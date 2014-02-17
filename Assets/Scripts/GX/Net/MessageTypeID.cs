@@ -63,5 +63,22 @@ namespace GX.Net
 
 			return ret;
 		}
+
+		public void Serialize(System.IO.Stream stream)
+		{
+			stream.WriteByte(this.CmdID);
+			stream.WriteByte(this.ParamID);
+		}
+
+		public void Deserialize(System.IO.Stream stream)
+		{
+			var cmd = stream.ReadByte();
+			if (cmd == -1) throw new System.IO.EndOfStreamException();
+			this.CmdID = (byte)cmd;
+
+			var param = stream.ReadByte();
+			if (param == -1) throw new System.IO.EndOfStreamException();
+			this.ParamID = (byte)param;
+		}
 	}
 }
