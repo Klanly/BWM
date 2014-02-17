@@ -39,7 +39,8 @@ namespace GX.Net
 			// 若有性能不足，以后可以仿deserializeTable的方式，缓存加速
 			ProtoBuf.Serializer.Serialize(dest, message);
 #else
-			ProtoBuf.Serializer.NonGeneric.Serialize(stream, message);
+			//ProtoBuf.Serializer.NonGeneric.Serialize(stream, message);
+			ProtoBuf.Serializer.NonGeneric.SerializeWithLengthPrefix(stream, message, ProtoBuf.PrefixStyle.Base128, 0);
 #endif
 		}
 
@@ -49,15 +50,15 @@ namespace GX.Net
 
 		public ProtoBuf.IExtensible Deserialize(byte[] messagePackageData)
 		{
-			return DeserializeImpl(new MemoryStream(messagePackageData, 0, messagePackageData.Length));
+			return Deserialize(new MemoryStream(messagePackageData, 0, messagePackageData.Length));
 		}
 
 		public ProtoBuf.IExtensible Deserialize(byte[] messagePackageData, int offset, int count)
 		{
-			return DeserializeImpl(new MemoryStream(messagePackageData, offset, count));
+			return Deserialize(new MemoryStream(messagePackageData, offset, count));
 		}
 
-		private ProtoBuf.IExtensible DeserializeImpl(Stream stream)
+		public ProtoBuf.IExtensible Deserialize(Stream stream)
 		{
 			var messageType = new MessageType();
 			messageType.Deserialize(stream);
@@ -77,7 +78,8 @@ namespace GX.Net
 
 			// 注册
 			messageTypeTable[typeof(T)] = messageType;
-			deserializeTable[messageType] = (stream) => ProtoBuf.Serializer.Deserialize<T>(stream);
+			//deserializeTable[messageType] = (stream) => ProtoBuf.Serializer.Deserialize<T>(stream);
+			deserializeTable[messageType] = (stream) => ProtoBuf.Serializer.DeserializeWithLengthPrefix<T>(stream, ProtoBuf.PrefixStyle.Base128);
 		}
 
 		/// <summary>注册可被解析的消息类型</summary>
@@ -101,7 +103,7 @@ namespace GX.Net
 			var categoryIdType = typeof(Cmd.MSGTYPE.Cmd);
 			var assembly = Assembly.GetExecutingAssembly();
 
-			var ret = new SortedList<MessageType, Type>();
+			var ret = new Dictionary<MessageType, Type>();
 			foreach (var cName in Enum.GetNames(categoryIdType))
 			{
 				var cValue = Convert.ToByte(Enum.Parse(categoryIdType, cName));
