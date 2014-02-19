@@ -37,11 +37,6 @@ static class WP8Menu
 				BuildPipeline.BuildPlayer(levels, "WP8", BuildTarget.WP8Player, BuildOptions.None);
 			}
 
-			// 生成的WP8项目采用wp8版本的protobuf
-			File.Copy("3Party/protobuf-net r668/Full/wp8/protobuf-net.dll", "WP8/ShenZuo/protobuf-net.dll", true);
-			File.Copy("3Party/protobuf-net r668/Full/wp8/protobuf-net.pdb", "WP8/ShenZuo/protobuf-net.pdb", true);
-			File.Copy("3Party/protobuf-net r668/Full/wp8/protobuf-net.xml", "WP8/ShenZuo/protobuf-net.xml", true);
-
 			// 从临时文件夹恢复默认的protobuf文件
 			File.Copy(Temp + "/protobuf-net.dll", "Assets/DLL/protobuf-net.dll", true);
 			File.Copy(Temp + "/protobuf-net.pdb", "Assets/DLL/protobuf-net.pdb", true);
