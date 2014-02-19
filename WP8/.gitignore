@@ -1,0 +1,10 @@
+bin/
+obj/
+*.user
+*.suo
+/packages
+/Players
+
+ShenZuo/Data
+ShenZuo/*.dll
+ShenZuo/*.pdb
