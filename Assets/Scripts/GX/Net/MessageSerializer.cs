@@ -18,16 +18,26 @@ namespace GX.Net
 		private readonly Dictionary<Type, MessageType> messageTypeTable = new Dictionary<Type, MessageType>();
 
 		#region Serialize
-		public byte[] Serialize<T>(T message) where T : ProtoBuf.IExtensible
+		public byte[] Serialize(ProtoBuf.IExtensible message)
 		{
-			using (var stream = new MemoryStream())
+			using (var mem = new MemoryStream())
 			{
-				Serialize(message, stream);
-				return stream.ToArray();
+				SerializeTo(mem, message);
+				return mem.ToArray();
 			}
 		}
 
-		public void Serialize<T>(T message, Stream stream) where T : ProtoBuf.IExtensible
+		public byte[] Serialize(IEnumerable<ProtoBuf.IExtensible> message)
+		{
+			using (var mem = new MemoryStream())
+			{
+				foreach (var m in message)
+					SerializeTo(mem, m);
+				return mem.ToArray();
+			}
+		}
+
+		public void SerializeTo(Stream stream, ProtoBuf.IExtensible message)
 		{
 			Debug.Assert(ProtoBuf.Serializer.NonGeneric.CanSerialize(message.GetType()));
 
