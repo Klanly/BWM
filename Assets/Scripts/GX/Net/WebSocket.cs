@@ -3,6 +3,7 @@ using System.Collections;
 using System.IO;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace GX.Net
 {
@@ -11,6 +12,7 @@ namespace GX.Net
 		#region Proxy
 		public interface IProxy
 		{
+			bool Connected { get; }
 			void Open(string url);
 			void Send(byte[] data);
 			byte[] Receive();
@@ -28,6 +30,8 @@ namespace GX.Net
 			Queue<byte[]> queue;
 
 			#region IProxy 成员
+			public bool Connected { get { return socket.connected; } }
+
 			public void Open(string url)
 			{
 				queue = new Queue<byte[]>();
@@ -39,6 +43,10 @@ namespace GX.Net
 						queue.Enqueue(buf);
 					}
 				};
+
+				// UniWeb can only work on http protocol. 
+				// http://answers.unity3d.com/questions/575963/websocket-implementation-that-works-in-ide-and-on.html
+				url = Regex.Replace(url, "^ws", "http");
 				socket.Connect(url);
 			}
 
@@ -79,7 +87,7 @@ namespace GX.Net
 
 		private readonly MessageSerializer serizlizer = new MessageSerializer();
 
-		public void Open(string url = "http://echo.websocket.org")
+		public void Open(string url = "ws://echo.websocket.org")
 		{
 			Debug.Log("WebSocket Open: " + url);
 			Proxy.Open(url);
