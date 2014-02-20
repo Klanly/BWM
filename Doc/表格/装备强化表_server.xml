@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- edited with XMLSPY v2004 rel. 2 U (http://www.xmlspy.com) by wt (zt) -->
+<config>
+	<!-- 
+字段顺序必与结构中定义的一样
+name 字段名字
+type 字段类型：（缺省 int ）
+	string	字符串(size 缺省 16); 
+	int		整数（根据size决定其位数,缺省 4，base：进制，缺省 10）;
+	float	浮点数（size = 4 单精度，size = 8 双精度,缺省 4）
+default 缺省值
+-->
+	<table name="EquipLevelDataBase" sheet="Sheet1" ExcelFile="装备强化表.xlsm">
+		<fields>
+			<field name="强化ID" type="int"/>
+			<field name="强化等级" type="int"/>
+			<field name="服务器成功率" type="string" size="64">
+				<regex><![CDATA[^\d+:\d+(;\d+:\d+){3}$]]></regex>
+			</field>
+			<field name="物攻" type="int"/>
+			<field name="化攻" type="int"/>
+			<field name="物防" type="int"/>
+			<field name="化防" type="int"/>
+			<field name="生命值" type="int"/>
+			<field name="需要金钱" type="int"/>
+			<field name="惩罚等级" type="int"/>
+			<field name="需求等级增加" type="int"/>
+			<field name="服务器完美增加" type="int"/>
+			<field name="是否会爆" type="int"/>
+			<field name="祝福值上限" type="int" var="badtimesmax"/>
+			<field name="祝福值1" type="int" var="badtimesneed1"/>
+			<field name="祝福值2" type="int" var="badtimesneed2"/>
+			<field name="祝福值3" type="int" var="badtimesneed3"/>
+			<field name="祝福值4" type="int" var="badtimesneed4"/>
+			<field name="几率1" type="int" var="rate1"/>
+			<field name="几率2" type="int" var="rate2"/>
+			<field name="几率3" type="int" var="rate3"/>
+			<field name="材料数量" type="int" var="basenum"/>
+			<field name="激活物攻" type="int" var="pdamadd"/>
+			<field name="激活化攻" type="int" var="mdamadd"/>
+			<field name="激活物防" type="int" var="pdefadd"/>
+			<field name="激活化防" type="int" var="mdefadd"/>
+			<field name="激活生命值" type="int" var="maxhpadd"/>
+			<field name="祝福up小" type="int" var="minbless"/>
+			<field name="祝福up大" type="int" var="maxbless"/>
+		</fields>
+	</table>
+</config>

@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- edited with XMLSPY v2004 rel. 2 U (http://www.xmlspy.com) by wt (zt) -->
+<config>
+	<!-- 
+字段顺序必与结构中定义的一样
+name 字段名字
+type 字段类型：（缺省 int ）
+	string	字符串( size 缺省 16); 
+	int		整数（根据size决定其位数,缺省 4，base：进制，缺省 10）;
+	float	浮点数（size = 4 单精度，size = 8 双精度,缺省 4）
+default 缺省值
+-->
+	<table name="TitleDataBase" ExcelFile="头衔称号表.xlsm" sheet="Sheet1" sort="编号">
+		<fields>
+			<field name="编号" type="int" size="4" var="dwID"/>
+			<field name="名称" type="string" size="0" var="strName"/>
+			<field name="时间" type="int" size="4" var="dwTime"/>
+			<field name="百分比物攻加成" type="int" size="4" var="dwPDamPercent"/>
+			<field name="百分比化攻加成" type="int" size="4" var="dwMDamPercent"/>
+			<field name="百分比物防加成" type="int" size="4" var="dwPDefPercent"/>
+			<field name="百分比化防加成" type="int" size="4" var="dwMDefPercent"/>
+			<field name="百分比生命值加成" type="int" size="4" var="dwMaxHpPercent"/>
+			<field name="品质" type="int" size="4" var="dwQuality"/>
+			<field name="等级" type="int" size="4" var="dwLevel"/>
+			<field name="称号说明" type="string" size="0" var="strDesc"/>
+			<field name="可否查询" type="int" size="4" var="dwShow"/>
+			<field name="组" type="int" size="4" var="dwGroup"/>
+			<field name="组内索引" type="int" size="4" var="dwIndexInGroup"/>
+			<field name="BuffID" type="int" size="4" var="dwBuffID"/>
+			<field name="物攻固定值" type="int" size="4" var="dwPDam"/>
+			<field name="化攻固定值" type="int" size="4" var="dwMDam"/>
+			<field name="物防固定值" type="int" size="4" var="dwPDef"/>
+			<field name="化防固定值" type="int" size="4" var="dwMdef"/>
+			<field name="生命固定值" type="int" size="4" var="dwMAXHp"/>
+		</fields>
+	</table>
+</config>

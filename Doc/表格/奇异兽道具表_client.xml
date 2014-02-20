@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- edited with XMLSPY v2004 rel. 2 U (http://www.xmlspy.com) by wt (zt) -->
+<config>
+	<!-- 
+字段顺序必与结构中定义的一样
+name 字段名字
+type 字段类型：（缺省 int ）
+	string	字符串(size 缺省 16); 
+	int		整数（根据size决定其位数,缺省 4，base：进制，缺省 10）;
+	float	浮点数（size = 4 单精度，size = 8 双精度,缺省 4）
+default 缺省值
+-->
+	<table name="PreciousPetDataBase" sheet="Sheet1" ExcelFile="奇异兽道具表.xlsm" sort="道具ID">
+		<fields>
+			<field name="道具ID" type="int" size="4" var="dwID"/>
+			<field name="名称" type="string" size="0" var="strName"/>	
+			<field name="力量资质" type="string" size="0" var="strLiliangZ"/>
+			<field name="智力资质" type="string" size="0" var="strZhiliZ"/>
+			<field name="敏捷资质" type="string" size="0" var="strMinjieZ"/>
+			<field name="精神资质" type="string" size="0" var="strJingshenZ"/>
+			<field name="体质资质" type="string" size="0" var="strTizhiZ"/>
+			<field name="力量资质2" type="string" size="0" var="strLiliangZ2"/>
+			<field name="智力资质2" type="string" size="0" var="strZhiliZ2"/>
+			<field name="敏捷资质2" type="string" size="0" var="strMinjieZ2"/>
+			<field name="精神资质2" type="string" size="0" var="strJingshenZ2"/>
+			<field name="体质资质2" type="string" size="0" var="strTizhiZ2"/>
+			<field name="动作文件夹" type="string" size="0" var="strAniDir"/>
+			<field name="模型ID" type="int" size="4" var="dwModelSet"/>	
+			<field name="脸型显示图片" type="int" size="4" var="dwface"/>
+			<field name="合体显示位置" type="string" size="0" var="strShowPos"/>
+			<field name="品质颜色" type="string" size="0" var="strColor">
+				<regex><![CDATA[^1-0x[0-9a-fA-F]{8};2-0x[0-9a-fA-F]{8};3-0x[0-9a-fA-F]{8};4-0x[0-9a-fA-F]{8};5-0x[0-9a-fA-F]{8}$]]></regex>
+			</field>
+			<field name="宠物类型" type="int" size="4" var="dwType"/>
+			<field name="携带等级" type="int" size="4" var="dwLimitLevel"/>
+			<field name="扭蛋类型" type="int" size="4" var="dwEggHatchType"/>
+			<field name="材料ID" type="int" size="4" var="dwMaterial"/>
+			<field name="白品数量" type="int" size="4" var="dwMaterialNum"/>
+			<field name="货币类型" type="int" size="4" var="dwMoneyType"/>
+			<field name="白品费用" type="int" size="4" var="dwMoneyCost"/>
+		</fields>
+	</table>
+</config>	
+
+

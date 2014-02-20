@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- edited with XMLSPY v2004 rel. 2 U (http://www.xmlspy.com) by wt (zt) -->
+<config>
+	<!-- 
+字段顺序必与结构中定义的一样
+name 字段名字
+type 字段类型：（缺省 int ）
+	string	字符串(size 缺省 16); 
+	int		整数（根据size决定其位数,缺省 4，base：进制，缺省 10）;
+	float	浮点数（size = 4 单精度，size = 8 双精度,缺省 4）
+default 缺省值
+-->
+	<table name="NewHorseLevelupDataBase" sheet="Sheet1" ExcelFile="坐骑进阶表.xlsm">
+		<fields>
+			<field name="等阶" type="int" var="horselevel"/>
+			<field name="坐骑id" type="int" var="horseid"/>
+			<field name="进化id" type="int" var="nextlevelid"/>
+			<field name="满祝福" type="int" var="fullbless"/>
+			<field name="道具消耗" type="int" var="itemnum"/>
+			<field name="绑银消耗" type="int" var="moneyneed"/>
+			<field name="祝福up小" type="int" var="minbless"/>
+			<field name="祝福up大" type="int" var="maxbless"/>			
+			<field name="速度" type="int" var="speed"/>
+			<field name="血" type="int" var="hp"/>
+			<field name="防" type="int" var="def"/>
+			<field name="攻" type="int" var="dam"/>
+			<field name="伤害反射2" type="int" var="hurtecho2"/>
+			<field name="闪避2" type="int" var="hide2"/>
+			<field name="减伤2" type="int" var="sub2"/>
+			<field name="致命一击2" type="int" var="lucky2"/>
+			<field name="进化小时" type="int" var="leveluptime"/>
+			<field name="满次数" type="int" var="fulltimes"/>
+			<field name="祝福1" type="int" var="bless1"/>
+			<field name="祝福2" type="int" var="bless2"/>
+			<field name="祝福3" type="int" var="bless3"/>
+			<field name="祝福4" type="int" var="bless4"/>
+			<field name="祝福5" type="int" var="bless5"/>
+			<field name="祝福6" type="int" var="bless6"/>
+			<field name="几率1" type="int" var="rate1"/>
+			<field name="几率2" type="int" var="rate2"/>
+			<field name="几率3" type="int" var="rate3"/>
+			<field name="几率4" type="int" var="rate4"/>
+			<field name="几率5" type="int" var="rate5"/>
+			<field name="技能" type="string" size="128" var="skill"/>
+			</fields>
+	</table>
+</config>

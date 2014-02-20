@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- edited with XMLSPY v2004 rel. 2 U (http://www.xmlspy.com) by wt (zt) -->
+<config>
+	<!-- 
+字段顺序必与结构中定义的一样
+name 字段名字
+type 字段类型：（缺省 int ）
+	string	字符串(size 缺省 16); 
+	int		整数（根据size决定其位数,缺省 4，base：进制，缺省 10）;
+	float	浮点数（size = 4 单精度，size = 8 双精度,缺省 4）
+default 缺省值
+-->
+	<table name="ItemDatabase" ExcelFile="道具基本表.xlsm" sheet="Sheet1" sort="编号">
+		<fields>
+			<field name="编号" type="int" size="4" var="dwID"/>
+			<field name="名称" type="string" size="0" var="strName"/>
+			<field name="最大数量" type="int" size="4" var="dwMaxCount"/>
+			<field name="耐久度" type="int" size="4" var="dwMaxDur"/>
+			<field name="基数" type="int" size="4" var="dwBaseNum"/>
+			<field name="类型" type="int" size="4" var="dwType"/>
+			<field name="拾取类型" type="int" size="4" var="dwPickType"/>
+			<field name="求购编号" type="int" size="4" var="dwQiuGouType"/>
+			<field name="合成等级" type="int" size="4" var="dwComposeLevel"/>
+			<field name="需要等级" type="int" size="2" var="wdNeedLevel"/>
+			<field name="精力值消耗" type="int" size="4" var="dwEnergyCost"/>
+			<field name="需要原料" type="string" size="0" var="strNeedMaterial"/>
+			<field name="道具转换ID" type="string" size="0" var="strChangeID"/>
+			<field name="转换需要技能" type="string" size="0" var="strNeedSkill"/>
+			<field name="颜色" type="int" size="4" var="dwStuffQuality"/>
+			<field name="等级上限" type="int" size="2" var="wdNeedLevelMax"/>
+			<field name="货币类型" type="int" size="4" var="byMoneyType"/>
+			<field name="价格" type="int" size="4" var="dwPrice"/>
+			<field name="卖出价格" type="int" size="4" var="dwSalePrice"/>
+			<field name="基本手续费" type="int" size="4" var="dwJudgePrice"/>
+			<field name="冷却类型" type="int" size="4" var="dwIntervalType"/>
+			<field name="冷却时间" type="int" size="4" var="dwIntervalTime"/>
+			<field name="男模型ID" type="int" size="4" var="dwMaleModelSetID"/>
+			<field name="女模型ID" type="int" size="4" var="dwFemaleModelSetID"/>
+			<field name="物品模型" type="string" size="0" var="strModel"/>
+			<field name="地上模型" type="string" size="0" var="strSceneModel"/>
+			<field name="说明" type="string" size="0" var="strDesc"/>
+			<field name="属性或效用" type="string" size="0" var="strSpecialDesc"/>
+			<field name="使用类型" type="int" size="4" var="dwUseType"/>
+			<field name="耐久消耗类型" type="int" size="4" var="dwDurType"/>
+			<field name="耐久显示比例" type="int" size="4" var="dwShowPer"/>
+			<field name="是否显示大图" type="int" size="4" var="dwShowBigIcon"/>
+			<field name="道具栏声音" type="int" size="4" var="dwSound"/>
+			<field name="使用声音" type="int" size="4" var="dwUseSound"/>
+			<field name="主要获得方式" type="string" size="0" var="strGetmethod"/>
+			<field name="引导等级" type="int" size="2" var="strHelpGuidLevel"/>
+			<field name="引导说明" type="string" size="0" var="strHelpGuidDesc"/>
+			<field name="引导任务ID" type="int" size="4" var="dwHelpGuidTaskID"/>
+			<field name="引导任务状态" type="int" size="4" var="dwHelpGuidTaskOperate"/>
+			<field name="是否可修理" type="int" size="1" var="byCanRepair"/>
+			<field name="耐久耗尽是否不可删除" type="int" size="1" var="byDurDelete"/>
+			<field name="道具种类" type="string" size="0" var="strTypeName"/>
+			<field name="需要确认" type="int" size="4" var="dwNeedConfirm"/>
+			<field name="适用职业" type="int" size="1" var="byProfession"/>
+			<field name="拍卖类型" type="int" size="1" var="byAuction"/>
+		</fields>
+	</table>
+</config>	
+
+

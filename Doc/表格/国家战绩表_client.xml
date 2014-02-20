@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- edited with XMLSPY v2004 rel. 2 U (http://www.xmlspy.com) by wt (zt) -->
+<config>
+	<table name="CountryBattleDataRank" ExcelFile="国家战绩表.xlsm" sheet="Sheet1" sort="序号">
+		<fields>
+			<field name="序号" type="int" size="4" var="dwID"/>
+			<field name="下区间" type="int" size="4" var="dwDowm"/>
+			<field name="上区间" type="int" size="4" var="dwUp"/>
+			<field name="描述文字" type="string" size="0" var="strDesc"/>
+			<field name="文字显示颜色" type="int" size="4" var="dwColor"/>
+		</fields>
+	</table>
+</config>	
+
+

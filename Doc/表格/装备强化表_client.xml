@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- edited with XMLSPY v2004 rel. 2 U (http://www.xmlspy.com) by wt (zt) -->
+<config>
+	<!-- 
+字段顺序必与结构中定义的一样
+name 字段名字
+type 字段类型：（缺省 int ）
+	string	字符串( size 缺省 16); 
+	int		整数（根据size决定其位数,缺省 4，base：进制，缺省 10）;
+	float	浮点数（size = 4 单精度，size = 8 双精度,缺省 4）
+default 缺省值
+-->
+	<table name="EquipLevelDatabase" ExcelFile="装备强化表.xlsm" sheet="Sheet1" sort="强化ID+强化等级">
+		<fields>
+			<field name="强化ID" type="int" size="2" var="wdID"/>
+			<field name="强化等级" type="int" size="2" var="wdLevel"/>
+			<field name="对应成功率" type="string" var="strRate" size="0">
+				<regex><![CDATA[^\d+:\d+(;\d+:\d+){3}$]]></regex>
+			</field>
+			<field name="物攻" type="int" size="4" var="dwPDam"/>
+			<field name="化攻" type="int" size="4" var="dwMDam"/>
+			<field name="物防" type="int" size="4" var="dwPDef"/>
+			<field name="化防" type="int" size="4" var="dwMDef"/>
+			<field name="生命值" type="int" size="4" var="dwHP"/>
+			<field name="需要金钱" type="int" size="4" var="dwPrice"/>
+			<field name="需求等级增加" type="int" size="4" var="dwNeedLevel"/>
+			<field name="惩罚等级" type="int" size="4" var="dwLevelDown"/>
+			<field name="完美增加几率" type="int" size="4" var="dwPerfectUpgrade"/>
+			<field name="是否会爆" type="int" size="4" var="dwDestroy"/>
+			<field name="祝福值上限" type="int" size="4" var="dwBadTimesMax"/>
+			<field name="材料数量" type="int" size="4" var="dwBaseNum"/>
+			<field name="激活物攻" type="int" size="4" var="dwPDamAdd"/>
+			<field name="激活化攻" type="int" size="4" var="dwMDamAdd"/>
+			<field name="激活物防" type="int" size="4" var="dwPDefAdd"/>
+			<field name="激活化防" type="int" size="4" var="dwMDefAdd"/>
+			<field name="激活生命值" type="int" size="4" var="dwHPAdd"/>
+		</fields>
+	</table>
+</config>

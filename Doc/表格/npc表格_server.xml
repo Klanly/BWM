@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- edited with XMLSPY v2004 rel. 2 U (http://www.xmlspy.com) by wt (zt) -->
+<config>
+	<!-- 
+字段顺序必与结构中定义的一样
+name 字段名字
+type 字段类型：（缺省 int ）
+	string	字符串(size 缺省 16); 
+	int		整数（根据size决定其位数,缺省 4，base：进制，缺省 10）;
+	float	浮点数（size = 4 单精度，size = 8 双精度,缺省 4）
+default 缺省值
+-->
+	<table name="NpcDataBase" sheet="Sheet1" ExcelFile="Npc表格.xlsm">
+		<fields>
+			<field name="编号" type="int"/>
+			<field name="名称" type="string" size="32"/>
+			<field name="等级" type="int"/>
+			<field name="怪物类型" type="int"/>
+			<field name="访问距离" type="int"/>
+			<field name="技能" type="string" size="128">
+				<regex><![CDATA[^0?|(\d+(-\d+)*)$]]></regex>
+			</field>
+			<field name="AI" type="int"/>
+			<field name="生命值" type="int"/>
+			<field name="经验值" type="int"/>
+			<field name="视野" type="int"/>
+			<field name="移动速度" type="int"/>
+			<field name="奔跑速度" type="int"/>
+			<field name="攻击速度" type="int"/>
+			<field name="阻挡类型" type="int"/>
+			<field name="物理防御" type="int"/>
+			<field name="化学防御" type="int"/>
+			<field name="物理攻击" type="int"/>
+			<field name="化学攻击" type="int"/>
+			<field name="生化攻击" type="int"/>
+			<field name="热能攻击" type="int"/>
+			<field name="声波攻击" type="int"/>
+			<field name="光波攻击" type="int"/>
+			<field name="生化防御" type="int"/>
+			<field name="热能防御" type="int"/>
+			<field name="声波防御" type="int"/>
+			<field name="光波防御" type="int"/>
+			<field name="是否可访问" type="int"/>
+			<field name="是否可攻击" type="int"/>
+			<field name="产出惩罚" type="int"/>
+			<field name="物理命中" type="int"/>
+			<field name="化学命中" type="int"/>
+			<field name="重击几率" type="int"/>
+			<field name="闪避几率" type="int"/>
+			<field name="忽视几率" type="int"/>
+			<field name="类型" type="int"/>
+			<field name="死亡特效持续时间" type="int"/>
+			<field name="随机说话" type="string" size="128"/>
+			<field name="攻击说话" type="string" size="128"/>
+			<field name="死亡说话" type="string" size="128"/>
+			<field name="发现目标说话" type="string" size="128"/>
+			<field name="刷新奇异兽" type="int"/>
+			<field name="刷蓝色精英" type="string" size="128"/>
+			<field name="不重生" type="int"/>
+		</fields>
+	</table>
+</config>

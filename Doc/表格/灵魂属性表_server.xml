@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- edited with XMLSPY v2004 rel. 2 U (http://www.xmlspy.com) by wt (zt) -->
+<config>
+	<!-- 
+字段顺序必与结构中定义的一样
+name 字段名字
+type 字段类型：（缺省 int ）
+	string	字符串(size 缺省 16); 
+	int		整数（根据size决定其位数,缺省 4，base：进制，缺省 10）;
+	float	浮点数（size = 4 单精度，size = 8 双精度,缺省 4）
+default 缺省值
+-->
+	<table name="EquipSoulDataBase" sheet="Sheet1" ExcelFile="灵魂属性表.xlsm">
+		<fields>
+			<field name="装备类别" type="int"/>	
+			<field name="材料品质" type="int"/>	
+			<field name="致命一击" type="string" size="64">
+				<regex><![CDATA[^0|(\d+(-\d+){2}(:\d+(-\d+){2}){2})$]]></regex>
+			</field>
+			<field name="忽视防御" type="string" size="64">
+				<regex><![CDATA[^0|(\d+(-\d+){2}(:\d+(-\d+){2}){2})$]]></regex>
+			</field>
+			<field name="重击" type="string" size="64">
+				<regex><![CDATA[^0|(\d+(-\d+){2}(:\d+(-\d+){2}){2})$]]></regex>
+			</field>
+			<field name="伤害反射" type="string" size="64">
+				<regex><![CDATA[^0|(\d+(-\d+){2}(:\d+(-\d+){2}){2})$]]></regex>
+			</field>
+			<field name="物伤减少" type="string" size="64">
+				<regex><![CDATA[^0|(\d+(-\d+){2}(:\d+(-\d+){2}){2})$]]></regex>
+			</field>
+			<field name="化伤减少" type="string" size="64">
+				<regex><![CDATA[^0|(\d+(-\d+){2}(:\d+(-\d+){2}){2})$]]></regex>
+			</field>
+			<field name="生命值增加" type="string" size="64">
+				<regex><![CDATA[^0|(\d+(-\d+){2}(:\d+(-\d+){2}){2})$]]></regex>
+			</field>
+		</fields>
+	</table>
+</config>

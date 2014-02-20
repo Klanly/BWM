@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- edited with XMLSPY v2004 rel. 2 U (http://www.xmlspy.com) by wt (zt) -->
+<config>
+	<!-- 
+字段顺序必与结构中定义的一样
+name 字段名字
+type 字段类型：（缺省 int ）
+	string	字符串(size 缺省 16); 
+	int		整数（根据size决定其位数,缺省 4，base：进制，缺省 10）;
+	float	浮点数（size = 4 单精度，size = 8 双精度,缺省 4）
+default 缺省值
+-->
+	<table name="DemonInitData" sheet="Sheet1" ExcelFile="奇异兽道具表.xlsm">
+		<fields>
+			<field name="道具ID" type="int"/>
+			<field name="成长率" type="string" size="128">
+				<regex><![CDATA[^\d+-\d+(:\d+-\d+)*$]]></regex>
+			</field>
+			<field name="力量资质" type="string" size="32">
+				<regex><![CDATA[^\d+-\d+$]]></regex>
+			</field>
+			<field name="智力资质" type="string" size="32">
+				<regex><![CDATA[^\d+-\d+$]]></regex>
+			</field>
+			<field name="敏捷资质" type="string" size="32">
+				<regex><![CDATA[^\d+-\d+$]]></regex>
+			</field>
+			<field name="体质资质" type="string" size="32">
+				<regex><![CDATA[^\d+-\d+$]]></regex>
+			</field>
+			<field name="精神资质" type="string" size="32">
+				<regex><![CDATA[^\d+-\d+$]]></regex>
+			</field>
+			<field name="出生技能" type="string" size="256">
+				<regex><![CDATA[^(\d+-\d+;)*$]]></regex>
+			</field>
+			<field name="升级技能" type="string" size="256">
+				<regex><![CDATA[^(\d+-\d+;)*$]]></regex>
+			</field>
+			<field name="宠物类型" type="int"/>
+			<field name="宠物资质下限" type="int"/>
+			<field name="力量资质2" type="string" size="32">
+				<regex><![CDATA[^\d+-\d+$]]></regex>
+			</field>
+			<field name="智力资质2" type="string" size="32">
+				<regex><![CDATA[^\d+-\d+$]]></regex>
+			</field>
+			<field name="敏捷资质2" type="string" size="32">
+				<regex><![CDATA[^\d+-\d+$]]></regex>
+			</field>
+			<field name="体质资质2" type="string" size="32">
+				<regex><![CDATA[^\d+-\d+$]]></regex>
+			</field>
+			<field name="精神资质2" type="string" size="32">
+				<regex><![CDATA[^\d+-\d+$]]></regex>
+			</field>
+			<field name="宠物资质下限2" type="int"/>
+			<field name="携带等级" type="int"/>
+			<field name="扭蛋类型" type="int"/>
+			<field name="材料ID" type="int"/>
+			<field name="白品数量" type="int"/>
+			<field name="货币类型" type="int"/>
+			<field name="白品费用" type="int"/>
+		</fields>
+	</table>
+</config>

@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- edited with XMLSPY v2004 rel. 2 U (http://www.xmlspy.com) by wt (zt) -->
+<config>
+	<!-- 
+字段顺序必与结构中定义的一样
+name 字段名字
+type 字段类型：（缺省 int ）
+	string	字符串( size 缺省 16); 
+	int		整数（根据size决定其位数,缺省 4，base：进制，缺省 10）;
+	float	浮点数（size = 4 单精度，size = 8 双精度,缺省 4）
+default 缺省值
+-->
+	<table name="SelectRoleDataBase" ExcelFile="选人界面表.xlsm" sheet="Sheet1" sort="人物ID">
+		<fields>
+			<field name="人物ID" type="int" size="4" var="dwID"/>
+			<field name="职业" type="string" size="0" var="strPro"/>
+			<field name="脸型" type="int" size="4" var="dwFace"/>
+			<field name="头发" type="int" size="4" var="dwHair"/>
+			<field name="武器" type="int" size="4" var="dwWeapon"/>
+			<field name="武器等级" type="int" size="4" var="dwWeaponLevel"/>
+			<field name="武器1级" type="int" size="4" var="dwWeapon1Level"/>
+			<field name="武器展示模型" type="string" size="0" var="strWeaponShow"/>
+			<field name="武器展示动画" type="string" size="0" var="strWeaponAni"/>
+			<field name="参数1" type="int" size="4" var="dwParam1"/>
+			<field name="参数2" type="int" size="4" var="dwParam2"/>
+			<field name="参数3" type="int" size="4" var="dwParam3"/>
+			<field name="套装" type="int" size="4" var="dwSuite"/>
+			<field name="装备特效" type="int" size="4" var="dwEquipsfx"/>
+			<field name="声音文件" type="string" size="0" var="strWaveFile"/>
+			<field name="选人动作文件" type="string" size="0" var="strAniSelectFile"/>
+			<field name="加载完毕动作文件" type="string" size="0" var="strAniFinishFile"/>
+			<field name="待机动作文件" type="string" size="0" var="strAniStandFile"/>
+			<field name="持械站立动作文件" type="string" size="0" var="strAniWithWeapon"/>
+			<field name="特效模型" type="string" size="0" var="strSfxFile"/>
+			<field name="特效模型动画" type="string" size="0" var="strSfxAniFile"/>
+		</fields>
+	</table>
+</config>

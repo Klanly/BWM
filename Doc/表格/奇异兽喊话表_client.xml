@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- edited with XMLSPY v2004 rel. 2 U (http://www.xmlspy.com) by wt (zt) -->
+<config>
+	<!-- 
+字段顺序必与结构中定义的一样
+name 字段名字
+type 字段类型：（缺省 int ）
+	string	字符串(size 缺省 16); 
+	int		整数（根据size决定其位数,缺省 4，base：进制，缺省 10）;
+	float	浮点数（size = 4 单精度，size = 8 双精度,缺省 4）
+default 缺省值
+-->
+	<table name="DemonSpeechDataBase" sheet="Sheet1" ExcelFile="奇异兽喊话表.xlsm" sort="状态+编号">
+		<fields>
+			<field name="状态" type="int" size="2" var="wdState"/>
+			<field name="编号" type="int" size="2" var="wdID"/>
+			<field name="内容数量" type="int" size="4" var="dwMaxNum"/>
+			<field name="内容" type="string" size="0" var="strSpeech"/>
+			<field name="几率" type="string" size="0" var="strProbability">
+				<regex><![CDATA[^(\d+-\d+(;\d+-\d+)*)?$]]></regex>
+			</field>
+		</fields>
+	</table>
+</config>	
+
+

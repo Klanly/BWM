@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- edited with XMLSPY v2004 rel. 2 U (http://www.xmlspy.com) by wt (zt) -->
+<config>
+	<!-- 
+字段顺序必与结构中定义的一样
+name 字段名字
+type 字段类型：（缺省 int ）
+	string	字符串( size 缺省 16); 
+	int		整数（根据size决定其位数,缺省 4，base：进制，缺省 10）;
+	float	浮点数（size = 4 单精度，size = 8 双精度,缺省 4）
+default 缺省值
+-->
+	<table name="RoleTaskBase" sheet="Sheet1" ExcelFile="任务基本表.xlsm">
+		<fields>
+			<field name="任务编号" type="int"/>
+			<field name="名称" type="string" size="32"/>
+			<field name="类型" type="int"/>
+			<field name="最低等级" type="int"/>
+			<field name="最高等级" type="int"/>
+			<field name="前置任务" type="int"/>
+			<field name="接任务NPC" type="int"/>
+			<field name="交任务NPC" type="int"/>
+			<field name="步骤总数" type="int"/>
+			<field name="初始步骤数量" type="int"/>
+			<field name="奖励经验" type="string" size="32"/>
+			<field name="奖励道具" type="string" size="512">
+				<regex><![CDATA[^\s?(\{\{(\d+,){4}"(\d+-\d+(,\d+-\d+)*)?"\}(,\{(\d+,){4}"(\d+-\d+(,\d+-\d+)*)?"\})*[, ]?\})?$]]></regex>
+			</field>
+			<field name="任务道具" type="string" size="512">
+				<regex><![CDATA[^\s?(\{\{(\d+,){4}"(\d+-\d+(,\d+-\d+)*)?"\}(,\{(\d+,){4}"(\d+-\d+(,\d+-\d+)*)?"\})*[, ]?\})?$]]></regex>
+			</field>
+			<field name="任务描述" type="string" size="1024"/>
+			<field name="接任务文本" type="string" size="1024"/>
+			<field name="交任务文本" type="string" size="1024"/>
+			<field name="不可交任务文本" type="string" size="512"/>
+			<field name="奖励银币" type="int"/>
+			<field name="奖励硬币" type="int"/>
+			<field name="任务提示" type="string" size="128"/>
+			<field name="每日次数" type="int"/>
+			<field name="收集材料" type="string" size="128"/>
+			<field name="是否检索" type="int"/>
+			<field name="快捷交付" type="int"/>
+			<field name="狩猎任务" type="int"/>
+			<field name="奖励赠点" type="int"/>
+			<field name="成长勋章" type="int"/>
+			<field name="历练勋章" type="int"/>
+			<field name="战争勋章" type="int"/>
+			<field name="任务内容" type="string" size="1024">
+				<regex><![CDATA[^(\{[0-9a-zA-Z_]+,\s?\{\d+(,\s?\d+)*\}\})?$]]></regex>
+			</field>
+			<field name="瞬间到达接取" type="int"/>
+			<field name="瞬间直接完成" type="int"/>
+			<field name="客户端判定任务" type="int"/>
+			<field name="完成后自动打开交任务NPC的对话框" type="int" var="autoopen"/>
+			<field name="补全等级" type="int" var="completelevel"/>
+			<field name="国家" type="int"/>
+		</fields>
+	</table>
+</config>

@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- edited with XMLSPY v2004 rel. 2 U (http://www.xmlspy.com) by wt (zt) -->
+<config>
+	<!-- 
+字段顺序必与结构中定义的一样
+name 字段名字
+type 字段类型：（缺省 int ）
+	string	字符串(size 缺省 16); 
+	int		整数（根据size决定其位数,缺省 4，base：进制，缺省 10）;
+	float	浮点数（size = 4 单精度，size = 8 双精度,缺省 4）
+default 缺省值
+-->
+	<table name="TaskDataBase" ExcelFile="任务基本表.xlsm" sheet="Sheet1" sort="任务编号">
+		<fields>
+			<field name="任务编号" type="int" size="4" var="dwID"/>
+			<field name="名称" type="string" size="0" var="strName"/>
+			<field name="类型" type="int" size="4" var="dwType"/>
+			<field name="地图" type="int" size="4" var="dwMap"/>
+			<field name="最低等级" type="int" size="4" var="dwMinLevel"/>
+			<field name="最高等级" type="int" size="4" var="dwMaxLevel"/>
+			<field name="每日次数" type="int" size="4" var="dwEveyDayNum"/>
+			<field name="前置任务" type="int" size="4" var="dwPreTask"/>
+			<field name="接任务NPC" type="int" size="4" var="dwBeginNpc"/>
+			<field name="采集NPC" type="int" size="4" var="dwNpcCaiJi"/>
+			<field name="军团任务类型" type="int" size="4" var="dwArmytype"/>
+			<field name="任务追踪接取" type="string" size="0" var="strTaskTraceBegin"/>
+			<field name="任务追踪完成" type="string" size="0" var="strTaskTraceEnd"/>
+			<field name="是否检索" type="int" size="4" var="dwCanSearch"/>
+			<field name="快捷交付" type="int" size="4" var="dwCanEasyFinish"/>
+			<field name="瞬间到达接取" type="int" size="4" var="dwHelpGoto"/>
+			<field name="瞬间直接完成" type="int" size="4" var="dwHelpCommit"/>
+			<field name="客户端判定任务" type="int" size="4" var="dwJudgeByClient"/>
+			<field name="国家" type="int" size="4" var="dwCountry"/>
+		</fields>
+	</table>
+</config>	
+
+

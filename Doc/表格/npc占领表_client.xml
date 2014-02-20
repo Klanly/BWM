@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<config>
+	<table name="NpcOccupyDataBase" ExcelFile="NPC占领表.xlsm" sheet="Sheet1" sort="编号">
+		<fields>
+			<field name="编号" type="int" size="4" var="dwID"/>
+			<field name="NPC编号" type="int" size="4" var="dwNPCID"/>
+			<field name="费用" type="int" size="4" var="dwPrice"/>
+			<field name="占领称号" type="string" size="0" var="strOccupyTitle"/>
+			<field name="领地名称" type="string" size="0" var="strOccupyPlaceName"/>
+		</fields>
+	</table>
+</config>

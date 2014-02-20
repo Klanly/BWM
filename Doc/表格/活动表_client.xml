@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<config>
+	<table name="ActionDatabase" ExcelFile="活动表.xlsm" sheet="Sheet1" sort="ID" distinct="false">
+		<fields>
+			<field name="ID" type="int" size="4" var="dwID"/>
+			<field name="任务ID" type="int" size="4" var="dwTaskID"/>
+			<field name="活动名称" type="string" size="0" var="strName"/>
+			<field name="类型" type="int" size="4" var="dwType"/>
+			<field name="推荐" type="int" size="4" var="dwRecommend"/>
+			<field name="时间类型" type="int" size="4" var="dwTimeType"/>
+			<field name="开始时间" type="string" size="0" var="strBeginTime">
+				<regex><![CDATA[^\d\d-\d\d-\d\d-\d\d$]]></regex>
+			</field>
+			<field name="结束时间" type="string" size="0" var="strEndTime">
+				<regex><![CDATA[^\d\d-\d\d-\d\d-\d\d$]]></regex>
+			</field>
+			<field name="时间及体力消耗" type="string" size="0" var="strTimeAndVigorConsume"/>
+			<field name="描述" type="string" size="0" var="strDesc"/>
+			<field name="Tips" type="string" size="0" var="strTips"/>
+			<field name="前往" type="string" size="0" var="strGoto"/>
+			<field name="奖励" type="string" size="0" var="strBonus"/>
+			<field name="图标" type="int" size="4" var="dwIcon"/>
+			<field name="活动日期" type="string" size="0" var="strActionDay">
+				<regex><![CDATA[^[0-7](-[0-7]){6}$]]></regex>
+			</field>
+			<field name="单次活跃度" type="int" size="4" var="dwActivePoint"/>
+			<field name="快速完成" type="string" size="0" var="strQuickFinish"/>
+			<field name="快速完成描述" type="string" size="0" var="strQuickFinishDesc"/>
+			<field name="活动国家" type="int" size="2" var="wCountry"/>
+			<field name="副本图片" type="string" size="0" var="strCopyNameImg"/>
+			<field name="背景图片" type="string" size="0" var="strCopyBackImg"/>
+			<field name="人类进程" type="int" size="1" var="byWorldLevel"/>
+		</fields>
+	</table>
+	<table name="AchievementDatabase" ExcelFile="活动表.xlsm" sheet="Sheet1" sort="任务ID" distinct="false">
+		<fields>
+			<field name="任务ID" type="int" size="4" var="dwTaskID"/>
+			<field name="活动名称" type="string" size="0" var="strName"/>
+			<field name="类型" type="int" size="4" var="dwType"/>
+			<field name="奖励" type="string" size="0" var="strBonus"/>
+			<field name="描述" type="string" size="0" var="strDesc"/>
+			<field name="图标" type="int" size="4" var="dwIcon"/>
+			<field name="任务总步骤数" type="int" size="4" var="dwNum"/>
+		</fields>
+	</table>
+</config>	
+
+

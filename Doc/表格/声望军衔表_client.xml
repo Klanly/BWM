@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- edited with XMLSPY v2004 rel. 2 U (http://www.xmlspy.com) by wt (zt) -->
+<config>
+	<!-- 
+字段顺序必与结构中定义的一样
+name 字段名字
+type 字段类型：（缺省 int ）
+	string	字符串( size 缺省 16); 
+	int		整数（根据size决定其位数,缺省 4，base：进制，缺省 10）;
+	float	浮点数（size = 4 单精度，size = 8 双精度,缺省 4）
+default 缺省值
+-->
+	<table name="MilitaryRankDataBase" ExcelFile="声望军衔表.xlsm" sheet="Sheet1" sort="军衔编号">
+		<fields>
+			<field name="军衔编号" type="int" size="4" var="dwID"/>
+			<field name="名称" type="string" size="0" var="strName"/>
+			<field name="需要等级" type="int" size="4" var="dwNeedLevel"/>
+			<field name="需要声望" type="int" size="4" var="dwNeedPrestige"/>
+			<field name="功勋上限" type="int" size="4" var="dwExploitLimit"/>
+			<field name="声望上限" type="int" size="4" var="dwPrestigeLimit"/>
+			<field name="真气增加" type="int" size="4" var="dwZhenqi"/>
+			<field name="日绑银" type="int" size="4" var="dwWelfareCopper"/>
+			<field name="日赠点" type="int" size="4" var="dwDailyGoldTicket"/>
+			<field name="生命附加" type="int" size="4" var="dwHpExt"/>
+			<field name="攻击附加" type="int" size="4" var="dwDamExt"/>
+			<field name="防御附加" type="int" size="4" var="dwDefExt"/>
+		</fields>
+	</table>
+</config>

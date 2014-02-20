@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- edited with XMLSPY v2004 rel. 2 U (http://www.xmlspy.com) by wt (zt) -->
+<config>
+	<table name="DemonSkillLevel" ExcelFile="宠物技能等级表.xlsm" sheet="Sheet1" sort="技能编号">
+		<fields>
+			<field name="技能编号" type="int" size="4" var="dwID"/>
+			<field name="固定技能" type="int" size="4" var="dwFix"/>
+			<field name="技能等级" type="int" size="4" var="dwSkillLevel"/>
+			<field name="评分" type="int" size="4" var="dwSkillScore"/>
+		</fields>
+	</table>
+	<table name="PetSkillCardBase" ExcelFile="宠物技能等级表.xlsm" sheet="Sheet1" sort="技能卡ID">
+		<fields>
+			<field name="技能卡ID" type="int" size="4" var="dwID"/>
+			<field name="技能编号" type="int" size="4" var="dwSkillID"/>
+			<field name="技能等级" type="int" size="4" var="dwSkillLevel"/>
+		</fields>
+	</table>
+</config>

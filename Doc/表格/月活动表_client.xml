@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- edited with XMLSPY v2004 rel. 2 U (http://www.xmlspy.com) by wt (zt) -->
+<config>
+	<!-- 
+字段顺序必与结构中定义的一样
+name 字段名字
+type 字段类型：（缺省 int ）
+	string	字符串(size 缺省 16); 
+	int		整数（根据size决定其位数,缺省 4，base：进制，缺省 10）;
+	float	浮点数（size = 4 单精度，size = 8 双精度,缺省 4）
+default 缺省值
+-->
+	<table name="MonthEventBase" sheet="Sheet1" ExcelFile="月活动表.xlsm" sort="活动月份+活动日">
+		<fields>
+			<field name="编号" type="int" size="4" var="dwID"/>
+			<field name="活动月份" type="int" size="4" var="dwMonth"/>
+			<field name="活动日" type="int" size="4" var="dwDay"/>
+			<field name="主题名称" type="string" size="0" var="strEventName"/>
+			<field name="主题配图" type="string" size="0" var="strPic"/>
+			<field name="活动1" type="int" size="4" var="dwEvent1"/>
+			<field name="活动2" type="int" size="4" var="dwEvent2"/>
+			<field name="活动3" type="int" size="4" var="dwEvent3"/>
+			<field name="活动4" type="int" size="4" var="dwEvent4"/>
+			<field name="活动5" type="int" size="4" var="dwEvent5"/>
+			<field name="活动6" type="int" size="4" var="dwEvent6"/>
+			<field name="活动7" type="int" size="4" var="dwEvent7"/>
+			<field name="活动8" type="int" size="4" var="dwEvent8"/>
+			<field name="活动9" type="int" size="4" var="dwEvent9"/>
+			<field name="活动10" type="int" size="4" var="dwEvent10"/>
+		</fields>
+	</table>
+</config>

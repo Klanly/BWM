@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- edited with XMLSPY v2004 rel. 2 U (http://www.xmlspy.com) by wt (zt) -->
+<config>
+	<!-- 
+字段顺序必与结构中定义的一样
+name 字段名字
+type 字段类型：（缺省 int ）
+	string	字符串( size 缺省 16); 
+	int		整数（根据size决定其位数,缺省 4，base：进制，缺省 10）;
+	float	浮点数（size = 4 单精度，size = 8 双精度,缺省 4）
+default 缺省值
+-->
+	<table name="GrouponDataBase" ExcelFile="团购表.xlsm" sheet="Sheet1" sort="礼包ID">
+		<fields>
+			<field name="礼包ID" type="int" size="4" var="dwID"/>
+			<field name="礼包名称" type="string" size="0" var="strName"/>
+			<field name="限购次数" type="int" size="4" var="dwBuyTimes"/>
+			<field name="货币类型" type="int" size="4" var="dwMoneyType"/>
+			<field name="原价" type="int" size="4" var="dwOriginalPrice"/>
+			<field name="现价" type="int" size="4" var="dwCurrentPrice"/>
+			<field name="图片" type="int" size="4" var="dwImage"/>
+			<field name="道具1" type="string" size="0" var="strItemGift1">
+				<regex><![CDATA[^(\d+:\d+:(\d+-\d+)(,\d+-\d+)*)?$]]></regex>
+			</field>
+			<field name="道具2" type="string" size="0" var="strItemGift2">
+				<regex><![CDATA[^(\d+:\d+:(\d+-\d+)(,\d+-\d+)*)?$]]></regex>
+			</field>
+			<field name="道具3" type="string" size="0" var="strItemGift3">
+				<regex><![CDATA[^(\d+:\d+:(\d+-\d+)(,\d+-\d+)*)?$]]></regex>
+			</field>
+			<field name="道具4" type="string" size="0" var="strItemGift4">
+				<regex><![CDATA[^(\d+:\d+:(\d+-\d+)(,\d+-\d+)*)?$]]></regex>
+			</field>
+			<field name="道具5" type="string" size="0" var="strItemGift5">
+				<regex><![CDATA[^(\d+:\d+:(\d+-\d+)(,\d+-\d+)*)?$]]></regex>
+			</field>
+			<field name="道具6" type="string" size="0" var="strItemGift6">
+				<regex><![CDATA[^(\d+:\d+:(\d+-\d+)(,\d+-\d+)*)?$]]></regex>
+			</field>
+		</fields>
+	</table>
+</config>

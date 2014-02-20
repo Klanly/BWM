@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- edited with XMLSPY v2004 rel. 2 U (http://www.xmlspy.com) by wt (zt) -->
+<config>
+	<!-- 
+字段顺序必与结构中定义的一样
+name 字段名字
+type 字段类型：（缺省 int ）
+	string	字符串(size 缺省 16); 
+	int		整数（根据size决定其位数,缺省 4，base：进制，缺省 10）;
+	float	浮点数（size = 4 单精度，size = 8 双精度,缺省 4）
+default 缺省值
+-->
+	<table name="PreciousPetLevelBase" ExcelFile="奇异兽升级表.xlsm" sheet="Sheet1" sort="等级">
+		<fields>
+			<field name="等级" type="int" size="4" var="dwID"/>
+			<field name="需要经验" type="int" size="4" var="dwExp"/>
+			<field name="蓝色经验" type="int"/>
+			<field name="黄色经验" type="int"/>
+			<field name="绿色经验" type="int"/>
+			<field name="紫色经验" type="int"/>
+		</fields>
+	</table>
+</config>	
+
+

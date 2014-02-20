@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- edited with XMLSPY v2004 rel. 2 U (http://www.xmlspy.com) by wt (zt) -->
+<config>
+	<!-- 
+字段顺序必与结构中定义的一样
+name 字段名字
+type 字段类型：（缺省 int ）
+	string	字符串( size 缺省 16); 
+	int		整数（根据size决定其位数,缺省 4，base：进制，缺省 10）;
+	float	浮点数（size = 4 单精度，size = 8 双精度,缺省 4）
+default 缺省值
+-->
+	<table name="FunctionRightBase" ExcelFile="职务权限表.xlsm" sheet="Sheet1" sort="编号">
+		<fields>
+				<field name="编号" type="int" size="4" var="dwID" />
+				<field name="名称" type="string" size="0" var="strName" />
+				<field name="权利职务" type="string" size="0" var="strduty">
+					<regex><![CDATA[^(\d+(-\d+)*)?$]]></regex>
+				</field>
+				<field name="说明" type="string" size="0" var="strExplain"/>
+				<field name="悬浮提示" type="string" size="0" var="strTip"/>
+		</fields>
+	</table>
+</config>

@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- edited with XMLSPY v2004 rel. 2 U (http://www.xmlspy.com) by wt (zt) -->
+<config>
+	<!-- 
+字段顺序必与结构中定义的一样
+name 字段名字
+type 字段类型：（缺省 int ）
+	string	字符串( size 缺省 16); 
+	int		整数（根据size决定其位数,缺省 4，base：进制，缺省 10）;
+	float	浮点数（size = 4 单精度，size = 8 双精度,缺省 4）
+default 缺省值
+-->
+	<table name="BuildingLevelBase" sheet="Sheet1" ExcelFile="团建筑升级表.xlsm">
+		<fields>
+			<field name="类型" type="int"/>
+			<field name="等级" type="int"/>
+			<field name="升级繁荣度" type="int"/>
+			<field name="升级团资金" type="int"/>
+			<field name="维护繁荣度" type="int"/>
+			<field name="维护团资金" type="int"/>
+			<field name="建筑NPC" type="int"/>
+			<field name="位置X" type="int"/>
+			<field name="位置Y" type="int"/>
+			<field name="团包裹格子" type="int"/>	
+			<field name="团维护资金" type="int"/>
+			<field name="人数上限" type="int"/>
+			<field name="奖箱格子" type="int"/>
+			<field name="营养指数上限" type="int"/>	
+			<field name="繁荣度上限" type="int"/>	
+			<field name="资金上限" type="int"/>	
+			<field name="名称" type="string" size="32"/>
+		</fields>
+	</table>
+</config>

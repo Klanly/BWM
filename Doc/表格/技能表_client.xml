@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- edited with XMLSPY v2004 rel. 2 U (http://www.xmlspy.com) by wt (zt) -->
+<config>
+	<!-- 
+字段顺序必与结构中定义的一样
+name 字段名字
+type 字段类型：（缺省 int ）
+	string	字符串(size 缺省 16); 
+	int		整数（根据size决定其位数,缺省 4，base：进制，缺省 10）;
+	float	浮点数（size = 4 单精度，size = 8 双精度,缺省 4）
+default 缺省值
+-->
+	<table name="SkillDatabase" ExcelFile="技能表.xlsm" sheet="Sheet1" sort="编号+等级">
+		<fields>
+			<field name="编号" type="int" size="2" var="wdID"/>
+			<field name="等级" type="int" size="2" var="wdLevel"/>
+			<field name="名称" type="string" size="0" var="strName"/>
+			<field name="最高等级" type="int" size="4" var="dwMaxLevel"/>
+			<field name="技能类型" type="int" size="4" var="dwType"/>
+			<field name="职业类型" type="int" size="4" var="dwProfType"/>
+			<field name="攻击距离" type="int" size="4" var="dwDis"/>
+			<field name="释放方式" type="int" size="4" var="dwUseMethod"/>
+			<field name="能否连续释放" type="int" size="4" var="dwLockAndContinue"/>
+			<field name="技能范围" type="int" size="4" var="dwRange"/>
+			<field name="增益/减益技能" type="int" size="4" var="dwBad"/>
+			<field name="人物等级" type="int" size="4" var="dwNeedLevel"/>
+			<field name="前提技能" type="int" size="4" var="dwNeedSkill1"/>	
+			<field name="前提技能等级" type="int" size="4" var="dwNeedSkill1Level"/>
+			<field name="进阶技能" type="int" size="4" var="dwAdvanceSkill"/>	
+			<field name="技能释放需求BUFF" type="int" size="4" var="dwNeedBuff"/>
+			<field name="体力消耗" type="int" size="4" var="dwSp"/>
+			<field name="能否学习" type="int" size="4" var="dwCanStudy"/>
+			<field name="消耗真气" type="int" size="4" var="dwZhenqi"/>
+			<field name="需要道具" type="int" size="4" var="dwSkillBookID"/>			
+			<field name="消耗经验" type="int" size="4" var="dwExp"/>
+			<field name="消耗货币" type="int" size="4" var="dwMoney"/>
+			<field name="消耗货币类型" type="int" size="4" var="dwMoneyType"/>
+			
+			<field name="冷却时间" type="int" size="4" var="dwIntervalTime"/>
+			<field name="公共冷却" type="int" size="4" var="dwCommonCDTime"/>
+			<field name="公共冷却组" type="int" size="4" var="dwCommonCDGroup"/>
+			<field name="准备时间" type="int" size="4" var="dwWaitTime"/>
+			<field name="释放停顿时间" type="int" size="4" var="dwNeedToStopMove"/>
+			<field name="是否可骑乘使用" type="int" size="4" var="dwUsedInRide"/>
+			<field name="技能冷却次数" type="int" size="4" var="dwUseTimes"/>
+			<field name="不可攻击对象" type="int" size="4" var="dwNoneType"/>
+			<field name="显示位置" type="int" size="4" var="byShowPosition"/>
+			<field name="描述" type="string" size="0" var="strDesc"/>
+			<field name="可制造物品" type="string" size="0" var="strcanmake">
+				<regex><![CDATA[^0|(\d+(-\d+)*)$]]></regex>
+			</field>
+			<field name="持续时间" type="float" size="4" var="dwContinuationTime"/>
+			<field name="百分比" type="float" size="4" var="dwPercent"/>
+		</fields>
+	</table>
+</config>	
+
+

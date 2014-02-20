@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- edited with XMLSPY v2004 rel. 2 U (http://www.xmlspy.com) by wt (zt) -->
+<config>
+	<!-- 
+字段顺序必与结构中定义的一样
+name 字段名字
+type 字段类型：（缺省 int ）
+	string	字符串(size 缺省 16); 
+	int		整数（根据size决定其位数,缺省 4，base：进制，缺省 10）;
+	float	浮点数（size = 4 单精度，size = 8 双精度,缺省 4）
+default 缺省值
+-->
+	<table name="PetSkillLevelBase" sheet="Sheet1" ExcelFile="宠物技能等级表.xlsm">
+		<fields>
+			<field name="技能编号" type="int"/>
+			<field name="一级技能" type="int"/>
+			<field name="技能等级" type="int"/>
+			<field name="下一级技能" type="int"/>
+			<field name="固定技能" type="int"/>
+			<field name="技能卡ID" type="int"/>
+			<field name="评分" type="int"/>			
+		</fields>
+	</table>
+	<table name="PetSkillCardBase" sheet="Sheet1" ExcelFile="宠物技能等级表.xlsm">
+		<fields>
+			<field name="技能卡ID" type="int"/>
+			<field name="技能编号" type="int"/>
+			<field name="技能等级" type="int"/>
+		</fields>
+	</table>
+</config>

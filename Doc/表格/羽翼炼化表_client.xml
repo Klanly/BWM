@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- edited with XMLSPY v2004 rel. 2 U (http://www.xmlspy.com) by wt (zt) -->
+<config>
+	<!-- 
+字段顺序必与结构中定义的一样
+name 字段名字
+type 字段类型：（缺省 int ）
+	string	字符串(size 缺省 16); 
+	int		整数（根据size决定其位数,缺省 4，base：进制，缺省 10）;
+	float	浮点数（size = 4 单精度，size = 8 双精度,缺省 4）
+default 缺省值
+-->
+	<table name="WingRefinementBase" sheet="Sheet1" ExcelFile="羽翼炼化表.xlsm" sort="炼化等级">
+		<fields>
+			<field name="炼化等级" type="int" size="4" var="dwLevel"/>
+			<field name="成功几率" type="int" size="4" var="dwRate"/>
+			<field name="失败后等级" type="int" size="4" var="wdFailedLevel"/>
+			<field name="物攻附加" type="int" size="4" var="dwPDam"/>
+			<field name="化攻附加" type="int" size="4" var="dwMDam"/>
+			<field name="物防附加" type="int" size="4" var="dwPDef"/>
+			<field name="化防附加" type="int" size="4" var="dwMDef"/>
+			<field name="生命值附加" type="int" size="4" var="dwHP"/>
+			<field name="需要金钱" type="int" size="4" var="dwPrice"/>
+			<field name="需要个数" type="int" size="4" var="dwNum"/>
+			<field name="需求人物等级" type="int" size="4" var="dwNeedRoleLevel"/>
+		</fields>
+	</table>
+</config>

@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- edited with XMLSPY v2004 rel. 2 U (http://www.xmlspy.com) by wt (zt) -->
+<config>
+	<!-- 
+字段顺序必与结构中定义的一样
+name 字段名字
+type 字段类型：（缺省 int ）
+	string	字符串( size 缺省 16); 
+	int		整数（根据size决定其位数,缺省 4，base：进制，缺省 10）;
+	float	浮点数（size = 4 单精度，size = 8 双精度,缺省 4）
+default 缺省值
+-->
+	<table name="WhiteEquipDatabase" ExcelFile="白色装备表.xlsm" sheet="Sheet1" sort="道具ID">
+		<fields>
+			<field name="道具ID" type="int" size="4" var="dwID"/>
+			<field name="装备耐久" type="string" size="0" var="strDur"/>
+			<field name="生命值上限" type="int" size="4" var="dwHp"/>
+			<field name="物理攻击" type="int" size="4" var="dwPdam"/>
+			<field name="化学攻击" type="int" size="4" var="dwMdam"/>
+			<field name="物理命中" type="int" size="4" var="dwPhit"/>
+			<field name="化学命中" type="int" size="4" var="dwMhit"/>
+			<field name="物理防御" type="int" size="4" var="dwPdef"/>
+			<field name="化学防御" type="int" size="4" var="dwMdef"/>
+			<field name="热能攻击" type="int" size="4" var="dwRN"/>
+			<field name="光波攻击" type="int" size="4" var="dwGB"/>
+			<field name="声波攻击" type="int" size="4" var="dwSB"/>
+			<field name="生化攻击" type="int" size="4" var="dwSH"/>
+			<field name="热能防御" type="int" size="4" var="dwRNDef"/>
+			<field name="光波防御" type="int" size="4" var="dwGBDef"/>
+			<field name="声波防御" type="int" size="4" var="dwSBDef"/>
+			<field name="生化防御" type="int" size="4" var="dwSHDef"/>
+			<field name="需要材料" type="string" size="0" var="strNeedMaterial">
+				<regex><![CDATA[^\d+-\d+-\d+-\d+-\d+$]]></regex>
+			</field>
+			<field name="生命值附加" type="int" size="4" var="dwExtHp"/>
+			<field name="物攻附加" type="int" size="4" var="dwExtPdam"/>
+			<field name="化攻附加" type="int" size="4" var="dwExtMdam"/>
+			<field name="物防附加" type="int" size="4" var="dwExtPdef"/>
+			<field name="化防附加" type="int" size="4" var="dwExtMdef"/>
+            <field name="物攻提升" type="int" size="4" var="dwPdamper"/>
+			<field name="化攻提升" type="int" size="4" var="dwMdamper"/>
+			<field name="物防提升" type="int" size="4" var="dwPdefper"/>
+			<field name="化防提升" type="int" size="4" var="dwMdefper"/>
+			<field name="生命值提升" type="int" size="4" var="dwMaxhpper"/>		
+            <field name="抗冰冻" type="int" size="2" var="wFrozenDef"/>
+			<field name="抗静默" type="int" size="2" var="wSilentDef"/>
+			<field name="抗变形" type="int" size="2" var="wChangeDef"/>
+			<field name="抗眩晕" type="int" size="2" var="wFaintDef"/>
+			<field name="抗减速" type="int" size="2" var="wSpeedSubDef"/>
+            <field name="反伤减免" type="int" size="2" var="wPerSubEcho"/>			
+            <field name="致命一击2" type="int" size="4" var="dwLucky2"/>			
+            <field name="忽视防御2" type="int" size="4" var="dwIgnoredef2"/>			
+            <field name="重击2" type="int" size="4" var="dwForce2"/>			
+            <field name="伤害反射2" type="int" size="4" var="dwHurtecho2"/>			
+            <field name="物伤减少2" type="int" size="4" var="dwSubph2"/>			
+            <field name="化伤减少2" type="int" size="4" var="dwSubmh2"/>			
+            <field name="闪避2" type="int" size="4" var="dwHide2"/>			
+		</fields>
+	</table>
+</config>

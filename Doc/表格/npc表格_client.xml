@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- edited with XMLSpy v2005 sp2 U (http://www.altova.com) by any (Ru-Board) -->
+<!-- edited with XMLSPY v2004 rel. 2 U (http://www.xmlspy.com) by wt (zt) -->
+<config>
+	<!-- 
+字段顺序必与结构中定义的一样
+name 字段名字
+type 字段类型：（缺省 int ）
+	string	字符串( size 缺省 16); 
+	int		整数（根据size决定其位数,缺省 4，base：进制，缺省 10）;
+	float	浮点数（size = 4 单精度，size = 8 双精度,缺省 4）
+default 缺省值
+-->
+	<!--NPC 动作类型：1 人形类  2 怪兽类 3 飞行类
+	-->
+	<table name="NpcDataBase" ExcelFile="npc表格.xlsm" sheet="Sheet1" sort="编号">
+		<fields>
+			<field name="编号" type="int" var="dwID"/>
+			<field name="颜色" type="int" var="dwNameColor"/>
+			<field name="名称" type="string" size="32" var="strName"/>
+			<field name="子名称" type="string" size="32" var="strSubName"/>
+			<field name="是否可访问" type="int" var="dwVisitType"/>
+			<field name="是否可攻击" type="int" var="dwAttackType"/>
+			<field name="是否可选中" type="int" var="dwCanBeSelect"/>
+			<field name="信息显示" type="int" var="dwShowType"/>
+			
+			<field name="移动速度" type="int" var="dwWalkSpeed"/>
+			<field name="奔跑速度" type="int" var="dwRunSpeed"/>
+			
+			<field name="生命值" type="int" var="dwBaseLife"/>
+			<field name="物理防御" type="int" var="dwBaseDefine"/>
+			<field name="物理攻击" type="int" var="dwBaseAttack"/>
+			
+			<field name="动作文件夹" type="string" var="strAniDir"/>
+			<field name="访问距离" type="int" var="dwCallDis"/>
+			<field name="访问动作" type="string" var="strCallAction"/>
+			<field name="待机时间" type="int" var="dwResetDirectionTime"/>			
+
+			<field name="模型ID" type="int" var="dwModelSet"/>
+			<field name="类型" type="int" var="dwType"/>
+			<field name="怪物类型" type="int" var="dwMonsterType"/>
+			<field name="等级" type="int" var="dwLevel"/>
+			<field name="攻击发声" type="string" size="0" var="strAttackSound"/>
+			<field name="被击发声" type="string" size="0" var="strUnderAttackSound"/>
+			<field name="空闲发声" type="string" size="0" var="strIdleSound"/>
+			<field name="临死发声"  var="dwDyingSound"/>
+			<field name="点击语音"  type="string" size="0" var="strFunNpcClickSound"/>
+			<field name="出生特效" type="string" size="0" var="strBirthMagic"/>
+			<field name="出生特效绑定点" type="string" size="0" var="strBirthMagicLink"/>
+			<field name="出生特效持续时间" type="int" var="dwBirthMagicLife"/>
+			<field name="出生音效" type="int" var="dwBirthMagicSoundID"/>
+			<field name="出生音效延迟" type="int" var="dwBirthMagicSoundDelay"/>
+			<field name="死亡特效" type="string" size="0" var="strDeathMagic"/>
+			<field name="死亡特效绑定点" type="string" size="0" var="strDeathMagicLink"/>
+			<field name="死亡特效持续时间" type="int" var="dwDeathMagicLife"/>
+			<field name="死亡音效" type="int" var="dwDeathMagicSoundID"/>
+			<field name="死亡音效延迟" type="int" var="dwDeathMagicSoundDelay"/>
+			<field name="移动音效" type="int" var="dwMovingSound"/>
+			<field name="静止音效" type="int" var="dwStandingSound"/>	
+
+			<field name="模型被攻击范围" type="int" var="dwModelArea"/>
+			<field name="旋转速度X"  type="float"  var="fRotateX"/>
+			<field name="旋转速度Y"  type="float"  var="fRotateY"/>
+			<field name="旋转速度Z"  type="float"  var="fRotateZ"/>
+			<field name="描述" type="string" size="0" var="strDesc"/>
+			<field name="碰撞框缩放X"  type="float"  var="fColAABBScaleX"/>
+			<field name="碰撞框缩放Y"  type="float"  var="fColAABBScaleY"/>
+			<field name="碰撞框缩放Z"  type="float"  var="fColAABBScaleZ"/>
+		</fields>
+	</table>
+</config>

@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- edited with XMLSPY v2004 rel. 2 U (http://www.xmlspy.com) by wt (zt) -->
+<config>
+	<!-- 
+字段顺序必与结构中定义的一样
+name 字段名字
+type 字段类型：（缺省 int ）
+	string	字符串( size 缺省 16); 
+	int		整数（根据size决定其位数,缺省 4，base：进制，缺省 10）;
+	float	浮点数（size = 4 单精度，size = 8 双精度,缺省 4）
+default 缺省值
+-->
+	<table name="LifeEquipDataBase" ExcelFile="生命存储仪升级表.xlsm" sheet="Sheet1" sort="存储仪编号">
+		<fields>
+			<field name="存储仪编号" type="int" size="4" var="dwID"/>
+			<field name="白血量" type="int" size="4" var="dwHpWhite"/>
+			<field name="蓝血量" type="int" size="4" var="dwHpBlue"/>
+			<field name="黄血量" type="int" size="4" var="dwHpYellow"/>
+			<field name="绿血量" type="int" size="4" var="dwHpGreen"/>
+			<field name="血精石个数" type="int" size="4" var="dwNeedStoneNum"/>
+			<field name="血精石等级" type="int" size="4" var="dwNeedStoneLevel"/>
+			<field name="成功几率" type="int" size="4" var="dwRate"/>
+			<field name="失败降级" type="int" size="4" var="dwLevelPenalty"/>
+			<field name="手续费" type="int" size="4" var="dwPrice"/>
+			<field name="需求人物等级" type="int" size="4" var="dwNeedRoleLevel"/>
+		</fields>
+	</table>
+</config>

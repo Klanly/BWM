@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<config>
+	<table name="NpcTileSfx" ExcelFile="NPC地表特效表.xlsm" sheet="Sheet1" sort="ID">
+		<fields>
+			<field name="ID" type="int" size="4" var="dwNpcID"/>
+			<field name="脚部绑定点" type="string" size="0" var="szFeetNodes">
+				<regex><![CDATA[^([0-9a-zA-Z_]+(;[0-9a-zA-Z_]+)*)$]]></regex>
+			</field>
+			<field name="脚步音效类型" type="int" size="4" var="dwStepSoundType"/>	
+			<field name="脚印特效" type="string" size="0" var="szFootprintSfx"/>
+			<field name="尘土特效" type="string" size="0" var="szDirtSfx"/>
+		</fields>
+	</table>
+</config>

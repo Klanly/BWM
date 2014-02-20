@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- edited with XMLSPY v2004 rel. 2 U (http://www.xmlspy.com) by wt (zt) -->
+<config>
+	<!-- 
+字段顺序必与结构中定义的一样
+name 字段名字
+type 字段类型：（缺省 int ）
+	string	字符串(size 缺省 16); 
+	int		整数（根据size决定其位数,缺省 4，base：进制，缺省 10）;
+	float	浮点数（size = 4 单精度，size = 8 双精度,缺省 4）
+default 缺省值
+-->
+	<table name="WeaponActionDataBase" ExcelFile="武器动作表.xlsm" sheet="Sheet1" sort="武器子类型">
+		<fields>
+			<field name="武器子类型" type="int" size="4" var="dwID"/>
+			<field name="武器待机类型" type="string" size="0" var="strWeaponIdle"/>
+			<field name="武器攻击待机类型" type="string" size="0" var="strWeaponAttIdle"/>
+			<field name="武器站立类型" type="string" size="0" var="strWeaponStand"/>
+			<field name="武器跑步类型" type="string" size="0" var="strWeaponRun"/>	
+			
+			<field name="武器被击类型" type="string" size="0" var="strWeaponBeiji"/>
+			<field name="武器半身被击类型" type="string" size="0" var="strWeaponBeijiHalf"/>
+			<field name="武器被击倒和跳起类型" type="string" size="0" var="strWeaponBeijiDownAndUp"/>
+			
+			<field name="武器起跳类型" type="string" size="0" var="strWeaponLaunch"/>	
+			<field name="武器跳跃类型" type="string" size="0" var="strWeaponJump"/>
+			<field name="武器着陆站立类型" type="string" size="0" var="strWeaponLandToStand"/>	
+			<field name="武器着陆跑步类型" type="string" size="0" var="strWeaponLandToRun"/>				
+			
+			<field name="武器死亡类型" type="string" size="0" var="strWeaponDie"/>
+			<field name="武器取出动作时间" type="int" size="4" var="dwWeaponTakeTime"/>
+			<field name="武器取出动作" type="string" size="0" var="strWeaponTake"/>
+			<field name="武器半身取出动作" type="string" size="0" var="strWeaponTakeHalf"/>
+			<field name="武器收起动作时间" type="int" size="4" var="dwWeaponBackTime"/>
+			<field name="武器收起动作" type="string" size="0" var="strWeaponBack"/>
+			<field name="武器半身收起动作" type="string" size="0" var="strWeaponBackHalf"/>
+			
+			<field name="武器骑乘取出动作" type="string" size="0" var="strRideWeaponTake"/>
+			<field name="武器骑乘收起动作" type="string" size="0" var="strRideWeaponBack"/>
+			<field name="武器骑乘被击类型" type="string" size="0" var="strRideWeaponBeiji"/>
+			<field name="武器骑乘站立类型" type="string" size="0" var="strRideWeaponStand"/>
+
+			<field name="武器吟唱动作" type="string" size="0" var="strWeaponIntonate"/>
+			<field name="武器骑乘吟唱动作" type="string" size="0" var="strRideWeaponIntonate"/>
+
+			<field name="武器BUFF动作" type="string" size="0" var="strWeaponBuff"/>
+			<field name="武器骑乘BUFF动作" type="string" size="0" var="strRideWeaponBuff"/>
+			
+			<field name="武器闪避动作" type="string" size="0" var="strWeaponShanbi"/>
+			<field name="武器骑乘闪避动作" type="string" size="0" var="strRideWeaponShanbi"/>
+		</fields>
+	</table>
+</config>	
+
+
