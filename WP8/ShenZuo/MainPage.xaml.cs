@@ -58,6 +58,8 @@ namespace ShenZuo
 		private void Unity_Loaded()
 		{
 			SetupGeolocator();
+
+			GX.Net.WebSocket.Proxy = new WebSocket();
 		}
 
 		private void PhoneApplicationPage_BackKeyPress(object sender, CancelEventArgs e)
