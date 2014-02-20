@@ -80,28 +80,28 @@ namespace GX.Net
 		#region Register
 		/// <summary>注册可被解析的消息类型</summary>
 		/// <typeparam name="T">可被解析的消息类型ID</typeparam>
-		/// <param name="messageType"><typeparamref name="T"/>对应的<see cref="ProtoBuf.IExtensible"/>类型</param>
-		private void Register<T>(MessageType messageType) where T : ProtoBuf.IExtensible
+		/// <param name="messageTypeID"><typeparamref name="T"/>对应的<see cref="ProtoBuf.IExtensible"/>类型</param>
+		public void Register<T>(MessageType messageTypeID) where T : ProtoBuf.IExtensible
 		{
 			// 反序列化预编译
 			ProtoBuf.Serializer.PrepareSerializer<T>();
 
 			// 注册
-			messageTypeTable[typeof(T)] = messageType;
+			messageTypeTable[typeof(T)] = messageTypeID;
 			//deserializeTable[messageType] = (stream) => ProtoBuf.Serializer.Deserialize<T>(stream);
-			deserializeTable[messageType] = (stream) => ProtoBuf.Serializer.DeserializeWithLengthPrefix<T>(stream, ProtoBuf.PrefixStyle.Base128);
+			deserializeTable[messageTypeID] = (stream) => ProtoBuf.Serializer.DeserializeWithLengthPrefix<T>(stream, ProtoBuf.PrefixStyle.Base128);
 		}
 
 		/// <summary>注册可被解析的消息类型</summary>
 		/// <param name="messageTypeID">可被解析的消息类型ID</param>
 		/// <param name="messageType"><paramref name="messageTypeID"/>对应的<see cref="ProtoBuf.IExtensible"/>类型</param>
 		/// <remarks>对泛型重载Register&lt;T&gt;的非泛型包装</remarks>
-		private void Register(MessageType messageTypeID, Type messageType)
+		public void Register(MessageType messageTypeID, Type messageType)
 		{
-			BindingFlags flags = BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.InvokeMethod;
-			MethodInfo method = this.GetType().GetMethod("Register", flags, null, new Type[] { typeof(MessageType) }, null);
-			method = method.MakeGenericMethod(messageType);
-			method.Invoke(this, new object[] { messageTypeID });
+			// Call Register<messageType>(messageTypeID) by refelect.
+			this.GetType().GetMethod("Register", new Type[] { typeof(MessageType) })
+				.MakeGenericMethod(messageType)
+				.Invoke(this, new object[] { messageTypeID });
 		}
 
 		/// <summary>
