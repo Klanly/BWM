@@ -15,11 +15,10 @@
   </Resources>
   <Applications>
     <Application Id="App" Executable="Template.exe" EntryPoint="shen.App">
-      <VisualElements DisplayName="ShenZuo" Logo="Assets\SquareTile.png" SmallLogo="Assets\SmallTile.png" Description="shen" ForegroundText="light" BackgroundColor="#000000">
+      <VisualElements DisplayName="神作" Logo="Assets\SquareTile.png" SmallLogo="Assets\SmallTile.png" Description="shen" ForegroundText="light" BackgroundColor="#000000">
         <DefaultTile ShowName="allLogos" />
         <SplashScreen Image="Assets\SplashScreen.png" />
       </VisualElements>
     </Application>
   </Applications>
-  <Capabilities />
 </Package>
