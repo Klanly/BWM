@@ -15,7 +15,7 @@ static class WP8Menu
 	public static void Help()
 	{
 		Debug.developerConsoleVisible = true;
-		ClearLog();
+		GX.Editor.LogEntries.Clear();
 
 		// 获取所有需要编译的场景列表
 		var levels = (from s in EditorBuildSettings.scenes where s.enabled select s.path).ToArray();
@@ -51,16 +51,7 @@ static class WP8Menu
 		}
 	}
 
-	/// <summary>
-	/// http://answers.unity3d.com/questions/10580/editor-script-how-to-clear-the-console-output-wind.html
-	/// </summary>
-	public static void ClearLog()
-	{
-		var assembly = Assembly.GetAssembly(typeof(UnityEditor.ActiveEditorTracker));
-		var type = assembly.GetType("UnityEditorInternal.LogEntries");
-		var method = type.GetMethod("Clear");
-		method.Invoke(new object(), null);
-	}
+	
 
 	private static void ProtobufBegin()
 	{
