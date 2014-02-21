@@ -14,7 +14,7 @@
     <Resource Language="x-generate" />
   </Resources>
   <Applications>
-    <Application Id="App" Executable="Template.exe" EntryPoint="shen.App">
+    <Application Id="App" Executable="ShenZuo.exe" EntryPoint="shen.App">
       <VisualElements DisplayName="神作" Logo="Assets\SquareTile.png" SmallLogo="Assets\SmallTile.png" Description="shen" ForegroundText="light" BackgroundColor="#000000">
         <DefaultTile ShowName="allLogos" />
         <SplashScreen Image="Assets\SplashScreen.png" />
