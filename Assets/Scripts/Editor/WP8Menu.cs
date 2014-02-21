@@ -1,4 +1,4 @@
-﻿#if UNITY_WP8
+﻿#if UNITY_WP8 || UNITY_WINRT
 using UnityEngine;
 using System.Collections;
 using UnityEditor;
@@ -11,7 +11,11 @@ using System.Reflection;
 static class WP8Menu
 {
 	const string Temp = "WP8Temp";
+#if UNITY_WP8
 	[MenuItem("WP8/Export", false)]
+#elif UNITY_WINRT
+	[MenuItem("WRT/Export", false)]
+#endif
 	public static void Help()
 	{
 		Debug.developerConsoleVisible = true;
@@ -31,7 +35,11 @@ static class WP8Menu
 			// 进行WP8项目生成
 			{
 				AssetDatabase.Refresh();
+#if UNITY_WP8
 				BuildPipeline.BuildPlayer(levels, "WP8", BuildTarget.WP8Player, BuildOptions.None);
+#elif UNITY_WINRT
+				BuildPipeline.BuildPlayer(levels, "WRT", BuildTarget.MetroPlayer, BuildOptions.None);
+#endif
 			}
 
 			ProtobufEnd();
