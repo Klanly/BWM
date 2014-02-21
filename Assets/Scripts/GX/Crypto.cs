@@ -6,6 +6,14 @@ using System.Security.Cryptography;
 using System.Text;
 using UnityEngine;
 
+#if UNITY_WINRT && !UNITY_EDITOR
+using Windows.Security.Cryptography;
+using Windows.Security.Cryptography.Core;
+using Windows.Storage.Streams;
+using GX.WinRT;
+#endif
+
+
 namespace GX
 {
 	public class Crypto
@@ -60,21 +68,47 @@ namespace GX
 
 			#endregion
 		}
+#else
+		/// <summary>
+		/// ref: http://canbilgin.wordpress.com/2012/10/03/simple-aes-symmetric-key-encryption-in-winrt/
+		/// </summary>
+		class AesProxy : IProxy
+		{
+			private GX.SecretBytes KEY;
+			private GX.SecretBytes IV;
 
+			#region IProxy 成员
+
+			public void SetKey(byte[] key, byte[] iv)
+			{
+				this.KEY = new SecretBytes() { Bytes = key };
+				this.IV = new SecretBytes() { Bytes = iv };
+			}
+
+			public byte[] Encode(byte[] buf)
+			{
+				var encoder = SymmetricKeyAlgorithmProvider.OpenAlgorithm(SymmetricAlgorithmNames.AesEcbPkcs7);
+				var encoderKey = encoder.CreateSymmetricKey(KEY.Bytes.ToIBuffer());
+				return CryptographicEngine.Encrypt(encoderKey, buf.ToIBuffer(), IV.Bytes.ToIBuffer()).ToBytes();
+			}
+
+			public byte[] Decode(byte[] buf)
+			{
+				var decoder = SymmetricKeyAlgorithmProvider.OpenAlgorithm(SymmetricAlgorithmNames.AesCbcPkcs7);
+				var decoderKey = decoder.CreateSymmetricKey(KEY.Bytes.ToIBuffer());
+				return CryptographicEngine.Decrypt(decoderKey, buf.ToIBuffer(), IV.Bytes.ToIBuffer()).ToBytes();
+			}
+
+			#endregion
+		}
 #endif
-		
+
 		static Crypto()
 		{
-#if !UNITY_WINRT || UNITY_EDITOR
 			Proxy = new AesProxy();
-#endif
-		}
-
-		public static void SetKey(byte[] key = null, byte[] iv = null)
-		{
 			Proxy.SetKey(
-				key ?? GX.MD5.ComputeHash(Encoding.GetBytes(SystemInfo.deviceUniqueIdentifier)), 
-				iv ?? new byte[128]);
+				GX.MD5.ComputeHash(Encoding.GetBytes(SystemInfo.deviceUniqueIdentifier)),
+				new byte[128]);
 		}
 
 		public static byte[] Encode(byte[] buf)
