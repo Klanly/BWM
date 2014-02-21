@@ -99,7 +99,7 @@ namespace GX.Net
 		public void Register(MessageType messageTypeID, Type messageType)
 		{
 			// Call Register<messageType>(messageTypeID) by refelect.
-			this.GetType().GetMethod("Register", new Type[] { typeof(MessageType) })
+			this.GetType().GetRuntimeMethod("Register", typeof(MessageType))
 				.MakeGenericMethod(messageType)
 				.Invoke(this, new object[] { messageTypeID });
 		}
@@ -111,17 +111,20 @@ namespace GX.Net
 		private IEnumerable<KeyValuePair<MessageType, Type>> Parse()
 		{
 			var categoryIdType = typeof(Cmd.MSGTYPE.Cmd);
+#if UNITY_WINRT && !UNITY_EDITOR
+			var assembly = this.GetType().GetTypeInfo().Assembly;
+#else
 			var assembly = Assembly.GetExecutingAssembly();
-
+#endif
 			var ret = new Dictionary<MessageType, Type>();
 			foreach (var cName in Enum.GetNames(categoryIdType))
 			{
 				var cValue = Convert.ToByte(Enum.Parse(categoryIdType, cName));
-				var typeIdType = assembly.GetType(categoryIdType.Namespace + "." + cName + ".MSGTYPE+Param", true);
+				var typeIdType = assembly.GetType(categoryIdType.Namespace + "." + cName + ".MSGTYPE+Param");
 				foreach (var tName in Enum.GetNames(typeIdType))
 				{
 					var tValue = Convert.ToByte(Enum.Parse(typeIdType, tName));
-					var messageType = assembly.GetType(categoryIdType.Namespace + "." + cName + "." + tName, true);
+					var messageType = assembly.GetType(categoryIdType.Namespace + "." + cName + "." + tName);
 					ret.Add(new MessageType() { Cmd = cValue, Param = tValue }, messageType);
 				}
 			}
