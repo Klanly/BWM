@@ -14,7 +14,7 @@ public class NetTest : MonoBehaviour
 	{
 		socket = new WebSocket();
 		yield return null;
-		socket.Open();
+		socket.Open("ws://192.168.85.71:8000/shen/user");
 		StartCoroutine(socket.Run());
 
 		socket.Send(new Cmd.Login.VersionVerify() { version = "1.0" });
