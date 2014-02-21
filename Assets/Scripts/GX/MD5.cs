@@ -27,13 +27,15 @@ namespace GX
 		public static string ComputeHashString(string filename) { return ToString(ComputeHash(filename)); }
 		public static byte[] ComputeHash(string filename)
 		{
-#if (UNITY_WP8 || UNITY_WINRT) && !UNITY_EDITOR
+#if UNITY_WP8 && !UNITY_EDITOR
 			byte[] buf;
 			using (var file = File.OpenRead(filename))
 			{
 				buf = file.ReadAllBytes();
 			}
 			return ComputeHash(buf);
+#elif UNITY_WINRT && !UNITY_EDITOR
+			return ComputeHash(UnityEngine.Windows.File.ReadAllBytes(filename));
 #else
 			return ComputeHash(File.ReadAllBytes(filename));
 #endif
