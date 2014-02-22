@@ -8,13 +8,13 @@ using System.IO;
 using System.Collections.Generic;
 using System.Reflection;
 
-static class WP8Menu
+static class GXMenu
 {
-	const string Temp = "WP8Temp";
+	const string Temp = "GXTemp";
 #if UNITY_WP8
-	[MenuItem("WP8/Export", false)]
+	[MenuItem("GX/Export WP8", false)]
 #elif UNITY_WINRT
-	[MenuItem("WRT/Export", false)]
+	[MenuItem("GX/Export Metro", false)]
 #endif
 	public static void Help()
 	{
@@ -38,7 +38,7 @@ static class WP8Menu
 #if UNITY_WP8
 				BuildPipeline.BuildPlayer(levels, "WP8", BuildTarget.WP8Player, BuildOptions.None);
 #elif UNITY_WINRT
-				BuildPipeline.BuildPlayer(levels, "WRT", BuildTarget.MetroPlayer, BuildOptions.None);
+				BuildPipeline.BuildPlayer(levels, "Metro", BuildTarget.MetroPlayer, BuildOptions.None);
 #endif
 			}
 
