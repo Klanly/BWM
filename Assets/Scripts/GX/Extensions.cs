@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using UnityEngine;
+using GX;
 
 public static class Extensions
 {
@@ -57,7 +58,15 @@ public static class Extensions
 	{
 		foreach (var d in collection)
 			dic.Add(d.Key, d.Value);
-	} 
+	}
+
+#if UNITY_METRO && !UNITY_EDITOR
+	public static void ForEach<T>(this List<T> list, Action<T> action)
+	{
+		foreach (var i in list)
+			action(i);
+	}
+#endif
 	#endregion
 
 	#region Stream
@@ -87,7 +96,7 @@ public static class Extensions
 	public static string ToStringDebug(this object obj)
 	{
 		return "{ " + string.Join(", ", (
-			from f in obj.GetType().GetFields(System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance)
+			from f in obj.GetType().GetRuntimeFields()
 			select f.Name + "=" + f.GetValue(obj)).ToArray()) + " }";
 	} 
 	#endregion

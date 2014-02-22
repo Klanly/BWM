@@ -22,7 +22,7 @@ namespace GX.Net
 		public static IProxy Proxy { get; set; }
 
 		#region UniWeb WebSocket
-#if !UNITY_WP8 || UNITY_EDITOR
+#if !UNITY_WINRT || UNITY_EDITOR
 		class UniWebWebSocket : IProxy
 		{
 			HTTP.WebSocket socket;
@@ -79,7 +79,7 @@ namespace GX.Net
 
 		static WebSocket()
 		{
-#if !UNITY_WP8 || UNITY_EDITOR
+#if !UNITY_WINRT || UNITY_EDITOR
 			Proxy = new UniWebWebSocket();
 #endif
 		}

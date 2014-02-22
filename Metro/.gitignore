@@ -1,0 +1,13 @@
+bin/
+obj/
+*.user
+*.suo
+/packages
+/Players
+
+ShenZuo/Data
+ShenZuo/*.dll
+ShenZuo/*.pdb
+ShenZuo/protobuf-net.dll
+ShenZuo/protobuf-net.pdb
+ShenZuo/protobuf-net.xml
