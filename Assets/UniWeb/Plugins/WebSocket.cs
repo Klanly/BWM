@@ -239,9 +239,9 @@ namespace HTTP
 			req.headers.Set ("Connection", "Upgrade");
 			var key = WebSocketKey ();
 			req.headers.Set ("Sec-WebSocket-Key", key);
-			req.headers.Add ("Sec-WebSocket-Protocol", "chat, superchat");
+			//req.headers.Add ("Sec-WebSocket-Protocol", "chat, superchat");
 			req.headers.Set ("Sec-WebSocket-Version", "13");
-			req.headers.Set ("Origin", "null");
+			req.headers.Set ("Origin", uri.ToString());
 			req.acceptGzip = false;
 			req.Send ((Response obj) => {
 				if (obj.headers.Get ("Upgrade").ToLower () == "websocket" && obj.headers.Get ("Connection").ToLower () == "upgrade") {
