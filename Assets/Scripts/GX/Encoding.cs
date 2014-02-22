@@ -11,7 +11,7 @@ namespace GX
 			string GetString(byte[] bytes);
 		}
 
-#if (!UNITY_WP8 && !UNITY_WINRT) || UNITY_EDITOR
+#if !UNITY_WINRT || UNITY_EDITOR
 
 		class DefaultEncoding : IProxy
 		{
@@ -32,7 +32,7 @@ namespace GX
 
 		static Encoding()
 		{
-#if (!UNITY_WP8 && !UNITY_WINRT) || UNITY_EDITOR
+#if !UNITY_WINRT || UNITY_EDITOR
 			Proxy = new DefaultEncoding();
 #endif
 		}

@@ -6,7 +6,7 @@ using System.Security.Cryptography;
 using System.Text;
 using UnityEngine;
 
-#if UNITY_WINRT && !UNITY_EDITOR
+#if UNITY_METRO && !UNITY_EDITOR
 using Windows.Security.Cryptography;
 using Windows.Security.Cryptography.Core;
 using Windows.Storage.Streams;
@@ -27,7 +27,7 @@ namespace GX
 
 		public static IProxy Proxy { get; set; }
 
-#if !UNITY_WINRT || UNITY_EDITOR
+#if !UNITY_METRO || UNITY_EDITOR
 		class AesProxy : IProxy
 		{
 			private readonly SymmetricAlgorithm algorithm = new System.Security.Cryptography.AesManaged() { KeySize = 128 };

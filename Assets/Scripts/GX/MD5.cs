@@ -8,14 +8,14 @@ namespace GX
 {
 	public class MD5
 	{
-#if (!UNITY_WP8 && !UNITY_WINRT) || UNITY_EDITOR
+#if !UNITY_WINRT || UNITY_EDITOR
 		[ThreadStatic]
 		private static System.Security.Cryptography.MD5 md5 = System.Security.Cryptography.MD5.Create();
 #endif
 		public static string ComputeHashString(byte[] data) { return ToString(ComputeHash(data)); }
 		public static byte[] ComputeHash(byte[] data)
 		{
-#if (UNITY_WP8 || UNITY_WINRT) && !UNITY_EDITOR
+#if UNITY_WINRT && !UNITY_EDITOR
 			return UnityEngine.Windows.Crypto.ComputeMD5Hash(data);
 #else
 			if (md5 == null)
@@ -34,7 +34,7 @@ namespace GX
 				buf = file.ReadAllBytes();
 			}
 			return ComputeHash(buf);
-#elif UNITY_WINRT && !UNITY_EDITOR
+#elif UNITY_METRO && !UNITY_EDITOR
 			return ComputeHash(UnityEngine.Windows.File.ReadAllBytes(filename));
 #else
 			return ComputeHash(File.ReadAllBytes(filename));

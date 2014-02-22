@@ -10,7 +10,7 @@ namespace GX
 	{
 		public static FieldInfo GetRuntimeField(this Type type, string name)
 		{
-#if UNITY_WINRT && !UNITY_EDITOR
+#if UNITY_METRO && !UNITY_EDITOR
 			return RuntimeReflectionExtensions.GetRuntimeField(type, name);
 #else
 			return type.GetField(name);
@@ -18,7 +18,7 @@ namespace GX
 		}
 		public static IEnumerable<FieldInfo> GetRuntimeFields(this Type type)
 		{
-#if UNITY_WINRT && !UNITY_EDITOR
+#if UNITY_METRO && !UNITY_EDITOR
 			return RuntimeReflectionExtensions.GetRuntimeFields(type);
 #else
 			return type.GetFields();
@@ -27,7 +27,7 @@ namespace GX
 
 		public static PropertyInfo GetRuntimeProperty(this Type type, string name)
 		{
-#if UNITY_WINRT && !UNITY_EDITOR
+#if UNITY_METRO && !UNITY_EDITOR
 			return RuntimeReflectionExtensions.GetRuntimeProperty(type, name);
 #else
 			return type.GetProperty(name);
@@ -35,7 +35,7 @@ namespace GX
 		}
 		public static IEnumerable<PropertyInfo> GetRuntimeProperties(this Type type)
 		{
-#if UNITY_WINRT && !UNITY_EDITOR
+#if UNITY_METRO && !UNITY_EDITOR
 			return RuntimeReflectionExtensions.GetRuntimeProperties(type);
 #else
 			return type.GetProperties();
@@ -44,7 +44,7 @@ namespace GX
 
 		public static EventInfo GetRuntimeEvent(this Type type, string name)
 		{
-#if UNITY_WINRT && !UNITY_EDITOR
+#if UNITY_METRO && !UNITY_EDITOR
 			return RuntimeReflectionExtensions.GetRuntimeEvent(type, name);
 #else
 			return type.GetEvent(name);
@@ -52,7 +52,7 @@ namespace GX
 		}
 		public static IEnumerable<EventInfo> GetRuntimeEvents(this Type type)
 		{
-#if UNITY_WINRT && !UNITY_EDITOR
+#if UNITY_METRO && !UNITY_EDITOR
 			return RuntimeReflectionExtensions.GetRuntimeEvents(type);
 #else
 			return type.GetEvents();
@@ -61,7 +61,7 @@ namespace GX
 
 		public static MethodInfo GetRuntimeMethod(this Type type, string name, params Type[] parameters)
 		{
-#if UNITY_WINRT && !UNITY_EDITOR
+#if UNITY_METRO && !UNITY_EDITOR
 			return RuntimeReflectionExtensions.GetRuntimeMethod(type, name, parameters);
 #else
 			return type.GetMethod(name, parameters);
@@ -69,7 +69,7 @@ namespace GX
 		}
 		public static IEnumerable<MethodInfo> GetRuntimeMethods(this Type type)
 		{
-#if UNITY_WINRT && !UNITY_EDITOR
+#if UNITY_METRO && !UNITY_EDITOR
 			return RuntimeReflectionExtensions.GetRuntimeMethods(type);
 #else
 			return type.GetMethods();

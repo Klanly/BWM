@@ -111,7 +111,7 @@ namespace GX.Net
 		private IEnumerable<KeyValuePair<MessageType, Type>> Parse()
 		{
 			var categoryIdType = typeof(Cmd.MSGTYPE.Cmd);
-#if UNITY_WINRT && !UNITY_EDITOR
+#if UNITY_METRO && !UNITY_EDITOR
 			var assembly = this.GetType().GetTypeInfo().Assembly;
 #else
 			var assembly = Assembly.GetExecutingAssembly();

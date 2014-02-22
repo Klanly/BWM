@@ -60,7 +60,7 @@ public static class Extensions
 			dic.Add(d.Key, d.Value);
 	}
 
-#if UNITY_WINRT && !UNITY_EDITOR
+#if UNITY_METRO && !UNITY_EDITOR
 	public static void ForEach<T>(this List<T> list, Action<T> action)
 	{
 		foreach (var i in list)
