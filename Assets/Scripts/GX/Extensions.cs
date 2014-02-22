@@ -58,7 +58,15 @@ public static class Extensions
 	{
 		foreach (var d in collection)
 			dic.Add(d.Key, d.Value);
-	} 
+	}
+
+#if UNITY_WINRT && !UNITY_EDITOR
+	public static void ForEach<T>(this List<T> list, Action<T> action)
+	{
+		foreach (var i in list)
+			action(i);
+	}
+#endif
 	#endregion
 
 	#region Stream
