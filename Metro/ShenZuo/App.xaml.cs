@@ -66,6 +66,8 @@ namespace BWGame
 				appCallbacks.SetCoreWindowEvents(Window.Current.CoreWindow);
 
 				appCallbacks.InitializeD3DXAML();
+
+				GX.Net.WebSocket.Proxy = new WebSocket();
 			}
 
 			Window.Current.Activate();
