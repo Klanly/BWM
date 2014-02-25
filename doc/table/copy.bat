@@ -2,8 +2,9 @@
 pushd %~dp0
 set dest=..\..
 
-del /Q %dest%\Assets\Resources\Table\*.pbt
+del /Q %dest%\Assets\Resources\Table\*.bytes
 copy /Y *.pbt %dest%\Assets\Resources\Table
+rename %dest%\Assets\Resources\Table\*.pbt *.bytes
 call:clearMeta %dest%\Assets\Resources\Table
 
 del /Q %dest%\Assets\Scripts\Table\*.cs
