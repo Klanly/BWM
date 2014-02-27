@@ -17,16 +17,16 @@ public class NetTest : MonoBehaviour
 		socket.Open("ws://192.168.85.71:8000/shen/user");
 		StartCoroutine(socket.Run());
 
-		socket.Send(new Cmd.Login.VersionVerify() { version = "1.0" });
-		socket.Send(new Cmd.Login.VersionVerify() { version = "2.0" });
-		socket.Send(new Cmd.Login.VersionVerify() { version = "3.0" }, new Cmd.Login.VersionVerify() { version = "4.0" });
+		socket.Send(new Cmd.Login.VersionVerify_CS() { version = 1 });
+		socket.Send(new Cmd.Login.VersionVerify_CS() { version = 2 });
+		socket.Send(new Cmd.Login.VersionVerify_CS() { version = 3 }, new Cmd.Login.VersionVerify_CS() { version = 4 });
 	}
 
 	void Update()
 	{
 		foreach (var cmd in socket.Receive())
 		{
-			var vv = cmd as VersionVerify;
+			var vv = cmd as VersionVerify_CS;
 			Debug.Log(vv.version);
 			//yield return vv;
 		}
