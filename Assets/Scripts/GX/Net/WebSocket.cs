@@ -4,6 +4,7 @@ using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
+using System;
 
 namespace GX.Net
 {
@@ -86,6 +87,12 @@ namespace GX.Net
 		#endregion
 
 		private readonly MessageSerializer serizlizer = new MessageSerializer();
+		public MessageDispatcher Dispatcher { get; private set; }
+
+		public WebSocket()
+		{
+			this.Dispatcher = new MessageDispatcher();
+		}
 
 		public void Open(string url = "ws://echo.websocket.org")
 		{
@@ -105,24 +112,34 @@ namespace GX.Net
 			Proxy.Send(buf);
 		}
 
-		public IEnumerable<ProtoBuf.IExtensible> Receive()
+		public IEnumerator Dispatch()
 		{
 			while (true)
 			{
 				var buf = Proxy.Receive();
 				if (buf == null)
-					break;
+				{
+					yield return null;
+					continue;
+				}
 				using (var mem = new MemoryStream(buf))
 				{
 					while (mem.Position < mem.Length)
 					{
 						var msg = serizlizer.Deserialize(mem);
+						Debug.Log("收到网络消息：" + msg.ToStringDebug());
+						if (Dispatcher.Dispatch(msg) == false)
+							Debug.Log(string.Format("未处理的消息: {0}\n{1}", msg.GetType(), msg.ToStringDebug()));
 						yield return msg;
 					}
 				}
 			}
 		}
 
+		/// <summary>
+		/// 网络底层所需的收发轮询
+		/// </summary>
+		/// <returns></returns>
 		public IEnumerator Run()
 		{
 			return Proxy.Run();

@@ -11,6 +11,8 @@ namespace GX.Net
 	/// </summary>
 	public struct MessageType : IComparable<MessageType>
 	{
+		public static readonly MessageType Empty = new MessageType();
+			 
 		public byte Cmd { get; set; }
 		public byte Param { get; set; }
 

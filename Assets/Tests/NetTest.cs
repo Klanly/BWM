@@ -13,22 +13,58 @@ public class NetTest : MonoBehaviour
 	IEnumerator Start()
 	{
 		socket = new WebSocket();
-		yield return null;
-		socket.Open("ws://192.168.85.71:8000/shen/user");
-		StartCoroutine(socket.Run());
+		socket.Dispatcher.Register(this);
+		Debug.Log(socket.Dispatcher);
 
-		socket.Send(new Cmd.Login.VersionVerify_CS() { version = 1 });
-		socket.Send(new Cmd.Login.VersionVerify_CS() { version = 2 });
-		socket.Send(new Cmd.Login.VersionVerify_CS() { version = 3 }, new Cmd.Login.VersionVerify_CS() { version = 4 });
+		yield return null;
+		socket.Open("ws://192.168.85.71:7000/shen/user");
+		StartCoroutine(socket.Run());
+		StartCoroutine(socket.Dispatch());
+
+		socket.Send(new Cmd.Login.VersionVerify_CS() { version = 2014 });
 	}
 
-	void Update()
+	void OnDestroy()
 	{
-		foreach (var cmd in socket.Receive())
-		{
-			var vv = cmd as VersionVerify_CS;
-			Debug.Log(vv.version);
-			//yield return vv;
-		}
+		socket.Dispatcher.UnRegister(this);
+		Debug.Log(socket.Dispatcher);
+	}
+
+	[Execute]
+	void Execute(VersionVerify_CS cmd)
+	{
+		Debug.Log("[Execute]" + cmd.GetType().FullName);
+		Debug.Log("void Execute(VersionVerify_CS cmd)");
+		socket.Send(new UserLoginRequest_C() { username = "test", gameversion = (cmd as VersionVerify_CS).version });
+	}
+
+	[Execute]
+	void Execute(ZoneInfoList_S cmd)
+	{
+		Debug.Log("[Execute]" + cmd.GetType().FullName);
+	}
+	
+
+		
+	[Execute]
+	void Execute(UserLoginRequest_C cmd)
+	{
+		Debug.Log("[Execute]" + cmd.GetType().FullName);
+	}
+		
+
+	[Execute]
+	void Execute(UserLoginReturnFail_S cmd)
+	{
+		Debug.Log("[Execute]" + cmd.GetType().FullName);
+	}
+
+	[Execute]
+	void Execute(UserLoginReturnOk_S cmd)
+	{
+		Debug.Log("[Execute]" + cmd.GetType().FullName);
+		var rev = cmd as UserLoginReturnOk_S;
+		socket.Open(rev.gatewayurl);
+		socket.Send(new UserLoginToken_C() { logintempid = rev.logintempid, userid = rev.userid });
 	}
 }

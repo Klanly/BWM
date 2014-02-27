@@ -17,6 +17,15 @@ namespace GX.Net
 		private readonly Dictionary<MessageType, Func<Stream, ProtoBuf.IExtensible>> deserializeTable = new Dictionary<MessageType, Func<Stream, ProtoBuf.IExtensible>>();
 		private readonly Dictionary<Type, MessageType> messageTypeTable = new Dictionary<Type, MessageType>();
 
+		public MessageType this[Type type]
+		{
+			get 
+			{
+				MessageType mt;
+				return messageTypeTable.TryGetValue(type, out mt) ? mt : MessageType.Empty;
+			}
+		}
+
 		#region Serialize
 		public byte[] Serialize(ProtoBuf.IExtensible message)
 		{
