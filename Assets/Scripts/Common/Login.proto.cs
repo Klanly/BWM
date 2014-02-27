@@ -22,17 +22,20 @@ namespace Cmd.Login
       [global::ProtoBuf.ProtoEnum(Name=@"VersionVerify_CS", Value=1)]
       VersionVerify_CS = 1,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"UserLoginRequest_C", Value=2)]
-      UserLoginRequest_C = 2,
+      [global::ProtoBuf.ProtoEnum(Name=@"ZoneInfoList_S", Value=2)]
+      ZoneInfoList_S = 2,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"UserLoginReturnFail_S", Value=3)]
-      UserLoginReturnFail_S = 3,
+      [global::ProtoBuf.ProtoEnum(Name=@"UserLoginRequest_C", Value=3)]
+      UserLoginRequest_C = 3,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"UserLoginReturnOk_S", Value=4)]
-      UserLoginReturnOk_S = 4,
+      [global::ProtoBuf.ProtoEnum(Name=@"UserLoginReturnFail_S", Value=4)]
+      UserLoginReturnFail_S = 4,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"UserLoginToken_C", Value=5)]
-      UserLoginToken_C = 5
+      [global::ProtoBuf.ProtoEnum(Name=@"UserLoginReturnOk_S", Value=5)]
+      UserLoginReturnOk_S = 5,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"UserLoginToken_C", Value=6)]
+      UserLoginToken_C = 6
     }
   
     private global::ProtoBuf.IExtension extensionObject;
@@ -52,6 +55,77 @@ namespace Cmd.Login
       get { return _version; }
       set { _version = value; }
     }
+    private uint _gameid = default(uint);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"gameid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint gameid
+    {
+      get { return _gameid; }
+      set { _gameid = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"ZoneInfo")]
+  public partial class ZoneInfo : global::ProtoBuf.IExtensible
+  {
+    public ZoneInfo() {}
+    
+    private uint _zoneid;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"zoneid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint zoneid
+    {
+      get { return _zoneid; }
+      set { _zoneid = value; }
+    }
+    private string _zonename;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"zonename", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public string zonename
+    {
+      get { return _zonename; }
+      set { _zonename = value; }
+    }
+    private uint _state = default(uint);
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"state", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint state
+    {
+      get { return _state; }
+      set { _state = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"ZoneInfoList_S")]
+  public partial class ZoneInfoList_S : global::ProtoBuf.IExtensible
+  {
+    public ZoneInfoList_S() {}
+    
+    private string _gamename;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"gamename", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public string gamename
+    {
+      get { return _gamename; }
+      set { _gamename = value; }
+    }
+    private uint _gameid;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"gameid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint gameid
+    {
+      get { return _gameid; }
+      set { _gameid = value; }
+    }
+    private readonly global::System.Collections.Generic.List<Cmd.Login.ZoneInfo> _server = new global::System.Collections.Generic.List<Cmd.Login.ZoneInfo>();
+    [global::ProtoBuf.ProtoMember(3, Name=@"server", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<Cmd.Login.ZoneInfo> server
+    {
+      get { return _server; }
+    }
+  
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -69,22 +143,29 @@ namespace Cmd.Login
       get { return _username; }
       set { _username = value; }
     }
-    private uint _gamezone;
-    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"gamezone", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public uint gamezone
+    private uint _gameid;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"gameid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint gameid
     {
-      get { return _gamezone; }
-      set { _gamezone = value; }
+      get { return _gameid; }
+      set { _gameid = value; }
+    }
+    private uint _zoneid;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"zoneid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint zoneid
+    {
+      get { return _zoneid; }
+      set { _zoneid = value; }
     }
     private uint _gameversion;
-    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"gameversion", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoMember(4, IsRequired = true, Name=@"gameversion", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     public uint gameversion
     {
       get { return _gameversion; }
       set { _gameversion = value; }
     }
     private string _mid = "";
-    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"mid", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"mid", DataFormat = global::ProtoBuf.DataFormat.Default)]
     [global::System.ComponentModel.DefaultValue("")]
     public string mid
     {
@@ -146,6 +227,20 @@ namespace Cmd.Login
       get { return _gatewayurl; }
       set { _gatewayurl = value; }
     }
+    private uint _gameid;
+    [global::ProtoBuf.ProtoMember(4, IsRequired = true, Name=@"gameid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint gameid
+    {
+      get { return _gameid; }
+      set { _gameid = value; }
+    }
+    private uint _zoneid;
+    [global::ProtoBuf.ProtoMember(5, IsRequired = true, Name=@"zoneid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint zoneid
+    {
+      get { return _zoneid; }
+      set { _zoneid = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -174,6 +269,17 @@ namespace Cmd.Login
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
+  
+    [global::ProtoBuf.ProtoContract(Name=@"ServerState")]
+    public enum ServerState
+    {
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"Shutdown", Value=0)]
+      Shutdown = 0,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"Normal", Value=1)]
+      Normal = 1
+    }
   
     [global::ProtoBuf.ProtoContract(Name=@"UserLoginReturnFail")]
     public enum UserLoginReturnFail
