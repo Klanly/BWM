@@ -19,18 +19,9 @@ public class TableTest : MonoBehaviour
 				while (mem.Position < mem.Length)
 				{
 					var item = ProtoBuf.Serializer.DeserializeWithLengthPrefix<table.TableItemItem>(mem, ProtoBuf.PrefixStyle.Base128);
-					Debug.Log(ToString(item));
+					Debug.Log(item.ToStringDebug());
 				}
 			}
 		}
-	}
-
-	public string ToString(ProtoBuf.IExtensible proto)
-	{
-		return "{ " + string.Join(", ", (
-			from p in proto.GetType().GetRuntimeProperties()
-			let sub = p.GetValue(proto, null)
-			let str = sub is ProtoBuf.IExtensible ? ToString((ProtoBuf.IExtensible)sub) : sub.ToString()
-			select p.Name + "=" + str).ToArray()) + " }";
 	}
 }

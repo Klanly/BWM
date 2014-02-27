@@ -98,6 +98,17 @@ public static class Extensions
 		return "{ " + string.Join(", ", (
 			from f in obj.GetType().GetRuntimeFields()
 			select f.Name + "=" + f.GetValue(obj)).ToArray()) + " }";
-	} 
+	}
+
+	public static string ToStringDebug(this ProtoBuf.IExtensible proto)
+	{
+		if (proto == null)
+			return "<null>";
+		return "{ " + string.Join(", ", (
+			from p in proto.GetType().GetRuntimeProperties()
+			let sub = p.GetValue(proto, null)
+			let str = sub is ProtoBuf.IExtensible ? ToStringDebug((ProtoBuf.IExtensible)sub) : sub.ToString()
+			select p.Name + "=" + str).ToArray()) + " }";
+	}
 	#endregion
 }
