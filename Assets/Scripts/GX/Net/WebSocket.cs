@@ -96,12 +96,13 @@ namespace GX.Net
 
 		public void Open(string url = "ws://echo.websocket.org")
 		{
-			Debug.Log("WebSocket Open: " + url);
+			Debug.Log("WebSocket to: " + url);
 			Proxy.Open(url);
 		}
 
 		public void Send(ProtoBuf.IExtensible message)
 		{
+			Debug.Log("[SEND]" + message.ToStringDebug());
 			var buf = serizlizer.Serialize(message);
 			Proxy.Send(buf);
 		}
@@ -127,7 +128,7 @@ namespace GX.Net
 					while (mem.Position < mem.Length)
 					{
 						var msg = serizlizer.Deserialize(mem);
-						Debug.Log("收到网络消息：" + msg.ToStringDebug());
+						Debug.Log("[RECV]" + msg.ToStringDebug());
 						if (Dispatcher.Dispatch(msg) == false)
 							Debug.Log(string.Format("未处理的消息: {0}\n{1}", msg.GetType(), msg.ToStringDebug()));
 						yield return msg;
