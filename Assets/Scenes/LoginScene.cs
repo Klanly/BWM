@@ -5,6 +5,12 @@ using Cmd.Login;
 
 public class LoginScene : MonoBehaviour
 {
+	const int Version = 2014;
+	const int GameID = 100;
+
+	public UIGrid zoneList;
+	public GameObject zoneButton;
+
 	private WebSocket socket;
 
 	// Use this for initialization
@@ -19,7 +25,7 @@ public class LoginScene : MonoBehaviour
 		StartCoroutine(socket.Run());
 		StartCoroutine(socket.Dispatch());
 
-		socket.Send(new Cmd.Login.VersionVerify_CS() { version = 2014, gameid = 100 });
+		socket.Send(new Cmd.Login.VersionVerify_CS() { version = Version, gameid = GameID });
 	}
 
 	void OnDestroy()
@@ -32,13 +38,38 @@ public class LoginScene : MonoBehaviour
 	void Execute(VersionVerify_CS cmd)
 	{
 		Debug.Log("[EXEC]" + cmd.GetType().FullName);
-		socket.Send(new UserLoginRequest_C() { username = "1024", gameversion = cmd.version, gameid = cmd.gameid, zoneid = 101 });
+		//socket.Send(new UserLoginRequest_C() { username = "1024", gameversion = cmd.version, gameid = cmd.gameid, zoneid = 101 });
 	}
 
 	[Execute]
 	void Execute(ZoneInfoList_S cmd)
 	{
 		Debug.Log("[EXEC]" + cmd.GetType().FullName);
+		foreach (Transform t in zoneList.transform)
+			DestroyObject(t.gameObject);
+		zoneList.Reposition();
+
+		foreach (var zone in cmd.server)
+		{
+			var item = Instantiate(zoneButton) as GameObject;
+			item.transform.parent = zoneList.transform;
+			item.transform.localScale = Vector3.one;
+			item.GetComponentInChildren<UILabel>().text = zone.zonename;
+			switch(zone.state)
+			{
+				case ServerState.Normal:
+					UIEventListener.Get(item).onClick = go => socket.Send(new UserLoginRequest_C() { username = "1024", gameversion = Version, gameid = cmd.gameid, zoneid = zone.zoneid });
+					break;
+				case ServerState.Shutdown:
+					var button = item.GetComponentInChildren<UIButton>();
+					button.enabled= false;
+					button.UpdateColor(false, false);
+					break;
+				default:
+					throw new System.NotImplementedException();
+			}
+		}
+		zoneList.Reposition();
 	}
 
 	[Execute]
