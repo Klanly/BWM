@@ -25,7 +25,7 @@ public class LoginScene : MonoBehaviour
 		StartCoroutine(socket.Run());
 		StartCoroutine(socket.Dispatch());
 
-		socket.Send(new Cmd.Login.VersionVerify_CS() { version = Version, gameid = GameID });
+		socket.Send(new Cmd.Login.AccountTokenVerify_CS() { version = Version, gameid = GameID, account = "1024", token = "1" });
 	}
 
 	void OnDestroy()
@@ -35,7 +35,7 @@ public class LoginScene : MonoBehaviour
 	}
 
 	[Execute]
-	void Execute(VersionVerify_CS cmd)
+	void Execute(AccountTokenVerify_CS cmd)
 	{
 		Debug.Log("[EXEC]" + cmd.GetType().FullName);
 		//socket.Send(new UserLoginRequest_C() { username = "1024", gameversion = cmd.version, gameid = cmd.gameid, zoneid = 101 });
@@ -58,7 +58,8 @@ public class LoginScene : MonoBehaviour
 			switch(zone.state)
 			{
 				case ServerState.Normal:
-					UIEventListener.Get(item).onClick = go => socket.Send(new UserLoginRequest_C() { username = "1024", gameversion = Version, gameid = cmd.gameid, zoneid = zone.zoneid });
+					var zoneid = zone.zoneid;
+					UIEventListener.Get(item).onClick = go => socket.Send(new UserLoginRequest_C() { gameversion = Version, gameid = cmd.gameid, zoneid = zoneid });
 					break;
 				case ServerState.Shutdown:
 					var button = item.GetComponentInChildren<UIButton>();
@@ -90,6 +91,6 @@ public class LoginScene : MonoBehaviour
 		Debug.Log("[EXEC]" + cmd.GetType().FullName);
 		var rev = cmd as UserLoginReturnOk_S;
 		socket.Open(rev.gatewayurl);
-		socket.Send(new UserLoginToken_C() { logintempid = rev.logintempid, userid = rev.userid });
+		socket.Send(new UserLoginToken_C() { logintempid = rev.logintempid, accountid = rev.accountid });
 	}
 }

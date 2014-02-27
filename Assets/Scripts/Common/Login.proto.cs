@@ -19,23 +19,26 @@ namespace Cmd.Login
     public enum Param
     {
             
-      [global::ProtoBuf.ProtoEnum(Name=@"VersionVerify_CS", Value=1)]
-      VersionVerify_CS = 1,
+      [global::ProtoBuf.ProtoEnum(Name=@"AccountTokenVerify_CS", Value=1)]
+      AccountTokenVerify_CS = 1,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"ZoneInfoList_S", Value=2)]
-      ZoneInfoList_S = 2,
+      [global::ProtoBuf.ProtoEnum(Name=@"AccountTokenVerifyReturn_S", Value=2)]
+      AccountTokenVerifyReturn_S = 2,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"UserLoginRequest_C", Value=3)]
-      UserLoginRequest_C = 3,
+      [global::ProtoBuf.ProtoEnum(Name=@"ZoneInfoList_S", Value=3)]
+      ZoneInfoList_S = 3,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"UserLoginReturnFail_S", Value=4)]
-      UserLoginReturnFail_S = 4,
+      [global::ProtoBuf.ProtoEnum(Name=@"UserLoginRequest_C", Value=4)]
+      UserLoginRequest_C = 4,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"UserLoginReturnOk_S", Value=5)]
-      UserLoginReturnOk_S = 5,
+      [global::ProtoBuf.ProtoEnum(Name=@"UserLoginReturnFail_S", Value=5)]
+      UserLoginReturnFail_S = 5,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"UserLoginToken_C", Value=6)]
-      UserLoginToken_C = 6
+      [global::ProtoBuf.ProtoEnum(Name=@"UserLoginReturnOk_S", Value=6)]
+      UserLoginReturnOk_S = 6,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"UserLoginToken_C", Value=7)]
+      UserLoginToken_C = 7
     }
   
     private global::ProtoBuf.IExtension extensionObject;
@@ -43,26 +46,82 @@ namespace Cmd.Login
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"VersionVerify_CS")]
-  public partial class VersionVerify_CS : global::ProtoBuf.IExtensible
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"AccountTokenVerify_CS")]
+  public partial class AccountTokenVerify_CS : global::ProtoBuf.IExtensible
   {
-    public VersionVerify_CS() {}
+    public AccountTokenVerify_CS() {}
     
+    private string _account;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"account", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public string account
+    {
+      get { return _account; }
+      set { _account = value; }
+    }
+    private string _token;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"token", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public string token
+    {
+      get { return _token; }
+      set { _token = value; }
+    }
     private uint _version;
-    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"version", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"version", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     public uint version
     {
       get { return _version; }
       set { _version = value; }
     }
     private uint _gameid = default(uint);
-    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"gameid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"gameid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint gameid
     {
       get { return _gameid; }
       set { _gameid = value; }
     }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"AccountTokenVerifyReturn_S")]
+  public partial class AccountTokenVerifyReturn_S : global::ProtoBuf.IExtensible
+  {
+    public AccountTokenVerifyReturn_S() {}
+    
+    private Cmd.Login.AccountTokenVerifyReturn_S.Reason _retcode;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"retcode", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public Cmd.Login.AccountTokenVerifyReturn_S.Reason retcode
+    {
+      get { return _retcode; }
+      set { _retcode = value; }
+    }
+    private string _desc = "";
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"desc", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string desc
+    {
+      get { return _desc; }
+      set { _desc = value; }
+    }
+    [global::ProtoBuf.ProtoContract(Name=@"Reason")]
+    public enum Reason
+    {
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"LoginOk", Value=0)]
+      LoginOk = 0,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"TokenFindError", Value=1)]
+      TokenFindError = 1,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"TokenDiffError", Value=2)]
+      TokenDiffError = 2,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"VersionError", Value=3)]
+      VersionError = 3
+    }
+  
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -136,36 +195,29 @@ namespace Cmd.Login
   {
     public UserLoginRequest_C() {}
     
-    private string _username;
-    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"username", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public string username
-    {
-      get { return _username; }
-      set { _username = value; }
-    }
     private uint _gameid;
-    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"gameid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"gameid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     public uint gameid
     {
       get { return _gameid; }
       set { _gameid = value; }
     }
     private uint _zoneid;
-    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"zoneid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"zoneid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     public uint zoneid
     {
       get { return _zoneid; }
       set { _zoneid = value; }
     }
     private uint _gameversion;
-    [global::ProtoBuf.ProtoMember(4, IsRequired = true, Name=@"gameversion", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"gameversion", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     public uint gameversion
     {
       get { return _gameversion; }
       set { _gameversion = value; }
     }
     private string _mid = "";
-    [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"mid", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"mid", DataFormat = global::ProtoBuf.DataFormat.Default)]
     [global::System.ComponentModel.DefaultValue("")]
     public string mid
     {
@@ -229,12 +281,12 @@ namespace Cmd.Login
   {
     public UserLoginReturnOk_S() {}
     
-    private ulong _userid;
-    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"userid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public ulong userid
+    private ulong _accountid;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"accountid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public ulong accountid
     {
-      get { return _userid; }
-      set { _userid = value; }
+      get { return _accountid; }
+      set { _accountid = value; }
     }
     private ulong _logintempid;
     [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"logintempid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
@@ -274,12 +326,12 @@ namespace Cmd.Login
   {
     public UserLoginToken_C() {}
     
-    private ulong _userid;
-    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"userid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public ulong userid
+    private ulong _accountid;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"accountid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public ulong accountid
     {
-      get { return _userid; }
-      set { _userid = value; }
+      get { return _accountid; }
+      set { _accountid = value; }
     }
     private ulong _logintempid;
     [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"logintempid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]

@@ -20,7 +20,7 @@ public class NetTest : MonoBehaviour
 		StartCoroutine(socket.Run());
 		StartCoroutine(socket.Dispatch());
 
-		socket.Send(new Cmd.Login.VersionVerify_CS() { version = 2014, gameid = 100 });
+		socket.Send(new Cmd.Login.AccountTokenVerify_CS() { version = 2014, gameid = 100 });
 	}
 
 	void OnDestroy()
@@ -30,10 +30,10 @@ public class NetTest : MonoBehaviour
 	}
 
 	[Execute]
-	void Execute(VersionVerify_CS cmd)
+	void Execute(AccountTokenVerify_CS cmd)
 	{
 		Debug.Log("[EXEC]" + cmd.GetType().FullName);
-		socket.Send(new UserLoginRequest_C() { username = "1024", gameversion = cmd.version, gameid = cmd.gameid, zoneid = 101});
+		socket.Send(new UserLoginRequest_C() { gameversion = cmd.version, gameid = cmd.gameid, zoneid = 101});
 	}
 
 	[Execute]
@@ -60,6 +60,6 @@ public class NetTest : MonoBehaviour
 		Debug.Log("[EXEC]" + cmd.GetType().FullName);
 		var rev = cmd as UserLoginReturnOk_S;
 		socket.Open(rev.gatewayurl);
-		socket.Send(new UserLoginToken_C() { logintempid = rev.logintempid, userid = rev.userid });
+		socket.Send(new UserLoginToken_C() { logintempid = rev.logintempid, accountid = rev.accountid });
 	}
 }
