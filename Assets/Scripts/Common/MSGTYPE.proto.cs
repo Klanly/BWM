@@ -20,7 +20,10 @@ namespace Cmd
     {
             
       [global::ProtoBuf.ProtoEnum(Name=@"Login", Value=1)]
-      Login = 1
+      Login = 1,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"Select", Value=2)]
+      Select = 2
     }
   
     private global::ProtoBuf.IExtension extensionObject;

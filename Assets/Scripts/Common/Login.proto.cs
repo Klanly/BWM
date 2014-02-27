@@ -19,20 +19,20 @@ namespace Cmd.Login
     public enum Param
     {
             
-      [global::ProtoBuf.ProtoEnum(Name=@"VersionVerify", Value=1)]
-      VersionVerify = 1,
+      [global::ProtoBuf.ProtoEnum(Name=@"VersionVerify_CS", Value=1)]
+      VersionVerify_CS = 1,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"VersionVerifyResult", Value=2)]
-      VersionVerifyResult = 2,
+      [global::ProtoBuf.ProtoEnum(Name=@"UserLoginRequest_C", Value=2)]
+      UserLoginRequest_C = 2,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"WebGateUserRequestLogon", Value=3)]
-      WebGateUserRequestLogon = 3,
+      [global::ProtoBuf.ProtoEnum(Name=@"UserLoginReturnFail_S", Value=3)]
+      UserLoginReturnFail_S = 3,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"HttpsUserRequestLogon", Value=4)]
-      HttpsUserRequestLogon = 4,
+      [global::ProtoBuf.ProtoEnum(Name=@"UserLoginReturnOk_S", Value=4)]
+      UserLoginReturnOk_S = 4,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"HttpsUserReturnLogon", Value=5)]
-      HttpsUserReturnLogon = 5
+      [global::ProtoBuf.ProtoEnum(Name=@"UserLoginToken_C", Value=5)]
+      UserLoginToken_C = 5
     }
   
     private global::ProtoBuf.IExtension extensionObject;
@@ -40,14 +40,14 @@ namespace Cmd.Login
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"VersionVerify")]
-  public partial class VersionVerify : global::ProtoBuf.IExtensible
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"VersionVerify_CS")]
+  public partial class VersionVerify_CS : global::ProtoBuf.IExtensible
   {
-    public VersionVerify() {}
+    public VersionVerify_CS() {}
     
-    private string _version;
-    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"version", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public string version
+    private uint _version;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"version", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint version
     {
       get { return _version; }
       set { _version = value; }
@@ -57,79 +57,145 @@ namespace Cmd.Login
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"VersionVerifyResult")]
-  public partial class VersionVerifyResult : global::ProtoBuf.IExtensible
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"UserLoginRequest_C")]
+  public partial class UserLoginRequest_C : global::ProtoBuf.IExtensible
   {
-    public VersionVerifyResult() {}
+    public UserLoginRequest_C() {}
     
-    private bool _ok;
-    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"ok", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public bool ok
+    private string _username;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"username", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public string username
     {
-      get { return _ok; }
-      set { _ok = value; }
+      get { return _username; }
+      set { _username = value; }
+    }
+    private uint _gamezone;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"gamezone", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint gamezone
+    {
+      get { return _gamezone; }
+      set { _gamezone = value; }
+    }
+    private uint _gameversion;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"gameversion", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint gameversion
+    {
+      get { return _gameversion; }
+      set { _gameversion = value; }
+    }
+    private string _mid = "";
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"mid", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string mid
+    {
+      get { return _mid; }
+      set { _mid = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"WebGateUserRequestLogon")]
-  public partial class WebGateUserRequestLogon : global::ProtoBuf.IExtensible
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"UserLoginReturnFail_S")]
+  public partial class UserLoginReturnFail_S : global::ProtoBuf.IExtensible
   {
-    public WebGateUserRequestLogon() {}
+    public UserLoginReturnFail_S() {}
     
-    private string _token;
-    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"token", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public string token
+    private int _retcode;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"retcode", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int retcode
     {
-      get { return _token; }
-      set { _token = value; }
+      get { return _retcode; }
+      set { _retcode = value; }
     }
-    private int _net_type;
-    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"net_type", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public int net_type
+    private string _desc;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"desc", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public string desc
     {
-      get { return _net_type; }
-      set { _net_type = value; }
+      get { return _desc; }
+      set { _desc = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"HttpsUserRequestLogon")]
-  public partial class HttpsUserRequestLogon : global::ProtoBuf.IExtensible
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"UserLoginReturnOk_S")]
+  public partial class UserLoginReturnOk_S : global::ProtoBuf.IExtensible
   {
-    public HttpsUserRequestLogon() {}
+    public UserLoginReturnOk_S() {}
     
-    private string _loginstr;
-    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"loginstr", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public string loginstr
+    private ulong _userid;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"userid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public ulong userid
     {
-      get { return _loginstr; }
-      set { _loginstr = value; }
+      get { return _userid; }
+      set { _userid = value; }
+    }
+    private ulong _logintempid;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"logintempid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public ulong logintempid
+    {
+      get { return _logintempid; }
+      set { _logintempid = value; }
+    }
+    private string _gatewayurl;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"gatewayurl", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public string gatewayurl
+    {
+      get { return _gatewayurl; }
+      set { _gatewayurl = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"HttpsUserReturnLogon")]
-  public partial class HttpsUserReturnLogon : global::ProtoBuf.IExtensible
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"UserLoginToken_C")]
+  public partial class UserLoginToken_C : global::ProtoBuf.IExtensible
   {
-    public HttpsUserReturnLogon() {}
+    public UserLoginToken_C() {}
     
-    private uint _code;
-    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"code", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public uint code
+    private ulong _userid;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"userid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public ulong userid
     {
-      get { return _code; }
-      set { _code = value; }
+      get { return _userid; }
+      set { _userid = value; }
+    }
+    private ulong _logintempid;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"logintempid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public ulong logintempid
+    {
+      get { return _logintempid; }
+      set { _logintempid = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
+  
+    [global::ProtoBuf.ProtoContract(Name=@"UserLoginReturnFail")]
+    public enum UserLoginReturnFail
+    {
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"Password", Value=1)]
+      Password = 1,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"ServerShutdown", Value=2)]
+      ServerShutdown = 2,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"VersionTooLow", Value=3)]
+      VersionTooLow = 3,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"UserTokenFind", Value=4)]
+      UserTokenFind = 4,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"UserTokenTempId", Value=5)]
+      UserTokenTempId = 5,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"UserTokenTimeOut", Value=6)]
+      UserTokenTimeOut = 6
+    }
   
 }
