@@ -102,13 +102,52 @@ public static class Extensions
 
 	public static string ToStringDebug(this ProtoBuf.IExtensible proto)
 	{
+		var sb = new StringBuilder();
+		using(var writer = new StringWriter(sb))
+		{
+			WriteTo(proto, writer);
+		}
+		return sb.ToString();
+	}
+
+	private static void WriteTo(ProtoBuf.IExtensible proto, TextWriter writer, int indent = 0)
+	{
+		var prefix = new string('\t', indent);
 		if (proto == null)
-			return "<null>";
-		return "{ " + string.Join(", ", (
-			from p in proto.GetType().GetRuntimeProperties()
-			let sub = p.GetValue(proto, null)
-			let str = sub is ProtoBuf.IExtensible ? ToStringDebug((ProtoBuf.IExtensible)sub) : sub.ToString()
-			select p.Name + "=" + str).ToArray()) + " }";
+		{
+			writer.Write(prefix); writer.Write("<null>");
+			return;
+		}
+		writer.Write(prefix); writer.Write(proto.GetType().FullName); writer.WriteLine(" {");
+		foreach (var p in proto.GetType().GetRuntimeProperties())
+		{
+			writer.Write(prefix); writer.Write('\t'); writer.Write(p.Name); writer.Write(" = ");
+			var value = p.GetValue(proto, null);
+			if (value is ProtoBuf.IExtensible)
+			{
+				WriteTo((ProtoBuf.IExtensible)value, writer, indent + 1);
+			}
+			else if (value is IList)
+			{
+				writer.Write('['); writer.WriteLine();
+				foreach (ProtoBuf.IExtensible line in value as IList)
+				{
+					WriteTo(line, writer, indent + 2);
+					writer.WriteLine();
+				}
+				writer.Write(prefix); writer.Write('\t'); writer.Write(']');
+			}
+			else if (value is string)
+			{
+				writer.Write('"'); writer.Write(value); writer.Write('"');
+			}
+			else
+			{
+				writer.Write(value);
+			}
+			writer.WriteLine();
+		}
+		writer.Write(prefix); writer.Write("}");
 	}
 	#endregion
 }
