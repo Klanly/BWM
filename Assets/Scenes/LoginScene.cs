@@ -1,10 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 using GX.Net;
-using System.IO;
 using Cmd.Login;
 
-public class NetTest : MonoBehaviour
+public class LoginScene : MonoBehaviour
 {
 	private WebSocket socket;
 
@@ -33,7 +32,7 @@ public class NetTest : MonoBehaviour
 	void Execute(VersionVerify_CS cmd)
 	{
 		Debug.Log("[EXEC]" + cmd.GetType().FullName);
-		socket.Send(new UserLoginRequest_C() { username = "1024", gameversion = cmd.version, gameid = cmd.gameid, zoneid = 101});
+		socket.Send(new UserLoginRequest_C() { username = "1024", gameversion = cmd.version, gameid = cmd.gameid, zoneid = 101 });
 	}
 
 	[Execute]
@@ -41,7 +40,7 @@ public class NetTest : MonoBehaviour
 	{
 		Debug.Log("[EXEC]" + cmd.GetType().FullName);
 	}
-	
+
 	[Execute]
 	void Execute(UserLoginRequest_C cmd)
 	{
