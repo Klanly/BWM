@@ -87,10 +87,10 @@ namespace Cmd.Login
       get { return _zonename; }
       set { _zonename = value; }
     }
-    private uint _state = default(uint);
+    private Cmd.Login.ServerState _state = Cmd.Login.ServerState.Shutdown;
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"state", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
-    public uint state
+    [global::System.ComponentModel.DefaultValue(Cmd.Login.ServerState.Shutdown)]
+    public Cmd.Login.ServerState state
     {
       get { return _state; }
       set { _state = value; }
@@ -182,9 +182,9 @@ namespace Cmd.Login
   {
     public UserLoginReturnFail_S() {}
     
-    private int _retcode;
+    private Cmd.Login.UserLoginReturnFail_S.Reason _retcode;
     [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"retcode", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public int retcode
+    public Cmd.Login.UserLoginReturnFail_S.Reason retcode
     {
       get { return _retcode; }
       set { _retcode = value; }
@@ -196,6 +196,29 @@ namespace Cmd.Login
       get { return _desc; }
       set { _desc = value; }
     }
+    [global::ProtoBuf.ProtoContract(Name=@"Reason")]
+    public enum Reason
+    {
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"Password", Value=1)]
+      Password = 1,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"ServerShutdown", Value=2)]
+      ServerShutdown = 2,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"VersionTooLow", Value=3)]
+      VersionTooLow = 3,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"UserTokenFind", Value=4)]
+      UserTokenFind = 4,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"UserTokenTempId", Value=5)]
+      UserTokenTempId = 5,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"UserTokenTimeOut", Value=6)]
+      UserTokenTimeOut = 6
+    }
+  
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -279,29 +302,6 @@ namespace Cmd.Login
             
       [global::ProtoBuf.ProtoEnum(Name=@"Normal", Value=1)]
       Normal = 1
-    }
-  
-    [global::ProtoBuf.ProtoContract(Name=@"UserLoginReturnFail")]
-    public enum UserLoginReturnFail
-    {
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"Password", Value=1)]
-      Password = 1,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"ServerShutdown", Value=2)]
-      ServerShutdown = 2,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"VersionTooLow", Value=3)]
-      VersionTooLow = 3,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"UserTokenFind", Value=4)]
-      UserTokenFind = 4,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"UserTokenTempId", Value=5)]
-      UserTokenTempId = 5,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"UserTokenTimeOut", Value=6)]
-      UserTokenTimeOut = 6
     }
   
 }
