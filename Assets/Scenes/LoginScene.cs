@@ -11,6 +11,8 @@ public class LoginScene : MonoBehaviour
 	public UIGrid zoneList;
 	public GameObject zoneButton;
 
+	public UIButton playButton;
+
 	private WebSocket socket;
 
 	// Use this for initialization
@@ -26,6 +28,8 @@ public class LoginScene : MonoBehaviour
 		StartCoroutine(socket.Dispatch());
 
 		socket.Send(new Cmd.Login.AccountTokenVerify_CS() { version = Version, gameid = GameID, account = "1024", token = "1" });
+
+		UIEventListener.Get(playButton.gameObject).onClick = go => Application.LoadLevel("TestScene");
 	}
 
 	void OnDestroy()
