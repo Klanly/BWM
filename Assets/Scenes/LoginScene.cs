@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 using GX.Net;
-using Cmd.Login;
 using System;
+using Cmd;
 
 public class LoginScene : MonoBehaviour
 {
@@ -27,7 +27,7 @@ public class LoginScene : MonoBehaviour
 		{
 			if (string.IsNullOrEmpty(accountInput.value))
 				return;
-			Net.Instance.Send(new Cmd.Login.AccountTokenVerify_CS() { version = Version, gameid = GameID, account = accountInput.value, token = "dev" });
+			Net.Instance.Send(new AccountTokenVerifyLoginUserCmd_CS() { version = Version, gameid = GameID, account = accountInput.value, token = "dev" });
 		};
 	}
 
@@ -43,34 +43,33 @@ public class LoginScene : MonoBehaviour
 	}
 
 	[Execute]
-	void Execute(AccountTokenVerify_CS cmd)
+	void Execute(AccountTokenVerifyLoginUserCmd_CS cmd)
 	{
 		Debug.Log("[EXEC]" + cmd.GetType().FullName);
 	}
 
 	[Execute]
-	void Execute(UserLoginRequest_C cmd)
+	void Execute(UserLoginRequestLoginUserCmd_C cmd)
 	{
 		Debug.Log("[EXEC]" + cmd.GetType().FullName);
 	}
 
 	[Execute]
-	void Execute(UserLoginReturnFail_S cmd)
+	void Execute(UserLoginReturnFailLoginUserCmd_S cmd)
 	{
 		Debug.Log("[EXEC]" + cmd.GetType().FullName);
 	}
 
 	[Execute]
-	void Execute(UserLoginReturnOk_S cmd)
+	void Execute(UserLoginReturnOkLoginUserCmd_S cmd)
 	{
 		Debug.Log("[EXEC]" + cmd.GetType().FullName);
-		var rev = cmd as UserLoginReturnOk_S;
-		Net.Instance.Open(rev.gatewayurl);
-		Net.Instance.Send(new UserLoginToken_C() { logintempid = rev.logintempid, accountid = rev.accountid });
+		Net.Instance.Open(cmd.gatewayurl);
+		Net.Instance.Send(new UserLoginTokenLoginUserCmd_C() { logintempid = cmd.logintempid, accountid = cmd.accountid });
 	}
 
 	[Execute]
-	void Execute(ZoneInfoList_S cmd)
+	void Execute(ZoneInfoListLoginUserCmd_S cmd)
 	{
 		ZoneListScene.ZoneInfoList = cmd;
 		Application.LoadLevel("ZoneListScene");

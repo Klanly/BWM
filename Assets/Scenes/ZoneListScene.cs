@@ -1,11 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 using GX.Net;
-using Cmd.Login;
+using Cmd;
 
 public class ZoneListScene : MonoBehaviour
 {
-	public static ZoneInfoList_S ZoneInfoList { get; set; }
+	public static ZoneInfoListLoginUserCmd_S ZoneInfoList { get; set; }
 
 	public UIGrid zoneList;
 	public GameObject zoneButton;
@@ -17,7 +17,7 @@ public class ZoneListScene : MonoBehaviour
 		ZoneInfoList = null;
 	}
 
-	void Execute(ZoneInfoList_S cmd)
+	void Execute(ZoneInfoListLoginUserCmd_S cmd)
 	{
 		Debug.Log("[EXEC]" + cmd.GetType().FullName);
 		foreach (Transform t in zoneList.transform)
@@ -34,7 +34,7 @@ public class ZoneListScene : MonoBehaviour
 			{
 				case ServerState.Normal:
 					var zoneid = zone.zoneid;
-					UIEventListener.Get(item).onClick = go => Net.Instance.Send(new UserLoginRequest_C()
+					UIEventListener.Get(item).onClick = go => Net.Instance.Send(new UserLoginRequestLoginUserCmd_C()
 					{
 						gameversion = LoginScene.Version, 
 						gameid = cmd.gameid,

@@ -7,38 +7,38 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-// Generated from: Common/login/Login.proto
-namespace Cmd.Login
+// Generated from: Common/Login.proto
+namespace Cmd
 {
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"MSGTYPE")]
-  public partial class MSGTYPE : global::ProtoBuf.IExtensible
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"Login")]
+  public partial class Login : global::ProtoBuf.IExtensible
   {
-    public MSGTYPE() {}
+    public Login() {}
     
     [global::ProtoBuf.ProtoContract(Name=@"Param")]
     public enum Param
     {
             
-      [global::ProtoBuf.ProtoEnum(Name=@"AccountTokenVerify_CS", Value=1)]
-      AccountTokenVerify_CS = 1,
+      [global::ProtoBuf.ProtoEnum(Name=@"AccountTokenVerifyLoginUserCmd_CS", Value=1)]
+      AccountTokenVerifyLoginUserCmd_CS = 1,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"AccountTokenVerifyReturn_S", Value=2)]
-      AccountTokenVerifyReturn_S = 2,
+      [global::ProtoBuf.ProtoEnum(Name=@"AccountTokenVerifyReturnLoginUserCmd_S", Value=2)]
+      AccountTokenVerifyReturnLoginUserCmd_S = 2,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"ZoneInfoList_S", Value=3)]
-      ZoneInfoList_S = 3,
+      [global::ProtoBuf.ProtoEnum(Name=@"ZoneInfoListLoginUserCmd_S", Value=3)]
+      ZoneInfoListLoginUserCmd_S = 3,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"UserLoginRequest_C", Value=4)]
-      UserLoginRequest_C = 4,
+      [global::ProtoBuf.ProtoEnum(Name=@"UserLoginRequestLoginUserCmd_C", Value=4)]
+      UserLoginRequestLoginUserCmd_C = 4,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"UserLoginReturnFail_S", Value=5)]
-      UserLoginReturnFail_S = 5,
+      [global::ProtoBuf.ProtoEnum(Name=@"UserLoginReturnFailLoginUserCmd_S", Value=5)]
+      UserLoginReturnFailLoginUserCmd_S = 5,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"UserLoginReturnOk_S", Value=6)]
-      UserLoginReturnOk_S = 6,
+      [global::ProtoBuf.ProtoEnum(Name=@"UserLoginReturnOkLoginUserCmd_S", Value=6)]
+      UserLoginReturnOkLoginUserCmd_S = 6,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"UserLoginToken_C", Value=7)]
-      UserLoginToken_C = 7
+      [global::ProtoBuf.ProtoEnum(Name=@"UserLoginTokenLoginUserCmd_C", Value=7)]
+      UserLoginTokenLoginUserCmd_C = 7
     }
   
     private global::ProtoBuf.IExtension extensionObject;
@@ -46,10 +46,10 @@ namespace Cmd.Login
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"AccountTokenVerify_CS")]
-  public partial class AccountTokenVerify_CS : global::ProtoBuf.IExtensible
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"AccountTokenVerifyLoginUserCmd_CS")]
+  public partial class AccountTokenVerifyLoginUserCmd_CS : global::ProtoBuf.IExtensible
   {
-    public AccountTokenVerify_CS() {}
+    public AccountTokenVerifyLoginUserCmd_CS() {}
     
     private string _account;
     [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"account", DataFormat = global::ProtoBuf.DataFormat.Default)]
@@ -85,14 +85,14 @@ namespace Cmd.Login
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"AccountTokenVerifyReturn_S")]
-  public partial class AccountTokenVerifyReturn_S : global::ProtoBuf.IExtensible
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"AccountTokenVerifyReturnLoginUserCmd_S")]
+  public partial class AccountTokenVerifyReturnLoginUserCmd_S : global::ProtoBuf.IExtensible
   {
-    public AccountTokenVerifyReturn_S() {}
+    public AccountTokenVerifyReturnLoginUserCmd_S() {}
     
-    private Cmd.Login.AccountTokenVerifyReturn_S.Reason _retcode;
+    private Cmd.AccountTokenVerifyReturnLoginUserCmd_S.Reason _retcode;
     [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"retcode", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public Cmd.Login.AccountTokenVerifyReturn_S.Reason retcode
+    public Cmd.AccountTokenVerifyReturnLoginUserCmd_S.Reason retcode
     {
       get { return _retcode; }
       set { _retcode = value; }
@@ -146,10 +146,10 @@ namespace Cmd.Login
       get { return _zonename; }
       set { _zonename = value; }
     }
-    private Cmd.Login.ServerState _state = Cmd.Login.ServerState.Shutdown;
+    private Cmd.ServerState _state = Cmd.ServerState.Shutdown;
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"state", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(Cmd.Login.ServerState.Shutdown)]
-    public Cmd.Login.ServerState state
+    [global::System.ComponentModel.DefaultValue(Cmd.ServerState.Shutdown)]
+    public Cmd.ServerState state
     {
       get { return _state; }
       set { _state = value; }
@@ -159,10 +159,10 @@ namespace Cmd.Login
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"ZoneInfoList_S")]
-  public partial class ZoneInfoList_S : global::ProtoBuf.IExtensible
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"ZoneInfoListLoginUserCmd_S")]
+  public partial class ZoneInfoListLoginUserCmd_S : global::ProtoBuf.IExtensible
   {
-    public ZoneInfoList_S() {}
+    public ZoneInfoListLoginUserCmd_S() {}
     
     private string _gamename;
     [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"gamename", DataFormat = global::ProtoBuf.DataFormat.Default)]
@@ -178,9 +178,9 @@ namespace Cmd.Login
       get { return _gameid; }
       set { _gameid = value; }
     }
-    private readonly global::System.Collections.Generic.List<Cmd.Login.ZoneInfo> _server = new global::System.Collections.Generic.List<Cmd.Login.ZoneInfo>();
+    private readonly global::System.Collections.Generic.List<Cmd.ZoneInfo> _server = new global::System.Collections.Generic.List<Cmd.ZoneInfo>();
     [global::ProtoBuf.ProtoMember(3, Name=@"server", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public global::System.Collections.Generic.List<Cmd.Login.ZoneInfo> server
+    public global::System.Collections.Generic.List<Cmd.ZoneInfo> server
     {
       get { return _server; }
     }
@@ -190,10 +190,10 @@ namespace Cmd.Login
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"UserLoginRequest_C")]
-  public partial class UserLoginRequest_C : global::ProtoBuf.IExtensible
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"UserLoginRequestLoginUserCmd_C")]
+  public partial class UserLoginRequestLoginUserCmd_C : global::ProtoBuf.IExtensible
   {
-    public UserLoginRequest_C() {}
+    public UserLoginRequestLoginUserCmd_C() {}
     
     private uint _gameid;
     [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"gameid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
@@ -229,14 +229,14 @@ namespace Cmd.Login
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"UserLoginReturnFail_S")]
-  public partial class UserLoginReturnFail_S : global::ProtoBuf.IExtensible
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"UserLoginReturnFailLoginUserCmd_S")]
+  public partial class UserLoginReturnFailLoginUserCmd_S : global::ProtoBuf.IExtensible
   {
-    public UserLoginReturnFail_S() {}
+    public UserLoginReturnFailLoginUserCmd_S() {}
     
-    private Cmd.Login.UserLoginReturnFail_S.Reason _retcode;
+    private Cmd.UserLoginReturnFailLoginUserCmd_S.Reason _retcode;
     [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"retcode", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public Cmd.Login.UserLoginReturnFail_S.Reason retcode
+    public Cmd.UserLoginReturnFailLoginUserCmd_S.Reason retcode
     {
       get { return _retcode; }
       set { _retcode = value; }
@@ -276,10 +276,10 @@ namespace Cmd.Login
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"UserLoginReturnOk_S")]
-  public partial class UserLoginReturnOk_S : global::ProtoBuf.IExtensible
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"UserLoginReturnOkLoginUserCmd_S")]
+  public partial class UserLoginReturnOkLoginUserCmd_S : global::ProtoBuf.IExtensible
   {
-    public UserLoginReturnOk_S() {}
+    public UserLoginReturnOkLoginUserCmd_S() {}
     
     private ulong _accountid;
     [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"accountid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
@@ -321,10 +321,10 @@ namespace Cmd.Login
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"UserLoginToken_C")]
-  public partial class UserLoginToken_C : global::ProtoBuf.IExtensible
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"UserLoginTokenLoginUserCmd_C")]
+  public partial class UserLoginTokenLoginUserCmd_C : global::ProtoBuf.IExtensible
   {
-    public UserLoginToken_C() {}
+    public UserLoginTokenLoginUserCmd_C() {}
     
     private ulong _accountid;
     [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"accountid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]

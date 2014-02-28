@@ -10,13 +10,8 @@
 // Generated from: Common/MSGTYPE.proto
 namespace Cmd
 {
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"MSGTYPE")]
-  public partial class MSGTYPE : global::ProtoBuf.IExtensible
-  {
-    public MSGTYPE() {}
-    
-    [global::ProtoBuf.ProtoContract(Name=@"Cmd")]
-    public enum Cmd
+    [global::ProtoBuf.ProtoContract(Name=@"Command")]
+    public enum Command
     {
             
       [global::ProtoBuf.ProtoEnum(Name=@"Login", Value=1)]
@@ -25,10 +20,5 @@ namespace Cmd
       [global::ProtoBuf.ProtoEnum(Name=@"Select", Value=2)]
       Select = 2
     }
-  
-    private global::ProtoBuf.IExtension extensionObject;
-    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
-  }
   
 }
