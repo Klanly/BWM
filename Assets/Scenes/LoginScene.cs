@@ -14,19 +14,16 @@ public class LoginScene : MonoBehaviour
 	public UIInput accountInput;
 	public UIButton playButton;
 
-	private WebSocket socket;
-
 	// Use this for initialization
 	IEnumerator Start()
 	{
-		socket = new WebSocket();
-		socket.Dispatcher.Register(this);
-		Debug.Log(socket.Dispatcher);
+		yield return null;
+
+		Net.Instance.Dispatcher.Register(this);
+		Debug.Log(Net.Instance.Dispatcher);
 
 		yield return null;
-		socket.Open("ws://192.168.85.71:7000/shen/user");
-		StartCoroutine(socket.Run());
-		StartCoroutine(socket.Dispatch());
+		Net.Instance.Open("ws://192.168.85.71:7000/shen/user");
 
 		accountInput.value = SystemInfo.deviceUniqueIdentifier.GetHashCode().ToString();
 
@@ -34,7 +31,7 @@ public class LoginScene : MonoBehaviour
 		{
 			if (string.IsNullOrEmpty(accountInput.value))
 				return;
-			socket.Send(new Cmd.Login.AccountTokenVerify_CS() { version = Version, gameid = GameID, account = accountInput.value, token="dev"});
+			Net.Instance.Send(new Cmd.Login.AccountTokenVerify_CS() { version = Version, gameid = GameID, account = accountInput.value, token = "dev" });
 		};
 	}
 
@@ -45,15 +42,15 @@ public class LoginScene : MonoBehaviour
 
 	void OnDestroy()
 	{
-		socket.Dispatcher.UnRegister(this);
-		Debug.Log(socket.Dispatcher);
+		Net.Instance.Dispatcher.UnRegister(this);
+		Debug.Log(Net.Instance.Dispatcher);
 	}
 
 	[Execute]
 	void Execute(AccountTokenVerify_CS cmd)
 	{
 		Debug.Log("[EXEC]" + cmd.GetType().FullName);
-		//socket.Send(new UserLoginRequest_C() { username = "1024", gameversion = cmd.version, gameid = cmd.gameid, zoneid = 101 });
+		//Net.Instance.Send(new UserLoginRequest_C() { username = "1024", gameversion = cmd.version, gameid = cmd.gameid, zoneid = 101 });
 	}
 
 	[Execute]
@@ -74,7 +71,7 @@ public class LoginScene : MonoBehaviour
 			{
 				case ServerState.Normal:
 					var zoneid = zone.zoneid;
-					UIEventListener.Get(item).onClick = go => socket.Send(new UserLoginRequest_C() { gameversion = Version, gameid = cmd.gameid, zoneid = zoneid });
+					UIEventListener.Get(item).onClick = go => Net.Instance.Send(new UserLoginRequest_C() { gameversion = Version, gameid = cmd.gameid, zoneid = zoneid });
 					break;
 				case ServerState.Shutdown:
 					var button = item.GetComponentInChildren<UIButton>();
@@ -104,7 +101,7 @@ public class LoginScene : MonoBehaviour
 	{
 		Debug.Log("[EXEC]" + cmd.GetType().FullName);
 		var rev = cmd as UserLoginReturnOk_S;
-		socket.Open(rev.gatewayurl);
-		socket.Send(new UserLoginToken_C() { logintempid = rev.logintempid, accountid = rev.accountid });
+		Net.Instance.Open(rev.gatewayurl);
+		Net.Instance.Send(new UserLoginToken_C() { logintempid = rev.logintempid, accountid = rev.accountid });
 	}
 }
