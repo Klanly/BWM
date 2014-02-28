@@ -11,6 +11,7 @@ public class LoginScene : MonoBehaviour
 	public UIGrid zoneList;
 	public GameObject zoneButton;
 
+	public UIInput accountInput;
 	public UIButton playButton;
 
 	private WebSocket socket;
@@ -27,9 +28,19 @@ public class LoginScene : MonoBehaviour
 		StartCoroutine(socket.Run());
 		StartCoroutine(socket.Dispatch());
 
-		socket.Send(new Cmd.Login.AccountTokenVerify_CS() { version = Version, gameid = GameID, account = "1024", token = "1" });
+		accountInput.value = SystemInfo.deviceUniqueIdentifier.GetHashCode().ToString();
 
-		UIEventListener.Get(playButton.gameObject).onClick = go => Application.LoadLevel("TestScene");
+		UIEventListener.Get(playButton.gameObject).onClick = go =>
+		{
+			if (string.IsNullOrEmpty(accountInput.value))
+				return;
+			socket.Send(new Cmd.Login.AccountTokenVerify_CS() { version = Version, gameid = GameID, account = accountInput.value, token="dev"});
+		};
+	}
+
+	void Update()
+	{
+		playButton.isEnabled = !string.IsNullOrEmpty(accountInput.value);
 	}
 
 	void OnDestroy()
@@ -59,7 +70,7 @@ public class LoginScene : MonoBehaviour
 			item.transform.parent = zoneList.transform;
 			item.transform.localScale = Vector3.one;
 			item.GetComponentInChildren<UILabel>().text = zone.zonename;
-			switch(zone.state)
+			switch (zone.state)
 			{
 				case ServerState.Normal:
 					var zoneid = zone.zoneid;
@@ -67,8 +78,7 @@ public class LoginScene : MonoBehaviour
 					break;
 				case ServerState.Shutdown:
 					var button = item.GetComponentInChildren<UIButton>();
-					button.enabled= false;
-					button.UpdateColor(false, false);
+					button.isEnabled = false;
 					break;
 				default:
 					throw new System.NotImplementedException();
