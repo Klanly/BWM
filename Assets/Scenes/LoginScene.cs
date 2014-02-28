@@ -2,14 +2,12 @@
 using System.Collections;
 using GX.Net;
 using Cmd.Login;
+using System;
 
 public class LoginScene : MonoBehaviour
 {
-	const int Version = 2014;
-	const int GameID = 100;
-
-	public UIGrid zoneList;
-	public GameObject zoneButton;
+	public const int Version = 2014;
+	public const int GameID = 100;
 
 	public UIInput accountInput;
 	public UIButton playButton;
@@ -17,15 +15,13 @@ public class LoginScene : MonoBehaviour
 	// Use this for initialization
 	IEnumerator Start()
 	{
-		yield return null;
-
 		Net.Instance.Dispatcher.Register(this);
 		Debug.Log(Net.Instance.Dispatcher);
-
 		yield return null;
+
 		Net.Instance.Open("ws://192.168.85.71:7000/shen/user");
 
-		accountInput.value = SystemInfo.deviceUniqueIdentifier.GetHashCode().ToString();
+		accountInput.value = Math.Abs(SystemInfo.deviceUniqueIdentifier.GetHashCode()).ToString();
 
 		UIEventListener.Get(playButton.gameObject).onClick = go =>
 		{
@@ -35,53 +31,21 @@ public class LoginScene : MonoBehaviour
 		};
 	}
 
-	void Update()
-	{
-		playButton.isEnabled = !string.IsNullOrEmpty(accountInput.value);
-	}
-
 	void OnDestroy()
 	{
 		Net.Instance.Dispatcher.UnRegister(this);
 		Debug.Log(Net.Instance.Dispatcher);
 	}
 
+	void Update()
+	{
+		playButton.isEnabled = !string.IsNullOrEmpty(accountInput.value);
+	}
+
 	[Execute]
 	void Execute(AccountTokenVerify_CS cmd)
 	{
 		Debug.Log("[EXEC]" + cmd.GetType().FullName);
-		//Net.Instance.Send(new UserLoginRequest_C() { username = "1024", gameversion = cmd.version, gameid = cmd.gameid, zoneid = 101 });
-	}
-
-	[Execute]
-	void Execute(ZoneInfoList_S cmd)
-	{
-		Debug.Log("[EXEC]" + cmd.GetType().FullName);
-		foreach (Transform t in zoneList.transform)
-			DestroyObject(t.gameObject);
-		zoneList.Reposition();
-
-		foreach (var zone in cmd.server)
-		{
-			var item = Instantiate(zoneButton) as GameObject;
-			item.transform.parent = zoneList.transform;
-			item.transform.localScale = Vector3.one;
-			item.GetComponentInChildren<UILabel>().text = zone.zonename;
-			switch (zone.state)
-			{
-				case ServerState.Normal:
-					var zoneid = zone.zoneid;
-					UIEventListener.Get(item).onClick = go => Net.Instance.Send(new UserLoginRequest_C() { gameversion = Version, gameid = cmd.gameid, zoneid = zoneid });
-					break;
-				case ServerState.Shutdown:
-					var button = item.GetComponentInChildren<UIButton>();
-					button.isEnabled = false;
-					break;
-				default:
-					throw new System.NotImplementedException();
-			}
-		}
-		zoneList.Reposition();
 	}
 
 	[Execute]
@@ -103,5 +67,12 @@ public class LoginScene : MonoBehaviour
 		var rev = cmd as UserLoginReturnOk_S;
 		Net.Instance.Open(rev.gatewayurl);
 		Net.Instance.Send(new UserLoginToken_C() { logintempid = rev.logintempid, accountid = rev.accountid });
+	}
+
+	[Execute]
+	void Execute(ZoneInfoList_S cmd)
+	{
+		ZoneListScene.ZoneInfoList = cmd;
+		Application.LoadLevel("ZoneListScene");
 	}
 }
