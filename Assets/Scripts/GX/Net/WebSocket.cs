@@ -87,12 +87,6 @@ namespace GX.Net
 		#endregion
 
 		private readonly MessageSerializer serizlizer = new MessageSerializer();
-		public MessageDispatcher Dispatcher { get; private set; }
-
-		public WebSocket()
-		{
-			this.Dispatcher = new MessageDispatcher();
-		}
 
 		public void Open(string url = "ws://echo.websocket.org")
 		{
@@ -113,26 +107,18 @@ namespace GX.Net
 			Proxy.Send(buf);
 		}
 
-		public IEnumerator Dispatch()
+		public IEnumerable<ProtoBuf.IExtensible> Receive()
 		{
-			while (true)
+			var buf = Proxy.Receive();
+			if (buf == null)
+				yield break;
+			using (var mem = new MemoryStream(buf))
 			{
-				var buf = Proxy.Receive();
-				if (buf == null)
+				while (mem.Position < mem.Length)
 				{
-					yield return null;
-					continue;
-				}
-				using (var mem = new MemoryStream(buf))
-				{
-					while (mem.Position < mem.Length)
-					{
-						var msg = serizlizer.Deserialize(mem);
-						Debug.Log("[RECV]" + msg.ToStringDebug());
-						if (Dispatcher.Dispatch(msg) == false)
-							Debug.Log(string.Format("未处理的消息: {0}\n{1}", msg.GetType(), msg.ToStringDebug()));
-						yield return msg;
-					}
+					var msg = serizlizer.Deserialize(mem);
+					Debug.Log("[RECV]" + msg.ToStringDebug());
+					yield return msg;
 				}
 			}
 		}

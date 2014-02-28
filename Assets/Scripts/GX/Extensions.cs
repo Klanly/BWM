@@ -150,4 +150,24 @@ public static class Extensions
 		writer.Write(prefix); writer.Write("}");
 	}
 	#endregion
+
+	#region Unity
+	/// <summary>
+	/// Gets or add a component. Usage example:
+	/// BoxCollider boxCollider = transform.GetOrAddComponent<BoxCollider>();
+	/// </summary>
+	/// <example><code>
+	/// BoxCollider boxCollider = transform.GetOrAddComponent<BoxCollider>();
+	/// </code></example>
+	/// <remarks> ref: http://wiki.unity3d.com/index.php?title=Singleton </remarks>
+	public static T GetOrAddComponent<T>(this Component child) where T : Component
+	{
+		T result = child.GetComponent<T>();
+		if (result == null)
+		{
+			result = child.gameObject.AddComponent<T>();
+		}
+		return result;
+	}
+	#endregion
 }

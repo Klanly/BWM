@@ -119,7 +119,7 @@ namespace GX.Net
 		/// <returns></returns>
 		private IEnumerable<KeyValuePair<MessageType, Type>> Parse()
 		{
-			var categoryIdType = typeof(Cmd.MSGTYPE.Cmd);
+			var categoryIdType = typeof(Cmd.Command);
 #if UNITY_METRO && !UNITY_EDITOR
 			var assembly = this.GetType().GetTypeInfo().Assembly;
 #else
@@ -129,15 +129,17 @@ namespace GX.Net
 			foreach (var cName in Enum.GetNames(categoryIdType))
 			{
 				var cValue = Convert.ToByte(Enum.Parse(categoryIdType, cName));
-				var typeIdType = assembly.GetType(categoryIdType.Namespace + "." + cName + ".MSGTYPE+Param");
+				var typeIdType = assembly.GetType(categoryIdType.Namespace + "." + cName + "+Param");
 				foreach (var tName in Enum.GetNames(typeIdType))
 				{
 					var tValue = Convert.ToByte(Enum.Parse(typeIdType, tName));
-					var messageType = assembly.GetType(categoryIdType.Namespace + "." + cName + "." + tName);
+					var name = categoryIdType.Namespace + "." + tName;
+					var messageType = assembly.GetType(name);
+					if (messageType == null)
+						throw new FormatException("Can't find type by name: " + name);
 					ret.Add(new MessageType() { Cmd = cValue, Param = tValue }, messageType);
 				}
 			}
-
 			return ret;
 		}
 		#endregion

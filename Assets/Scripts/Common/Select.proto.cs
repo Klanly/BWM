@@ -7,29 +7,29 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-// Generated from: Common/select/Select.proto
-namespace Cmd.Select
+// Generated from: Common/Select.proto
+namespace Cmd
 {
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"MSGTYPE")]
-  public partial class MSGTYPE : global::ProtoBuf.IExtensible
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"Select")]
+  public partial class Select : global::ProtoBuf.IExtensible
   {
-    public MSGTYPE() {}
+    public Select() {}
     
     [global::ProtoBuf.ProtoContract(Name=@"Param")]
     public enum Param
     {
             
-      [global::ProtoBuf.ProtoEnum(Name=@"CharactorListRequest_C", Value=1)]
-      CharactorListRequest_C = 1,
+      [global::ProtoBuf.ProtoEnum(Name=@"CharactorListRequestSelectUserCmd_C", Value=1)]
+      CharactorListRequestSelectUserCmd_C = 1,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"CharactorListReturn_S", Value=2)]
-      CharactorListReturn_S = 2,
+      [global::ProtoBuf.ProtoEnum(Name=@"CharactorListReturnSelectUserCmd_S", Value=2)]
+      CharactorListReturnSelectUserCmd_S = 2,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"CharactorCreate_C", Value=3)]
-      CharactorCreate_C = 3,
+      [global::ProtoBuf.ProtoEnum(Name=@"CharactorCreateSelectUserCmd_C", Value=3)]
+      CharactorCreateSelectUserCmd_C = 3,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"CharactorSelect_C", Value=4)]
-      CharactorSelect_C = 4
+      [global::ProtoBuf.ProtoEnum(Name=@"CharactorSelectSelectUserCmd_C", Value=4)]
+      CharactorSelectSelectUserCmd_C = 4
     }
   
     private global::ProtoBuf.IExtension extensionObject;
@@ -37,10 +37,10 @@ namespace Cmd.Select
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CharactorListRequest_C")]
-  public partial class CharactorListRequest_C : global::ProtoBuf.IExtensible
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CharactorListRequestSelectUserCmd_C")]
+  public partial class CharactorListRequestSelectUserCmd_C : global::ProtoBuf.IExtensible
   {
-    public CharactorListRequest_C() {}
+    public CharactorListRequestSelectUserCmd_C() {}
     
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -78,14 +78,14 @@ namespace Cmd.Select
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CharactorListReturn_S")]
-  public partial class CharactorListReturn_S : global::ProtoBuf.IExtensible
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CharactorListReturnSelectUserCmd_S")]
+  public partial class CharactorListReturnSelectUserCmd_S : global::ProtoBuf.IExtensible
   {
-    public CharactorListReturn_S() {}
+    public CharactorListReturnSelectUserCmd_S() {}
     
-    private readonly global::System.Collections.Generic.List<Cmd.Select.Charactor> _list = new global::System.Collections.Generic.List<Cmd.Select.Charactor>();
+    private readonly global::System.Collections.Generic.List<Cmd.Charactor> _list = new global::System.Collections.Generic.List<Cmd.Charactor>();
     [global::ProtoBuf.ProtoMember(1, Name=@"list", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public global::System.Collections.Generic.List<Cmd.Select.Charactor> list
+    public global::System.Collections.Generic.List<Cmd.Charactor> list
     {
       get { return _list; }
     }
@@ -95,10 +95,10 @@ namespace Cmd.Select
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CharactorCreate_C")]
-  public partial class CharactorCreate_C : global::ProtoBuf.IExtensible
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CharactorCreateSelectUserCmd_C")]
+  public partial class CharactorCreateSelectUserCmd_C : global::ProtoBuf.IExtensible
   {
-    public CharactorCreate_C() {}
+    public CharactorCreateSelectUserCmd_C() {}
     
     private string _charname;
     [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"charname", DataFormat = global::ProtoBuf.DataFormat.Default)]
@@ -119,10 +119,10 @@ namespace Cmd.Select
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CharactorSelect_C")]
-  public partial class CharactorSelect_C : global::ProtoBuf.IExtensible
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CharactorSelectSelectUserCmd_C")]
+  public partial class CharactorSelectSelectUserCmd_C : global::ProtoBuf.IExtensible
   {
-    public CharactorSelect_C() {}
+    public CharactorSelectSelectUserCmd_C() {}
     
     private ulong _charid;
     [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"charid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
