@@ -18,7 +18,10 @@ namespace Cmd
       Login = 1,
             
       [global::ProtoBuf.ProtoEnum(Name=@"Select", Value=2)]
-      Select = 2
+      Select = 2,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"Chat", Value=3)]
+      Chat = 3
     }
   
 }

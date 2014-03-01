@@ -268,7 +268,10 @@ namespace Cmd
       UserTokenTempId = 5,
             
       [global::ProtoBuf.ProtoEnum(Name=@"UserTokenTimeOut", Value=6)]
-      UserTokenTimeOut = 6
+      UserTokenTimeOut = 6,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"LoginDulicate", Value=7)]
+      LoginDulicate = 7
     }
   
     private global::ProtoBuf.IExtension extensionObject;
