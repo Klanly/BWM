@@ -36,7 +36,7 @@ public class ZoneListScene : MonoBehaviour
 					var zoneid = zone.zoneid;
 					UIEventListener.Get(item).onClick = go => Net.Instance.Send(new UserLoginRequestLoginUserCmd_C()
 					{
-						gameversion = LoginScene.Version, 
+						gameversion = (uint)Cmd.Config.Version.Version_Game, 
 						gameid = cmd.gameid,
 						zoneid = zoneid,
 					});

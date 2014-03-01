@@ -6,7 +6,6 @@ using Cmd;
 
 public class LoginScene : MonoBehaviour
 {
-	public const int Version = 2014;
 	public const int GameID = 100;
 
 	public UIInput accountInput;
@@ -27,7 +26,7 @@ public class LoginScene : MonoBehaviour
 		{
 			if (string.IsNullOrEmpty(accountInput.value))
 				return;
-			Net.Instance.Send(new AccountTokenVerifyLoginUserCmd_CS() { version = Version, gameid = GameID, account = accountInput.value, token = "dev" });
+			Net.Instance.Send(new AccountTokenVerifyLoginUserCmd_CS() { version = (uint)Cmd.Config.Version.Version_Login, gameid = GameID, account = accountInput.value, token = "dev" });
 		};
 	}
 

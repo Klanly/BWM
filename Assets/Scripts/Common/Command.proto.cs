@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-// Generated from: Common/MSGTYPE.proto
+// Generated from: Common/Command.proto
 namespace Cmd
 {
     [global::ProtoBuf.ProtoContract(Name=@"Command")]
