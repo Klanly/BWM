@@ -46,6 +46,7 @@ public class MapNavEditor : Editor {
 			float _gridWidth = gridWidth.floatValue;
 			float _gridHeight = gridHeight.floatValue;
 
+			/*
 			for(int z = 0; z < _gridZNum; ++z)
 			{
 				for(int x = 0; x < _gridXNum; ++x)
@@ -58,6 +59,7 @@ public class MapNavEditor : Editor {
 					Handles.DrawSolidRectangleWithOutline(verts, new Color(1,1,1,0.2f), new Color(0,0,0,1));
 				}
 			}
+			*/
 		}
 	}
 }

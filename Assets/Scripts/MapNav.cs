@@ -63,5 +63,34 @@ public class MapNav : MonoBehaviour {
 		} 
 	}
 
+	void OnDrawGizmos() {
+		if(showGrids)
+		{
+			float y = 0.2f;
+			for(int z = 0; z < gridZNum; ++z)
+			{
+				Gizmos.color = new Color(0, 0, 0, 0.5F);
+				Gizmos.DrawLine(new Vector3(0, y, z * gridHeight), new Vector3(gridXNum * gridWidth, y, z * gridHeight));
+			}
 
+			for(int x = 0; x < gridXNum; ++x)
+			{
+				Gizmos.color = new Color(0, 0, 0, 0.5F);
+				Gizmos.DrawLine(new Vector3(x * gridWidth, y, 0), new Vector3(x * gridWidth, y, gridZNum * gridHeight));
+			}
+
+			for(int z = 0; z < gridZNum; ++z)
+			{
+				for(int x = 0; x < gridXNum; ++x)
+				{
+					Gizmos.color = new Color(0.5f, 0.5f, 0.5f, 0.5F);
+					Vector3 center = new Vector3(x * gridWidth + gridWidth * 0.5f, y, z * gridHeight + gridHeight * 0.5f);
+					Vector3 size = new Vector3(gridWidth, 0, gridHeight);
+					Gizmos.DrawCube(center, size);
+				}
+			}
+		}
+	}
+
+	
 }
