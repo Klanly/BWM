@@ -46,24 +46,14 @@ public class ZoneListScene : MonoBehaviour
 	[Execute]
 	static IEnumerator Execute(ZoneInfoListLoginUserCmd_S cmd)
 	{
-		Debug.Log("[EXEC]" + cmd.GetType().FullName);
 		Application.LoadLevel("ZoneListScene");
 		yield return null;
 		Object.FindObjectOfType<ZoneListScene>().ShowZoneList(cmd);
 	}
 
 	[Execute]
-	static void Execute(UserLoginReturnOkLoginUserCmd_S cmd)
-	{
-		Debug.Log("[EXEC]" + cmd.GetType().FullName);
-		Net.Instance.Open(cmd.gatewayurl);
-		Net.Instance.Send(new UserLoginTokenLoginUserCmd_C() { logintempid = cmd.logintempid, accountid = cmd.accountid });
-	}
-
-	[Execute]
 	static void Execute(CharactorListReturnSelectUserCmd_S cmd)
 	{
-		Debug.Log("[EXEC]" + cmd.GetType().FullName);
 		Application.LoadLevel("TestScene");
 	}
 }

@@ -22,7 +22,10 @@ public class LoginScene : MonoBehaviour
 		{
 			if (string.IsNullOrEmpty(accountInput.value))
 				return;
-			Net.Instance.Send(new AccountTokenVerifyLoginUserCmd_CS() { version = (uint)Cmd.Config.Version.Version_Login, gameid = GameID, account = accountInput.value, token = "dev" });
+			// 连接到LoginServer
+			Net.Instance.Send(new AccountTokenVerifyLoginUserCmd_CS() { version = (uint)Cmd.Config.Version.Version_Login, gameid = GameID, 
+				account = accountInput.value,
+				token = "dev" });
 		};
 	}
 
@@ -34,18 +37,26 @@ public class LoginScene : MonoBehaviour
 	[Execute]
 	static void Execute(AccountTokenVerifyLoginUserCmd_CS cmd)
 	{
-		Debug.Log("[EXEC]" + cmd.GetType().FullName);
 	}
 
 	[Execute]
 	static void Execute(UserLoginRequestLoginUserCmd_C cmd)
 	{
-		Debug.Log("[EXEC]" + cmd.GetType().FullName);
+	}
+
+	/// <summary>
+	/// LoginServer登陆成功，连接到GatewayServer
+	/// </summary>
+	/// <param name="cmd"></param>
+	[Execute]
+	static void Execute(UserLoginReturnOkLoginUserCmd_S cmd)
+	{
+		Net.Instance.Open(cmd.gatewayurl);
+		Net.Instance.Send(new UserLoginTokenLoginUserCmd_C() { logintempid = cmd.logintempid, accountid = cmd.accountid });
 	}
 
 	[Execute]
 	static void Execute(UserLoginReturnFailLoginUserCmd_S cmd)
 	{
-		Debug.Log("[EXEC]" + cmd.GetType().FullName);
 	}
 }
