@@ -169,5 +169,28 @@ public static class Extensions
 		}
 		return result;
 	}
+
+	class ActionToEnumerator : IEnumerable
+	{
+		private Action action;
+		public ActionToEnumerator(Action action) { this.action = action; }
+
+		#region IEnumerable 成员
+
+		public IEnumerator GetEnumerator()
+		{
+			if (action == null)
+				yield break;
+			action();
+		}
+
+		#endregion
+	}
+
+	public static Coroutine StartCoroutine(this MonoBehaviour mb, Action action)
+	{
+		return mb.StartCoroutine(new ActionToEnumerator(action).GetEnumerator());
+	}
+
 	#endregion
 }
