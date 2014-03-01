@@ -13,8 +13,17 @@ public class ZoneListScene : MonoBehaviour
 	// Use this for initialization
 	void Start()
 	{
+		Net.Instance.Dispatcher.Register(this);
+		Debug.Log(Net.Instance.Dispatcher);
+
 		Execute(ZoneInfoList);
 		ZoneInfoList = null;
+	}
+
+	void OnDestroy()
+	{
+		Net.Instance.Dispatcher.UnRegister(this);
+		Debug.Log(Net.Instance.Dispatcher);
 	}
 
 	void Execute(ZoneInfoListLoginUserCmd_S cmd)
@@ -50,5 +59,20 @@ public class ZoneListScene : MonoBehaviour
 			}
 		}
 		zoneList.Reposition();
+	}
+
+	[Execute]
+	void Execute(UserLoginReturnOkLoginUserCmd_S cmd)
+	{
+		Debug.Log("[EXEC]" + cmd.GetType().FullName);
+		Net.Instance.Open(cmd.gatewayurl);
+		Net.Instance.Send(new UserLoginTokenLoginUserCmd_C() { logintempid = cmd.logintempid, accountid = cmd.accountid });
+	}
+
+	[Execute]
+	void Execute(CharactorListReturnSelectUserCmd_S cmd)
+	{
+		Debug.Log("[EXEC]" + cmd.GetType().FullName);
+		Application.LoadLevel("TestScene");
 	}
 }

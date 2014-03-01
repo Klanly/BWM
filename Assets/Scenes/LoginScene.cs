@@ -12,11 +12,10 @@ public class LoginScene : MonoBehaviour
 	public UIButton playButton;
 
 	// Use this for initialization
-	IEnumerator Start()
+	void Start()
 	{
 		Net.Instance.Dispatcher.Register(this);
 		Debug.Log(Net.Instance.Dispatcher);
-		yield return null;
 
 		Net.Instance.Open("ws://192.168.85.71:7000/shen/user");
 
@@ -57,14 +56,6 @@ public class LoginScene : MonoBehaviour
 	void Execute(UserLoginReturnFailLoginUserCmd_S cmd)
 	{
 		Debug.Log("[EXEC]" + cmd.GetType().FullName);
-	}
-
-	[Execute]
-	void Execute(UserLoginReturnOkLoginUserCmd_S cmd)
-	{
-		Debug.Log("[EXEC]" + cmd.GetType().FullName);
-		Net.Instance.Open(cmd.gatewayurl);
-		Net.Instance.Send(new UserLoginTokenLoginUserCmd_C() { logintempid = cmd.logintempid, accountid = cmd.accountid });
 	}
 
 	[Execute]
