@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class TestMainRole : MonoBehaviour {
-	public float speedMainRole = 10.0f;
+	public float speedMainRole = 5.0f;
 	public float distanceCameraToRole = 25.0f;
 	public float heightCameraLookAt = 0.5f;
 
