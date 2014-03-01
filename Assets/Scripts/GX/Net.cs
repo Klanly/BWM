@@ -52,7 +52,7 @@ public class Net : Singleton<Net>
 			{
 				IEnumerator coroutine;
 				if (Dispatcher.Dispatch(msg, out coroutine) == false)
-					Debug.Log(string.Format("未处理的消息: {0}\n{1}", msg.GetType(), msg.ToStringDebug()));
+					Debug.LogWarning(string.Format("未处理的消息: {0}\n{1}", msg.GetType(), msg.ToStringDebug()));
 				if (coroutine != null)
 				{
 					while (coroutine.MoveNext())

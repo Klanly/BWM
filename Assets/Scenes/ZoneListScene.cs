@@ -52,8 +52,16 @@ public class ZoneListScene : MonoBehaviour
 	}
 
 	[Execute]
-	static void Execute(CharactorListReturnSelectUserCmd_S cmd)
+	static IEnumerator Execute(CharactorListReturnSelectUserCmd_S cmd)
 	{
 		Application.LoadLevel("TestScene");
+		yield return null;
+		Net.Instance.Send(new CharactorCreateSelectUserCmd_C() { charname = "1" });
+	}
+
+	[Execute]
+	static void Execute(MessageBoxChatUserCmd_S cmd)
+	{
+		Debug.Log(cmd.info);
 	}
 }
