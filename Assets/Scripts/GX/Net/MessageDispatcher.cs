@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Reflection;
 using System.Diagnostics;
+using System.Collections;
 
 namespace GX.Net
 {
@@ -12,29 +13,42 @@ namespace GX.Net
 	/// </summary>
 	public class MessageDispatcher
 	{
+		#region class MessageInvoker
 		private abstract class MessageInvoker
 		{
 			class Invoker<TMessage> : MessageInvoker
 				where TMessage : class, ProtoBuf.IExtensible
 			{
-				private Action<TMessage> action;
+				private Func<TMessage, IEnumerator> action;
 
 				public override object Target { get { return action.Target; } }
 				public override Type MessageType { get { return typeof(TMessage); } }
 
-				public Invoker(Action<TMessage> action)
+				public Invoker(Func<TMessage, IEnumerator> action)
 				{
 					this.action = action;
 				}
 
 				public Invoker(MethodInfo methodInfo, object target)
-					: this((Action<TMessage>)Delegate.CreateDelegate(typeof(Action<TMessage>), target, methodInfo, true))
 				{
+					if (methodInfo.ReturnType == typeof(void))
+					{
+						this.action = new Func<TMessage, IEnumerator>(m =>
+						{
+							var act  = (Action<TMessage>)Delegate.CreateDelegate(typeof(Action<TMessage>), target, methodInfo, true);
+							act(m);
+							return null;
+						});
+					}
+					else
+					{
+						this.action = (Func<TMessage, IEnumerator>)Delegate.CreateDelegate(typeof(Func<TMessage, IEnumerator>), target, methodInfo, true);
+					}
 				}
 
-				public override void Invoke(ProtoBuf.IExtensible message)
+				public override IEnumerator Invoke(ProtoBuf.IExtensible message)
 				{
-					this.action(message as TMessage);
+					return this.action(message as TMessage);
 				}
 
 				public override string ToString()
@@ -45,7 +59,7 @@ namespace GX.Net
 
 			public abstract object Target { get; }
 			public abstract Type MessageType { get; }
-			public abstract void Invoke(ProtoBuf.IExtensible message);
+			public abstract IEnumerator Invoke(ProtoBuf.IExtensible message);
 
 			public static MessageInvoker Create(MethodInfo method, object target)
 			{
@@ -64,19 +78,30 @@ namespace GX.Net
 				Debug.Assert(parameters[0].ParameterType.GetInterface(typeof(ProtoBuf.IExtensible).FullName) != null);
 				return method.GetParameters()[0].ParameterType;
 			}
-		}
+		} 
+		#endregion
 
 		private readonly Dictionary<Type, MessageInvoker> items = new Dictionary<Type,MessageInvoker>();
 
-		public bool Dispatch(ProtoBuf.IExtensible message)
+		/// <summary>
+		/// 将消息发送到对应的接收者
+		/// </summary>
+		/// <param name="message"></param>
+		/// <param name="result">消息接收者处理消息后的返回值</param>
+		/// <returns>是否有对应的消息接收者并进行了分发</returns>
+		public bool Dispatch(ProtoBuf.IExtensible message, out IEnumerator result)
 		{
 			MessageInvoker invoker;
 			if (items.TryGetValue(message.GetType(), out invoker))
 			{
-				invoker.Invoke(message);
+				result = invoker.Invoke(message);
 				return true;
 			}
-			return false;
+			else
+			{
+				result = null;
+				return false;
+			}
 		}
 
 		#region 消息响应注册

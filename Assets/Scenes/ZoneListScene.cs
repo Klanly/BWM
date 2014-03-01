@@ -44,12 +44,11 @@ public class ZoneListScene : MonoBehaviour
 
 
 	[Execute]
-	static void Execute(ZoneInfoListLoginUserCmd_S cmd)
+	static IEnumerator Execute(ZoneInfoListLoginUserCmd_S cmd)
 	{
 		Debug.Log("[EXEC]" + cmd.GetType().FullName);
-		Debug.Log(Application.loadedLevelName);
 		Application.LoadLevel("ZoneListScene");
-		Debug.Log(Application.loadedLevelName);
+		yield return null;
 		Object.FindObjectOfType<ZoneListScene>().ShowZoneList(cmd);
 	}
 

@@ -47,19 +47,18 @@ public class Net : Singleton<Net>
 	{
 		while (true)
 		{
-			var buf = socket.Receive();
-			if (buf == null)
-			{
-				yield return null;
-				continue;
-			}
+			yield return null;
 			foreach (var msg in socket.Receive())
 			{
-				if (Dispatcher.Dispatch(msg) == false)
+				IEnumerator coroutine;
+				if (Dispatcher.Dispatch(msg, out coroutine) == false)
 					Debug.Log(string.Format("未处理的消息: {0}\n{1}", msg.GetType(), msg.ToStringDebug()));
-				yield return msg;
+				if (coroutine != null)
+				{
+					while (coroutine.MoveNext())
+						yield return coroutine.Current;
+				}
 			}
-			yield return null;
 		}
 		throw new System.NotImplementedException();
 	}
