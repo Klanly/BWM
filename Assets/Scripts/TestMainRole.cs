@@ -19,7 +19,7 @@ public class TestMainRole : MonoBehaviour {
 		{
 			if(GameObject.Find("BirthPos"))
 				birthPos = GameObject.Find("BirthPos").transform;
-			if(GameObject.Find("MainRole").transform)
+			if(GameObject.Find("MainRole"))
 				mainRole = GameObject.Find("MainRole").transform;
 			if(mainRole && birthPos)
 				mainRole.position = birthPos.position;
