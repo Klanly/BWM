@@ -13,6 +13,7 @@ public class Net : Singleton<Net>
 	{
 		this.socket = new WebSocket();
 		this.Dispatcher = new MessageDispatcher();
+		this.Dispatcher.StaticRegister();
 	}
 
 	public void Open(string url = "ws://echo.websocket.org")
@@ -46,19 +47,19 @@ public class Net : Singleton<Net>
 	{
 		while (true)
 		{
-			var buf = socket.Receive();
-			if (buf == null)
-			{
-				yield return null;
-				continue;
-			}
+			yield return null;
 			foreach (var msg in socket.Receive())
 			{
-				if (Dispatcher.Dispatch(msg) == false)
-					Debug.Log(string.Format("未处理的消息: {0}\n{1}", msg.GetType(), msg.ToStringDebug()));
-				yield return msg;
+				IEnumerator coroutine;
+				if (Dispatcher.Dispatch(msg, out coroutine) == false)
+					Debug.LogWarning(string.Format("未处理的消息: {0}\n{1}", msg.GetType(), msg.ToStringDebug()));
+				if (coroutine != null)
+				{
+					while (coroutine.MoveNext())
+						yield return coroutine.Current;
+				}
 			}
-			yield return null;
 		}
+		throw new System.NotImplementedException();
 	}
 }

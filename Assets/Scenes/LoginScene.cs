@@ -6,19 +6,14 @@ using Cmd;
 
 public class LoginScene : MonoBehaviour
 {
-	public const int Version = 2014;
 	public const int GameID = 100;
 
 	public UIInput accountInput;
 	public UIButton playButton;
 
 	// Use this for initialization
-	IEnumerator Start()
+	void Start()
 	{
-		Net.Instance.Dispatcher.Register(this);
-		Debug.Log(Net.Instance.Dispatcher);
-		yield return null;
-
 		Net.Instance.Open("ws://192.168.85.71:7000/shen/user");
 
 		accountInput.value = Math.Abs(SystemInfo.deviceUniqueIdentifier.GetHashCode()).ToString();
@@ -27,14 +22,11 @@ public class LoginScene : MonoBehaviour
 		{
 			if (string.IsNullOrEmpty(accountInput.value))
 				return;
-			Net.Instance.Send(new AccountTokenVerifyLoginUserCmd_CS() { version = Version, gameid = GameID, account = accountInput.value, token = "dev" });
+			// 连接到LoginServer
+			Net.Instance.Send(new AccountTokenVerifyLoginUserCmd_CS() { version = (uint)Cmd.Config.Version.Version_Login, gameid = GameID, 
+				account = accountInput.value,
+				token = "dev" });
 		};
-	}
-
-	void OnDestroy()
-	{
-		Net.Instance.Dispatcher.UnRegister(this);
-		Debug.Log(Net.Instance.Dispatcher);
 	}
 
 	void Update()
@@ -43,35 +35,28 @@ public class LoginScene : MonoBehaviour
 	}
 
 	[Execute]
-	void Execute(AccountTokenVerifyLoginUserCmd_CS cmd)
+	static void Execute(AccountTokenVerifyLoginUserCmd_CS cmd)
 	{
-		Debug.Log("[EXEC]" + cmd.GetType().FullName);
 	}
 
 	[Execute]
-	void Execute(UserLoginRequestLoginUserCmd_C cmd)
+	static void Execute(UserLoginRequestLoginUserCmd_C cmd)
 	{
-		Debug.Log("[EXEC]" + cmd.GetType().FullName);
 	}
 
+	/// <summary>
+	/// LoginServer登陆成功，连接到GatewayServer
+	/// </summary>
+	/// <param name="cmd"></param>
 	[Execute]
-	void Execute(UserLoginReturnFailLoginUserCmd_S cmd)
+	static void Execute(UserLoginReturnOkLoginUserCmd_S cmd)
 	{
-		Debug.Log("[EXEC]" + cmd.GetType().FullName);
-	}
-
-	[Execute]
-	void Execute(UserLoginReturnOkLoginUserCmd_S cmd)
-	{
-		Debug.Log("[EXEC]" + cmd.GetType().FullName);
 		Net.Instance.Open(cmd.gatewayurl);
 		Net.Instance.Send(new UserLoginTokenLoginUserCmd_C() { logintempid = cmd.logintempid, accountid = cmd.accountid });
 	}
 
 	[Execute]
-	void Execute(ZoneInfoListLoginUserCmd_S cmd)
+	static void Execute(UserLoginReturnFailLoginUserCmd_S cmd)
 	{
-		ZoneListScene.ZoneInfoList = cmd;
-		Application.LoadLevel("ZoneListScene");
 	}
 }

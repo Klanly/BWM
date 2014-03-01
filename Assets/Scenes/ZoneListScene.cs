@@ -5,21 +5,11 @@ using Cmd;
 
 public class ZoneListScene : MonoBehaviour
 {
-	public static ZoneInfoListLoginUserCmd_S ZoneInfoList { get; set; }
-
 	public UIGrid zoneList;
 	public GameObject zoneButton;
 
-	// Use this for initialization
-	void Start()
+	private void ShowZoneList(ZoneInfoListLoginUserCmd_S cmd)
 	{
-		Execute(ZoneInfoList);
-		ZoneInfoList = null;
-	}
-
-	void Execute(ZoneInfoListLoginUserCmd_S cmd)
-	{
-		Debug.Log("[EXEC]" + cmd.GetType().FullName);
 		foreach (Transform t in zoneList.transform)
 			DestroyObject(t.gameObject);
 		zoneList.Reposition();
@@ -36,7 +26,7 @@ public class ZoneListScene : MonoBehaviour
 					var zoneid = zone.zoneid;
 					UIEventListener.Get(item).onClick = go => Net.Instance.Send(new UserLoginRequestLoginUserCmd_C()
 					{
-						gameversion = LoginScene.Version, 
+						gameversion = (uint)Cmd.Config.Version.Version_Game,
 						gameid = cmd.gameid,
 						zoneid = zoneid,
 					});
@@ -50,5 +40,28 @@ public class ZoneListScene : MonoBehaviour
 			}
 		}
 		zoneList.Reposition();
+	}
+
+
+	[Execute]
+	static IEnumerator Execute(ZoneInfoListLoginUserCmd_S cmd)
+	{
+		Application.LoadLevel("ZoneListScene");
+		yield return null;
+		Object.FindObjectOfType<ZoneListScene>().ShowZoneList(cmd);
+	}
+
+	[Execute]
+	static IEnumerator Execute(CharactorListReturnSelectUserCmd_S cmd)
+	{
+		Application.LoadLevel("TestScene");
+		yield return null;
+		Net.Instance.Send(new CharactorCreateSelectUserCmd_C() { charname = "1" });
+	}
+
+	[Execute]
+	static void Execute(MessageBoxChatUserCmd_S cmd)
+	{
+		Debug.Log(cmd.info);
 	}
 }

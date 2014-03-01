@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-// Generated from: Common/Login.proto
+// Generated from: Common/LoginCommand.proto
 namespace Cmd
 {
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"Login")]
@@ -268,7 +268,10 @@ namespace Cmd
       UserTokenTempId = 5,
             
       [global::ProtoBuf.ProtoEnum(Name=@"UserTokenTimeOut", Value=6)]
-      UserTokenTimeOut = 6
+      UserTokenTimeOut = 6,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"LoginDulicate", Value=7)]
+      LoginDulicate = 7
     }
   
     private global::ProtoBuf.IExtension extensionObject;

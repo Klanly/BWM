@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-// Generated from: Common/Select.proto
+// Generated from: Common/SelectCommand.proto
 namespace Cmd
 {
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"Select")]
@@ -22,14 +22,20 @@ namespace Cmd
       [global::ProtoBuf.ProtoEnum(Name=@"CharactorListRequestSelectUserCmd_C", Value=1)]
       CharactorListRequestSelectUserCmd_C = 1,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"CharactorListReturnSelectUserCmd_S", Value=2)]
-      CharactorListReturnSelectUserCmd_S = 2,
+      [global::ProtoBuf.ProtoEnum(Name=@"CheckCharNameSelectUserCmd_CS", Value=2)]
+      CheckCharNameSelectUserCmd_CS = 2,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"CharactorCreateSelectUserCmd_C", Value=3)]
-      CharactorCreateSelectUserCmd_C = 3,
+      [global::ProtoBuf.ProtoEnum(Name=@"CharactorListReturnSelectUserCmd_S", Value=3)]
+      CharactorListReturnSelectUserCmd_S = 3,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"CharactorSelectSelectUserCmd_C", Value=4)]
-      CharactorSelectSelectUserCmd_C = 4
+      [global::ProtoBuf.ProtoEnum(Name=@"CharactorCreateSelectUserCmd_C", Value=4)]
+      CharactorCreateSelectUserCmd_C = 4,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"CharactorSelectSelectUserCmd_C", Value=5)]
+      CharactorSelectSelectUserCmd_C = 5,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"CharactorDeleteSelectUserCmd_C", Value=6)]
+      CharactorDeleteSelectUserCmd_C = 6
     }
   
     private global::ProtoBuf.IExtension extensionObject;
@@ -95,6 +101,31 @@ namespace Cmd
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CheckCharNameSelectUserCmd_CS")]
+  public partial class CheckCharNameSelectUserCmd_CS : global::ProtoBuf.IExtensible
+  {
+    public CheckCharNameSelectUserCmd_CS() {}
+    
+    private string _charname;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"charname", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public string charname
+    {
+      get { return _charname; }
+      set { _charname = value; }
+    }
+    private bool _exist = default(bool);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"exist", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool exist
+    {
+      get { return _exist; }
+      set { _exist = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CharactorCreateSelectUserCmd_C")]
   public partial class CharactorCreateSelectUserCmd_C : global::ProtoBuf.IExtensible
   {
@@ -123,6 +154,23 @@ namespace Cmd
   public partial class CharactorSelectSelectUserCmd_C : global::ProtoBuf.IExtensible
   {
     public CharactorSelectSelectUserCmd_C() {}
+    
+    private ulong _charid;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"charid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public ulong charid
+    {
+      get { return _charid; }
+      set { _charid = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CharactorDeleteSelectUserCmd_C")]
+  public partial class CharactorDeleteSelectUserCmd_C : global::ProtoBuf.IExtensible
+  {
+    public CharactorDeleteSelectUserCmd_C() {}
     
     private ulong _charid;
     [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"charid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]

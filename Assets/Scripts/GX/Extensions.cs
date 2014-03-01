@@ -112,7 +112,7 @@ public static class Extensions
 
 	private static void WriteTo(ProtoBuf.IExtensible proto, TextWriter writer, int indent = 0)
 	{
-		var prefix = new string('\t', indent);
+		var prefix = new string(' ', 4 * indent);
 		if (proto == null)
 		{
 			writer.Write(prefix); writer.Write("<null>");
@@ -121,7 +121,7 @@ public static class Extensions
 		writer.Write(prefix); writer.Write(proto.GetType().FullName); writer.WriteLine(" {");
 		foreach (var p in proto.GetType().GetRuntimeProperties())
 		{
-			writer.Write(prefix); writer.Write('\t'); writer.Write(p.Name); writer.Write(" = ");
+			writer.Write(prefix); writer.Write("    "); writer.Write(p.Name); writer.Write(" = ");
 			var value = p.GetValue(proto, null);
 			if (value is ProtoBuf.IExtensible)
 			{
@@ -135,7 +135,7 @@ public static class Extensions
 					WriteTo(line, writer, indent + 2);
 					writer.WriteLine();
 				}
-				writer.Write(prefix); writer.Write('\t'); writer.Write(']');
+				writer.Write(prefix); writer.Write("    "); writer.Write(']');
 			}
 			else if (value is string)
 			{
@@ -169,5 +169,28 @@ public static class Extensions
 		}
 		return result;
 	}
+
+	class ActionToEnumerator : IEnumerable
+	{
+		private Action action;
+		public ActionToEnumerator(Action action) { this.action = action; }
+
+		#region IEnumerable 成员
+
+		public IEnumerator GetEnumerator()
+		{
+			if (action == null)
+				yield break;
+			action();
+		}
+
+		#endregion
+	}
+
+	public static Coroutine StartCoroutine(this MonoBehaviour mb, Action action)
+	{
+		return mb.StartCoroutine(new ActionToEnumerator(action).GetEnumerator());
+	}
+
 	#endregion
 }

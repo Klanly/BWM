@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-// Generated from: Common/MSGTYPE.proto
+// Generated from: Common/Command.proto
 namespace Cmd
 {
     [global::ProtoBuf.ProtoContract(Name=@"Command")]
@@ -18,7 +18,10 @@ namespace Cmd
       Login = 1,
             
       [global::ProtoBuf.ProtoEnum(Name=@"Select", Value=2)]
-      Select = 2
+      Select = 2,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"Chat", Value=3)]
+      Chat = 3
     }
   
 }

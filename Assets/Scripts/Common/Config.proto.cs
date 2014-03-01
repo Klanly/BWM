@@ -7,29 +7,39 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-// Generated from: Common/config/Config.proto
-namespace Cmd.Config
+// Generated from: Common/Config.proto
+namespace Cmd
 {
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"Config")]
+  public partial class Config : global::ProtoBuf.IExtensible
+  {
+    public Config() {}
+    
     [global::ProtoBuf.ProtoContract(Name=@"Version")]
     public enum Version
     {
             
-      [global::ProtoBuf.ProtoEnum(Name=@"Login", Value=2014)]
-      Login = 2014,
+      [global::ProtoBuf.ProtoEnum(Name=@"Version_Login", Value=2014)]
+      Version_Login = 2014,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"Game", Value=2014)]
-      Game = 2014
+      [global::ProtoBuf.ProtoEnum(Name=@"Version_Game", Value=2014)]
+      Version_Game = 2014
     }
   
     [global::ProtoBuf.ProtoContract(Name=@"Debug")]
     public enum Debug
     {
             
-      [global::ProtoBuf.ProtoEnum(Name=@"All", Value=1)]
-      All = 1,
+      [global::ProtoBuf.ProtoEnum(Name=@"Debug_All", Value=1)]
+      Debug_All = 1,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"Whj", Value=1)]
-      Whj = 1
+      [global::ProtoBuf.ProtoEnum(Name=@"Debug_Whj", Value=1)]
+      Debug_Whj = 1
     }
+  
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
   
 }
