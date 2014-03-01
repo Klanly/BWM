@@ -60,5 +60,6 @@ public class Net : Singleton<Net>
 			}
 			yield return null;
 		}
+		throw new System.NotImplementedException();
 	}
 }
