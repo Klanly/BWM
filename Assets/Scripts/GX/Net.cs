@@ -13,6 +13,7 @@ public class Net : Singleton<Net>
 	{
 		this.socket = new WebSocket();
 		this.Dispatcher = new MessageDispatcher();
+		this.Dispatcher.StaticRegister();
 	}
 
 	public void Open(string url = "ws://echo.websocket.org")

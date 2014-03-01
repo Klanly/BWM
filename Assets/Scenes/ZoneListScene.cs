@@ -5,30 +5,11 @@ using Cmd;
 
 public class ZoneListScene : MonoBehaviour
 {
-	public static ZoneInfoListLoginUserCmd_S ZoneInfoList { get; set; }
-
 	public UIGrid zoneList;
 	public GameObject zoneButton;
 
-	// Use this for initialization
-	void Start()
+	private void ShowZoneList(ZoneInfoListLoginUserCmd_S cmd)
 	{
-		Net.Instance.Dispatcher.Register(this);
-		Debug.Log(Net.Instance.Dispatcher);
-
-		Execute(ZoneInfoList);
-		ZoneInfoList = null;
-	}
-
-	void OnDestroy()
-	{
-		Net.Instance.Dispatcher.UnRegister(this);
-		Debug.Log(Net.Instance.Dispatcher);
-	}
-
-	void Execute(ZoneInfoListLoginUserCmd_S cmd)
-	{
-		Debug.Log("[EXEC]" + cmd.GetType().FullName);
 		foreach (Transform t in zoneList.transform)
 			DestroyObject(t.gameObject);
 		zoneList.Reposition();
@@ -45,7 +26,7 @@ public class ZoneListScene : MonoBehaviour
 					var zoneid = zone.zoneid;
 					UIEventListener.Get(item).onClick = go => Net.Instance.Send(new UserLoginRequestLoginUserCmd_C()
 					{
-						gameversion = (uint)Cmd.Config.Version.Version_Game, 
+						gameversion = (uint)Cmd.Config.Version.Version_Game,
 						gameid = cmd.gameid,
 						zoneid = zoneid,
 					});
@@ -61,8 +42,19 @@ public class ZoneListScene : MonoBehaviour
 		zoneList.Reposition();
 	}
 
+
 	[Execute]
-	void Execute(UserLoginReturnOkLoginUserCmd_S cmd)
+	static void Execute(ZoneInfoListLoginUserCmd_S cmd)
+	{
+		Debug.Log("[EXEC]" + cmd.GetType().FullName);
+		Debug.Log(Application.loadedLevelName);
+		Application.LoadLevel("ZoneListScene");
+		Debug.Log(Application.loadedLevelName);
+		Object.FindObjectOfType<ZoneListScene>().ShowZoneList(cmd);
+	}
+
+	[Execute]
+	static void Execute(UserLoginReturnOkLoginUserCmd_S cmd)
 	{
 		Debug.Log("[EXEC]" + cmd.GetType().FullName);
 		Net.Instance.Open(cmd.gatewayurl);
@@ -70,7 +62,7 @@ public class ZoneListScene : MonoBehaviour
 	}
 
 	[Execute]
-	void Execute(CharactorListReturnSelectUserCmd_S cmd)
+	static void Execute(CharactorListReturnSelectUserCmd_S cmd)
 	{
 		Debug.Log("[EXEC]" + cmd.GetType().FullName);
 		Application.LoadLevel("TestScene");
