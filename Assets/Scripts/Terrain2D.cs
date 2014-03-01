@@ -20,6 +20,7 @@ public class Terrain2D : MonoBehaviour {
 
 			var tempMaterial = new Material(renderer.sharedMaterial);
 			tempMaterial.mainTexture = texture;
+			tempMaterial.shader = Shader.Find("Unlit/Texture");
 			renderer.sharedMaterial = tempMaterial;
 		}
 	}
