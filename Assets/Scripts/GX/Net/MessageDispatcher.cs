@@ -86,12 +86,11 @@ namespace GX.Net
 		/// </summary>
 		public void StaticRegister()
 		{
-			ExecuteAttribute.GetStaticExecuteMethod(Assembly.GetExecutingAssembly())
-				 .ForEach(method => 
-				 {
-					 var invoker = MessageInvoker.Create(method, null);
-					 items.Add(invoker.MessageType, invoker);
-				 });
+			foreach(var method in ExecuteAttribute.GetStaticExecuteMethod(Assembly.GetExecutingAssembly()))
+			{
+				var invoker = MessageInvoker.Create(method, null);
+				items.Add(invoker.MessageType, invoker);
+			}
 		}
 
 		/// <summary>
@@ -100,12 +99,11 @@ namespace GX.Net
 		/// </summary>
 		public void Register(object target)
 		{
-			ExecuteAttribute.GetInstanceExecuteMethod(target.GetType())
-				 .ForEach(method =>
-				 {
-					 var invoker = MessageInvoker.Create(method, target);
-					 items.Add(invoker.MessageType, invoker);
-				 });
+			foreach(var method in ExecuteAttribute.GetInstanceExecuteMethod(target.GetType()))
+			{
+				var invoker = MessageInvoker.Create(method, target);
+				items.Add(invoker.MessageType, invoker);
+			}
 		}
 
 		/// <summary>
