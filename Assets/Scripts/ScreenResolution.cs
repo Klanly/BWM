@@ -11,6 +11,10 @@ public class ScreenResolution : MonoBehaviour
 		var pc = Application.platform == RuntimePlatform.WindowsPlayer
 			|| Application.platform == RuntimePlatform.LinuxPlayer
 			|| Application.platform == RuntimePlatform.OSXPlayer;
-		Screen.SetResolution(960, 640, !pc);
+
+		int _height = height;
+		int _width = height * Screen.width / Screen.height;	//保证手机的aspect不变
+		//Debug.LogError(string.Format("width:{0},height:{1}",_width,_height));
+		Screen.SetResolution(_width, _height, !pc);
 	}
 }
