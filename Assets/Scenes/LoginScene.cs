@@ -57,5 +57,6 @@ public class LoginScene : MonoBehaviour
 	[Execute]
 	static void Execute(UserLoginReturnFailLoginUserCmd_S cmd)
 	{
+		UnityEditor.EditorUtility.DisplayDialog(cmd.retcode.ToString(), cmd.desc, "OK");
 	}
 }

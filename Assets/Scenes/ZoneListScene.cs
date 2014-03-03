@@ -51,9 +51,13 @@ public class ZoneListScene : MonoBehaviour
 		Object.FindObjectOfType<ZoneListScene>().ShowZoneList(cmd);
 	}
 
+	/// <summary>
+	/// TODO: move to a golbal script file.
+	/// </summary>
+	/// <param name="cmd"></param>
 	[Execute]
 	static void Execute(MessageBoxChatUserCmd_S cmd)
 	{
-		Debug.Log(cmd.info);
+		UnityEditor.EditorUtility.DisplayDialog(string.Empty, cmd.info, "OK");
 	}
 }

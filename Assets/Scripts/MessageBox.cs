@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System;
+using GX;
 
 public class MessageBox : MonoBehaviour
 {
@@ -24,7 +25,7 @@ public class MessageBox : MonoBehaviour
 		UIEventListener.Get(this.messageBoxCancel).onClick = null;
 	}
 
-	public void Show(string message, string title = null, UIEventListener.VoidDelegate onOK = null, UIEventListener.VoidDelegate onCancel = null)
+	public void Show(string title, string message, UIEventListener.VoidDelegate onOK = null, UIEventListener.VoidDelegate onCancel = null)
 	{
 		this.gameObject.SetActive(true);
 
