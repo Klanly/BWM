@@ -53,10 +53,10 @@ namespace Cmd
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"Charactor")]
-  public partial class Charactor : global::ProtoBuf.IExtensible
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CharSelect")]
+  public partial class CharSelect : global::ProtoBuf.IExtensible
   {
-    public Charactor() {}
+    public CharSelect() {}
     
     private ulong _charid;
     [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"charid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
@@ -89,9 +89,9 @@ namespace Cmd
   {
     public CharactorListReturnSelectUserCmd_S() {}
     
-    private readonly global::System.Collections.Generic.List<Cmd.Charactor> _list = new global::System.Collections.Generic.List<Cmd.Charactor>();
+    private readonly global::System.Collections.Generic.List<Cmd.CharSelect> _list = new global::System.Collections.Generic.List<Cmd.CharSelect>();
     [global::ProtoBuf.ProtoMember(1, Name=@"list", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public global::System.Collections.Generic.List<Cmd.Charactor> list
+    public global::System.Collections.Generic.List<Cmd.CharSelect> list
     {
       get { return _list; }
     }
