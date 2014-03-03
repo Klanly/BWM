@@ -123,7 +123,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 100002, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 2}
       propertyPath: m_Name
-      value: ZoneButton
+      value: RoleButton
       objectReference: {fileID: 0}
     - target: {fileID: 11400002, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 2}
       propertyPath: mText
@@ -146,7 +146,7 @@ GameObject:
   - 114: {fileID: 176452949}
   - 65: {fileID: 176452948}
   m_Layer: 13
-  m_Name: ZoneButton
+  m_Name: RoleButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -465,6 +465,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 1060389861}
   - 114: {fileID: 1060389859}
+  - 114: {fileID: 1060389858}
   m_Layer: 0
   m_Name: Global
   m_TagString: Untagged
@@ -472,6 +473,19 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &1060389858
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1060389857}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46883509b1f7a3f48abf2ccb465af165, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  roleList: {fileID: 256516570}
+  roleButton: {fileID: 176452946}
 --- !u!114 &1060389859
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -750,7 +764,7 @@ MonoBehaviour:
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 1.49843752
+  aspectRatio: 1.66718745
   mRect:
     serializedVersion: 2
     x: 0
@@ -788,8 +802,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 256516569}
-  - {fileID: 1498870485}
   - {fileID: 176452947}
+  - {fileID: 1498870485}
   m_Father: {fileID: 1476132468}
 --- !u!54 &2094706620
 Rigidbody:
