@@ -71,7 +71,6 @@ public class TestMainRole : MonoBehaviour {
 			Vector3 targetCenter = mainRole.position;
 			targetCenter.y += heightCameraLookAt;
 			this.transform.position = targetCenter;
-			float currentAngle = this.transform.eulerAngles.y;
 			this.transform.position += this.transform.rotation * Vector3.back * distanceCameraToRole;
 		}
 	}

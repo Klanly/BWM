@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 [ExecuteInEditMode]
 public class MapNav : MonoBehaviour {
@@ -9,7 +10,9 @@ public class MapNav : MonoBehaviour {
 	public int gridXNum = 0;
 	public int gridZNum = 0;
 	public bool showGrids = false;
-	public uint[] grids;
+
+	[SerializeField]
+	public List<uint> grids = new List<uint>();
 
 	// 格子类型，0表示都不能走，每位0表示不可走，1表示可以走
 	public enum TileType
@@ -54,9 +57,11 @@ public class MapNav : MonoBehaviour {
 	/// </summary>
 	public void Reset()
 	{
-		grids = new uint[gridZNum * gridXNum];
-		for(int i = 0; i < grids.Length; ++i)
-			grids[i] = 0;
+		grids.Clear();
+		grids.TrimExcess();
+		int num = gridZNum * gridXNum;
+		for(int i = 0; i < num; ++i)
+			grids.Add(0);
 	}
 
 	// get a grid at index of grids
@@ -64,7 +69,7 @@ public class MapNav : MonoBehaviour {
 	{ 
 		get 
 		{
-			if(grids == null) return 0;
+			if(grids.Count == 0) return 0;
 			if(_z < 0 && _z >= gridZNum) return 0;
 			if(_x < 0 && _x >= gridXNum) return 0;
 			return grids[_z * gridXNum + _x];
@@ -72,7 +77,7 @@ public class MapNav : MonoBehaviour {
 
 		set
 		{
-			if(grids == null) return;
+			if(grids.Count == 0) return;
 			if(_z < 0 && _z >= gridZNum) return;
 			if(_x < 0 && _x >= gridXNum) return;
 			grids[_z * gridXNum + _x] = value;
@@ -84,8 +89,7 @@ public class MapNav : MonoBehaviour {
 	{ 
 		get 
 		{
-			if (grids == null) return 0;
-			return grids.Length; 
+			return grids.Count; 
 		} 
 	}
 
