@@ -6,7 +6,14 @@ using GX.Net;
 public class RoleListScene : MonoBehaviour
 {
 	public UIGrid roleList;
-	public GameObject roleButton;
+	public GameObject roleItem;
+	public GameObject roleCreate;
+
+	// Use this for initialization
+	void Start()
+	{
+		UIEventListener.Get(roleCreate).onClick = go => Application.LoadLevel("RoleCreateScene");
+	}
 
 	private void ShowRoleList(CharactorListReturnSelectUserCmd_S cmd)
 	{
@@ -16,13 +23,18 @@ public class RoleListScene : MonoBehaviour
 
 		foreach (var role in cmd.list)
 		{
-			var item = Instantiate(roleButton) as GameObject;
+			var item = Instantiate(roleItem) as GameObject;
 			item.transform.parent = roleList.transform;
 			item.transform.localScale = Vector3.one;
-			item.GetComponentInChildren<UILabel>().text = role.charname;
 
 			var info = role;
-			UIEventListener.Get(item).onClick = go => Net.Instance.Send(new CharactorSelectSelectUserCmd_C()
+			item.transform.Find("Name").GetComponent<UILabel>().text = info.charname;
+			UIEventListener.Get(item.transform.Find("Login").gameObject).onClick = go => Net.Instance.Send(new CharactorSelectSelectUserCmd_C()
+			{
+				charid = info.charid,
+			});
+
+			UIEventListener.Get(item.transform.Find("Delete").gameObject).onClick = go => Net.Instance.Send(new CharactorDeleteSelectUserCmd_C()
 			{
 				charid = info.charid,
 			});
@@ -30,17 +42,6 @@ public class RoleListScene : MonoBehaviour
 		roleList.Reposition();
 	}
 
-	// Use this for initialization
-	void Start()
-	{
-
-	}
-
-	// Update is called once per frame
-	void Update()
-	{
-
-	}
 
 	[Execute]
 	static IEnumerator Execute(CharactorListReturnSelectUserCmd_S cmd)
@@ -51,8 +52,11 @@ public class RoleListScene : MonoBehaviour
 		}
 		else
 		{
-			Application.LoadLevel("RoleListScene");
-			yield return null;
+			if (Application.loadedLevelName != "RoleListScene")
+			{
+				Application.LoadLevel("RoleListScene");
+				yield return null;
+			}
 			Object.FindObjectOfType<RoleListScene>().ShowRoleList(cmd);
 		}
 	}
