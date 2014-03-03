@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Deployment xmlns="http://schemas.microsoft.com/windowsphone/2012/deployment" AppPlatformVersion="8.0">
+  <DefaultLanguage xmlns="" code="zh-Hans" />
+  <Languages xmlns="">
+    <Language code="zh-Hans" />
+  </Languages>
+  <App xmlns="" ProductID="{16C0A07A-21D5-4DFC-8DAE-CB9646B7DD67}" Title="神作" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal" Author="bwgame" Description="" Publisher="bwgame" PublisherID="{dffab5e0-9ad5-42fc-a3c9-0fe94f5fccd4}">
+    <IconPath IsRelative="true" IsResource="false">icon.png</IconPath>
+    <Capabilities>
+      <Capability Name="ID_CAP_IDENTITY_DEVICE" />
+      <Capability Name="ID_CAP_MEDIALIB_AUDIO" />
+      <Capability Name="ID_CAP_MEDIALIB_PLAYBACK" />
+      <Capability Name="ID_CAP_NETWORKING" />
+      <Capability Name="ID_CAP_SENSORS" />
+    </Capabilities>
+    <Tasks>
+      <DefaultTask Name="_default" NavigationPage="MainPage.xaml" />
+    </Tasks>
+    <Tokens>
+      <PrimaryToken TokenID="ShenZuoToken" TaskName="_default">
+        <TemplateFlip>
+          <SmallImageURI IsRelative="true" IsResource="false">icon.png</SmallImageURI>
+          <Count>0</Count>
+          <BackgroundImageURI IsRelative="true" IsResource="false">icon.png</BackgroundImageURI>
+          <Title>ShenZuo</Title>
+          <BackContent>
+          </BackContent>
+          <BackBackgroundImageURI>
+          </BackBackgroundImageURI>
+          <BackTitle>
+          </BackTitle>
+          <DeviceLockImageURI>
+          </DeviceLockImageURI>
+          <HasLarge>
+          </HasLarge>
+        </TemplateFlip>
+      </PrimaryToken>
+    </Tokens>
+    <ActivatableClasses>
+      <InProcessServer>
+        <Path>BridgeInterface.winmd</Path>
+        <ActivatableClass ActivatableClassId="UnityEngineDelegates.IBridge" ThreadingModel="both" />
+      </InProcessServer>
+      <InProcessServer>
+        <Path>WinRTBridge.dll</Path>
+        <ActivatableClass ActivatableClassId="WinRTBridge.WinRTBridge" ThreadingModel="both" />
+      </InProcessServer>
+      <InProcessServer>
+        <Path>UnityEngineProxy.dll</Path>
+        <ActivatableClass ActivatableClassId="UnityEngineProxy.InternalCalls" ThreadingModel="both" />
+      </InProcessServer>
+      <InProcessServer>
+        <Path>UnityPlayer.dll</Path>
+        <ActivatableClass ActivatableClassId="UnityPlayer.UnityApp" ThreadingModel="both" />
+      </InProcessServer>
+    </ActivatableClasses>
+    <ScreenResolutions>
+      <ScreenResolution Name="ID_RESOLUTION_WVGA" />
+      <ScreenResolution Name="ID_RESOLUTION_WXGA" />
+      <ScreenResolution Name="ID_RESOLUTION_HD720P" />
+    </ScreenResolutions>
+    <!--<Requirements>
+      <Requirement Name="ID_REQ_MEMORY_300" />
+    </Requirements>-->
+    <FunctionalCapabilities>
+      <FunctionalCapability Name="ID_FUNCCAP_EXTEND_MEM" />
+    </FunctionalCapabilities>
+  </App>
+</Deployment>

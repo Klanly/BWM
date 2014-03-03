@@ -1,0 +1,45 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShenZuo", "ShenZuo\ShenZuo.csproj", "{16C0A07A-21D5-4DFC-8DAE-CB9646B7DD67}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{DA709838-485C-480B-83BF-69E4D06D28A1}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|ARM = Debug|ARM
+		Debug|x86 = Debug|x86
+		Master|ARM = Master|ARM
+		Master|x86 = Master|x86
+		Release|ARM = Release|ARM
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{16C0A07A-21D5-4DFC-8DAE-CB9646B7DD67}.Debug|ARM.ActiveCfg = Debug|ARM
+		{16C0A07A-21D5-4DFC-8DAE-CB9646B7DD67}.Debug|ARM.Build.0 = Debug|ARM
+		{16C0A07A-21D5-4DFC-8DAE-CB9646B7DD67}.Debug|ARM.Deploy.0 = Debug|ARM
+		{16C0A07A-21D5-4DFC-8DAE-CB9646B7DD67}.Debug|x86.ActiveCfg = Debug|x86
+		{16C0A07A-21D5-4DFC-8DAE-CB9646B7DD67}.Debug|x86.Build.0 = Debug|x86
+		{16C0A07A-21D5-4DFC-8DAE-CB9646B7DD67}.Debug|x86.Deploy.0 = Debug|x86
+		{16C0A07A-21D5-4DFC-8DAE-CB9646B7DD67}.Master|ARM.ActiveCfg = Master|ARM
+		{16C0A07A-21D5-4DFC-8DAE-CB9646B7DD67}.Master|ARM.Build.0 = Master|ARM
+		{16C0A07A-21D5-4DFC-8DAE-CB9646B7DD67}.Master|ARM.Deploy.0 = Master|ARM
+		{16C0A07A-21D5-4DFC-8DAE-CB9646B7DD67}.Master|x86.ActiveCfg = Master|x86
+		{16C0A07A-21D5-4DFC-8DAE-CB9646B7DD67}.Master|x86.Build.0 = Master|x86
+		{16C0A07A-21D5-4DFC-8DAE-CB9646B7DD67}.Master|x86.Deploy.0 = Master|x86
+		{16C0A07A-21D5-4DFC-8DAE-CB9646B7DD67}.Release|ARM.ActiveCfg = Release|ARM
+		{16C0A07A-21D5-4DFC-8DAE-CB9646B7DD67}.Release|ARM.Build.0 = Release|ARM
+		{16C0A07A-21D5-4DFC-8DAE-CB9646B7DD67}.Release|ARM.Deploy.0 = Release|ARM
+		{16C0A07A-21D5-4DFC-8DAE-CB9646B7DD67}.Release|x86.ActiveCfg = Release|x86
+		{16C0A07A-21D5-4DFC-8DAE-CB9646B7DD67}.Release|x86.Build.0 = Release|x86
+		{16C0A07A-21D5-4DFC-8DAE-CB9646B7DD67}.Release|x86.Deploy.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

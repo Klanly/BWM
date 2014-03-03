@@ -17,17 +17,36 @@ namespace GX.Net
 		private readonly Dictionary<MessageType, Func<Stream, ProtoBuf.IExtensible>> deserializeTable = new Dictionary<MessageType, Func<Stream, ProtoBuf.IExtensible>>();
 		private readonly Dictionary<Type, MessageType> messageTypeTable = new Dictionary<Type, MessageType>();
 
-		#region Serialize
-		public byte[] Serialize<T>(T message) where T : ProtoBuf.IExtensible
+		public MessageType this[Type type]
 		{
-			using (var stream = new MemoryStream())
+			get 
 			{
-				Serialize(message, stream);
-				return stream.ToArray();
+				MessageType mt;
+				return messageTypeTable.TryGetValue(type, out mt) ? mt : MessageType.Empty;
 			}
 		}
 
-		public void Serialize<T>(T message, Stream stream) where T : ProtoBuf.IExtensible
+		#region Serialize
+		public byte[] Serialize(ProtoBuf.IExtensible message)
+		{
+			using (var mem = new MemoryStream())
+			{
+				SerializeTo(mem, message);
+				return mem.ToArray();
+			}
+		}
+
+		public byte[] Serialize(IEnumerable<ProtoBuf.IExtensible> message)
+		{
+			using (var mem = new MemoryStream())
+			{
+				foreach (var m in message)
+					SerializeTo(mem, m);
+				return mem.ToArray();
+			}
+		}
+
+		public void SerializeTo(Stream stream, ProtoBuf.IExtensible message)
 		{
 			Debug.Assert(ProtoBuf.Serializer.NonGeneric.CanSerialize(message.GetType()));
 
@@ -70,28 +89,28 @@ namespace GX.Net
 		#region Register
 		/// <summary>注册可被解析的消息类型</summary>
 		/// <typeparam name="T">可被解析的消息类型ID</typeparam>
-		/// <param name="messageType"><typeparamref name="T"/>对应的<see cref="ProtoBuf.IExtensible"/>类型</param>
-		private void Register<T>(MessageType messageType) where T : ProtoBuf.IExtensible
+		/// <param name="messageTypeID"><typeparamref name="T"/>对应的<see cref="ProtoBuf.IExtensible"/>类型</param>
+		public void Register<T>(MessageType messageTypeID) where T : ProtoBuf.IExtensible
 		{
 			// 反序列化预编译
 			ProtoBuf.Serializer.PrepareSerializer<T>();
 
 			// 注册
-			messageTypeTable[typeof(T)] = messageType;
+			messageTypeTable[typeof(T)] = messageTypeID;
 			//deserializeTable[messageType] = (stream) => ProtoBuf.Serializer.Deserialize<T>(stream);
-			deserializeTable[messageType] = (stream) => ProtoBuf.Serializer.DeserializeWithLengthPrefix<T>(stream, ProtoBuf.PrefixStyle.Base128);
+			deserializeTable[messageTypeID] = (stream) => ProtoBuf.Serializer.DeserializeWithLengthPrefix<T>(stream, ProtoBuf.PrefixStyle.Base128);
 		}
 
 		/// <summary>注册可被解析的消息类型</summary>
 		/// <param name="messageTypeID">可被解析的消息类型ID</param>
 		/// <param name="messageType"><paramref name="messageTypeID"/>对应的<see cref="ProtoBuf.IExtensible"/>类型</param>
 		/// <remarks>对泛型重载Register&lt;T&gt;的非泛型包装</remarks>
-		private void Register(MessageType messageTypeID, Type messageType)
+		public void Register(MessageType messageTypeID, Type messageType)
 		{
-			BindingFlags flags = BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.InvokeMethod;
-			MethodInfo method = this.GetType().GetMethod("Register", flags, null, new Type[] { typeof(MessageType) }, null);
-			method = method.MakeGenericMethod(messageType);
-			method.Invoke(this, new object[] { messageTypeID });
+			// Call Register<messageType>(messageTypeID) by refelect.
+			this.GetType().GetRuntimeMethod("Register", typeof(MessageType))
+				.MakeGenericMethod(messageType)
+				.Invoke(this, new object[] { messageTypeID });
 		}
 
 		/// <summary>
@@ -100,22 +119,27 @@ namespace GX.Net
 		/// <returns></returns>
 		private IEnumerable<KeyValuePair<MessageType, Type>> Parse()
 		{
-			var categoryIdType = typeof(Cmd.MSGTYPE.Cmd);
+			var categoryIdType = typeof(Cmd.Command);
+#if UNITY_METRO && !UNITY_EDITOR
+			var assembly = this.GetType().GetTypeInfo().Assembly;
+#else
 			var assembly = Assembly.GetExecutingAssembly();
-
+#endif
 			var ret = new Dictionary<MessageType, Type>();
 			foreach (var cName in Enum.GetNames(categoryIdType))
 			{
 				var cValue = Convert.ToByte(Enum.Parse(categoryIdType, cName));
-				var typeIdType = assembly.GetType(categoryIdType.Namespace + "." + cName + ".MSGTYPE+Param", true);
+				var typeIdType = assembly.GetType(categoryIdType.Namespace + "." + cName + "+Param");
 				foreach (var tName in Enum.GetNames(typeIdType))
 				{
 					var tValue = Convert.ToByte(Enum.Parse(typeIdType, tName));
-					var messageType = assembly.GetType(categoryIdType.Namespace + "." + cName + "." + tName, true);
+					var name = categoryIdType.Namespace + "." + tName;
+					var messageType = assembly.GetType(name);
+					if (messageType == null)
+						throw new FormatException("Can't find type by name: " + name);
 					ret.Add(new MessageType() { Cmd = cValue, Param = tValue }, messageType);
 				}
 			}
-
 			return ret;
 		}
 		#endregion
