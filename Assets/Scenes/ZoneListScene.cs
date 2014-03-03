@@ -58,6 +58,6 @@ public class ZoneListScene : MonoBehaviour
 	[Execute]
 	static void Execute(MessageBoxChatUserCmd_S cmd)
 	{
-		UnityEditor.EditorUtility.DisplayDialog(string.Empty, cmd.info, "OK");
+		MessageBox.Show(cmd.info);
 	}
 }

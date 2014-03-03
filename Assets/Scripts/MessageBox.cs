@@ -5,17 +5,13 @@ using GX;
 
 public class MessageBox : MonoBehaviour
 {
-	private string title;
-	private string message;
-
 	public UILabel messageBoxTitle;
 	public UILabel messageBoxText;
 	public GameObject messageBoxOK;
 	public GameObject messageBoxCancel;
 
-	void Start()
+	protected MessageBox()
 	{
-		Close();
 	}
 
 	public void Close(GameObject sender = null)
@@ -25,22 +21,29 @@ public class MessageBox : MonoBehaviour
 		UIEventListener.Get(this.messageBoxCancel).onClick = null;
 	}
 
-	public void Show(string title, string message, UIEventListener.VoidDelegate onOK = null, UIEventListener.VoidDelegate onCancel = null)
+	public static void Show(string message, UIEventListener.VoidDelegate onOK = null, UIEventListener.VoidDelegate onCancel = null)
 	{
-		this.gameObject.SetActive(true);
-
-		this.title = title ?? string.Empty;
-		this.message = message;
-		
-		onCancel = onCancel ?? Close;
-		onOK = onOK ?? onCancel;
-		UIEventListener.Get(this.messageBoxOK).onClick = onOK;
-		UIEventListener.Get(this.messageBoxCancel).onClick = onCancel;
+		Show(string.Empty, message, onOK, onCancel);
 	}
 
-	void Update()
+	public static void Show(string title, string message, UIEventListener.VoidDelegate onOK = null, UIEventListener.VoidDelegate onCancel = null)
 	{
-		this.messageBoxTitle.text = title ?? string.Empty;
-		this.messageBoxText.text = message ?? string.Empty;
+		var my = GameObject.FindObjectOfType<MessageBox>();
+		if (my == null)
+		{
+			my = (GameObject.Instantiate(Resources.Load("Prefabs/MessageBox")) as GameObject).GetComponent<MessageBox>();
+			my.transform.parent = GameObject.Find("UI Root").transform;
+			my.transform.localScale = Vector3.one;
+		}
+
+		my.gameObject.SetActive(true);
+
+		my.messageBoxTitle.text = title ?? string.Empty;
+		my.messageBoxText.text = message;
+		
+		onCancel = onCancel ?? my.Close;
+		onOK = onOK ?? onCancel;
+		UIEventListener.Get(my.messageBoxOK).onClick = onOK;
+		UIEventListener.Get(my.messageBoxCancel).onClick = onCancel;
 	}
 }
