@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class TestMainRole : MonoBehaviour {
+public class TestMainRole : MonoBehaviour
+{
 	public float speedMainRole = 5.0f;
 	public float distanceCameraToRole = 25.0f;
 	public float heightCameraLookAt = 0.5f;
@@ -10,24 +11,26 @@ public class TestMainRole : MonoBehaviour {
 	private Transform birthPos;
 
 	// Use this for initialization
-	void Start () {
+	void Start()
+	{
 	}
-	
+
 	// Update is called once per frame
-	void Update () {
-		if(mainRole == null || birthPos == null)
+	void Update()
+	{
+		if (mainRole == null || birthPos == null)
 		{
-			if(GameObject.Find("BirthPos"))
+			if (GameObject.Find("BirthPos"))
 				birthPos = GameObject.Find("BirthPos").transform;
-			if(GameObject.Find("MainRole"))
+			if (GameObject.Find("MainRole"))
 				mainRole = GameObject.Find("MainRole").transform;
-			if(mainRole && birthPos)
+			if (mainRole && birthPos)
 				mainRole.position = birthPos.position;
 		}
 
 
 		// 设置主角的移动
-		if(mainRole)
+		if (mainRole)
 		{
 			// keyboard
 			float v = Input.GetAxisRaw("Vertical");
@@ -39,7 +42,8 @@ public class TestMainRole : MonoBehaviour {
 			mainRole.position = oldPosition;
 
 			// 触摸屏
-			if (Input.touchCount > 0 && (Input.GetTouch(0).phase == TouchPhase.Began || Input.GetTouch(0).phase == TouchPhase.Moved)) {
+			if (Input.touchCount > 0 && (Input.GetTouch(0).phase == TouchPhase.Began || Input.GetTouch(0).phase == TouchPhase.Moved))
+			{
 				Collider terrain = GameObject.Find("Terrain2D").collider;
 				Ray ray = Camera.main.ScreenPointToRay(Input.GetTouch(0).position);
 				RaycastHit hit;
@@ -52,7 +56,8 @@ public class TestMainRole : MonoBehaviour {
 			}
 
 			// mouse
-			if (Input.GetMouseButton(0)) {				
+			if (Input.GetMouseButton(0))
+			{
 				Collider terrain = GameObject.Find("Terrain2D").collider;
 				Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 				RaycastHit hit;
@@ -63,10 +68,10 @@ public class TestMainRole : MonoBehaviour {
 					mainRole.position = mainRole.position + Vector3.Normalize(direction) * speedMainRole * Time.deltaTime;
 				}
 			}
-		}			
+		}
 
 		// 设置照相机位置
-		if(mainRole)
+		if (mainRole)
 		{
 			Vector3 targetCenter = mainRole.position;
 			targetCenter.y += heightCameraLookAt;

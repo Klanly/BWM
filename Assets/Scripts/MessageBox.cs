@@ -40,7 +40,7 @@ public class MessageBox : MonoBehaviour
 
 		my.messageBoxTitle.text = title ?? string.Empty;
 		my.messageBoxText.text = message;
-		
+
 		onCancel = onCancel ?? my.Close;
 		onOK = onOK ?? onCancel;
 		UIEventListener.Get(my.messageBoxOK).onClick = onOK;

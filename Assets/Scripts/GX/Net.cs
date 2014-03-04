@@ -60,6 +60,5 @@ public class Net : Singleton<Net>
 				}
 			}
 		}
-		throw new System.NotImplementedException();
 	}
 }
