@@ -35,7 +35,10 @@ namespace Cmd
       CharactorSelectSelectUserCmd_C = 5,
             
       [global::ProtoBuf.ProtoEnum(Name=@"CharactorDeleteSelectUserCmd_C", Value=6)]
-      CharactorDeleteSelectUserCmd_C = 6
+      CharactorDeleteSelectUserCmd_C = 6,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"CharactorUnregSelectUserCmd_C", Value=7)]
+      CharactorUnregSelectUserCmd_C = 7
     }
   
     private global::ProtoBuf.IExtension extensionObject;
@@ -179,6 +182,16 @@ namespace Cmd
       get { return _charid; }
       set { _charid = value; }
     }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CharactorUnregSelectUserCmd_C")]
+  public partial class CharactorUnregSelectUserCmd_C : global::ProtoBuf.IExtensible
+  {
+    public CharactorUnregSelectUserCmd_C() {}
+    
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }

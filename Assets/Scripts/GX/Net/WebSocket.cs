@@ -35,6 +35,8 @@ namespace GX.Net
 
 			public void Open(string url)
 			{
+				if (socket != null)
+					socket.Close(HTTP.WebSocket.CloseEventCode.CloseEventCodeNormalClosure, string.Empty);
 				queue = new Queue<byte[]>();
 				socket = new HTTP.WebSocket();
 				socket.OnBinaryMessageRecv += buf =>

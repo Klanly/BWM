@@ -1,0 +1,220 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>WebSocket4Net</name>
+    </assembly>
+    <members>
+        <member name="T:WebSocket4Net.JsonWebSocket">
+            <summary>
+            WebSocket client wrapping which serializes/deserializes objects by JSON
+            </summary>
+        </member>
+        <member name="M:WebSocket4Net.JsonWebSocket.On``1(System.String,System.Action{``0})">
+            <summary>
+            Registers the message handler.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="name">The message's name.</param>
+            <param name="executor">The message handler.</param>
+        </member>
+        <member name="M:WebSocket4Net.JsonWebSocket.On``1(System.String,System.Action{WebSocket4Net.JsonWebSocket,``0})">
+            <summary>
+            Registers the message handler.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="name">The name.</param>
+            <param name="executor">The executor.</param>
+        </member>
+        <member name="M:WebSocket4Net.JsonWebSocket.SerializeObject(System.Object)">
+            <summary>
+            Serializes the object.
+            </summary>
+            <param name="target">The target object is being serialized.</param>
+            <returns></returns>
+        </member>
+        <member name="M:WebSocket4Net.JsonWebSocket.DeserializeObject(System.String,System.Type)">
+            <summary>
+            Deserializes the json string to obeject.
+            </summary>
+            <param name="json">The json string.</param>
+            <param name="type">The type of the target object.</param>
+            <returns></returns>
+        </member>
+        <member name="M:WebSocket4Net.JsonWebSocket.Send(System.String,System.Object)">
+            <summary>
+            Sends object with specific name.
+            </summary>
+            <param name="name">The name.</param>
+            <param name="content">The object you want to send.</param>
+        </member>
+        <member name="M:WebSocket4Net.JsonWebSocket.Query``1(System.String,System.Object,System.Action{``0})">
+            <summary>
+            Queries server.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="name">The request name.</param>
+            <param name="content">The request content.</param>
+            <param name="executor">The response handler.</param>
+            <returns>return token of the request</returns>
+        </member>
+        <member name="M:WebSocket4Net.JsonWebSocket.Query``1(System.String,System.Object,System.Action{System.String,``0})">
+            <summary>
+            Queries server.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="name">The request name.</param>
+            <param name="content">The request content.</param>
+            <param name="executor">The response handler.</param>
+            <returns>return token of the request</returns>
+        </member>
+        <member name="M:WebSocket4Net.JsonWebSocket.Query``1(System.String,System.Object,System.Action{WebSocket4Net.JsonWebSocket,``0})">
+            <summary>
+            Queries server.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="name">The request name.</param>
+            <param name="content">The request content.</param>
+            <param name="executor">The response handler.</param>
+            <returns></returns>
+        </member>
+        <member name="M:WebSocket4Net.JsonWebSocket.Query``1(System.String,System.Object,System.Action{WebSocket4Net.JsonWebSocket,System.String,``0})">
+            <summary>
+            Queries server.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="name">The request name.</param>
+            <param name="content">The request content.</param>
+            <param name="executor">The response handler.</param>
+            <returns></returns>
+        </member>
+        <member name="M:WebSocket4Net.JsonWebSocket.Query``1(System.String,System.Object,System.Action{WebSocket4Net.JsonWebSocket,``0,System.Object},System.Object)">
+            <summary>
+            Queries the specified name.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="name">The name.</param>
+            <param name="content">The content.</param>
+            <param name="executor">The executor.</param>
+            <param name="state">The callback state.</param>
+            <returns></returns>
+        </member>
+        <member name="P:WebSocket4Net.JsonWebSocket.EnableAutoSendPing">
+            <summary>
+            Gets or sets a value indicating whether [enable auto send ping].
+            </summary>
+            <value>
+              <c>true</c> if [enable auto send ping]; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:WebSocket4Net.JsonWebSocket.AutoSendPingInterval">
+            <summary>
+            Gets or sets the interval of ping auto sending, in seconds.
+            </summary>
+            <value>
+            The auto send ping internal.
+            </value>
+        </member>
+        <member name="P:WebSocket4Net.JsonWebSocket.AllowUnstrustedCertificate">
+            <summary>
+            Gets or sets a value indicating whether [allow unstrusted certificate] when connect a secure websocket uri.
+            </summary>
+            <value>
+            	<c>true</c> if [allow unstrusted certificate]; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="M:WebSocket4Net.Protocol.ReaderBase.#ctor(WebSocket4Net.WebSocket)">
+            <summary>
+            Initializes a new instance of the <see cref="T:WebSocket4Net.Protocol.ReaderBase"/> class.
+            </summary>
+            <param name="websocket">The websocket.</param>
+        </member>
+        <member name="M:WebSocket4Net.Protocol.ReaderBase.#ctor(WebSocket4Net.Protocol.ReaderBase)">
+            <summary>
+            Initializes a new instance of the <see cref="T:WebSocket4Net.Protocol.ReaderBase"/> class.
+            </summary>
+            <param name="previousCommandReader">The previous command reader.</param>
+        </member>
+        <member name="M:WebSocket4Net.Protocol.ReaderBase.AddArraySegment(System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            Adds the array segment into BufferSegment.
+            </summary>
+            <param name="buffer">The buffer.</param>
+            <param name="offset">The offset.</param>
+            <param name="length">The length.</param>
+        </member>
+        <member name="M:WebSocket4Net.Protocol.ReaderBase.ClearBufferSegments">
+            <summary>
+            Clears the buffer segments.
+            </summary>
+        </member>
+        <member name="P:WebSocket4Net.Protocol.ReaderBase.BufferSegments">
+            <summary>
+            Gets the buffer segments which can help you parse your commands conviniently.
+            </summary>
+        </member>
+        <member name="P:WebSocket4Net.Protocol.ReaderBase.NextCommandReader">
+            <summary>
+            Gets or sets the next command reader.
+            </summary>
+            <value>
+            The next command reader.
+            </value>
+        </member>
+        <member name="T:WebSocket4Net.Protocol.DraftHybi00Processor">
+            <summary>
+            http://tools.ietf.org/html/draft-ietf-hybi-thewebsocketprotocol-00
+            </summary>
+        </member>
+        <member name="T:WebSocket4Net.Protocol.DraftHybi10Processor">
+            <summary>
+            http://tools.ietf.org/html/draft-ietf-hybi-thewebsocketprotocol-10
+            </summary>
+        </member>
+        <member name="T:WebSocket4Net.Protocol.Rfc6455Processor">
+            <summary>
+            http://tools.ietf.org/html/rfc6455
+            </summary>
+        </member>
+        <member name="P:WebSocket4Net.WebSocket.Version">
+            <summary>
+            Gets the version of the websocket protocol.
+            </summary>
+        </member>
+        <member name="P:WebSocket4Net.WebSocket.LastActiveTime">
+            <summary>
+            Gets the last active time of the websocket.
+            </summary>
+        </member>
+        <member name="P:WebSocket4Net.WebSocket.EnableAutoSendPing">
+            <summary>
+            Gets or sets a value indicating whether [enable auto send ping].
+            </summary>
+            <value>
+              <c>true</c> if [enable auto send ping]; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:WebSocket4Net.WebSocket.AutoSendPingInterval">
+            <summary>
+            Gets or sets the interval of ping auto sending, in seconds.
+            </summary>
+            <value>
+            The auto send ping internal.
+            </value>
+        </member>
+        <member name="P:WebSocket4Net.WebSocket.AllowUnstrustedCertificate">
+            <summary>
+            Gets or sets a value indicating whether [allow unstrusted certificate] when connect a secure websocket uri.
+            </summary>
+            <value>
+            	<c>true</c> if [allow unstrusted certificate]; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="M:WebSocket4Net.WebSocketCommandInfo.#ctor(WebSocket4Net.Protocol.WebSocketDataFrame)">
+            <summary>
+            Initializes a new instance of the <see cref="T:WebSocket4Net.WebSocketCommandInfo"/> class.
+            </summary>
+            <param name="frame">The frame.</param>
+            <param name="left">The left.</param>
+        </member>
+    </members>
+</doc>

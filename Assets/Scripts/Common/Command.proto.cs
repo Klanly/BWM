@@ -21,7 +21,10 @@ namespace Cmd
       Select = 2,
             
       [global::ProtoBuf.ProtoEnum(Name=@"Chat", Value=3)]
-      Chat = 3
+      Chat = 3,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"Map", Value=4)]
+      Map = 4
     }
   
 }
