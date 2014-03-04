@@ -10,6 +10,10 @@ public class MapNavEditor : Editor {
 	private SerializedProperty gridXNum;
 	private SerializedProperty gridZNum;
 	private SerializedProperty showGrids;
+	private SerializedProperty curTileType;
+	private SerializedProperty curProcessType;
+	private SerializedProperty radius;
+
 
 	void OnEnable()
 	{
@@ -18,48 +22,101 @@ public class MapNavEditor : Editor {
 		gridXNum = serializedObject.FindProperty("gridXNum");
 		gridZNum = serializedObject.FindProperty("gridZNum");
 		showGrids = serializedObject.FindProperty("showGrids");
+		curTileType = serializedObject.FindProperty("curTileType");
+		curProcessType = serializedObject.FindProperty("curProcessType");
+		radius = serializedObject.FindProperty("radius");
 	}
 
 	public override void OnInspectorGUI()
 	{
+		Tools.current = Tool.View;
+
 		EditorGUILayout.Space();
 		serializedObject.Update();
 
-		EditorGUILayout.PropertyField(gridWidth, new GUIContent("gridWidth"));
-		EditorGUILayout.PropertyField(gridHeight, new GUIContent("gridHeight"));
-		EditorGUILayout.PropertyField(gridXNum, new GUIContent("gridXNum"));
-		EditorGUILayout.PropertyField(gridZNum, new GUIContent("gridZNum"));
-		EditorGUILayout.PropertyField(showGrids, new GUIContent("showGrids"));
-		serializedObject.ApplyModifiedProperties();
-
+		EditorGUILayout.PropertyField(gridWidth, new GUIContent("格子宽(米)"));
+		EditorGUILayout.PropertyField(gridHeight, new GUIContent("格子高(米)"));
+		EditorGUILayout.PropertyField(gridXNum, new GUIContent("X轴格子数"));
+		EditorGUILayout.PropertyField(gridZNum, new GUIContent("Z轴格子数"));
 		if (GUILayout.Button("Update"))
 		{
 			((MapNav)target).Reset();
 		}
+
+		EditorGUILayout.PropertyField(showGrids, new GUIContent("显示格子"));
+		EditorGUILayout.PropertyField(curProcessType, new GUIContent("当前操作类型"));
+		EditorGUILayout.PropertyField(curTileType, new GUIContent("当前格子类型"));
+		EditorGUILayout.IntSlider(radius, 1, 16, "操作直径");
+
+		serializedObject.ApplyModifiedProperties();
 	}
 
-	public void OnSceneGUI () {
-		if(showGrids.boolValue)
+	public void OnSceneGUI () 
+	{
+		MapNav mapNav = (MapNav)target;
+		float y = 0.1f;
+		if((uint)mapNav.curProcessType != (uint)(MapNav.ProcessType.None))
 		{
-			int _gridZNum = gridZNum.intValue;
-			int _gridXNum = gridXNum.intValue;
-			float _gridWidth = gridWidth.floatValue;
-			float _gridHeight = gridHeight.floatValue;
-
-			/*
-			for(int z = 0; z < _gridZNum; ++z)
+			Plane groundPlane = new Plane(Vector3.up, Vector3.zero);
+			float rayDistance;
+			Ray ray = HandleUtility.GUIPointToWorldRay(Event.current.mousePosition);
+			if(groundPlane.Raycast(ray, out rayDistance))
 			{
-				for(int x = 0; x < _gridXNum; ++x)
+				Vector3 hitPoint = ray.GetPoint(rayDistance);
+				if(hitPoint.x >= 0.0f && hitPoint.x <= mapNav.gridXNum * mapNav.gridWidth
+				   && hitPoint.z >= 0.0f && hitPoint.z <= mapNav.gridZNum * mapNav.gridHeight)
 				{
-					Vector3[] verts = {new Vector3(x*_gridWidth, 0.5f, z*_gridHeight),
-						new Vector3(x*_gridWidth, 0.5f, (z+1)*_gridHeight),
-						new Vector3((x+1)*_gridWidth, 0.5f, (z+1)*_gridHeight),
-						new Vector3((x+1)*_gridWidth, 0.5f, z*_gridHeight)};
+					Handles.color = Color.white;
+					float _radius = mapNav.radius * 0.5f;
+					Handles.DrawPolyLine(new Vector3[]{new Vector3(hitPoint.x - _radius * mapNav.gridWidth, y, hitPoint.z - _radius * mapNav.gridHeight),
+						new Vector3(hitPoint.x - _radius * mapNav.gridWidth, y, hitPoint.z + _radius * mapNav.gridHeight),
+						new Vector3(hitPoint.x + _radius * mapNav.gridWidth, y, hitPoint.z + _radius * mapNav.gridHeight),
+						new Vector3(hitPoint.x + _radius * mapNav.gridWidth, y, hitPoint.z - _radius * mapNav.gridHeight),
+						new Vector3(hitPoint.x - _radius * mapNav.gridWidth, y, hitPoint.z - _radius * mapNav.gridHeight)});
 
-					Handles.DrawSolidRectangleWithOutline(verts, new Color(1,1,1,0.2f), new Color(0,0,0,1));
+					if(Event.current.type == EventType.MouseDown || Event.current.type == EventType.MouseDrag)
+					{
+						int x = mapNav.getX(hitPoint);
+						int z = mapNav.getZ(hitPoint);
+						for(int _z = z - Mathf.RoundToInt(_radius); _z <= z + Mathf.RoundToInt(_radius); ++_z)
+						{
+							if(_z < 0) continue;
+							if(_z > mapNav.gridZNum-1) continue;
+							for(int _x = x - Mathf.RoundToInt(_radius); _x <= x + Mathf.RoundToInt(_radius); ++_x)
+							{
+								if(_x < 0) continue;
+								if(_x > mapNav.gridXNum-1) continue;
+								
+								Vector3 position = mapNav.getPosition(_x,_z);
+								if(Mathf.Abs(position.x - hitPoint.x) <= _radius * mapNav.gridWidth 
+								   && Mathf.Abs(position.z - hitPoint.z) <= _radius * mapNav.gridHeight)
+								{
+									switch((uint)curProcessType.intValue)
+									{
+									case (uint)MapNav.ProcessType.Set:
+										mapNav[_x,_z] |= (uint)mapNav.curTileType;
+										break;
+									case (uint)MapNav.ProcessType.Clear:
+										mapNav[_x,_z] &= ~(uint)mapNav.curTileType;
+										break;
+									}
+								}
+							}
+						}
+					}
 				}
 			}
-			*/
+
+			HandleUtility.Repaint();
+			switch(Event.current.type)
+			{
+			case EventType.MouseUp:
+			case EventType.MouseDown:
+			case EventType.MouseDrag:
+			case EventType.MouseMove:
+				Event.current.Use();
+				break;
+			}
 		}
 	}
 }

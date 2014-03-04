@@ -192,5 +192,39 @@ public static class Extensions
 		return mb.StartCoroutine(new ActionToEnumerator(action).GetEnumerator());
 	}
 
+	public static IEnumerable<T> GetComponentsDescendant<T>(this GameObject go) where T : Component
+	{
+		if (go == null)
+			return Enumerable.Empty<T>();
+		return GetComponentsDescendant<T>(go.transform);
+	}
+
+	public static IEnumerable<T> GetComponentsDescendant<T>(this Component c) where T : Component
+	{
+		if (c == null)
+			return Enumerable.Empty<T>();
+		return GetComponentsDescendant<T>(c.transform);
+	}
+
+	/// <summary>
+	/// ref: http://answers.unity3d.com/questions/555101/possible-to-make-gameobjectgetcomponentinchildren.html
+	/// </summary>
+	/// <typeparam name="T"></typeparam>
+	/// <param name="transform"></param>
+	/// <returns></returns>
+	public static IEnumerable<T> GetComponentsDescendant<T>(this Transform transform) where T : Component
+	{
+		if (transform == null)
+			yield break;
+		foreach(var c in transform.GetComponents<T>())
+			yield return c;
+
+		for(int i = 0; i < transform.childCount; i++)
+		{
+			foreach(var c in GetComponentsDescendant<T>(transform.GetChild(i)))
+				yield return c;
+		}
+	}
+
 	#endregion
 }

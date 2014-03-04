@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
 using GX.Net;
-using System;
 using Cmd;
 
 public class LoginScene : MonoBehaviour
@@ -14,9 +13,9 @@ public class LoginScene : MonoBehaviour
 	// Use this for initialization
 	void Start()
 	{
-		Net.Instance.Open("ws://192.168.85.71:7000/shen/user");
+		Net.Instance.Open("ws://112.65.197.72:7000/shen/user");
 
-		accountInput.value = Math.Abs(SystemInfo.deviceUniqueIdentifier.GetHashCode()).ToString();
+		accountInput.value = System.Math.Abs(SystemInfo.deviceUniqueIdentifier.GetHashCode()).ToString();
 
 		UIEventListener.Get(playButton.gameObject).onClick = go =>
 		{
@@ -58,5 +57,6 @@ public class LoginScene : MonoBehaviour
 	[Execute]
 	static void Execute(UserLoginReturnFailLoginUserCmd_S cmd)
 	{
+		MessageBox.Show(cmd.retcode.ToString(), cmd.desc);
 	}
 }

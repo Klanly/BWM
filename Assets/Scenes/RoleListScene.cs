@@ -7,16 +7,18 @@ public class RoleListScene : MonoBehaviour
 {
 	public UIGrid roleList;
 	public GameObject roleItem;
-	public GameObject roleCreate;
+	public UIButton roleCreate;
 
 	// Use this for initialization
 	void Start()
 	{
-		UIEventListener.Get(roleCreate).onClick = go => Application.LoadLevel("RoleCreateScene");
+		UIEventListener.Get(roleCreate.gameObject).onClick = go => Application.LoadLevel("RoleCreateScene");
 	}
 
 	private void ShowRoleList(CharactorListReturnSelectUserCmd_S cmd)
 	{
+		roleCreate.isEnabled = cmd.list.Count < 5;
+
 		foreach (Transform t in roleList.transform)
 			DestroyObject(t.gameObject);
 		roleList.Reposition();
