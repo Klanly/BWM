@@ -30,18 +30,13 @@ public class MapNav : MonoBehaviour
 	/// <summary>
 	/// 索引方式：[z * gridXNum + x]
 	/// </summary>
-	public TileType[] grids; 
+	public TileType[] grids;
 	#endregion
 
-	public bool showGrids { get; set; }
-
 	/// <summary>
-	/// Creates a new grid of tile nodes of x by y count
+	/// 显示格子
 	/// </summary>
-	public void Reset()
-	{
-		grids = new TileType[gridZNum * gridXNum];
-	}
+	public bool ShowGrids { get; set; }
 
 	/// <summary>
 	/// get a grid at index of grids
@@ -67,72 +62,78 @@ public class MapNav : MonoBehaviour
 		}
 	}
 
-	public int getX(Vector3 position)
+	/// <summary>
+	/// Creates a new grid of tile nodes of x by y count
+	/// </summary>
+	public void Reset()
 	{
-		return (int)(position.x / gridWidth);
+		grids = new TileType[gridZNum * gridXNum];
 	}
 
-	public int getZ(Vector3 position)
+	public int GetGridX(Vector3 worldPosition)
 	{
-		return (int)(position.z / gridHeight);
+		return (int)(worldPosition.x / gridWidth);
 	}
 
-	public Vector3 getPosition(int x, int z)
+	public int GetGridZ(Vector3 worldPosition)
 	{
-		if (x < 0) x = 0;
-		if (x > gridXNum - 1) x = gridXNum - 1;
-		if (z < 0) z = 0;
-		if (z > gridZNum - 1) z = gridZNum - 1;
-		return new Vector3((x + 0.5f) * gridWidth, 0.0f, (z + 0.5f) * gridHeight);
+		return (int)(worldPosition.z / gridHeight);
+	}
+
+	public Vector3 GetWorldPosition(int gridX, int gridZ)
+	{
+		return new Vector3(
+			(Mathf.Clamp(gridX, 0, gridXNum - 1) + 0.5f) * gridWidth,
+			0.0f,
+			(Mathf.Clamp(gridZ, 0, gridZNum - 1) + 0.5f) * gridHeight);
 	}
 
 	void OnDrawGizmos()
 	{
-		if (showGrids)
+		if (ShowGrids == false)
+			return;
+		// 格子颜色
+		var tileColor = new Color[]
 		{
-			// 格子颜色
-			var tileColor = new Color[]
-			{
-				Color.green,	// walk
-				Color.cyan,		// water
-				// etc
-				// etc
-			};
+			Color.green,	// walk
+			Color.cyan,		// water
+			// etc
+			// etc
+		};
 
-			float y = 0.1f;
-			for (int z = 0; z < gridZNum; ++z)
-			{
-				Gizmos.color = new Color(0, 0, 0, 0.5F);
-				Gizmos.DrawLine(new Vector3(0, y, z * gridHeight), new Vector3(gridXNum * gridWidth, y, z * gridHeight));
-			}
+		float y = 0.1f;
+		for (int z = 0; z < gridZNum; ++z)
+		{
+			Gizmos.color = new Color(0, 0, 0, 0.5F);
+			Gizmos.DrawLine(new Vector3(0, y, z * gridHeight), new Vector3(gridXNum * gridWidth, y, z * gridHeight));
+		}
 
+		for (int x = 0; x < gridXNum; ++x)
+		{
+			Gizmos.color = new Color(0, 0, 0, 0.5F);
+			Gizmos.DrawLine(new Vector3(x * gridWidth, y, 0), new Vector3(x * gridWidth, y, gridZNum * gridHeight));
+		}
+
+		for (int z = 0; z < gridZNum; ++z)
+		{
 			for (int x = 0; x < gridXNum; ++x)
 			{
-				Gizmos.color = new Color(0, 0, 0, 0.5F);
-				Gizmos.DrawLine(new Vector3(x * gridWidth, y, 0), new Vector3(x * gridWidth, y, gridZNum * gridHeight));
-			}
+				var flag = this[x, z];
+				if (flag == TileType.None)
+					Gizmos.color = new Color(0.5f, 0.0f, 0.0f, 0.5f);
+				else
+					Gizmos.color = new Color(0.5f, 0.5f, 0.5f, 0.5f);
 
-			for (int z = 0; z < gridZNum; ++z)
-			{
-				for (int x = 0; x < gridXNum; ++x)
+				Vector3 center = new Vector3(x * gridWidth + gridWidth * 0.5f, y, z * gridHeight + gridHeight * 0.5f);
+				Vector3 size = new Vector3(gridWidth, 0, gridHeight);
+				Gizmos.DrawCube(center, size);
+
+				if ((flag & TileType.Walk) != 0)
 				{
-					var flag = this[x, z];
-					if (flag == TileType.None)
-						Gizmos.color = new Color(0.5f, 0.0f, 0.0f, 0.5f);
-					else
-						Gizmos.color = new Color(0.5f, 0.5f, 0.5f, 0.5f);
-
-					Vector3 center = new Vector3(x * gridWidth + gridWidth * 0.5f, y, z * gridHeight + gridHeight * 0.5f);
-					Vector3 size = new Vector3(gridWidth, 0, gridHeight);
+					Gizmos.color = tileColor[0];
+					center = new Vector3(x * gridWidth + gridWidth * 0.5f - gridWidth * 0.25f, y, z * gridHeight + gridHeight * 0.5f - gridHeight * 0.25f);
+					size = new Vector3(gridWidth * 0.25f, 0, gridHeight * 0.25f);
 					Gizmos.DrawCube(center, size);
-
-					if ((flag & TileType.Walk) != 0)
-					{
-						Gizmos.color = tileColor[0];
-						center = new Vector3(x * gridWidth + gridWidth * 0.5f - gridWidth * 0.25f, y, z * gridHeight + gridHeight * 0.5f - gridHeight * 0.25f);
-						size = new Vector3(gridWidth * 0.25f, 0, gridHeight * 0.25f);
-						Gizmos.DrawCube(center, size);
-					}
 				}
 			}
 		}

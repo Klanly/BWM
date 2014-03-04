@@ -73,8 +73,8 @@ public class MapNavEditor : Editor
 		EditorGUILayout.Space();
 		serializedObject.Update();
 
-		Target.showGrids = EditorGUILayout.BeginToggleGroup("显示格子", Target.showGrids);
-		if (Target.showGrids)
+		Target.ShowGrids = EditorGUILayout.BeginToggleGroup("显示格子", Target.ShowGrids);
+		if (Target.ShowGrids)
 		{
 			EditorGUILayout.PropertyField(gridWidth, new GUIContent("格子宽(米)"));
 			EditorGUILayout.PropertyField(gridHeight, new GUIContent("格子高(米)"));
@@ -125,8 +125,8 @@ public class MapNavEditor : Editor
 
 				if (Event.current.type == EventType.MouseDown || Event.current.type == EventType.MouseDrag)
 				{
-					int x = mapNav.getX(hitPoint);
-					int z = mapNav.getZ(hitPoint);
+					int x = mapNav.GetGridX(hitPoint);
+					int z = mapNav.GetGridZ(hitPoint);
 					for (int _z = z - Mathf.RoundToInt(_radius); _z <= z + Mathf.RoundToInt(_radius); ++_z)
 					{
 						if (_z < 0) continue;
@@ -136,7 +136,7 @@ public class MapNavEditor : Editor
 							if (_x < 0) continue;
 							if (_x > mapNav.gridXNum - 1) continue;
 
-							Vector3 position = mapNav.getPosition(_x, _z);
+							Vector3 position = mapNav.GetWorldPosition(_x, _z);
 							if (Mathf.Abs(position.x - hitPoint.x) <= _radius * mapNav.gridWidth
 							   && Mathf.Abs(position.z - hitPoint.z) <= _radius * mapNav.gridHeight)
 							{
