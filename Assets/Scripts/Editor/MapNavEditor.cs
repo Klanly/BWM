@@ -5,13 +5,37 @@ using System.Collections;
 [CustomEditor(typeof(MapNav))]
 public class MapNavEditor : Editor
 {
+	/// <summary>
+	/// 格子宽(米)
+	/// </summary>
 	private SerializedProperty gridWidth;
+	/// <summary>
+	/// 格子高(米)
+	/// </summary>
 	private SerializedProperty gridHeight;
+	/// <summary>
+	/// X轴格子数
+	/// </summary>
 	private SerializedProperty gridXNum;
+	/// <summary>
+	/// Z轴格子数
+	/// </summary>
 	private SerializedProperty gridZNum;
+	/// <summary>
+	/// 显示格子
+	/// </summary>
 	private SerializedProperty showGrids;
+	/// <summary>
+	/// 当前操作类型
+	/// </summary>
 	private SerializedProperty curTileType;
+	/// <summary>
+	/// 当前格子类型
+	/// </summary>
 	private SerializedProperty curProcessType;
+	/// <summary>
+	/// 操作直径
+	/// </summary>
 	private SerializedProperty radius;
 
 	public MapNav Target { get { return (MapNav)target; } }

@@ -5,15 +5,15 @@ using System.Collections.Generic;
 [ExecuteInEditMode]
 public class MapNav : MonoBehaviour
 {
-
 	public float gridWidth = 1.0f;
 	public float gridHeight = 1.0f;
 	public int gridXNum = 0;
 	public int gridZNum = 0;
 	public bool showGrids = false;
-
-	[SerializeField]
-	public List<TileType> grids = new List<TileType>();
+	/// <summary>
+	/// 索引方式：[z * gridXNum + x]
+	/// </summary>
+	public TileType[] grids;
 
 	/// <summary>
 	/// 格子类型，0表示都不能走，每位0表示不可走，1表示可以走
@@ -21,6 +21,7 @@ public class MapNav : MonoBehaviour
 	[System.Flags]
 	public enum TileType
 	{
+		None = 0,
 		/// <summary>
 		/// 可以行走
 		/// </summary>
@@ -79,46 +80,31 @@ public class MapNav : MonoBehaviour
 	/// </summary>
 	public void Reset()
 	{
-		grids.Clear();
-		grids.TrimExcess();
-		int num = gridZNum * gridXNum;
-		for (int i = 0; i < num; ++i)
-			grids.Add(0);
+		grids = new TileType[gridZNum * gridXNum];
 	}
 
 	/// <summary>
 	/// get a grid at index of grids
 	/// </summary>
-	/// <param name="_x"></param>
-	/// <param name="_z"></param>
+	/// <param name="x"></param>
+	/// <param name="z"></param>
 	/// <returns></returns>
-	public TileType this[int _x, int _z]
+	public TileType this[int x, int z]
 	{
 		get
 		{
-			if (grids.Count == 0) return 0;
-			if (_z < 0 && _z >= gridZNum) return 0;
-			if (_x < 0 && _x >= gridXNum) return 0;
-			return grids[_z * gridXNum + _x];
+			var index = z * gridXNum + x;
+			if (grids == null || index < 0 || index > grids.Length)
+				return TileType.None;
+			return grids[index];
 		}
 
 		set
 		{
-			if (grids.Count == 0) return;
-			if (_z < 0 && _z >= gridZNum) return;
-			if (_x < 0 && _x >= gridXNum) return;
-			grids[_z * gridXNum + _x] = value;
-		}
-	}
-
-	/// <summary>
-	/// shortcut to getting the length of grids.
-	/// </summary>
-	public int Length
-	{
-		get
-		{
-			return grids.Count;
+			var index = z * gridXNum + x;
+			if (grids == null || index < 0 || index > grids.Length)
+				return;
+			grids[index] = value;
 		}
 	}
 
@@ -163,7 +149,7 @@ public class MapNav : MonoBehaviour
 				for (int x = 0; x < gridXNum; ++x)
 				{
 					var flag = this[x, z];
-					if (flag == 0)
+					if (flag == TileType.None)
 						Gizmos.color = new Color(0.5f, 0.0f, 0.0f, 0.5f);
 					else
 						Gizmos.color = new Color(0.5f, 0.5f, 0.5f, 0.5f);
@@ -172,7 +158,7 @@ public class MapNav : MonoBehaviour
 					Vector3 size = new Vector3(gridWidth, 0, gridHeight);
 					Gizmos.DrawCube(center, size);
 
-					if ((flag & TileType.Walk) > 0)
+					if ((flag & TileType.Walk) != 0)
 					{
 						Gizmos.color = TileColor[0];
 						center = new Vector3(x * gridWidth + gridWidth * 0.5f - gridWidth * 0.25f, y, z * gridHeight + gridHeight * 0.5f - gridHeight * 0.25f);
