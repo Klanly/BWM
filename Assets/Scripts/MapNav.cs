@@ -13,7 +13,7 @@ public class MapNav : MonoBehaviour
 	public bool showGrids = false;
 
 	[SerializeField]
-	public List<uint> grids = new List<uint>();
+	public List<TileType> grids = new List<TileType>();
 
 	/// <summary>
 	/// 格子类型，0表示都不能走，每位0表示不可走，1表示可以走
@@ -92,7 +92,7 @@ public class MapNav : MonoBehaviour
 	/// <param name="_x"></param>
 	/// <param name="_z"></param>
 	/// <returns></returns>
-	public uint this[int _x, int _z]
+	public TileType this[int _x, int _z]
 	{
 		get
 		{
@@ -162,7 +162,7 @@ public class MapNav : MonoBehaviour
 			{
 				for (int x = 0; x < gridXNum; ++x)
 				{
-					uint flag = this[x, z];
+					var flag = this[x, z];
 					if (flag == 0)
 						Gizmos.color = new Color(0.5f, 0.0f, 0.0f, 0.5f);
 					else
@@ -172,7 +172,7 @@ public class MapNav : MonoBehaviour
 					Vector3 size = new Vector3(gridWidth, 0, gridHeight);
 					Gizmos.DrawCube(center, size);
 
-					if ((flag & (uint)TileType.Walk) > 0)
+					if ((flag & TileType.Walk) > 0)
 					{
 						Gizmos.color = TileColor[0];
 						center = new Vector3(x * gridWidth + gridWidth * 0.5f - gridWidth * 0.25f, y, z * gridHeight + gridHeight * 0.5f - gridHeight * 0.25f);

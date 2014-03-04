@@ -101,10 +101,10 @@ public class MapNavEditor : Editor
 									case MapNav.ProcessType.None:
 										break;
 									case MapNav.ProcessType.Set:
-										mapNav[_x, _z] |= (uint)mapNav.curTileType;
+										mapNav[_x, _z] |= mapNav.curTileType;
 										break;
 									case MapNav.ProcessType.Clear:
-										mapNav[_x, _z] &= ~(uint)mapNav.curTileType;
+										mapNav[_x, _z] &= ~mapNav.curTileType;
 										break;
 									default:
 										throw new System.NotImplementedException();
