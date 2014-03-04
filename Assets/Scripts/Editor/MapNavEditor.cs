@@ -5,6 +5,7 @@ using System.Collections;
 [CustomEditor(typeof(MapNav))]
 public class MapNavEditor : Editor
 {
+	#region SerializedProperty
 	/// <summary>
 	/// 格子宽(米)
 	/// </summary>
@@ -20,25 +21,42 @@ public class MapNavEditor : Editor
 	/// <summary>
 	/// Z轴格子数
 	/// </summary>
-	private SerializedProperty gridZNum;
+	private SerializedProperty gridZNum; 
+	#endregion
+
 	/// <summary>
-	/// 显示格子
+	/// 当前修改的阻挡标志
 	/// </summary>
-	private SerializedProperty showGrids;
+	private MapNav.TileType curTileType = MapNav.TileType.Walk;
 	/// <summary>
 	/// 当前操作类型
 	/// </summary>
-	private SerializedProperty curTileType;
-	/// <summary>
-	/// 当前格子类型
-	/// </summary>
-	private SerializedProperty curProcessType;
+	private ProcessType curProcessType = ProcessType.None;
 	/// <summary>
 	/// 操作直径
 	/// </summary>
-	private SerializedProperty radius;
+	private int radius = 1;
 
 	public MapNav Target { get { return (MapNav)target; } }
+
+	/// <summary>
+	/// 操作类型
+	/// </summary>
+	public enum ProcessType
+	{
+		/// <summary>
+		/// 没有操作
+		/// </summary>
+		None = 0,
+		/// <summary>
+		/// 设置
+		/// </summary>
+		Set = 1,
+		/// <summary>
+		/// 清空
+		/// </summary>
+		Clear = 2,
+	}
 
 	void OnEnable()
 	{
@@ -46,10 +64,6 @@ public class MapNavEditor : Editor
 		gridHeight = serializedObject.FindProperty("gridHeight");
 		gridXNum = serializedObject.FindProperty("gridXNum");
 		gridZNum = serializedObject.FindProperty("gridZNum");
-		showGrids = serializedObject.FindProperty("showGrids");
-		curTileType = serializedObject.FindProperty("curTileType");
-		curProcessType = serializedObject.FindProperty("curProcessType");
-		radius = serializedObject.FindProperty("radius");
 	}
 
 	public override void OnInspectorGUI()
@@ -59,19 +73,25 @@ public class MapNavEditor : Editor
 		EditorGUILayout.Space();
 		serializedObject.Update();
 
-		EditorGUILayout.PropertyField(gridWidth, new GUIContent("格子宽(米)"));
-		EditorGUILayout.PropertyField(gridHeight, new GUIContent("格子高(米)"));
-		EditorGUILayout.PropertyField(gridXNum, new GUIContent("X轴格子数"));
-		EditorGUILayout.PropertyField(gridZNum, new GUIContent("Z轴格子数"));
-		if (GUILayout.Button("Update"))
+		Target.showGrids = EditorGUILayout.BeginToggleGroup("显示格子", Target.showGrids);
+		if (Target.showGrids)
 		{
-			Target.Reset();
-		}
+			EditorGUILayout.PropertyField(gridWidth, new GUIContent("格子宽(米)"));
+			EditorGUILayout.PropertyField(gridHeight, new GUIContent("格子高(米)"));
+			EditorGUILayout.PropertyField(gridXNum, new GUIContent("X轴格子数"));
+			EditorGUILayout.PropertyField(gridZNum, new GUIContent("Z轴格子数"));
+			if (GUILayout.Button("Update"))
+			{
+				Target.Reset();
+			}
 
-		EditorGUILayout.PropertyField(showGrids, new GUIContent("显示格子"));
-		EditorGUILayout.PropertyField(curProcessType, new GUIContent("当前操作类型"));
-		EditorGUILayout.PropertyField(curTileType, new GUIContent("当前格子类型"));
-		EditorGUILayout.IntSlider(radius, 1, 16, "操作直径");
+			this.curProcessType = (ProcessType)EditorGUILayout.EnumPopup("当前操作类型", this.curProcessType);
+			this.curTileType = (MapNav.TileType)EditorGUILayout.EnumPopup("当前格子类型", this.curTileType);
+			this.radius = EditorGUILayout.IntSlider("操作直径", this.radius, 1, 16);
+
+			EditorUtility.SetDirty(this.target);
+		}
+		EditorGUILayout.EndToggleGroup();
 
 		serializedObject.ApplyModifiedProperties();
 	}
@@ -80,7 +100,7 @@ public class MapNavEditor : Editor
 	{
 		MapNav mapNav = Target;
 		float y = 0.1f;
-		if (mapNav.curProcessType == MapNav.ProcessType.None)
+		if (curProcessType == ProcessType.None)
 			return;
 
 		Plane groundPlane = new Plane(Vector3.up, Vector3.zero);
@@ -93,7 +113,7 @@ public class MapNavEditor : Editor
 			   && hitPoint.z >= 0.0f && hitPoint.z <= mapNav.gridZNum * mapNav.gridHeight)
 			{
 				Handles.color = Color.white;
-				float _radius = mapNav.radius * 0.5f;
+				float _radius = radius * 0.5f;
 				Handles.DrawPolyLine(new Vector3[]
 				{
 					new Vector3(hitPoint.x - _radius * mapNav.gridWidth, y, hitPoint.z - _radius * mapNav.gridHeight),
@@ -120,15 +140,15 @@ public class MapNavEditor : Editor
 							if (Mathf.Abs(position.x - hitPoint.x) <= _radius * mapNav.gridWidth
 							   && Mathf.Abs(position.z - hitPoint.z) <= _radius * mapNav.gridHeight)
 							{
-								switch ((MapNav.ProcessType)curProcessType.intValue)
+								switch (curProcessType)
 								{
-									case MapNav.ProcessType.None:
+									case ProcessType.None:
 										break;
-									case MapNav.ProcessType.Set:
-										mapNav[_x, _z] |= mapNav.curTileType;
+									case ProcessType.Set:
+										mapNav[_x, _z] |= curTileType;
 										break;
-									case MapNav.ProcessType.Clear:
-										mapNav[_x, _z] &= ~mapNav.curTileType;
+									case ProcessType.Clear:
+										mapNav[_x, _z] &= ~curTileType;
 										break;
 									default:
 										throw new System.NotImplementedException();

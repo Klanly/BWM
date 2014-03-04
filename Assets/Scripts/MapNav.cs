@@ -5,16 +5,6 @@ using System.Collections.Generic;
 [ExecuteInEditMode]
 public class MapNav : MonoBehaviour
 {
-	public float gridWidth = 1.0f;
-	public float gridHeight = 1.0f;
-	public int gridXNum = 0;
-	public int gridZNum = 0;
-	public bool showGrids = false;
-	/// <summary>
-	/// 索引方式：[z * gridXNum + x]
-	/// </summary>
-	public TileType[] grids;
-
 	/// <summary>
 	/// 格子类型，0表示都不能走，每位0表示不可走，1表示可以走
 	/// </summary>
@@ -31,49 +21,19 @@ public class MapNav : MonoBehaviour
 		/// </summary>
 		Water = 0x2,
 	}
-	/// <summary>
-	/// 当前修改的阻挡标志
-	/// </summary>
-	public TileType curTileType = TileType.Walk;
 
+	#region SerializedProperty
+	public float gridWidth = 1.0f;
+	public float gridHeight = 1.0f;
+	public int gridXNum = 0;
+	public int gridZNum = 0;
 	/// <summary>
-	/// 格子颜色
+	/// 索引方式：[z * gridXNum + x]
 	/// </summary>
-	public static Color[] TileColor = 
-	{
-		Color.green,	// walk
-		Color.cyan,		// water
-		// etc
-		// etc
-	};
+	public TileType[] grids; 
+	#endregion
 
-	/// <summary>
-	/// 操作类型
-	/// </summary>
-	public enum ProcessType
-	{
-		/// <summary>
-		/// 没有操作
-		/// </summary>
-		None = 0,
-		/// <summary>
-		/// 设置
-		/// </summary>
-		Set = 1,
-		/// <summary>
-		/// 清空
-		/// </summary>
-		Clear = 2,
-	}
-	/// <summary>
-	/// 当前操作类型
-	/// </summary>
-	public ProcessType curProcessType = ProcessType.None;
-	/// <summary>
-	/// 操作半径
-	/// </summary>
-	public int radius = 1;
-
+	public bool showGrids { get; set; }
 
 	/// <summary>
 	/// Creates a new grid of tile nodes of x by y count
@@ -98,7 +58,6 @@ public class MapNav : MonoBehaviour
 				return TileType.None;
 			return grids[index];
 		}
-
 		set
 		{
 			var index = z * gridXNum + x;
@@ -131,6 +90,15 @@ public class MapNav : MonoBehaviour
 	{
 		if (showGrids)
 		{
+			// 格子颜色
+			var tileColor = new Color[]
+			{
+				Color.green,	// walk
+				Color.cyan,		// water
+				// etc
+				// etc
+			};
+
 			float y = 0.1f;
 			for (int z = 0; z < gridZNum; ++z)
 			{
@@ -160,7 +128,7 @@ public class MapNav : MonoBehaviour
 
 					if ((flag & TileType.Walk) != 0)
 					{
-						Gizmos.color = TileColor[0];
+						Gizmos.color = tileColor[0];
 						center = new Vector3(x * gridWidth + gridWidth * 0.5f - gridWidth * 0.25f, y, z * gridHeight + gridHeight * 0.5f - gridHeight * 0.25f);
 						size = new Vector3(gridWidth * 0.25f, 0, gridHeight * 0.25f);
 						Gizmos.DrawCube(center, size);
