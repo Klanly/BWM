@@ -3,8 +3,8 @@ using UnityEditor;
 using System.Collections;
 
 [CustomEditor(typeof(MapNav))]
-public class MapNavEditor : Editor {
-
+public class MapNavEditor : Editor
+{
 	private SerializedProperty gridWidth;
 	private SerializedProperty gridHeight;
 	private SerializedProperty gridXNum;
@@ -14,6 +14,7 @@ public class MapNavEditor : Editor {
 	private SerializedProperty curProcessType;
 	private SerializedProperty radius;
 
+	public MapNav Target { get { return (MapNav)target; } }
 
 	void OnEnable()
 	{
@@ -40,7 +41,7 @@ public class MapNavEditor : Editor {
 		EditorGUILayout.PropertyField(gridZNum, new GUIContent("Z轴格子数"));
 		if (GUILayout.Button("Update"))
 		{
-			((MapNav)target).Reset();
+			Target.Reset();
 		}
 
 		EditorGUILayout.PropertyField(showGrids, new GUIContent("显示格子"));
@@ -51,72 +52,79 @@ public class MapNavEditor : Editor {
 		serializedObject.ApplyModifiedProperties();
 	}
 
-	public void OnSceneGUI () 
+	public void OnSceneGUI()
 	{
-		MapNav mapNav = (MapNav)target;
+		MapNav mapNav = Target;
 		float y = 0.1f;
-		if((uint)mapNav.curProcessType != (uint)(MapNav.ProcessType.None))
-		{
-			Plane groundPlane = new Plane(Vector3.up, Vector3.zero);
-			float rayDistance;
-			Ray ray = HandleUtility.GUIPointToWorldRay(Event.current.mousePosition);
-			if(groundPlane.Raycast(ray, out rayDistance))
-			{
-				Vector3 hitPoint = ray.GetPoint(rayDistance);
-				if(hitPoint.x >= 0.0f && hitPoint.x <= mapNav.gridXNum * mapNav.gridWidth
-				   && hitPoint.z >= 0.0f && hitPoint.z <= mapNav.gridZNum * mapNav.gridHeight)
-				{
-					Handles.color = Color.white;
-					float _radius = mapNav.radius * 0.5f;
-					Handles.DrawPolyLine(new Vector3[]{new Vector3(hitPoint.x - _radius * mapNav.gridWidth, y, hitPoint.z - _radius * mapNav.gridHeight),
-						new Vector3(hitPoint.x - _radius * mapNav.gridWidth, y, hitPoint.z + _radius * mapNav.gridHeight),
-						new Vector3(hitPoint.x + _radius * mapNav.gridWidth, y, hitPoint.z + _radius * mapNav.gridHeight),
-						new Vector3(hitPoint.x + _radius * mapNav.gridWidth, y, hitPoint.z - _radius * mapNav.gridHeight),
-						new Vector3(hitPoint.x - _radius * mapNav.gridWidth, y, hitPoint.z - _radius * mapNav.gridHeight)});
+		if (mapNav.curProcessType == MapNav.ProcessType.None)
+			return;
 
-					if(Event.current.type == EventType.MouseDown || Event.current.type == EventType.MouseDrag)
+		Plane groundPlane = new Plane(Vector3.up, Vector3.zero);
+		float rayDistance;
+		Ray ray = HandleUtility.GUIPointToWorldRay(Event.current.mousePosition);
+		if (groundPlane.Raycast(ray, out rayDistance))
+		{
+			Vector3 hitPoint = ray.GetPoint(rayDistance);
+			if (hitPoint.x >= 0.0f && hitPoint.x <= mapNav.gridXNum * mapNav.gridWidth
+			   && hitPoint.z >= 0.0f && hitPoint.z <= mapNav.gridZNum * mapNav.gridHeight)
+			{
+				Handles.color = Color.white;
+				float _radius = mapNav.radius * 0.5f;
+				Handles.DrawPolyLine(new Vector3[]
+				{
+					new Vector3(hitPoint.x - _radius * mapNav.gridWidth, y, hitPoint.z - _radius * mapNav.gridHeight),
+					new Vector3(hitPoint.x - _radius * mapNav.gridWidth, y, hitPoint.z + _radius * mapNav.gridHeight),
+					new Vector3(hitPoint.x + _radius * mapNav.gridWidth, y, hitPoint.z + _radius * mapNav.gridHeight),
+					new Vector3(hitPoint.x + _radius * mapNav.gridWidth, y, hitPoint.z - _radius * mapNav.gridHeight),
+					new Vector3(hitPoint.x - _radius * mapNav.gridWidth, y, hitPoint.z - _radius * mapNav.gridHeight)
+				});
+
+				if (Event.current.type == EventType.MouseDown || Event.current.type == EventType.MouseDrag)
+				{
+					int x = mapNav.getX(hitPoint);
+					int z = mapNav.getZ(hitPoint);
+					for (int _z = z - Mathf.RoundToInt(_radius); _z <= z + Mathf.RoundToInt(_radius); ++_z)
 					{
-						int x = mapNav.getX(hitPoint);
-						int z = mapNav.getZ(hitPoint);
-						for(int _z = z - Mathf.RoundToInt(_radius); _z <= z + Mathf.RoundToInt(_radius); ++_z)
+						if (_z < 0) continue;
+						if (_z > mapNav.gridZNum - 1) continue;
+						for (int _x = x - Mathf.RoundToInt(_radius); _x <= x + Mathf.RoundToInt(_radius); ++_x)
 						{
-							if(_z < 0) continue;
-							if(_z > mapNav.gridZNum-1) continue;
-							for(int _x = x - Mathf.RoundToInt(_radius); _x <= x + Mathf.RoundToInt(_radius); ++_x)
+							if (_x < 0) continue;
+							if (_x > mapNav.gridXNum - 1) continue;
+
+							Vector3 position = mapNav.getPosition(_x, _z);
+							if (Mathf.Abs(position.x - hitPoint.x) <= _radius * mapNav.gridWidth
+							   && Mathf.Abs(position.z - hitPoint.z) <= _radius * mapNav.gridHeight)
 							{
-								if(_x < 0) continue;
-								if(_x > mapNav.gridXNum-1) continue;
-								
-								Vector3 position = mapNav.getPosition(_x,_z);
-								if(Mathf.Abs(position.x - hitPoint.x) <= _radius * mapNav.gridWidth 
-								   && Mathf.Abs(position.z - hitPoint.z) <= _radius * mapNav.gridHeight)
+								switch ((MapNav.ProcessType)curProcessType.intValue)
 								{
-									switch((uint)curProcessType.intValue)
-									{
-									case (uint)MapNav.ProcessType.Set:
-										mapNav[_x,_z] |= (uint)mapNav.curTileType;
+									case MapNav.ProcessType.None:
 										break;
-									case (uint)MapNav.ProcessType.Clear:
-										mapNav[_x,_z] &= ~(uint)mapNav.curTileType;
+									case MapNav.ProcessType.Set:
+										mapNav[_x, _z] |= (uint)mapNav.curTileType;
 										break;
-									}
+									case MapNav.ProcessType.Clear:
+										mapNav[_x, _z] &= ~(uint)mapNav.curTileType;
+										break;
+									default:
+										throw new System.NotImplementedException();
 								}
 							}
 						}
 					}
 				}
 			}
+		}
 
-			HandleUtility.Repaint();
-			switch(Event.current.type)
-			{
+		HandleUtility.Repaint();
+		switch (Event.current.type)
+		{
 			case EventType.MouseUp:
 			case EventType.MouseDown:
 			case EventType.MouseDrag:
 			case EventType.MouseMove:
 				Event.current.Use();
 				break;
-			}
 		}
 	}
 }
