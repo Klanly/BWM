@@ -951,7 +951,7 @@ MonoBehaviour:
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 2.73004699
+  aspectRatio: 2.00234747
   mRect:
     serializedVersion: 2
     x: 0
@@ -1103,7 +1103,7 @@ MonoBehaviour:
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 1.81718755
+  aspectRatio: 1.33281255
   mRect:
     serializedVersion: 2
     x: 0
@@ -1792,7 +1792,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 45edf347f9f51214dbfbab27b16fbf01, type: 2}
       propertyPath: m_Name
-      value: RoleName
+      value: inputRoleName
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: 45edf347f9f51214dbfbab27b16fbf01, type: 2}
       propertyPath: mAtlas
@@ -1942,7 +1942,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roleNameInput: {fileID: 1445716732}
-  okButton: {fileID: 1106381540}
   sexman: 1
 --- !u!114 &1060389859
 MonoBehaviour:
@@ -2023,7 +2022,7 @@ GameObject:
   - 114: {fileID: 1106381540}
   - 65: {fileID: 1106381539}
   m_Layer: 13
-  m_Name: OK
+  m_Name: btnOK
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2588,7 +2587,7 @@ GameObject:
   - 114: {fileID: 1445716732}
   - 65: {fileID: 1445716731}
   m_Layer: 13
-  m_Name: RoleName
+  m_Name: inputRoleName
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3414,7 +3413,7 @@ MonoBehaviour:
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 3.38081384
+  aspectRatio: 2.47965121
   mRect:
     serializedVersion: 2
     x: 0
