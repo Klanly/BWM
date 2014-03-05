@@ -1,7 +1,7 @@
 ----------------------------------------------
             NGUI: Next-Gen UI kit
  Copyright © 2011-2014 Tasharen Entertainment
-            Version 3.0.9 f4
+            Version 3.5.3
     http://www.tasharen.com/?page_id=197
             support@tasharen.com
 ----------------------------------------------
@@ -33,16 +33,118 @@ All can be found here: http://www.tasharen.com/forum/index.php?topic=6754.0
 
 Using NGUI with JavaScript (UnityScript)? Read this first: http://www.tasharen.com/forum/index.php?topic=6
 
+-------------------
+  FreeType Library
+-------------------
+
+NGUI version 3.5.2 onwards includes the pre-compiled C++ FreeType library, which is an open source project (http://freetype.org/)
+FreeType license: http://git.savannah.gnu.org/cgit/freetype/freetype2.git/tree/docs/FTL.TXT
+This library is used only if you choose the "Generate Bitmap" font option in the Font Maker,
+and it will not be included in the build of your game. It's only used in the editor.
+
 -----------------
  Version History
 -----------------
 
-3.0.9 f4
+3.5.3
+- NEW: All sprite types can now be flipped, not just simple sprites.
+- NEW: Exposed On Change event in UIInput's inspector.
+- FIX: UIButton will no longer pixel snap the normal sprite by default, and pixel snap is now off by default.
+
+3.5.2
+- NEW: Added the ability to generate bitmap fonts from within Unity using FreeType directly.
+- NEW: You can now add transparent, clamped and tiling border to sprites via the Atlas inspector.
+- NEW: You can now modify any sprite to bake a shadow or add some visual depth to it (want deeper shadow? add multiple!)
+- NEW: UIImageButton's functionality is now a part of UIButton.
+- NEW: You can now flip simple sprites horizontally and vertically (contributed by Nicki).
+- FIX: Labels using Packed Fonts no longer have the Gradient and Effect options, as they don't work with packed fonts.
+- FIX: Moved the Localization file into Examples/Resources so that it doesn't break older localization projects.
+- FIX: Buttons that start with disabled colliders will now always assume their disabled state on start.
+- FIX: UIProgressBar will no longer send OnChange if the change was limited by the number of steps.
+- FIX: It should be possible to set the font to be of Reference type again.
+- FIX: UIKeyBinding will no longer leave the button in a highlighted state.
+- FIX: Another fix for scenes being marked as edited.
+- FIX: Fixed the 2D hit detection logic.
+- FIX: Flash compile fix.
+- DEL: Removed Pixel Size property from UIFont. Set the label's target font size instead.
+- DEL: Removed UICamera's OnInput event as it wasn't being used (as it wasn't reliable).
+
+3.5.1
+- NEW: CSV reader will now convert the "\n" character sequence into a new line char.
+- FIX: Scenes using NGUI should no longer get marked edited so much.
+- FIX: Reduced the size of meshes used by NGUI draw calls.
+- FIX: Changing the panel's alpha will now properly inform child panels.
+- FIX: Fix for how URL tags get parsed in labels.
+
+3.5.0
+- NEW: Localization system now supports CSV type input.
+- NEW: UILocalize script now has key lookup and localized preview options.
+- NEW: UICamera now has a new event type that supports 2D colliders.
+- NEW: Added justified alignment support for labels.
+- NEW: Scroll views now have a Content Origin point.
+- NEW: You can now freely adjust width and height of anchored widgets.
+- NEW: UIDragResize script now has a maximum size limiting option as well.
+- FIX: Improved scroll view resizing and logic regarding how it repositions the content.
+- FIX: Fixed an issue with how changing panel's alpha would not propagate to children in certain cases.
+- FIX: NGUI will no longer intercept RMB events that occur outside the selected widget's area.
+- FIX: UICenterOnClick should now work as expected when there is no UICenterOnChild present.
+- FIX: UICenterOnClick shouldn't cache the panel anymore, making it work properly with drag & drop.
+- FIX: Widget inspector's Dimensions field should no longer be grayed out if the widget is partially anchored.
+- FIX: UIRoot's FixedSizeOnMobiles setting should now recognize BB and WP8 as mobile devices
+- FIX: UICamera will now clear all active touch events when the application is paused.
+- FIX: Work-around for dynamic font delegate subscriptions causing epic GC.
+- FIX: Setting label text will now auto-adjust the collider size.
+- FIX: Inlined italic text should now look better.
+
+3.4.9
+- NEW: You can now embed hidden content in labels using bbcode: [url=link]Click Here[/url]. Retrieve this content via UILabel.GetUrlAtPosition(UICamera.lastHit.point), then do what you want.
+- NEW: Labels can now keep references to UIFonts that use dynamic fonts, for easy replacement/swapping.
+- FIX: Work-around for a bug in Unity related to dynamic fonts discarding previously requested characters.
+- FIX: UIButtonColor/UIButton will set the normal color in Awake instead of Start to avoid conflicts with tweens.
+- FIX: Create UI menu option will now let you create a 3D UI if you have a 2D UI present, and vice versa.
+- FIX: Input improvements: IME text selection while typing and proper dialog positioning.
+- FIX: Parent widget's visibility checks should no longer cause children to be culled.
+- FIX: Scaled bitmap fonts should now be correctly affected by the gradient setting.
+- FIX: Removed UIAnchor usage from the Scroll View example.
+- FIX: UIRoot should be executed before everything else.
+- FIX: UIToggle.startsChecked is now be public.
+
+3.4.8
+- NEW: Tweens will now display the curve in inspector as a square, making it easier to eyeball.
+- FIX: Fixed floating-point precision issues in NGUIText's print-wrapping logic.
+- FIX: UIDrawCall will remove all references to materials and textures when it's disabled.
+- FIX: Removed UIAnchor from the Drag & Drop scene.
+
+3.4.7
+- NEW: You can now set font size even on bitmap labels.
+- NEW: UIScrollView can now reference sliders as scroll bars.
+- FIX: Adjusting the widget's aspect ratio will now automatically resize the widget.
+- FIX: UIImageButton now won't try to swap sprites if a sprite hasn't been set, and "pixel snap" is now optional.
+- FIX: Text set to resize freely with positive spacing should no longer wrap the last char.
+- FIX: Compile fixes on Unity 4.0, 4.1, and 4.2.
+
+3.4.6 (previously 3.0.9 f7)
+- NEW: UIPlayAnimation now supports Animator animations (mecanim).
+- NEW: Added UIEventTrigger that can be used to add event delegates via inspector for press, release, select, etc.
+- OLD: Deprecated UIButtonMessage and UIForwardEvents (upgrade to UIEventTrigger at your own pace).
+
+3.4.5 (previously 3.0.9 f6)
+- FIX: Typo fix in UIEventDelegate.
+
+3.4.4 (previously 3.0.9 f5)
+- NEW: UIGrid and UITable now have a virtual Sort function you can overwrite, and are now extensible.
+- NEW: You can now use the Component Selector to load more than just prefabs by specifying explicit extensions.
+- FIX: The Component Selector should now behave better with dynamic fonts and will hide Lucida Grande (internal Unity font).
+- FIX: UICamera's new hit check should now work even if only one widget was hit.
+- FIX: You can now remove delegates from the EventDelegate list even while executing its callbacks.
+- FIX: Work-around for potential crash on exit on mobiles due to an issue in Unity.
+
+3.4.3 (previously 3.0.9 f4)
 - NEW: Added UIWidget.hitCheck delegate you can set for custom hit detection (circular sprites, alpha checks, etc).
 - FIX: Caret and selection will now work properly even with one long word that doesn't fit.
 - FIX: UITable will now always update the scroll view's scroll bars.
 
-3.0.9 f3
+3.4.2 (previously 3.0.9 f3)
 - FIX: Work-around for a bug in Unity that was causing prefabs to be marked as edited (version control).
 - FIX: Optimized how UIInput works on mobiles, and setting UIInput.value will now force it through validation.
 - FIX: UICamera's raycast now always considers cumulative alpha and ignores invisible objects.
@@ -53,12 +155,12 @@ Using NGUI with JavaScript (UnityScript)? Read this first: http://www.tasharen.c
 - FIX: Scroll bar should no longer cause NaNs in some situations.
 - FIX: Packed fonts fix.
 
-3.0.9 f2
+3.4.1 (previously 3.0.9 f2)
 - FIX: UITweener will again keep persistent OnFinished delegates.
 - FIX: Widgets that are invisible will disable their box collider as needed.
 - FIX: Minor tweak related to widget alpha checks.
 
-3.0.9 f1
+3.4.0 (previously 3.0.9 f1)
 - NEW: Community contribution: bold, italic, underline, strike-through and subscript support for text (Rudy Pangestu).
 - NEW: You can now use TweenPosition on anchored widgets and panels.
 - NEW: You can now nudge anchored widgets, panels and containers (arrow keys).
@@ -81,16 +183,16 @@ Using NGUI with JavaScript (UnityScript)? Read this first: http://www.tasharen.c
 - FIX: Gradient on labels should now look correct with fixed size UIRoot.
 - FIX: Draw calls from non-automatic Render Q panels will now be more careful with their Z position.
 
-3.0.8 f7
+3.3.6 (previously 3.0.8 f7)
 - FIX: UIPanel's "explicit" render queue option should now work correctly.
 - FIX: UITweener.Play should behave better with duration of 0.
 - FIX: NGUITools.FindCamera will prioritize the Main Camera over others (fix for Unity Water).
 - FIX: Null exception fix in UIKeyBinding.
 
-3.0.8 f6
+3.3.5 (previously 3.0.8 f6)
 - FIX: Labels using atlassed fonts will again correctly use the pixel size setting.
 
-3.0.8 f5
+3.3.4 (previously 3.0.8 f5)
 - NEW: Added a flag to UIDragDropItem that lets you drag a clone of the object rather than the object itself.
 - FIX: Labels limited by number of lines with resizable height were not wrapped properly.
 - FIX: Added UITable's "keep within panel" checkbox to the UIGrid as well.
@@ -100,13 +202,13 @@ Using NGUI with JavaScript (UnityScript)? Read this first: http://www.tasharen.c
 - FIX: UIWidget.CreatePanel will now also invalidate the parent reference.
 - FIX: More changes related to how dynamic text is drawn...
 
-3.0.8 f4
+3.3.3 (previously 3.0.8 f4)
 - NEW: Added a script that can animate Unity 2D sprite (UI2DSpriteAnimation).
 - FIX: Tweaks to how PlayAnimation works in regards to dragging over/out.
 - FIX: Labels will always be created with even dimensions.
 - FIX: More text printing related tweaks.
 
-3.0.8 f3
+3.3.2 (previously 3.0.8 f3)
 - FIX: Dynamic fonts should now be positioned better.
 - FIX: Fixing how fonts behave with a pixel size of non-1.
 - FIX: Sliders should no longer shrink the foreground sliced sprite beyond its minimum dimensions.
@@ -114,10 +216,10 @@ Using NGUI with JavaScript (UnityScript)? Read this first: http://www.tasharen.c
 - FIX: Grid and table scripts were updating the scroll views even though they shouldn't have been.
 - FIX: Removed the UIRect requirement from TweenAlpha.
 
-3.0.8 f2
+3.3.1 (previously 3.0.8 f2)
 - FIX: Fix for widgets not adding themselves to draw calls when enabled in some cases.
 
-3.0.8
+3.3.0 (previously 3.0.8)
 - NEW: Input field has been redesigned and now has caret, multi-line selection, click-move, drag select, arrow key navigation, and full copy/paste.
 - NEW: Widgets now have a new "aspect ratio" field, in case you want them to keep a specific aspect ratio.
 - NEW: Community contribution (Nicki): Sliced & Tiled sprite via the Advanced sprite type setting.
@@ -130,7 +232,7 @@ Using NGUI with JavaScript (UnityScript)? Read this first: http://www.tasharen.c
 - FIX: Draw calls were not added correctly to the list of active draw calls.
 - FIX: Scroll wheel scrolling is now affected by the transform's rotation properly.
 
-3.0.7 f3
+3.2.3 (previously 3.0.7 f3)
 - NEW: Added an option for anchors to be offset by the panel's position.
 - NEW: Made it possible to anchor directly to a Camera, without having to use panels.
 - NEW: Made "Keep crisp" option always show up for dynamic fonts.
@@ -140,7 +242,7 @@ Using NGUI with JavaScript (UnityScript)? Read this first: http://www.tasharen.c
 - FIX: Improved how baseline is calculated (with a hack!), making fonts be positioned better.
 - FIX: Filled sprites should now ignore the padding.
 
-3.0.7 f2
+3.2.2 (previously 3.0.7 f2)
 - NEW: You can now right-click on tweens to set the 'from' and 'to' values using the current.
 - FIX: Tweens no longer reset the object to its default value when first added (current value is now used instead).
 - FIX: Non-clipped panels will no longer use their position when calculating dimensions for anchors.
@@ -150,7 +252,7 @@ Using NGUI with JavaScript (UnityScript)? Read this first: http://www.tasharen.c
 - FIX: Button should now keep the highlighted state correctly when using controller input.
 - FIX: Unity has a bug related to input on BB10, apparently (backspace).
 
-3.0.7 f1
+3.2.1 (previously 3.0.7 f1)
 - NEW: Further improved the layout system's presentation, making it less daunting.
 - NEW: Enabling anchoring will automatically anchor to the first parent by default.
 - NEW: It's now possible to automatically anchor to the mid-points (sides, center).
@@ -159,7 +261,7 @@ Using NGUI with JavaScript (UnityScript)? Read this first: http://www.tasharen.c
 - FIX: Mobile keyboard will now have the multi-line option.
 - FIX: Re-added support for packed fonts.
 
-3.0.7 rc1 & 2
+3.2.0 (previously 3.0.7 rc1 & 2)
 - NEW: Created a new layout system. All widgets and panels can now anchor to each other, the screen, and even 3D game objects.
 - NEW: You can now create resizable scroll views and anchor them to UI elements.
 - NEW: Re-created the Anchor Example to use the new anchoring system.
@@ -201,7 +303,7 @@ Using NGUI with JavaScript (UnityScript)? Read this first: http://www.tasharen.c
 - DEL: Eliminated the half-pixel offset setting from anchors.
 - DEL: Removed anchor and stretch scripts from the menus.
 
-3.0.6
+3.1.0 (previously 3.0.6)
 - NEW: NGUI now has new written documentation.
 - NEW: NGUI now has an abundance of context-sensitive help. Just right click on an NGUI component and choose the Help option.
 - NEW: NGUI now has robust context menus letting you add, create and modify widgets by right-clicking on stuff in the Scene View.
