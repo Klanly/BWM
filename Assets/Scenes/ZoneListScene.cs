@@ -12,6 +12,12 @@ public class ZoneListScene : MonoBehaviour
 	{
 		foreach (Transform t in zoneList.transform)
 			DestroyObject(t.gameObject);
+
+		var height = zoneList.cellHeight * cmd.server.Count - (zoneList.cellHeight - zoneButton.GetComponent<UISprite>().height);
+		var oldPosition = zoneList.transform.localPosition;
+		oldPosition.y = height / 2.0f;
+		zoneList.transform.localPosition = oldPosition;
+		GameObject.Find("BG_List").GetComponent<UISprite>().height = (int)height + 70;
 		zoneList.Reposition();
 
 		foreach (var zone in cmd.server)
@@ -40,6 +46,7 @@ public class ZoneListScene : MonoBehaviour
 			}
 		}
 		zoneList.Reposition();
+		zoneButton.SetActive(false);
 	}
 
 
