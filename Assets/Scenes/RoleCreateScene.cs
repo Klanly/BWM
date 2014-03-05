@@ -58,6 +58,13 @@ public class RoleCreateScene : MonoBehaviour
 		GameObject.Find("wiDesc").GetComponent<TweenPosition>().PlayForward();
 	}
 
+	void btnSuiji_onClick(GameObject sender)
+	{
+		var t = Table.Query<table.TableNameItem>();
+		var name = t.Random().name1 + t.Random().name2 + t.Random().name3 + t.Random().name4;
+		roleNameInput.value = name;
+	}
+
 	void Start()
 	{
 		UIEventListener.Get(GameObject.Find("btnMale")).onClick = this.btnMale_onClick;
@@ -65,6 +72,7 @@ public class RoleCreateScene : MonoBehaviour
 		UIEventListener.Get(GameObject.Find("btnZhanshi")).onClick = this.btnZhanshi_onClick;
 		UIEventListener.Get(GameObject.Find("btnDaoshi")).onClick = this.btnDaoshi_onClick;
 		UIEventListener.Get(GameObject.Find("btnFashi")).onClick = this.btnFashi_onClick;
+		UIEventListener.Get(GameObject.Find("btnSuiji")).onClick = this.btnSuiji_onClick;
 
 		spriteZhanshi = GameObject.Find("spriteZhanshi");
 		spriteDaoshi = GameObject.Find("spriteDaoshi");
@@ -73,17 +81,16 @@ public class RoleCreateScene : MonoBehaviour
 		spriteDaoshi.SetActive(false);
 		spriteFashi.SetActive(false);
 
-		roleNameInput.isSelected = true; // focus it
+		// 随机玩家名
+		btnSuiji_onClick(null);
+
+		//roleNameInput.isSelected = true; // focus it
 		UIEventListener.Get(okButton.gameObject).onClick = go => Net.Instance.Send(new CheckCharNameSelectUserCmd_CS() 
 		{
 			charname = roleNameInput.value,
 		});
 	}
 
-	void Update()
-	{
-		okButton.isEnabled = !string.IsNullOrEmpty(roleNameInput.value);
-	}
 
 	[Execute]
 	static void Execute(CheckCharNameSelectUserCmd_CS cmd)
