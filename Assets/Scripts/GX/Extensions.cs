@@ -227,4 +227,29 @@ public static class Extensions
 	}
 
 	#endregion
+
+
+	#region Convert DateTime & Unix GMT +8
+	static readonly DateTime UnixBase = new DateTime(1970, 1, 1, 0, 0, 0);
+
+	/// <summary>
+	/// 将本地时区的DateTime时间转换成Unix时戳
+	/// </summary>
+	/// <param name="time">本地时间</param>
+	/// <returns></returns>
+	public static uint ToUnixTime(this DateTime time)
+	{
+		return (uint)(time - UnixBase).TotalSeconds;
+	}
+
+	/// <summary>
+	/// 将本地时区的Unix时戳转换成DateTime类型
+	/// </summary>
+	/// <param name="localGMTTime"></param>
+	/// <returns></returns>
+	public static DateTime ToDateTime(this uint localGMTTime)
+	{
+		return UnixBase + TimeSpan.FromSeconds(localGMTTime);
+	}
+	#endregion
 }

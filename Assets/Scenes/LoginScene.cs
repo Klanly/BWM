@@ -2,6 +2,7 @@
 using System.Collections;
 using GX.Net;
 using Cmd;
+using System;
 
 public class LoginScene : MonoBehaviour
 {
@@ -24,7 +25,8 @@ public class LoginScene : MonoBehaviour
 				version = (uint)Cmd.Config.Version.Version_Login,
 				gameid = GameID,
 				account = accountInput.value,
-				token = "dev"
+				token = "dev",
+				mid = SystemInfo.deviceUniqueIdentifier,
 			}));
 		};
 	}
@@ -78,7 +80,19 @@ public class LoginScene : MonoBehaviour
 	static void Execute(UserLoginReturnOkLoginUserCmd_S cmd)
 	{
 		Net.Instance.Open(cmd.gatewayurl);
-		Net.Instance.Send(new UserLoginTokenLoginUserCmd_C() { logintempid = cmd.logintempid, accountid = cmd.accountid });
+		var stamp = DateTime.Now.ToUnixTime();
+		Net.Instance.Send(new UserLoginTokenLoginUserCmd_C()
+		{
+			accountid = cmd.accountid,
+			logintempid = cmd.logintempid,
+			timestamp = stamp,
+			tokenmd5 = GX.MD5.ComputeHashString(GX.Encoding.GetBytes(
+				cmd.accountid.ToString() +
+				cmd.logintempid.ToString() +
+				stamp.ToString() +
+				cmd.tokenid.ToString())),
+			mid = SystemInfo.deviceUniqueIdentifier,
+		});
 	}
 
 	[Execute]
