@@ -82,6 +82,13 @@ namespace Cmd
       get { return _sexman; }
       set { _sexman = value; }
     }
+    private Cmd.Profession _profession;
+    [global::ProtoBuf.ProtoMember(4, IsRequired = true, Name=@"profession", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public Cmd.Profession profession
+    {
+      get { return _profession; }
+      set { _profession = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -135,18 +142,25 @@ namespace Cmd
     public CharactorCreateSelectUserCmd_C() {}
     
     private string _charname;
-    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"charname", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"charname", DataFormat = global::ProtoBuf.DataFormat.Default)]
     public string charname
     {
       get { return _charname; }
       set { _charname = value; }
     }
     private bool _sexman;
-    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"sexman", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"sexman", DataFormat = global::ProtoBuf.DataFormat.Default)]
     public bool sexman
     {
       get { return _sexman; }
       set { _sexman = value; }
+    }
+    private Cmd.Profession _profession;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"profession", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public Cmd.Profession profession
+    {
+      get { return _profession; }
+      set { _profession = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -196,5 +210,19 @@ namespace Cmd
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
+  
+    [global::ProtoBuf.ProtoContract(Name=@"Profession")]
+    public enum Profession
+    {
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"Profession_ZhanShi", Value=1)]
+      Profession_ZhanShi = 1,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"Profession_DaoShi", Value=2)]
+      Profession_DaoShi = 2,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"Profession_FaShi", Value=3)]
+      Profession_FaShi = 3
+    }
   
 }
