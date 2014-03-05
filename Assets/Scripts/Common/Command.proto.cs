@@ -14,6 +14,9 @@ namespace Cmd
     public enum Command
     {
             
+      [global::ProtoBuf.ProtoEnum(Name=@"Null", Value=0)]
+      Null = 0,
+            
       [global::ProtoBuf.ProtoEnum(Name=@"Login", Value=1)]
       Login = 1,
             
