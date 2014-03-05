@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<table>
+	<output type="protobuf" code="TableName" file="名字表.xlsx" sheet="Sheet1">
+		<key code="id" />
+		<field column="编号" code="id" type="uint32" />
+		<field column="名字1" code="name1" type="string" />
+		<field column="名字2" code="name2" type="string" />
+		<field column="名字3" code="name3" type="string" />
+		<field column="名字4" code="name4" type="string" />
+	</output>
+</table>
