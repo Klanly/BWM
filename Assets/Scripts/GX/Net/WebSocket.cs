@@ -80,10 +80,88 @@ namespace GX.Net
 #endif
 		#endregion
 
+		#region WebSocket4Net WebSocket
+#if !UNITY_WINRT || UNITY_EDITOR
+		class WebSocket4NetProxy : IProxy
+		{
+			WebSocket4Net.WebSocket socket;
+			readonly object syncRoot = new object();
+			readonly Queue<byte[]> sendQueue = new Queue<byte[]>();
+			readonly Queue<byte[]> receiveQueue = new Queue<byte[]>();
+			
+			
+			#region IProxy 成员
+			
+			public bool Connected
+			{
+				get { return socket.State == WebSocket4Net.WebSocketState.Open; }
+			}
+			
+			public void Open(string url)
+			{
+				sendQueue.Clear();
+				receiveQueue.Clear();
+				if (socket != null)
+					socket.Close();
+				socket = new WebSocket4Net.WebSocket(url);
+				socket.DataReceived += (s, e) =>
+				{
+					//Debug.Log("WebSocket DataReceived: length=" + e.Data.Length);
+					lock (syncRoot)
+					{
+						receiveQueue.Enqueue(e.Data);
+					}
+				};
+				socket.Closed += (s, e) => Debug.Log("WebSocket Closed");
+				socket.Opened += (s, e) => Debug.Log("WebSocket Opened");
+				socket.Error += (s, e) => Debug.Log("WebSocket Error: " + e.Exception.Message);
+				socket.MessageReceived += (s, e) => Debug.Log("WebSocket MessageReceived: " + e.Message);
+
+				socket.Open();
+			}
+			
+			public void Send(byte[] data)
+			{
+				if (Connected)
+					socket.Send(data, 0, data.Length);
+				else
+					sendQueue.Enqueue(data);
+			}
+			
+			public byte[] Receive()
+			{
+				if (receiveQueue == null)
+					return null;
+				lock (syncRoot)
+				{
+					if (receiveQueue.Count == 0)
+						return null;
+					return receiveQueue.Dequeue();
+				}
+			}
+			
+			public IEnumerator Run()
+			{
+				while (true)
+				{
+					yield return null;
+					if (Connected && sendQueue.Count != 0)
+					{
+						socket.Send((from buf in sendQueue select new ArraySegment<byte>(buf)).ToList());
+						sendQueue.Clear();
+					}
+				}
+			}
+			
+			#endregion
+		}
+#endif
+		#endregion
+
 		static WebSocket()
 		{
 #if !UNITY_WINRT || UNITY_EDITOR
-			Proxy = new UniWebWebSocket();
+			Proxy = new WebSocket4NetProxy();
 #endif
 		}
 		#endregion
