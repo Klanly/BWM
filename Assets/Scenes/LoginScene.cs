@@ -77,22 +77,29 @@ public class LoginScene : MonoBehaviour
 	/// </summary>
 	/// <param name="cmd"></param>
 	[Execute]
-	static void Execute(UserLoginReturnOkLoginUserCmd_S cmd)
+	static IEnumerator Execute(UserLoginReturnOkLoginUserCmd_S cmd)
 	{
-		Net.Instance.Open(cmd.gatewayurl);
-		var stamp = DateTime.Now.ToUnixTime();
-		Net.Instance.Send(new UserLoginTokenLoginUserCmd_C()
+		foreach (var c in Net.Instance.Open(cmd.gatewayurl).AsEnumerable())
+			yield return c;
+		if (Net.Instance.State == WebSocket.State.Open)
 		{
-			accountid = cmd.accountid,
-			logintempid = cmd.logintempid,
-			timestamp = stamp,
-			tokenmd5 = GX.MD5.ComputeHashString(GX.Encoding.GetBytes(
-				cmd.accountid.ToString() +
-				cmd.logintempid.ToString() +
-				stamp.ToString() +
-				cmd.tokenid.ToString())),
-			mid = SystemInfo.deviceUniqueIdentifier,
-		});
+			var stamp = DateTime.Now.ToUnixTime();
+			Net.Instance.Send(new UserLoginTokenLoginUserCmd_C()
+			{
+				accountid = cmd.accountid,
+				logintempid = cmd.logintempid,
+				timestamp = stamp,
+				tokenmd5 = GX.MD5.ComputeHashString(GX.Encoding.GetBytes(
+					cmd.accountid.ToString() +
+					cmd.logintempid.ToString() +
+					stamp.ToString() +
+					cmd.tokenid.ToString())),
+				mid = SystemInfo.deviceUniqueIdentifier,
+			});
+			yield break;
+		}
+
+		MessageBox.Show("无法连接到网关服务器: " + cmd.gatewayurl);
 	}
 
 	[Execute]
