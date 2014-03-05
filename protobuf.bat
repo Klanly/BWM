@@ -1,17 +1,16 @@
 @echo off
+set protogen=%~dp0\3Party\protobuf-net r668\ProtoGen\protogen.exe
+set dest=%~dp0\Assets\Scripts\Common
+
 pushd "%~dp0\Common"
-
-set protogen="..\3Party\protobuf-net r668\ProtoGen\protogen.exe"
-set dest=..\Assets\Scripts\Common
-
 del /Q %dest%\*.cs
 for /f "tokens=* delims=" %%i in ('dir /b /s *.proto') do (
 	echo %%i
-	%protogen% -i:"%%i" -o:"%%i.cs" -q
+	"%protogen%" -i:"%%i" -o:"%%i.cs" -q
 	move /Y "%%i.cs" %dest%
 )
-
 call:clearMeta %dest%
+popd
 
 pause
 GOTO:EOF
