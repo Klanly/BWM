@@ -11,9 +11,23 @@ class WebSocket4NetProxy : GX.Net.WebSocket.IProxy
 	readonly Queue<byte[]> receiveQueue = new Queue<byte[]>();
 
 	#region IProxy 成员
-	public Action OnOpen { get; set; }
-	public Action OnError { get; set; }
-	public Action OnClose { get; set; }
+	public GX.Net.WebSocket.State State 
+	{
+		get
+		{
+			if (socket == null)
+				return GX.Net.WebSocket.State.None;
+			switch (socket.State)
+			{
+				case WebSocket4Net.WebSocketState.None: return GX.Net.WebSocket.State.None;
+				case WebSocket4Net.WebSocketState.Connecting: return GX.Net.WebSocket.State.Connecting;
+				case WebSocket4Net.WebSocketState.Open: return GX.Net.WebSocket.State.Open;
+				case WebSocket4Net.WebSocketState.Closing: return GX.Net.WebSocket.State.Closing;
+				case WebSocket4Net.WebSocketState.Closed: return GX.Net.WebSocket.State.Closed;
+				default: throw new NotImplementedException();
+			}
+		}
+	}
 	
 	public void Open(string url)
 	{
@@ -29,24 +43,9 @@ class WebSocket4NetProxy : GX.Net.WebSocket.IProxy
 				receiveQueue.Enqueue(e.Data);
 			}
 		};
-		socket.Closed += (s, e) =>
-		{
-			Debug.Log("WebSocket Closed");
-			if(OnClose != null)
-				OnClose();
-		};
-		socket.Opened += (s, e) =>
-		{
-			Debug.Log("WebSocket Opened");
-			if (OnOpen != null)
-				OnOpen();
-		};
-		socket.Error += (s, e) =>
-		{
-			Debug.Log("WebSocket Error: " + e.Exception.Message);
-			if (OnError != null)
-				OnError();
-		};
+		socket.Closed += (s, e) => Debug.Log("WebSocket Closed");
+		socket.Opened += (s, e) => Debug.Log("WebSocket Opened");
+		socket.Error += (s, e) => Debug.Log("WebSocket Error: " + e.Exception.Message);
 		socket.MessageReceived += (s, e) => Debug.Log("WebSocket MessageReceived: " + e.Message);
 
 		socket.Open();

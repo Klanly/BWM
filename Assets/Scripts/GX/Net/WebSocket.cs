@@ -8,17 +8,30 @@ using System;
 
 namespace GX.Net
 {
-	public class WebSocket
+	/// <summary>
+	/// 跨平台的WebSocket实现
+	/// </summary>
+	/// <remarks>
+	/// TODO: 若需要多个实例，可以考虑对<see cref="WebSocket.IProxy"/>实现工厂
+	/// </remarks>
+	public static class WebSocket
 	{
+		public enum State
+		{
+			None = -1,
+			Connecting = 0,
+			Open = 1,
+			Closing = 2,
+			Closed = 3,
+		}
+
 		#region Proxy
 		/// <summary>
 		/// 接口定义参考：http://www.w3.org/TR/2011/CR-websockets-20111208/#the-websocket-interface
 		/// </summary>
 		public interface IProxy
 		{
-			Action OnOpen { get; set; }
-			Action OnError { get; set; }
-			Action OnClose { get; set; }
+			GX.Net.WebSocket.State State { get; }
 			void Open(string url);
 			void Send(byte[] data);
 			byte[] Receive();
@@ -33,28 +46,28 @@ namespace GX.Net
 		}
 		#endregion
 
-		private readonly MessageSerializer serizlizer = new MessageSerializer();
+		private static readonly MessageSerializer serizlizer = new MessageSerializer();
 
-		public void Open(string url = "ws://echo.websocket.org")
+		public static void Open(string url = "ws://echo.websocket.org")
 		{
 			Debug.Log("WebSocket to: " + url);
 			Proxy.Open(url);
 		}
 
-		public void Send(ProtoBuf.IExtensible message)
+		public static void Send(ProtoBuf.IExtensible message)
 		{
 			Debug.Log("[SEND]" + message.ToStringDebug());
 			var buf = serizlizer.Serialize(message);
 			Proxy.Send(buf);
 		}
 
-		public void Send(params ProtoBuf.IExtensible[] message)
+		public static void Send(params ProtoBuf.IExtensible[] message)
 		{
 			var buf = serizlizer.Serialize(message);
 			Proxy.Send(buf);
 		}
 
-		public IEnumerable<ProtoBuf.IExtensible> Receive()
+		public static IEnumerable<ProtoBuf.IExtensible> Receive()
 		{
 			var buf = Proxy.Receive();
 			if (buf == null)

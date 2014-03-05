@@ -3,32 +3,40 @@ using System.Collections;
 using GX;
 using GX.Net;
 using System.IO;
+using System;
 
 public class Net : Singleton<Net>
 {
-	private WebSocket socket;
+	public const string EchoServer = "ws://echo.websocket.org";
+
 	public MessageDispatcher Dispatcher { get; private set; }
+	public GX.Net.WebSocket.State State { get { return WebSocket.Proxy.State; } }
 
 	protected Net()
 	{
-		this.socket = new WebSocket();
 		this.Dispatcher = new MessageDispatcher();
 		this.Dispatcher.StaticRegister();
 	}
 
-	public void Open(string url = "ws://echo.websocket.org")
+	public IEnumerator Open(string url)
 	{
-		socket.Open(url);
+		WebSocket.Open(url);
+		while (true)
+		{
+			if (this.State != WebSocket.State.Connecting)
+				break;
+			yield return new WaitForEndOfFrame();
+		}
 	}
 
 	public void Send(ProtoBuf.IExtensible message)
 	{
-		socket.Send(message);
+		WebSocket.Send(message);
 	}
 
 	public void Send(params ProtoBuf.IExtensible[] message)
 	{
-		socket.Send(message);
+		WebSocket.Send(message);
 	}
 
 	void Start()
@@ -41,7 +49,7 @@ public class Net : Singleton<Net>
 		while (true)
 		{
 			yield return null;
-			foreach (var msg in socket.Receive())
+			foreach (var msg in WebSocket.Receive())
 			{
 				IEnumerator coroutine;
 				if (Dispatcher.Dispatch(msg, out coroutine) == false)
