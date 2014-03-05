@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-// Generated from: Common/ChatCommand.proto
+// Generated from: ChatCommand.proto
 namespace Cmd
 {
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"Chat")]
@@ -183,5 +183,13 @@ namespace Cmd
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
+  
+    [global::ProtoBuf.ProtoContract(Name=@"ChatType")]
+    public enum ChatType
+    {
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"ChatType_Map", Value=2)]
+      ChatType_Map = 2
+    }
   
 }

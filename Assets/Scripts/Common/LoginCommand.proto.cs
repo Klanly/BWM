@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-// Generated from: Common/LoginCommand.proto
+// Generated from: LoginCommand.proto
 namespace Cmd
 {
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"Login")]

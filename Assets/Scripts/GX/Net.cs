@@ -18,9 +18,7 @@ public class Net : Singleton<Net>
 
 	public void Open(string url = "ws://echo.websocket.org")
 	{
-		StopCoroutine("Run");
 		socket.Open(url);
-		StartCoroutine("Run");
 	}
 
 	public void Send(ProtoBuf.IExtensible message)
@@ -36,11 +34,6 @@ public class Net : Singleton<Net>
 	void Start()
 	{
 		StartCoroutine(Dispatch());
-	}
-
-	IEnumerator Run()
-	{
-		return socket.Run();
 	}
 
 	IEnumerator Dispatch()

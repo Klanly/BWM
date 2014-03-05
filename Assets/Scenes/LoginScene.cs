@@ -13,6 +13,7 @@ public class LoginScene : MonoBehaviour
 	// Use this for initialization
 	void Start()
 	{
+		//Net.Instance.Open("ws://192.168.85.71:7000/shen/user");
 		Net.Instance.Open("ws://112.65.197.72:7000/shen/user");
 
 		accountInput.value = System.Math.Abs(SystemInfo.deviceUniqueIdentifier.GetHashCode()).ToString();
