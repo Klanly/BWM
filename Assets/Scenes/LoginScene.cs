@@ -13,20 +13,45 @@ public class LoginScene : MonoBehaviour
 	// Use this for initialization
 	void Start()
 	{
-		//Net.Instance.Open("ws://192.168.85.71:7000/shen/user");
-		Net.Instance.Open("ws://112.65.197.72:7000/shen/user");
-
 		accountInput.value = System.Math.Abs(SystemInfo.deviceUniqueIdentifier.GetHashCode()).ToString();
 
 		UIEventListener.Get(playButton.gameObject).onClick = go =>
 		{
 			if (string.IsNullOrEmpty(accountInput.value))
 				return;
-			// 连接到LoginServer
-			Net.Instance.Send(new AccountTokenVerifyLoginUserCmd_CS() { version = (uint)Cmd.Config.Version.Version_Login, gameid = GameID, 
+			StartCoroutine(ConnectLoginServer(new AccountTokenVerifyLoginUserCmd_CS()
+			{
+				version = (uint)Cmd.Config.Version.Version_Login,
+				gameid = GameID,
 				account = accountInput.value,
-				token = "dev" });
+				token = "dev"
+			}));
 		};
+	}
+
+	/// <summary>
+	/// 连接到LoginServer
+	/// </summary>
+	/// <returns></returns>
+	IEnumerator ConnectLoginServer(ProtoBuf.IExtensible cmd)
+	{
+		foreach (var c in Net.Instance.Open("ws://112.65.197.72:7000/shen/user").AsEnumerable())
+			yield return c;
+		if (Net.Instance.State == WebSocket.State.Open)
+		{
+			Net.Instance.Send(cmd);
+			yield break;
+		}
+
+		foreach (var c in Net.Instance.Open("ws://192.168.85.71:7000/shen/user").AsEnumerable())
+			yield return c;
+		if (Net.Instance.State == WebSocket.State.Open)
+		{
+			Net.Instance.Send(cmd);
+			yield break;
+		}
+
+		MessageBox.Show("无法连接到登陆服务器");
 	}
 
 	void Update()
