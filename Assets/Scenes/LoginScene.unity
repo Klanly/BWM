@@ -235,7 +235,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 628467499}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -222.54364, y: 134.281433, z: 0}
+  m_LocalPosition: {x: -223.299545, y: 135.037933, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 412017433}
@@ -579,7 +579,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1169743668}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 204.123047, y: 134.281433, z: 0}
+  m_LocalPosition: {x: 255.944534, y: 135.037933, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 510261326}
@@ -625,7 +625,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1284611458}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -649.210327, y: 454.281433, z: 0}
+  m_LocalPosition: {x: -702.54364, y: 454.281433, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1909208366}
@@ -1098,7 +1098,6 @@ GameObject:
   - 65: {fileID: 2032827510}
   - 114: {fileID: 2032827515}
   - 114: {fileID: 2032827514}
-  - 114: {fileID: 2032827511}
   m_Layer: 13
   m_Name: OK
   m_TagString: Untagged
@@ -1130,19 +1129,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 281, y: 88, z: 0}
   m_Center: {x: -.5, y: 0, z: 0}
---- !u!114 &2032827511
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2032827508}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6a707e44c081bcf4c89026b6f55023d3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  accountInput: {fileID: 0}
-  playButton: {fileID: 0}
 --- !u!114 &2032827512
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1248,7 +1234,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2071682154}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -222.54364, y: 134.281433, z: 0}
+  m_LocalPosition: {x: -222.9216, y: 134.281433, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1476132468}
@@ -1281,13 +1267,13 @@ MonoBehaviour:
     absolute: 0
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 853
+  mWidth: 959
   mHeight: 640
   mDepth: -1
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 1.33281255
+  aspectRatio: 1.49843752
   mRect:
     serializedVersion: 2
     x: 0
