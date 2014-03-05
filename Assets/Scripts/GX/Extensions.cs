@@ -115,10 +115,10 @@ public static class Extensions
 		var prefix = new string(' ', 4 * indent);
 		if (proto == null)
 		{
-			writer.Write(prefix); writer.Write("<null>");
+			writer.Write("<null>");
 			return;
 		}
-		writer.Write(prefix); writer.Write(proto.GetType().FullName); writer.WriteLine(" {");
+		writer.Write(proto.GetType().FullName); writer.WriteLine(" {");
 		foreach (var p in proto.GetType().GetRuntimeProperties())
 		{
 			writer.Write(prefix); writer.Write("    "); writer.Write(p.Name); writer.Write(" = ");
