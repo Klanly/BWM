@@ -125,15 +125,27 @@ public class UIProgressBar : UIWidgetContainer
 
 			if (mValue != val)
 			{
+				float before = this.value;
 				mValue = val;
 
-				if (EventDelegate.IsValid(onChange))
+				if (Mathf.Abs(before - this.value) > 0.001f)
 				{
-					current = this;
-					EventDelegate.Execute(onChange);
-					current = null;
+					ForceUpdate();
+
+					if (NGUITools.GetActive(this))
+					{
+						if (EventDelegate.IsValid(onChange))
+						{
+							current = this;
+							EventDelegate.Execute(onChange);
+							current = null;
+						}
+					}
 				}
-				ForceUpdate();
+#if UNITY_EDITOR
+				if (!Application.isPlaying)
+					NGUITools.SetDirty(this);
+#endif
 			}
 		}
 	}

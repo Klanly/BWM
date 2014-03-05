@@ -13,8 +13,8 @@ namespace GX.Net
 	{
 		public static readonly MessageType Empty = new MessageType();
 			 
-		public byte Cmd { get; set; }
-		public byte Param { get; set; }
+		public uint Cmd { get; set; }
+		public uint Param { get; set; }
 
 		#region IComparable<MessageType> 成员
 
@@ -38,28 +38,6 @@ namespace GX.Net
 		public override string ToString()
 		{
 			return string.Format("{{Cmd={0},Param={1}}}", Cmd, Param);
-		}
-
-		public override int GetHashCode()
-		{
-			return ((int)Cmd << 8) | Param;
-		}
-
-		public void Serialize(System.IO.Stream stream)
-		{
-			stream.WriteByte(this.Cmd);
-			stream.WriteByte(this.Param);
-		}
-
-		public void Deserialize(System.IO.Stream stream)
-		{
-			var cmd = stream.ReadByte();
-			if (cmd == -1) throw new System.IO.EndOfStreamException();
-			this.Cmd = (byte)cmd;
-
-			var param = stream.ReadByte();
-			if (param == -1) throw new System.IO.EndOfStreamException();
-			this.Param = (byte)param;
 		}
 	}
 }

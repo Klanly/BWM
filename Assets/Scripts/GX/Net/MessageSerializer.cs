@@ -51,16 +51,20 @@ namespace GX.Net
 			Debug.Assert(ProtoBuf.Serializer.NonGeneric.CanSerialize(message.GetType()));
 
 			var messageType = messageTypeTable[message.GetType()];
-			messageType.Serialize(stream);
+			var package = new Cmd.ForwardNullUserCmd_CS()
+			{
+				byCmd = messageType.Cmd,
+				byParam = messageType.Param,
+				time = DateTime.Now.ToUnixTime(),
+			};
 
-#if false
-			// 以下方法实现中未能正确处理泛型类型探测，此处的T全部以ProtoBuf.IExtensible对待了。
-			// 若有性能不足，以后可以仿deserializeTable的方式，缓存加速
-			ProtoBuf.Serializer.Serialize(dest, message);
-#else
-			//ProtoBuf.Serializer.NonGeneric.Serialize(stream, message);
-			ProtoBuf.Serializer.NonGeneric.SerializeWithLengthPrefix(stream, message, ProtoBuf.PrefixStyle.Base128, 0);
-#endif
+			using (var buf = new MemoryStream())
+			{
+				ProtoBuf.Serializer.NonGeneric.SerializeWithLengthPrefix(buf, message, ProtoBuf.PrefixStyle.Base128, 0);
+				package.data = buf.ToArray();
+			}
+
+			ProtoBuf.Serializer.NonGeneric.SerializeWithLengthPrefix(stream, package, ProtoBuf.PrefixStyle.Base128, 0);
 		}
 
 		#endregion
@@ -79,9 +83,12 @@ namespace GX.Net
 
 		public ProtoBuf.IExtensible Deserialize(Stream stream)
 		{
-			var messageType = new MessageType();
-			messageType.Deserialize(stream);
-			return deserializeTable[messageType](stream);
+			var package = ProtoBuf.Serializer.DeserializeWithLengthPrefix<Cmd.ForwardNullUserCmd_CS>(stream, ProtoBuf.PrefixStyle.Base128);
+			var messageType = new MessageType() { Cmd = package.byCmd, Param = package.byParam };
+			using (var buf = new MemoryStream(package.data))
+			{
+				return deserializeTable[messageType](buf);
+			}
 		}
 
 		#endregion
@@ -97,7 +104,6 @@ namespace GX.Net
 
 			// 注册
 			messageTypeTable[typeof(T)] = messageTypeID;
-			//deserializeTable[messageType] = (stream) => ProtoBuf.Serializer.Deserialize<T>(stream);
 			deserializeTable[messageTypeID] = (stream) => ProtoBuf.Serializer.DeserializeWithLengthPrefix<T>(stream, ProtoBuf.PrefixStyle.Base128);
 		}
 

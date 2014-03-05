@@ -149,7 +149,7 @@ public class UIDrawCall : MonoBehaviour
 				if (mRenderer != null)
 				{
 					mRenderer.enabled = value;
-					UnityEditor.EditorUtility.SetDirty(gameObject);
+					NGUITools.SetDirty(gameObject);
 				}
 			}
 		}
@@ -404,6 +404,9 @@ public class UIDrawCall : MonoBehaviour
 				if (!trim && panel.renderQueue != UIPanel.RenderQueue.Automatic)
 					trim = (mMesh == null || mMesh.vertexCount != verts.buffer.Length);
 
+				// If the number of vertices in the buffer is less than half of the full buffer, trim it
+				if (!trim && (verts.size << 1) < verts.buffer.Length) trim = true;
+
 				mTriangles = (verts.size >> 1);
 
 				if (trim || verts.buffer.Length > 65000)
@@ -458,7 +461,9 @@ public class UIDrawCall : MonoBehaviour
 					mMesh.triangles = mIndices;
 				}
 
+#if !UNITY_FLASH
 				if (trim || !alwaysOnScreen)
+#endif
 					mMesh.RecalculateBounds();
 
 				mFilter.mesh = mMesh;
@@ -566,6 +571,8 @@ public class UIDrawCall : MonoBehaviour
 		depthEnd = int.MinValue;
 		panel = null;
 		manager = null;
+		mMaterial = null;
+		mTexture = null;
 
 		NGUITools.DestroyImmediate(mDynamicMat);
 		mDynamicMat = null;
@@ -636,16 +643,17 @@ public class UIDrawCall : MonoBehaviour
 		// If we're in the editor, create the game object with hide flags set right away
 		GameObject go = UnityEditor.EditorUtility.CreateGameObjectWithHideFlags(name,
  #if SHOW_HIDDEN_OBJECTS
-			HideFlags.DontSave | HideFlags.NotEditable);
+			HideFlags.DontSave | HideFlags.NotEditable, typeof(UIDrawCall));
  #else
-			HideFlags.HideAndDontSave);
+			HideFlags.HideAndDontSave, typeof(UIDrawCall));
  #endif
+		UIDrawCall newDC = go.GetComponent<UIDrawCall>();
 #else
 		GameObject go = new GameObject(name);
 		DontDestroyOnLoad(go);
+		UIDrawCall newDC = go.AddComponent<UIDrawCall>();
 #endif
 		// Create the draw call
-		UIDrawCall newDC = go.AddComponent<UIDrawCall>();
 		mActiveList.Add(newDC);
 		return newDC;
 	}
@@ -661,8 +669,12 @@ public class UIDrawCall : MonoBehaviour
 		for (int i = mActiveList.size; i > 0; )
 		{
 			UIDrawCall dc = mActiveList[--i];
-			if (playing) NGUITools.SetActive(dc.gameObject, false);
-			else NGUITools.DestroyImmediate(dc.gameObject);
+
+			if (dc)
+			{
+				if (playing) NGUITools.SetActive(dc.gameObject, false);
+				else NGUITools.DestroyImmediate(dc.gameObject);
+			}
 		}
 		mActiveList.Clear();
 	}
@@ -674,11 +686,19 @@ public class UIDrawCall : MonoBehaviour
 	static public void ReleaseAll ()
 	{
 		ClearAll();
+		ReleaseInactive();
+	}
 
+	/// <summary>
+	/// Immediately destroy all inactive draw calls (draw calls that have been recycled and are waiting to be re-used).
+	/// </summary>
+
+	static public void ReleaseInactive()
+	{
 		for (int i = mInactiveList.size; i > 0; )
 		{
 			UIDrawCall dc = mInactiveList[--i];
-			NGUITools.DestroyImmediate(dc.gameObject);
+			if (dc) NGUITools.DestroyImmediate(dc.gameObject);
 		}
 		mInactiveList.Clear();
 	}

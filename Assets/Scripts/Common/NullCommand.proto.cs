@@ -69,13 +69,14 @@ namespace Cmd
       get { return _fid; }
       set { _fid = value; }
     }
-    private readonly global::System.Collections.Generic.List<byte[]> _data = new global::System.Collections.Generic.List<byte[]>();
-    [global::ProtoBuf.ProtoMember(5, Name=@"data", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public global::System.Collections.Generic.List<byte[]> data
+    private byte[] _data = null;
+    [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"data", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(null)]
+    public byte[] data
     {
       get { return _data; }
+      set { _data = value; }
     }
-  
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
