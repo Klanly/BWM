@@ -56,7 +56,8 @@ public class LoginScene : MonoBehaviour
 
 	void Update()
 	{
-		playButton.isEnabled = !string.IsNullOrEmpty(accountInput.value);
+		//会影响按钮的按下变色，先屏蔽
+		//playButton.isEnabled = !string.IsNullOrEmpty(accountInput.value);
 	}
 
 	[Execute]
