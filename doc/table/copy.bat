@@ -13,12 +13,13 @@ del /Q %dest%\Assets\Scripts\Table\*.proto
 copy /Y *.proto %dest%\Assets\Scripts\Table
 call:clearMeta %dest%\Assets\Scripts\Table
 
+popd
 pause
 GOTO:EOF
 
 rem ===================================================================
-rem é€’å½’åˆ é™¤ç»™å®šç›®å½•ä¸­æ‰€æœ‰å­¤ç«‹çš„*.metaæ–‡ä»¶
-rem å‚æ•°ï¼šè·¯å¾„
+rem µİ¹éÉ¾³ı¸ø¶¨Ä¿Â¼ÖĞËùÓĞ¹ÂÁ¢µÄ*.metaÎÄ¼ş
+rem ²ÎÊı£ºÂ·¾¶
 :clearMeta
 for /f "tokens=* delims=" %%i in ('dir /b /s %~1\*.meta') do (
 	if not exist %%~dpni del /Q %%i
