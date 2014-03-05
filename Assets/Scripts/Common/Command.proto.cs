@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-// Generated from: Common/Command.proto
+// Generated from: Command.proto
 namespace Cmd
 {
     [global::ProtoBuf.ProtoContract(Name=@"Command")]
@@ -24,7 +24,10 @@ namespace Cmd
       Chat = 3,
             
       [global::ProtoBuf.ProtoEnum(Name=@"Map", Value=4)]
-      Map = 4
+      Map = 4,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"Move", Value=5)]
+      Move = 5
     }
   
 }
