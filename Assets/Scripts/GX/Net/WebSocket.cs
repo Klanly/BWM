@@ -22,64 +22,6 @@ namespace GX.Net
 		}
 		public static IProxy Proxy { get; set; }
 
-		#region UniWeb WebSocket
-#if !UNITY_WINRT || UNITY_EDITOR
-		class UniWebWebSocket : IProxy
-		{
-			HTTP.WebSocket socket;
-			readonly object syncRoot = new object();
-			Queue<byte[]> queue;
-
-			#region IProxy 成员
-			public bool Connected { get { return socket.connected; } }
-
-			public void Open(string url)
-			{
-				if (socket != null)
-					socket.Close(HTTP.WebSocket.CloseEventCode.CloseEventCodeNormalClosure, string.Empty);
-				queue = new Queue<byte[]>();
-				socket = new HTTP.WebSocket();
-				socket.OnBinaryMessageRecv += buf =>
-				{
-					lock (syncRoot)
-					{
-						queue.Enqueue(buf);
-					}
-				};
-
-				// UniWeb can only work on http protocol. 
-				// http://answers.unity3d.com/questions/575963/websocket-implementation-that-works-in-ide-and-on.html
-				url = Regex.Replace(url, "^ws", "http");
-				socket.Connect(url);
-			}
-
-			public void Send(byte[] data)
-			{
-				socket.Send(data);
-			}
-
-			public byte[] Receive()
-			{
-				if (queue == null)
-					return null;
-				lock (syncRoot)
-				{
-					if (queue.Count == 0)
-						return null;
-					return queue.Dequeue();
-				}
-			}
-
-			public IEnumerator Run()
-			{
-				return socket.Dispatcher();
-			}
-
-			#endregion
-		}
-#endif
-		#endregion
-
 		#region WebSocket4Net WebSocket
 #if !UNITY_WINRT || UNITY_EDITOR
 		class WebSocket4NetProxy : IProxy
