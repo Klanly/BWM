@@ -2,6 +2,7 @@
 using UnityEditor;
 using System.Collections;
 using System.IO;
+using System.Linq;
 
 [CustomEditor(typeof(MapNav))]
 public class MapNavEditor : Editor
@@ -57,6 +58,11 @@ public class MapNavEditor : Editor
 		/// 清空
 		/// </summary>
 		Clear = 2,
+	}
+
+	static MapNavEditor()
+	{
+		ProtoBuf.Serializer.PrepareSerializer<MapNav>();
 	}
 
 	void OnEnable()
@@ -182,10 +188,19 @@ public class MapNavEditor : Editor
 	{
 		var path = Path.Combine(Path.GetDirectoryName(Application.dataPath), "MapNav");
 		Directory.CreateDirectory(path);
-		path = EditorUtility.SaveFilePanel("Export MapNav grid info", path, Target.transform.root.name, "nav");
-		Debug.Log(path);
+		path = EditorUtility.SaveFilePanel("Export MapNav grid info", path, Path.GetFileNameWithoutExtension(EditorApplication.currentScene), "nav");
 		if (string.IsNullOrEmpty(path))
 			return;
-
+		var config = new Config.MapNav();
+		config.gridwidth = Target.gridWidth;
+		config.gridheight = Target.gridHeight;
+		config.gridxnum = (uint)Target.gridXNum;
+		config.gridznum = (uint)Target.gridZNum;
+		config.grids.AddRange(from g in Target.grids select (uint)g);
+		using(var stream = File.OpenWrite(path))
+		{
+			ProtoBuf.Serializer.SerializeWithLengthPrefix(stream, config, ProtoBuf.PrefixStyle.Base128);
+		}
+		EditorUtility.DisplayDialog("MapNav Export OK", path, "OK");
 	}
 }
