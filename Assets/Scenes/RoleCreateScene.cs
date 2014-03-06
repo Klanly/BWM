@@ -9,6 +9,7 @@ public class RoleCreateScene : MonoBehaviour
 	public UIInput roleNameInput;
 	public bool sexman = true;
 	public Profession profession = default(Profession);
+	private readonly Dictionary<Profession, GameObject> professionSprites = new Dictionary<Profession, GameObject>();
 	private readonly Dictionary<Profession, GameObject> professionButtons = new Dictionary<Profession, GameObject>();
 
 	private GameObject spriteZhanshi, spriteDaoshi, spriteFashi;
@@ -30,7 +31,7 @@ public class RoleCreateScene : MonoBehaviour
 	void OnProfessionClick(Profession p)
 	{
 		profession = p;
-		foreach (var b in professionButtons)
+		foreach (var b in professionSprites)
 			b.Value.SetActive(b.Key == profession);
 		GameObject.Find("wiDesc").GetComponent<TweenColor>().ResetToBeginning();
 		GameObject.Find("wiDesc").GetComponent<TweenPosition>().ResetToBeginning();
@@ -62,12 +63,15 @@ public class RoleCreateScene : MonoBehaviour
 		UIEventListener.Get(GameObject.Find("btnSuiji")).onClick = this.btnSuiji_onClick;
 		UIEventListener.Get(GameObject.Find("btnOK")).onClick = this.btnOK_onClick;
 
-		professionButtons[Profession.Profession_ZhanShi] = GameObject.Find("spriteZhanshi");
-		professionButtons[Profession.Profession_DaoShi] = GameObject.Find("spriteDaoshi");
-		professionButtons[Profession.Profession_FaShi] = GameObject.Find("spriteFashi");
-		foreach (var item in professionButtons)
+		professionButtons[Profession.Profession_ZhanShi] = GameObject.Find("btnZhanshi");
+		professionButtons[Profession.Profession_DaoShi] = GameObject.Find("btnDaoshi");
+		professionButtons[Profession.Profession_FaShi] = GameObject.Find("btnFashi");
+		professionSprites[Profession.Profession_ZhanShi] = GameObject.Find("spriteZhanshi");
+		professionSprites[Profession.Profession_DaoShi] = GameObject.Find("spriteDaoshi");
+		professionSprites[Profession.Profession_FaShi] = GameObject.Find("spriteFashi");
+		foreach (var p in professionButtons)
 		{
-			item.Value.SetActive(false);
+			var item = p;
 			UIEventListener.Get(item.Value).onClick = s => OnProfessionClick(item.Key);
 		}
 
