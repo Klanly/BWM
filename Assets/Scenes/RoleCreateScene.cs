@@ -51,7 +51,7 @@ public class RoleCreateScene : MonoBehaviour
 		if (profession == default(Profession))
 			return;
 		Net.Instance.Send(new CheckCharNameSelectUserCmd_CS()
-        {
+		{
 			charname = roleNameInput.value,
 		});
 	}
