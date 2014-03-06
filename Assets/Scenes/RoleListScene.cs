@@ -44,7 +44,7 @@ public class RoleListScene : MonoBehaviour
 			item.transform.Find("labelName").GetComponent<UILabel>().text = info.charname;
 			item.transform.Find("labelLevel").GetComponent<UILabel>().text = "LV" + 10;
 			item.transform.Find("spriteProfession").GetComponent<UISprite>().spriteName = spriteNameProfession[1];
-			UIEventListener.Get(item.transform.Find("btnRole").gameObject).onClick = go => Net.Instance.Send(new CharactorSelectSelectUserCmd_C()
+			UIEventListener.Get(item.gameObject).onClick = go => Net.Instance.Send(new CharactorSelectSelectUserCmd_C()
 			{
 				charid = info.charid,
 			});
@@ -60,7 +60,7 @@ public class RoleListScene : MonoBehaviour
 			var item = Instantiate(btnRoleCreate) as GameObject;
 			item.transform.parent = gridRoleList.transform;
 			item.transform.localScale = Vector3.one;
-			UIEventListener.Get(item.transform.Find("btnRoleCreate").gameObject).onClick = go => Application.LoadLevel("RoleCreateScene");
+			UIEventListener.Get(item.gameObject).onClick = go => Application.LoadLevel("RoleCreateScene");
 		}
 
 		gridRoleList.Reposition();
