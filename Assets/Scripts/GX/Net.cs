@@ -62,4 +62,12 @@ public class Net : Singleton<Net>
 			}
 		}
 	}
+
+	protected override void OnDestroy()
+	{
+		WebSocket.Proxy.Close();
+		WebSocket.Proxy = null;
+
+		base.OnDestroy();
+	}
 }

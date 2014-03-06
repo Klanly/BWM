@@ -31,9 +31,8 @@ class WebSocket4NetProxy : GX.Net.WebSocket.IProxy
 	
 	public void Open(string url)
 	{
-		receiveQueue.Clear();
-		if (socket != null)
-			socket.Close();
+		Close();
+
 		socket = new WebSocket4Net.WebSocket(url);
 		socket.DataReceived += (s, e) =>
 		{
@@ -49,6 +48,16 @@ class WebSocket4NetProxy : GX.Net.WebSocket.IProxy
 		socket.MessageReceived += (s, e) => Debug.Log("WebSocket MessageReceived: " + e.Message);
 
 		socket.Open();
+	}
+
+	public void Close()
+	{
+		receiveQueue.Clear();
+		if (socket != null)
+		{
+			socket.Close();
+			socket = null;
+		}
 	}
 
 	public void Send(byte[] data)

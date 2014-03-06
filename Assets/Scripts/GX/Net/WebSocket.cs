@@ -33,6 +33,7 @@ namespace GX.Net
 		{
 			GX.Net.WebSocket.State State { get; }
 			void Open(string url);
+			void Close();
 			void Send(byte[] data);
 			byte[] Receive();
 		}
