@@ -130,12 +130,20 @@ namespace Cmd
       get { return _charname; }
       set { _charname = value; }
     }
-    private bool _sexman;
-    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"sexman", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public bool sexman
+    private string _method;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"method", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public string method
     {
-      get { return _sexman; }
-      set { _sexman = value; }
+      get { return _method; }
+      set { _method = value; }
+    }
+    private string _params = "";
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"params", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string @params
+    {
+      get { return _params; }
+      set { _params = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
