@@ -13,9 +13,14 @@ public class MainCharacter : MonoBehaviour
 	public float distanceCameraToRole = 25.0f;
 	public float heightCameraLookAt = 0.5f;
 
+	public MapNav MapNav { get; private set; }
+
 	private Transform mainRole;
 	private Transform birthPos;
 
+	/// <summary>
+	/// 主角世界坐标位置
+	/// </summary>
 	public Vector3 Position
 	{
 		get { return mainRole.position; }
@@ -31,6 +36,15 @@ public class MainCharacter : MonoBehaviour
 		}
 	}
 
+	/// <summary>
+	/// 主角逻辑格子位置
+	/// </summary>
+	public GridPosition Grid
+	{
+		get { return new GridPosition() { X = MapNav.GetGridX(Position), Z = MapNav.GetGridZ(Position) }; }
+		set { Position = MapNav.GetWorldPosition(value.X, value.Z); }
+	}
+
 	static MainCharacter()
 	{
 		ServerInfo = new MainCharacterInfo(); // 避免不必要的空指针判断
@@ -39,6 +53,7 @@ public class MainCharacter : MonoBehaviour
 	// Use this for initialization
 	void Start()
 	{
+		MapNav = Object.FindObjectOfType<MapNav>();
 	}
 
 	// Update is called once per frame
@@ -112,5 +127,6 @@ public class MainCharacter : MonoBehaviour
 		}
 
 		var my = Object.FindObjectOfType<MainCharacter>();
+		my.Grid = new GridPosition() { X = (int)cmd.pos.x, Z = (int)cmd.pos.y };
 	}
 }
