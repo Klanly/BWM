@@ -9,7 +9,7 @@ public class RoleListScene : MonoBehaviour
 
 	private GameObject btnRole;
 	private GameObject btnRoleCreate;
-	private string[] spriteNameProfession = {"button_zhanshi", "button_daoshi", "button_fashi"};
+	private string[] spriteNameProfession = { "button_zhanshi", "button_daoshi", "button_fashi" };
 
 	// Use this for initialization
 	void Start()
@@ -31,7 +31,7 @@ public class RoleListScene : MonoBehaviour
 		btnRoleCreate.SetActive(true);
 
 		var num = cmd.list.Count;
-		if(num < MaxRoleNum)
+		if (num < MaxRoleNum)
 			num += 1;
 		var height = gridRoleList.cellHeight * num - (gridRoleList.cellHeight - btnRole.GetComponent<UISprite>().height);
 		var oldPosition = gridRoleList.transform.localPosition;
@@ -57,12 +57,12 @@ public class RoleListScene : MonoBehaviour
 				Net.Instance.Send(new CharactorDeleteSelectUserCmd_C() { charid = info.charid, });
 		}
 
-		if(cmd.list.Count < MaxRoleNum)
+		if (cmd.list.Count < MaxRoleNum)
 		{
 			var item = Instantiate(btnRoleCreate) as GameObject;
 			item.transform.parent = gridRoleList.transform;
 			item.transform.localScale = Vector3.one;
-			
+
 			UIEventListener.Get(item.gameObject).onClick = go => Application.LoadLevel("RoleCreateScene");
 		}
 
