@@ -82,8 +82,15 @@ namespace Cmd
       get { return _sexman; }
       set { _sexman = value; }
     }
+    private uint _level;
+    [global::ProtoBuf.ProtoMember(4, IsRequired = true, Name=@"level", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint level
+    {
+      get { return _level; }
+      set { _level = value; }
+    }
     private Cmd.Profession _profession;
-    [global::ProtoBuf.ProtoMember(4, IsRequired = true, Name=@"profession", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoMember(5, IsRequired = true, Name=@"profession", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     public Cmd.Profession profession
     {
       get { return _profession; }
