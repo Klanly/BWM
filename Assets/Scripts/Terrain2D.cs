@@ -3,7 +3,6 @@ using System.Collections;
 
 public class Terrain2D : MonoBehaviour
 {
-
 	public Texture texture;
 	public int pixelsInXOneMeter = 64;
 	public int pixelsInZOneMeter = 32;

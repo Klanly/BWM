@@ -13,10 +13,6 @@ public class MapNavEditor : Editor
 	/// </summary>
 	private SerializedProperty gridWidth;
 	/// <summary>
-	/// 格子高(米)
-	/// </summary>
-	private SerializedProperty gridHeight;
-	/// <summary>
 	/// X轴格子数
 	/// </summary>
 	private SerializedProperty gridXNum;
@@ -68,7 +64,6 @@ public class MapNavEditor : Editor
 	void OnEnable()
 	{
 		gridWidth = serializedObject.FindProperty("gridWidth");
-		gridHeight = serializedObject.FindProperty("gridHeight");
 		gridXNum = serializedObject.FindProperty("gridXNum");
 		gridZNum = serializedObject.FindProperty("gridZNum");
 	}
@@ -84,7 +79,6 @@ public class MapNavEditor : Editor
 		if (Target.ShowGrids)
 		{
 			EditorGUILayout.PropertyField(gridWidth, new GUIContent("格子宽(米)"));
-			EditorGUILayout.PropertyField(gridHeight, new GUIContent("格子高(米)"));
 			EditorGUILayout.PropertyField(gridXNum, new GUIContent("X轴格子数"));
 			EditorGUILayout.PropertyField(gridZNum, new GUIContent("Z轴格子数"));
 			if (GUILayout.Button("Update"))

@@ -23,10 +23,9 @@ public class MapNav : MonoBehaviour
 	}
 
 	#region SerializedProperty
-	public float gridWidth = 1.0f;
-	public float gridHeight = 1.0f;
-	public int gridXNum = 0;
-	public int gridZNum = 0;
+	public float gridWidth = 0.25f;
+	public int gridXNum = 128;
+	public int gridZNum = 256;
 	/// <summary>
 	/// 索引方式：[z * gridXNum + x]
 	/// </summary>
@@ -37,6 +36,7 @@ public class MapNav : MonoBehaviour
 	/// 显示格子
 	/// </summary>
 	public bool ShowGrids { get; set; }
+	public float gridHeight { get { return gridWidth; } }
 
 	/// <summary>
 	/// get a grid at index of grids
@@ -67,6 +67,7 @@ public class MapNav : MonoBehaviour
 	/// </summary>
 	public void Reset()
 	{
+		Debug.LogWarning(string.Format("阻挡数据重置为 {0}*{1}", gridXNum, gridZNum));
 		grids = new TileType[gridZNum * gridXNum];
 	}
 
