@@ -2027,6 +2027,7 @@ GameObject:
   - 114: {fileID: 985412417}
   - 114: {fileID: 985412416}
   - 54: {fileID: 985412415}
+  - 114: {fileID: 985412418}
   m_Layer: 13
   m_Name: UI Root
   m_TagString: Untagged
@@ -2119,6 +2120,17 @@ MonoBehaviour:
   manualHeight: 720
   minimumHeight: 320
   maximumHeight: 1536
+--- !u!114 &985412418
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 985412413}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0ad6f8d2c1e96246867b1095e986840, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1057145269
 GameObject:
   m_ObjectHideFlags: 0

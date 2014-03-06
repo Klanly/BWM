@@ -7,6 +7,7 @@ using System;
 public class LoginScene : MonoBehaviour
 {
 	public const int GameID = 100;
+	public const string Name = "LoginScene";
 
 	public UIInput accountInput;
 	public UIButton playButton;
