@@ -55,7 +55,8 @@ class WebSocket4NetProxy : GX.Net.WebSocket.IProxy
 		receiveQueue.Clear();
 		if (socket != null)
 		{
-			socket.Close();
+			try { socket.Close(); }
+			catch { }
 			socket = null;
 		}
 	}
