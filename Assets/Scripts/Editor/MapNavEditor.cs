@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEditor;
 using System.Collections;
+using System.IO;
 
 [CustomEditor(typeof(MapNav))]
 public class MapNavEditor : Editor
@@ -93,6 +94,11 @@ public class MapNavEditor : Editor
 		}
 		EditorGUILayout.EndToggleGroup();
 
+		if (GUILayout.Button("Export"))
+		{
+			Export();
+		}
+
 		serializedObject.ApplyModifiedProperties();
 	}
 
@@ -170,5 +176,16 @@ public class MapNavEditor : Editor
 				Event.current.Use();
 				break;
 		}
+	}
+
+	void Export()
+	{
+		var path = Path.Combine(Path.GetDirectoryName(Application.dataPath), "MapNav");
+		Directory.CreateDirectory(path);
+		path = EditorUtility.SaveFilePanel("Export MapNav grid info", path, Target.transform.root.name, "nav");
+		Debug.Log(path);
+		if (string.IsNullOrEmpty(path))
+			return;
+
 	}
 }
