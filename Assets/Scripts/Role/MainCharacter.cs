@@ -16,6 +16,21 @@ public class MainCharacter : MonoBehaviour
 	private Transform mainRole;
 	private Transform birthPos;
 
+	public Vector3 Position
+	{
+		get { return mainRole.position; }
+		set 
+		{
+			mainRole.position = value;
+
+			// 设置照相机位置
+			Vector3 targetCenter = mainRole.position;
+			targetCenter.y += heightCameraLookAt;
+			this.transform.position = targetCenter;
+			this.transform.position += this.transform.rotation * Vector3.back * distanceCameraToRole;
+		}
+	}
+
 	static MainCharacter()
 	{
 		ServerInfo = new MainCharacterInfo(); // 避免不必要的空指针判断
@@ -36,7 +51,7 @@ public class MainCharacter : MonoBehaviour
 			if (GameObject.Find("MainRole"))
 				mainRole = GameObject.Find("MainRole").transform;
 			if (mainRole && birthPos)
-				mainRole.position = birthPos.position;
+				Position = birthPos.position;
 		}
 
 
@@ -50,7 +65,7 @@ public class MainCharacter : MonoBehaviour
 			Vector3 oldPosition = mainRole.transform.position;
 			oldPosition.x += h * speedMainRole * Time.deltaTime;
 			oldPosition.z += v * speedMainRole * Time.deltaTime;
-			mainRole.position = oldPosition;
+			Position = oldPosition;
 
 			// 触摸屏
 			if (Input.touchCount > 0 && (Input.GetTouch(0).phase == TouchPhase.Began || Input.GetTouch(0).phase == TouchPhase.Moved))
@@ -60,9 +75,9 @@ public class MainCharacter : MonoBehaviour
 				RaycastHit hit;
 				if (terrain.Raycast(ray, out hit, 1000))
 				{
-					Vector3 direction = hit.point - mainRole.position;
+					var direction = hit.point - Position;
 					direction.y = 0;
-					mainRole.position = mainRole.position + Vector3.Normalize(direction) * speedMainRole * Time.deltaTime;
+					Position += Vector3.Normalize(direction) * speedMainRole * Time.deltaTime;
 				}
 			}
 
@@ -74,20 +89,11 @@ public class MainCharacter : MonoBehaviour
 				RaycastHit hit;
 				if (terrain.Raycast(ray, out hit, 1000))
 				{
-					Vector3 direction = hit.point - mainRole.position;
+					var direction = hit.point - Position;
 					direction.y = 0;
-					mainRole.position = mainRole.position + Vector3.Normalize(direction) * speedMainRole * Time.deltaTime;
+					Position += Vector3.Normalize(direction) * speedMainRole * Time.deltaTime;
 				}
 			}
-		}
-
-		// 设置照相机位置
-		if (mainRole)
-		{
-			Vector3 targetCenter = mainRole.position;
-			targetCenter.y += heightCameraLookAt;
-			this.transform.position = targetCenter;
-			this.transform.position += this.transform.rotation * Vector3.back * distanceCameraToRole;
 		}
 	}
 
@@ -104,5 +110,7 @@ public class MainCharacter : MonoBehaviour
 			Application.LoadLevel("BattleScene");
 			yield return null;
 		}
+
+		var my = Object.FindObjectOfType<MainCharacter>();
 	}
 }
