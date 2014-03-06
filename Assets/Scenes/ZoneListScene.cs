@@ -12,6 +12,7 @@ public class ZoneListScene : MonoBehaviour
 	{
 		foreach (Transform t in zoneList.transform)
 			DestroyObject(t.gameObject);
+		zoneList.transform.DetachChildren();
 
 		var height = zoneList.cellHeight * cmd.server.Count - (zoneList.cellHeight - zoneButton.GetComponent<UISprite>().height);
 		var oldPosition = zoneList.transform.localPosition;
