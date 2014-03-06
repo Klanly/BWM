@@ -19,8 +19,13 @@ public class MainCharacter : Singleton<MainCharacter>
 	/// </summary>
 	/// <param name="cmd"></param>
 	[Execute]
-	static void Execute(MainCharacterInfo cmd)
+	static IEnumerator Execute(MainCharacterInfo cmd)
 	{
 		ServerInfo = cmd;
+		if (Application.loadedLevelName != "BattleScene")
+		{
+			Application.LoadLevel("BattleScene");
+			yield return null;
+		}
 	}
 }
