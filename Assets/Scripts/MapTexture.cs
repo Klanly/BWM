@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Terrain2D : MonoBehaviour
+public class MapTexture : MonoBehaviour
 {
 	public Texture texture;
 	public int pixelsInXOneMeter = 64;

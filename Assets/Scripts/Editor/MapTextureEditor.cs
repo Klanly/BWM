@@ -2,8 +2,8 @@
 using UnityEditor;
 using System.Collections;
 
-[CustomEditor(typeof(Terrain2D))]
-public class Terrain2DEditor : Editor {
+[CustomEditor(typeof(MapTexture))]
+public class MapTextureEditor : Editor {
 
 	private SerializedProperty texture;
 	private SerializedProperty pixelsInXOneMeter;
@@ -34,7 +34,7 @@ public class Terrain2DEditor : Editor {
 
 		if (GUILayout.Button("Update"))
 		{
-			((Terrain2D)target).Reset();
+			((MapTexture)target).Reset();
 		}
 	}
 }
