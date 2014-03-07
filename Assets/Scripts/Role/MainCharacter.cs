@@ -53,23 +53,21 @@ public class MainCharacter : MonoBehaviour
 	// Use this for initialization
 	void Start()
 	{
+		if (ServerInfo.data == null)
+			return;
+		var map = Resources.Load("Map/" + ServerInfo.data.mapid);
+		if(map != null)
+			GameObject.Instantiate(map);
+
+		birthPos = GameObject.Find("BirthPos").transform;
+		mainRole = GameObject.Find("MainRole").transform;
 		MapNav = Object.FindObjectOfType<MapNav>();
+		Grid = new GridPosition() { X = (int)ServerInfo.pos.x, Z = (int)ServerInfo.pos.y };
 	}
 
 	// Update is called once per frame
 	void Update()
 	{
-		if (mainRole == null || birthPos == null)
-		{
-			if (GameObject.Find("BirthPos"))
-				birthPos = GameObject.Find("BirthPos").transform;
-			if (GameObject.Find("MainRole"))
-				mainRole = GameObject.Find("MainRole").transform;
-			if (mainRole && birthPos)
-				Position = birthPos.position;
-		}
-
-
 		// 设置主角的移动
 		if (mainRole)
 		{
@@ -117,15 +115,12 @@ public class MainCharacter : MonoBehaviour
 	/// </summary>
 	/// <param name="cmd"></param>
 	[Execute]
-	static IEnumerator Execute(MainCharacterInfo cmd)
+	static void Execute(MainCharacterInfo cmd)
 	{
 		ServerInfo = cmd;
 		if (Application.loadedLevelName != "BattleScene")
 		{
-			yield return Application.LoadLevelAsync("BattleScene");
+			Application.LoadLevelAsync("BattleScene");
 		}
-
-		var my = Object.FindObjectOfType<MainCharacter>();
-		my.Grid = new GridPosition() { X = (int)cmd.pos.x, Z = (int)cmd.pos.y };
 	}
 }
