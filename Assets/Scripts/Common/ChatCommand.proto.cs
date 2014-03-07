@@ -116,15 +116,17 @@ namespace Cmd
   {
     public GMCommandChatUserCmd_C() {}
     
-    private ulong _charid;
-    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"charid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    private ulong _charid = default(ulong);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"charid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong charid
     {
       get { return _charid; }
       set { _charid = value; }
     }
-    private string _charname;
-    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"charname", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    private string _charname = "";
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"charname", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
     public string charname
     {
       get { return _charname; }
