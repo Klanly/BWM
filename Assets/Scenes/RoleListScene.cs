@@ -14,14 +14,6 @@ public class RoleListScene : MonoBehaviour
 	// Use this for initialization
 	void Start()
 	{
-#if UNITY_EDITOR
-		if (System.IO.Path.GetFileNameWithoutExtension(UnityEditor.EditorApplication.currentScene) != LoginScene.Name)
-		{
-			Application.LoadLevel(LoginScene.Name);
-			return;
-		}
-#endif
-
 		btnRole = GameObject.Find("btnRole");
 		btnRoleCreate = GameObject.Find("btnRoleCreate");
 		btnRole.SetActive(false);

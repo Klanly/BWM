@@ -58,14 +58,6 @@ public class RoleCreateScene : MonoBehaviour
 
 	void Start()
 	{
-#if UNITY_EDITOR
-		if (System.IO.Path.GetFileNameWithoutExtension(UnityEditor.EditorApplication.currentScene) != LoginScene.Name)
-		{
-			Application.LoadLevel(LoginScene.Name);
-			return;
-		}
-#endif
-
 		UIEventListener.Get(GameObject.Find("btnMale")).onClick = this.btnMale_onClick;
 		UIEventListener.Get(GameObject.Find("btnFemale")).onClick = this.btnFemale_onClick;
 		UIEventListener.Get(GameObject.Find("btnSuiji")).onClick = this.btnSuiji_onClick;

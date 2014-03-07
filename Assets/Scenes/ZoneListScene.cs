@@ -8,17 +8,6 @@ public class ZoneListScene : MonoBehaviour
 	public UIGrid zoneList;
 	public GameObject zoneButton;
 
-	void Start()
-	{
-#if UNITY_EDITOR
-		if (System.IO.Path.GetFileNameWithoutExtension(UnityEditor.EditorApplication.currentScene) != LoginScene.Name)
-		{
-			Application.LoadLevel(LoginScene.Name);
-			return;
-		}
-#endif
-	}
-
 	private void ShowZoneList(ZoneInfoListLoginUserCmd_S cmd)
 	{
 		foreach (Transform t in zoneList.transform)
