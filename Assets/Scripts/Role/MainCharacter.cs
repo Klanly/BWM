@@ -16,6 +16,7 @@ public class MainCharacter : MonoBehaviour
 	public MapNav MapNav { get; private set; }
 
 	private Transform mainRole;
+	private GameObject terrain;
 
 	/// <summary>
 	/// 主角世界坐标位置
@@ -52,15 +53,29 @@ public class MainCharacter : MonoBehaviour
 	// Use this for initialization
 	void Start()
 	{
+		mainRole = GameObject.Find("MainRole").transform;
 		if (ServerInfo.data == null)
 			return;
-		var map = Resources.Load("Map/" + ServerInfo.data.mapid);
-		if(map != null)
-			GameObject.Instantiate(map);
-
-		mainRole = GameObject.Find("MainRole").transform;
-		MapNav = Object.FindObjectOfType<MapNav>();
+		LoadMap(ServerInfo.data.mapid.ToString());
 		Grid = new GridPosition() { X = (int)ServerInfo.pos.x, Z = (int)ServerInfo.pos.y };
+	}
+
+	public bool LoadMap(string mapname)
+	{
+		var map = Resources.Load("Map/" + mapname);
+		if (map == null)
+		{
+			Debug.LogError("Load map error: " + mapname);
+			return false;
+		}
+		Debug.Log("Load map: " + mapname);
+		if (terrain != null)
+			GameObject.Destroy(terrain);
+		terrain = GameObject.Instantiate(map) as GameObject;
+		terrain.name = "Map." + mapname;
+		MapNav = Object.FindObjectOfType<MapNav>();
+		Grid = new GridPosition();
+		return true;
 	}
 
 	// Update is called once per frame
