@@ -44,7 +44,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 400004}
   m_Layer: 0
-  m_Name: 1
+  m_Name: 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -350,7 +350,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 919200b5ff9771e4691bb0f88198dbe7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  texture: {fileID: 2800000, guid: 6f79b8ff21ee7fe41a909bf3d4260718, type: 3}
+  texture: {fileID: 2800000, guid: 07fc948413fe65943816781a782a5c69, type: 3}
   pixelsInXOneMeter: 64
   pixelsInZOneMeter: 32
 --- !u!114 &11400002

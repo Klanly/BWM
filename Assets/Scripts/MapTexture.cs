@@ -10,24 +10,20 @@ public class MapTexture : MonoBehaviour
 	// Use this for initialization
 	void Start()
 	{
-		if (texture != null)
-		{
-			int width = texture.width / pixelsInXOneMeter;
-			int height = texture.height / pixelsInZOneMeter;
-
-			transform.localScale = new Vector3(width, height, 1);
-			transform.localEulerAngles = new Vector3(90, 0, 0);
-			transform.position = new Vector3(width / 2.0f, 0, height / 2.0f);
-
-			var tempMaterial = new Material(renderer.sharedMaterial);
-			tempMaterial.mainTexture = texture;
-			tempMaterial.shader = Shader.Find("Unlit/Texture");
-			renderer.sharedMaterial = tempMaterial;
-		}
+		Reset();
 	}
 
 	public void Reset()
 	{
-		Start();
+		if (texture == null)
+			return;
+		int width = texture.width / pixelsInXOneMeter;
+		int height = texture.height / pixelsInZOneMeter;
+
+		transform.localScale = new Vector3(width, height, 1);
+		transform.localEulerAngles = new Vector3(90, 0, 0);
+		transform.position = new Vector3(width / 2.0f, 0, height / 2.0f);
+
+		renderer.sharedMaterial = new Material(Shader.Find("Unlit/Texture")) { mainTexture = texture, name = texture.name };
 	}
 }

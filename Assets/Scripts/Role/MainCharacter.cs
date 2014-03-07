@@ -16,7 +16,6 @@ public class MainCharacter : MonoBehaviour
 	public MapNav MapNav { get; private set; }
 
 	private Transform mainRole;
-	private Transform birthPos;
 
 	/// <summary>
 	/// 主角世界坐标位置
@@ -59,7 +58,6 @@ public class MainCharacter : MonoBehaviour
 		if(map != null)
 			GameObject.Instantiate(map);
 
-		birthPos = GameObject.Find("BirthPos").transform;
 		mainRole = GameObject.Find("MainRole").transform;
 		MapNav = Object.FindObjectOfType<MapNav>();
 		Grid = new GridPosition() { X = (int)ServerInfo.pos.x, Z = (int)ServerInfo.pos.y };
