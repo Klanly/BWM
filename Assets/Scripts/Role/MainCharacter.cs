@@ -85,7 +85,7 @@ public class MainCharacter : MonoBehaviour
 			// 触摸屏
 			if (Input.touchCount > 0 && (Input.GetTouch(0).phase == TouchPhase.Began || Input.GetTouch(0).phase == TouchPhase.Moved))
 			{
-				Collider terrain = GameObject.Find("Terrain2D").collider;
+				Collider terrain = MapNav.gameObject.collider;
 				Ray ray = Camera.main.ScreenPointToRay(Input.GetTouch(0).position);
 				RaycastHit hit;
 				if (terrain.Raycast(ray, out hit, 1000))
@@ -99,7 +99,7 @@ public class MainCharacter : MonoBehaviour
 			// mouse
 			if (Input.GetMouseButton(0))
 			{
-				Collider terrain = GameObject.Find("Terrain2D").collider;
+				Collider terrain = MapNav.gameObject.collider;
 				Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 				RaycastHit hit;
 				if (terrain.Raycast(ray, out hit, 1000))
