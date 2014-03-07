@@ -50,12 +50,10 @@ public class ZoneListScene : MonoBehaviour
 		zoneButton.SetActive(false);
 	}
 
-
 	[Execute]
 	static IEnumerator Execute(ZoneInfoListLoginUserCmd_S cmd)
 	{
-		Application.LoadLevel("ZoneListScene");
-		yield return null;
+		yield return Application.LoadLevelAsync("ZoneListScene");
 		Object.FindObjectOfType<ZoneListScene>().ShowZoneList(cmd);
 	}
 }

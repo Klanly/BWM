@@ -78,14 +78,13 @@ public class RoleListScene : MonoBehaviour
 	{
 		if (cmd.list.Count == 0)
 		{
-			Application.LoadLevel("RoleCreateScene");
+			yield return Application.LoadLevelAsync("RoleCreateScene");
 		}
 		else
 		{
 			if (Application.loadedLevelName != "RoleListScene")
 			{
-				Application.LoadLevel("RoleListScene");
-				yield return null;
+				yield return  Application.LoadLevelAsync("RoleListScene");
 			}
 			Object.FindObjectOfType<RoleListScene>().ShowRoleList(cmd);
 		}

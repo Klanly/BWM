@@ -122,8 +122,7 @@ public class MainCharacter : MonoBehaviour
 		ServerInfo = cmd;
 		if (Application.loadedLevelName != "BattleScene")
 		{
-			Application.LoadLevel("BattleScene");
-			yield return null;
+			yield return Application.LoadLevelAsync("BattleScene");
 		}
 
 		var my = Object.FindObjectOfType<MainCharacter>();
