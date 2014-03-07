@@ -136,7 +136,7 @@ MonoBehaviour:
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 2.47965121
+  aspectRatio: 2.79069757
   mRect:
     serializedVersion: 2
     x: 0
@@ -407,7 +407,7 @@ MonoBehaviour:
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 1.33281255
+  aspectRatio: 1.5
   mRect:
     serializedVersion: 2
     x: 0
@@ -598,7 +598,7 @@ MonoBehaviour:
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 2.00234747
+  aspectRatio: 2.2535212
   mRect:
     serializedVersion: 2
     x: 0
@@ -1005,6 +1005,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46883509b1f7a3f48abf2ccb465af165, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  btnRole: {fileID: 884787673}
+  btnRoleCreate: {fileID: 411538283}
+  gridRoleList: {fileID: 256516570}
 --- !u!114 &1476132470
 MonoBehaviour:
   m_ObjectHideFlags: 0

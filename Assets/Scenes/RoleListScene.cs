@@ -7,22 +7,21 @@ public class RoleListScene : MonoBehaviour
 {
 	public const int MaxRoleNum = 3;
 
-	private GameObject btnRole;
-	private GameObject btnRoleCreate;
+	public GameObject btnRole;
+	public GameObject btnRoleCreate;
+	public UIGrid gridRoleList;
+
 	private string[] spriteNameProfession = { "button_zhanshi", "button_daoshi", "button_fashi" };
 
 	// Use this for initialization
 	void Start()
 	{
-		btnRole = GameObject.Find("btnRole");
-		btnRoleCreate = GameObject.Find("btnRoleCreate");
 		btnRole.SetActive(false);
 		btnRoleCreate.SetActive(false);		
 	}
 
 	private void ShowRoleList(CharactorListReturnSelectUserCmd_S cmd)
 	{
-		var gridRoleList = GameObject.Find("gridRoleList").GetComponent<UIGrid>();
 		foreach (Transform t in gridRoleList.transform)
 			DestroyObject(t.gameObject);
 		gridRoleList.transform.DetachChildren();
