@@ -12,15 +12,20 @@ public class GuiChatInput : MonoBehaviour
 	// Use this for initialization
 	void Start()
 	{
-		UIEventListener.Get(sendButton.gameObject).onClick = go => SendChat(chatInput.value.Trim());
+		UIEventListener.Get(sendButton.gameObject).onClick = go => SendChat();
 	}
 
 	void Update()
 	{
-		var value = chatInput.value.Trim();
-		sendButton.isEnabled = !string.IsNullOrEmpty(value);
+		sendButton.isEnabled = !string.IsNullOrEmpty(chatInput.value.Trim());
 		if (sendButton.isEnabled && Input.GetKeyDown(KeyCode.Return))
-			SendChat(value);
+			SendChat();
+	}
+
+	private void SendChat()
+	{
+		SendChat(chatInput.value.Trim());
+		chatInput.value = string.Empty;
 	}
 
 	public static void SendChat(string message)
