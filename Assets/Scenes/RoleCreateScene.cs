@@ -12,13 +12,26 @@ public class RoleCreateScene : MonoBehaviour
 	private readonly Dictionary<Profession, GameObject> professionSprites = new Dictionary<Profession, GameObject>();
 	private readonly Dictionary<Profession, GameObject> professionButtons = new Dictionary<Profession, GameObject>();
 
+	private string[] strSk = new string[]{"Prefabs/Models/Body/Sk_Female", "Prefabs/Models/Body/Sk_Female"};
+	private string[] strFemaleBody = new string[]{"Prefabs/Models/Body/Female_Body_8100", "Prefabs/Models/Body/Female_Body_8100","Prefabs/Models/Body/Female_Body_8100"};
+	private string[] strFemaleHead = new string[]{"Prefabs/Models/Head/Female_Head_8100", "Prefabs/Models/Head/Female_Head_8100","Prefabs/Models/Head/Female_Head_8100"};
+	private string[] strFemaleWeapon = new string[]{"Prefabs/Models/Weapon/Weapon_Cann_1006", "Prefabs/Models/Weapon/Weapon_Cann_1006","Prefabs/Models/Weapon/Weapon_Cann_1006"};
+	private string[] strFemaleAction = new string[]{"Ani_Dd_show", "Ani_Dd_show","Ani_Dd_show"};
+	private string[] strMaleBody = new string[]{"Prefabs/Models/Body/Female_Body_8100", "Prefabs/Models/Body/Female_Body_8100","Prefabs/Models/Body/Female_Body_8100"};
+	private string[] strMaleHead = new string[]{"Prefabs/Models/Head/Female_Head_8100", "Prefabs/Models/Head/Female_Head_8100","Prefabs/Models/Head/Female_Head_8100"};
+	private string[] strMaleWeapon = new string[]{"Prefabs/Models/Weapon/Weapon_Cann_1006", "Prefabs/Models/Weapon/Weapon_Cann_1006","Prefabs/Models/Weapon/Weapon_Cann_1006"};
+	private string[] strMaleAction = new string[]{"Ani_Dd_show", "Ani_Dd_show","Ani_Dd_show"};
+
 	private GameObject spriteZhanshi, spriteDaoshi, spriteFashi;
+	private GameObject avatar;
+	private GameObject curAvatar = null;
 
 	void btnMale_onClick(GameObject sender)
 	{
 		sexman = true;
 		GameObject.Find("btnMale").GetComponent<TweenScale>().PlayForward();
 		GameObject.Find("btnFemale").GetComponent<TweenScale>().PlayReverse();
+		CreateAvatar();
 	}
 
 	void btnFemale_onClick(GameObject sender)
@@ -26,6 +39,39 @@ public class RoleCreateScene : MonoBehaviour
 		sexman = false;
 		GameObject.Find("btnFemale").GetComponent<TweenScale>().PlayForward();
 		GameObject.Find("btnMale").GetComponent<TweenScale>().PlayReverse();
+		CreateAvatar();
+	}
+
+	void CreateAvatar()
+	{
+		if(curAvatar != null)
+			Destroy(curAvatar);
+
+		string sk, body, head, weapon, action;
+		int index = (int)profession - 1;
+		if(sexman == true)
+		{
+			sk = strSk[0];
+			body = strMaleBody[index];
+			head = strMaleHead[index];
+			weapon = strMaleWeapon[index];
+			action = strMaleAction[index];
+		}
+		else
+		{
+			sk = strSk[1];
+			body = strFemaleBody[index];
+			head = strFemaleHead[index];
+			weapon = strFemaleWeapon[index];
+			action = strFemaleAction[index];
+		}
+
+		var go = Avatar.CreateAvatar(sk, body, head, weapon);
+		go.transform.position = avatar.transform.position;
+		go.transform.rotation = avatar.transform.rotation;
+		go.transform.localScale = avatar.transform.localScale;
+		go.GetComponent<Animator>().Play(action);
+		curAvatar = go;
 	}
 
 	void OnProfessionClick(Profession p)
@@ -37,6 +83,7 @@ public class RoleCreateScene : MonoBehaviour
 		GameObject.Find("wiDesc").GetComponent<TweenPosition>().ResetToBeginning();
 		GameObject.Find("wiDesc").GetComponent<TweenColor>().PlayForward();
 		GameObject.Find("wiDesc").GetComponent<TweenPosition>().PlayForward();
+		CreateAvatar();
 	}
 
 	void btnSuiji_onClick(GameObject sender)
@@ -74,6 +121,10 @@ public class RoleCreateScene : MonoBehaviour
 			var item = p;
 			UIEventListener.Get(item.Value).onClick = s => OnProfessionClick(item.Key);
 		}
+
+		// 找到avatar
+		avatar = GameObject.Find("Avatar");
+		avatar.SetActive(false);
 
 		// 随机玩家名
 		roleNameInput = GameObject.Find("inputRoleName").GetComponent<UIInput>();
