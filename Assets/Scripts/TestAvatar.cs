@@ -10,9 +10,9 @@ public class TestAvatar : MonoBehaviour {
 	public GameObject prefabWeapon;
 
 	private string strSkeleton = "Prefabs/Models/Body/Sk_Female";
-	public string strCoat;
-	public string strHead;
-	public string strWeapon;
+	private string strCoat = "Prefabs/Models/Body/Female_Body_8100";
+	private string strHead = "Prefabs/Models/Head/Female_Head_8100";
+	private string strWeapon = "Prefabs/Models/Weapon/Weapon_Cann_1006";
 
 	/*
 
@@ -102,7 +102,7 @@ public class TestAvatar : MonoBehaviour {
 		role.transform.position = new Vector3(10,0,10);
 		role.transform.localScale = new Vector3(5,5,5);
 
-		role1 = Instantiate(Resources.Load(strSkeleton)) as GameObject;
+		role1 = Avatar.CreateAvatar(strSkeleton, strCoat, strHead, strWeapon);
 		role1.transform.position = new Vector3(15,0,10);
 		role1.transform.localScale = new Vector3(5,5,5);
 		role1.name = "role1";
