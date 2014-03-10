@@ -26,6 +26,11 @@ public class MainCharacter : MonoBehaviour
 		get { return mainRole.position; }
 		set 
 		{
+			if (MapNav != null)
+			{
+				value.x = Mathf.Clamp(value.x, 0, MapNav.gridWidth * MapNav.gridXNum);
+				value.z = Mathf.Clamp(value.z, 0, MapNav.gridHeight * MapNav.gridZNum);
+			}
 			mainRole.position = value;
 
 			// 设置照相机位置
