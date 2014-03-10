@@ -1,10 +1,31 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System;
+using System.Linq;
+using System.Reflection;
 
 public class LuaTest : MonoBehaviour
 {
-	string script = string.Empty;
+	string script =
+@"function test(a, b)
+	return a + b
+end
+print('Hello World! ' .. test(100, 200))";
+
+	NLua.Lua lua;
+
+	void Start()
+	{
+		lua = new NLua.Lua();
+		lua.LoadCLRPackage();
+		var method = typeof(Debug).GetMethod("Log", new Type[] { typeof(object) });
+		lua.RegisterFunction("print", method);
+	}
+	void OnDestroy()
+	{
+		lua.Dispose();
+		lua = null;
+	}
 
 	void OnGUI()
 	{
@@ -19,13 +40,8 @@ public class LuaTest : MonoBehaviour
 	{
 		try
 		{
-			Debug.Log("Run... \n" + script);
-			using (var lua = new NLua.Lua())
-			{
-				lua.LoadCLRPackage();
-				var returns = lua.DoString(script);
-				Debug.Log(returns);
-			}
+			Debug.Log("DoString:\n" + script);
+			lua.DoString(script);
 			Debug.Log("OK");
 			return true;
 		}
