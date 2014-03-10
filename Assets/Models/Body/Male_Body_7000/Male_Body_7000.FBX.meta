@@ -3,76 +3,11 @@ guid: e27412802d6907144a1d937832f8b371
 ModelImporter:
   serializedVersion: 16
   fileIDToRecycleName:
-    100000: Bip01
-    100002: Bip01 Footsteps
-    100004: Bip01 Head
-    100006: Bip01 HeadNub
-    100008: Bip01 L Calf
-    100010: Bip01 L Clavicle
-    100012: Bip01 L Foot
-    100014: Bip01 L Forearm
-    100016: Bip01 L Hand
-    100018: Bip01 L Thigh
-    100020: Bip01 L Toe0
-    100022: Bip01 L Toe0Nub
-    100024: Bip01 L UpperArm
-    100026: Bip01 Neck
-    100028: Bip01 Pelvis
-    100030: Bip01 R Calf
-    100032: Bip01 R Clavicle
-    100034: Bip01 R Foot
-    100036: Bip01 R Forearm
-    100038: Bip01 R Hand
-    100040: Bip01 R Thigh
-    100042: Bip01 R Toe0
-    100044: Bip01 R Toe0Nub
-    100046: Bip01 R UpperArm
-    100048: Bip01 Spine
-    100050: Bip01 Spine1
-    100052: Bip01 Spine2
-    100054: k_armleft
-    100056: k_armright
-    100058: k_back
-    100060: k_front
-    100062: k_top
-    100064: //RootNode
-    100066: Object01
-    400000: Bip01
-    400002: Bip01 Footsteps
-    400004: Bip01 Head
-    400006: Bip01 HeadNub
-    400008: Bip01 L Calf
-    400010: Bip01 L Clavicle
-    400012: Bip01 L Foot
-    400014: Bip01 L Forearm
-    400016: Bip01 L Hand
-    400018: Bip01 L Thigh
-    400020: Bip01 L Toe0
-    400022: Bip01 L Toe0Nub
-    400024: Bip01 L UpperArm
-    400026: Bip01 Neck
-    400028: Bip01 Pelvis
-    400030: Bip01 R Calf
-    400032: Bip01 R Clavicle
-    400034: Bip01 R Foot
-    400036: Bip01 R Forearm
-    400038: Bip01 R Hand
-    400040: Bip01 R Thigh
-    400042: Bip01 R Toe0
-    400044: Bip01 R Toe0Nub
-    400046: Bip01 R UpperArm
-    400048: Bip01 Spine
-    400050: Bip01 Spine1
-    400052: Bip01 Spine2
-    400054: k_armleft
-    400056: k_armright
-    400058: k_back
-    400060: k_front
-    400062: k_top
-    400064: //RootNode
-    400066: Object01
+    100000: //RootNode
+    100002: Object01
+    400000: //RootNode
+    400002: Object01
     4300000: Object01
-    7400000: Take 001
     9500000: //RootNode
     13700000: Object01
   materials:
@@ -83,7 +18,7 @@ ModelImporter:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
     optimizeGameObjects: 0
-    animationCompression: 3
+    animationCompression: 1
     animationRotationError: .5
     animationPositionError: .5
     animationScaleError: .5
