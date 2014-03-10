@@ -95,7 +95,7 @@ public class RoleCreateScene : MonoBehaviour
 
 	void btnOK_onClick(GameObject sender)
 	{
-		if (profession == default(Profession))
+		if (profession == default(Profession) || string.IsNullOrEmpty(roleNameInput.value))
 			return;
 		Net.Instance.Send(new CheckCharNameSelectUserCmd_CS()
 		{
@@ -136,6 +136,12 @@ public class RoleCreateScene : MonoBehaviour
 		// 初始选择战士、女性
 		OnProfessionClick(Profession.Profession_ZhanShi);
 		btnFemale_onClick(null);
+	}
+
+	void Update()
+	{
+		if (Input.GetKeyDown(KeyCode.Return))
+			btnOK_onClick(this.gameObject);
 	}
 
 	[Execute]
