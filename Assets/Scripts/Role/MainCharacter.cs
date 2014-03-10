@@ -31,8 +31,8 @@ public class MainCharacter : MonoBehaviour
 			// 设置照相机位置
 			Vector3 targetCenter = mainRole.position;
 			targetCenter.y += heightCameraLookAt;
-			this.transform.position = targetCenter;
-			this.transform.position += this.transform.rotation * Vector3.back * distanceCameraToRole;
+			var pos = targetCenter + this.transform.rotation * Vector3.back * distanceCameraToRole;
+			this.transform.position = pos;
 		}
 	}
 
@@ -88,30 +88,24 @@ public class MainCharacter : MonoBehaviour
 			float v = Input.GetAxisRaw("Vertical");
 			float h = Input.GetAxisRaw("Horizontal");
 
-			Vector3 oldPosition = mainRole.transform.position;
+			Vector3 oldPosition = Position;
 			oldPosition.x += h * speedMainRole * Time.deltaTime;
 			oldPosition.z += v * speedMainRole * Time.deltaTime;
 			Position = oldPosition;
 
 			// 触摸屏
+			Vector3? screenPoint = null;
 			if (Input.touchCount > 0 && (Input.GetTouch(0).phase == TouchPhase.Began || Input.GetTouch(0).phase == TouchPhase.Moved))
-			{
-				Collider terrain = MapNav.gameObject.collider;
-				Ray ray = Camera.main.ScreenPointToRay(Input.GetTouch(0).position);
-				RaycastHit hit;
-				if (terrain.Raycast(ray, out hit, 1000))
-				{
-					var direction = hit.point - Position;
-					direction.y = 0;
-					Position += Vector3.Normalize(direction) * speedMainRole * Time.deltaTime;
-				}
-			}
+				screenPoint = Input.GetTouch(0).position;
 
 			// mouse
 			if (Input.GetMouseButton(0))
+				screenPoint = Input.mousePosition;
+
+			if (screenPoint != null)
 			{
+				var ray = Camera.main.ScreenPointToRay(screenPoint.Value);
 				Collider terrain = MapNav.gameObject.collider;
-				Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 				RaycastHit hit;
 				if (terrain.Raycast(ray, out hit, 1000))
 				{
