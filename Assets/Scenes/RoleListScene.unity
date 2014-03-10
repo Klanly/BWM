@@ -130,7 +130,7 @@ MonoBehaviour:
     absolute: 24
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 7
-  mWidth: 960
+  mWidth: 1023
   mHeight: 344
   mDepth: 2
   autoResizeBoxCollider: 0
@@ -401,7 +401,7 @@ MonoBehaviour:
     absolute: 0
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 960
+  mWidth: 1023
   mHeight: 640
   mDepth: -1
   autoResizeBoxCollider: 0
@@ -592,7 +592,7 @@ MonoBehaviour:
     absolute: 106
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 7
-  mWidth: 960
+  mWidth: 1023
   mHeight: 426
   mDepth: 1
   autoResizeBoxCollider: 0
@@ -1030,6 +1030,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea5b03183f4ddda49abb1772ad9fd055, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lastSceneName: ZoneListScene
 --- !u!1 &1534951807
 GameObject:
   m_ObjectHideFlags: 0

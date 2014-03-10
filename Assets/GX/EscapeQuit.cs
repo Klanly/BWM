@@ -6,9 +6,22 @@ using System.Collections;
 /// </summary>
 public class EscapeQuit : MonoBehaviour
 {
+	public string lastSceneName;
+
 	void Update()
 	{
 		if (Input.GetKeyDown(KeyCode.Escape))
-			Application.Quit();
+		{
+			if (string.IsNullOrEmpty(lastSceneName))
+			{
+#if UNITY_EDITOR
+				UnityEditor.EditorApplication.isPlaying = false;
+#else
+				Application.Quit();
+#endif
+			}
+			else
+				Application.LoadLevel(lastSceneName);
+		}
 	}
 }

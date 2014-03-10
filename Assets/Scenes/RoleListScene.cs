@@ -2,10 +2,12 @@
 using System.Collections;
 using Cmd;
 using GX.Net;
+using System.Collections.Generic;
 
 public class RoleListScene : MonoBehaviour
 {
 	public const int MaxRoleNum = 3;
+	public static List<CharSelect> RoleList { get; private set; }
 
 	public GameObject btnRole;
 	public GameObject btnRoleCreate;
@@ -17,10 +19,12 @@ public class RoleListScene : MonoBehaviour
 	void Start()
 	{
 		btnRole.SetActive(false);
-		btnRoleCreate.SetActive(false);		
+		btnRoleCreate.SetActive(false);
+		if (RoleList != null)
+			ShowRoleList();
 	}
 
-	private void ShowRoleList(CharactorListReturnSelectUserCmd_S cmd)
+	private void ShowRoleList()
 	{
 		foreach (Transform t in gridRoleList.transform)
 			DestroyObject(t.gameObject);
@@ -29,7 +33,7 @@ public class RoleListScene : MonoBehaviour
 		btnRole.SetActive(true);
 		btnRoleCreate.SetActive(true);
 
-		var num = cmd.list.Count;
+		var num = RoleList.Count;
 		if (num < MaxRoleNum)
 			num += 1;
 		var height = gridRoleList.cellHeight * num - (gridRoleList.cellHeight - btnRole.GetComponent<UISprite>().height);
@@ -39,7 +43,7 @@ public class RoleListScene : MonoBehaviour
 		gridRoleList.transform.localPosition = oldPosition;
 		gridRoleList.Reposition();
 
-		foreach (var role in cmd.list)
+		foreach (var role in RoleList)
 		{
 			var item = Instantiate(btnRole) as GameObject;
 			item.transform.parent = gridRoleList.transform;
@@ -56,7 +60,7 @@ public class RoleListScene : MonoBehaviour
 				Net.Instance.Send(new CharactorDeleteSelectUserCmd_C() { charid = info.charid, });
 		}
 
-		if (cmd.list.Count < MaxRoleNum)
+		if (RoleList.Count < MaxRoleNum)
 		{
 			var item = Instantiate(btnRoleCreate) as GameObject;
 			item.transform.parent = gridRoleList.transform;
@@ -75,6 +79,7 @@ public class RoleListScene : MonoBehaviour
 	[Execute]
 	static IEnumerator Execute(CharactorListReturnSelectUserCmd_S cmd)
 	{
+		RoleList = cmd.list;
 		if (cmd.list.Count == 0)
 		{
 			yield return Application.LoadLevelAsync("RoleCreateScene");
@@ -82,10 +87,9 @@ public class RoleListScene : MonoBehaviour
 		else
 		{
 			if (Application.loadedLevelName != "RoleListScene")
-			{
 				yield return  Application.LoadLevelAsync("RoleListScene");
-			}
-			Object.FindObjectOfType<RoleListScene>().ShowRoleList(cmd);
+			else
+				Object.FindObjectOfType<RoleListScene>().ShowRoleList();
 		}
 	}
 }
