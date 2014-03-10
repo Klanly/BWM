@@ -19,7 +19,7 @@ public class MapNavEditor : Editor
 	/// <summary>
 	/// Z轴格子数
 	/// </summary>
-	private SerializedProperty gridZNum; 
+	private SerializedProperty gridZNum;
 	#endregion
 
 	/// <summary>
@@ -191,7 +191,7 @@ public class MapNavEditor : Editor
 		config.gridxnum = (uint)Target.gridXNum;
 		config.gridznum = (uint)Target.gridZNum;
 		config.grids.AddRange(from g in Target.grids select (uint)g);
-		using(var stream = File.OpenWrite(path))
+		using (var stream = File.OpenWrite(path))
 		{
 			ProtoBuf.Serializer.SerializeWithLengthPrefix(stream, config, ProtoBuf.PrefixStyle.Base128);
 		}
