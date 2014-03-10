@@ -8,14 +8,23 @@ public class ModelPostprocess : AssetPostprocessor
 	void OnPreprocessModel()
 	{
 		ModelImporter mi = (ModelImporter)assetImporter;
-		if(assetPath.Contains("Sk_Female@"))
+		if((assetPath.Contains("Sk_Female") && assetPath.Contains("@"))
+		   ||(assetPath.Contains("Sk_Male") && assetPath.Contains("@")))
 		{
 			mi.animationType = ModelImporterAnimationType.Human;
-			foreach (ModelImporterClipAnimation ma in mi.clipAnimations )
+			foreach (ModelImporterClipAnimation ma in mi.clipAnimations)
 			{
 				ma.maskType = ClipAnimationMaskType.CopyFromOther;
-				//ma.maskSource = GameObject.Find("Female_Skeleton").GetComponent<Animator>().avatar.;
+				//var prefab = Object.Instantiate(Resources.Load("Prefabs/Models/body/Sk_Female")) as GameObject;
+				//ma.maskSource = Resources.Load("New Human Template.ht") as UnityEditorInternal.AvatarMask;
 			}
+		}
+
+		// 模型不需要导出动画
+		if (assetPath.Contains("Female_Body") || assetPath.Contains("Male_Body"))
+		{
+			mi.importAnimation = false;
+			mi.animationType = ModelImporterAnimationType.Human;
 		}
 	}
 	
@@ -40,5 +49,16 @@ public class ModelPostprocess : AssetPostprocessor
 			foreach (Transform o in go.transform)
 				Object.DestroyImmediate(o.gameObject);
 		}
+
+		// body不需要骨架
+		if (assetPath.Contains("Female_Body") || assetPath.Contains("Male_Body"))
+		{
+			foreach (Transform o in go.transform)
+			{
+				if(o.gameObject.name == "Bip01")
+					Object.DestroyImmediate(o.gameObject);
+			}
+		}
+
 	}
 }
