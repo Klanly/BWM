@@ -12,15 +12,15 @@ public class RoleCreateScene : MonoBehaviour
 	private readonly Dictionary<Profession, GameObject> professionSprites = new Dictionary<Profession, GameObject>();
 	private readonly Dictionary<Profession, GameObject> professionButtons = new Dictionary<Profession, GameObject>();
 
-	private string[] strSk = new string[]{"Prefabs/Models/Body/Sk_Female", "Prefabs/Models/Body/Sk_Female"};
+	private string[] strSk = new string[]{"Prefabs/Models/Body/Sk_Male_001", "Prefabs/Models/Body/Sk_Female_001"};
 	private string[] strFemaleBody = new string[]{"Prefabs/Models/Body/Female_Body_8100", "Prefabs/Models/Body/Female_Body_8100","Prefabs/Models/Body/Female_Body_8100"};
 	private string[] strFemaleHead = new string[]{"Prefabs/Models/Head/Female_Head_8100", "Prefabs/Models/Head/Female_Head_8100","Prefabs/Models/Head/Female_Head_8100"};
 	private string[] strFemaleWeapon = new string[]{"Prefabs/Models/Weapon/Weapon_Cann_1006", "Prefabs/Models/Weapon/Weapon_Cann_1006","Prefabs/Models/Weapon/Weapon_Cann_1006"};
 	private string[] strFemaleAction = new string[]{"Ani_Dd_show", "Ani_Dd_show","Ani_Dd_show"};
-	private string[] strMaleBody = new string[]{"Prefabs/Models/Body/Female_Body_8100", "Prefabs/Models/Body/Female_Body_8100","Prefabs/Models/Body/Female_Body_8100"};
-	private string[] strMaleHead = new string[]{"Prefabs/Models/Head/Female_Head_8100", "Prefabs/Models/Head/Female_Head_8100","Prefabs/Models/Head/Female_Head_8100"};
-	private string[] strMaleWeapon = new string[]{"Prefabs/Models/Weapon/Weapon_Cann_1006", "Prefabs/Models/Weapon/Weapon_Cann_1006","Prefabs/Models/Weapon/Weapon_Cann_1006"};
-	private string[] strMaleAction = new string[]{"Ani_Dd_show", "Ani_Dd_show","Ani_Dd_show"};
+	private string[] strMaleBody = new string[]{"Prefabs/Models/Body/Male_Body_7000", "Prefabs/Models/Body/Male_Body_7000","Prefabs/Models/Body/Male_Body_7000"};
+	private string[] strMaleHead = new string[]{"Prefabs/Models/Head/Male_Head_7000", "Prefabs/Models/Head/Male_Head_7000","Prefabs/Models/Head/Male_Head_7000"};
+	private string[] strMaleWeapon = new string[]{"Prefabs/Models/Weapon/Weapon_Sword_1006", "Prefabs/Models/Weapon/Weapon_Sword_1006","Prefabs/Models/Weapon/Weapon_Sword_1006"};
+	private string[] strMaleAction = new string[]{"Ani_Cq_show", "Ani_Cq_show","Ani_Cq_show"};
 
 	private GameObject spriteZhanshi, spriteDaoshi, spriteFashi;
 	private GameObject avatar;
