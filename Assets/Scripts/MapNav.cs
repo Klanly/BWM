@@ -89,6 +89,15 @@ public class MapNav : MonoBehaviour
 			(Mathf.Clamp(gridZ, 0, gridZNum - 1) + 0.5f) * gridHeight);
 	}
 
+	void Start()
+	{
+		var width = gridXNum * gridWidth;
+		var height = gridZNum * gridHeight;
+		transform.localScale = new Vector3(width + 50, height + 100, 1); // 放大地表碰撞盒，方便地图外点地行走
+		transform.localEulerAngles = new Vector3(90, 0, 0);
+		transform.position = new Vector3(width * 0.5f, 0, height * 0.5f);
+	}
+
 	void OnDrawGizmos()
 	{
 		if (ShowGrids == false)
