@@ -16,9 +16,7 @@ public class MessageBox : MonoBehaviour
 
 	public void Close(GameObject sender = null)
 	{
-		this.gameObject.SetActive(false);
-		UIEventListener.Get(this.messageBoxOK).onClick = null;
-		UIEventListener.Get(this.messageBoxCancel).onClick = null;
+		NGUITools.Destroy(this.gameObject);
 	}
 
 	public static void Show(string message, UIEventListener.VoidDelegate onOK = null, UIEventListener.VoidDelegate onCancel = null)
@@ -28,15 +26,10 @@ public class MessageBox : MonoBehaviour
 
 	public static void Show(string title, string message, UIEventListener.VoidDelegate onOK = null, UIEventListener.VoidDelegate onCancel = null)
 	{
-		var my = GameObject.FindObjectOfType<MessageBox>();
-		if (my == null)
-		{
-			my = (GameObject.Instantiate(Resources.Load("Prefabs/MessageBox")) as GameObject).GetComponent<MessageBox>();
-			my.transform.parent = GameObject.Find("UI Root").transform;
-			my.transform.localScale = Vector3.one;
-		}
-
-		my.gameObject.SetActive(true);
+		var my = (GameObject.Instantiate(Resources.Load("Prefabs/MessageBox")) as GameObject).GetComponent<MessageBox>();
+		my.transform.parent = GameObject.Find("UI Root").transform;
+		my.transform.localScale = Vector3.one;
+		NGUITools.BringForward(my.gameObject);
 
 		my.messageBoxTitle.text = title ?? string.Empty;
 		my.messageBoxText.text = message;
