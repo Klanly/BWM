@@ -16,7 +16,9 @@ public class MainCharacter : MonoBehaviour
 	public MapNav MapNav { get; private set; }
 
 	private Transform mainRole;
+	private Animator animator;
 	private GameObject terrain;
+
 
 	/// <summary>
 	/// 主角世界坐标位置
@@ -50,6 +52,33 @@ public class MainCharacter : MonoBehaviour
 		set { Position = MapNav.GetWorldPosition(value.X, value.Z); }
 	}
 
+	private Vector3 targetPosition;
+	/// <summary>
+	/// 设置目标点
+	/// </summary>
+	/// <value>The target position.</value>
+	public Vector3 TargetPosition
+	{
+		get {return targetPosition;}
+		set
+		{
+			if (MapNav != null)
+			{
+				value.x = Mathf.Clamp(value.x, 0, MapNav.gridWidth * MapNav.gridXNum);
+				value.z = Mathf.Clamp(value.z, 0, MapNav.gridHeight * MapNav.gridZNum);
+			}
+			targetPosition = value;
+			if(value != Vector3.zero)
+			{
+				if(animator.GetFloat("speed") == 0.0f)
+					animator.SetFloat("speed", speedMainRole);
+				
+				var relativePos = TargetPosition - Position;
+				mainRole.rotation = Quaternion.LookRotation(relativePos);
+			}
+		}
+	}
+
 	static MainCharacter()
 	{
 		ServerInfo = new MainCharacterInfo(); // 避免不必要的空指针判断
@@ -58,7 +87,15 @@ public class MainCharacter : MonoBehaviour
 	// Use this for initialization
 	void Start()
 	{
-		mainRole = GameObject.Find("MainRole").transform;
+		var refRole = GameObject.Find("MainRole").transform;
+		mainRole = Avatar.CreateAvatar("Prefabs/Models/body/Sk_Female", "Prefabs/Models/body/Female_Body_8100", "Prefabs/Models/Head/Female_Head_8100", "Prefabs/Models/Weapon/Weapon_Cann_1006").transform;
+		mainRole.gameObject.name = "MainRole";
+		mainRole.position = refRole.position;
+		mainRole.rotation = refRole.rotation;
+		mainRole.localScale = refRole.localScale;
+		animator = mainRole.gameObject.GetComponent<Animator>();
+		refRole.gameObject.SetActive(false);
+
 		if (ServerInfo.data == null)
 			return;
 		LoadMap(ServerInfo.data.mapid.ToString());
@@ -114,9 +151,32 @@ public class MainCharacter : MonoBehaviour
 				RaycastHit hit;
 				if (terrain.Raycast(ray, out hit, 1000))
 				{
-					var direction = hit.point - Position;
-					direction.y = 0;
-					Position += Vector3.Normalize(direction) * speedMainRole * Time.deltaTime;
+					TargetPosition = hit.point;
+				}
+			}
+
+			if(TargetPosition != Vector3.zero)
+			{
+				Vector3 vDelta = TargetPosition - Position;
+				float fDeltaLen = vDelta.magnitude;
+				vDelta.Normalize();
+
+				Vector3 vOldPosition = Position;
+				float fMoveLen = speedMainRole * Time.deltaTime;
+				bool bFinish = false;
+				if(fMoveLen >= fDeltaLen)
+				{
+					fMoveLen = fDeltaLen;
+					bFinish = true;
+				}
+
+				Position = vOldPosition + vDelta * fMoveLen;
+				if(bFinish)
+				{
+					TargetPosition = Vector3.zero;
+					var oldRotate = mainRole.rotation;
+					animator.SetFloat("speed", 0.0f);
+					mainRole.rotation = oldRotate;
 				}
 			}
 		}
