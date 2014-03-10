@@ -113,6 +113,7 @@ public static class Extensions
 	private static void WriteTo(ProtoBuf.IExtensible proto, TextWriter writer, int indent = 0)
 	{
 		var prefix = new string(' ', 4 * indent);
+		var tab = "    ";
 		if (proto == null)
 		{
 			writer.Write("<null>");
@@ -121,7 +122,7 @@ public static class Extensions
 		writer.Write(proto.GetType().FullName); writer.WriteLine(" {");
 		foreach (var p in proto.GetType().GetRuntimeProperties())
 		{
-			writer.Write(prefix); writer.Write("    "); writer.Write(p.Name); writer.Write(" = ");
+			writer.Write(prefix); writer.Write(tab); writer.Write(p.Name); writer.Write(" = ");
 			var value = p.GetValue(proto, null);
 			if (value is ProtoBuf.IExtensible)
 			{
@@ -132,10 +133,10 @@ public static class Extensions
 				writer.Write('['); writer.WriteLine();
 				foreach (ProtoBuf.IExtensible line in value as IList)
 				{
-					WriteTo(line, writer, indent + 2);
+					writer.Write(prefix); writer.Write(tab); writer.Write(tab); WriteTo(line, writer, indent + 2);
 					writer.WriteLine();
 				}
-				writer.Write(prefix); writer.Write("    "); writer.Write(']');
+				writer.Write(prefix); writer.Write(tab); writer.Write(']');
 			}
 			else if (value is string)
 			{
