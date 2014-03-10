@@ -4,11 +4,11 @@ set dest=%~dp0\Assets\Scripts\Common
 
 pushd "%~dp0\Common"
 echo ===================================================================
-del /Q *.cs
-del /Q "%dest%\*.cs"
+del /Q /S *.cs
+del /Q /S "%dest%\*.cs"
 call:buildDir "%~dp0\Common" "%dest%"
 call:buildDir "%~dp0\Common\Config" "%dest%\Editor"
-del /Q *.cs
+del /Q /S *.cs
 echo ===================================================================
 call:clearMeta "%dest%"
 popd
