@@ -3,6 +3,7 @@ using System.Collections;
 using Cmd;
 using GX.Net;
 using System.Collections.Generic;
+using System.Linq;
 
 public class RoleListScene : MonoBehaviour
 {
@@ -53,9 +54,7 @@ public class RoleListScene : MonoBehaviour
 			item.transform.Find("labelName").GetComponent<UILabel>().text = info.charname;
 			item.transform.Find("labelLevel").GetComponent<UILabel>().text = "LV" + info.level;
 			item.transform.Find("spriteProfession").GetComponent<UISprite>().spriteName = spriteNameProfession[(int)(info.profession) - 1];
-			UIEventListener.Get(item.gameObject).onClick = go =>
-				Net.Instance.Send(new CharactorSelectSelectUserCmd_C() { charid = info.charid, });
-
+			UIEventListener.Get(item.gameObject).onClick = go => SelectRole(info.charid);
 			UIEventListener.Get(item.transform.Find("btnDelete").gameObject).onClick = go =>
 				Net.Instance.Send(new CharactorDeleteSelectUserCmd_C() { charid = info.charid, });
 		}
@@ -73,6 +72,18 @@ public class RoleListScene : MonoBehaviour
 		btnRoleCreate.SetActive(false);
 
 		gridRoleList.Reposition();
+	}
+
+	private static void SelectRole(ulong charid)
+	{
+		Net.Instance.Send(new CharactorSelectSelectUserCmd_C() { charid = charid, });
+	}
+
+	void Update()
+	{
+		// 默认选择第一个角色
+		if (Input.GetKeyDown(KeyCode.Return))
+			SelectRole((from r in RoleList select r.charid).FirstOrDefault());
 	}
 
 

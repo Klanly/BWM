@@ -2,6 +2,7 @@
 using System.Collections;
 using GX.Net;
 using Cmd;
+using System.Linq;
 
 public class ZoneListScene : MonoBehaviour
 {
@@ -39,12 +40,7 @@ public class ZoneListScene : MonoBehaviour
 			{
 				case ServerState.Normal:
 					var zoneid = zone.zoneid;
-					UIEventListener.Get(item).onClick = go => Net.Instance.Send(new UserLoginRequestLoginUserCmd_C()
-					{
-						gameversion = (uint)Cmd.Config.Version.Version_Game,
-						gameid = ZoneList.gameid,
-						zoneid = zoneid,
-					});
+					UIEventListener.Get(item).onClick = go => ZoneSelect(zoneid);
 					break;
 				case ServerState.Shutdown:
 					var button = item.GetComponentInChildren<UIButton>();
@@ -55,6 +51,25 @@ public class ZoneListScene : MonoBehaviour
 			}
 		}
 		zoneList.Reposition();
+	}
+
+	private static void ZoneSelect(uint zoneid)
+	{
+		if (zoneid == 0)
+			return;
+		Net.Instance.Send(new UserLoginRequestLoginUserCmd_C()
+		{
+			gameversion = (uint)Cmd.Config.Version.Version_Game,
+			gameid = ZoneList.gameid,
+			zoneid = zoneid,
+		});
+	}
+
+	void Update()
+	{
+		// 默认选择第一个可用的区
+		if (Input.GetKeyDown(KeyCode.Return))
+			ZoneSelect((from z in ZoneList.server where z.state == ServerState.Normal select z.zoneid).FirstOrDefault());
 	}
 
 	[Execute]
