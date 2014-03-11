@@ -5,7 +5,7 @@ using Cmd;
 using System.Collections.Generic;
 using System.Linq;
 
-public class GuiChatOutput : MonoBehaviour
+public class GXChatOutput : MonoBehaviour
 {
 	public const int MaxChatLines = 10;
 	public const int MaxSnapshotLines = 2;
@@ -44,7 +44,7 @@ public class GuiChatOutput : MonoBehaviour
 	[Execute]
 	static void ShowChat(CommonChatUserCmd_CS cmd)
 	{
-		var my = Object.FindObjectOfType<GuiChatOutput>();
+		var my = Object.FindObjectOfType<GXChatOutput>();
 
 		var chat = string.Format("{0}: {1}\n", cmd.charname, cmd.info);
 		my.lines.Add(chat);

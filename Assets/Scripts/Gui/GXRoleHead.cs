@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class GuiRoleHead : MonoBehaviour
+public class GXRoleHead : MonoBehaviour
 {
 	public UILabel myName;
 	public UILabel myLevel;

@@ -4,7 +4,7 @@ using Cmd;
 using GX.Net;
 using System.Text.RegularExpressions;
 
-public class GuiChatInput : MonoBehaviour
+public class GXChatInput : MonoBehaviour
 {
 	public UIButton sendButton;
 	public UIInput chatInput;
