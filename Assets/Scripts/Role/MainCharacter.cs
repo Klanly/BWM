@@ -87,14 +87,10 @@ public class MainCharacter : MonoBehaviour
 	// Use this for initialization
 	void Start()
 	{
-		var refRole = GameObject.Find("MainRole").transform;
 		mainRole = Avatar.CreateAvatar("Prefabs/Models/Body/Sk_Female_001", "Prefabs/Models/Body/Female_Body_8100", "Prefabs/Models/Head/Female_Head_8100", "Prefabs/Models/Weapon/Weapon_Cann_1006").transform;
 		mainRole.gameObject.name = "MainRole";
-		mainRole.position = refRole.position;
-		mainRole.rotation = refRole.rotation;
-		mainRole.localScale = refRole.localScale;
+		mainRole.localScale = new Vector3(5, 5, 5);
 		animator = mainRole.gameObject.GetComponent<Animator>();
-		refRole.gameObject.SetActive(false);
 
 		if (ServerInfo.data == null)
 			return;
