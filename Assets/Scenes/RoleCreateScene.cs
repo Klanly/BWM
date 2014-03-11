@@ -105,6 +105,8 @@ public class RoleCreateScene : MonoBehaviour
 
 	void Start()
 	{
+		if (RoleListScene.RoleList == null)
+			return;
 		var quit = this.gameObject.GetComponent<EscapeQuit>();
 		quit.lastSceneName = RoleListScene.RoleList.Count == 0 ? "ZoneListScene" : "RoleListScene";
 
