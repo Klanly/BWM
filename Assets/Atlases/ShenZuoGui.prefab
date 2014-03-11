@@ -66,9 +66,22 @@ MonoBehaviour:
     paddingRight: 0
     paddingTop: 0
     paddingBottom: 0
+  - name: bar_exp
+    x: 910
+    y: 1396
+    width: 106
+    height: 75
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
   - name: button_big
-    x: 862
-    y: 1385
+    x: 248
+    y: 1113
     width: 122
     height: 47
     borderLeft: 18
@@ -158,10 +171,23 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: button_female
-    x: 755
-    y: 1381
+    x: 248
+    y: 1161
     width: 66
     height: 90
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: button_jump
+    x: 372
+    y: 1132
+    width: 63
+    height: 77
     borderLeft: 0
     borderRight: 0
     borderTop: 0
@@ -184,7 +210,7 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: button_minimap
-    x: 260
+    x: 325
     y: 1388
     width: 42
     height: 43
@@ -210,8 +236,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: button_tab2
-    x: 862
-    y: 1433
+    x: 248
+    y: 1252
     width: 122
     height: 49
     borderLeft: 42
@@ -275,8 +301,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: checkbox
-    x: 303
-    y: 1391
+    x: 572
+    y: 1380
     width: 41
     height: 40
     borderLeft: 0
@@ -353,7 +379,7 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: exp
-    x: 755
+    x: 910
     y: 1472
     width: 106
     height: 75
@@ -365,8 +391,21 @@ MonoBehaviour:
     paddingRight: 0
     paddingTop: 0
     paddingBottom: 0
+  - name: female
+    x: 833
+    y: 1437
+    width: 76
+    height: 110
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 3
+    paddingTop: 11
+    paddingBottom: 0
   - name: hp
-    x: 314
+    x: 448
     y: 1350
     width: 208
     height: 16
@@ -392,8 +431,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: image_input
-    x: 862
-    y: 1483
+    x: 248
+    y: 1302
     width: 123
     height: 64
     borderLeft: 15
@@ -456,6 +495,19 @@ MonoBehaviour:
     paddingRight: 0
     paddingTop: 0
     paddingBottom: 0
+  - name: image_skill
+    x: 372
+    y: 1292
+    width: 75
+    height: 74
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
   - name: input
     x: 918
     y: 1686
@@ -483,7 +535,7 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: item
-    x: 660
+    x: 738
     y: 1377
     width: 76
     height: 75
@@ -521,6 +573,19 @@ MonoBehaviour:
     paddingRight: 1
     paddingTop: 0
     paddingBottom: 0
+  - name: male
+    x: 660
+    y: 1431
+    width: 77
+    height: 116
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 2
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 5
   - name: mima_word
     x: 511
     y: 1682
@@ -587,8 +652,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: panel3
-    x: 248
-    y: 1285
+    x: 372
+    y: 1210
     width: 65
     height: 81
     borderLeft: 8
@@ -613,7 +678,7 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: select
-    x: 660
+    x: 738
     y: 1453
     width: 94
     height: 94
@@ -664,6 +729,45 @@ MonoBehaviour:
     paddingRight: 0
     paddingTop: 0
     paddingBottom: 16
+  - name: skill1
+    x: 260
+    y: 1367
+    width: 64
+    height: 64
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: skill2
+    x: 660
+    y: 1367
+    width: 63
+    height: 63
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: skill3
+    x: 833
+    y: 1373
+    width: 63
+    height: 63
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
   - name: slider_bar
     x: 504
     y: 1782
