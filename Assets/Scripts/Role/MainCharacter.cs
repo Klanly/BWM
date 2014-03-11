@@ -26,7 +26,7 @@ public class MainCharacter : MonoBehaviour
 	public Vector3 Position
 	{
 		get { return mainRole.position; }
-		set 
+		set
 		{
 			if (MapNav != null)
 			{
@@ -59,7 +59,7 @@ public class MainCharacter : MonoBehaviour
 	/// <value>The target position.</value>
 	public Vector3 TargetPosition
 	{
-		get {return targetPosition;}
+		get { return targetPosition; }
 		set
 		{
 			if (MapNav != null)
@@ -68,11 +68,11 @@ public class MainCharacter : MonoBehaviour
 				value.z = Mathf.Clamp(value.z, 0, MapNav.gridHeight * MapNav.gridZNum);
 			}
 			targetPosition = value;
-			if(value != Vector3.zero)
+			if (value != Vector3.zero)
 			{
-				if(animator.GetFloat("speed") == 0.0f)
+				if (animator.GetFloat("speed") == 0.0f)
 					animator.SetFloat("speed", speedMainRole);
-				
+
 				var relativePos = TargetPosition - Position;
 				mainRole.rotation = Quaternion.LookRotation(relativePos);
 			}
@@ -102,6 +102,11 @@ public class MainCharacter : MonoBehaviour
 		Grid = new GridPosition() { X = (int)ServerInfo.pos.x, Z = (int)ServerInfo.pos.y };
 	}
 
+	/// <summary>
+	/// 加载指定路径的地图prefab作为地表
+	/// </summary>
+	/// <param name="mapname"></param>
+	/// <returns>加载是否成功</returns>
 	public bool LoadMap(string mapname)
 	{
 		var map = Resources.Load("Map/" + mapname);
@@ -155,7 +160,7 @@ public class MainCharacter : MonoBehaviour
 				}
 			}
 
-			if(TargetPosition != Vector3.zero)
+			if (TargetPosition != Vector3.zero)
 			{
 				Vector3 vDelta = TargetPosition - Position;
 				float fDeltaLen = vDelta.magnitude;
@@ -164,14 +169,14 @@ public class MainCharacter : MonoBehaviour
 				Vector3 vOldPosition = Position;
 				float fMoveLen = speedMainRole * Time.deltaTime;
 				bool bFinish = false;
-				if(fMoveLen >= fDeltaLen)
+				if (fMoveLen >= fDeltaLen)
 				{
 					fMoveLen = fDeltaLen;
 					bFinish = true;
 				}
 
 				Position = vOldPosition + vDelta * fMoveLen;
-				if(bFinish)
+				if (bFinish)
 				{
 					TargetPosition = Vector3.zero;
 					var oldRotate = mainRole.rotation;

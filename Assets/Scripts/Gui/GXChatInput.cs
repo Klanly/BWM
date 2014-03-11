@@ -4,6 +4,9 @@ using Cmd;
 using GX.Net;
 using System.Text.RegularExpressions;
 
+/// <summary>
+/// </summary>
+/// <remarks>ChatInput和NGUI\Examples\Scripts\Other\ChatInput.cs重名</remarks>
 public class GXChatInput : MonoBehaviour
 {
 	public UIButton sendButton;
