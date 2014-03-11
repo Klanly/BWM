@@ -9,7 +9,7 @@ public class TestAvatar : MonoBehaviour {
 	public GameObject prefabHead;
 	public GameObject prefabWeapon;
 
-	private string strSkeleton = "Prefabs/Models/Body/Sk_Female";
+	private string strSkeleton = "Prefabs/Models/Body/Sk_Female_001";
 	private string strCoat = "Prefabs/Models/Body/Female_Body_8100";
 	private string strHead = "Prefabs/Models/Head/Female_Head_8100";
 	private string strWeapon = "Prefabs/Models/Weapon/Weapon_Cann_1006";
