@@ -11,8 +11,8 @@ public class GXRoleHead : MonoBehaviour
 
 	void Start()
 	{
-		if (MainCharacter.ServerInfo.data == null)
+		if (MainRole.ServerInfo.data == null)
 			return;
-		myName.text = MainCharacter.ServerInfo.data.charname;
+		myName.text = MainRole.ServerInfo.data.charname;
 	}
 }

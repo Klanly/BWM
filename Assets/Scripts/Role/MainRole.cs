@@ -3,11 +3,11 @@ using System.Collections;
 using Cmd;
 using GX;
 using GX.Net;
-using MainCharacterInfo = Cmd.FirstMainUserDataAndPosMapUserCmd_S;
+using MainRoleInfo = Cmd.FirstMainUserDataAndPosMapUserCmd_S;
 
-public class MainCharacter : MonoBehaviour
+public class MainRole : MonoBehaviour
 {
-	public static MainCharacterInfo ServerInfo { get; private set; }
+	public static MainRoleInfo ServerInfo { get; private set; }
 
 	public float speedMainRole = 5.0f;
 	public float distanceCameraToRole = 25.0f;
@@ -79,9 +79,9 @@ public class MainCharacter : MonoBehaviour
 		}
 	}
 
-	static MainCharacter()
+	static MainRole()
 	{
-		ServerInfo = new MainCharacterInfo(); // 避免不必要的空指针判断
+		ServerInfo = new MainRoleInfo(); // 避免不必要的空指针判断
 	}
 
 	// Use this for initialization
@@ -188,7 +188,7 @@ public class MainCharacter : MonoBehaviour
 	/// </summary>
 	/// <param name="cmd"></param>
 	[Execute]
-	static void Execute(MainCharacterInfo cmd)
+	static void Execute(MainRoleInfo cmd)
 	{
 		ServerInfo = cmd;
 		if (Application.loadedLevelName != "BattleScene")
