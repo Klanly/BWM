@@ -23,7 +23,7 @@ public class ModelPostprocess : AssetPostprocessor
 				foreach (ModelImporterClipAnimation ma in mi.clipAnimations)
 				{
 					ma.maskType = ClipAnimationMaskType.CopyFromOther;
-					//var prefab = Object.Instantiate(Resources.Load("Prefabs/Models/body/Sk_Female")) as GameObject;
+					//var prefab = Object.Instantiate(Resources.Load("Prefabs/Models/Body/Sk_Female_001")) as GameObject;
 					//ma.maskSource = Resources.Load("New Human Template.ht") as UnityEditorInternal.AvatarMask;
 				}
 			}
