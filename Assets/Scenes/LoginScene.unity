@@ -660,7 +660,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1169743668}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 371.016479, y: 133.555817, z: 0}
+  m_LocalPosition: {x: 257.45636, y: 133.555817, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 510261326}
@@ -706,7 +706,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1284611458}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -816.10376, y: 454.281433, z: 0}
+  m_LocalPosition: {x: -702.54364, y: 454.281433, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1909208366}
@@ -1159,7 +1159,6 @@ GameObject:
   - 4: {fileID: 1909208366}
   - 114: {fileID: 1909208367}
   - 114: {fileID: 1909208368}
-  - 20: {fileID: 1909208370}
   - 114: {fileID: 1909208369}
   m_Layer: 13
   m_Name: Logo
@@ -1300,35 +1299,6 @@ MonoBehaviour:
   callWhenFinished: 
   from: 0
   to: 1
---- !u!20 &1909208370
-Camera:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1909208365}
-  m_Enabled: 1
-  serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: .192156866, g: .301960796, b: .474509805, a: .0196078438}
-  m_NormalizedViewPortRect:
-    serializedVersion: 2
-    x: 0
-    y: 0
-    width: 1
-    height: 1
-  near clip plane: .300000012
-  far clip plane: 1000
-  field of view: 60
-  orthographic: 0
-  orthographic size: 5
-  m_Depth: 0
-  m_CullingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_RenderingPath: -1
-  m_TargetTexture: {fileID: 0}
-  m_HDR: 0
-  m_OcclusionCulling: 1
 --- !u!1 &2032827508
 GameObject:
   m_ObjectHideFlags: 0
@@ -1522,7 +1492,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2071682154}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -222.54364, y: 134.281433, z: 0}
+  m_LocalPosition: {x: -222.906174, y: 134.281433, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1476132468}
@@ -1555,13 +1525,13 @@ MonoBehaviour:
     absolute: 0
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 1187
+  mWidth: 959
   mHeight: 640
   mDepth: -1
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 1.85468745
+  aspectRatio: 1.49843752
   mRect:
     serializedVersion: 2
     x: 0
