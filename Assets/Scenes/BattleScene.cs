@@ -67,5 +67,7 @@ public class BattleScene : MonoBehaviour
 		Gui<GXChatOutput>();
 		Gui<GXRoleHead>();
 		Load("ControlBar");
+
+		MainRole.Create();
 	}
 }

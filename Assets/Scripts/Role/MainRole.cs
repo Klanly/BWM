@@ -15,7 +15,6 @@ public class MainRole : MonoBehaviour
 
 	public MapNav MapNav { get; private set; }
 
-	private Transform mainRole;
 	private Animator animator;
 	private GameObject terrain;
 
@@ -25,7 +24,7 @@ public class MainRole : MonoBehaviour
 	/// </summary>
 	public Vector3 Position
 	{
-		get { return mainRole.position; }
+		get { return this.transform.position; }
 		set
 		{
 			if (MapNav != null)
@@ -33,13 +32,13 @@ public class MainRole : MonoBehaviour
 				value.x = Mathf.Clamp(value.x, 0, MapNav.gridWidth * MapNav.gridXNum);
 				value.z = Mathf.Clamp(value.z, 0, MapNav.gridHeight * MapNav.gridZNum);
 			}
-			mainRole.position = value;
+			this.transform.position = value;
 
 			// 设置照相机位置
-			Vector3 targetCenter = mainRole.position;
-			targetCenter.y += heightCameraLookAt;
-			var pos = targetCenter + this.transform.rotation * Vector3.back * distanceCameraToRole;
-			this.transform.position = pos;
+			//Vector3 targetCenter = this.position;
+			//targetCenter.y += heightCameraLookAt;
+			//var pos = targetCenter + this.transform.rotation * Vector3.back * distanceCameraToRole;
+			//this.transform.position = pos;
 		}
 	}
 
@@ -74,7 +73,7 @@ public class MainRole : MonoBehaviour
 					animator.SetFloat("speed", speedMainRole);
 
 				var relativePos = TargetPosition - Position;
-				mainRole.rotation = Quaternion.LookRotation(relativePos);
+				this.transform.rotation = Quaternion.LookRotation(relativePos);
 			}
 		}
 	}
@@ -87,15 +86,20 @@ public class MainRole : MonoBehaviour
 	// Use this for initialization
 	void Start()
 	{
-		mainRole = Avatar.CreateAvatar("Prefabs/Models/Body/Sk_Female_001", "Prefabs/Models/Body/Female_Body_8100", "Prefabs/Models/Head/Female_Head_8100", "Prefabs/Models/Weapon/Weapon_Cann_1006").transform;
-		mainRole.gameObject.name = "MainRole";
-		mainRole.localScale = new Vector3(5, 5, 5);
-		animator = mainRole.gameObject.GetComponent<Animator>();
-
 		if (ServerInfo.data == null)
 			return;
 		LoadMap(ServerInfo.data.mapid.ToString());
 		Grid = new GridPosition() { X = (int)ServerInfo.pos.x, Z = (int)ServerInfo.pos.y };
+	}
+
+	public static MainRole Create()
+	{
+		var avatar = Avatar.CreateAvatar("Prefabs/Models/Body/Sk_Female_001", "Prefabs/Models/Body/Female_Body_8100", "Prefabs/Models/Head/Female_Head_8100", "Prefabs/Models/Weapon/Weapon_Cann_1006");
+		avatar.name = "MainRole";
+		avatar.transform.localScale = new Vector3(5, 5, 5);
+		var role = avatar.AddComponent<MainRole>();
+		role.animator = avatar.GetComponent<Animator>();
+		return role;
 	}
 
 	/// <summary>
@@ -125,60 +129,59 @@ public class MainRole : MonoBehaviour
 	void Update()
 	{
 		// 设置主角的移动
-		if (mainRole)
+		// keyboard
+		float v = Input.GetAxisRaw("Vertical");
+		float h = Input.GetAxisRaw("Horizontal");
+
+		Vector3 oldPosition = Position;
+		oldPosition.x += h * speedMainRole * Time.deltaTime;
+		oldPosition.z += v * speedMainRole * Time.deltaTime;
+		Position = oldPosition;
+
+		// 触摸屏
+		Vector3? screenPoint = null;
+		if (Input.touchCount > 0 && (Input.GetTouch(0).phase == TouchPhase.Began || Input.GetTouch(0).phase == TouchPhase.Moved))
+			screenPoint = Input.GetTouch(0).position;
+
+		// mouse
+		if (Input.GetMouseButton(0))
+			screenPoint = Input.mousePosition;
+
+		if (screenPoint != null)
 		{
-			// keyboard
-			float v = Input.GetAxisRaw("Vertical");
-			float h = Input.GetAxisRaw("Horizontal");
-
-			Vector3 oldPosition = Position;
-			oldPosition.x += h * speedMainRole * Time.deltaTime;
-			oldPosition.z += v * speedMainRole * Time.deltaTime;
-			Position = oldPosition;
-
-			// 触摸屏
-			Vector3? screenPoint = null;
-			if (Input.touchCount > 0 && (Input.GetTouch(0).phase == TouchPhase.Began || Input.GetTouch(0).phase == TouchPhase.Moved))
-				screenPoint = Input.GetTouch(0).position;
-
-			// mouse
-			if (Input.GetMouseButton(0))
-				screenPoint = Input.mousePosition;
-
-			if (screenPoint != null)
+			var ray = Camera.main.ScreenPointToRay(screenPoint.Value);
+			Collider terrain = MapNav.gameObject.collider;
+			RaycastHit hit;
+			if (terrain.Raycast(ray, out hit, 1000))
 			{
-				var ray = Camera.main.ScreenPointToRay(screenPoint.Value);
-				Collider terrain = MapNav.gameObject.collider;
-				RaycastHit hit;
-				if (terrain.Raycast(ray, out hit, 1000))
-				{
-					TargetPosition = hit.point;
-				}
+				TargetPosition = hit.point;
+			}
+		}
+
+		Debug.Log(TargetPosition);
+
+		if (TargetPosition != Vector3.zero)
+		{
+			Vector3 vDelta = TargetPosition - Position;
+			float fDeltaLen = vDelta.magnitude;
+			vDelta.Normalize();
+
+			Vector3 vOldPosition = Position;
+			float fMoveLen = speedMainRole * Time.deltaTime;
+			bool bFinish = false;
+			if (fMoveLen >= fDeltaLen)
+			{
+				fMoveLen = fDeltaLen;
+				bFinish = true;
 			}
 
-			if (TargetPosition != Vector3.zero)
+			Position = vOldPosition + vDelta * fMoveLen;
+			if (bFinish)
 			{
-				Vector3 vDelta = TargetPosition - Position;
-				float fDeltaLen = vDelta.magnitude;
-				vDelta.Normalize();
-
-				Vector3 vOldPosition = Position;
-				float fMoveLen = speedMainRole * Time.deltaTime;
-				bool bFinish = false;
-				if (fMoveLen >= fDeltaLen)
-				{
-					fMoveLen = fDeltaLen;
-					bFinish = true;
-				}
-
-				Position = vOldPosition + vDelta * fMoveLen;
-				if (bFinish)
-				{
-					TargetPosition = Vector3.zero;
-					var oldRotate = mainRole.rotation;
-					animator.SetFloat("speed", 0.0f);
-					mainRole.rotation = oldRotate;
-				}
+				TargetPosition = Vector3.zero;
+				var oldRotate = this.transform.rotation;
+				animator.SetFloat("speed", 0.0f);
+				this.transform.rotation = oldRotate;
 			}
 		}
 	}
