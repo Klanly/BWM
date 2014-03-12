@@ -13,6 +13,8 @@ echo ===================================================================
 call:clearMeta "%dest%"
 popd
 
+"%protogen%" -i:"Assets\Scripts\Config\UserData.proto" -o:"Assets\Scripts\Config\UserData.proto.cs" -p:observable -q
+
 pause
 GOTO:EOF
 

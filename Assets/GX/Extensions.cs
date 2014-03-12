@@ -122,6 +122,8 @@ public static class Extensions
 		writer.Write(proto.GetType().FullName); writer.WriteLine(" {");
 		foreach (var p in proto.GetType().GetRuntimeProperties())
 		{
+			if (p.GetCustomAttributes(typeof(ProtoBuf.ProtoMemberAttribute), false).Any() == false)
+				continue;
 			writer.Write(prefix); writer.Write(tab); writer.Write(p.Name); writer.Write(" = ");
 			var value = p.GetValue(proto, null);
 			if (value is ProtoBuf.IExtensible)

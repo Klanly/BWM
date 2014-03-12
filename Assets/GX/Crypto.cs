@@ -108,7 +108,7 @@ namespace GX
 			Proxy = new AesProxy();
 			Proxy.SetKey(
 				GX.MD5.ComputeHash(Encoding.GetBytes(SystemInfo.deviceUniqueIdentifier)),
-				new byte[128]);
+				new byte[16]);
 		}
 
 		public static byte[] Encode(byte[] buf)
