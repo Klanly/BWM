@@ -29,16 +29,24 @@ public class GXChatOutput : MonoBehaviour
 		snapshotChatMessage.text = string.Empty;
 		UIEventListener.Get(snapshotToggle.gameObject).onClick = Toggle;
 
-		Toggle();
+		Toggle(true);
 	}
 
-	void Toggle(GameObject sender = null)
+	void Toggle(GameObject sender)
 	{
-		var full = content.activeSelf;
-		content.SetActive(!full);
-		snapshot.SetActive(full);
+		Toggle(content.activeSelf);
+	}
+
+	public void Toggle(bool toMinichat)
+	{
+		content.SetActive(!toMinichat);
+		snapshot.SetActive(toMinichat);
 
 		NGUITools.BringForward(this.gameObject);
+
+		var input = BattleScene.Instance.Gui<GXChatInput>().gameObject;
+		input.SetActive(!toMinichat);
+		NGUITools.BringForward(input);
 	}
 
 	[Execute]
