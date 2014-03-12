@@ -56,6 +56,7 @@ public class BattleScene : MonoBehaviour
 			{
 				go.transform.parent = uiRoot.transform;
 				go.transform.localScale = Vector3.one;
+				go.transform.position = Vector3.zero;
 				return go;
 			}
 		}
