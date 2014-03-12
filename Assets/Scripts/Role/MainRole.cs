@@ -17,6 +17,7 @@ public class MainRole : MonoBehaviour
 
 	private Animator animator;
 	private GameObject terrain;
+	private Camera camera;
 
 
 	/// <summary>
@@ -33,12 +34,7 @@ public class MainRole : MonoBehaviour
 				value.z = Mathf.Clamp(value.z, 0, MapNav.gridHeight * MapNav.gridZNum);
 			}
 			this.transform.position = value;
-
-			// 设置照相机位置
-			//Vector3 targetCenter = this.position;
-			//targetCenter.y += heightCameraLookAt;
-			//var pos = targetCenter + this.transform.rotation * Vector3.back * distanceCameraToRole;
-			//this.transform.position = pos;
+			UpdateCamera();
 		}
 	}
 
@@ -88,8 +84,10 @@ public class MainRole : MonoBehaviour
 	{
 		if (ServerInfo.data == null)
 			return;
+		camera = Object.FindObjectOfType<Camera>();
 		LoadMap(ServerInfo.data.mapid.ToString());
 		Grid = new GridPosition() { X = (int)ServerInfo.pos.x, Z = (int)ServerInfo.pos.y };
+		UpdateCamera();
 	}
 
 	public static MainRole Create()
@@ -158,8 +156,6 @@ public class MainRole : MonoBehaviour
 			}
 		}
 
-		Debug.Log(TargetPosition);
-
 		if (TargetPosition != Vector3.zero)
 		{
 			Vector3 vDelta = TargetPosition - Position;
@@ -184,6 +180,17 @@ public class MainRole : MonoBehaviour
 				this.transform.rotation = oldRotate;
 			}
 		}
+	}
+
+	/// <summary>
+	/// 根据主角位置设置照相机位置
+	/// </summary>
+	private void UpdateCamera()
+	{
+		var targetCenter = this.transform.position;
+		targetCenter.y += heightCameraLookAt;
+		var pos = targetCenter + camera.transform.rotation * Vector3.back * distanceCameraToRole;
+		camera.transform.position = pos;
 	}
 
 	/// <summary>
