@@ -327,7 +327,7 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: checkbox2
-    x: 712
+    x: 773
     y: 1580
     width: 36
     height: 36
@@ -560,6 +560,32 @@ MonoBehaviour:
     paddingRight: 0
     paddingTop: 0
     paddingBottom: 0
+  - name: loadingback
+    x: 0
+    y: 1082
+    width: 945
+    height: 15
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: loadingbar
+    x: 0
+    y: 1073
+    width: 895
+    height: 8
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
   - name: loginbutton
     x: 341
     y: 1593
@@ -604,6 +630,32 @@ MonoBehaviour:
     y: 1895
     width: 242
     height: 153
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: MonsterBack
+    x: 712
+    y: 1583
+    width: 60
+    height: 33
+    borderLeft: 43
+    borderRight: 16
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: MonsterHp
+    x: 657
+    y: 1356
+    width: 262
+    height: 10
     borderLeft: 0
     borderRight: 0
     borderTop: 0
@@ -795,8 +847,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: white
-    x: 749
-    y: 1584
+    x: 445
+    y: 1400
     width: 32
     height: 32
     borderLeft: 0
