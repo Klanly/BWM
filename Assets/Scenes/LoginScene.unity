@@ -231,26 +231,26 @@ MonoBehaviour:
     m_Curve:
     - time: 0
       value: 0
-      inSlope: 0
-      outSlope: 0
+      inSlope: 2
+      outSlope: 2
       tangentMode: 0
     - time: 1
       value: 1
-      inSlope: 2
-      outSlope: 2
+      inSlope: 0
+      outSlope: 0
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
   ignoreTimeScale: 1
-  delay: 1
-  duration: 4
+  delay: 0
+  duration: 3
   steeperCurves: 0
-  tweenGroup: 0
+  tweenGroup: 1
   onFinished: []
   eventReceiver: {fileID: 0}
   callWhenFinished: 
-  from: {x: 800, y: 0, z: 0}
-  to: {x: 145, y: -51, z: 0}
+  from: {x: 900, y: 0, z: 0}
+  to: {x: 145, y: -31, z: 0}
   worldSpace: 0
 --- !u!1 &628467499
 GameObject:
@@ -1040,6 +1040,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 1909208366}
   - 114: {fileID: 1909208367}
+  - 114: {fileID: 1909208368}
   m_Layer: 13
   m_Name: Logo
   m_TagString: Untagged
@@ -1103,6 +1104,50 @@ MonoBehaviour:
   mTexture: {fileID: 2800000, guid: da2e91883e4af904d894012d8d127213, type: 3}
   mMat: {fileID: 0}
   mShader: {fileID: 4800000, guid: e75727d9555d9d14ca51d91908c681bc, type: 3}
+--- !u!114 &1909208368
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1909208365}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d166255cacf07b4292b8402b3ddefc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  method: 0
+  style: 0
+  animationCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+    - time: .473010957
+      value: .722282529
+      inSlope: .292687744
+      outSlope: .292687744
+      tangentMode: 0
+    - time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  ignoreTimeScale: 1
+  delay: 0
+  duration: 3
+  steeperCurves: 0
+  tweenGroup: 1
+  onFinished: []
+  eventReceiver: {fileID: 0}
+  callWhenFinished: 
+  from: {x: -325, y: 9, z: 0}
+  to: {x: 25, y: 9, z: 0}
+  worldSpace: 0
 --- !u!1 &2032827508
 GameObject:
   m_ObjectHideFlags: 0
@@ -1115,6 +1160,7 @@ GameObject:
   - 65: {fileID: 2032827510}
   - 114: {fileID: 2032827515}
   - 114: {fileID: 2032827514}
+  - 114: {fileID: 2032827511}
   m_Layer: 13
   m_Name: OK
   m_TagString: Untagged
@@ -1146,6 +1192,45 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 281, y: 88, z: 0}
   m_Center: {x: -.5, y: 0, z: 0}
+--- !u!114 &2032827511
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2032827508}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75e7459110b9666449485c40f25362a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  method: 0
+  style: 0
+  animationCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 1
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  ignoreTimeScale: 1
+  delay: 0
+  duration: 3
+  steeperCurves: 0
+  tweenGroup: 0
+  onFinished: []
+  eventReceiver: {fileID: 0}
+  callWhenFinished: 
+  from: {x: 0, y: 0, z: 0}
+  to: {x: 1, y: 1, z: 1}
+  updateTable: 0
 --- !u!114 &2032827512
 MonoBehaviour:
   m_ObjectHideFlags: 0
