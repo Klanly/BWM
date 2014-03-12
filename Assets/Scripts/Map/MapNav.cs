@@ -93,7 +93,7 @@ public class MapNav : MonoBehaviour
 	{
 		var width = gridXNum * gridWidth;
 		var height = gridZNum * gridHeight;
-		transform.localScale = new Vector3(width + 50, height + 100, 1); // 放大地表碰撞盒，方便地图外点地行走
+		transform.localScale = new Vector3(width, height, 1);
 		transform.localEulerAngles = new Vector3(90, 0, 0);
 		transform.position = new Vector3(width * 0.5f, 0, height * 0.5f);
 	}

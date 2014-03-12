@@ -17,7 +17,7 @@ public class MainRole : MonoBehaviour
 
 	private Animator animator;
 	private GameObject terrain;
-	private Camera camera;
+	private Camera cameraMain;
 
 
 	/// <summary>
@@ -30,8 +30,8 @@ public class MainRole : MonoBehaviour
 		{
 			if (MapNav != null)
 			{
-				value.x = Mathf.Clamp(value.x, 0, MapNav.gridWidth * MapNav.gridXNum);
-				value.z = Mathf.Clamp(value.z, 0, MapNav.gridHeight * MapNav.gridZNum);
+				value.x = Mathf.Clamp(value.x, 0.5f, MapNav.gridWidth * MapNav.gridXNum - 0.5f);
+				value.z = Mathf.Clamp(value.z, 1.0f, MapNav.gridHeight * MapNav.gridZNum - 4.0f);
 			}
 			this.transform.position = value;
 			UpdateCamera();
@@ -84,7 +84,7 @@ public class MainRole : MonoBehaviour
 	{
 		if (ServerInfo.data == null)
 			return;
-		camera = Object.FindObjectOfType<Camera>();
+		cameraMain = GameObject.Find("CameraMain").GetComponent<Camera>();
 		LoadMap(ServerInfo.data.mapid.ToString());
 		Grid = new GridPosition() { X = (int)ServerInfo.pos.x, Z = (int)ServerInfo.pos.y };
 		UpdateCamera();
@@ -188,9 +188,16 @@ public class MainRole : MonoBehaviour
 	private void UpdateCamera()
 	{
 		var targetCenter = this.transform.position;
-		targetCenter.y += heightCameraLookAt;
-		var pos = targetCenter + camera.transform.rotation * Vector3.back * distanceCameraToRole;
-		camera.transform.position = pos;
+		targetCenter.z += heightCameraLookAt;
+
+		var dx = cameraMain.orthographicSize * Screen.width / Screen.height;
+		var dz = cameraMain.orthographicSize / Mathf.Sin(cameraMain.transform.rotation.eulerAngles.x * Mathf.Deg2Rad) + heightCameraLookAt;
+
+		targetCenter.x = Mathf.Clamp(targetCenter.x, dx, MapNav.transform.localScale.x - dx);
+		targetCenter.z = Mathf.Clamp(targetCenter.z, dz, MapNav.transform.localScale.y - dz);
+
+		var pos = targetCenter + cameraMain.transform.rotation * Vector3.back * distanceCameraToRole;
+		cameraMain.transform.position = pos;
 	}
 
 	/// <summary>
