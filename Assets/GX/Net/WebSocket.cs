@@ -55,10 +55,13 @@ namespace GX.Net
 			Proxy.Open(url);
 		}
 
-		public static void Send(ProtoBuf.IExtensible message)
+		public static void Send(ProtoBuf.IExtensible msg)
 		{
-			Debug.Log("[SEND]" + message.ToStringDebug());
-			var buf = serizlizer.Serialize(message);
+			if (msg.GetType() != typeof(Cmd.TickRequestNullUserCmd_CS) &&
+				msg.GetType() != typeof(Cmd.TickReturnNullUserCmd_CS))
+				Debug.Log("[SEND]" + msg.ToStringDebug());
+
+			var buf = serizlizer.Serialize(msg);
 			Proxy.Send(buf);
 		}
 
@@ -78,7 +81,9 @@ namespace GX.Net
 				while (mem.Position < mem.Length)
 				{
 					var msg = serizlizer.Deserialize(mem);
-					Debug.Log("[RECV]" + msg.ToStringDebug());
+					if (msg.GetType() != typeof(Cmd.TickRequestNullUserCmd_CS) &&
+						msg.GetType() != typeof(Cmd.TickReturnNullUserCmd_CS))
+						Debug.Log("[RECV]" + msg.ToStringDebug());
 					yield return msg;
 				}
 			}
