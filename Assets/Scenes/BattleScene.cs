@@ -8,6 +8,8 @@ public class BattleScene : MonoBehaviour
 	public UIRoot uiRoot;
 	private readonly Dictionary<string, MonoBehaviour> guiCache = new Dictionary<string, MonoBehaviour>();
 
+	public static BattleScene Instance { get; private set; }
+
 	/// <summary>
 	/// 获取给定类型的GUI组件，会进行单件实例的缓存，以避免重复加载
 	/// </summary>
@@ -62,6 +64,9 @@ public class BattleScene : MonoBehaviour
 
 	IEnumerator Start()
 	{
+		if (Instance != null)
+			throw new System.InvalidOperationException();
+		Instance = this;
 		yield return null;
 		Gui<GXChatInput>();
 		Gui<GXChatOutput>();
@@ -69,5 +74,12 @@ public class BattleScene : MonoBehaviour
 		Load("ControlBar");
 
 		MainRole.Create();
+	}
+
+	void Destory()
+	{
+		if (Instance == null)
+			throw new System.InvalidOperationException();
+		Instance = null;
 	}
 }
