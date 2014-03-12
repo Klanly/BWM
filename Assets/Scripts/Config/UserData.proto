@@ -1,0 +1,6 @@
+package Config;
+
+message UserData
+{
+	optional string test = 1;
+}
