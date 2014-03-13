@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-// Generated from: Common/LoginCommand.proto
+// Generated from: LoginCommand.proto
 namespace Cmd
 {
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"Login")]
@@ -79,6 +79,14 @@ namespace Cmd
     {
       get { return _gameid; }
       set { _gameid = value; }
+    }
+    private string _mid = "";
+    [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"mid", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string mid
+    {
+      get { return _mid; }
+      set { _mid = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -298,22 +306,29 @@ namespace Cmd
       get { return _logintempid; }
       set { _logintempid = value; }
     }
+    private ulong _tokenid;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"tokenid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public ulong tokenid
+    {
+      get { return _tokenid; }
+      set { _tokenid = value; }
+    }
     private string _gatewayurl;
-    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"gatewayurl", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::ProtoBuf.ProtoMember(4, IsRequired = true, Name=@"gatewayurl", DataFormat = global::ProtoBuf.DataFormat.Default)]
     public string gatewayurl
     {
       get { return _gatewayurl; }
       set { _gatewayurl = value; }
     }
     private uint _gameid;
-    [global::ProtoBuf.ProtoMember(4, IsRequired = true, Name=@"gameid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoMember(5, IsRequired = true, Name=@"gameid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     public uint gameid
     {
       get { return _gameid; }
       set { _gameid = value; }
     }
     private uint _zoneid;
-    [global::ProtoBuf.ProtoMember(5, IsRequired = true, Name=@"zoneid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoMember(6, IsRequired = true, Name=@"zoneid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     public uint zoneid
     {
       get { return _zoneid; }
@@ -342,6 +357,28 @@ namespace Cmd
     {
       get { return _logintempid; }
       set { _logintempid = value; }
+    }
+    private uint _timestamp;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"timestamp", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint timestamp
+    {
+      get { return _timestamp; }
+      set { _timestamp = value; }
+    }
+    private string _tokenmd5;
+    [global::ProtoBuf.ProtoMember(4, IsRequired = true, Name=@"tokenmd5", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public string tokenmd5
+    {
+      get { return _tokenmd5; }
+      set { _tokenmd5 = value; }
+    }
+    private string _mid = "";
+    [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"mid", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string mid
+    {
+      get { return _mid; }
+      set { _mid = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)

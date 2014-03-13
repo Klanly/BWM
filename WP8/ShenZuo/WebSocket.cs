@@ -25,6 +25,9 @@ namespace ShenZuo
 			receiveQueue.Clear();
 
 			socket = new WebSocket4Net.WebSocket(url);
+			if (socket != null)
+					socket.Close();
+
 			socket.DataReceived += (s, e) =>
 			{
 				Debug.WriteLine("WebSocket DataReceived: length=" + e.Data.Length);

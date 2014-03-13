@@ -7,12 +7,15 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-// Generated from: Common/Command.proto
+// Generated from: Command.proto
 namespace Cmd
 {
     [global::ProtoBuf.ProtoContract(Name=@"Command")]
     public enum Command
     {
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"Null", Value=0)]
+      Null = 0,
             
       [global::ProtoBuf.ProtoEnum(Name=@"Login", Value=1)]
       Login = 1,
@@ -21,7 +24,13 @@ namespace Cmd
       Select = 2,
             
       [global::ProtoBuf.ProtoEnum(Name=@"Chat", Value=3)]
-      Chat = 3
+      Chat = 3,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"Map", Value=4)]
+      Map = 4,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"Move", Value=5)]
+      Move = 5
     }
   
 }

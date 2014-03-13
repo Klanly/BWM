@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using UnityEditor;
 using System.Collections;
+using System.IO;
+using System.Linq;
 
 [CustomEditor(typeof(MapNav))]
 public class MapNavEditor : Editor
@@ -11,17 +13,13 @@ public class MapNavEditor : Editor
 	/// </summary>
 	private SerializedProperty gridWidth;
 	/// <summary>
-	/// 格子高(米)
-	/// </summary>
-	private SerializedProperty gridHeight;
-	/// <summary>
 	/// X轴格子数
 	/// </summary>
 	private SerializedProperty gridXNum;
 	/// <summary>
 	/// Z轴格子数
 	/// </summary>
-	private SerializedProperty gridZNum; 
+	private SerializedProperty gridZNum;
 	#endregion
 
 	/// <summary>
@@ -58,10 +56,14 @@ public class MapNavEditor : Editor
 		Clear = 2,
 	}
 
+	static MapNavEditor()
+	{
+		ProtoBuf.Serializer.PrepareSerializer<MapNav>();
+	}
+
 	void OnEnable()
 	{
 		gridWidth = serializedObject.FindProperty("gridWidth");
-		gridHeight = serializedObject.FindProperty("gridHeight");
 		gridXNum = serializedObject.FindProperty("gridXNum");
 		gridZNum = serializedObject.FindProperty("gridZNum");
 	}
@@ -77,7 +79,6 @@ public class MapNavEditor : Editor
 		if (Target.ShowGrids)
 		{
 			EditorGUILayout.PropertyField(gridWidth, new GUIContent("格子宽(米)"));
-			EditorGUILayout.PropertyField(gridHeight, new GUIContent("格子高(米)"));
 			EditorGUILayout.PropertyField(gridXNum, new GUIContent("X轴格子数"));
 			EditorGUILayout.PropertyField(gridZNum, new GUIContent("Z轴格子数"));
 			if (GUILayout.Button("Update"))
@@ -92,6 +93,11 @@ public class MapNavEditor : Editor
 			EditorUtility.SetDirty(this.target);
 		}
 		EditorGUILayout.EndToggleGroup();
+
+		if (GUILayout.Button("Export"))
+		{
+			Export();
+		}
 
 		serializedObject.ApplyModifiedProperties();
 	}
@@ -170,5 +176,25 @@ public class MapNavEditor : Editor
 				Event.current.Use();
 				break;
 		}
+	}
+
+	void Export()
+	{
+		var path = Path.Combine(Path.GetDirectoryName(Application.dataPath), "MapNav");
+		Directory.CreateDirectory(path);
+		path = EditorUtility.SaveFilePanel("Export MapNav grid info", path, Path.GetFileNameWithoutExtension(EditorApplication.currentScene), "nav");
+		if (string.IsNullOrEmpty(path))
+			return;
+		var config = new Config.MapNav();
+		config.gridwidth = Target.gridWidth;
+		config.gridheight = Target.gridHeight;
+		config.gridxnum = (uint)Target.gridXNum;
+		config.gridznum = (uint)Target.gridZNum;
+		config.grids.AddRange(from g in Target.grids select (uint)g);
+		using (var stream = File.OpenWrite(path))
+		{
+			ProtoBuf.Serializer.SerializeWithLengthPrefix(stream, config, ProtoBuf.PrefixStyle.Base128);
+		}
+		EditorUtility.DisplayDialog("MapNav Export OK", path, "OK");
 	}
 }

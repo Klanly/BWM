@@ -1,0 +1,11 @@
+// file=名字表.xlsx[Sheet1] key=id
+package table;
+
+message TableNameItem
+{
+	required uint32 id = 1; // 编号
+	required string name1 = 2; // 名字1
+	required string name2 = 3; // 名字2
+	required string name3 = 4; // 名字3
+	required string name4 = 5; // 名字4
+}

@@ -1,26 +1,45 @@
 @echo off
-pushd "%~dp0"
+set protogen=%~dp0\3Party\protobuf-net r668\ProtoGen\protogen.exe
+set dest=%~dp0\Assets\Scripts\Common
 
-set protogen="3Party\protobuf-net r668\ProtoGen\protogen.exe"
-set dest=Assets\Scripts\Common
+pushd "%~dp0\Common"
+echo ===================================================================
+del /Q /S *.cs
+del /Q /S "%dest%\*.cs"
+call:buildDir "%~dp0\Common" "%dest%"
+call:buildDir "%~dp0\Common\Config" "%dest%\Editor"
+del /Q /S *.cs
+echo ===================================================================
+call:clearMeta "%dest%"
+popd
 
-del /Q %dest%\*.cs
-for /f "tokens=* delims=" %%i in ('dir /b /s Common\*.proto') do (
-	echo %%i
-	%protogen% -i:"%%i" -o:"%%i.cs" -q
-	move /Y "%%i.cs" %dest%
-)
-
-call:clearMeta %dest%
+"%protogen%" -i:"Assets\Scripts\Config\UserData.proto" -o:"Assets\Scripts\Config\UserData.proto.cs" -p:observable -q
 
 pause
 GOTO:EOF
 
 rem ===================================================================
-rem é€’å½’åˆ é™¤ç»™å®šç›®å½•ä¸­æ‰€æœ‰å­¤ç«‹çš„*.metaæ–‡ä»¶
-rem å‚æ•°ï¼šè·¯å¾„
+rem ¶ÔÖ¸¶¨Ä¿Â¼µÄprotoÎÄ¼þ½øÐÐC#´úÂëÉú³É
+rem ²ÎÊý1: protoÂ·¾¶
+rem ²ÎÊý2: csÎÄ¼þÄ¿±êÂ·¾¶
+:buildDir
+echo build: %~1 -> %~2
+for /f "tokens=* delims=" %%i in ('dir /b "%~1\*.proto"') do (
+	echo %~1\%%i
+	"%protogen%" -i:"%~1\%%i" -o:"%~1\%%i.cs" -q
+)
+xcopy "%~1\*.cs" "%~2" /Y /F
+GOTO:EOF
+
+rem ===================================================================
+rem µÝ¹éÉ¾³ý¸ø¶¨Ä¿Â¼ÖÐËùÓÐ¹ÂÁ¢µÄ*.metaÎÄ¼þ
+rem ²ÎÊý: Â·¾¶
 :clearMeta
-for /f "tokens=* delims=" %%i in ('dir /b /s %~1\*.meta') do (
-	if not exist %%~dpni del /Q %%i
+echo clear meta: %~1
+for /f "tokens=* delims=" %%i in ('dir /b /s "%~1\*.meta"') do (
+	if not exist "%%~dpni" (
+		echo "%~1\%%i"
+		del /Q "%~1\%%i"
+	)
 )
 GOTO:EOF

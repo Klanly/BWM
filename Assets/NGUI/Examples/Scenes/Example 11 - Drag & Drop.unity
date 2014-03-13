@@ -212,24 +212,9 @@ MonoBehaviour:
   verticalScrollBar: {fileID: 1706457514}
   showScrollBars: 1
   customMovement: {x: 1, y: 0}
-  relativePositionOnReset: {x: .5, y: 0}
+  contentPivot: 1
   scale: {x: 0, y: 0, z: 0}
---- !u!1 &28
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 3
-  m_Component:
-  - 4: {fileID: 60}
-  - 114: {fileID: 110}
-  m_Layer: 8
-  m_Name: Anchor - Left
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
+  relativePositionOnReset: {x: 0, y: 0}
 --- !u!1 &29
 GameObject:
   m_ObjectHideFlags: 0
@@ -382,6 +367,7 @@ MonoBehaviour:
   animateSmoothly: 1
   sorted: 1
   hideInactive: 1
+  keepWithinPanel: 0
 --- !u!4 &42
 Transform:
   m_ObjectHideFlags: 0
@@ -401,10 +387,10 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 11}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 142, y: -1, z: 0}
+  m_LocalPosition: {x: -498, y: -1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 60}
+  m_Father: {fileID: 67}
 --- !u!4 &52
 Transform:
   m_ObjectHideFlags: 0
@@ -452,24 +438,11 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 26}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7, y: 210, z: 0}
+  m_LocalPosition: {x: 7, y: 223, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 57}
   m_Father: {fileID: 848388263}
---- !u!4 &60
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 28}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -640, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 848388263}
-  - {fileID: 43}
-  m_Father: {fileID: 67}
 --- !u!4 &61
 Transform:
   m_ObjectHideFlags: 0
@@ -536,9 +509,10 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: .00277777785, y: .00277777785, z: .00277777785}
   m_Children:
-  - {fileID: 60}
-  - {fileID: 1948896188}
   - {fileID: 66}
+  - {fileID: 848388263}
+  - {fileID: 710038378}
+  - {fileID: 43}
   - {fileID: 64}
   m_Father: {fileID: 0}
 --- !u!4 &68
@@ -723,30 +697,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9d0b5f3bbe925a408bd595c79d0bf63, type: 1}
   m_Name: 
   leftAnchor:
-    target: {fileID: 0}
+    target: {fileID: 67}
     relative: 0
-    absolute: 0
+    absolute: 142
   rightAnchor:
-    target: {fileID: 0}
-    relative: 1
-    absolute: 0
-  bottomAnchor:
-    target: {fileID: 0}
+    target: {fileID: 67}
     relative: 0
-    absolute: 0
+    absolute: 576
+  bottomAnchor:
+    target: {fileID: 67}
+    relative: .5
+    absolute: -201
   topAnchor:
-    target: {fileID: 0}
-    relative: 1
-    absolute: 0
+    target: {fileID: 67}
+    relative: .5
+    absolute: 199
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 3
-  mWidth: 427
+  mWidth: 434
   mHeight: 400
   mDepth: -9
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 1
+  aspectRatio: 1.08500004
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 0}
   mFont: {fileID: 11400000, guid: 29056518aafb01b49a5b08faf8e30cff, type: 2}
@@ -769,13 +743,14 @@ MonoBehaviour:
     Drag & drop from one scroll view to another is possible by attaching [99ff00]UIDragDropContainer[-].'
   mFontSize: 20
   mFontStyle: 0
+  mAlignment: 0
   mEncoding: 1
   mMaxLineCount: 0
   mEffectStyle: 1
   mEffectColor: {r: 0, g: 0, b: 0, a: 1}
   mSymbols: 1
   mEffectDistance: {x: 1, y: 1}
-  mOverflow: 3
+  mOverflow: 0
   mMaterial: {fileID: 0}
   mApplyGradient: 1
   mGradientTop: {r: 1, g: 1, b: 1, a: 1}
@@ -904,23 +879,6 @@ MonoBehaviour:
   rightType: 1
   bottomType: 1
   topType: 1
---- !u!114 &110
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 28}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c8077b76001d36d489868d20d28bddb9, type: 1}
-  m_Name: 
-  uiCamera: {fileID: 69}
-  container: {fileID: 0}
-  side: 1
-  runOnlyOnce: 0
-  relativeOffset: {x: 0, y: 0}
-  pixelOffset: {x: 0, y: 0}
-  widgetContainer: {fileID: 0}
 --- !u!114 &111
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1089,6 +1047,7 @@ MonoBehaviour:
   mClipRange: {x: 0, y: 0, z: 0, w: 0}
   mClipSoftness: {x: 40, y: 40}
   mDepth: 1
+  mClipOffset: {x: 0, y: 0}
 --- !u!114 &118
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1128,6 +1087,7 @@ MonoBehaviour:
   mClipRange: {x: 50, y: -209, z: 102, w: 594}
   mClipSoftness: {x: 1, y: 10}
   mDepth: 3
+  mClipOffset: {x: 0, y: -13}
 --- !u!114 &120
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1167,6 +1127,7 @@ MonoBehaviour:
   mClipRange: {x: 0, y: 0, z: 0, w: 0}
   mClipSoftness: {x: 40, y: 40}
   mDepth: 5
+  mClipOffset: {x: 0, y: 0}
 --- !u!196 &121
 NavMeshSettings:
   m_ObjectHideFlags: 0
@@ -1250,6 +1211,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d331b94ba7bbfa343bb6b9f9282b5c93, type: 1}
   m_Name: 
   restriction: 1
+  cloneOnDrag: 0
   prefab: {fileID: 100000, guid: 8d847f26b6745fb4d9076f59a3cf0151, type: 2}
 --- !u!1 &144824840
 GameObject:
@@ -1380,6 +1342,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d331b94ba7bbfa343bb6b9f9282b5c93, type: 1}
   m_Name: 
   restriction: 1
+  cloneOnDrag: 0
   prefab: {fileID: 100000, guid: 8d847f26b6745fb4d9076f59a3cf0151, type: 2}
 --- !u!114 &227252776
 MonoBehaviour:
@@ -1512,6 +1475,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d331b94ba7bbfa343bb6b9f9282b5c93, type: 1}
   m_Name: 
   restriction: 1
+  cloneOnDrag: 0
   prefab: {fileID: 100000, guid: 8d847f26b6745fb4d9076f59a3cf0151, type: 2}
 --- !u!114 &297538264
 MonoBehaviour:
@@ -1629,8 +1593,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 16, y: 117.600029, z: 0}
-  m_Center: {x: 0, y: -99.2543945, z: 0}
+  m_Size: {x: 16, y: 562.953369, z: 0}
+  m_Center: {x: 0, y: -4.81666565, z: 0}
 --- !u!114 &306477866
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2181,6 +2145,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d331b94ba7bbfa343bb6b9f9282b5c93, type: 1}
   m_Name: 
   restriction: 1
+  cloneOnDrag: 0
   prefab: {fileID: 100000, guid: 8d847f26b6745fb4d9076f59a3cf0151, type: 2}
 --- !u!114 &650606782
 MonoBehaviour:
@@ -2212,7 +2177,7 @@ GameObject:
   - 114: {fileID: 710038381}
   - 114: {fileID: 710038382}
   m_Layer: 8
-  m_Name: Container
+  m_Name: Container - Right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2225,13 +2190,13 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 710038377}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -110, y: 0, z: 0}
+  m_LocalPosition: {x: 530, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1761466419}
   - {fileID: 1675588937}
   - {fileID: 1607436410}
-  m_Father: {fileID: 1948896188}
+  m_Father: {fileID: 67}
 --- !u!65 &710038379
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2416,6 +2381,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d331b94ba7bbfa343bb6b9f9282b5c93, type: 1}
   m_Name: 
   restriction: 1
+  cloneOnDrag: 0
   prefab: {fileID: 100000, guid: d6b1ee5e07651d74fa5f4b8f8adfbc9b, type: 2}
 --- !u!114 &722266127
 MonoBehaviour:
@@ -2548,6 +2514,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d331b94ba7bbfa343bb6b9f9282b5c93, type: 1}
   m_Name: 
   restriction: 1
+  cloneOnDrag: 0
   prefab: {fileID: 100000, guid: 8d847f26b6745fb4d9076f59a3cf0151, type: 2}
 --- !u!114 &760194426
 MonoBehaviour:
@@ -2621,6 +2588,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d331b94ba7bbfa343bb6b9f9282b5c93, type: 1}
   m_Name: 
   restriction: 1
+  cloneOnDrag: 0
   prefab: {fileID: 100000, guid: d6b1ee5e07651d74fa5f4b8f8adfbc9b, type: 2}
 --- !u!114 &818940274
 MonoBehaviour:
@@ -2748,6 +2716,7 @@ MonoBehaviour:
   animateSmoothly: 1
   sorted: 1
   hideInactive: 1
+  keepWithinPanel: 0
 --- !u!1 &848388262
 GameObject:
   m_ObjectHideFlags: 0
@@ -2761,7 +2730,7 @@ GameObject:
   - 114: {fileID: 848388267}
   - 114: {fileID: 848388268}
   m_Layer: 8
-  m_Name: Container
+  m_Name: Container - Left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2774,13 +2743,13 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 848388262}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -640, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 61}
   - {fileID: 1706457510}
   - {fileID: 58}
-  m_Father: {fileID: 60}
+  m_Father: {fileID: 67}
 --- !u!114 &848388264
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2965,6 +2934,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d331b94ba7bbfa343bb6b9f9282b5c93, type: 1}
   m_Name: 
   restriction: 1
+  cloneOnDrag: 0
   prefab: {fileID: 100000, guid: d6b1ee5e07651d74fa5f4b8f8adfbc9b, type: 2}
 --- !u!114 &856643768
 MonoBehaviour:
@@ -3098,11 +3068,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11400010, guid: df7390d50d06a4b4b893085286142266, type: 2}
       propertyPath: mHeight
-      value: 598
+      value: 423
       objectReference: {fileID: 0}
     - target: {fileID: 6500000, guid: df7390d50d06a4b4b893085286142266, type: 2}
       propertyPath: m_Size.y
-      value: 117.600029
+      value: 562.953369
       objectReference: {fileID: 0}
     - target: {fileID: 11400004, guid: df7390d50d06a4b4b893085286142266, type: 2}
       propertyPath: mHeight
@@ -3138,7 +3108,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 6500000, guid: df7390d50d06a4b4b893085286142266, type: 2}
       propertyPath: m_Center.y
-      value: -99.2543945
+      value: -4.81666565
       objectReference: {fileID: 0}
     - target: {fileID: 11400010, guid: df7390d50d06a4b4b893085286142266, type: 2}
       propertyPath: leftAnchor.target
@@ -3187,6 +3157,14 @@ Prefab:
     - target: {fileID: 11400010, guid: df7390d50d06a4b4b893085286142266, type: 2}
       propertyPath: aspectRatio
       value: .0434782617
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400008, guid: df7390d50d06a4b4b893085286142266, type: 2}
+      propertyPath: mValue
+      value: .692307711
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400008, guid: df7390d50d06a4b4b893085286142266, type: 2}
+      propertyPath: mSize
+      value: .956666648
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: df7390d50d06a4b4b893085286142266, type: 2}
@@ -3470,6 +3448,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d331b94ba7bbfa343bb6b9f9282b5c93, type: 1}
   m_Name: 
   restriction: 1
+  cloneOnDrag: 0
   prefab: {fileID: 100000, guid: d6b1ee5e07651d74fa5f4b8f8adfbc9b, type: 2}
 --- !u!114 &1325024852
 MonoBehaviour:
@@ -3661,6 +3640,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d331b94ba7bbfa343bb6b9f9282b5c93, type: 1}
   m_Name: 
   restriction: 1
+  cloneOnDrag: 0
   prefab: {fileID: 100000, guid: d6b1ee5e07651d74fa5f4b8f8adfbc9b, type: 2}
 --- !u!114 &1327411870
 MonoBehaviour:
@@ -3794,11 +3774,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11400010, guid: df7390d50d06a4b4b893085286142266, type: 2}
       propertyPath: mHeight
-      value: 598
+      value: 423
       objectReference: {fileID: 0}
     - target: {fileID: 6500000, guid: df7390d50d06a4b4b893085286142266, type: 2}
       propertyPath: m_Size.y
-      value: 117.600029
+      value: 562.953369
       objectReference: {fileID: 0}
     - target: {fileID: 11400004, guid: df7390d50d06a4b4b893085286142266, type: 2}
       propertyPath: mHeight
@@ -3838,7 +3818,7 @@ Prefab:
       objectReference: {fileID: 69}
     - target: {fileID: 6500000, guid: df7390d50d06a4b4b893085286142266, type: 2}
       propertyPath: m_Center.y
-      value: -99.2543945
+      value: -4.81666565
       objectReference: {fileID: 0}
     - target: {fileID: 11400010, guid: df7390d50d06a4b4b893085286142266, type: 2}
       propertyPath: leftAnchor.target
@@ -3883,6 +3863,14 @@ Prefab:
     - target: {fileID: 11400004, guid: df7390d50d06a4b4b893085286142266, type: 2}
       propertyPath: aspectRatio
       value: .0272108838
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400008, guid: df7390d50d06a4b4b893085286142266, type: 2}
+      propertyPath: mValue
+      value: .692307711
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400008, guid: df7390d50d06a4b4b893085286142266, type: 2}
+      propertyPath: mSize
+      value: .956666648
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: df7390d50d06a4b4b893085286142266, type: 2}
@@ -3988,7 +3976,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1607436409}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7, y: 210, z: 0}
+  m_LocalPosition: {x: 7, y: 223, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 830441778}
@@ -4030,8 +4018,9 @@ MonoBehaviour:
   verticalScrollBar: {fileID: 1675588941}
   showScrollBars: 1
   customMovement: {x: 1, y: 0}
-  relativePositionOnReset: {x: .5, y: 0}
+  contentPivot: 1
   scale: {x: 0, y: 0, z: 0}
+  relativePositionOnReset: {x: 0, y: 0}
 --- !u!114 &1607436413
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4071,6 +4060,7 @@ MonoBehaviour:
   mClipRange: {x: 50, y: -209, z: 102, w: 594}
   mClipSoftness: {x: 1, y: 10}
   mDepth: 4
+  mClipOffset: {x: 0, y: -13}
 --- !u!1 &1675588936
 GameObject:
   m_ObjectHideFlags: 0
@@ -4195,7 +4185,7 @@ MonoBehaviour:
   thumb: {fileID: 0}
   mBG: {fileID: 1675588939}
   mFG: {fileID: 2069478560}
-  mValue: .711000025
+  mValue: .692307711
   mFill: 3
   numberOfSteps: 0
   onChange: []
@@ -4203,7 +4193,7 @@ MonoBehaviour:
   rawValue: 1
   direction: 2
   mInverted: 0
-  mSize: .200000003
+  mSize: .956666648
   mScroll: .600000024
   mDir: 2
 --- !u!1 &1706457509
@@ -4330,7 +4320,7 @@ MonoBehaviour:
   thumb: {fileID: 0}
   mBG: {fileID: 1706457513}
   mFG: {fileID: 306477867}
-  mValue: .711000025
+  mValue: .692307711
   mFill: 3
   numberOfSteps: 0
   onChange: []
@@ -4338,7 +4328,7 @@ MonoBehaviour:
   rawValue: 1
   direction: 2
   mInverted: 0
-  mSize: .200000003
+  mSize: .956666648
   mScroll: .600000024
   mDir: 2
 --- !u!1 &1761466418
@@ -4471,6 +4461,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d331b94ba7bbfa343bb6b9f9282b5c93, type: 1}
   m_Name: 
   restriction: 1
+  cloneOnDrag: 0
   prefab: {fileID: 100000, guid: 8d847f26b6745fb4d9076f59a3cf0151, type: 2}
 --- !u!114 &1771743974
 MonoBehaviour:
@@ -4548,51 +4539,6 @@ MonoBehaviour:
   disabledColor: {r: .5, g: .5, b: .5, a: 1}
   dragHighlight: 0
   onClick: []
---- !u!1 &1948896187
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 3
-  m_Component:
-  - 4: {fileID: 1948896188}
-  - 114: {fileID: 1948896189}
-  m_Layer: 8
-  m_Name: Anchor - Right
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1948896188
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1948896187}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 640, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 710038378}
-  m_Father: {fileID: 67}
---- !u!114 &1948896189
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1948896187}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c8077b76001d36d489868d20d28bddb9, type: 1}
-  m_Name: 
-  uiCamera: {fileID: 69}
-  container: {fileID: 0}
-  side: 5
-  runOnlyOnce: 0
-  relativeOffset: {x: 0, y: 0}
-  pixelOffset: {x: 0, y: 0}
-  widgetContainer: {fileID: 0}
 --- !u!1 &1958127439
 GameObject:
   m_ObjectHideFlags: 0
@@ -4648,6 +4594,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d331b94ba7bbfa343bb6b9f9282b5c93, type: 1}
   m_Name: 
   restriction: 1
+  cloneOnDrag: 0
   prefab: {fileID: 100000, guid: d6b1ee5e07651d74fa5f4b8f8adfbc9b, type: 2}
 --- !u!114 &1958127443
 MonoBehaviour:
@@ -4765,8 +4712,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 16, y: 117.600029, z: 0}
-  m_Center: {x: 0, y: -99.2543945, z: 0}
+  m_Size: {x: 16, y: 562.953369, z: 0}
+  m_Center: {x: 0, y: -4.81666565, z: 0}
 --- !u!114 &2069478560
 MonoBehaviour:
   m_ObjectHideFlags: 0

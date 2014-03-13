@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-// Generated from: Common/ChatCommand.proto
+// Generated from: ChatCommand.proto
 namespace Cmd
 {
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"Chat")]
@@ -116,26 +116,36 @@ namespace Cmd
   {
     public GMCommandChatUserCmd_C() {}
     
-    private ulong _charid;
-    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"charid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    private ulong _charid = default(ulong);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"charid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong charid
     {
       get { return _charid; }
       set { _charid = value; }
     }
-    private string _charname;
-    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"charname", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    private string _charname = "";
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"charname", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
     public string charname
     {
       get { return _charname; }
       set { _charname = value; }
     }
-    private bool _sexman;
-    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"sexman", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public bool sexman
+    private string _method;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"method", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public string method
     {
-      get { return _sexman; }
-      set { _sexman = value; }
+      get { return _method; }
+      set { _method = value; }
+    }
+    private string _params = "";
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"params", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string @params
+    {
+      get { return _params; }
+      set { _params = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -183,5 +193,13 @@ namespace Cmd
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
+  
+    [global::ProtoBuf.ProtoContract(Name=@"ChatType")]
+    public enum ChatType
+    {
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"ChatType_Map", Value=2)]
+      ChatType_Map = 2
+    }
   
 }

@@ -16,15 +16,14 @@ public class TestJumpPos : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
-		if (nextLevel != null && nextLevel != "")
+		if (string.IsNullOrEmpty(nextLevel))
+			return;
+		Transform role = GameObject.Find("MainRole").transform;
+		Vector2 posRole = new Vector2(role.position.x, role.position.z);
+		Vector2 posSelf = new Vector2(transform.position.x, transform.position.z);
+		if (Vector2.Distance(posRole, posSelf) < distance)
 		{
-			Transform role = GameObject.Find("MainRole").transform;
-			Vector2 posRole = new Vector2(role.position.x, role.position.z);
-			Vector2 posSelf = new Vector2(transform.position.x, transform.position.z);
-			if (Vector2.Distance(posRole, posSelf) < distance)
-			{
-				Application.LoadLevel(nextLevel);
-			}
+			Object.FindObjectOfType<MainRole>().LoadMap(nextLevel);
 		}
 	}
 }
