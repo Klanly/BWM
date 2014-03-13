@@ -3,43 +3,70 @@ using System.Collections;
 using GX.Net;
 using Cmd;
 using System.Collections.Generic;
-using RoleInfo = Cmd.AddMapUserDataAndPosMapUserCmd_S;
 
 public class Role : MonoBehaviour
 {
-	public static Dictionary<ulong, RoleInfo> All { get; private set; }
+	public static Dictionary<ulong, Role> All { get; private set; }
+
+	public MapUserData ServerInfo { get; private set; }
+	private Animator animator;
 
 	static Role()
 	{
-		All = new Dictionary<ulong, RoleInfo>();
+		All = new Dictionary<ulong, Role>();
+	}
+
+	private Role() { }
+
+	public static Role Create(MapUserData info)
+	{
+		var item = table.TableAvatarItem.Select(info.profession, info.sexman);
+		var avatar = Avatar.CreateAvatar("Prefabs/Models/Body/Sk_Female_001", item.body, item.head, item.weapon);
+		avatar.name = "Role/" + info.charname;
+		avatar.transform.localScale = new Vector3(5, 5, 5);
+		var role = avatar.AddComponent<Role>();
+		role.animator = avatar.GetComponent<Animator>();
+
+		role.ServerInfo = info;
+		return role;
 	}
 
 	[Execute]
-	static void Execute(RoleInfo cmd)
+	static void Execute(AddMapUserDataAndPosMapUserCmd_S cmd)
 	{
-		if (Role.All.ContainsKey(cmd.data.charid) == false)
+		Role role;
+		if (Role.All.TryGetValue(cmd.data.charid, out role))
 		{
-			// TODO: add charater to scene
+			role.ServerInfo = cmd.data;
 		}
-		Role.All[cmd.data.charid] = cmd;
+		else
+		{
+			role = Role.Create(cmd.data);
+			Role.All[cmd.data.charid] = role;
+		}
+
+		Debug.Log(role.transform);
+		Debug.Log(BattleScene.Instance.MapNav);
+		role.transform.position = BattleScene.Instance.MapNav.GetWorldPosition(cmd.pos.x, cmd.pos.y);
 	}
 
 	[Execute]
 	static void Execute(UserMoveDownMoveUserCmd_S cmd)
 	{
-		RoleInfo info;
-		if (Role.All.TryGetValue(cmd.charid, out info))
-			info.pos = cmd.pos;
+		Role role;
+		if (Role.All.TryGetValue(cmd.charid, out role))
+		{
+			role.transform.position = BattleScene.Instance.MapNav.GetWorldPosition(cmd.pos.x, cmd.pos.y);
+		}
 	}
 
 	[Execute]
 	static void Execute(UserGotoMoveUserCmd_S cmd)
 	{
-		RoleInfo info;
-		if (Role.All.TryGetValue(cmd.charid, out info))
+		Role role;
+		if (Role.All.TryGetValue(cmd.charid, out role))
 		{
-			info.pos = cmd.pos;
-			// TODO: process cmd.mapid
+			role.transform.position = BattleScene.Instance.MapNav.GetWorldPosition(cmd.pos.x, cmd.pos.y);
 		}
 	}
 }

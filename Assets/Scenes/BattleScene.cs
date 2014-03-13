@@ -66,6 +66,8 @@ public class BattleScene : MonoBehaviour
 	#endregion
 
 	#region Map
+	public MapNav MapNav { get; private set; }
+
 	/// <summary>
 	/// 地表的唯一实例，用于避免重复加载
 	/// </summary>
@@ -104,6 +106,8 @@ public class BattleScene : MonoBehaviour
 		LoadGui("ControlBar");
 
 		LoadMap(table.TableMapItem.Select(MainRole.ServerInfo.data.mapid).path);
+		yield return null;
+		MapNav = UnityEngine.Object.FindObjectOfType<MapNav>();
 
 		MainRole.Create();
 	}
