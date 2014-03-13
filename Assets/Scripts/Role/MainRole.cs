@@ -13,8 +13,7 @@ public class MainRole : MonoBehaviour
 	public float distanceCameraToRole = 25.0f;
 	public float heightCameraLookAt = 0.5f;
 
-	public MapNav MapNav { get; private set; }
-
+	private MapNav MapNav { get { return BattleScene.Instance.MapNav; } }
 	private Animator animator;
 	private Camera cameraMain;
 
@@ -87,26 +86,35 @@ public class MainRole : MonoBehaviour
 		ServerInfo = new MainRoleInfo(); // 避免不必要的空指针判断
 	}
 
-	// Use this for initialization
-	void Start()
-	{
-		if (ServerInfo.data == null)
-			return;
-		cameraMain = GameObject.Find("CameraMain").GetComponent<Camera>();
-		MapNav = Object.FindObjectOfType<MapNav>();
-		Grid = new Pos() { x = (int)ServerInfo.pos.x, y = (int)ServerInfo.pos.y };
-		UpdateCamera();
-	}
+	private MainRole() { }
 
 	public static MainRole Create()
 	{
-		var item = table.TableAvatarItem.Select((Profession)ServerInfo.data.profession, ServerInfo.data.sexman); // TODO: remove force type cast, use strong type.
+		var item = table.TableAvatarItem.Select(ServerInfo.data.profession, ServerInfo.data.sexman);
 		var avatar = Avatar.CreateAvatar("Prefabs/Models/Body/Sk_Female_001", item.body, item.head, item.weapon);
 		avatar.name = "MainRole";
 		avatar.transform.localScale = new Vector3(5, 5, 5);
 		var role = avatar.AddComponent<MainRole>();
 		role.animator = avatar.GetComponent<Animator>();
 		return role;
+	}
+
+	public static MainRole Instance { get; private set; }
+	// Use this for initialization
+	void Start()
+	{
+		Instance = this;
+
+		if (ServerInfo.data == null)
+			return;
+		cameraMain = GameObject.Find("CameraMain").GetComponent<Camera>();
+		Grid = new Pos() { x = (int)ServerInfo.pos.x, y = (int)ServerInfo.pos.y };
+		UpdateCamera();
+	}
+
+	void Destory()
+	{
+		Instance = null;
 	}
 
 	// Update is called once per frame
@@ -191,12 +199,12 @@ public class MainRole : MonoBehaviour
 	/// </summary>
 	/// <param name="cmd"></param>
 	[Execute]
-	static void Execute(MainRoleInfo cmd)
+	static IEnumerator Execute(FirstMainUserDataAndPosMapUserCmd_S cmd)
 	{
 		ServerInfo = cmd;
 		if (Application.loadedLevelName != "BattleScene")
 		{
-			Application.LoadLevelAsync("BattleScene");
+			yield return Application.LoadLevelAsync("BattleScene");
 		}
 	}
 }
