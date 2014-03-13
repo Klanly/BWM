@@ -103,7 +103,7 @@ public class BattleScene : MonoBehaviour
 		Gui<GXRoleHead>();
 		LoadGui("ControlBar");
 
-		LoadMap(table.TableMapItem.QueryID(MainRole.ServerInfo.data.mapid).path);
+		LoadMap(table.TableMapItem.Select(MainRole.ServerInfo.data.mapid).path);
 
 		MainRole.Create();
 	}

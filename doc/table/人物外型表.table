@@ -1,7 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <table>
 	<output type="protobuf" code="TableAvatar" file="人物外型表.xlsx" sheet="Sheet1">
-		<field column="职业" code="profession" type="uint32" />
+		<field column="职业" code="profession" type="uint8">
+			<regex>^[123]$</regex>
+		</field>
 		<field column="性别" code="sex" type="uint8">
 			<regex>^[12]$</regex>
 		</field>
