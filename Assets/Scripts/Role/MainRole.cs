@@ -34,16 +34,25 @@ public class MainRole : MonoBehaviour
 			}
 			this.transform.position = value;
 			UpdateCamera();
+
+			var cur = Grid;
+			if (cur != lastGird)
+			{
+				Net.Instance.Send(new UserMoveUpMoveUserCmd_C() { pos = cur });
+				lastGird = cur;
+			}
 		}
 	}
+
+	private Pos lastGird = new Pos();
 
 	/// <summary>
 	/// 主角逻辑格子位置
 	/// </summary>
-	public GridPosition Grid
+	public Pos Grid
 	{
-		get { return new GridPosition() { X = MapNav.GetGridX(Position), Z = MapNav.GetGridZ(Position) }; }
-		set { Position = MapNav.GetWorldPosition(value.X, value.Z); }
+		get { return new Pos() { x = MapNav.GetGridX(Position), y = MapNav.GetGridZ(Position) }; }
+		set { Position = MapNav.GetWorldPosition(value.x, value.y); }
 	}
 
 	private Vector3 targetPosition;
@@ -85,7 +94,7 @@ public class MainRole : MonoBehaviour
 			return;
 		cameraMain = GameObject.Find("CameraMain").GetComponent<Camera>();
 		MapNav = Object.FindObjectOfType<MapNav>();
-		Grid = new GridPosition() { X = (int)ServerInfo.pos.x, Z = (int)ServerInfo.pos.y };
+		Grid = new Pos() { x = (int)ServerInfo.pos.x, y = (int)ServerInfo.pos.y };
 		UpdateCamera();
 	}
 
@@ -184,10 +193,6 @@ public class MainRole : MonoBehaviour
 	[Execute]
 	static void Execute(MainRoleInfo cmd)
 	{
-		// TODO: remove profession patch, server must set this field.
-		if (cmd.data.profession == 0)
-			cmd.data.profession = (uint)Profession.Profession_ZhanShi;
-
 		ServerInfo = cmd;
 		if (Application.loadedLevelName != "BattleScene")
 		{

@@ -8,7 +8,7 @@
 //------------------------------------------------------------------------------
 
 // Generated from: MoveCommand.proto
-// Note: requires additional types generated from: MapCommand.proto
+// Note: requires additional types generated from: Common.proto
 namespace Cmd
 {
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"Move")]
