@@ -1,0 +1,11 @@
+// file=人物外型表.xlsx[Sheet1] key=
+package table;
+
+message TableAvatarItem
+{
+	required uint32 profession = 1; // 职业
+	required uint32 sex = 2; // 性别
+	required string body = 3; // 模型名
+	required string head = 4; // 发型名
+	required string weapon = 5; // 武器
+}

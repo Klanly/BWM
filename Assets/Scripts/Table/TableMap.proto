@@ -1,0 +1,9 @@
+// file=场景表.xlsx[Sheet1] key=id
+package table;
+
+message TableMapItem
+{
+	required uint32 id = 1; // 编号
+	required string name = 2; // 名称
+	required string path = 3; // 地图文件
+}
