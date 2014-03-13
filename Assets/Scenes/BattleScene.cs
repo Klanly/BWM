@@ -5,10 +5,11 @@ using System.Collections.Generic;
 
 public class BattleScene : MonoBehaviour
 {
+	public static BattleScene Instance { get; private set; }
+
+	#region GUI
 	public UIRoot uiRoot;
 	private readonly Dictionary<string, MonoBehaviour> guiCache = new Dictionary<string, MonoBehaviour>();
-
-	public static BattleScene Instance { get; private set; }
 
 	/// <summary>
 	/// 获取给定类型的GUI组件，会进行单件实例的缓存，以避免重复加载
@@ -21,7 +22,7 @@ public class BattleScene : MonoBehaviour
 		if (guiCache.TryGetValue(typeof(T).FullName, out cache))
 			return (T)cache;
 
-		var go = Load(typeof(T).Name);
+		var go = LoadGui(typeof(T).Name);
 		if (go == null)
 		{
 			Debug.LogError(string.Format("[GUI] Load {0} error in file {1}", typeof(T).FullName, name));
@@ -44,7 +45,7 @@ public class BattleScene : MonoBehaviour
 	/// </summary>
 	/// <param name="name"></param>
 	/// <returns>失败返回null</returns>
-	public GameObject Load(string name)
+	public GameObject LoadGui(string name)
 	{
 		if (name.StartsWith("GX"))
 			name = name.Substring(2);
@@ -62,6 +63,34 @@ public class BattleScene : MonoBehaviour
 		}
 		return null;
 	}
+	#endregion
+
+	#region Map
+	/// <summary>
+	/// 地表的唯一实例，用于避免重复加载
+	/// </summary>
+	private GameObject terrain;
+	/// <summary>
+	/// 加载指定路径的地图prefab作为地表
+	/// </summary>
+	/// <param name="mapname"></param>
+	/// <returns>加载是否成功</returns>
+	public bool LoadMap(string mapname)
+	{
+		var map = Resources.Load("Map/" + mapname);
+		if (map == null)
+		{
+			Debug.LogError("Load map error: " + mapname);
+			return false;
+		}
+		Debug.Log("Load map: " + mapname);
+		if (terrain != null)
+			GameObject.Destroy(terrain);
+		terrain = GameObject.Instantiate(map) as GameObject;
+		terrain.name = "Map." + mapname;
+		return true;
+	}
+	#endregion
 
 	IEnumerator Start()
 	{
@@ -72,7 +101,9 @@ public class BattleScene : MonoBehaviour
 		Gui<GXChatInput>();
 		Gui<GXChatOutput>();
 		Gui<GXRoleHead>();
-		Load("ControlBar");
+		LoadGui("ControlBar");
+
+		LoadMap(MainRole.ServerInfo.data.mapid.ToString());
 
 		MainRole.Create();
 	}

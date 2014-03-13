@@ -16,7 +16,6 @@ public class MainRole : MonoBehaviour
 	public MapNav MapNav { get; private set; }
 
 	private Animator animator;
-	private GameObject terrain;
 	private Camera cameraMain;
 
 
@@ -85,7 +84,7 @@ public class MainRole : MonoBehaviour
 		if (ServerInfo.data == null)
 			return;
 		cameraMain = GameObject.Find("CameraMain").GetComponent<Camera>();
-		LoadMap(ServerInfo.data.mapid.ToString());
+		MapNav = Object.FindObjectOfType<MapNav>();
 		Grid = new GridPosition() { X = (int)ServerInfo.pos.x, Z = (int)ServerInfo.pos.y };
 		UpdateCamera();
 	}
@@ -98,29 +97,6 @@ public class MainRole : MonoBehaviour
 		var role = avatar.AddComponent<MainRole>();
 		role.animator = avatar.GetComponent<Animator>();
 		return role;
-	}
-
-	/// <summary>
-	/// 加载指定路径的地图prefab作为地表
-	/// </summary>
-	/// <param name="mapname"></param>
-	/// <returns>加载是否成功</returns>
-	public bool LoadMap(string mapname)
-	{
-		var map = Resources.Load("Map/" + mapname);
-		if (map == null)
-		{
-			Debug.LogError("Load map error: " + mapname);
-			return false;
-		}
-		Debug.Log("Load map: " + mapname);
-		if (terrain != null)
-			GameObject.Destroy(terrain);
-		terrain = GameObject.Instantiate(map) as GameObject;
-		terrain.name = "Map." + mapname;
-		MapNav = Object.FindObjectOfType<MapNav>();
-		Grid = new GridPosition();
-		return true;
 	}
 
 	// Update is called once per frame
