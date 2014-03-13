@@ -2,16 +2,22 @@
 pushd %~dp0
 set dest=..\..
 
+rem 客户端bytes文件
 del /Q %dest%\Assets\Resources\Table\*.bytes
 copy /Y *.pbt %dest%\Assets\Resources\Table
 rename %dest%\Assets\Resources\Table\*.pbt *.bytes
 call:clearMeta %dest%\Assets\Resources\Table
 
+rem 客户端C#文件
 del /Q %dest%\Assets\Scripts\Table\*.cs
 copy /Y *.cs %dest%\Assets\Scripts\Table
 del /Q %dest%\Assets\Scripts\Table\*.proto
 copy /Y *.proto %dest%\Assets\Scripts\Table
 call:clearMeta %dest%\Assets\Scripts\Table
+
+rem 服务器json文件
+del /Q %dest%\Common\data\table\*.json
+copy /Y *.json %dest%\Common\data\table
 
 popd
 pause
