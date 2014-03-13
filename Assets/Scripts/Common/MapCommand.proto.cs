@@ -184,16 +184,16 @@ namespace Cmd
   {
     public Pos() {}
     
-    private uint _x;
+    private int _x;
     [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"x", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public uint x
+    public int x
     {
       get { return _x; }
       set { _x = value; }
     }
-    private uint _y;
+    private int _y;
     [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"y", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public uint y
+    public int y
     {
       get { return _y; }
       set { _y = value; }
