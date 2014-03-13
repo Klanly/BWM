@@ -91,7 +91,8 @@ public class MainRole : MonoBehaviour
 
 	public static MainRole Create()
 	{
-		var avatar = Avatar.CreateAvatar("Prefabs/Models/Body/Sk_Female_001", "Prefabs/Models/Body/Female_Body_8100", "Prefabs/Models/Head/Female_Head_8100", "Prefabs/Models/Weapon/Weapon_Cann_1006");
+		var item = table.TableAvatarItem.Select((Profession)ServerInfo.data.profession, ServerInfo.data.sexman); // TODO: remove force type cast, use strong type.
+		var avatar = Avatar.CreateAvatar("Prefabs/Models/Body/Sk_Female_001", item.body, item.head, item.weapon);
 		avatar.name = "MainRole";
 		avatar.transform.localScale = new Vector3(5, 5, 5);
 		var role = avatar.AddComponent<MainRole>();
@@ -183,6 +184,10 @@ public class MainRole : MonoBehaviour
 	[Execute]
 	static void Execute(MainRoleInfo cmd)
 	{
+		// TODO: remove profession patch, server must set this field.
+		if (cmd.data.profession == 0)
+			cmd.data.profession = (uint)Profession.Profession_ZhanShi;
+
 		ServerInfo = cmd;
 		if (Application.loadedLevelName != "BattleScene")
 		{

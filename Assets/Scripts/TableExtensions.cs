@@ -17,6 +17,8 @@ namespace table
 
 	partial class TableAvatarItem
 	{
+		public bool sexman { get { return this.sex == 1; } }
+
 		public static TableAvatarItem Select(Profession profession, bool sexman)
 		{
 			var pro = (uint)profession;
