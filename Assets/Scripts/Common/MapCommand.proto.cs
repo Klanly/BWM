@@ -8,6 +8,7 @@
 //------------------------------------------------------------------------------
 
 // Generated from: MapCommand.proto
+// Note: requires additional types generated from: Common.proto
 namespace Cmd
 {
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"Map")]
@@ -80,33 +81,12 @@ namespace Cmd
       get { return _level; }
       set { _level = value; }
     }
-    private uint _profession;
+    private Cmd.Profession _profession;
     [global::ProtoBuf.ProtoMember(6, IsRequired = true, Name=@"profession", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public uint profession
+    public Cmd.Profession profession
     {
       get { return _profession; }
       set { _profession = value; }
-    }
-    private uint _headid;
-    [global::ProtoBuf.ProtoMember(7, IsRequired = true, Name=@"headid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public uint headid
-    {
-      get { return _headid; }
-      set { _headid = value; }
-    }
-    private uint _bodayid;
-    [global::ProtoBuf.ProtoMember(8, IsRequired = true, Name=@"bodayid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public uint bodayid
-    {
-      get { return _bodayid; }
-      set { _bodayid = value; }
-    }
-    private uint _equipid;
-    [global::ProtoBuf.ProtoMember(9, IsRequired = true, Name=@"equipid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public uint equipid
-    {
-      get { return _equipid; }
-      set { _equipid = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -146,57 +126,12 @@ namespace Cmd
       get { return _level; }
       set { _level = value; }
     }
-    private uint _profession;
+    private Cmd.Profession _profession;
     [global::ProtoBuf.ProtoMember(5, IsRequired = true, Name=@"profession", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public uint profession
+    public Cmd.Profession profession
     {
       get { return _profession; }
       set { _profession = value; }
-    }
-    private uint _headid;
-    [global::ProtoBuf.ProtoMember(6, IsRequired = true, Name=@"headid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public uint headid
-    {
-      get { return _headid; }
-      set { _headid = value; }
-    }
-    private uint _bodayid;
-    [global::ProtoBuf.ProtoMember(7, IsRequired = true, Name=@"bodayid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public uint bodayid
-    {
-      get { return _bodayid; }
-      set { _bodayid = value; }
-    }
-    private uint _equipid;
-    [global::ProtoBuf.ProtoMember(8, IsRequired = true, Name=@"equipid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public uint equipid
-    {
-      get { return _equipid; }
-      set { _equipid = value; }
-    }
-    private global::ProtoBuf.IExtension extensionObject;
-    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
-  }
-  
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"Pos")]
-  public partial class Pos : global::ProtoBuf.IExtensible
-  {
-    public Pos() {}
-    
-    private int _x;
-    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"x", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public int x
-    {
-      get { return _x; }
-      set { _x = value; }
-    }
-    private int _y;
-    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"y", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public int y
-    {
-      get { return _y; }
-      set { _y = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
