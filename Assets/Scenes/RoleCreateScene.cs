@@ -13,13 +13,7 @@ public class RoleCreateScene : MonoBehaviour
 	private readonly Dictionary<Profession, GameObject> professionButtons = new Dictionary<Profession, GameObject>();
 
 	private string[] strSk = new string[]{"Prefabs/Models/Body/Sk_Male_001", "Prefabs/Models/Body/Sk_Female_001"};
-	private string[] strFemaleBody = new string[]{"Prefabs/Models/Body/Female_Body_8100", "Prefabs/Models/Body/Female_Body_8100","Prefabs/Models/Body/Female_Body_8100"};
-	private string[] strFemaleHead = new string[]{"Prefabs/Models/Head/Female_Head_8100", "Prefabs/Models/Head/Female_Head_8100","Prefabs/Models/Head/Female_Head_8100"};
-	private string[] strFemaleWeapon = new string[]{"Prefabs/Models/Weapon/Weapon_Cann_1006", "Prefabs/Models/Weapon/Weapon_Cann_1006","Prefabs/Models/Weapon/Weapon_Cann_1006"};
 	private string[] strFemaleAction = new string[]{"Ani_Dd_show", "Ani_Dd_show","Ani_Dd_show"};
-	private string[] strMaleBody = new string[]{"Prefabs/Models/Body/Male_Body_7000", "Prefabs/Models/Body/Male_Body_7000","Prefabs/Models/Body/Male_Body_7000"};
-	private string[] strMaleHead = new string[]{"Prefabs/Models/Head/Male_Head_7000", "Prefabs/Models/Head/Male_Head_7000","Prefabs/Models/Head/Male_Head_7000"};
-	private string[] strMaleWeapon = new string[]{"Prefabs/Models/Weapon/Weapon_Sword_1006", "Prefabs/Models/Weapon/Weapon_Sword_1006","Prefabs/Models/Weapon/Weapon_Sword_1006"};
 	private string[] strMaleAction = new string[]{"Ani_Cq_show", "Ani_Cq_show","Ani_Cq_show"};
 
 	private GameObject spriteZhanshi, spriteDaoshi, spriteFashi;
@@ -47,26 +41,22 @@ public class RoleCreateScene : MonoBehaviour
 		if(curAvatar != null)
 			Destroy(curAvatar);
 
-		string sk, body, head, weapon, action;
+		string sk, action;
 		int index = (int)profession - 1;
 		if(sexman == true)
 		{
 			sk = strSk[0];
-			body = strMaleBody[index];
-			head = strMaleHead[index];
-			weapon = strMaleWeapon[index];
 			action = strMaleAction[index];
 		}
 		else
 		{
 			sk = strSk[1];
-			body = strFemaleBody[index];
-			head = strFemaleHead[index];
-			weapon = strFemaleWeapon[index];
 			action = strFemaleAction[index];
 		}
 
-		var go = Avatar.CreateAvatar(sk, body, head, weapon);
+		var item = table.TableAvatarItem.Select(profession, sexman);
+
+		var go = Avatar.CreateAvatar(sk, item.body, item.head, item.weapon);
 		go.transform.position = avatar.transform.position;
 		go.transform.rotation = avatar.transform.rotation;
 		go.transform.localScale = avatar.transform.localScale;

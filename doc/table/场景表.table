@@ -4,7 +4,9 @@
 		<key code="id" />
 		<field column="编号" code="id" type="uint32" />
 		<field column="名称" code="name" type="string" />
-		<field column="地图文件" code="path" type="string" />
+		<field column="地图文件" code="path" type="string">
+			<regex>^[^\\]+$</regex>
+		</field>
 	</output>
 	<output type="json-unity" code="TableMap" file="场景表.xlsx" sheet="Sheet1">
 		<key code="id" />

@@ -1,12 +1,20 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <table>
 	<output type="protobuf" code="TableAvatar" file="人物外型表.xlsx" sheet="Sheet1">
-		<field column="职业" code="profession" type="uint32" />
+		<field column="职业" code="profession" type="uint8">
+			<regex>^[123]$</regex>
+		</field>
 		<field column="性别" code="sex" type="uint8">
 			<regex>^[12]$</regex>
 		</field>
-		<field column="模型名" code="body" type="string" />
-		<field column="发型名" code="head" type="string" />
-		<field column="武器" code="weapon" type="string" />
+		<field column="模型名" code="body" type="string">
+			<regex>^[^\\]+$</regex>
+		</field>
+		<field column="发型名" code="head" type="string">
+			<regex>^[^\\]+$</regex>
+		</field>
+		<field column="武器" code="weapon" type="string">
+			<regex>^[^\\]+$</regex>
+		</field>
 	</output>
 </table>

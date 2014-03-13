@@ -23,7 +23,8 @@ public class TestJumpPos : MonoBehaviour
 		Vector2 posSelf = new Vector2(transform.position.x, transform.position.z);
 		if (Vector2.Distance(posRole, posSelf) < distance)
 		{
-			Object.FindObjectOfType<MainRole>().LoadMap(nextLevel);
+			//Object.FindObjectOfType<MainRole>().LoadMap(nextLevel);
+			// TODO: send jump message to server
 		}
 	}
 }
