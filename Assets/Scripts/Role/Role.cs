@@ -45,8 +45,6 @@ public class Role : MonoBehaviour
 			Role.All[cmd.data.charid] = role;
 		}
 
-		Debug.Log(role.transform);
-		Debug.Log(BattleScene.Instance.MapNav);
 		role.transform.position = BattleScene.Instance.MapNav.GetWorldPosition(cmd.pos.x, cmd.pos.y);
 	}
 
