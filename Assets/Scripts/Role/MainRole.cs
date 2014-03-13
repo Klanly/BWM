@@ -184,10 +184,6 @@ public class MainRole : MonoBehaviour
 	[Execute]
 	static void Execute(MainRoleInfo cmd)
 	{
-		// TODO: remove profession patch, server must set this field.
-		if (cmd.data.profession == 0)
-			cmd.data.profession = (uint)Profession.Profession_ZhanShi;
-
 		ServerInfo = cmd;
 		if (Application.loadedLevelName != "BattleScene")
 		{
