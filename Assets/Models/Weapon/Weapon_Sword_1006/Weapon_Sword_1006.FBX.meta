@@ -7,14 +7,20 @@ ModelImporter:
     100002: m_a
     100004: m_ab
     100006: //RootNode
+    100008: Sword_1006
     400000: Box07
     400002: m_a
     400004: m_ab
     400006: //RootNode
+    400008: Sword_1006
     2300000: Box07
+    2300002: Sword_1006
     3300000: Box07
+    3300002: Sword_1006
     4300000: Box07
+    4300002: Sword_1006
     9500000: //RootNode
+    11100000: //RootNode
   materials:
     importMaterials: 1
     materialName: 0
@@ -51,7 +57,7 @@ ModelImporter:
     splitTangentsAcrossUV: 1
     normalImportMode: 0
     tangentImportMode: 1
-  importAnimation: 1
+  importAnimation: 0
   copyAvatar: 0
   humanDescription:
     human: []
@@ -65,6 +71,6 @@ ModelImporter:
     feetSpacing: 0
     rootMotionBoneName: 
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 2
+  animationType: 1
   additionalBone: 0
   userData: 
