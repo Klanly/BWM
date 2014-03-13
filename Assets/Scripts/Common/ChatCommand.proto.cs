@@ -26,7 +26,10 @@ namespace Cmd
       GMCommandChatUserCmd_C = 2,
             
       [global::ProtoBuf.ProtoEnum(Name=@"MessageBoxChatUserCmd_S", Value=3)]
-      MessageBoxChatUserCmd_S = 3
+      MessageBoxChatUserCmd_S = 3,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"GMCommandListChatUserCmd_S", Value=4)]
+      GMCommandListChatUserCmd_S = 4
     }
   
     private global::ProtoBuf.IExtension extensionObject;
@@ -189,6 +192,47 @@ namespace Cmd
       get { return _info; }
       set { _info = value; }
     }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"GMHelpInfo")]
+  public partial class GMHelpInfo : global::ProtoBuf.IExtensible
+  {
+    public GMHelpInfo() {}
+    
+    private string _method;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"method", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public string method
+    {
+      get { return _method; }
+      set { _method = value; }
+    }
+    private string _example;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"example", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public string example
+    {
+      get { return _example; }
+      set { _example = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"GMCommandListChatUserCmd_S")]
+  public partial class GMCommandListChatUserCmd_S : global::ProtoBuf.IExtensible
+  {
+    public GMCommandListChatUserCmd_S() {}
+    
+    private readonly global::System.Collections.Generic.List<Cmd.GMHelpInfo> _list = new global::System.Collections.Generic.List<Cmd.GMHelpInfo>();
+    [global::ProtoBuf.ProtoMember(1, Name=@"list", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<Cmd.GMHelpInfo> list
+    {
+      get { return _list; }
+    }
+  
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }

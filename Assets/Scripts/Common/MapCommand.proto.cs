@@ -73,6 +73,41 @@ namespace Cmd
       get { return _sexman; }
       set { _sexman = value; }
     }
+    private uint _level;
+    [global::ProtoBuf.ProtoMember(5, IsRequired = true, Name=@"level", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint level
+    {
+      get { return _level; }
+      set { _level = value; }
+    }
+    private uint _profession;
+    [global::ProtoBuf.ProtoMember(6, IsRequired = true, Name=@"profession", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint profession
+    {
+      get { return _profession; }
+      set { _profession = value; }
+    }
+    private uint _headid;
+    [global::ProtoBuf.ProtoMember(7, IsRequired = true, Name=@"headid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint headid
+    {
+      get { return _headid; }
+      set { _headid = value; }
+    }
+    private uint _bodayid;
+    [global::ProtoBuf.ProtoMember(8, IsRequired = true, Name=@"bodayid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint bodayid
+    {
+      get { return _bodayid; }
+      set { _bodayid = value; }
+    }
+    private uint _equipid;
+    [global::ProtoBuf.ProtoMember(9, IsRequired = true, Name=@"equipid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint equipid
+    {
+      get { return _equipid; }
+      set { _equipid = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -103,6 +138,41 @@ namespace Cmd
     {
       get { return _sexman; }
       set { _sexman = value; }
+    }
+    private uint _level;
+    [global::ProtoBuf.ProtoMember(4, IsRequired = true, Name=@"level", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint level
+    {
+      get { return _level; }
+      set { _level = value; }
+    }
+    private uint _profession;
+    [global::ProtoBuf.ProtoMember(5, IsRequired = true, Name=@"profession", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint profession
+    {
+      get { return _profession; }
+      set { _profession = value; }
+    }
+    private uint _headid;
+    [global::ProtoBuf.ProtoMember(6, IsRequired = true, Name=@"headid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint headid
+    {
+      get { return _headid; }
+      set { _headid = value; }
+    }
+    private uint _bodayid;
+    [global::ProtoBuf.ProtoMember(7, IsRequired = true, Name=@"bodayid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint bodayid
+    {
+      get { return _bodayid; }
+      set { _bodayid = value; }
+    }
+    private uint _equipid;
+    [global::ProtoBuf.ProtoMember(8, IsRequired = true, Name=@"equipid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint equipid
+    {
+      get { return _equipid; }
+      set { _equipid = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)

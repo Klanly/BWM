@@ -1,17 +1,20 @@
 @echo off
-pushd %~dp0
-set dest=..\..
+pushd %~dp0\..\..
 
-del /Q %dest%\Assets\Resources\Table\*.bytes
-copy /Y *.pbt %dest%\Assets\Resources\Table
-rename %dest%\Assets\Resources\Table\*.pbt *.bytes
-call:clearMeta %dest%\Assets\Resources\Table
+rem 客户端bytes文件
+del /Q Assets\Resources\Table\*.bytes
+copy /Y doc\table\*.pbt Assets\Resources\Table
+rename Assets\Resources\Table\*.pbt *.bytes
+call:clearMeta Assets\Resources\Table
 
-del /Q %dest%\Assets\Scripts\Table\*.cs
-copy /Y *.cs %dest%\Assets\Scripts\Table
-del /Q %dest%\Assets\Scripts\Table\*.proto
-copy /Y *.proto %dest%\Assets\Scripts\Table
-call:clearMeta %dest%\Assets\Scripts\Table
+rem 客户端C#文件
+del /Q Assets\Scripts\Table\*.cs
+copy /Y doc\table\*.cs Assets\Scripts\Table
+call:clearMeta Assets\Scripts\Table
+
+rem 服务器json文件
+del /Q Common\data\table\*.json
+copy /Y doc\table\*.json Common\data\table
 
 popd
 pause
