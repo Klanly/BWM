@@ -13,8 +13,8 @@ public class RoleCreateScene : MonoBehaviour
 	private readonly Dictionary<Profession, GameObject> professionButtons = new Dictionary<Profession, GameObject>();
 
 	private string[] strSk = new string[]{"Prefabs/Models/Body/Sk_Male_001", "Prefabs/Models/Body/Sk_Female_001"};
-	private string[] strFemaleAction = new string[]{"Ani_Dd_show", "Ani_Dd_show","Ani_Dd_show"};
-	private string[] strMaleAction = new string[]{"Ani_Cq_show", "Ani_Cq_show","Ani_Cq_show"};
+	private string[] strFemaleAction = new string[]{"Ani_Cq_show", "Ani_Dd_show","Ani_Sz_show"};
+	private string[] strMaleAction = new string[]{"Ani_Cq_show", "Ani_Dd_show","Ani_Sz_show"};
 
 	private GameObject spriteZhanshi, spriteDaoshi, spriteFashi;
 	private GameObject avatar;
