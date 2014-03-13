@@ -8,6 +8,7 @@
 //------------------------------------------------------------------------------
 
 // Generated from: SelectCommand.proto
+// Note: requires additional types generated from: Common.proto
 namespace Cmd
 {
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"Select")]
@@ -217,19 +218,5 @@ namespace Cmd
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
-  
-    [global::ProtoBuf.ProtoContract(Name=@"Profession")]
-    public enum Profession
-    {
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"Profession_ZhanShi", Value=1)]
-      Profession_ZhanShi = 1,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"Profession_DaoShi", Value=2)]
-      Profession_DaoShi = 2,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"Profession_FaShi", Value=3)]
-      Profession_FaShi = 3
-    }
   
 }
