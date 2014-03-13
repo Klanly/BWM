@@ -34,8 +34,17 @@ public class MainRole : MonoBehaviour
 			}
 			this.transform.position = value;
 			UpdateCamera();
+
+			var cur = Grid;
+			if (cur != lastGird)
+			{
+				Net.Instance.Send(new UserMoveUpMoveUserCmd_C() { pos = new Pos() { x = (uint)cur.X, y = (uint)cur.Z } });
+				lastGird = cur;
+			}
 		}
 	}
+
+	private GridPosition lastGird = new GridPosition();
 
 	/// <summary>
 	/// 主角逻辑格子位置
