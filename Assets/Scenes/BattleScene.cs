@@ -73,21 +73,21 @@ public class BattleScene : MonoBehaviour
 	/// <summary>
 	/// 加载指定路径的地图prefab作为地表
 	/// </summary>
-	/// <param name="mapname"></param>
+	/// <param name="path"></param>
 	/// <returns>加载是否成功</returns>
-	public bool LoadMap(string mapname)
+	public bool LoadMap(string path)
 	{
-		var map = Resources.Load("Map/" + mapname);
+		var map = Resources.Load(path);
 		if (map == null)
 		{
-			Debug.LogError("Load map error: " + mapname);
+			Debug.LogError("Load map error: " + path);
 			return false;
 		}
-		Debug.Log("Load map: " + mapname);
+		Debug.Log("Load map: " + path);
 		if (terrain != null)
 			GameObject.Destroy(terrain);
 		terrain = GameObject.Instantiate(map) as GameObject;
-		terrain.name = "Map." + mapname;
+		terrain.name = path;
 		return true;
 	}
 	#endregion
@@ -103,7 +103,7 @@ public class BattleScene : MonoBehaviour
 		Gui<GXRoleHead>();
 		LoadGui("ControlBar");
 
-		LoadMap(MainRole.ServerInfo.data.mapid.ToString());
+		LoadMap(table.TableMapItem.QueryID(MainRole.ServerInfo.data.mapid).path);
 
 		MainRole.Create();
 	}
