@@ -135,6 +135,20 @@ public class TestAvatar : MonoBehaviour {
 
 			role.GetComponentInChildren<SkinnedMeshRenderer>().sharedMesh = coat.GetComponentInChildren<SkinnedMeshRenderer>().sharedMesh;
 			role.GetComponentInChildren<SkinnedMeshRenderer>().sharedMaterials = coat.GetComponentInChildren<SkinnedMeshRenderer>().sharedMaterials;
+
+			Transform[] transforms = role.GetComponentsInChildren<Transform>();
+			List<Transform> bones = new List<Transform>();
+			foreach (Transform bone in coat.GetComponentInChildren<SkinnedMeshRenderer>().bones)
+			{
+				foreach (Transform transform in transforms)
+				{
+					//通过名字找到实际的骨骼
+					if (transform.name != bone.name) continue;
+					bones.Add(transform);
+					break;
+				}
+			}
+			role.GetComponentInChildren<SkinnedMeshRenderer>().bones = bones.ToArray();
 			Destroy(coat);
 
 			/*

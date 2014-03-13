@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public static class Avatar
 {
@@ -28,6 +29,20 @@ public static class Avatar
 			var gobody = Object.Instantiate(Resources.Load(body)) as GameObject;
 			go.GetComponentInChildren<SkinnedMeshRenderer>().sharedMesh = gobody.GetComponentInChildren<SkinnedMeshRenderer>().sharedMesh;
 			go.GetComponentInChildren<SkinnedMeshRenderer>().sharedMaterials = gobody.GetComponentInChildren<SkinnedMeshRenderer>().sharedMaterials;
+
+			Transform[] transforms = go.GetComponentsInChildren<Transform>();
+			List<Transform> bones = new List<Transform>();
+			foreach (Transform bone in gobody.GetComponentInChildren<SkinnedMeshRenderer>().bones)
+			{
+				foreach (Transform transform in transforms)
+				{
+					//通过名字找到实际的骨骼
+					if (transform.name != bone.name) continue;
+					bones.Add(transform);
+					break;
+				}
+			}
+			go.GetComponentInChildren<SkinnedMeshRenderer>().bones = bones.ToArray();
 			Object.Destroy(gobody);
 		}
 	}

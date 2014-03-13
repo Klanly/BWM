@@ -62,11 +62,13 @@ public class ModelPostprocess : AssetPostprocessor
 		// 人体模型不需要导出骨架
 		if (assetPath.Contains("Female_Body") || assetPath.Contains("Male_Body"))
 		{
+			/*
 			foreach (Transform o in go.transform)
 			{
 				if(o.gameObject.name == "Bip01")
 					Object.DestroyImmediate(o.gameObject);
 			}
+			*/
 		}
 
 	}
