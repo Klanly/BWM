@@ -16,7 +16,7 @@ public static class Avatar
 		}
 		var gosk = Object.Instantiate(res) as GameObject;
 		ChangeBody(gosk, body);
-		ChangeHead(gosk, head);
+		LinkHead(gosk, head);
 		LinkWeapon(gosk, weapon);
 		return gosk;
 	}
@@ -32,15 +32,22 @@ public static class Avatar
 		}
 	}
 
-	public static void ChangeHead(GameObject go, string head)
+	public static void LinkHead(GameObject go, string head)
 	{
 		if (!string.IsNullOrEmpty(head))
 		{
 			var gohead = Object.Instantiate(Resources.Load(head)) as GameObject;
+
 			var ktop = go.transform.Find("Bip01").Find("Bip01 Pelvis").Find("Bip01 Spine").Find("Bip01 Spine1").Find("Bip01 Spine2").Find("Bip01 Neck").Find("Bip01 Head").Find("k_top");
-			ktop.gameObject.AddComponent<MeshFilter>().sharedMesh = gohead.GetComponentInChildren<MeshFilter>().sharedMesh;
-			ktop.gameObject.AddComponent<MeshRenderer>().sharedMaterials = gohead.GetComponentInChildren<MeshRenderer>().sharedMaterials;
-			Object.Destroy(gohead);
+			var headroot = gohead.transform;
+			headroot.parent = ktop;
+			var headma = gohead.transform.Find("m_a");
+			var invert = Matrix4x4.TRS(headma.localPosition, headma.localRotation, headma.localScale).inverse;
+			var v4 = invert.GetColumn(3);
+			headroot.localPosition = new Vector3(v4.x, v4.y, v4.z);
+			headroot.localScale = headma.localScale;
+			var rotate = headma.localRotation.eulerAngles;
+			headroot.localRotation = Quaternion.Inverse(Quaternion.Euler(rotate));
 		}
 	}
 

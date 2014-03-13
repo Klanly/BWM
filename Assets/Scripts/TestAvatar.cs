@@ -9,10 +9,10 @@ public class TestAvatar : MonoBehaviour {
 	public GameObject prefabHead;
 	public GameObject prefabWeapon;
 
-	private string strSkeleton = "Prefabs/Models/Body/Sk_Female_001";
-	private string strCoat = "Prefabs/Models/Body/Female_Body_8100";
-	private string strHead = "Prefabs/Models/Head/Female_Head_8100";
-	private string strWeapon = "Prefabs/Models/Weapon/Weapon_Cann_1006";
+	private string strSkeleton = "Prefabs/Models/Body/Sk_Male_001";
+	private string strCoat = "Prefabs/Models/Body/Male_Body_7000";
+	private string strHead = "Prefabs/Models/Head/Male_Head_7000";
+	private string strWeapon = "Prefabs/Models/Weapon/Weapon_Sword_1006";
 
 	/*
 
@@ -101,10 +101,12 @@ public class TestAvatar : MonoBehaviour {
 		role = Instantiate(prefabSkeleton) as GameObject;
 		role.transform.position = new Vector3(10,0,10);
 		role.transform.localScale = new Vector3(5,5,5);
+		role.transform.rotation = Quaternion.Euler(new Vector3(0,180,0));
 
 		role1 = Avatar.CreateAvatar(strSkeleton, strCoat, strHead, strWeapon);
 		role1.transform.position = new Vector3(15,0,10);
 		role1.transform.localScale = new Vector3(5,5,5);
+		role1.transform.rotation = Quaternion.Euler(new Vector3(0,180,0));
 		role1.name = "role1";
 
 
@@ -134,11 +136,24 @@ public class TestAvatar : MonoBehaviour {
 			role.GetComponentInChildren<SkinnedMeshRenderer>().sharedMesh = coat.GetComponentInChildren<SkinnedMeshRenderer>().sharedMesh;
 			role.GetComponentInChildren<SkinnedMeshRenderer>().sharedMaterials = coat.GetComponentInChildren<SkinnedMeshRenderer>().sharedMaterials;
 			Destroy(coat);
-			
+
+			/*
 			var ktop = role.transform.Find("Bip01").Find("Bip01 Pelvis").Find("Bip01 Spine").Find("Bip01 Spine1").Find("Bip01 Spine2").Find("Bip01 Neck").Find("Bip01 Head").Find("k_top");
 			ktop.gameObject.AddComponent<MeshFilter>().sharedMesh = head.GetComponentInChildren<MeshFilter>().sharedMesh;
 			ktop.gameObject.AddComponent<MeshRenderer>().sharedMaterials = head.GetComponentInChildren<MeshRenderer>().sharedMaterials;
 			Destroy(head);
+			*/
+			var ktop = role.transform.Find("Bip01").Find("Bip01 Pelvis").Find("Bip01 Spine").Find("Bip01 Spine1").Find("Bip01 Spine2").Find("Bip01 Neck").Find("Bip01 Head").Find("k_top");
+			var headroot = head.transform;
+			headroot.parent = ktop;
+			var headma = head.transform.Find("m_a");
+			var invert1 = Matrix4x4.TRS(headma.localPosition, headma.localRotation, headma.localScale).inverse;
+			var v41 = invert1.GetColumn(3);
+			headroot.localPosition = new Vector3(v41.x,v41.y,v41.z);
+			headroot.localScale = headma.localScale;
+			var rotate1 = headma.localRotation.eulerAngles;
+			headroot.localRotation = Quaternion.Inverse(Quaternion.Euler(rotate1));
+			
 
 			/* 以scene_root和k_armright对齐
 			var karmright = role.transform.Find("Bip01").Find("Bip01 Pelvis").Find("Bip01 Spine").Find("Bip01 Spine1").Find("Bip01 Spine2").Find("Bip01 Neck").Find("Bip01 R Clavicle").Find("Bip01 R UpperArm").Find("Bip01 R Forearm").Find("Bip01 R Hand").Find("k_armright");
