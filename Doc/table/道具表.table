@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<table>
+	<output type="protobuf" code="TableItem" file="道具表.xlsx" sheet="Sheet1">
+		<key code="id" />
+		<field column="id" code="id" type="uint32" />
+		<field column="名称" code="name" type="string" />
+		<field column="icon" code="icon" type="string">
+			<regex>^[^\\]+$</regex>
+		</field>
+	</output>
+	<output type="json-unity" code="TableItem" file="道具表.xlsx" sheet="Sheet1">
+		<key code="id" />
+		<field column="id" code="id" type="uint32" />
+		<field column="名称" code="name" type="string" />
+	</output>
+</table>
