@@ -95,11 +95,12 @@ public class BattleScene : MonoBehaviour
 	}
 	#endregion
 
-	void Start()
+	IEnumerator Start()
 	{
 		if (Instance != null)
 			throw new System.InvalidOperationException();
 		Instance = this;
+		yield return null; // 所有GUI必须在此之后加载，否则编辑器中直接从该场景启动游戏会报错
 
 		Gui<GXChatInput>();
 		Gui<GXChatOutput>();
