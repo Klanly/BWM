@@ -3,6 +3,7 @@ using System.Collections;
 
 namespace Cmd
 {
+	#region Pos
 	/// <summary>
 	/// 游戏地图上的逻辑格子位置
 	/// 原点在屏幕左下角
@@ -47,4 +48,22 @@ namespace Cmd
 		}
 
 	}
+	#endregion
+}
+
+static class CommonExtensions
+{
+	#region MainUserData
+	public static Cmd.MapUserData ToMapUserData(this Cmd.MainUserData mainRole)
+	{
+		return new Cmd.MapUserData()
+		{
+			charid = mainRole.charid,
+			charname = mainRole.charname,
+			sexman = mainRole.sexman,
+			level = mainRole.level,
+			profession = mainRole.profession,
+		};
+	}
+	#endregion
 }

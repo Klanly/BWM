@@ -90,25 +90,21 @@ public class BattleScene : MonoBehaviour
 			GameObject.Destroy(terrain);
 		terrain = GameObject.Instantiate(map) as GameObject;
 		terrain.name = path;
+		MapNav = UnityEngine.Object.FindObjectOfType<MapNav>();
 		return true;
 	}
 	#endregion
 
-	IEnumerator Start()
+	void Start()
 	{
 		if (Instance != null)
 			throw new System.InvalidOperationException();
 		Instance = this;
-		LoadMap(table.TableMapItem.Select(MainRole.ServerInfo.data.mapid).path);
-		MapNav = UnityEngine.Object.FindObjectOfType<MapNav>();
-		yield return null;
+
 		Gui<GXChatInput>();
 		Gui<GXChatOutput>();
 		Gui<GXRoleHead>();
 		LoadGui("ControlBar");
-		
-		
-		MainRole.Create();
 	}
 
 	void Destory()
