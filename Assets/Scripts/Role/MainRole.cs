@@ -9,39 +9,13 @@ public class MainRole : MonoBehaviour
 {
 	public static MainRoleInfo ServerInfo { get; private set; }
 
-	public float speedMainRole = 5.0f;
+	public Role Role { get; private set; }
+	private MapNav MapNav { get { return BattleScene.Instance.MapNav; } }
+
 	public float distanceCameraToRole = 25.0f;
 	public float heightCameraLookAt = 0.5f;
 
-	private MapNav MapNav { get { return BattleScene.Instance.MapNav; } }
-	private Animator animator;
 	private Camera cameraMain;
-
-
-	/// <summary>
-	/// 主角世界坐标位置
-	/// </summary>
-	public Vector3 Position
-	{
-		get { return this.transform.position; }
-		set
-		{
-			if (MapNav != null)
-			{
-				value.x = Mathf.Clamp(value.x, 0.5f, MapNav.gridWidth * MapNav.gridXNum - 0.5f);
-				value.z = Mathf.Clamp(value.z, 1.0f, MapNav.gridHeight * MapNav.gridZNum - 4.0f);
-			}
-			this.transform.position = value;
-			UpdateCamera();
-
-			var cur = Grid;
-			if (cur != lastGird)
-			{
-				Net.Instance.Send(new UserMoveUpMoveUserCmd_C() { pos = cur });
-				lastGird = cur;
-			}
-		}
-	}
 
 	private Pos lastGird = new Pos();
 
@@ -50,48 +24,21 @@ public class MainRole : MonoBehaviour
 	/// </summary>
 	public Pos Grid
 	{
-		get { return new Pos() { x = MapNav.GetGridX(Position), y = MapNav.GetGridZ(Position) }; }
-		set { Position = MapNav.GetWorldPosition(value.x, value.y); }
-	}
-
-	private Vector3 targetPosition;
-	/// <summary>
-	/// 设置行走目标点
-	/// </summary>
-	/// <value>The target position.</value>
-	public Vector3 TargetPosition
-	{
-		get { return targetPosition; }
-		set
-		{
-			if (MapNav != null)
-			{
-				value.x = Mathf.Clamp(value.x, 0, MapNav.gridWidth * MapNav.gridXNum);
-				value.z = Mathf.Clamp(value.z, 0, MapNav.gridHeight * MapNav.gridZNum);
-			}
-			targetPosition = value;
-			if (value != Vector3.zero)
-			{
-				if (animator.GetFloat("speed") == 0.0f)
-					animator.SetFloat("speed", speedMainRole);
-
-				var relativePos = TargetPosition - Position;
-				this.transform.rotation = Quaternion.LookRotation(relativePos);
-			}
-		}
+		get { return new Pos() { x = MapNav.GetGridX(Role.Position), y = MapNav.GetGridZ(Role.Position) }; }
+		set { Role.Position = MapNav.GetWorldPosition(value.x, value.y); }
 	}
 
 	private MainRole() { }
 
 	public static MainRole Create()
 	{
-		var item = table.TableAvatarItem.Select(ServerInfo.data.profession, ServerInfo.data.sexman);
-		var avatar = Avatar.CreateAvatar("Prefabs/Models/Body/Sk_Female_001", item.body, item.head, item.weapon);
-		avatar.name = "MainRole";
-		avatar.transform.localScale = new Vector3(5, 5, 5);
-		var role = avatar.AddComponent<MainRole>();
-		role.animator = avatar.GetComponent<Animator>();
-		return role;
+		var role = Role.Create(ServerInfo.data.ToMapUserData());
+		role.gameObject.name = "MainRole/" + role.ServerInfo.charname;
+
+		var mainRole = role.gameObject.AddComponent<MainRole>();
+		mainRole.Role = role;
+		role.PositionChanged += mainRole.OnPositionChanged;
+		return mainRole;
 	}
 
 	public static MainRole Instance { get; private set; }
@@ -120,10 +67,10 @@ public class MainRole : MonoBehaviour
 		float v = Input.GetAxisRaw("Vertical");
 		float h = Input.GetAxisRaw("Horizontal");
 
-		Vector3 oldPosition = Position;
-		oldPosition.x += h * speedMainRole * Time.deltaTime;
-		oldPosition.z += v * speedMainRole * Time.deltaTime;
-		Position = oldPosition;
+		Vector3 oldPosition = Role.Position;
+		oldPosition.x += h * Role.speedMainRole * Time.deltaTime;
+		oldPosition.z += v * Role.speedMainRole * Time.deltaTime;
+		Role.Position = oldPosition;
 
 		// 触摸屏
 		Vector3? screenPoint = null;
@@ -141,33 +88,19 @@ public class MainRole : MonoBehaviour
 			RaycastHit hit;
 			if (terrain.Raycast(ray, out hit, 1000))
 			{
-				TargetPosition = hit.point;
+				Role.TargetPosition = hit.point;
 			}
 		}
+	}
 
-		if (TargetPosition != Vector3.zero)
+	void OnPositionChanged(Role sender)
+	{
+		UpdateCamera();
+		var cur = Grid;
+		if (cur != lastGird)
 		{
-			Vector3 vDelta = TargetPosition - Position;
-			float fDeltaLen = vDelta.magnitude;
-			vDelta.Normalize();
-
-			Vector3 vOldPosition = Position;
-			float fMoveLen = speedMainRole * Time.deltaTime;
-			bool bFinish = false;
-			if (fMoveLen >= fDeltaLen)
-			{
-				fMoveLen = fDeltaLen;
-				bFinish = true;
-			}
-
-			Position = vOldPosition + vDelta * fMoveLen;
-			if (bFinish)
-			{
-				TargetPosition = Vector3.zero;
-				var oldRotate = this.transform.rotation;
-				animator.SetFloat("speed", 0.0f);
-				this.transform.rotation = oldRotate;
-			}
+			Net.Instance.Send(new UserMoveUpMoveUserCmd_C() { pos = cur });
+			lastGird = cur;
 		}
 	}
 

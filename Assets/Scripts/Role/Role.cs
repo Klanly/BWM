@@ -3,6 +3,7 @@ using System.Collections;
 using GX.Net;
 using Cmd;
 using System.Collections.Generic;
+using System;
 
 public class Role : MonoBehaviour
 {
@@ -14,6 +15,10 @@ public class Role : MonoBehaviour
 
 	private Animator animator;
 
+	/// <summary>
+	/// 角色移动事件
+	/// </summary>
+	public event Action<Role> PositionChanged;
 
 	/// <summary>
 	/// 角色世界坐标位置
@@ -29,12 +34,15 @@ public class Role : MonoBehaviour
 				value.z = Mathf.Clamp(value.z, 1.0f, MapNav.gridHeight * MapNav.gridZNum - 4.0f);
 			}
 			this.transform.position = value;
+
+			if (PositionChanged != null)
+				PositionChanged(this);
 		}
 	}
 
 	private Vector3 targetPosition;
 	/// <summary>
-	/// 设置行走目标点
+	/// 行走目标点
 	/// </summary>
 	/// <value>The target position.</value>
 	public Vector3 TargetPosition
