@@ -56,7 +56,7 @@ public class MainRole : MonoBehaviour
 
 	private Vector3 targetPosition;
 	/// <summary>
-	/// 设置目标点
+	/// 设置行走目标点
 	/// </summary>
 	/// <value>The target position.</value>
 	public Vector3 TargetPosition
@@ -79,11 +79,6 @@ public class MainRole : MonoBehaviour
 				this.transform.rotation = Quaternion.LookRotation(relativePos);
 			}
 		}
-	}
-
-	static MainRole()
-	{
-		ServerInfo = new MainRoleInfo(); // 避免不必要的空指针判断
 	}
 
 	private MainRole() { }

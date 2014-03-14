@@ -99,14 +99,17 @@ public class BattleScene : MonoBehaviour
 		if (Instance != null)
 			throw new System.InvalidOperationException();
 		Instance = this;
+		if (MainRole.ServerInfo == null)
+			yield break;
+
 		LoadMap(table.TableMapItem.Select(MainRole.ServerInfo.data.mapid).path);
 		MapNav = UnityEngine.Object.FindObjectOfType<MapNav>();
 		yield return null;
+
 		Gui<GXChatInput>();
 		Gui<GXChatOutput>();
 		Gui<GXRoleHead>();
 		LoadGui("ControlBar");
-		
 		
 		MainRole.Create();
 	}
