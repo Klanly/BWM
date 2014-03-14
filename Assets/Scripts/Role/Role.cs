@@ -118,9 +118,6 @@ public class Role : MonoBehaviour
 	[Execute]
 	static void Execute(AddMapUserDataAndPosMapUserCmd_S cmd)
 	{
-		if (cmd.data.charid == MainRole.ServerInfo.data.charid)
-			return;
-
 		Role role;
 		if (Role.All.TryGetValue(cmd.data.charid, out role))
 		{
@@ -138,7 +135,7 @@ public class Role : MonoBehaviour
 	[Execute]
 	static void Execute(UserMoveDownMoveUserCmd_S cmd)
 	{
-		if (cmd.charid == MainRole.ServerInfo.data.charid)
+		if (cmd.charid == MainRole.ServerInfo.charid)
 			return;
 
 		Role role;
@@ -151,7 +148,7 @@ public class Role : MonoBehaviour
 	[Execute]
 	static void Execute(UserGotoMoveUserCmd_S cmd)
 	{
-		if (cmd.charid == MainRole.ServerInfo.data.charid)
+		if (cmd.charid == MainRole.ServerInfo.charid)
 			return;
 
 		Role role;

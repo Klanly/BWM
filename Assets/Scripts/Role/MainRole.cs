@@ -3,11 +3,10 @@ using System.Collections;
 using Cmd;
 using GX;
 using GX.Net;
-using MainRoleInfo = Cmd.FirstMainUserDataAndPosMapUserCmd_S;
 
 public class MainRole : MonoBehaviour
 {
-	public static MainRoleInfo ServerInfo { get; private set; }
+	public static MapUserData ServerInfo { get { return Instance != null ? Instance.Role.ServerInfo : null; } }
 
 	public Role Role { get; private set; }
 	private MapNav MapNav { get { return BattleScene.Instance.MapNav; } }
@@ -30,9 +29,9 @@ public class MainRole : MonoBehaviour
 
 	private MainRole() { }
 
-	public static MainRole Create()
+	public static MainRole Create(MapUserData info)
 	{
-		var role = Role.Create(ServerInfo.data.ToMapUserData());
+		var role = Role.Create(info);
 		role.gameObject.name = "MainRole/" + role.ServerInfo.charname;
 
 		var mainRole = role.gameObject.AddComponent<MainRole>();
@@ -46,12 +45,9 @@ public class MainRole : MonoBehaviour
 	void Start()
 	{
 		Instance = this;
-
-		if (ServerInfo.data == null)
+		if (ServerInfo == null)
 			return;
 		cameraMain = GameObject.Find("CameraMain").GetComponent<Camera>();
-		Grid = new Pos() { x = (int)ServerInfo.pos.x, y = (int)ServerInfo.pos.y };
-		UpdateCamera();
 	}
 
 	void Destory()
@@ -109,6 +105,8 @@ public class MainRole : MonoBehaviour
 	/// </summary>
 	private void UpdateCamera()
 	{
+		if (cameraMain == null)
+			return;
 		var targetCenter = this.transform.position;
 		targetCenter.z += heightCameraLookAt;
 
@@ -129,10 +127,13 @@ public class MainRole : MonoBehaviour
 	[Execute]
 	static IEnumerator Execute(FirstMainUserDataAndPosMapUserCmd_S cmd)
 	{
-		ServerInfo = cmd;
 		if (Application.loadedLevelName != "BattleScene")
 		{
 			yield return Application.LoadLevelAsync("BattleScene");
 		}
+		
+		BattleScene.Instance.LoadMap(table.TableMapItem.Select(cmd.data.mapid).path);
+		var mainRole = MainRole.Create(cmd.data.ToMapUserData());
+		mainRole.Grid = cmd.pos;
 	}
 }
