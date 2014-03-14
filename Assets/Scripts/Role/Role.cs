@@ -77,7 +77,7 @@ public class Role : MonoBehaviour
 	public static Role Create(MapUserData info)
 	{
 		var item = table.TableAvatarItem.Select(info.profession, info.sexman);
-		var avatar = Avatar.CreateAvatar("Prefabs/Models/Body/Sk_Female_001", item.body, item.head, item.weapon);
+		var avatar = Avatar.Create(item);
 		avatar.name = "Role/" + info.charname;
 		avatar.transform.localScale = new Vector3(5, 5, 5);
 
