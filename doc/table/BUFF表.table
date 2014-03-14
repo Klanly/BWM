@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<table>
+	<output type="protobuf" code="TableBUFF" file="BUFF表.xlsx" sheet="Sheet1">
+		<key code="id" />
+		<field column="id" code="id" type="uint32" />
+		<field column="名称" code="name" type="string" />
+		<field column="描述" code="desc" type="string" />
+	</output>
+	<output type="json-unity" code="TableBUFF" file="BUFF表.xlsx" sheet="Sheet1">
+		<key code="id" />
+		<field column="id" code="id" type="uint32" />
+		<field column="名称" code="name" type="string" />
+	</output>
+</table>
