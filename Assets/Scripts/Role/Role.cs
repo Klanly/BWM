@@ -129,7 +129,7 @@ public class Role : MonoBehaviour
 			Role.All[cmd.data.charid] = role;
 		}
 
-		role.TargetPosition = BattleScene.Instance.MapNav.GetWorldPosition(cmd.pos.x, cmd.pos.y);
+		role.Position = BattleScene.Instance.MapNav.GetWorldPosition(cmd.pos.x, cmd.pos.y);
 	}
 
 	[Execute]
@@ -148,13 +148,10 @@ public class Role : MonoBehaviour
 	[Execute]
 	static void Execute(UserGotoMoveUserCmd_S cmd)
 	{
-		if (cmd.charid == MainRole.ServerInfo.charid)
-			return;
-
 		Role role;
 		if (Role.All.TryGetValue(cmd.charid, out role))
 		{
-			role.TargetPosition = BattleScene.Instance.MapNav.GetWorldPosition(cmd.pos.x, cmd.pos.y);
+			role.Position = BattleScene.Instance.MapNav.GetWorldPosition(cmd.pos.x, cmd.pos.y);
 		}
 	}
 }
