@@ -105,7 +105,7 @@ public class MainRole : MonoBehaviour
 	/// </summary>
 	private void UpdateCamera()
 	{
-		if (cameraMain == null)
+		if (cameraMain == null || MapNav == null)
 			return;
 		var targetCenter = this.transform.position;
 		targetCenter.z += heightCameraLookAt;
