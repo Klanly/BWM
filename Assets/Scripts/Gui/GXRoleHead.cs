@@ -11,8 +11,6 @@ public class GXRoleHead : MonoBehaviour
 
 	void Start()
 	{
-		if (MainRole.ServerInfo == null)
-			return;
 		myName.text = MainRole.ServerInfo.charname;
 		myLevel.text = MainRole.ServerInfo.level.ToString();
 	}
