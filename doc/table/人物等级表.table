@@ -1,11 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <table>
-	<output type="protobuf" code="TableLevel" file="人物等级表.xlsx" sheet="Sheet1">
+	<output type="protobuf" code="TableRoleLevel" file="人物等级表.xlsx" sheet="Sheet1">
 		<key code="level" />
 		<field column="等级" code="level" type="uint32" />
 		<field column="最大血量" code="mapHP" type="uint32" />
 	</output>
-	<output type="json-unity" code="TableLevel" file="人物等级表.xlsx" sheet="Sheet1">
+	<output type="json-unity" code="TableRoleLevel" file="人物等级表.xlsx" sheet="Sheet1">
 		<key code="level" />
 		<field column="等级" code="level" type="uint32" />
 		<field column="最大血量" code="mapHP" type="uint32" />
