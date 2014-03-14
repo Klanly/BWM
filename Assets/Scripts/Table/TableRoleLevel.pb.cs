@@ -22,12 +22,12 @@ namespace table
       get { return _level; }
       set { _level = value; }
     }
-    private uint _mapHP;
-    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"mapHP", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public uint mapHP
+    private uint _maxHp;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"maxHp", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint maxHp
     {
-      get { return _mapHP; }
-      set { _mapHP = value; }
+      get { return _maxHp; }
+      set { _maxHp = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
