@@ -80,11 +80,25 @@ public class Role : MonoBehaviour
 		var avatar = Avatar.CreateAvatar("Prefabs/Models/Body/Sk_Female_001", item.body, item.head, item.weapon);
 		avatar.name = "Role/" + info.charname;
 		avatar.transform.localScale = new Vector3(5, 5, 5);
+
 		var role = avatar.AddComponent<Role>();
 		role.animator = avatar.GetComponent<Animator>();
-
 		role.ServerInfo = info;
+
+		CreateHeadTip(role);
+		
 		return role;
+	}
+
+	private static void CreateHeadTip(Role role)
+	{
+		var headTip = (GameObject.Instantiate(Resources.Load("Prefabs/Gui/HeadTip")) as GameObject).GetComponent<UILabel>();
+		headTip.name = role.name;
+		headTip.text = role.ServerInfo.charname;
+		headTip.hideIfOffScreen = true;
+		headTip.SetAnchor(role.gameObject);
+		headTip.bottomAnchor.absolute = 120;
+		headTip.topAnchor.absolute = headTip.bottomAnchor.absolute + 30;
 	}
 
 	void Update()
