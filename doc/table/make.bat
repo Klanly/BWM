@@ -2,7 +2,7 @@
 pushd "%~dp0"
 set tool=..\..\..\..\Tools\release
 
-del /Q *.meta;*.pbt;*.proto;*.cs;*.json;*.go
+call clear.bat
 %tool%\TableBuild .
 
 popd
