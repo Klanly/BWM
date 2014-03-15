@@ -26,7 +26,7 @@ public class MessageBox : MonoBehaviour
 
 	public static void Show(string title, string message, UIEventListener.VoidDelegate onOK = null, UIEventListener.VoidDelegate onCancel = null)
 	{
-		var my = (GameObject.Instantiate(Resources.Load("Prefabs/MessageBox")) as GameObject).GetComponent<MessageBox>();
+		var my = (GameObject.Instantiate(Resources.Load("Prefabs/Gui/MessageBox")) as GameObject).GetComponent<MessageBox>();
 		my.transform.parent = GameObject.Find("UI Root").transform;
 		my.transform.localScale = Vector3.one;
 		NGUITools.BringForward(my.gameObject);
