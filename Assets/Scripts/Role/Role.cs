@@ -58,7 +58,7 @@ public class Role : MonoBehaviour
 			targetPosition = value;
 			if (value != Vector3.zero)
 			{
-				if (animator.GetFloat("speed") == 0.0f)
+				if (animator != null && animator.GetFloat("speed") == 0.0f)
 					animator.SetFloat("speed", speedMainRole);
 
 				var relativePos = TargetPosition - Position;
