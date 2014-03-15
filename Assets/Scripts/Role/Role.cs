@@ -78,7 +78,7 @@ public class Role : MonoBehaviour
 	{
 		var item = table.TableAvatarItem.Select(info.profession, info.sexman);
 		var avatar = Avatar.Create(item);
-		avatar.name = "Role/" + info.charname;
+		avatar.name = "Role." + info.charname;
 		avatar.transform.localScale = new Vector3(5, 5, 5);
 
 		var role = avatar.AddComponent<Role>();

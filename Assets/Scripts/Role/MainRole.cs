@@ -36,7 +36,7 @@ public class MainRole : MonoBehaviour
 	public static MainRole Create(MapUserData info)
 	{
 		var role = Role.Create(info);
-		role.gameObject.name = "MainRole/" + role.ServerInfo.charname;
+		role.gameObject.name = "Main." + role.gameObject.name;
 
 		var mainRole = role.gameObject.AddComponent<MainRole>();
 		mainRole.Role = role;
