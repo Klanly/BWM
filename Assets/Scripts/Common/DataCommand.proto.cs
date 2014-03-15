@@ -30,10 +30,7 @@ namespace Cmd
       SetUserSpDataUserCmd_S = 3,
             
       [global::ProtoBuf.ProtoEnum(Name=@"SetUserHpSpDataUserCmd_S", Value=4)]
-      SetUserHpSpDataUserCmd_S = 4,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"RemoveNpcDataUserCmd_S", Value=5)]
-      RemoveNpcDataUserCmd_S = 5
+      SetUserHpSpDataUserCmd_S = 4
     }
   
     private global::ProtoBuf.IExtension extensionObject;
