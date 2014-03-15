@@ -30,7 +30,10 @@ namespace Cmd
       Map = 4,
             
       [global::ProtoBuf.ProtoEnum(Name=@"Move", Value=5)]
-      Move = 5
+      Move = 5,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"Data", Value=6)]
+      Data = 6
     }
   
 }
