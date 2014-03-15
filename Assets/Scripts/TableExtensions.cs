@@ -7,23 +7,23 @@ using Cmd;
 
 namespace table
 {
-	partial class TableMapItem
+	partial class TableMap
 	{
-		public static TableMapItem Select(uint id)
+		public static TableMap Select(uint id)
 		{
-			return (from i in Table.Query<TableMapItem>() where i.id == id select i).First();
+			return (from i in Table.Query<TableMap>() where i.id == id select i).First();
 		}
 	}
 
-	partial class TableAvatarItem
+	partial class TableAvatar
 	{
 		public bool sexman { get { return this.sex == 1; } }
 
-		public static TableAvatarItem Select(Profession profession, bool sexman)
+		public static TableAvatar Select(Profession profession, bool sexman)
 		{
 			var pro = (uint)profession;
 			var sex = sexman ? 1 : 2;
-			return (from i in Table.Query<TableAvatarItem>() where i.profession == pro && i.sex == sex select i).First();
+			return (from i in Table.Query<TableAvatar>() where i.profession == pro && i.sex == sex select i).First();
 		}
 	}
 }

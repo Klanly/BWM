@@ -51,7 +51,7 @@ public class RoleCreateScene : MonoBehaviour
 			action = strFemaleAction[index];
 		}
 
-		var item = table.TableAvatarItem.Select(profession, sexman);
+		var item = table.TableAvatar.Select(profession, sexman);
 		var go = Avatar.Create(item);
 		go.transform.position = avatar.transform.position;
 		go.transform.rotation = avatar.transform.rotation;
@@ -74,7 +74,7 @@ public class RoleCreateScene : MonoBehaviour
 
 	void btnSuiji_onClick(GameObject sender)
 	{
-		var t = Table.Query<table.TableNameItem>();
+		var t = Table.Query<table.TableName>();
 		var name = t.Random().name1 + t.Random().name2 + t.Random().name3 + t.Random().name4;
 		roleNameInput.value = name;
 	}

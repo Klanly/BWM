@@ -10,10 +10,10 @@
 // Generated from: TableRoleLevel.proto
 namespace table
 {
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"TableRoleLevelItem")]
-  public partial class TableRoleLevelItem : global::ProtoBuf.IExtensible
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"TableRoleLevel")]
+  public partial class TableRoleLevel : global::ProtoBuf.IExtensible
   {
-    public TableRoleLevelItem() {}
+    public TableRoleLevel() {}
     
     private uint _level;
     [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"level", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]

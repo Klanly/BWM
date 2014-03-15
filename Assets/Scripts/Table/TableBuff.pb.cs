@@ -10,10 +10,10 @@
 // Generated from: TableBuff.proto
 namespace table
 {
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"TableBuffItem")]
-  public partial class TableBuffItem : global::ProtoBuf.IExtensible
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"TableBuff")]
+  public partial class TableBuff : global::ProtoBuf.IExtensible
   {
-    public TableBuffItem() {}
+    public TableBuff() {}
     
     private uint _id;
     [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]

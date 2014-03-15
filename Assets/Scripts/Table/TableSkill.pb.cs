@@ -10,10 +10,10 @@
 // Generated from: TableSkill.proto
 namespace table
 {
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"TableSkillItem")]
-  public partial class TableSkillItem : global::ProtoBuf.IExtensible
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"TableSkill")]
+  public partial class TableSkill : global::ProtoBuf.IExtensible
   {
-    public TableSkillItem() {}
+    public TableSkill() {}
     
     private uint _id;
     [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
