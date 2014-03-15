@@ -34,6 +34,38 @@ namespace Cmd
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"ItemLocation")]
+  public partial class ItemLocation : global::ProtoBuf.IExtensible
+  {
+    public ItemLocation() {}
+    
+    private int _x;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"x", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int x
+    {
+      get { return _x; }
+      set { _x = value; }
+    }
+    private int _y;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"y", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int y
+    {
+      get { return _y; }
+      set { _y = value; }
+    }
+    private int _z = default(int);
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"z", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(int))]
+    public int z
+    {
+      get { return _z; }
+      set { _z = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"MainUserData")]
   public partial class MainUserData : global::ProtoBuf.IExtensible
   {

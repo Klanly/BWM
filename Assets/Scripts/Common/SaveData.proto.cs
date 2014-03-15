@@ -91,45 +91,35 @@ namespace Cmd
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"ItemPos")]
-  public partial class ItemPos : global::ProtoBuf.IExtensible
-  {
-    public ItemPos() {}
-    
-    private uint _x;
-    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"x", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public uint x
-    {
-      get { return _x; }
-      set { _x = value; }
-    }
-    private uint _y;
-    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"y", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public uint y
-    {
-      get { return _y; }
-      set { _y = value; }
-    }
-    private global::ProtoBuf.IExtension extensionObject;
-    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
-  }
-  
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"SaveItem")]
   public partial class SaveItem : global::ProtoBuf.IExtensible
   {
     public SaveItem() {}
     
-    private ulong _itemid;
-    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"itemid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public ulong itemid
+    private uint _thisid;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"thisid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint thisid
     {
-      get { return _itemid; }
-      set { _itemid = value; }
+      get { return _thisid; }
+      set { _thisid = value; }
     }
-    private Cmd.ItemPos _pos;
-    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"pos", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public Cmd.ItemPos pos
+    private uint _baseid;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"baseid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint baseid
+    {
+      get { return _baseid; }
+      set { _baseid = value; }
+    }
+    private int _num;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"num", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int num
+    {
+      get { return _num; }
+      set { _num = value; }
+    }
+    private Cmd.ItemLocation _pos;
+    [global::ProtoBuf.ProtoMember(4, IsRequired = true, Name=@"pos", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public Cmd.ItemLocation pos
     {
       get { return _pos; }
       set { _pos = value; }
