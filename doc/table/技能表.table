@@ -9,7 +9,7 @@
 		<field column="名称" code="name" type="string" />
 		<field column="描述" code="desc" type="string" />
 	</output>
-	<output type="json-unity" code="TableSkill" file="技能表.xlsx" sheet="Sheet1">
+	<output type="json-go" code="TableSkill" file="技能表.xlsx" sheet="Sheet1">
 		<key code="id" />
 		<key code="level" />
 		<field column="id" code="id" type="uint16" />

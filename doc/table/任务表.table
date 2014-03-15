@@ -6,7 +6,7 @@
 		<field column="名称" code="name" type="string" />
 		<field column="描述" code="desc" type="string" />
 	</output>
-	<output type="json-unity" code="TableQuest" file="任务表.xlsx" sheet="Sheet1">
+	<output type="json-go" code="TableQuest" file="任务表.xlsx" sheet="Sheet1">
 		<key code="id" />
 		<field column="id" code="id" type="uint32" />
 		<field column="名称" code="name" type="string" />

@@ -22,9 +22,9 @@ namespace table
       get { return _level; }
       set { _level = value; }
     }
-    private uint _maxHp;
+    private int _maxHp;
     [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"maxHp", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public uint maxHp
+    public int maxHp
     {
       get { return _maxHp; }
       set { _maxHp = value; }
