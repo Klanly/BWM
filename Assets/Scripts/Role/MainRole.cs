@@ -6,7 +6,11 @@ using GX.Net;
 
 public class MainRole : MonoBehaviour
 {
-	public static MapUserData ServerInfo { get { return Instance != null ? Instance.Role.ServerInfo : null; } }
+	/// <summary>
+	/// 主角对应的<see cref="Role.ServerInfo"/>
+	/// 主角无效时返回<see cref="MapUserData.Empty"/>而不是null，外部使用无需进行<c>null</c>判断
+	/// </summary>
+	public static MapUserData ServerInfo { get { return Instance != null ? Instance.Role.ServerInfo : MapUserData.Empty; } }
 
 	public Role Role { get; private set; }
 	private MapNav MapNav { get { return BattleScene.Instance.MapNav; } }
@@ -32,7 +36,7 @@ public class MainRole : MonoBehaviour
 	public static MainRole Create(MapUserData info)
 	{
 		var role = Role.Create(info);
-		role.gameObject.name = "MainRole/" + role.ServerInfo.charname;
+		role.gameObject.name = "Main." + role.gameObject.name;
 
 		var mainRole = role.gameObject.AddComponent<MainRole>();
 		mainRole.Role = role;
@@ -45,8 +49,6 @@ public class MainRole : MonoBehaviour
 	void Start()
 	{
 		Instance = this;
-		if (ServerInfo == null)
-			return;
 		cameraMain = GameObject.Find("CameraMain").GetComponent<Camera>();
 	}
 

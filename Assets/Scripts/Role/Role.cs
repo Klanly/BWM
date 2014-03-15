@@ -58,7 +58,7 @@ public class Role : MonoBehaviour
 			targetPosition = value;
 			if (value != Vector3.zero)
 			{
-				if (animator.GetFloat("speed") == 0.0f)
+				if (animator != null && animator.GetFloat("speed") == 0.0f)
 					animator.SetFloat("speed", speedMainRole);
 
 				var relativePos = TargetPosition - Position;
@@ -77,14 +77,28 @@ public class Role : MonoBehaviour
 	public static Role Create(MapUserData info)
 	{
 		var item = table.TableAvatarItem.Select(info.profession, info.sexman);
-		var avatar = Avatar.CreateAvatar("Prefabs/Models/Body/Sk_Female_001", item.body, item.head, item.weapon);
-		avatar.name = "Role/" + info.charname;
+		var avatar = Avatar.Create(item);
+		avatar.name = "Role." + info.charname;
 		avatar.transform.localScale = new Vector3(5, 5, 5);
+
 		var role = avatar.AddComponent<Role>();
 		role.animator = avatar.GetComponent<Animator>();
-
 		role.ServerInfo = info;
+
+		CreateHeadTip(role);
+		
 		return role;
+	}
+
+	private static void CreateHeadTip(Role role)
+	{
+		var headTip = (GameObject.Instantiate(Resources.Load("Prefabs/Gui/HeadTip")) as GameObject).GetComponent<UILabel>();
+		headTip.name = role.name;
+		headTip.text = role.ServerInfo.charname;
+		headTip.hideIfOffScreen = true;
+		headTip.SetAnchor(role.gameObject);
+		headTip.bottomAnchor.absolute = 120;
+		headTip.topAnchor.absolute = headTip.bottomAnchor.absolute + 30;
 	}
 
 	void Update()

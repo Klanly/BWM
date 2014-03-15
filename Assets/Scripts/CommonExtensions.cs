@@ -49,6 +49,11 @@ namespace Cmd
 
 	}
 	#endregion
+
+	partial class MapUserData
+	{
+		public static readonly MapUserData Empty = new MapUserData();
+	}
 }
 
 static class CommonExtensions

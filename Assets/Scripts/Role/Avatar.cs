@@ -4,15 +4,27 @@ using System.Collections.Generic;
 
 public static class Avatar
 {
-	public static GameObject CreateAvatar(string sk, string body, string head, string weapon)
+	private static readonly string[] Skeleton = new string[]
 	{
-		if (string.IsNullOrEmpty(sk) || string.IsNullOrEmpty(body))
+		null,
+		"Prefabs/Models/Body/Sk_Male_001", 
+		"Prefabs/Models/Body/Sk_Female_001"
+	};
+
+	public static GameObject Create(table.TableAvatarItem item)
+	{
+		return Create(Skeleton[item.sex], item.body, item.head, item.weapon);
+	}
+
+	public static GameObject Create(string skeleton, string body, string head, string weapon)
+	{
+		if (string.IsNullOrEmpty(skeleton) || string.IsNullOrEmpty(body))
 			return null;
 
-		var res = Resources.Load(sk);
+		var res = Resources.Load(skeleton);
 		if (res == null)
 		{
-			Debug.LogError("Load Resources error: " + sk);
+			Debug.LogError("Load Resources error: " + skeleton);
 			return null;
 		}
 		var gosk = Object.Instantiate(res) as GameObject;

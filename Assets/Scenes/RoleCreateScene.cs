@@ -12,7 +12,6 @@ public class RoleCreateScene : MonoBehaviour
 	private readonly Dictionary<Profession, GameObject> professionSprites = new Dictionary<Profession, GameObject>();
 	private readonly Dictionary<Profession, GameObject> professionButtons = new Dictionary<Profession, GameObject>();
 
-	private string[] strSk = new string[]{"Prefabs/Models/Body/Sk_Male_001", "Prefabs/Models/Body/Sk_Female_001"};
 	private string[] strFemaleAction = new string[]{"Ani_Cq_show", "Ani_Dd_show","Ani_Sz_show"};
 	private string[] strMaleAction = new string[]{"Ani_Cq_show", "Ani_Dd_show","Ani_Sz_show"};
 
@@ -41,22 +40,19 @@ public class RoleCreateScene : MonoBehaviour
 		if(curAvatar != null)
 			Destroy(curAvatar);
 
-		string sk, action;
+		string action;
 		int index = (int)profession - 1;
 		if(sexman == true)
 		{
-			sk = strSk[0];
 			action = strMaleAction[index];
 		}
 		else
 		{
-			sk = strSk[1];
 			action = strFemaleAction[index];
 		}
 
 		var item = table.TableAvatarItem.Select(profession, sexman);
-
-		var go = Avatar.CreateAvatar(sk, item.body, item.head, item.weapon);
+		var go = Avatar.Create(item);
 		go.transform.position = avatar.transform.position;
 		go.transform.rotation = avatar.transform.rotation;
 		go.transform.localScale = avatar.transform.localScale;

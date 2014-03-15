@@ -11,8 +11,10 @@ public class GXRoleHead : MonoBehaviour
 
 	void Start()
 	{
-		if (MainRole.ServerInfo == null)
-			return;
+		var my = myName.transform.parent; // 主角自我信息所在节点
+		my.Find("head1").gameObject.SetActive(MainRole.ServerInfo.sexman);
+		my.Find("head2").gameObject.SetActive(!MainRole.ServerInfo.sexman);
+
 		myName.text = MainRole.ServerInfo.charname;
 		myLevel.text = MainRole.ServerInfo.level.ToString();
 	}

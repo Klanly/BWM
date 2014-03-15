@@ -65,6 +65,27 @@ namespace Cmd
       get { return _mapid; }
       set { _mapid = value; }
     }
+    private int _hp;
+    [global::ProtoBuf.ProtoMember(11, IsRequired = true, Name=@"hp", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int hp
+    {
+      get { return _hp; }
+      set { _hp = value; }
+    }
+    private int _sp;
+    [global::ProtoBuf.ProtoMember(12, IsRequired = true, Name=@"sp", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int sp
+    {
+      get { return _sp; }
+      set { _sp = value; }
+    }
+    private long _exp;
+    [global::ProtoBuf.ProtoMember(13, IsRequired = true, Name=@"exp", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public long exp
+    {
+      get { return _exp; }
+      set { _exp = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }

@@ -103,7 +103,7 @@ public class TestAvatar : MonoBehaviour {
 		role.transform.localScale = new Vector3(5,5,5);
 		role.transform.rotation = Quaternion.Euler(new Vector3(0,180,0));
 
-		role1 = Avatar.CreateAvatar(strSkeleton, strCoat, strHead, strWeapon);
+		role1 = Avatar.Create(strSkeleton, strCoat, strHead, strWeapon);
 		role1.transform.position = new Vector3(15,0,10);
 		role1.transform.localScale = new Vector3(5,5,5);
 		role1.transform.rotation = Quaternion.Euler(new Vector3(0,180,0));
