@@ -10,10 +10,10 @@
 // Generated from: TableBuff.proto
 namespace table
 {
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"TableBuffItem")]
-  public partial class TableBuffItem : global::ProtoBuf.IExtensible
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"TableBuff")]
+  public partial class TableBuff : global::ProtoBuf.IExtensible
   {
-    public TableBuffItem() {}
+    public TableBuff() {}
     
     private uint _id;
     [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
@@ -22,15 +22,22 @@ namespace table
       get { return _id; }
       set { _id = value; }
     }
+    private uint _level;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"level", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint level
+    {
+      get { return _level; }
+      set { _level = value; }
+    }
     private string _name;
-    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"name", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"name", DataFormat = global::ProtoBuf.DataFormat.Default)]
     public string name
     {
       get { return _name; }
       set { _name = value; }
     }
     private string _desc;
-    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"desc", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::ProtoBuf.ProtoMember(4, IsRequired = true, Name=@"desc", DataFormat = global::ProtoBuf.DataFormat.Default)]
     public string desc
     {
       get { return _desc; }

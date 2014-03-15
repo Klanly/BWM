@@ -16,6 +16,12 @@ rem 服务器json文件
 del /Q Common\data\table\*.json
 copy /Y doc\table\*.json Common\data\table
 
+rem 服务器go文件
+rename Common\table\Table.go Table.BAK
+del /Q Common\table\Table*.go
+rename Common\table\*.BAK *.go
+copy /Y doc\table\*.go Common\table
+
 popd
 pause
 GOTO:EOF

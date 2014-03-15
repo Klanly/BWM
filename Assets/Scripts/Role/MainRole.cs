@@ -134,7 +134,7 @@ public class MainRole : MonoBehaviour
 			yield return Application.LoadLevelAsync("BattleScene");
 		}
 		
-		BattleScene.Instance.LoadMap(table.TableMapItem.Select(cmd.data.mapid).path);
+		BattleScene.Instance.LoadMap(table.TableMap.Select(cmd.data.mapid).path);
 		var mainRole = MainRole.Create(cmd.data.ToMapUserData());
 		mainRole.Grid = cmd.pos;
 	}

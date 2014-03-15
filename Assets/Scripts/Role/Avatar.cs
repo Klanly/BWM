@@ -11,7 +11,7 @@ public static class Avatar
 		"Prefabs/Models/Body/Sk_Female_001"
 	};
 
-	public static GameObject Create(table.TableAvatarItem item)
+	public static GameObject Create(table.TableAvatar item)
 	{
 		return Create(Skeleton[item.sex], item.body, item.head, item.weapon);
 	}

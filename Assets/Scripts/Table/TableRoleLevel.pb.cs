@@ -10,10 +10,10 @@
 // Generated from: TableRoleLevel.proto
 namespace table
 {
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"TableRoleLevelItem")]
-  public partial class TableRoleLevelItem : global::ProtoBuf.IExtensible
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"TableRoleLevel")]
+  public partial class TableRoleLevel : global::ProtoBuf.IExtensible
   {
-    public TableRoleLevelItem() {}
+    public TableRoleLevel() {}
     
     private uint _level;
     [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"level", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
@@ -22,9 +22,9 @@ namespace table
       get { return _level; }
       set { _level = value; }
     }
-    private uint _maxHp;
+    private int _maxHp;
     [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"maxHp", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public uint maxHp
+    public int maxHp
     {
       get { return _maxHp; }
       set { _maxHp = value; }

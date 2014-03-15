@@ -10,10 +10,10 @@
 // Generated from: TableQuest.proto
 namespace table
 {
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"TableQuestItem")]
-  public partial class TableQuestItem : global::ProtoBuf.IExtensible
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"TableQuest")]
+  public partial class TableQuest : global::ProtoBuf.IExtensible
   {
-    public TableQuestItem() {}
+    public TableQuest() {}
     
     private uint _id;
     [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]

@@ -9,7 +9,7 @@ public class TableTest : MonoBehaviour
 {
 	void Start()
 	{
-		foreach (var item in Table.Query<table.TableNameItem>())
+		foreach (var item in Table.Query<table.TableName>())
 		{
 			Debug.Log(item.ToStringDebug());
 		}

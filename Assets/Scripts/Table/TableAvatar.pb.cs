@@ -10,10 +10,10 @@
 // Generated from: TableAvatar.proto
 namespace table
 {
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"TableAvatarItem")]
-  public partial class TableAvatarItem : global::ProtoBuf.IExtensible
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"TableAvatar")]
+  public partial class TableAvatar : global::ProtoBuf.IExtensible
   {
-    public TableAvatarItem() {}
+    public TableAvatar() {}
     
     private uint _profession;
     [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"profession", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
