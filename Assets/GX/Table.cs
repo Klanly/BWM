@@ -26,13 +26,7 @@ public static class Table
 		if (ret == null)
 		{
 			if (string.IsNullOrEmpty(path))
-			{
-				var name = typeof(T).Name;
-				var postfix = "Item";
-				if (name.EndsWith(postfix) == false)
-					throw new ArgumentException("请显式指定表格路径");
-				path = "Table/" + name.Substring(0, name.Length - postfix.Length);
-			}
+				path = "Table/" + typeof(T).Name;
 
 			wr.Target = ret = new List<T>(Load<T>(path));
 		}
