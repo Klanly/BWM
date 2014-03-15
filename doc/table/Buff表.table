@@ -2,13 +2,19 @@
 <table>
 	<output type="protobuf" code="TableBuff" file="Buff表.xlsx" sheet="Sheet1">
 		<key code="id" />
-		<field column="id" code="id" type="uint32" />
+		<key code="level" />
+		<field column="id" code="id" type="uint16" />
+		<field column="等级" code="level" type="uint16" />
+		
 		<field column="名称" code="name" type="string" />
 		<field column="描述" code="desc" type="string" />
 	</output>
 	<output type="json-unity" code="TableBuff" file="Buff表.xlsx" sheet="Sheet1">
 		<key code="id" />
-		<field column="id" code="id" type="uint32" />
+		<key code="level" />
+		<field column="id" code="id" type="uint16" />
+		<field column="等级" code="level" type="uint16" />
+		
 		<field column="名称" code="name" type="string" />
 	</output>
 </table>
