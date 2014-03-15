@@ -3,11 +3,11 @@
 	<output type="protobuf" code="TableRoleLevel" file="人物等级表.xlsx" sheet="Sheet1">
 		<key code="level" />
 		<field column="等级" code="level" type="uint32" />
-		<field column="最大血量" code="maxHp" type="uint32" />
+		<field column="最大血量" code="maxHp" type="int32" />
 	</output>
 	<output type="json-unity" code="TableRoleLevel" file="人物等级表.xlsx" sheet="Sheet1">
 		<key code="level" />
 		<field column="等级" code="level" type="uint32" />
-		<field column="最大血量" code="maxHp" type="uint32" />
+		<field column="最大血量" code="maxHp" type="int32" />
 	</output>
 </table>
