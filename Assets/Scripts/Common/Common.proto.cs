@@ -78,13 +78,6 @@ namespace Cmd
       get { return _userdata; }
       set { _userdata = value; }
     }
-    private uint _mapid;
-    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"mapid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public uint mapid
-    {
-      get { return _mapid; }
-      set { _mapid = value; }
-    }
     private int _hp;
     [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"hp", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     public int hp
@@ -105,6 +98,13 @@ namespace Cmd
     {
       get { return _exp; }
       set { _exp = value; }
+    }
+    private uint _level;
+    [global::ProtoBuf.ProtoMember(6, IsRequired = true, Name=@"level", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint level
+    {
+      get { return _level; }
+      set { _level = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -137,15 +137,8 @@ namespace Cmd
       get { return _sexman; }
       set { _sexman = value; }
     }
-    private uint _level;
-    [global::ProtoBuf.ProtoMember(4, IsRequired = true, Name=@"level", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public uint level
-    {
-      get { return _level; }
-      set { _level = value; }
-    }
     private Cmd.Profession _profession;
-    [global::ProtoBuf.ProtoMember(5, IsRequired = true, Name=@"profession", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoMember(4, IsRequired = true, Name=@"profession", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     public Cmd.Profession profession
     {
       get { return _profession; }
