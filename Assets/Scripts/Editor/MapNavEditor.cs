@@ -188,7 +188,7 @@ public class MapNavEditor : Editor
 			{"tilewidth", Target.gridWidth},
 			{"tileheight", Target.gridHeight},
 			{"tilexnum", Target.gridXNum},
-			{"tileznum", Target.gridZNum},
+			{"tileynum", Target.gridZNum},
 			{"tiles", System.Array.ConvertAll(Target.grids, g => (uint)g)},
 		});
 		//Debug.Log(json);
