@@ -180,18 +180,18 @@ public class MapNavEditor : Editor
 
 	void Export()
 	{
-		var path = Path.Combine(Path.GetDirectoryName(Application.dataPath), "Common/data/map/" + 
-			Path.GetFileNameWithoutExtension(EditorApplication.currentScene) + "_zone.json");
+		var path = Path.Combine(Path.GetDirectoryName(Application.dataPath), "Common/data/map/" +
+			Target.transform.parent.name + "_tile.json");
 		Directory.CreateDirectory(Path.GetDirectoryName(path));
 		var json = NGUIJson.jsonEncode(new Hashtable()
 		{
-			{"gridwidth", Target.gridWidth},
-			{"gridheight", Target.gridHeight},
-			{"gridxnum", Target.gridXNum},
-			{"gridznum", Target.gridZNum},
-			{"grids", System.Array.ConvertAll(Target.grids, g => (uint)g)},
+			{"tilewidth", Target.gridWidth},
+			{"tileheight", Target.gridHeight},
+			{"tilexnum", Target.gridXNum},
+			{"tileznum", Target.gridZNum},
+			{"tiles", System.Array.ConvertAll(Target.grids, g => (uint)g)},
 		});
-		Debug.Log(json);
+		//Debug.Log(json);
 		File.WriteAllText(path, json, new System.Text.UTF8Encoding(false));
 		EditorUtility.DisplayDialog("MapNav Export OK", path, "OK");
 	}
