@@ -7,7 +7,6 @@ echo ===================================================================
 del /Q /S *.cs
 del /Q /S "%dest%\*.cs"
 call:buildDir "%~dp0\Common" "%dest%"
-call:buildDir "%~dp0\Common\Config" "%dest%\Editor"
 del /Q /S *.cs
 echo ===================================================================
 call:clearMeta "%dest%"

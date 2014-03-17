@@ -180,21 +180,19 @@ public class MapNavEditor : Editor
 
 	void Export()
 	{
-		var path = Path.Combine(Path.GetDirectoryName(Application.dataPath), "MapNav");
-		Directory.CreateDirectory(path);
-		path = EditorUtility.SaveFilePanel("Export MapNav grid info", path, Path.GetFileNameWithoutExtension(EditorApplication.currentScene), "nav");
-		if (string.IsNullOrEmpty(path))
-			return;
-		var config = new Config.MapNav();
-		config.gridwidth = Target.gridWidth;
-		config.gridheight = Target.gridHeight;
-		config.gridxnum = (uint)Target.gridXNum;
-		config.gridznum = (uint)Target.gridZNum;
-		config.grids.AddRange(from g in Target.grids select (uint)g);
-		using (var stream = File.OpenWrite(path))
+		var path = Path.Combine(Path.GetDirectoryName(Application.dataPath), "Common/data/map/" + 
+			Path.GetFileNameWithoutExtension(EditorApplication.currentScene) + "_zone.json");
+		Directory.CreateDirectory(Path.GetDirectoryName(path));
+		var json = NGUIJson.jsonEncode(new Hashtable()
 		{
-			ProtoBuf.Serializer.SerializeWithLengthPrefix(stream, config, ProtoBuf.PrefixStyle.Base128);
-		}
+			{"gridwidth", Target.gridWidth},
+			{"gridheight", Target.gridHeight},
+			{"gridxnum", Target.gridXNum},
+			{"gridznum", Target.gridZNum},
+			{"grids", System.Array.ConvertAll(Target.grids, g => (uint)g)},
+		});
+		Debug.Log(json);
+		File.WriteAllText(path, json, new System.Text.UTF8Encoding(false));
 		EditorUtility.DisplayDialog("MapNav Export OK", path, "OK");
 	}
 }
