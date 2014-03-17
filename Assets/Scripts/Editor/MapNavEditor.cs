@@ -234,8 +234,12 @@ public class MapNavEditor : Editor
 			{"npcs", System.Array.ConvertAll(npc, i => new Hashtable()
 				{
 					{"id", i.baseId},
+					{"name", string.IsNullOrEmpty(i.alias) ? db[(uint)i.baseId].name : i.alias},
 					{"x", Target.GetGridX(i.transform.localPosition)},
 					{"y", Target.GetGridZ(i.transform.localPosition)},
+					{"angle", (int)i.transform.localRotation.eulerAngles.y},
+					{"relivetime", i.relivetime},
+					{"rate", Mathf.Clamp(i.rate, 0, 100)},
 				})
 			},
 		});
