@@ -87,11 +87,15 @@ namespace GX.Net
 			var messageType = new MessageType() { Cmd = package.byCmd, Param = package.byParam };
 			using (var buf = new MemoryStream(package.data))
 			{
-				Func<Stream, ProtoBuf.IExtensible> func;
-				if (deserializeTable.TryGetValue(messageType, out func))
-					return func(buf);
-				UnityEngine.Debug.LogWarning("Can't deserialize message type " + messageType);
-				return null;
+				try
+				{
+					return deserializeTable[messageType](buf);
+				}
+				catch (Exception ex)
+				{
+					UnityEngine.Debug.LogWarning("Can't deserialize message type " + messageType + ", " + ex.Message);
+					return null;
+				}
 			}
 		}
 
