@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <table>
-	<output type="protobuf" code="TableNPC" file="NPC表.xlsx" sheet="Sheet1">
+	<output type="protobuf" code="TableNpc" file="Npc表.xlsx" sheet="Sheet1">
 		<key code="id" />
 		<field column="id" code="id" type="uint32" />
 		<field column="名称" code="name" type="string" />
@@ -8,7 +8,7 @@
 			<regex>^[^\\]+$</regex>
 		</field>
 	</output>
-	<output type="json-go" code="TableNPC" file="NPC表.xlsx" sheet="Sheet1">
+	<output type="json-go" code="TableNpc" file="Npc表.xlsx" sheet="Sheet1">
 		<key code="id" />
 		<field column="id" code="id" type="uint32" />
 		<field column="名称" code="name" type="string" />
