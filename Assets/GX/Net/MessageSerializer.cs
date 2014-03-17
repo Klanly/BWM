@@ -146,7 +146,10 @@ namespace GX.Net
 					var name = categoryIdType.Namespace + "." + tName;
 					var messageType = assembly.GetType(name);
 					if (messageType == null)
-						throw new FormatException("Can't find type by name: " + name);
+					{
+						UnityEngine.Debug.LogWarning("Can't find type by name: " + name);
+						continue;
+					}
 					ret.Add(new MessageType() { Cmd = cValue, Param = tValue }, messageType);
 				}
 			}
