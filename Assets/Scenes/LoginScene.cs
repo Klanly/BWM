@@ -90,6 +90,8 @@ public class LoginScene : MonoBehaviour
 			var stamp = DateTime.Now.ToUnixTime();
 			Net.Instance.Send(new UserLoginTokenLoginUserCmd_C()
 			{
+				gameid = cmd.gameid,
+				zoneid = cmd.zoneid,
 				accountid = cmd.accountid,
 				logintempid = cmd.logintempid,
 				timestamp = stamp,
