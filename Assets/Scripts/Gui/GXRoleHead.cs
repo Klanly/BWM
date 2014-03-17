@@ -16,6 +16,6 @@ public class GXRoleHead : MonoBehaviour
 		my.Find("head2").gameObject.SetActive(!MainRole.ServerInfo.sexman);
 
 		myName.text = MainRole.ServerInfo.charname;
-		myLevel.text = MainRole.ServerInfo.level.ToString();
+		myLevel.text = MainRole.Instance.level.ToString();
 	}
 }

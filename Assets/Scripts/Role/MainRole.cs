@@ -12,6 +12,8 @@ public class MainRole : MonoBehaviour
 	/// </summary>
 	public static MapUserData ServerInfo { get { return Instance != null ? Instance.Role.ServerInfo : MapUserData.Empty; } }
 
+	public uint level;
+
 	public Role Role { get; private set; }
 	private MapNav MapNav { get { return BattleScene.Instance.MapNav; } }
 
@@ -133,9 +135,10 @@ public class MainRole : MonoBehaviour
 		{
 			yield return Application.LoadLevelAsync("BattleScene");
 		}
-		
-		BattleScene.Instance.LoadMap(table.TableMap.Select(cmd.data.mapid).path);
+
+		BattleScene.Instance.LoadMap(table.TableMap.Select(cmd.mapid).path);
 		var mainRole = MainRole.Create(cmd.data.userdata);
 		mainRole.Grid = cmd.pos;
+		mainRole.level = cmd.data.level;
 	}
 }
