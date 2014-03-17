@@ -164,7 +164,7 @@ public class MainRole : MonoBehaviour, INotifyPropertyChanged
 			yield return Application.LoadLevelAsync("BattleScene");
 		}
 
-		BattleScene.Instance.LoadMap(table.TableMap.Select(cmd.mapid).path);
+		BattleScene.Instance.LoadMap(table.TableMap.Select(cmd.mapid).mapfile);
 		var mainRole = MainRole.Create(cmd.data.userdata);
 		mainRole.Grid = cmd.pos;
 		mainRole.level = cmd.data.level;
