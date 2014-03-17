@@ -3,6 +3,7 @@ using UnityEditor;
 using System.Collections;
 using System.IO;
 using System.Linq;
+using System.Collections.Generic;
 
 [CustomEditor(typeof(MapNav))]
 public class MapNavEditor : Editor
@@ -180,19 +181,66 @@ public class MapNavEditor : Editor
 
 	void Export()
 	{
-		var path = Path.Combine(Path.GetDirectoryName(Application.dataPath), "Common/data/map/" +
-			Target.transform.parent.name + "_tile.json");
+		GX.Editor.LogEntries.Clear();
+		var path = Path.Combine(Path.GetDirectoryName(Application.dataPath), "Common/data/map/" + Target.transform.parent.name);
 		Directory.CreateDirectory(Path.GetDirectoryName(path));
+		if (ExportTile(path + "_tile.json") == false)
+			return;
+		if (ExportNpc(path + "_npc.json") == false)
+			return;
+		EditorUtility.DisplayDialog("MapNav Export OK", path + "_*.json", "OK");
+	}
+
+	/// <summary>
+	/// 导出阻挡信息
+	/// </summary>
+	/// <param name="path"></param>
+	/// <returns></returns>
+	private bool ExportTile(string path)
+	{
 		var json = NGUIJson.jsonEncode(new Hashtable()
 		{
-			{"tilewidth", Target.gridWidth},
-			{"tileheight", Target.gridHeight},
+			//{"tilewidth", Target.gridWidth},
+			//{"tileheight", Target.gridHeight},
 			{"tilexnum", Target.gridXNum},
 			{"tileynum", Target.gridZNum},
 			{"tiles", System.Array.ConvertAll(Target.grids, g => (uint)g)},
 		});
 		//Debug.Log(json);
 		File.WriteAllText(path, json, new System.Text.UTF8Encoding(false));
-		EditorUtility.DisplayDialog("MapNav Export OK", path, "OK");
+		return true;
+	}
+
+	/// <summary>
+	/// 导出NPC摆放信息
+	/// </summary>
+	/// <param name="path"></param>
+	/// <returns></returns>
+	private bool ExportNpc(string path)
+	{
+		var host = Target.transform.parent;
+		var npc = host.GetComponentsInChildren<Npc>();
+		var db = Table.Query<table.TableNpc>().ToDictionary(i => i.id);
+
+		var error = from i in npc let id = (uint)i.baseId where db.ContainsKey(id) == false select i;
+		if(error.Any())
+		{
+			Debug.LogError("NPC表格中找不到对应id的NPC：\n" + string.Join("\n", (from i in error select string.Format("{0}\t{1}", i.baseId, i.transform.GetPath())).ToArray()));
+			return false;
+		}
+
+		var json = NGUIJson.jsonEncode(new Hashtable()
+		{
+			{"npcs", System.Array.ConvertAll(npc, i => new Hashtable()
+				{
+					{"id", i.baseId},
+					{"x", Target.GetGridX(i.transform.localPosition)},
+					{"y", Target.GetGridZ(i.transform.localPosition)},
+				})
+			},
+		});
+		//Debug.Log(json);
+		File.WriteAllText(path, json, new System.Text.UTF8Encoding(false));
+		return true;
 	}
 }

@@ -7,6 +7,7 @@ public class MapNav : MonoBehaviour
 {
 	/// <summary>
 	/// 格子类型，0表示都不能走，每位0表示不可走，1表示可以走
+	/// TODO: move to common, server and client use a same code.
 	/// </summary>
 	[System.Flags]
 	public enum TileType
