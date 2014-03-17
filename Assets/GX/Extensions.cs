@@ -229,6 +229,29 @@ public static class Extensions
 		}
 	}
 
+	/// <summary>
+	/// 得到节点全路径
+	/// </summary>
+	/// <remarks>
+	/// ref: http://answers.unity3d.com/questions/8500/how-can-i-get-the-full-path-to-a-gameobject.html
+	/// </remarks>
+	/// <param name="current"></param>
+	/// <returns></returns>
+	public static string GetPath(this Transform current)
+	{
+		if (current.parent == null)
+			return "/" + current.name;
+		return current.parent.GetPath() + "/" + current.name;
+	}
+	/// <summary>
+	/// 得到节点全路径
+	/// </summary>
+	/// <param name="component"></param>
+	/// <returns></returns>
+	public static string GetPath(this Component component)
+	{
+		return component.transform.GetPath() + "/" + component.GetType().ToString();
+	}
 	#endregion
 
 
