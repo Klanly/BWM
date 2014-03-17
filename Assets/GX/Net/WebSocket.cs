@@ -81,6 +81,8 @@ namespace GX.Net
 				while (mem.Position < mem.Length)
 				{
 					var msg = serizlizer.Deserialize(mem);
+					if (msg == null)
+						continue;
 					if (msg.GetType() != typeof(Cmd.TickRequestNullUserCmd_CS) &&
 						msg.GetType() != typeof(Cmd.TickReturnNullUserCmd_CS))
 						Debug.Log("[RECV]" + msg.ToStringDebug());
