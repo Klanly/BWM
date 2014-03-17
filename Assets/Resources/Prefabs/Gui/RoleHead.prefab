@@ -626,6 +626,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myName: {fileID: 11400010}
   myLevel: {fileID: 11400012}
+  myHp: {fileID: 0}
   otherName: {fileID: 11400024}
   otherLevel: {fileID: 11400026}
 --- !u!114 &11400010
