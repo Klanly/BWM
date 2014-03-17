@@ -117,12 +117,91 @@ namespace Cmd
       get { return _num; }
       set { _num = value; }
     }
-    private Cmd.ItemLocation _pos;
-    [global::ProtoBuf.ProtoMember(4, IsRequired = true, Name=@"pos", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public Cmd.ItemLocation pos
+    private Cmd.ItemLocation _loc;
+    [global::ProtoBuf.ProtoMember(4, IsRequired = true, Name=@"loc", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public Cmd.ItemLocation loc
     {
-      get { return _pos; }
-      set { _pos = value; }
+      get { return _loc; }
+      set { _loc = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"SaveSkill")]
+  public partial class SaveSkill : global::ProtoBuf.IExtensible
+  {
+    public SaveSkill() {}
+    
+    private uint _skillid;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"skillid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint skillid
+    {
+      get { return _skillid; }
+      set { _skillid = value; }
+    }
+    private uint _level;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"level", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint level
+    {
+      get { return _level; }
+      set { _level = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"SaveBuff")]
+  public partial class SaveBuff : global::ProtoBuf.IExtensible
+  {
+    public SaveBuff() {}
+    
+    private uint _buffid;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"buffid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint buffid
+    {
+      get { return _buffid; }
+      set { _buffid = value; }
+    }
+    private uint _level;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"level", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint level
+    {
+      get { return _level; }
+      set { _level = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"SaveQuest")]
+  public partial class SaveQuest : global::ProtoBuf.IExtensible
+  {
+    public SaveQuest() {}
+    
+    private uint _questid;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"questid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint questid
+    {
+      get { return _questid; }
+      set { _questid = value; }
+    }
+    private uint _operate;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"operate", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint operate
+    {
+      get { return _operate; }
+      set { _operate = value; }
+    }
+    private uint _state;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"state", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint state
+    {
+      get { return _state; }
+      set { _state = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -141,11 +220,32 @@ namespace Cmd
       get { return _charbase; }
       set { _charbase = value; }
     }
-    private readonly global::System.Collections.Generic.List<Cmd.SaveItem> _item = new global::System.Collections.Generic.List<Cmd.SaveItem>();
-    [global::ProtoBuf.ProtoMember(2, Name=@"item", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public global::System.Collections.Generic.List<Cmd.SaveItem> item
+    private readonly global::System.Collections.Generic.List<Cmd.SaveItem> _itemlist = new global::System.Collections.Generic.List<Cmd.SaveItem>();
+    [global::ProtoBuf.ProtoMember(2, Name=@"itemlist", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<Cmd.SaveItem> itemlist
     {
-      get { return _item; }
+      get { return _itemlist; }
+    }
+  
+    private readonly global::System.Collections.Generic.List<Cmd.SaveSkill> _skilllist = new global::System.Collections.Generic.List<Cmd.SaveSkill>();
+    [global::ProtoBuf.ProtoMember(3, Name=@"skilllist", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<Cmd.SaveSkill> skilllist
+    {
+      get { return _skilllist; }
+    }
+  
+    private readonly global::System.Collections.Generic.List<Cmd.SaveBuff> _bufflist = new global::System.Collections.Generic.List<Cmd.SaveBuff>();
+    [global::ProtoBuf.ProtoMember(4, Name=@"bufflist", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<Cmd.SaveBuff> bufflist
+    {
+      get { return _bufflist; }
+    }
+  
+    private readonly global::System.Collections.Generic.List<Cmd.SaveQuest> _questlist = new global::System.Collections.Generic.List<Cmd.SaveQuest>();
+    [global::ProtoBuf.ProtoMember(5, Name=@"questlist", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<Cmd.SaveQuest> questlist
+    {
+      get { return _questlist; }
     }
   
     private global::ProtoBuf.IExtension extensionObject;

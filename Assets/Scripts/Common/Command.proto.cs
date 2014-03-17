@@ -33,7 +33,22 @@ namespace Cmd
       Move = 5,
             
       [global::ProtoBuf.ProtoEnum(Name=@"Data", Value=6)]
-      Data = 6
+      Data = 6,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"Property", Value=7)]
+      Property = 7,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"Skill", Value=8)]
+      Skill = 8,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"Buff", Value=9)]
+      Buff = 9,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"Quest", Value=10)]
+      Quest = 10,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"Item", Value=11)]
+      Item = 11
     }
   
 }

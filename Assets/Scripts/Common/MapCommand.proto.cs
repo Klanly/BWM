@@ -26,14 +26,14 @@ namespace Cmd
       [global::ProtoBuf.ProtoEnum(Name=@"AddMapUserDataAndPosMapUserCmd_S", Value=2)]
       AddMapUserDataAndPosMapUserCmd_S = 2,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"RemoveUserMapUserCmd_S", Value=3)]
-      RemoveUserMapUserCmd_S = 3,
+      [global::ProtoBuf.ProtoEnum(Name=@"RemoveMapUserMapUserCmd_S", Value=3)]
+      RemoveMapUserMapUserCmd_S = 3,
             
       [global::ProtoBuf.ProtoEnum(Name=@"AddMapNpcDataAndPosMapUserCmd_S", Value=4)]
       AddMapNpcDataAndPosMapUserCmd_S = 4,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"RemoveNpcMapUserCmd_S", Value=5)]
-      RemoveNpcMapUserCmd_S = 5
+      [global::ProtoBuf.ProtoEnum(Name=@"RemoveMapNpcMapUserCmd_S", Value=5)]
+      RemoveMapNpcMapUserCmd_S = 5
     }
   
     private global::ProtoBuf.IExtension extensionObject;
@@ -89,10 +89,10 @@ namespace Cmd
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"RemoveUserMapUserCmd_S")]
-  public partial class RemoveUserMapUserCmd_S : global::ProtoBuf.IExtensible
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"RemoveMapUserMapUserCmd_S")]
+  public partial class RemoveMapUserMapUserCmd_S : global::ProtoBuf.IExtensible
   {
-    public RemoveUserMapUserCmd_S() {}
+    public RemoveMapUserMapUserCmd_S() {}
     
     private ulong _charid;
     [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"charid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
@@ -117,6 +117,20 @@ namespace Cmd
     {
       get { return _tempid; }
       set { _tempid = value; }
+    }
+    private int _hp;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"hp", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int hp
+    {
+      get { return _hp; }
+      set { _hp = value; }
+    }
+    private int _maxhp;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"maxhp", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int maxhp
+    {
+      get { return _maxhp; }
+      set { _maxhp = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -147,10 +161,10 @@ namespace Cmd
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"RemoveNpcMapUserCmd_S")]
-  public partial class RemoveNpcMapUserCmd_S : global::ProtoBuf.IExtensible
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"RemoveMapNpcMapUserCmd_S")]
+  public partial class RemoveMapNpcMapUserCmd_S : global::ProtoBuf.IExtensible
   {
-    public RemoveNpcMapUserCmd_S() {}
+    public RemoveMapNpcMapUserCmd_S() {}
     
     private ulong _tempid;
     [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"tempid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
