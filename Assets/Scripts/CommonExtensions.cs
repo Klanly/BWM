@@ -58,17 +58,4 @@ namespace Cmd
 
 static class CommonExtensions
 {
-	#region MainUserData
-	public static Cmd.MapUserData ToMapUserData(this Cmd.MainUserData mainRole)
-	{
-		return new Cmd.MapUserData()
-		{
-			charid = mainRole.charid,
-			charname = mainRole.charname,
-			sexman = mainRole.sexman,
-			level = mainRole.level,
-			profession = mainRole.profession,
-		};
-	}
-	#endregion
 }

@@ -135,7 +135,7 @@ public class MainRole : MonoBehaviour
 		}
 		
 		BattleScene.Instance.LoadMap(table.TableMap.Select(cmd.data.mapid).path);
-		var mainRole = MainRole.Create(cmd.data.ToMapUserData());
+		var mainRole = MainRole.Create(cmd.data.userdata);
 		mainRole.Grid = cmd.pos;
 	}
 }
