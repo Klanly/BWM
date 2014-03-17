@@ -344,36 +344,50 @@ namespace Cmd
   {
     public UserLoginTokenLoginUserCmd_C() {}
     
+    private uint _gameid;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"gameid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint gameid
+    {
+      get { return _gameid; }
+      set { _gameid = value; }
+    }
+    private uint _zoneid;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"zoneid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint zoneid
+    {
+      get { return _zoneid; }
+      set { _zoneid = value; }
+    }
     private ulong _accountid;
-    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"accountid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"accountid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     public ulong accountid
     {
       get { return _accountid; }
       set { _accountid = value; }
     }
     private ulong _logintempid;
-    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"logintempid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoMember(4, IsRequired = true, Name=@"logintempid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     public ulong logintempid
     {
       get { return _logintempid; }
       set { _logintempid = value; }
     }
     private uint _timestamp;
-    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"timestamp", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoMember(5, IsRequired = true, Name=@"timestamp", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     public uint timestamp
     {
       get { return _timestamp; }
       set { _timestamp = value; }
     }
     private string _tokenmd5;
-    [global::ProtoBuf.ProtoMember(4, IsRequired = true, Name=@"tokenmd5", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::ProtoBuf.ProtoMember(6, IsRequired = true, Name=@"tokenmd5", DataFormat = global::ProtoBuf.DataFormat.Default)]
     public string tokenmd5
     {
       get { return _tokenmd5; }
       set { _tokenmd5 = value; }
     }
     private string _mid = "";
-    [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"mid", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"mid", DataFormat = global::ProtoBuf.DataFormat.Default)]
     [global::System.ComponentModel.DefaultValue("")]
     public string mid
     {
