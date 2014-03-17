@@ -30,7 +30,7 @@ public class GXGmCommand : MonoBehaviour
 			UIEventListener.Get(item.GetComponentInChildren<UIButton>().gameObject).onClick = go =>
 			{
 				Debug.Log(info.ToStringDebug());
-				BattleScene.Instance.Gui<GXChatInput>().chatInput.value = string.Format("// {0} {1}", info.method, info.example);
+				BattleScene.Instance.Gui<GXChatInput>().SetText(string.Format("//{0} {1}", info.method, info.example));
 			};
 		}
 

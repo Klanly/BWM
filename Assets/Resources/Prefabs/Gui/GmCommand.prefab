@@ -254,7 +254,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07c4de3b4b6fe9045b059ee627c100df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  arrangement: 1
+  arrangement: 0
   maxPerLine: 1
   cellWidth: 800
   cellHeight: 30
@@ -381,7 +381,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26765c61d427a26478314ae9d3deb97e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemTemplate: {fileID: 0}
+  itemTemplate: {fileID: 100006}
   scrollView: {fileID: 11400006}
 --- !u!114 &11400014
 MonoBehaviour:
