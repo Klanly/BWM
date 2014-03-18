@@ -67,35 +67,51 @@ public class LoginScene : MonoBehaviour
 	}
 
 	/// <summary>
-	/// LoginServer登陆成功，连接到GatewayServer
+	/// LoginServer下发的用于网关登陆验证的令牌
+	/// TODO: 加密保存或持久化
 	/// </summary>
-	/// <param name="cmd"></param>
-	[Execute]
-	static IEnumerator Execute(UserLoginReturnOkLoginUserCmd_S cmd)
+	private static UserLoginReturnOkLoginUserCmd_S gamewayToken;
+
+	public static IEnumerator ConnectGatewayServer()
 	{
-		foreach (var c in Net.Instance.Open(cmd.gatewayurl).AsEnumerable())
+		var token = gamewayToken;
+		foreach (var c in Net.Instance.Open(token.gatewayurl).AsEnumerable())
 			yield return c;
 		if (Net.Instance.State == WebSocket.State.Open)
 		{
 			var stamp = DateTime.Now.ToUnixTime();
 			Net.Instance.Send(new UserLoginTokenLoginUserCmd_C()
 			{
-				gameid = cmd.gameid,
-				zoneid = cmd.zoneid,
-				accountid = cmd.accountid,
-				logintempid = cmd.logintempid,
+				gameid = token.gameid,
+				zoneid = token.zoneid,
+				accountid = token.accountid,
+				logintempid = token.logintempid,
 				timestamp = stamp,
 				tokenmd5 = GX.MD5.ComputeHashString(GX.Encoding.GetBytes(
-					cmd.accountid.ToString() +
-					cmd.logintempid.ToString() +
+					token.accountid.ToString() +
+					token.logintempid.ToString() +
 					stamp.ToString() +
-					cmd.tokenid.ToString())),
+					token.tokenid.ToString())),
 				mid = SystemInfo.deviceUniqueIdentifier,
 			});
 			yield break;
 		}
 
-		MessageBox.Show("无法连接到网关服务器: " + cmd.gatewayurl);
+		MessageBox.Show("无法连接到网关服务器: " + token.gatewayurl);
+	}
+
+	/// <summary>
+	/// LoginServer登陆成功，连接到GatewayServer
+	/// </summary>
+	/// <param name="cmd"></param>
+	[Execute]
+	static IEnumerator Execute(UserLoginReturnOkLoginUserCmd_S cmd)
+	{
+		Net.Instance.Close(); // 和LoginServer断开连接
+
+		gamewayToken = cmd;
+		foreach (var c in ConnectGatewayServer().AsEnumerable())
+			yield return c;
 	}
 
 	[Execute]

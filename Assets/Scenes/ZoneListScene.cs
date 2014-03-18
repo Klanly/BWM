@@ -4,6 +4,9 @@ using GX.Net;
 using Cmd;
 using System.Linq;
 
+/// <summary>
+/// 区列表，由LoginServer下发
+/// </summary>
 public class ZoneListScene : MonoBehaviour
 {
 	public static ZoneInfoListLoginUserCmd_S ZoneList { get; private set; }
