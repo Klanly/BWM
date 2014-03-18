@@ -62,6 +62,7 @@ public class ZoneListScene : MonoBehaviour
 			gameversion = (uint)Cmd.Config.Version.Version_Game,
 			gameid = ZoneList.gameid,
 			zoneid = zoneid,
+			mid = SystemInfo.deviceUniqueIdentifier,
 		});
 	}
 

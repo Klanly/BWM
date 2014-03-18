@@ -66,16 +66,6 @@ public class LoginScene : MonoBehaviour
 			UIEventListener.Get(playButton.gameObject).onClick(playButton.gameObject);
 	}
 
-	[Execute]
-	static void Execute(AccountTokenVerifyLoginUserCmd_CS cmd)
-	{
-	}
-
-	[Execute]
-	static void Execute(UserLoginRequestLoginUserCmd_C cmd)
-	{
-	}
-
 	/// <summary>
 	/// LoginServer登陆成功，连接到GatewayServer
 	/// </summary>
