@@ -48,7 +48,10 @@ namespace Cmd
       Quest = 10,
             
       [global::ProtoBuf.ProtoEnum(Name=@"Item", Value=11)]
-      Item = 11
+      Item = 11,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"Script", Value=12)]
+      Script = 12
     }
   
 }

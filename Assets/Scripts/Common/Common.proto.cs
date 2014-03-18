@@ -163,4 +163,18 @@ namespace Cmd
       Profession_FaShi = 3
     }
   
+    [global::ProtoBuf.ProtoContract(Name=@"SceneEntryType")]
+    public enum SceneEntryType
+    {
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"SceneEntryType_Player", Value=0)]
+      SceneEntryType_Player = 0,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"SceneEntryType_Npc", Value=1)]
+      SceneEntryType_Npc = 1,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"SceneEntryType_Item", Value=2)]
+      SceneEntryType_Item = 2
+    }
+  
 }
