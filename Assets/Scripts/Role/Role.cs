@@ -76,8 +76,8 @@ public class Role : MonoBehaviour
 
 	public static Role Create(MapUserData info)
 	{
-		var item = table.TableAvatar.Select(info.profession, info.sexman);
-		var avatar = Avatar.Create(item);
+		var tbl = table.TableAvatar.Select(info.profession, info.sexman);
+		var avatar = Avatar.Create(tbl);
 		avatar.name = "Role." + info.charname;
 		avatar.transform.localScale = new Vector3(5, 5, 5);
 
@@ -90,6 +90,10 @@ public class Role : MonoBehaviour
 		return role;
 	}
 
+	/// <summary>
+	/// 角色头顶文字
+	/// </summary>
+	/// <param name="role"></param>
 	private static void CreateHeadTip(Role role)
 	{
 		var headTip = (GameObject.Instantiate(Resources.Load("Prefabs/Gui/HeadTip")) as GameObject).GetComponent<UILabel>();
