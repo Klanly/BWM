@@ -8,17 +8,20 @@ public class GXGmCommand : MonoBehaviour
 {
 	public GameObject itemTemplate;
 	public UIScrollView scrollView;
+	public GameObject closeButton;
+
+	void Start()
+	{
+		UIEventListener.Get(closeButton).onClick = go => this.gameObject.SetActive(false);
+	}
+
 
 	void SetValues(IEnumerable<GMHelpInfo> infos)
 	{
-		var canvas = scrollView.GetComponent<UIGrid>();
-
+		var canvas = scrollView.GetComponentInChildren<UIGrid>();
 		// remove all childer of canvas
 		foreach (Transform d in canvas.transform)
 			DestroyObject(d.gameObject);
-		canvas.Reposition();
-		scrollView.ResetPosition();
-
 		foreach (var i in infos)
 		{
 			var info = i;
@@ -34,13 +37,17 @@ public class GXGmCommand : MonoBehaviour
 			};
 		}
 
+		canvas.gameObject.SetActive(true);
 		canvas.Reposition();
+		scrollView.ResetPosition();
 	}
 
 	[Execute]
-	static void Execute(GMCommandListChatUserCmd_S cmd)
+	static IEnumerator Execute(GMCommandListChatUserCmd_S cmd)
 	{
 		var my = BattleScene.Instance.Gui<GXGmCommand>();
+		my.gameObject.SetActive(true);
+		yield return new WaitForEndOfFrame();
 		my.SetValues(cmd.list);
 	}
 }
