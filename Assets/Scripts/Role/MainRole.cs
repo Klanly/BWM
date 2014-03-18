@@ -47,7 +47,7 @@ public class MainRole : MonoBehaviour, INotifyPropertyChanged
 	public Pos Grid
 	{
 		get { return new Pos() { x = MapNav.GetGridX(Role.Position), y = MapNav.GetGridZ(Role.Position) }; }
-		set { Role.Position = MapNav.GetWorldPosition(value.x, value.y); }
+		set { Role.Position = MapNav.GetWorldPosition(value); }
 	}
 
 	private MainRole() { }

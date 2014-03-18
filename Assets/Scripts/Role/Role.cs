@@ -143,7 +143,7 @@ public class Role : MonoBehaviour
 			Role.All[cmd.data.charid] = role;
 		}
 
-		role.Position = BattleScene.Instance.MapNav.GetWorldPosition(cmd.pos.x, cmd.pos.y);
+		role.Position = BattleScene.Instance.MapNav.GetWorldPosition(cmd.pos);
 	}
 
 	[Execute]
@@ -155,7 +155,7 @@ public class Role : MonoBehaviour
 		Role role;
 		if (Role.All.TryGetValue(cmd.charid, out role))
 		{
-			role.TargetPosition = BattleScene.Instance.MapNav.GetWorldPosition(cmd.pos.x, cmd.pos.y);
+			role.TargetPosition = BattleScene.Instance.MapNav.GetWorldPosition(cmd.pos);
 		}
 	}
 
@@ -165,7 +165,7 @@ public class Role : MonoBehaviour
 		Role role;
 		if (Role.All.TryGetValue(cmd.charid, out role))
 		{
-			role.Position = BattleScene.Instance.MapNav.GetWorldPosition(cmd.pos.x, cmd.pos.y);
+			role.Position = BattleScene.Instance.MapNav.GetWorldPosition(cmd.pos);
 		}
 	}
 }

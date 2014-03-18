@@ -82,6 +82,11 @@ public class MapNav : MonoBehaviour
 		return (int)(worldPosition.z / gridHeight);
 	}
 
+	public Vector3 GetWorldPosition(Cmd.Pos pos)
+	{
+		return GetWorldPosition(pos.x, pos.y);
+	}
+
 	public Vector3 GetWorldPosition(int gridX, int gridZ)
 	{
 		return new Vector3(
