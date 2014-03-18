@@ -18,9 +18,10 @@ public class GXRoleHead : MonoBehaviour
 		OnMainRolePropertyChanged(this, null);
 	}
 
-	void Destory()
+	void OnDestroy()
 	{
-		MainRole.Instance.PropertyChanged -= OnMainRolePropertyChanged;
+		if (MainRole.Instance != null)
+			MainRole.Instance.PropertyChanged -= OnMainRolePropertyChanged;
 	}
 
 	void OnMainRolePropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)

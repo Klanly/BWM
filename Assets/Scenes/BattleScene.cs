@@ -109,10 +109,11 @@ public class BattleScene : MonoBehaviour
 		LoadGui("ControlBar");
 	}
 
-	void Destory()
+	void OnDestroy()
 	{
 		if (Instance == null)
 			throw new System.InvalidOperationException();
 		Instance = null;
+		Role.All.Clear();
 	}
 }

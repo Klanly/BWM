@@ -72,7 +72,7 @@ public class MainRole : MonoBehaviour, INotifyPropertyChanged
 		UpdateCamera();
 	}
 
-	void Destory()
+	void OnDestroy()
 	{
 		Instance = null;
 	}
