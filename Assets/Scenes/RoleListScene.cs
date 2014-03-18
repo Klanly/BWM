@@ -5,6 +5,9 @@ using GX.Net;
 using System.Collections.Generic;
 using System.Linq;
 
+/// <summary>
+/// 角色列表，由游戏服务器下发
+/// </summary>
 public class RoleListScene : MonoBehaviour
 {
 	public const int MaxRoleNum = 3;

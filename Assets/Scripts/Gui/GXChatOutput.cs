@@ -53,8 +53,7 @@ public class GXChatOutput : MonoBehaviour
 	static void ShowChat(CommonChatUserCmd_CS cmd)
 	{
 		var my = Object.FindObjectOfType<GXChatOutput>();
-
-		var chat = string.Format("{0}: {1}\n", cmd.charname, cmd.info);
+		var chat = FormatChatMessage(cmd);
 		my.lines.Add(chat);
 		if (my.lines.Count > MaxChatLines)
 		{
@@ -67,5 +66,25 @@ public class GXChatOutput : MonoBehaviour
 		}
 
 		my.snapshotChatMessage.text = string.Join(string.Empty, my.lines.Skip(my.lines.Count - MaxSnapshotLines).ToArray());
+	}
+
+	/// <summary>
+	/// 格式化聊天输出文本
+	/// </summary>
+	/// <remarks>
+	/// NGUI Rich Text Manual
+	/// http://www.tasharen.com/?page_id=166
+	/// </remarks>
+	/// <param name="cmd"></param>
+	/// <returns></returns>
+	private static string FormatChatMessage(CommonChatUserCmd_CS cmd)
+	{
+		switch(cmd.chatpos)
+		{
+			case CommonChatUserCmd_CS.ChatPos.ChatPos_Sys:
+				return string.Format("[ff0000][GM]{0}[-]\n", cmd.info);
+			default:
+				return string.Format("{0}: {1}\n", cmd.charname, cmd.info);
+		}
 	}
 }

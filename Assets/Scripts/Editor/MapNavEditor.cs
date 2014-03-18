@@ -3,6 +3,7 @@ using UnityEditor;
 using System.Collections;
 using System.IO;
 using System.Linq;
+using System.Collections.Generic;
 
 [CustomEditor(typeof(MapNav))]
 public class MapNavEditor : Editor
@@ -180,21 +181,70 @@ public class MapNavEditor : Editor
 
 	void Export()
 	{
-		var path = Path.Combine(Path.GetDirectoryName(Application.dataPath), "MapNav");
-		Directory.CreateDirectory(path);
-		path = EditorUtility.SaveFilePanel("Export MapNav grid info", path, Path.GetFileNameWithoutExtension(EditorApplication.currentScene), "nav");
-		if (string.IsNullOrEmpty(path))
+		GX.Editor.LogEntries.Clear();
+		var path = Path.Combine(Path.GetDirectoryName(Application.dataPath), "Common/data/map/" + Target.transform.parent.name);
+		Directory.CreateDirectory(Path.GetDirectoryName(path));
+		if (ExportTile(path + "_tile.json") == false)
 			return;
-		var config = new Config.MapNav();
-		config.gridwidth = Target.gridWidth;
-		config.gridheight = Target.gridHeight;
-		config.gridxnum = (uint)Target.gridXNum;
-		config.gridznum = (uint)Target.gridZNum;
-		config.grids.AddRange(from g in Target.grids select (uint)g);
-		using (var stream = File.OpenWrite(path))
+		if (ExportNpc(path + "_npc.json") == false)
+			return;
+		EditorUtility.DisplayDialog("MapNav Export OK", path + "_*.json", "OK");
+	}
+
+	/// <summary>
+	/// 导出阻挡信息
+	/// </summary>
+	/// <param name="path"></param>
+	/// <returns></returns>
+	private bool ExportTile(string path)
+	{
+		var json = NGUIJson.jsonEncode(new Hashtable()
 		{
-			ProtoBuf.Serializer.SerializeWithLengthPrefix(stream, config, ProtoBuf.PrefixStyle.Base128);
+			//{"tilewidth", Target.gridWidth},
+			//{"tileheight", Target.gridHeight},
+			{"tilexnum", Target.gridXNum},
+			{"tileynum", Target.gridZNum},
+			{"tiles", System.Array.ConvertAll(Target.grids, g => (uint)g)},
+		});
+		//Debug.Log(json);
+		File.WriteAllText(path, json, new System.Text.UTF8Encoding(false));
+		return true;
+	}
+
+	/// <summary>
+	/// 导出NPC摆放信息
+	/// </summary>
+	/// <param name="path"></param>
+	/// <returns></returns>
+	private bool ExportNpc(string path)
+	{
+		var host = Target.transform.parent;
+		var npc = host.GetComponentsInChildren<Npc>();
+		var db = Table.Query<table.TableNpc>().ToDictionary(i => i.id);
+
+		var error = from i in npc let id = (uint)i.baseId where db.ContainsKey(id) == false select i;
+		if(error.Any())
+		{
+			Debug.LogError("NPC表格中找不到对应id的NPC：\n" + string.Join("\n", (from i in error select string.Format("{0}\t{1}", i.baseId, i.transform.GetPath())).ToArray()));
+			return false;
 		}
-		EditorUtility.DisplayDialog("MapNav Export OK", path, "OK");
+
+		var json = NGUIJson.jsonEncode(new Hashtable()
+		{
+			{"npcs", System.Array.ConvertAll(npc, i => new Hashtable()
+				{
+					{"id", i.baseId},
+					{"name", string.IsNullOrEmpty(i.alias) ? db[(uint)i.baseId].name : i.alias},
+					{"x", Target.GetGridX(i.transform.localPosition)},
+					{"y", Target.GetGridZ(i.transform.localPosition)},
+					{"angle", (int)i.transform.localRotation.eulerAngles.y},
+					{"relivetime", i.relivetime},
+					{"rate", Mathf.Clamp(i.rate, 0, 100)},
+				})
+			},
+		});
+		//Debug.Log(json);
+		File.WriteAllText(path, json, new System.Text.UTF8Encoding(false));
+		return true;
 	}
 }

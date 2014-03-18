@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<table>
+	<output type="json-go" code="TableCountry" file="国家表.xlsx" sheet="Sheet1">
+		<key code="id" />
+		<field column="编号" code="id" type="uint32" />
+		<field column="名称" code="name" type="string" />
+		<field column="类型" code="type" type="uint32">
+			<regex>^[12]$</regex>
+		</field>
+	</output>
+</table>

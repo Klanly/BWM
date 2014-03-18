@@ -58,8 +58,9 @@ namespace GX.Net
 		public static void Send(ProtoBuf.IExtensible msg)
 		{
 			if (msg.GetType() != typeof(Cmd.TickRequestNullUserCmd_CS) &&
-				msg.GetType() != typeof(Cmd.TickReturnNullUserCmd_CS))
-				Debug.Log("[SEND]" + msg.ToStringDebug());
+				msg.GetType() != typeof(Cmd.TickReturnNullUserCmd_CS) &&
+				msg.GetType() != typeof(Cmd.UserMoveUpMoveUserCmd_C))
+				Debug.Log("<color=green>[SEND]</color>" + msg.ToStringDebug());
 
 			var buf = serizlizer.Serialize(msg);
 			Proxy.Send(buf);
@@ -84,8 +85,11 @@ namespace GX.Net
 					if (msg == null)
 						continue;
 					if (msg.GetType() != typeof(Cmd.TickRequestNullUserCmd_CS) &&
-						msg.GetType() != typeof(Cmd.TickReturnNullUserCmd_CS))
-						Debug.Log("[RECV]" + msg.ToStringDebug());
+						msg.GetType() != typeof(Cmd.TickReturnNullUserCmd_CS) &&
+						msg.GetType() != typeof(Cmd.UserMoveDownMoveUserCmd_S) &&
+						msg.GetType() != typeof(Cmd.SetUserHpSpDataUserCmd_S) &&
+						msg.GetType() != typeof(Cmd.SetUserHpDataUserCmd_S))
+						Debug.Log("<color=yellow>[RECV]</color>" + msg.ToStringDebug());
 					yield return msg;
 				}
 			}

@@ -29,12 +29,12 @@ namespace table
       get { return _name; }
       set { _name = value; }
     }
-    private string _path;
-    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"path", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public string path
+    private string _mapfile;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"mapfile", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public string mapfile
     {
-      get { return _path; }
-      set { _path = value; }
+      get { return _mapfile; }
+      set { _mapfile = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)

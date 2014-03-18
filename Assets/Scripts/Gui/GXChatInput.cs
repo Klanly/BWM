@@ -25,6 +25,17 @@ public class GXChatInput : MonoBehaviour
 			SendChat();
 	}
 
+	/// <summary>
+	/// 设置聊天输入框中的文字
+	/// </summary>
+	/// <param name="text"></param>
+	public void SetText(string text)
+	{
+		chatInput.value = text;
+		BattleScene.Instance.Gui<GXChatOutput>().Toggle(false);
+		chatInput.isSelected = true;
+	}
+
 	private void SendChat()
 	{
 		SendChat(chatInput.value.Trim());

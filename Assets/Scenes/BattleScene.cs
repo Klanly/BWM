@@ -75,10 +75,11 @@ public class BattleScene : MonoBehaviour
 	/// <summary>
 	/// 加载指定路径的地图prefab作为地表
 	/// </summary>
-	/// <param name="path"></param>
+	/// <param name="mapname"></param>
 	/// <returns>加载是否成功</returns>
-	public bool LoadMap(string path)
+	public bool LoadMap(string mapname)
 	{
+		var path = "Map/" + mapname;
 		var map = Resources.Load(path);
 		if (map == null)
 		{
@@ -108,10 +109,11 @@ public class BattleScene : MonoBehaviour
 		LoadGui("ControlBar");
 	}
 
-	void Destory()
+	void OnDestroy()
 	{
 		if (Instance == null)
 			throw new System.InvalidOperationException();
 		Instance = null;
+		Role.All.Clear();
 	}
 }

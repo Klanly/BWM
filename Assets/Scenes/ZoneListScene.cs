@@ -4,6 +4,9 @@ using GX.Net;
 using Cmd;
 using System.Linq;
 
+/// <summary>
+/// 区列表，由LoginServer下发
+/// </summary>
 public class ZoneListScene : MonoBehaviour
 {
 	public static ZoneInfoListLoginUserCmd_S ZoneList { get; private set; }
@@ -62,6 +65,7 @@ public class ZoneListScene : MonoBehaviour
 			gameversion = (uint)Cmd.Config.Version.Version_Game,
 			gameid = ZoneList.gameid,
 			zoneid = zoneid,
+			mid = SystemInfo.deviceUniqueIdentifier,
 		});
 	}
 

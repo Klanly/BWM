@@ -66,14 +66,38 @@ public class LoginScene : MonoBehaviour
 			UIEventListener.Get(playButton.gameObject).onClick(playButton.gameObject);
 	}
 
-	[Execute]
-	static void Execute(AccountTokenVerifyLoginUserCmd_CS cmd)
-	{
-	}
+	/// <summary>
+	/// LoginServer下发的用于网关登陆验证的令牌
+	/// TODO: 加密保存或持久化
+	/// </summary>
+	private static UserLoginReturnOkLoginUserCmd_S gamewayToken;
 
-	[Execute]
-	static void Execute(UserLoginRequestLoginUserCmd_C cmd)
+	public static IEnumerator ConnectGatewayServer()
 	{
+		var token = gamewayToken;
+		foreach (var c in Net.Instance.Open(token.gatewayurl).AsEnumerable())
+			yield return c;
+		if (Net.Instance.State == WebSocket.State.Open)
+		{
+			var stamp = DateTime.Now.ToUnixTime();
+			Net.Instance.Send(new UserLoginTokenLoginUserCmd_C()
+			{
+				gameid = token.gameid,
+				zoneid = token.zoneid,
+				accountid = token.accountid,
+				logintempid = token.logintempid,
+				timestamp = stamp,
+				tokenmd5 = GX.MD5.ComputeHashString(GX.Encoding.GetBytes(
+					token.accountid.ToString() +
+					token.logintempid.ToString() +
+					stamp.ToString() +
+					token.tokenid.ToString())),
+				mid = SystemInfo.deviceUniqueIdentifier,
+			});
+			yield break;
+		}
+
+		MessageBox.Show("无法连接到网关服务器: " + token.gatewayurl);
 	}
 
 	/// <summary>
@@ -83,27 +107,11 @@ public class LoginScene : MonoBehaviour
 	[Execute]
 	static IEnumerator Execute(UserLoginReturnOkLoginUserCmd_S cmd)
 	{
-		foreach (var c in Net.Instance.Open(cmd.gatewayurl).AsEnumerable())
-			yield return c;
-		if (Net.Instance.State == WebSocket.State.Open)
-		{
-			var stamp = DateTime.Now.ToUnixTime();
-			Net.Instance.Send(new UserLoginTokenLoginUserCmd_C()
-			{
-				accountid = cmd.accountid,
-				logintempid = cmd.logintempid,
-				timestamp = stamp,
-				tokenmd5 = GX.MD5.ComputeHashString(GX.Encoding.GetBytes(
-					cmd.accountid.ToString() +
-					cmd.logintempid.ToString() +
-					stamp.ToString() +
-					cmd.tokenid.ToString())),
-				mid = SystemInfo.deviceUniqueIdentifier,
-			});
-			yield break;
-		}
+		Net.Instance.Close(); // 和LoginServer断开连接
 
-		MessageBox.Show("无法连接到网关服务器: " + cmd.gatewayurl);
+		gamewayToken = cmd;
+		foreach (var c in ConnectGatewayServer().AsEnumerable())
+			yield return c;
 	}
 
 	[Execute]

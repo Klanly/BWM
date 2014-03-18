@@ -93,7 +93,11 @@ namespace GX.Net
 				}
 				catch (Exception ex)
 				{
-					UnityEngine.Debug.LogWarning("Can't deserialize message type " + messageType + ", " + ex.Message);
+					var type = (from i in messageTypeTable where i.Value == messageType select i.Key).FirstOrDefault();
+					UnityEngine.Debug.LogWarning(string.Format("Can't deserialize message type {0}{1}, {2}",
+						type == null ? string.Empty : "<color=orange>" + type.FullName + "</color> ",
+						"<color=yellow>" + messageType + "</color>", 
+						ex.Message));
 					return null;
 				}
 			}
