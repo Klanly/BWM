@@ -170,22 +170,29 @@ namespace Cmd
   {
     public AddMapNpcDataAndPosMapUserCmd_S() {}
     
+    private uint _baseid;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"baseid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint baseid
+    {
+      get { return _baseid; }
+      set { _baseid = value; }
+    }
     private Cmd.MapNpcData _data;
-    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"data", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"data", DataFormat = global::ProtoBuf.DataFormat.Default)]
     public Cmd.MapNpcData data
     {
       get { return _data; }
       set { _data = value; }
     }
     private uint _mapid;
-    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"mapid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"mapid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     public uint mapid
     {
       get { return _mapid; }
       set { _mapid = value; }
     }
     private Cmd.Pos _pos;
-    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"pos", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::ProtoBuf.ProtoMember(4, IsRequired = true, Name=@"pos", DataFormat = global::ProtoBuf.DataFormat.Default)]
     public Cmd.Pos pos
     {
       get { return _pos; }
