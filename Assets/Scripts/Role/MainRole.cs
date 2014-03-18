@@ -69,45 +69,12 @@ public class MainRole : MonoBehaviour, INotifyPropertyChanged
 	{
 		Instance = this;
 		cameraMain = GameObject.Find("CameraMain").GetComponent<Camera>();
+		UpdateCamera();
 	}
 
 	void Destory()
 	{
 		Instance = null;
-	}
-
-	// Update is called once per frame
-	void Update()
-	{
-		// 设置主角的移动
-		// keyboard
-		float v = Input.GetAxisRaw("Vertical");
-		float h = Input.GetAxisRaw("Horizontal");
-
-		Vector3 oldPosition = Role.Position;
-		oldPosition.x += h * Role.speedMainRole * Time.deltaTime;
-		oldPosition.z += v * Role.speedMainRole * Time.deltaTime;
-		Role.Position = oldPosition;
-
-		// 触摸屏
-		Vector3? screenPoint = null;
-		if (Input.touchCount > 0 && (Input.GetTouch(0).phase == TouchPhase.Began || Input.GetTouch(0).phase == TouchPhase.Moved))
-			screenPoint = Input.GetTouch(0).position;
-
-		// mouse
-		if (Input.GetMouseButton(0))
-			screenPoint = Input.mousePosition;
-
-		if (screenPoint != null)
-		{
-			var ray = Camera.main.ScreenPointToRay(screenPoint.Value);
-			Collider terrain = MapNav.gameObject.collider;
-			RaycastHit hit;
-			if (terrain.Raycast(ray, out hit, 1000))
-			{
-				Role.TargetPosition = hit.point;
-			}
-		}
 	}
 
 	void OnPositionChanged(Role sender)
