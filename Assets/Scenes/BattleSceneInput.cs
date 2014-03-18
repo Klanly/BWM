@@ -12,6 +12,7 @@ public class BattleSceneInput : MonoBehaviour
 {
 	public Role Role { get { return MainRole.Instance.Role; } }
 	public MapNav MapNav { get { return BattleScene.Instance.MapNav; } }
+	private bool pressing = false;
 
 	void Start()
 	{
@@ -30,14 +31,20 @@ public class BattleSceneInput : MonoBehaviour
 	/// <param name="isDown"></param>
 	void OnPress(bool isDown)
 	{
-		if (isDown == false)
-			return;
-		var ray = Camera.main.ScreenPointToRay(new Vector3(UICamera.lastTouchPosition.x, UICamera.lastTouchPosition.y));
-		Collider terrain = MapNav.gameObject.collider;
-		RaycastHit hit;
-		if (terrain.Raycast(ray, out hit, 1000))
+		pressing = isDown;
+	}
+
+	void Update()
+	{
+		if (pressing)
 		{
-			Role.TargetPosition = hit.point;
+			var ray = Camera.main.ScreenPointToRay(new Vector3(UICamera.lastTouchPosition.x, UICamera.lastTouchPosition.y));
+			Collider terrain = MapNav.gameObject.collider;
+			RaycastHit hit;
+			if (terrain.Raycast(ray, out hit, 1000))
+			{
+				Role.TargetPosition = hit.point;
+			}
 		}
 	}
 
