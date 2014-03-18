@@ -58,29 +58,43 @@ namespace Cmd
       get { return _pos; }
       set { _pos = value; }
     }
+    private uint _homeland;
+    [global::ProtoBuf.ProtoMember(10, IsRequired = true, Name=@"homeland", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint homeland
+    {
+      get { return _homeland; }
+      set { _homeland = value; }
+    }
+    private uint _countryid;
+    [global::ProtoBuf.ProtoMember(11, IsRequired = true, Name=@"countryid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint countryid
+    {
+      get { return _countryid; }
+      set { _countryid = value; }
+    }
     private uint _mapid;
-    [global::ProtoBuf.ProtoMember(10, IsRequired = true, Name=@"mapid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoMember(12, IsRequired = true, Name=@"mapid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     public uint mapid
     {
       get { return _mapid; }
       set { _mapid = value; }
     }
     private int _hp;
-    [global::ProtoBuf.ProtoMember(11, IsRequired = true, Name=@"hp", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoMember(13, IsRequired = true, Name=@"hp", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     public int hp
     {
       get { return _hp; }
       set { _hp = value; }
     }
     private int _sp;
-    [global::ProtoBuf.ProtoMember(12, IsRequired = true, Name=@"sp", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoMember(14, IsRequired = true, Name=@"sp", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     public int sp
     {
       get { return _sp; }
       set { _sp = value; }
     }
     private long _exp;
-    [global::ProtoBuf.ProtoMember(13, IsRequired = true, Name=@"exp", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoMember(15, IsRequired = true, Name=@"exp", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     public long exp
     {
       get { return _exp; }
