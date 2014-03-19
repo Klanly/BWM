@@ -5,7 +5,6 @@ using Cmd;
 using System.Collections.Generic;
 using System;
 
-[RequireComponent(typeof(Entity))]
 public class Role : MonoBehaviour
 {
 	public static Dictionary<ulong, Role> All { get; private set; }

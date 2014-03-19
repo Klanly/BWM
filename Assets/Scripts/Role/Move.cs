@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-[RequireComponent(typeof(Entity))]
 public class Move : MonoBehaviour {
 
 	private MapNav MapNav { get { return BattleScene.Instance.MapNav; } }

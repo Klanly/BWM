@@ -5,7 +5,6 @@ using GX;
 using GX.Net;
 using System.ComponentModel;
 
-[RequireComponent(typeof(Entity))]
 public class MainRole : MonoBehaviour, INotifyPropertyChanged
 {
 	/// <summary>
@@ -46,7 +45,7 @@ public class MainRole : MonoBehaviour, INotifyPropertyChanged
 	public static MainRole Create(MapUserData info)
 	{
 		var role = Role.Create(info);
-		role.gameObject.name = "Main." + role.gameObject.name;
+		role.gameObject.name = "Main" + role.gameObject.name;
 
 		var mainRole = role.gameObject.AddComponent<MainRole>();
 		mainRole.Role = role;
