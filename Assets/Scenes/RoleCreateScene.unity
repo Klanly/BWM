@@ -399,7 +399,7 @@ MonoBehaviour:
   mPivot: 8
   mWidth: 295
   mHeight: 366
-  mDepth: 0
+  mDepth: 5
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
@@ -1260,8 +1260,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 112, y: 117, z: 0}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 112, y: 115, z: 0}
+  m_Center: {x: 0, y: -1, z: 0}
 --- !u!114 &459644646
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1317,7 +1317,7 @@ MonoBehaviour:
   mPivot: 4
   mWidth: 112
   mHeight: 117
-  mDepth: 1
+  mDepth: 6
   autoResizeBoxCollider: 1
   hideIfOffScreen: 0
   keepAspectRatio: 0
@@ -1751,7 +1751,7 @@ MonoBehaviour:
   mPivot: 4
   mWidth: 112
   mHeight: 114
-  mDepth: 1
+  mDepth: 6
   autoResizeBoxCollider: 1
   hideIfOffScreen: 0
   keepAspectRatio: 0
@@ -3027,8 +3027,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 112, y: 112, z: 0}
-  m_Center: {x: 0, y: -1, z: 0}
+  m_Size: {x: 112, y: 113, z: 0}
+  m_Center: {x: 0, y: .5, z: 0}
 --- !u!114 &1167296226
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3084,7 +3084,7 @@ MonoBehaviour:
   mPivot: 4
   mWidth: 112
   mHeight: 114
-  mDepth: 1
+  mDepth: 6
   autoResizeBoxCollider: 1
   hideIfOffScreen: 0
   keepAspectRatio: 0
@@ -4923,7 +4923,7 @@ Camera:
     serializedVersion: 2
     x: -.000154256821
     y: -.000271081924
-    width: .999818325
+    width: .999818385
     height: 1.0025816
   near clip plane: .300000012
   far clip plane: 1000
