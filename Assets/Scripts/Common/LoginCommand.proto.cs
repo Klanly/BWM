@@ -38,7 +38,10 @@ namespace Cmd
       UserLoginReturnOkLoginUserCmd_S = 6,
             
       [global::ProtoBuf.ProtoEnum(Name=@"UserLoginTokenLoginUserCmd_C", Value=7)]
-      UserLoginTokenLoginUserCmd_C = 7
+      UserLoginTokenLoginUserCmd_C = 7,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"ClintLogUrlLoginUserCmd_S", Value=8)]
+      ClintLogUrlLoginUserCmd_S = 8
     }
   
     private global::ProtoBuf.IExtension extensionObject;
@@ -393,6 +396,30 @@ namespace Cmd
     {
       get { return _mid; }
       set { _mid = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"ClintLogUrlLoginUserCmd_S")]
+  public partial class ClintLogUrlLoginUserCmd_S : global::ProtoBuf.IExtensible
+  {
+    public ClintLogUrlLoginUserCmd_S() {}
+    
+    private string _loglevel;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"loglevel", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public string loglevel
+    {
+      get { return _loglevel; }
+      set { _loglevel = value; }
+    }
+    private string _logurl;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"logurl", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public string logurl
+    {
+      get { return _logurl; }
+      set { _logurl = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
