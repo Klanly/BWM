@@ -5,6 +5,7 @@ using GX.Net;
 using System.Collections.Generic;
 using System.Linq;
 
+[RequireComponent(typeof(Entity))]
 public class Npc : MonoBehaviour
 {
 #if UNITY_EDITOR
@@ -31,21 +32,9 @@ public class Npc : MonoBehaviour
 	public table.TableNpc TableInfo { get; private set; }
 
 	private MapNav MapNav { get { return BattleScene.Instance.MapNav; } }
+	private Entity entity;
 	private Animator animator;
-
-	public Vector3 Position
-	{
-		get { return this.transform.position; }
-		set
-		{
-			if (MapNav != null)
-			{
-				value.x = Mathf.Clamp(value.x, 0.5f, MapNav.gridWidth * MapNav.gridXNum - 0.5f);
-				value.z = Mathf.Clamp(value.z, 1.0f, MapNav.gridHeight * MapNav.gridZNum - 4.0f);
-			}
-			this.transform.position = value;
-		}
-	}
+	private Move move;
 
 	static Npc()
 	{
@@ -70,6 +59,8 @@ public class Npc : MonoBehaviour
 		avatar.transform.localScale = new Vector3(5, 5, 5);
 
 		var npc = avatar.AddComponent<Npc>();
+		npc.entity = avatar.AddComponent<Entity>();
+		npc.move = avatar.AddComponent<Move>();
 		npc.animator = avatar.GetComponent<Animator>();
 		npc.ServerInfo = info;
 		npc.TableInfo = tbl;
@@ -108,6 +99,6 @@ public class Npc : MonoBehaviour
 			Npc.All[cmd.data.tempid] = npc;
 		}
 
-		npc.Position = BattleScene.Instance.MapNav.GetWorldPosition(cmd.pos);
+		npc.entity.Grid = cmd.pos;
 	}
 }

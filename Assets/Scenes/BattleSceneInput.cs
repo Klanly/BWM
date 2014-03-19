@@ -10,7 +10,7 @@ using System.Collections;
 /// </remarks>
 public class BattleSceneInput : MonoBehaviour
 {
-	public Role Role { get { return MainRole.Instance.Role; } }
+	public MainRole mainRole { get { return MainRole.Instance; } }
 	public MapNav MapNav { get { return BattleScene.Instance.MapNav; } }
 	private bool pressing = false;
 
@@ -43,7 +43,7 @@ public class BattleSceneInput : MonoBehaviour
 			RaycastHit hit;
 			if (terrain.Raycast(ray, out hit, 1000))
 			{
-				Role.TargetPosition = hit.point;
+				mainRole.move.TargetPosition = hit.point;
 			}
 		}
 	}
@@ -58,16 +58,16 @@ public class BattleSceneInput : MonoBehaviour
 		switch(key)
 		{
 			case KeyCode.UpArrow:
-				Role.TargetPosition = Role.Position + new Vector3(0, 0, +distance);
+				mainRole.move.TargetPosition = mainRole.entity.Position + new Vector3(0, 0, +distance);
 				break;
 			case KeyCode.DownArrow:
-				Role.TargetPosition = Role.Position + new Vector3(0, 0, -distance);
+				mainRole.move.TargetPosition = mainRole.entity.Position + new Vector3(0, 0, -distance);
 				break;
 			case KeyCode.LeftArrow:
-				Role.TargetPosition = Role.Position + new Vector3(-distance, 0, 0);
+				mainRole.move.TargetPosition = mainRole.entity.Position + new Vector3(-distance, 0, 0);
 				break;
 			case KeyCode.RightArrow:
-				Role.TargetPosition = Role.Position + new Vector3(+distance, 0, 0);
+				mainRole.move.TargetPosition = mainRole.entity.Position + new Vector3(+distance, 0, 0);
 				break;
 			default:
 				break;
