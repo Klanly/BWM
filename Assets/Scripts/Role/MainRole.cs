@@ -5,6 +5,7 @@ using GX;
 using GX.Net;
 using System.ComponentModel;
 
+[RequireComponent(typeof(Entity))]
 public class MainRole : MonoBehaviour, INotifyPropertyChanged
 {
 	/// <summary>
@@ -33,22 +34,12 @@ public class MainRole : MonoBehaviour, INotifyPropertyChanged
 
 	public Role Role { get; private set; }
 	private MapNav MapNav { get { return BattleScene.Instance.MapNav; } }
-
-	public float distanceCameraToRole = 25.0f;
-	public float heightCameraLookAt = 0.5f;
-
-	private Camera cameraMain;
+	public Entity entity;
+	public Animator animator;
+	public Move move;
+	public CameraFollow cameraFollow;
 
 	private Pos lastGird = new Pos();
-
-	/// <summary>
-	/// 主角逻辑格子位置
-	/// </summary>
-	public Pos Grid
-	{
-		get { return new Pos() { x = MapNav.GetGridX(Role.Position), y = MapNav.GetGridZ(Role.Position) }; }
-		set { Role.Position = MapNav.GetWorldPosition(value); }
-	}
 
 	private MainRole() { }
 
@@ -59,7 +50,14 @@ public class MainRole : MonoBehaviour, INotifyPropertyChanged
 
 		var mainRole = role.gameObject.AddComponent<MainRole>();
 		mainRole.Role = role;
-		role.PositionChanged += mainRole.OnPositionChanged;
+		mainRole.entity = role.gameObject.GetComponent<Entity>();
+		mainRole.animator = role.gameObject.GetComponent<Animator>();
+		mainRole.move = role.gameObject.GetComponent<Move>();
+
+		mainRole.cameraFollow = role.gameObject.AddComponent<CameraFollow>();
+		mainRole.cameraFollow.UpdateCamera();
+
+		mainRole.entity.PositionChanged += mainRole.OnPositionChanged;
 		return mainRole;
 	}
 
@@ -68,8 +66,6 @@ public class MainRole : MonoBehaviour, INotifyPropertyChanged
 	void Start()
 	{
 		Instance = this;
-		cameraMain = GameObject.Find("CameraMain").GetComponent<Camera>();
-		UpdateCamera();
 	}
 
 	void OnDestroy()
@@ -77,35 +73,16 @@ public class MainRole : MonoBehaviour, INotifyPropertyChanged
 		Instance = null;
 	}
 
-	void OnPositionChanged(Role sender)
+	void OnPositionChanged(Entity sender)
 	{
-		UpdateCamera();
-		var cur = Grid;
+		cameraFollow.UpdateCamera();
+
+		var cur = entity.Grid;
 		if (cur != lastGird)
 		{
 			Net.Instance.Send(new UserMoveUpMoveUserCmd_C() { pos = cur });
 			lastGird = cur;
 		}
-	}
-
-	/// <summary>
-	/// 根据主角位置设置照相机位置
-	/// </summary>
-	private void UpdateCamera()
-	{
-		if (cameraMain == null || MapNav == null)
-			return;
-		var targetCenter = this.transform.position;
-		targetCenter.z += heightCameraLookAt;
-
-		var dx = cameraMain.orthographicSize * Screen.width / Screen.height;
-		var dz = cameraMain.orthographicSize / Mathf.Sin(cameraMain.transform.rotation.eulerAngles.x * Mathf.Deg2Rad) + heightCameraLookAt;
-
-		targetCenter.x = Mathf.Clamp(targetCenter.x, dx, MapNav.transform.localScale.x - dx);
-		targetCenter.z = Mathf.Clamp(targetCenter.z, dz, MapNav.transform.localScale.y - dz);
-
-		var pos = targetCenter + cameraMain.transform.rotation * Vector3.back * distanceCameraToRole;
-		cameraMain.transform.position = pos;
 	}
 
 	#region INotifyPropertyChanged Members
@@ -133,7 +110,7 @@ public class MainRole : MonoBehaviour, INotifyPropertyChanged
 
 		BattleScene.Instance.LoadMap(table.TableMap.Select(cmd.mapid).mapfile);
 		var mainRole = MainRole.Create(cmd.data.userdata);
-		mainRole.Grid = cmd.pos;
+		mainRole.entity.Grid = cmd.pos;
 		mainRole.level = cmd.data.level;
 	}
 

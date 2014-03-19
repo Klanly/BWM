@@ -5,67 +5,17 @@ using Cmd;
 using System.Collections.Generic;
 using System;
 
+[RequireComponent(typeof(Entity))]
 public class Role : MonoBehaviour
 {
 	public static Dictionary<ulong, Role> All { get; private set; }
 
 	public MapUserData ServerInfo { get; private set; }
-	public float speedMainRole = 5.0f;
+
 	private MapNav MapNav { get { return BattleScene.Instance.MapNav; } }
-
+	private Entity entity;
 	private Animator animator;
-
-	/// <summary>
-	/// 角色移动事件
-	/// </summary>
-	public event Action<Role> PositionChanged;
-
-	/// <summary>
-	/// 角色世界坐标位置
-	/// </summary>
-	public Vector3 Position
-	{
-		get { return this.transform.position; }
-		set
-		{
-			if (MapNav != null)
-			{
-				value.x = Mathf.Clamp(value.x, 0.5f, MapNav.gridWidth * MapNav.gridXNum - 0.5f);
-				value.z = Mathf.Clamp(value.z, 1.0f, MapNav.gridHeight * MapNav.gridZNum - 4.0f);
-			}
-			this.transform.position = value;
-
-			if (PositionChanged != null)
-				PositionChanged(this);
-		}
-	}
-
-	private Vector3 targetPosition;
-	/// <summary>
-	/// 行走目标点
-	/// </summary>
-	/// <value>The target position.</value>
-	public Vector3 TargetPosition
-	{
-		get { return targetPosition; }
-		set
-		{
-			if (MapNav != null)
-			{
-				value.x = Mathf.Clamp(value.x, 0, MapNav.gridWidth * MapNav.gridXNum);
-				value.z = Mathf.Clamp(value.z, 0, MapNav.gridHeight * MapNav.gridZNum);
-			}
-			targetPosition = value;
-			if (value != Vector3.zero)
-			{
-				if (animator != null && animator.GetFloat("speed") == 0.0f)
-					animator.SetFloat("speed", speedMainRole);
-
-				var relativePos = TargetPosition - Position;
-				this.transform.rotation = Quaternion.LookRotation(relativePos);
-			}
-		}
-	}
+	private Move move;
 
 	static Role()
 	{
@@ -82,6 +32,8 @@ public class Role : MonoBehaviour
 		avatar.transform.localScale = new Vector3(5, 5, 5);
 
 		var role = avatar.AddComponent<Role>();
+		role.entity = avatar.AddComponent<Entity>();
+		role.move = avatar.AddComponent<Move>();
 		role.animator = avatar.GetComponent<Animator>();
 		role.ServerInfo = info;
 
@@ -105,34 +57,6 @@ public class Role : MonoBehaviour
 		headTip.topAnchor.absolute = headTip.bottomAnchor.absolute + 30;
 	}
 
-	void Update()
-	{
-		if (TargetPosition != Vector3.zero)
-		{
-			Vector3 vDelta = TargetPosition - Position;
-			float fDeltaLen = vDelta.magnitude;
-			vDelta.Normalize();
-
-			Vector3 vOldPosition = Position;
-			float fMoveLen = speedMainRole * Time.deltaTime;
-			bool bFinish = false;
-			if (fMoveLen >= fDeltaLen)
-			{
-				fMoveLen = fDeltaLen;
-				bFinish = true;
-			}
-
-			Position = vOldPosition + vDelta * fMoveLen;
-			if (bFinish)
-			{
-				TargetPosition = Vector3.zero;
-				var oldRotate = this.transform.rotation;
-				animator.SetFloat("speed", 0.0f);
-				this.transform.rotation = oldRotate;
-			}
-		}
-	}
-
 	[Execute]
 	static void Execute(AddMapUserDataAndPosMapUserCmd_S cmd)
 	{
@@ -147,7 +71,7 @@ public class Role : MonoBehaviour
 			Role.All[cmd.data.charid] = role;
 		}
 
-		role.Position = BattleScene.Instance.MapNav.GetWorldPosition(cmd.pos);
+		role.entity.Grid = cmd.pos;
 	}
 
 	[Execute]
@@ -159,7 +83,7 @@ public class Role : MonoBehaviour
 		Role role;
 		if (Role.All.TryGetValue(cmd.charid, out role))
 		{
-			role.TargetPosition = BattleScene.Instance.MapNav.GetWorldPosition(cmd.pos);
+			role.move.TargetPosition = BattleScene.Instance.MapNav.GetWorldPosition(cmd.pos);
 		}
 	}
 
@@ -169,7 +93,7 @@ public class Role : MonoBehaviour
 		Role role;
 		if (Role.All.TryGetValue(cmd.charid, out role))
 		{
-			role.Position = BattleScene.Instance.MapNav.GetWorldPosition(cmd.pos);
+			role.entity.Position = BattleScene.Instance.MapNav.GetWorldPosition(cmd.pos);
 		}
 	}
 }
