@@ -90,7 +90,7 @@ public class BattleScene : MonoBehaviour
 		if (terrain != null)
 			GameObject.Destroy(terrain);
 		terrain = GameObject.Instantiate(map) as GameObject;
-		terrain.name = path;
+		terrain.name = path.Replace('/', '.');
 		MapNav = UnityEngine.Object.FindObjectOfType<MapNav>();
 		return true;
 	}
