@@ -52,9 +52,7 @@ public class MainRole : MonoBehaviour, INotifyPropertyChanged
 		mainRole.entity = role.gameObject.GetComponent<Entity>();
 		mainRole.animator = role.gameObject.GetComponent<Animator>();
 		mainRole.move = role.gameObject.GetComponent<Move>();
-
 		mainRole.cameraFollow = role.gameObject.AddComponent<CameraFollow>();
-		mainRole.cameraFollow.UpdateCamera();
 
 		mainRole.entity.PositionChanged += mainRole.OnPositionChanged;
 		return mainRole;
