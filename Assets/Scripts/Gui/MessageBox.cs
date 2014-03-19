@@ -29,6 +29,7 @@ public class MessageBox : MonoBehaviour
 		var my = (GameObject.Instantiate(Resources.Load("Prefabs/Gui/MessageBox")) as GameObject).GetComponent<MessageBox>();
 		my.transform.parent = GameObject.Find("UI Root").transform;
 		my.transform.localScale = Vector3.one;
+		my.transform.position = Vector3.zero;
 		NGUITools.BringForward(my.gameObject);
 
 		my.messageBoxTitle.text = title ?? string.Empty;
