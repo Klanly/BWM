@@ -421,6 +421,13 @@ namespace Cmd
       get { return _logurl; }
       set { _logurl = value; }
     }
+    private bool _distinct;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"distinct", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public bool distinct
+    {
+      get { return _distinct; }
+      set { _distinct = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
