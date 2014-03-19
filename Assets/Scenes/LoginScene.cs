@@ -33,25 +33,27 @@ public class LoginScene : MonoBehaviour
 	}
 
 	/// <summary>
-	/// 连接到LoginServer
+	/// 连接到LoginServer，并发送指定的消息
 	/// </summary>
 	/// <returns></returns>
 	IEnumerator ConnectLoginServer(ProtoBuf.IExtensible cmd)
 	{
-		foreach (var c in Net.Instance.Open("ws://112.65.197.72:7000/shen/user").AsEnumerable())
-			yield return c;
-		if (Net.Instance.State == WebSocket.State.Open)
+		var remotes = new string[]
 		{
-			Net.Instance.Send(cmd);
-			yield break;
-		}
+			"ws://14.17.104.56:7000/shen/user", // 广东佛山
+			"ws://112.65.197.72:7000/shen/user", // 松江机房
+			"ws://192.168.85.71:7000/shen/user", // 公司本地
+		};
 
-		foreach (var c in Net.Instance.Open("ws://192.168.85.71:7000/shen/user").AsEnumerable())
-			yield return c;
-		if (Net.Instance.State == WebSocket.State.Open)
+		foreach (var url in remotes)
 		{
-			Net.Instance.Send(cmd);
-			yield break;
+			foreach (var c in Net.Instance.Open(url).AsEnumerable())
+				yield return c;
+			if (Net.Instance.State == WebSocket.State.Open)
+			{
+				Net.Instance.Send(cmd);
+				yield break;
+			}
 		}
 
 		MessageBox.Show("无法连接到登陆服务器");
