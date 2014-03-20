@@ -14,6 +14,16 @@ public class ItemManager : IEnumerable<SaveItem>
 	public SaveItem this[ItemLocation loc] { get { return this[loc.type, loc.index]; } }
 	public SaveItem this[ItemLocation.PackageType type, int index] { get { return items.Find(i => i.loc.type == type && i.loc.index == index); } }
 
+	/// <summary>
+	/// 得到指定包裹类型的道具，并按照位置下标排序
+	/// </summary>
+	/// <param name="package"></param>
+	/// <returns></returns>
+	public IEnumerable<SaveItem> Select(ItemLocation.PackageType package)
+	{
+		return from i in items where i.loc.type == package orderby i.loc.index select i;
+	}
+
 	protected bool Remove(ulong thisid)
 	{
 		var index = items.FindIndex(i => i.thisid == thisid);
@@ -69,7 +79,7 @@ public class ItemManager : IEnumerable<SaveItem>
 
 	public override string ToString()
 	{
-		return string.Join("\n", this.Select(i => i.ToString()).ToArray());
+		return string.Join("\n", this.OrderBy(i => i.loc.type).ThenBy(i => i.loc.index).Select(i => i.ToString()).ToArray());
 	}
 
 	#region IEnumerable<SaveItem> 成员
@@ -94,7 +104,7 @@ public class ItemManager : IEnumerable<SaveItem>
 	[Execute]
 	static void Execute(ReplaceItemListItemUserCmd_S cmd)
 	{
-		ItemManager.Instance.items.Clear();
+		ItemManager.Instance = new ItemManager();
 		ItemManager.Instance.items.AddRange(cmd.itemlist);
 	}
 
