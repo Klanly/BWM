@@ -218,7 +218,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0ad6f8d2c1e96246867b1095e986840, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  uiRoot: {fileID: 256517000}
 --- !u!114 &256517004
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -255,10 +254,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefabs:
-  - {fileID: 100008, guid: f98eb6ece3fc7184c96020237935aa0c, type: 2}
-  - {fileID: 100022, guid: 9e6aa9ab33e252c4ba5f757d9e47ca8b, type: 2}
-  - {fileID: 100004, guid: e88436e25da17ac40b1e15f339f71e71, type: 2}
   - {fileID: 100008, guid: 102820f8f2da1f24f9d66df304ae4ab8, type: 2}
+  - {fileID: 100004, guid: e88436e25da17ac40b1e15f339f71e71, type: 2}
+  - {fileID: 100022, guid: 9e6aa9ab33e252c4ba5f757d9e47ca8b, type: 2}
+  - {fileID: 100008, guid: f98eb6ece3fc7184c96020237935aa0c, type: 2}
+  - {fileID: 100098, guid: df82b101cbf4a7545a9711ed03d1695e, type: 2}
 --- !u!1 &689492968
 GameObject:
   m_ObjectHideFlags: 0

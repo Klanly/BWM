@@ -251,13 +251,14 @@ GameObject:
   - 114: {fileID: 11400160}
   - 54: {fileID: 5400000}
   - 114: {fileID: 11400000}
+  - 114: {fileID: 11400002}
   m_Layer: 13
   m_Name: RoleInfo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &100100
 GameObject:
   m_ObjectHideFlags: 1
@@ -958,6 +959,18 @@ MonoBehaviour:
   prefabs:
   - {fileID: 100000, guid: 15ef261409e944c4c8c187e5dd9b8930, type: 2}
   - {fileID: 100000, guid: 8fa684b12e7afcc4d9e0e3b441cf3a14, type: 2}
+--- !u!114 &11400002
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100098}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07c32d7d30ffd3748bf3160ff39c426e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  closeButton: {fileID: 11400252}
 --- !u!114 &11400044
 MonoBehaviour:
   m_ObjectHideFlags: 1
