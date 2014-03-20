@@ -9,4 +9,8 @@ public class RoleInfo : MonoBehaviour
 	{
 		UIEventListener.Get(closeButton.gameObject).onClick = go => this.gameObject.SetActive(false);
 	}
+	void OnEnable()
+	{
+		NGUITools.BringForward(this.gameObject);
+	}
 }
