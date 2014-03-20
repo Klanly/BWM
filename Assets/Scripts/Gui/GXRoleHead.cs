@@ -12,8 +12,10 @@ public class GXRoleHead : MonoBehaviour
 	public UILabel otherName;
 	public UILabel otherLevel;
 
-	void Start()
+	IEnumerator Start()
 	{
+		while (MainRole.Instance == null)
+			yield return new WaitForEndOfFrame();
 		MainRole.Instance.PropertyChanged += OnMainRolePropertyChanged;
 		OnMainRolePropertyChanged(this, null);
 	}
@@ -21,7 +23,9 @@ public class GXRoleHead : MonoBehaviour
 	void OnDestroy()
 	{
 		if (MainRole.Instance != null)
+		{
 			MainRole.Instance.PropertyChanged -= OnMainRolePropertyChanged;
+		}
 	}
 
 	void OnMainRolePropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)

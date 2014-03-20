@@ -104,6 +104,8 @@ public class MainRole : MonoBehaviour, INotifyPropertyChanged
 		{
 			yield return Application.LoadLevelAsync("BattleScene");
 		}
+		while (BattleScene.Instance == null)
+			yield return new WaitForEndOfFrame();
 
 		BattleScene.Instance.LoadMap(table.TableMap.Select(cmd.mapid).mapfile);
 		var mainRole = MainRole.Create(cmd.data.userdata);
