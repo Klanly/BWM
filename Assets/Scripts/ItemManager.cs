@@ -14,11 +14,6 @@ public class ItemManager : IEnumerable<SaveItem>
 	public SaveItem this[ItemLocation loc] { get { return this[loc.type, loc.index]; } }
 	public SaveItem this[ItemLocation.PackageType type, int index] { get { return items.Find(i => i.loc.type == type && i.loc.index == index); } }
 
-	public void Clear()
-	{
-		items.Clear();
-	}
-
 	protected bool Remove(ulong thisid)
 	{
 		var index = items.FindIndex(i => i.thisid == thisid);
@@ -97,8 +92,9 @@ public class ItemManager : IEnumerable<SaveItem>
 
 	#region 网络消息处理
 	[Execute]
-	static void Execute(AddItemListItemUserCmd_S cmd)
+	static void Execute(ReplaceItemListItemUserCmd_S cmd)
 	{
+		ItemManager.Instance.items.Clear();
 		ItemManager.Instance.items.AddRange(cmd.itemlist);
 	}
 

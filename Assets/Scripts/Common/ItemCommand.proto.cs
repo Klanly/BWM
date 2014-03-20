@@ -24,8 +24,8 @@ namespace Cmd
       [global::ProtoBuf.ProtoEnum(Name=@"AddItemItemUserCmd_S", Value=1)]
       AddItemItemUserCmd_S = 1,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"AddItemListItemUserCmd_S", Value=2)]
-      AddItemListItemUserCmd_S = 2,
+      [global::ProtoBuf.ProtoEnum(Name=@"ReplaceItemListItemUserCmd_S", Value=2)]
+      ReplaceItemListItemUserCmd_S = 2,
             
       [global::ProtoBuf.ProtoEnum(Name=@"RemoveItemItemUserCmd_CS", Value=3)]
       RemoveItemItemUserCmd_CS = 3,
@@ -71,10 +71,10 @@ namespace Cmd
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"AddItemListItemUserCmd_S")]
-  public partial class AddItemListItemUserCmd_S : global::ProtoBuf.IExtensible
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"ReplaceItemListItemUserCmd_S")]
+  public partial class ReplaceItemListItemUserCmd_S : global::ProtoBuf.IExtensible
   {
-    public AddItemListItemUserCmd_S() {}
+    public ReplaceItemListItemUserCmd_S() {}
     
     private readonly global::System.Collections.Generic.List<Cmd.SaveItem> _itemlist = new global::System.Collections.Generic.List<Cmd.SaveItem>();
     [global::ProtoBuf.ProtoMember(1, Name=@"itemlist", DataFormat = global::ProtoBuf.DataFormat.Default)]
