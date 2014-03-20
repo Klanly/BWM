@@ -956,8 +956,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefabs:
-  - Prefabs/Gui/RoleInfoAvatar
-  - Prefabs/Gui/RoleInfoPackage
+  - {fileID: 100000, guid: 15ef261409e944c4c8c187e5dd9b8930, type: 2}
+  - {fileID: 100000, guid: 8fa684b12e7afcc4d9e0e3b441cf3a14, type: 2}
 --- !u!114 &11400044
 MonoBehaviour:
   m_ObjectHideFlags: 1
