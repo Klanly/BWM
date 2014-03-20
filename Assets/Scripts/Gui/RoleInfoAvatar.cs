@@ -3,16 +3,8 @@ using System.Collections;
 
 public class RoleInfoAvatar : MonoBehaviour
 {
-
-	// Use this for initialization
-	void Start()
+	void OnEnable()
 	{
-
-	}
-
-	// Update is called once per frame
-	void Update()
-	{
-
+		NGUITools.BringForward(this.gameObject);
 	}
 }

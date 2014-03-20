@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Linq;
 
 public class ControlBar : MonoBehaviour
 {
@@ -11,9 +12,7 @@ public class ControlBar : MonoBehaviour
 		UIEventListener.Get(roleInfoButton.gameObject).onClick = go =>
 		{
 			var target = BattleScene.Instance.Gui<RoleInfo>();
-			NGUITools.SetActive(target.gameObject, !target.gameObject.activeSelf);
-			if (target.gameObject.activeSelf)
-				NGUITools.BringForward(this.gameObject);
+			BattleScene.Instance.Gui<RoleInfo>().gameObject.SetActive(!target.gameObject.activeSelf);
 		};
 	}
 }
