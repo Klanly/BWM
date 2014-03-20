@@ -229,6 +229,14 @@ public static class Extensions
 		}
 	}
 
+	public static IEnumerable<Transform> GetAllChildren(this Transform transform)
+	{
+		if (transform == null)
+			yield break;
+		for (var i = 0; i < transform.childCount; i++)
+			yield return transform.GetChild(i);
+	}
+
 	/// <summary>
 	/// 得到节点全路径
 	/// </summary>
