@@ -72,6 +72,11 @@ public class ItemManager : IEnumerable<SaveItem>
 		return false;
 	}
 
+	public override string ToString()
+	{
+		return string.Join("\n", this.Select(i => i.ToString()).ToArray());
+	}
+
 	#region IEnumerable<SaveItem> 成员
 
 	public IEnumerator<SaveItem> GetEnumerator()

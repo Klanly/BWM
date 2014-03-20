@@ -111,6 +111,12 @@ namespace Cmd
 				return tableInfoCache;
 			}
 		}
+
+		public override string ToString()
+		{
+			return string.Format("#{0} {1}({2})x{3} @{4}", 
+				this.thisid, this.TableInfo.name, this.baseid, this.num, this.loc);
+		}
 	}
 }
 
