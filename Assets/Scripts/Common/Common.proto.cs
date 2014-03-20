@@ -39,28 +39,29 @@ namespace Cmd
   {
     public ItemLocation() {}
     
-    private int _x;
-    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"x", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public int x
+    private int _index;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"index", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int index
     {
-      get { return _x; }
-      set { _x = value; }
+      get { return _index; }
+      set { _index = value; }
     }
-    private int _y;
-    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"y", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public int y
+    private Cmd.ItemLocation.PackageType _type = Cmd.ItemLocation.PackageType.Main;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"type", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(Cmd.ItemLocation.PackageType.Main)]
+    public Cmd.ItemLocation.PackageType type
     {
-      get { return _y; }
-      set { _y = value; }
+      get { return _type; }
+      set { _type = value; }
     }
-    private int _z = default(int);
-    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"z", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(int))]
-    public int z
+    [global::ProtoBuf.ProtoContract(Name=@"PackageType")]
+    public enum PackageType
     {
-      get { return _z; }
-      set { _z = value; }
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"Main", Value=0)]
+      Main = 0
     }
+  
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
