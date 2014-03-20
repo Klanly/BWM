@@ -54,14 +54,14 @@ public class ItemManager : IEnumerable<SaveItem>
 		return false;
 	}
 
-	protected bool Union(ulong srcThisid, ulong dstThisid)
+	protected bool Union(ulong srcThisid, int takeNum, ulong dstThisid)
 	{
-		var src = items.FindIndex(i => i.thisid == srcThisid);
-		var dst = items.FindIndex(i => i.thisid == dstThisid);
-		if (src >= 0 && dst >= 0 && items[src].baseid == items[dst].baseid)
+		var src = this[srcThisid];
+		var dst = this[dstThisid];
+		if (src != null && dst != null && src.baseid == dst.baseid && src.num >= takeNum)
 		{
-			items[dst].num += items[src].num;
-			items.RemoveAt(src);
+			src.num -= takeNum;
+			dst.num += takeNum;
 			return true;
 		}
 		return false;
@@ -99,6 +99,13 @@ public class ItemManager : IEnumerable<SaveItem>
 	}
 
 	[Execute]
+	static void Execute(AddItemItemUserCmd_S cmd)
+	{
+		ItemManager.Instance.Remove(cmd.item.thisid);
+		ItemManager.Instance.items.Add(cmd.item);
+	}
+
+	[Execute]
 	static void Execute(RemoveItemItemUserCmd_CS cmd)
 	{
 		ItemManager.Instance.Remove(cmd.thisid);
@@ -119,7 +126,7 @@ public class ItemManager : IEnumerable<SaveItem>
 	[Execute]
 	static void Execute(UnionItemItemUserCmd_CS cmd)
 	{
-		ItemManager.Instance.Union(cmd.srcThisid, cmd.dstThisid);
+		ItemManager.Instance.Union(cmd.srcThisid, cmd.num, cmd.dstThisid);
 	}
 
 	[Execute]
