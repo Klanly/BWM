@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Linq;
 
 namespace Cmd
 {
@@ -50,9 +51,66 @@ namespace Cmd
 	}
 	#endregion
 
+	#region ItemLocation
+	partial class ItemLocation : System.IEquatable<ItemLocation>
+	{
+		public static bool operator ==(ItemLocation a, ItemLocation b)
+		{
+			if (System.Object.ReferenceEquals(a, b))
+				return true;
+			if (((object)a == null) || ((object)b == null))
+				return false;
+			return a.index == b.index && a.type == b.type;
+		}
+		public static bool operator !=(ItemLocation a, ItemLocation b)
+		{
+			return !(a == b);
+		}
+
+		public override bool Equals(object obj)
+		{
+			return this == obj as ItemLocation;
+		}
+
+		public override int GetHashCode()
+		{
+			return ((int)this.type << 16) | ((int)this.index & 0x0000FFFF);
+		}
+
+		#region IEquatable<ItemLocation> 成员
+
+		public bool Equals(ItemLocation other)
+		{
+			return this == other;
+		}
+
+		#endregion
+
+		public override string ToString()
+		{
+			return string.Format("{{{0},{1}}}", type, index);
+		}
+	}
+	#endregion
+
 	partial class MapUserData
 	{
 		public static readonly MapUserData Empty = new MapUserData();
+	}
+
+	partial class SaveItem
+	{
+		private table.TableItem tableInfoCache;
+		public table.TableItem TableInfo
+		{
+			get
+			{
+				if (tableInfoCache != null && tableInfoCache.id == this.baseid)
+					return tableInfoCache;
+				tableInfoCache = Table.Query<table.TableItem>().First(i => i.id == this.baseid);
+				return tableInfoCache;
+			}
+		}
 	}
 }
 

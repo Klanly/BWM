@@ -254,6 +254,20 @@ public static class Extensions
 	}
 	#endregion
 
+	#region Google Protocol Buffers
+	/// <summary>
+	/// Create a deep clone of the supplied instance; any sub-items are also cloned.
+	/// </summary>
+	/// <typeparam name="T"></typeparam>
+	/// <param name="pb"></param>
+	/// <returns></returns>
+	public static T DeepClone<T>(this T pb) where T : ProtoBuf.IExtensible
+	{
+		if (pb == null)
+			return default(T);
+		return ProtoBuf.Serializer.DeepClone<T>(pb);
+	}
+	#endregion
 
 	#region Convert DateTime & Unix GMT +8
 	static readonly DateTime UnixBase = new DateTime(1970, 1, 1, 0, 0, 0);
