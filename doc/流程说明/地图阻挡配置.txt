@@ -1,0 +1,15 @@
+神作地图阻挡处理
+1.随便创建一个New Scene
+2.找到Assets\Resources\Map
+3.复制任意一个该文件夹内文件
+4.拖拽到Hierarchy中
+5.修改地图图素，找刚才拖拽文件夹下的MapTexture，修改地图的图片文件
+6.修改地图阻挡，找到MapNav，修改地图的阻挡文件
+7.在MapNav中点击Export文件，导出服务器、客户端的文件
+8.到\GitLab\Unity\目录下，针对shen1这个文件夹进行commit操作，选择自己需要上传的文件。先pull后push
+9.到\GitLab\Unity\shen1\目录下，针对Common文件进行操作，选择自己需要上传的文件。先pull后push
+10.地图的文件和Mapid需要在表格中的 场景表 来进行配置
+
+说明：
+1.第5步提交客户端内容
+2.第6步提交服务器端内容

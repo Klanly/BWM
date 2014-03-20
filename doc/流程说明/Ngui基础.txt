@@ -1,0 +1,31 @@
+NGUI策划使用说明
+
+1.unity的基础使用
+	a.布局描述
+	b.基础设置
+	c.父子级
+	d.前后层
+	e.报错查询
+2.ngui图素导入
+	a.资源格式、路径
+	b.Atlas Maker的使用
+	c.如何替换控件的图素
+	d.基础图素的九宫
+3.ngui字体导入
+	a.字体格式、路径
+	b.Font Maker的使用
+	c.如何使用选中的字体
+4.ngui相关控件的简单说明
+	a.Texture （单张大图）
+	b.Sprite （拉伸图素.按钮）
+	c.Anchor （节点）
+	d.Label （文本）
+	e.Widget （容器）
+	f.Panel （底板）
+	g.button （按钮）
+5.大图在不同分辨率下的拉伸
+	a.unifled     
+	b.advenced
+6.UI控件的对齐关系
+	a.anchor
+7.控件的变形、效果
