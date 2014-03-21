@@ -5,10 +5,16 @@ using Cmd;
 
 public class RoleInfoPackage : MonoBehaviour
 {
+	public UIButton tidyButton;
 	private ItemGrid[] items;
 
 	void Start()
 	{
+		// 包裹整理
+		UIEventListener.Get(tidyButton.gameObject).onClick = go =>
+			Net.Instance.Send(new TidyItemItemUserCmd_C());
+
+		// 道具格子表初始化
 		var grid = this.transform.FindChild("Grid");
 		items = new ItemGrid[grid.childCount];
 		for (var i = 0; i < grid.childCount; i++)
@@ -18,10 +24,12 @@ public class RoleInfoPackage : MonoBehaviour
 			view.gameObject.name = i.ToString("D2");
 			view.ServerInfo = null;
 
+			// 道具格子点击
 			var index = i;
 			UIEventListener.Get(grid.GetChild(i).gameObject).onClick = go => OnItemGridClicked(index);
 		}
 
+		// 道具格子表更新事件
 		ItemManager.Instance.ItemChanged += Present;
 		Present(ItemManager.Instance);
 	}

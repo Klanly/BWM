@@ -13,5 +13,6 @@
 		<key code="id" />
 		<field column="id" code="id" type="uint32" />
 		<field column="名称" code="name" type="string" />
+		<field column="最大叠加数" code="maxNum" type="uint32" default="1" />
 	</output>
 </table>
