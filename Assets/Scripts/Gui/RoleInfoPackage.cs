@@ -17,6 +17,9 @@ public class RoleInfoPackage : MonoBehaviour
 			items[i] = view;
 			view.gameObject.name = i.ToString("D2");
 			view.ServerInfo = null;
+
+			var index = i;
+			UIEventListener.Get(grid.GetChild(i).gameObject).onClick = go => OnItemGridClicked(index);
 		}
 
 		ItemManager.Instance.ItemChanged += Present;
@@ -46,5 +49,15 @@ public class RoleInfoPackage : MonoBehaviour
 			items[i++].ServerInfo = item;
 		for (; i < items.Length; i++)
 			items[i] = null;
+	}
+
+	private void OnItemGridClicked(int index)
+	{
+		var item = items[index].ServerInfo;
+		if (item == null)
+			return;
+		var tooltip = BattleScene.Instance.Gui<ItemTooltip>();
+		tooltip.gameObject.SetActive(true);
+		tooltip.ServerInfo = item;		
 	}
 }

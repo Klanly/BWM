@@ -110,6 +110,7 @@ GameObject:
   - 4: {fileID: 400012}
   - 114: {fileID: 11400018}
   - 114: {fileID: 11400004}
+  - 65: {fileID: 6500004}
   m_Layer: 13
   m_Name: ItemTooltip
   m_TagString: Untagged
@@ -223,6 +224,18 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 116, y: 50, z: 0}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!65 &6500004
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100012}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 960, y: 640, z: 0}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &11400000
 MonoBehaviour:
@@ -601,7 +614,7 @@ MonoBehaviour:
   keepAspectRatio: 0
   aspectRatio: .799595118
   mAtlas: {fileID: 11400000, guid: 81897fcdc0d7fb04bb512167943f2aab, type: 2}
-  mSpriteName: backimage2
+  mSpriteName: tipsback
   mType: 1
   mFillDirection: 4
   mFillAmount: 1
@@ -642,13 +655,13 @@ MonoBehaviour:
     absolute: 0
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 100
-  mHeight: 100
+  mWidth: 960
+  mHeight: 640
   mDepth: 0
-  autoResizeBoxCollider: 0
+  autoResizeBoxCollider: 1
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 1
+  aspectRatio: 1.5
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
