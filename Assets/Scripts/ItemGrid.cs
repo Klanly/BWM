@@ -5,7 +5,7 @@ using Cmd;
 /// <summary>
 /// 道具格子的显示视图
 /// </summary>
-public class ItemView : MonoBehaviour
+public class ItemGrid : MonoBehaviour
 {
 	public UISprite icon;
 	public UILabel num;

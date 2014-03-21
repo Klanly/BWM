@@ -5,15 +5,15 @@ using Cmd;
 
 public class RoleInfoPackage : MonoBehaviour
 {
-	private ItemView[] items;
+	private ItemGrid[] items;
 
 	void Start()
 	{
 		var grid = this.transform.FindChild("Grid");
-		items = new ItemView[grid.childCount];
+		items = new ItemGrid[grid.childCount];
 		for (var i = 0; i < grid.childCount; i++)
 		{
-			var view = grid.GetChild(i).GetComponent<ItemView>();
+			var view = grid.GetChild(i).GetComponent<ItemGrid>();
 			items[i] = view;
 			view.gameObject.name = i.ToString("D2");
 			view.ServerInfo = null;
