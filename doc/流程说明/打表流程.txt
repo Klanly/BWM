@@ -1,0 +1,11 @@
+神作手游版的表格处理
+1.表格所在路径：\GitLab\Unity\shen1\doc\table\
+2.修改表格文件
+3.修改完毕后，在该文件夹内运行make.bat（这个过程最好关闭所有的.unity文件）
+4.make.bat运行完毕且无报错的情况下，运行copy.bat
+5.到\GitLab\Unity\目录下，针对shen1这个文件夹进行commit操作，选择自己需要上传的文件。先pull后push
+6.到\GitLab\Unity\shen1\目录下，针对Common文件进行操作，选择自己需要上传的文件。先pull后push
+
+说明：
+1.第5步提交客户端内容
+2.第6步提交服务器端内容
