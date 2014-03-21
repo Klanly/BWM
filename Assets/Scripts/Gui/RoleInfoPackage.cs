@@ -34,9 +34,7 @@ public class RoleInfoPackage : MonoBehaviour
 
 	void OnEnable()
 	{
-		NGUITools.BringForward(this.gameObject);
-
-		Debug.Log(ItemManager.Instance.ToString());
+		NGUITools.BringForward(this.gameObject);		
 	}
 
 	/// <summary>
@@ -48,7 +46,7 @@ public class RoleInfoPackage : MonoBehaviour
 		foreach (var item in manager.Where(ItemLocation.PackageType.Main).Take(items.Length))
 			items[i++].ServerInfo = item;
 		for (; i < items.Length; i++)
-			items[i] = null;
+			items[i].ServerInfo = null;
 	}
 
 	private void OnItemGridClicked(int index)

@@ -23,7 +23,11 @@ public class ItemTooltip : MonoBehaviour
 	void Start()
 	{
 		UIEventListener.Get(closeButton.gameObject).onClick += go => this.gameObject.SetActive(false);
-		UIEventListener.Get(deleteButton.gameObject).onClick += go => this.gameObject.SetActive(false);
+		UIEventListener.Get(deleteButton.gameObject).onClick += go =>
+		{
+			Net.Instance.Send(new RemoveItemItemUserCmd_CS() { thisid = ServerInfo.thisid });
+			this.gameObject.SetActive(false);
+		};
 	}
 
 	void OnEnable()
