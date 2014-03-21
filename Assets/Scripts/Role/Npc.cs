@@ -33,8 +33,8 @@ public class Npc : MonoBehaviour
 
 	private MapNav MapNav { get { return BattleScene.Instance.MapNav; } }
 	private Entity entity;
-	private Animator animator;
-	private Move move;
+	//private Animator animator;
+	//private Move move;
 
 	static Npc()
 	{
@@ -60,8 +60,8 @@ public class Npc : MonoBehaviour
 
 		var npc = avatar.AddComponent<Npc>();
 		npc.entity = avatar.AddComponent<Entity>();
-		npc.move = avatar.AddComponent<Move>();
-		npc.animator = avatar.GetComponent<Animator>();
+		//npc.move = avatar.AddComponent<Move>();
+		//npc.animator = avatar.GetComponent<Animator>();
 		npc.ServerInfo = info;
 		npc.TableInfo = tbl;
 

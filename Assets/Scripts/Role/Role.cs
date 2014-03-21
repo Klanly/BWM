@@ -13,7 +13,7 @@ public class Role : MonoBehaviour
 
 	private MapNav MapNav { get { return BattleScene.Instance.MapNav; } }
 	private Entity entity;
-	private Animator animator;
+	//private Animator animator;
 	private Move move;
 
 	static Role()
@@ -33,7 +33,7 @@ public class Role : MonoBehaviour
 		var role = avatar.AddComponent<Role>();
 		role.entity = avatar.AddComponent<Entity>();
 		role.move = avatar.AddComponent<Move>();
-		role.animator = avatar.GetComponent<Animator>();
+		//role.animator = avatar.GetComponent<Animator>();
 		role.ServerInfo = info;
 
 		CreateHeadTip(role);
