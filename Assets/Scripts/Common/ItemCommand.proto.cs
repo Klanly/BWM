@@ -46,7 +46,10 @@ namespace Cmd
       RefreshPosItemUserCmd_CS = 8,
             
       [global::ProtoBuf.ProtoEnum(Name=@"RefreshCountItemItemUserCmd_CS", Value=9)]
-      RefreshCountItemItemUserCmd_CS = 9
+      RefreshCountItemItemUserCmd_CS = 9,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"TidyItemItemUserCmd_C", Value=10)]
+      TidyItemItemUserCmd_C = 10
     }
   
     private global::ProtoBuf.IExtension extensionObject;
@@ -258,6 +261,16 @@ namespace Cmd
       get { return _count; }
       set { _count = value; }
     }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"TidyItemItemUserCmd_C")]
+  public partial class TidyItemItemUserCmd_C : global::ProtoBuf.IExtensible
+  {
+    public TidyItemItemUserCmd_C() {}
+    
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }

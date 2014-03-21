@@ -29,8 +29,15 @@ namespace table
       get { return _name; }
       set { _name = value; }
     }
+    private string _desc;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"desc", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public string desc
+    {
+      get { return _desc; }
+      set { _desc = value; }
+    }
     private string _icon;
-    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"icon", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::ProtoBuf.ProtoMember(4, IsRequired = true, Name=@"icon", DataFormat = global::ProtoBuf.DataFormat.Default)]
     public string icon
     {
       get { return _icon; }
