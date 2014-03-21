@@ -19,8 +19,16 @@ public class RoleInfoPackage : MonoBehaviour
 			view.ServerInfo = null;
 		}
 
-		Present();
+		ItemManager.Instance.ItemChanged += Present;
+		Present(ItemManager.Instance);
 	}
+
+	void OnDestroy()
+	{
+		ItemManager.Instance.ItemChanged -= Present;
+	}
+
+
 	void OnEnable()
 	{
 		NGUITools.BringForward(this.gameObject);
@@ -31,13 +39,12 @@ public class RoleInfoPackage : MonoBehaviour
 	/// <summary>
 	/// Model -> View
 	/// </summary>
-	void Present()
+	void Present(ItemManager manager)
 	{
-		foreach (var i in ItemManager.Instance.Select(ItemLocation.PackageType.Main))
-		{
-			if (i.loc.index > items.Length)
-				break;
-			items[i.loc.index].ServerInfo = i;
-		}
+		var i = 0;
+		foreach (var item in manager.Where(ItemLocation.PackageType.Main).Take(items.Length))
+			items[i++].ServerInfo = item;
+		for (; i < items.Length; i++)
+			items[i] = null;
 	}
 }

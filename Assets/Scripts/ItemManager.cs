@@ -4,24 +4,35 @@ using Cmd;
 using System.Collections.Generic;
 using System.Linq;
 using GX.Net;
+using System;
 
 public class ItemManager : IEnumerable<SaveItem>
 {
-	public static ItemManager Instance { get; set; }
+	public static ItemManager Instance { get; private set; }
+	static ItemManager() { Instance = new ItemManager(); }
 	private readonly List<SaveItem> items = new List<SaveItem>();
+
+	public event Action<ItemManager> ItemChanged;
 
 	public SaveItem this[ulong thisid] { get { return items.Find(i => i.thisid == thisid); } }
 	public SaveItem this[ItemLocation loc] { get { return this[loc.type, loc.index]; } }
 	public SaveItem this[ItemLocation.PackageType type, int index] { get { return items.Find(i => i.loc.type == type && i.loc.index == index); } }
+
+	protected void OnItemChanged()
+	{
+		if (ItemChanged != null)
+			ItemChanged(this);
+	}
 
 	/// <summary>
 	/// 得到指定包裹类型的道具，并按照位置下标排序
 	/// </summary>
 	/// <param name="package"></param>
 	/// <returns></returns>
-	public IEnumerable<SaveItem> Select(ItemLocation.PackageType package)
+	public IEnumerable<SaveItem> Where(ItemLocation.PackageType package)
 	{
-		return from i in items where i.loc.type == package orderby i.loc.index select i;
+		return items.Where(i => i.loc.type == package)
+			.OrderBy(i => i.baseid).ThenBy(i => i.num);
 	}
 
 	protected bool Remove(ulong thisid)
@@ -104,8 +115,9 @@ public class ItemManager : IEnumerable<SaveItem>
 	[Execute]
 	static void Execute(ReplaceItemListItemUserCmd_S cmd)
 	{
-		ItemManager.Instance = new ItemManager();
+		ItemManager.Instance.items.Clear();
 		ItemManager.Instance.items.AddRange(cmd.itemlist);
+		ItemManager.Instance.OnItemChanged();
 	}
 
 	[Execute]
@@ -113,42 +125,49 @@ public class ItemManager : IEnumerable<SaveItem>
 	{
 		ItemManager.Instance.Remove(cmd.item.thisid);
 		ItemManager.Instance.items.Add(cmd.item);
+		ItemManager.Instance.OnItemChanged();
 	}
 
 	[Execute]
 	static void Execute(RemoveItemItemUserCmd_CS cmd)
 	{
-		ItemManager.Instance.Remove(cmd.thisid);
+		if(ItemManager.Instance.Remove(cmd.thisid))
+			ItemManager.Instance.OnItemChanged();
 	}
 
 	[Execute]
 	static void Execute(SwapItemItemUserCmd_CS cmd)
 	{
-		ItemManager.Instance.Swap(cmd.srcThisid, cmd.dstThisid);
+		if(ItemManager.Instance.Swap(cmd.srcThisid, cmd.dstThisid))
+			ItemManager.Instance.OnItemChanged();
 	}
 
 	[Execute]
 	static void Execute(SplitItemItemUserCmd_CS cmd)
 	{
-		ItemManager.Instance.Splite(cmd.thisid, cmd.num, cmd.dst);
+		if(ItemManager.Instance.Splite(cmd.thisid, cmd.num, cmd.dst))
+			ItemManager.Instance.OnItemChanged();
 	}
 
 	[Execute]
 	static void Execute(UnionItemItemUserCmd_CS cmd)
 	{
-		ItemManager.Instance.Union(cmd.srcThisid, cmd.num, cmd.dstThisid);
+		if(ItemManager.Instance.Union(cmd.srcThisid, cmd.num, cmd.dstThisid))
+			ItemManager.Instance.OnItemChanged();
 	}
 
 	[Execute]
 	static void Execute(RefreshPosItemUserCmd_CS cmd)
 	{
 		ItemManager.Instance[cmd.thisid].loc = cmd.dst;
+		ItemManager.Instance.OnItemChanged();
 	}
 
 	[Execute]
 	static void Execute(RefreshCountItemItemUserCmd_CS cmd)
 	{
 		ItemManager.Instance[cmd.thisid].num = cmd.count;
+		ItemManager.Instance.OnItemChanged();
 	}
 	#endregion
 }
