@@ -5,16 +5,18 @@ using Cmd;
 
 public class RoleInfoPackage : MonoBehaviour
 {
-	private Transform[] items;
+	private ItemView[] items;
 
 	void Start()
 	{
 		var grid = this.transform.FindChild("Grid");
-		items = new Transform[grid.childCount];
+		items = new ItemView[grid.childCount];
 		for (var i = 0; i < grid.childCount; i++)
 		{
-			items[i] = grid.GetChild(i);
-			items[i].name = i.ToString();
+			var view = grid.GetChild(i).GetComponent<ItemView>();
+			items[i] = view;
+			view.gameObject.name = i.ToString("D2");
+			view.ServerInfo = null;
 		}
 
 		Present();
@@ -33,7 +35,9 @@ public class RoleInfoPackage : MonoBehaviour
 	{
 		foreach (var i in ItemManager.Instance.Select(ItemLocation.PackageType.Main))
 		{
-			items[i.loc.index].name = i.TableInfo.name;
+			if (i.loc.index > items.Length)
+				break;
+			items[i.loc.index].ServerInfo = i;
 		}
 	}
 }
