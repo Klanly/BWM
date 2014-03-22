@@ -15,10 +15,10 @@ public class SkillPlayStartParticle : SkillBase {
 		var skill = gameObject.GetComponent<Skill>();
 		if(skill && skill.startGo)
 		{
-			var mount = skill.startGo.transform.Find(mountOfStartGo);
+			var mount = SkillBase.Find(skill.startGo.transform, mountOfStartGo);
 			if(!mount)
 				mount = skill.startGo.transform;
-			
+
 			var par = Instantiate(particle) as GameObject;
 			par.transform.parent = mount;
 			par.transform.localPosition = Vector3.zero;

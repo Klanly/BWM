@@ -38,11 +38,11 @@ public class SkillCurveToTargetInSpeed : SkillBase {
 		var skill = gameObject.GetComponent<Skill>();
 		if(skill && skill.startGo && skill.targetGo)
 		{
-			var mountStartGo = skill.startGo.transform.Find(mountOfStartGo);
+			var mountStartGo = SkillBase.Find(skill.startGo.transform, mountOfStartGo);
 			if(!mountStartGo)
 				mountStartGo = skill.startGo.transform;
 			
-			mountTargetGo = skill.targetGo.transform.Find(mountOfTargetGo);
+			mountTargetGo = SkillBase.Find(skill.targetGo.transform, mountOfTargetGo);
 			if(!mountTargetGo)
 				mountTargetGo = skill.targetGo.transform;
 			

@@ -30,7 +30,7 @@ public class SkillPlayTargetParticle : SkillBase {
 		var skill = gameObject.GetComponent<Skill>();
 		if(skill && skill.targetGo)
 		{
-			var mount = skill.targetGo.transform.Find(mountOfTargetGo);
+			var mount = SkillBase.Find(skill.targetGo.transform, mountOfTargetGo);
 			if(!mount)
 				mount = skill.targetGo.transform;
 
