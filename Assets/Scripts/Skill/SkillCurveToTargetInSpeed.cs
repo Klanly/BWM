@@ -36,29 +36,38 @@ public class SkillCurveToTargetInSpeed : SkillBase {
 	void MoveParticle()
 	{
 		var skill = gameObject.GetComponent<Skill>();
-		if(skill && skill.startGo && skill.targetGo)
+		if(!skill || !skill.startGo || !skill.targetGo)
 		{
-			var mountStartGo = SkillBase.Find(skill.startGo.transform, mountOfStartGo);
-			if(!mountStartGo)
-				mountStartGo = skill.startGo.transform;
-			
-			mountTargetGo = SkillBase.Find(skill.targetGo.transform, mountOfTargetGo);
-			if(!mountTargetGo)
-				mountTargetGo = skill.targetGo.transform;
-			
-			particleGo = Instantiate(particle) as GameObject;
-			particleGo.transform.localPosition = Vector3.zero;
-			particleGo.transform.position = mountStartGo.transform.position;
-			path = new Vector3[3];
-			path[0] = mountStartGo.transform.position;
-			startMove = true;
+			StartTargetEvent();
+			return;
 		}
+
+		var mountStartGo = SkillBase.Find(skill.startGo.transform, mountOfStartGo);
+		if(!mountStartGo)
+			mountStartGo = skill.startGo.transform;
+		
+		mountTargetGo = SkillBase.Find(skill.targetGo.transform, mountOfTargetGo);
+		if(!mountTargetGo)
+			mountTargetGo = skill.targetGo.transform;
+		
+		particleGo = Instantiate(particle) as GameObject;
+		particleGo.transform.localPosition = Vector3.zero;
+		particleGo.transform.position = mountStartGo.transform.position;
+		path = new Vector3[3];
+		path[0] = mountStartGo.transform.position;
+		startMove = true;
 	}
 
 	void Update()
 	{
 		if(startMove)
 		{
+			if (!mountTargetGo || !particleGo)
+			{
+				StartTargetEvent();
+				return;
+			}
+
 			var distance = (mountTargetGo.transform.position - particleGo.transform.position).magnitude;
 			if(distance <= 0.01f)
 			{
@@ -93,7 +102,11 @@ public class SkillCurveToTargetInSpeed : SkillBase {
 
 	void StartTargetEvent()
 	{
-		particleGo.particleSystem.loop = false;
+		if(particleGo != null)
+		{
+			foreach(ParticleSystem t in particleGo.GetComponentsInChildren<ParticleSystem>())
+				t.loop = false;
+		}
 		if(sendTargetEvent)
 			gameObject.SendMessage("ApplyTargetEvent");
 		Destroy(this);

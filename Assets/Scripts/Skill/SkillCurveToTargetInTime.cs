@@ -36,26 +36,32 @@ public class SkillCurveToTargetInTime : SkillBase {
 	void MoveParticle()
 	{
 		var skill = gameObject.GetComponent<Skill>();
-		if(skill && skill.startGo && skill.targetGo)
+		if(!skill || !skill.startGo || !skill.targetGo)
 		{
-			var mountStartGo = SkillBase.Find(skill.startGo.transform, mountOfStartGo);
-			if(!mountStartGo)
-				mountStartGo = skill.startGo.transform;
-			
-			mountTargetGo = SkillBase.Find(skill.targetGo.transform, mountOfTargetGo);
-			if(!mountTargetGo)
-				mountTargetGo = skill.targetGo.transform;
-			
-			particleGo = Instantiate(particle) as GameObject;
-			particleGo.transform.localPosition = Vector3.zero;
-			path = new Vector3[3];
-			path[0] = mountStartGo.transform.position;
-			iTween.ValueTo(gameObject, iTween.Hash("from",0.0f,"to",time,"time",time,"easetype",easeType,"onupdate", "onMoveUpdate", "oncomplete","StartTargetEvent"));
+			StartTargetEvent();
+			return;
 		}
+
+		var mountStartGo = SkillBase.Find(skill.startGo.transform, mountOfStartGo);
+		if(!mountStartGo)
+			mountStartGo = skill.startGo.transform;
+		
+		mountTargetGo = SkillBase.Find(skill.targetGo.transform, mountOfTargetGo);
+		if(!mountTargetGo)
+			mountTargetGo = skill.targetGo.transform;
+		
+		particleGo = Instantiate(particle) as GameObject;
+		particleGo.transform.localPosition = Vector3.zero;
+		path = new Vector3[3];
+		path[0] = mountStartGo.transform.position;
+		iTween.ValueTo(gameObject, iTween.Hash("from",0.0f,"to",time,"time",time,"easetype",easeType,"onupdate", "onMoveUpdate", "oncomplete","StartTargetEvent"));
 	}
 
 	void onMoveUpdate(float curTime)
 	{
+		if(!mountTargetGo || !particleGo)
+			return;
+
 		path[2] = mountTargetGo.transform.position;
 		var relative = path[2] - path[0];
 		var halfDis = relative.magnitude * 0.5f;
@@ -69,7 +75,11 @@ public class SkillCurveToTargetInTime : SkillBase {
 
 	void StartTargetEvent()
 	{
-		particleGo.particleSystem.loop = false;
+		if(particleGo != null)
+		{
+			foreach(ParticleSystem t in particleGo.GetComponentsInChildren<ParticleSystem>())
+				t.loop = false;
+		}
 		if(sendTargetEvent)
 			gameObject.SendMessage("ApplyTargetEvent");
 		Destroy(this);
