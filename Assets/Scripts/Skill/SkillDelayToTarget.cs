@@ -4,6 +4,7 @@ using System.Collections;
 [RequireComponent(typeof(Skill))]
 public class SkillDelayToTarget : SkillBase {
 
+	public bool sendTargetEvent = false;
 	public float delay = 1.0f;
 
 	// Use this for initialization
@@ -22,7 +23,8 @@ public class SkillDelayToTarget : SkillBase {
 
 	void StartTargetEvent()
 	{
-		gameObject.SendMessage("ApplyTargetEvent");
+		if(sendTargetEvent)
+			gameObject.SendMessage("ApplyTargetEvent");
 		Destroy(this);
 	}
 }
