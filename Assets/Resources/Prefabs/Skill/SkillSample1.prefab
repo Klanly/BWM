@@ -70,6 +70,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4751e697cf60f04dbfdd97bff881fcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sendTargetEvent: 1
   delay: 5
 --- !u!114 &11400006
 MonoBehaviour:
