@@ -23,7 +23,7 @@ public class TestSkill : MonoBehaviour {
 		{
 			t.StartSkill();
 		}
-		skill.transform.localPosition = Vector3.zero;
 		skill.transform.parent = startGo.transform;
+		skill.transform.localPosition = Vector3.zero;
 	}
 }
