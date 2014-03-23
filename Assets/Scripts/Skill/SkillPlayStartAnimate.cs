@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// 播放动画
+/// </summary>
 [RequireComponent(typeof(Skill))]
 public class SkillPlayStartAnimate : SkillBase
 {

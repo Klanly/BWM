@@ -2,6 +2,9 @@
 using System.Collections;
 using System.Collections.Generic;
 
+/// <summary>
+/// <see cref="Buff"/>路径及其宿主的集合
+/// </summary>
 public class Buffs : MonoBehaviour
 {
 
@@ -10,7 +13,7 @@ public class Buffs : MonoBehaviour
 	/// <summary>
 	/// Adds the buff.
 	/// </summary>
-	/// <param name="buff">Buff.</param>
+	/// <param name="buff">Buff路径</param>
 	public void AddBuff(string strBuff)
 	{
 		var buff = Object.Instantiate(Resources.Load("Buff/" + strBuff)) as GameObject;

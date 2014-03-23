@@ -17,12 +17,16 @@ public class SkillMoveToTargetInSpeed : SkillBase
 	private Transform mountTargetGo;
 	private bool startMove = false;
 
-	// Use this for initialization
 	override public void StartSkill()
 	{
 		if (delay > 0.0f)
 		{
-			iTween.ValueTo(gameObject, iTween.Hash("from", delay, "to", 0.0f, "time", delay, "onupdate", "onUpdate", "oncomplete", "MoveParticle"));
+			iTween.ValueTo(gameObject, iTween.Hash(
+				"from", delay, 
+				"to", 0.0f, 
+				"time", delay, 
+				"onupdate", "onUpdate", 
+				"oncomplete", "MoveParticle"));
 		}
 		else
 		{
@@ -74,7 +78,10 @@ public class SkillMoveToTargetInSpeed : SkillBase
 			else
 			{
 				var time = distance / speed;
-				iTween.MoveUpdate(particleGo, iTween.Hash("position", mountTargetGo, "orienttopath", orientToPath, "time", time));
+				iTween.MoveUpdate(particleGo, iTween.Hash(
+					"position", mountTargetGo, 
+					"orienttopath", orientToPath, 
+					"time", time));
 			}
 		}
 	}

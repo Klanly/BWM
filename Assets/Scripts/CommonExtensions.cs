@@ -93,11 +93,14 @@ namespace Cmd
 	}
 	#endregion
 
+	#region MapUserData
 	partial class MapUserData
 	{
 		public static readonly MapUserData Empty = new MapUserData();
 	}
+	#endregion
 
+	#region SaveItem
 	partial class SaveItem
 	{
 		private table.TableItem tableInfoCache;
@@ -118,6 +121,7 @@ namespace Cmd
 				this.thisid, this.TableInfo.name, this.baseid, this.num, this.loc);
 		}
 	}
+	#endregion
 }
 
 static class CommonExtensions

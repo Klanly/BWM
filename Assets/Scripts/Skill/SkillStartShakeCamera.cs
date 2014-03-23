@@ -14,7 +14,10 @@ public class SkillStartShakeCamera : SkillBase
 		var cameraGo = Camera.main.gameObject;
 		if (cameraGo != null)
 		{
-			iTween.ShakePosition(cameraGo, iTween.Hash("amount", shakeAmount, "time", time, "delay", delay));
+			iTween.ShakePosition(cameraGo, iTween.Hash(
+				"amount", shakeAmount, 
+				"time", time, 
+				"delay", delay));
 		}
 		Destroy(this);
 	}

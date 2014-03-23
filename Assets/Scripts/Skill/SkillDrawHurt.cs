@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// 延迟给定时间后绘制伤害
+/// </summary>
 [RequireComponent(typeof(Skill))]
 public class SkillDrawHurt : SkillBase
 {
@@ -12,7 +15,11 @@ public class SkillDrawHurt : SkillBase
 	{
 		if (delay > 0.0f)
 		{
-			iTween.ValueTo(gameObject, iTween.Hash("from", delay, "to", 0.0f, "time", delay, "oncomplete", "DrawHurt"));
+			iTween.ValueTo(gameObject, iTween.Hash(
+				"from", delay, 
+				"to", 0.0f, 
+				"time", delay, 
+				"oncomplete", "DrawHurt"));
 		}
 		else
 		{

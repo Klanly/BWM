@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// 可将“角色”行走至指定的世界坐标位置
+/// </summary>
 public class Move : MonoBehaviour
 {
 
@@ -12,7 +15,9 @@ public class Move : MonoBehaviour
 	/// <summary>
 	/// 行走目标点
 	/// </summary>
-	/// <value>The target position.</value>
+	/// <remarks>
+	/// TODO: 不再以Vector3.one作为无效标志
+	/// </remarks>
 	public Vector3 TargetPosition
 	{
 		get { return targetPosition; }

@@ -6,7 +6,7 @@ using System.Collections;
 /// </summary>
 public class Skill : SkillBase
 {
-
+	// TODO: 尽量使用TableSkill
 	public int skillId;
 	public GameObject startGo;
 	public GameObject targetGo;

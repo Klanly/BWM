@@ -25,7 +25,12 @@ public class SkillCurveToTargetInSpeed : SkillBase
 	{
 		if (delay > 0.0f)
 		{
-			iTween.ValueTo(gameObject, iTween.Hash("from", delay, "to", 0.0f, "time", delay, "onupdate", "onUpdate", "oncomplete", "MoveParticle"));
+			iTween.ValueTo(gameObject, iTween.Hash(
+				"from", delay, 
+				"to", 0.0f, 
+				"time", delay, 
+				"onupdate", "onUpdate",
+				"oncomplete", "MoveParticle"));
 		}
 		else
 		{

@@ -1,14 +1,17 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// 可指定目标释放技能
+/// </summary>
 public class CastSkill : MonoBehaviour
 {
 
 	/// <summary>
 	/// Starts the skill.
 	/// </summary>
-	/// <param name="strSkill">skill name.</param>
-	/// <param name="targetGo">Target go.</param>
+	/// <param name="strSkill">技能路径</param>
+	/// <param name="targetGo">技能释放的目标</param>
 	public void StartSkill(string strSkill, GameObject targetGo)
 	{
 		var skill = Object.Instantiate(Resources.Load("Skill/" + strSkill)) as GameObject;

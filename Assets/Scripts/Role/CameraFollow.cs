@@ -18,7 +18,7 @@ public class CameraFollow : MonoBehaviour
 	}
 
 	/// <summary>
-	/// Updates the camera.
+	/// 以宿主为中心，更新摄像机位置
 	/// </summary>
 	public void UpdateCamera()
 	{

@@ -23,7 +23,12 @@ public class SkillMoveToTargetInTime : SkillBase
 	{
 		if (delay > 0.0f)
 		{
-			iTween.ValueTo(gameObject, iTween.Hash("from", delay, "to", 0.0f, "time", delay, "onupdate", "onUpdate", "oncomplete", "MoveParticle"));
+			iTween.ValueTo(gameObject, iTween.Hash(
+				"from", delay, 
+				"to", 0.0f, 
+				"time", delay,
+				"onupdate", "onUpdate",
+				"oncomplete", "MoveParticle"));
 		}
 		else
 		{
@@ -53,7 +58,13 @@ public class SkillMoveToTargetInTime : SkillBase
 		particleGo = Instantiate(particle) as GameObject;
 		particleGo.transform.localPosition = Vector3.zero;
 		path = new Vector3[2] { mountStartGo.transform.position, mountTargetGo.transform.position };
-		iTween.ValueTo(gameObject, iTween.Hash("from", 0.0f, "to", time, "time", time, "easetype", easeType, "onupdate", "onMoveUpdate", "oncomplete", "StartTargetEvent"));
+		iTween.ValueTo(gameObject, iTween.Hash(
+			"from", 0.0f, 
+			"to", time, 
+			"time", time, 
+			"easetype", easeType, 
+			"onupdate", "onMoveUpdate",
+			"oncomplete", "StartTargetEvent"));
 	}
 
 	void onMoveUpdate(float curTime)

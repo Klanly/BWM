@@ -5,6 +5,9 @@ using GX.Net;
 using System.Collections.Generic;
 using System.Linq;
 
+/// <remarks>
+/// TODO: 编辑时NPC应该和运行时NPC分开
+/// </remarks>
 [RequireComponent(typeof(Entity))]
 public class Npc : MonoBehaviour
 {

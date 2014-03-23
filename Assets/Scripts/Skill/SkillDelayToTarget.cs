@@ -13,7 +13,12 @@ public class SkillDelayToTarget : SkillBase
 	{
 		if (delay > 0.0f)
 		{
-			iTween.ValueTo(gameObject, iTween.Hash("from", delay, "to", 0.0f, "time", delay, "onupdate", "onUpdate", "oncomplete", "StartTargetEvent"));
+			iTween.ValueTo(gameObject, iTween.Hash(
+				"from", delay, 
+				"to", 0.0f, 
+				"time", delay, 
+				"onupdate", "onUpdate", 
+				"oncomplete", "StartTargetEvent"));
 		}
 		else
 		{
