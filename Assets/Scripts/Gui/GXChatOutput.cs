@@ -52,7 +52,12 @@ public class GXChatOutput : MonoBehaviour
 	[Execute]
 	static void ShowChat(CommonChatUserCmd_CS cmd)
 	{
-		var my = Object.FindObjectOfType<GXChatOutput>();
+		if (BattleScene.Instance == null)
+		{
+			Debug.LogWarning("进场景前收到聊天消息： " + cmd.info);
+			return;
+		}
+		var my = BattleScene.Instance.Gui<GXChatOutput>();
 		var chat = FormatChatMessage(cmd);
 		my.lines.Add(chat);
 		if (my.lines.Count > MaxChatLines)
