@@ -2,7 +2,8 @@
 using System.Collections;
 
 [RequireComponent(typeof(Skill))]
-public class SkillCurveToTargetInSpeed : SkillBase {
+public class SkillCurveToTargetInSpeed : SkillBase
+{
 
 	public bool sendTargetEvent;
 	public GameObject particle;
@@ -20,36 +21,37 @@ public class SkillCurveToTargetInSpeed : SkillBase {
 	private float movePosition = 0.0f;
 
 	// Use this for initialization
-	override public void StartSkill () {
-		if(delay > 0.0f)
+	override public void StartSkill()
+	{
+		if (delay > 0.0f)
 		{
-			iTween.ValueTo(gameObject, iTween.Hash("from",delay,"to",0.0f,"time",delay,"onupdate", "onUpdate", "oncomplete","MoveParticle"));
+			iTween.ValueTo(gameObject, iTween.Hash("from", delay, "to", 0.0f, "time", delay, "onupdate", "onUpdate", "oncomplete", "MoveParticle"));
 		}
 		else
 		{
 			MoveParticle();
-		}		
+		}
 	}
 
-	void onUpdate(float delay) {}
+	void onUpdate(float delay) { }
 
 	void MoveParticle()
 	{
 		var skill = gameObject.GetComponent<Skill>();
-		if(!skill || !skill.startGo || !skill.targetGo)
+		if (!skill || !skill.startGo || !skill.targetGo)
 		{
 			StartTargetEvent();
 			return;
 		}
 
 		var mountStartGo = SkillBase.Find(skill.startGo.transform, mountOfStartGo);
-		if(!mountStartGo)
+		if (!mountStartGo)
 			mountStartGo = skill.startGo.transform;
-		
+
 		mountTargetGo = SkillBase.Find(skill.targetGo.transform, mountOfTargetGo);
-		if(!mountTargetGo)
+		if (!mountTargetGo)
 			mountTargetGo = skill.targetGo.transform;
-		
+
 		particleGo = Instantiate(particle) as GameObject;
 		particleGo.transform.localPosition = Vector3.zero;
 		particleGo.transform.position = mountStartGo.transform.position;
@@ -60,7 +62,7 @@ public class SkillCurveToTargetInSpeed : SkillBase {
 
 	void Update()
 	{
-		if(startMove)
+		if (startMove)
 		{
 			if (!mountTargetGo || !particleGo)
 			{
@@ -69,7 +71,7 @@ public class SkillCurveToTargetInSpeed : SkillBase {
 			}
 
 			var distance = (mountTargetGo.transform.position - particleGo.transform.position).magnitude;
-			if(distance <= 0.01f)
+			if (distance <= 0.01f)
 			{
 				StartTargetEvent();
 			}
@@ -78,14 +80,14 @@ public class SkillCurveToTargetInSpeed : SkillBase {
 				path[2] = mountTargetGo.transform.position;
 				var relative = path[2] - path[0];
 				var halfDis = relative.magnitude * 0.5f;
-				path[1] = relative * 0.5f + new Vector3( halfDis * Mathf.Tan(Mathf.Deg2Rad * deviationDegree.x), halfDis * Mathf.Tan(Mathf.Deg2Rad * deviationDegree.y), halfDis * Mathf.Tan(Mathf.Deg2Rad * deviationDegree.z) );
+				path[1] = relative * 0.5f + new Vector3(halfDis * Mathf.Tan(Mathf.Deg2Rad * deviationDegree.x), halfDis * Mathf.Tan(Mathf.Deg2Rad * deviationDegree.y), halfDis * Mathf.Tan(Mathf.Deg2Rad * deviationDegree.z));
 				var pathLength = iTween.PathLength(path);
-				if(movePosition > pathLength)
+				if (movePosition > pathLength)
 					movePosition = pathLength;
 				movePosition = iTween.FloatUpdate(movePosition, pathLength, speed);
-				if(movePosition > pathLength)
+				if (movePosition > pathLength)
 					movePosition = pathLength;
-				if(movePosition >= pathLength)
+				if (movePosition >= pathLength)
 				{
 					StartTargetEvent();
 				}
@@ -93,8 +95,8 @@ public class SkillCurveToTargetInSpeed : SkillBase {
 				{
 					var percentage = movePosition / pathLength;
 					iTween.PutOnPath(particleGo, path, percentage);
-					if(orientToPath)
-						particleGo.transform.LookAt(iTween.PointOnPath(path, percentage+.05f));
+					if (orientToPath)
+						particleGo.transform.LookAt(iTween.PointOnPath(path, percentage + .05f));
 				}
 			}
 		}
@@ -102,12 +104,12 @@ public class SkillCurveToTargetInSpeed : SkillBase {
 
 	void StartTargetEvent()
 	{
-		if(particleGo != null)
+		if (particleGo != null)
 		{
-			foreach(ParticleSystem t in particleGo.GetComponentsInChildren<ParticleSystem>())
+			foreach (ParticleSystem t in particleGo.GetComponentsInChildren<ParticleSystem>())
 				t.loop = false;
 		}
-		if(sendTargetEvent)
+		if (sendTargetEvent)
 			gameObject.SendMessage("ApplyTargetEvent");
 		Destroy(this);
 	}

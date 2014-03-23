@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class SkillBase : MonoBehaviour {
+public class SkillBase : MonoBehaviour
+{
 
 	/// <summary>
 	/// Starts the skill.
@@ -18,7 +19,7 @@ public class SkillBase : MonoBehaviour {
 	public static Transform Find(Transform parent, string childname)
 	{
 		Transform[] allchild = parent.GetComponentsInChildren<Transform>();
-		foreach(Transform t in allchild)
+		foreach (Transform t in allchild)
 		{
 			if (t.name == childname)
 			{

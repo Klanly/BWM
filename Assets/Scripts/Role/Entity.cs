@@ -4,7 +4,8 @@ using System;
 using Cmd;
 
 
-public class Entity : MonoBehaviour {
+public class Entity : MonoBehaviour
+{
 
 	private MapNav MapNav { get { return BattleScene.Instance.MapNav; } }
 
@@ -33,7 +34,7 @@ public class Entity : MonoBehaviour {
 				value.z = Mathf.Clamp(value.z, 1.0f, MapNav.gridHeight * MapNav.gridZNum - 4.0f);
 			}
 			this.transform.position = value;
-			
+
 			if (PositionChanged != null)
 				PositionChanged(this);
 		}

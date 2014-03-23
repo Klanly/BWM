@@ -5,7 +5,8 @@ using System.Collections;
 /// 吟唱，检测不可移动一段时间
 /// </summary>
 [RequireComponent(typeof(Skill))]
-public class SkillIntonateStillToTarget : SkillBase {
+public class SkillIntonateStillToTarget : SkillBase
+{
 
 	public float delay = 1.0f;
 
@@ -13,33 +14,34 @@ public class SkillIntonateStillToTarget : SkillBase {
 	private Vector3 lastPosition;
 
 	// Use this for initialization
-	override public void StartSkill () {
+	override public void StartSkill()
+	{
 
 		var skill = this.gameObject.GetComponent<Skill>();
 		startGo = skill.startGo;
 		lastPosition = startGo.transform.position;
 
-		if(delay > 0.0f)
+		if (delay > 0.0f)
 		{
-			iTween.ValueTo(gameObject, iTween.Hash("from",delay,"to",0.0f,"time",delay,"onupdate", "onUpdate", "oncomplete","Finish", "oncompleteparams", true));
+			iTween.ValueTo(gameObject, iTween.Hash("from", delay, "to", 0.0f, "time", delay, "onupdate", "onUpdate", "oncomplete", "Finish", "oncompleteparams", true));
 		}
 		else
 		{
 			Finish(true);
-		}		
+		}
 	}
 
-	void onUpdate(float delay) {}
+	void onUpdate(float delay) { }
 
 	void Update()
 	{
-		if(!startGo)
+		if (!startGo)
 		{
 			Finish(false);
 			return;
 		}
 
-		if(lastPosition != startGo.transform.position)
+		if (lastPosition != startGo.transform.position)
 		{
 			Finish(false);
 			return;
@@ -54,7 +56,7 @@ public class SkillIntonateStillToTarget : SkillBase {
 	/// <param name="success">If set to <c>true</c> success.</param>
 	void Finish(bool success)
 	{
-		if(success)
+		if (success)
 			Debug.Log("Intonate success，send msg to server");
 		else
 			Debug.Log("Intonate fail");

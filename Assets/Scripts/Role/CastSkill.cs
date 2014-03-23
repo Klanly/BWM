@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class CastSkill : MonoBehaviour {
+public class CastSkill : MonoBehaviour
+{
 
 	/// <summary>
 	/// Starts the skill.
@@ -13,8 +14,8 @@ public class CastSkill : MonoBehaviour {
 		var skill = Object.Instantiate(Resources.Load("Skill/" + strSkill)) as GameObject;
 		skill.GetComponent<Skill>().startGo = gameObject;
 		skill.GetComponent<Skill>().targetGo = targetGo;
-		
-		foreach(SkillBase t in skill.GetComponents<SkillBase>())
+
+		foreach (SkillBase t in skill.GetComponents<SkillBase>())
 		{
 			t.StartSkill();
 		}

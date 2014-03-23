@@ -3,7 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 
 [RequireComponent(typeof(Skill))]
-public class SkillCurveToTargetInTime : SkillBase {
+public class SkillCurveToTargetInTime : SkillBase
+{
 
 	public bool sendTargetEvent = false;
 	public GameObject particle;
@@ -20,67 +21,68 @@ public class SkillCurveToTargetInTime : SkillBase {
 	private Vector3[] path;
 
 	// Use this for initialization
-	override public void StartSkill () {
-		if(delay > 0.0f)
+	override public void StartSkill()
+	{
+		if (delay > 0.0f)
 		{
-			iTween.ValueTo(gameObject, iTween.Hash("from",delay,"to",0.0f,"time",delay,"onupdate", "onUpdate", "oncomplete","MoveParticle"));
+			iTween.ValueTo(gameObject, iTween.Hash("from", delay, "to", 0.0f, "time", delay, "onupdate", "onUpdate", "oncomplete", "MoveParticle"));
 		}
 		else
 		{
 			MoveParticle();
-		}		
+		}
 	}
 
-	void onUpdate(float delay) {}
+	void onUpdate(float delay) { }
 
 	void MoveParticle()
 	{
 		var skill = gameObject.GetComponent<Skill>();
-		if(!skill || !skill.startGo || !skill.targetGo)
+		if (!skill || !skill.startGo || !skill.targetGo)
 		{
 			StartTargetEvent();
 			return;
 		}
 
 		var mountStartGo = SkillBase.Find(skill.startGo.transform, mountOfStartGo);
-		if(!mountStartGo)
+		if (!mountStartGo)
 			mountStartGo = skill.startGo.transform;
-		
+
 		mountTargetGo = SkillBase.Find(skill.targetGo.transform, mountOfTargetGo);
-		if(!mountTargetGo)
+		if (!mountTargetGo)
 			mountTargetGo = skill.targetGo.transform;
-		
+
 		particleGo = Instantiate(particle) as GameObject;
 		particleGo.transform.localPosition = Vector3.zero;
 		path = new Vector3[3];
 		path[0] = mountStartGo.transform.position;
-		iTween.ValueTo(gameObject, iTween.Hash("from",0.0f,"to",time,"time",time,"easetype",easeType,"onupdate", "onMoveUpdate", "oncomplete","StartTargetEvent"));
+		iTween.ValueTo(gameObject, iTween.Hash("from", 0.0f, "to", time, "time", time, "easetype", easeType, "onupdate", "onMoveUpdate", "oncomplete", "StartTargetEvent"));
 	}
 
 	void onMoveUpdate(float curTime)
 	{
-		if(!mountTargetGo || !particleGo)
+		if (!mountTargetGo || !particleGo)
 			return;
 
 		path[2] = mountTargetGo.transform.position;
 		var relative = path[2] - path[0];
 		var halfDis = relative.magnitude * 0.5f;
-		path[1] = relative * 0.5f + new Vector3( halfDis * Mathf.Tan(Mathf.Deg2Rad * deviationDegree.x), halfDis * Mathf.Tan(Mathf.Deg2Rad * deviationDegree.y), halfDis * Mathf.Tan(Mathf.Deg2Rad * deviationDegree.z) );
+		path[1] = relative * 0.5f + new Vector3(halfDis * Mathf.Tan(Mathf.Deg2Rad * deviationDegree.x), halfDis * Mathf.Tan(Mathf.Deg2Rad * deviationDegree.y), halfDis * Mathf.Tan(Mathf.Deg2Rad * deviationDegree.z));
 
 		float percentage = curTime / time;
-		iTween.PutOnPath( particleGo, path, percentage );
-		if(orientToPath)
-			particleGo.transform.LookAt(iTween.PointOnPath(path, percentage+.05f));
+		iTween.PutOnPath(particleGo, path, percentage);
+		if (orientToPath)
+			particleGo.transform.LookAt(iTween.PointOnPath(path, percentage + .05f));
 	}
 
 	void StartTargetEvent()
 	{
-		if(particleGo != null)
+		if (particleGo != null)
 		{
-			foreach(ParticleSystem t in particleGo.GetComponentsInChildren<ParticleSystem>())
+			foreach (ParticleSystem t in particleGo.GetComponentsInChildren<ParticleSystem>())
 				t.loop = false;
 		}
-		if(sendTargetEvent)
+		if (sendTargetEvent)
 			gameObject.SendMessage("ApplyTargetEvent");
 		Destroy(this);
 	}

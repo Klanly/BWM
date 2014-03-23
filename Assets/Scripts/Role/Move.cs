@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Move : MonoBehaviour {
+public class Move : MonoBehaviour
+{
 
 	private MapNav MapNav { get { return BattleScene.Instance.MapNav; } }
 	private Entity entity;
@@ -27,7 +28,7 @@ public class Move : MonoBehaviour {
 			{
 				if (animator && animator.GetFloat("speed") == 0.0f)
 					animator.SetFloat("speed", entity.Speed);
-				
+
 				var relativePos = TargetPosition - entity.Position;
 				this.transform.rotation = Quaternion.LookRotation(relativePos);
 			}
@@ -36,21 +37,21 @@ public class Move : MonoBehaviour {
 
 
 	// Use this for initialization
-	void Start () 
+	void Start()
 	{
 		entity = gameObject.GetComponent<Entity>();
 		animator = gameObject.GetComponent<Animator>();
 	}
-	
+
 	// Update is called once per frame
-	void Update () 
+	void Update()
 	{
 		if (TargetPosition != Vector3.zero)
 		{
 			Vector3 vDelta = TargetPosition - entity.Position;
 			float fDeltaLen = vDelta.magnitude;
 			vDelta.Normalize();
-			
+
 			Vector3 vOldPosition = entity.Position;
 			float fMoveLen = entity.Speed * Time.deltaTime;
 			bool bFinish = false;
@@ -59,7 +60,7 @@ public class Move : MonoBehaviour {
 				fMoveLen = fDeltaLen;
 				bFinish = true;
 			}
-			
+
 			entity.Position = vOldPosition + vDelta * fMoveLen;
 			if (bFinish)
 			{
@@ -67,9 +68,9 @@ public class Move : MonoBehaviour {
 				//var oldRotate = this.transform.rotation;
 				//this.transform.rotation = oldRotate;
 
-				if(animator)
+				if (animator)
 					animator.SetFloat("speed", 0.0f);
 			}
-		}	
+		}
 	}
 }

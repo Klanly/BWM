@@ -4,7 +4,8 @@ using System.Collections;
 /// <summary>
 /// Buff
 /// </summary>
-public class Buff : MonoBehaviour {
+public class Buff : MonoBehaviour
+{
 
 	public int buffId;
 	public GameObject particleGo;
@@ -16,14 +17,14 @@ public class Buff : MonoBehaviour {
 	/// <param name="target">Target.</param>
 	public GameObject StartBuff(GameObject target)
 	{
-		if(!target)
+		if (!target)
 			return null;
 
 		var mountGo = SkillBase.Find(target.transform, mount);
-		if(!mountGo)
+		if (!mountGo)
 			mountGo = target.transform;
 		GameObject particle = Object.Instantiate(particleGo) as GameObject;
-		if(particle)
+		if (particle)
 		{
 			particle.transform.parent = mountGo;
 			particle.transform.localPosition = Vector2.zero;

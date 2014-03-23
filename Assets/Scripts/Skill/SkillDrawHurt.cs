@@ -2,26 +2,29 @@
 using System.Collections;
 
 [RequireComponent(typeof(Skill))]
-public class SkillDrawHurt : SkillBase {
+public class SkillDrawHurt : SkillBase
+{
 
 	public float delay;
 
 	// Use this for initialization
-	override public void StartSkill () {
-		if(delay > 0.0f)
+	override public void StartSkill()
+	{
+		if (delay > 0.0f)
 		{
-			iTween.ValueTo(gameObject, iTween.Hash("from",delay,"to",0.0f,"time",delay,"oncomplete","DrawHurt"));
+			iTween.ValueTo(gameObject, iTween.Hash("from", delay, "to", 0.0f, "time", delay, "oncomplete", "DrawHurt"));
 		}
 		else
 		{
 			DrawHurt();
-		}		
+		}
 	}
 
 	/// <summary>
 	/// 绘制伤害
 	/// </summary>
-	void DrawHurt() {
+	void DrawHurt()
+	{
 		Debug.Log("hp:" + 10);
 		Destroy(this);
 	}

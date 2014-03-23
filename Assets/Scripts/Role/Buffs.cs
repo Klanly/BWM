@@ -2,7 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class Buffs : MonoBehaviour {
+public class Buffs : MonoBehaviour
+{
 
 	public Dictionary<string, GameObject> buffs = new Dictionary<string, GameObject>();
 
@@ -22,7 +23,7 @@ public class Buffs : MonoBehaviour {
 	/// <param name="strBuff">String buff.</param>
 	public void RemoveBuff(string strBuff)
 	{
-		if(buffs.ContainsKey(strBuff))
+		if (buffs.ContainsKey(strBuff))
 		{
 			Destroy(buffs[strBuff]);
 			buffs.Remove(strBuff);
