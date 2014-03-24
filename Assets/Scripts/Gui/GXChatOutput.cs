@@ -20,6 +20,8 @@ public class GXChatOutput : MonoBehaviour
 	public UILabel snapshotChatMessage;
 	public UIButton snapshotToggle;
 
+	public UIButton gmCommandButton;
+
 	void Start()
 	{
 		lines.Clear();
@@ -28,6 +30,8 @@ public class GXChatOutput : MonoBehaviour
 
 		snapshotChatMessage.text = string.Empty;
 		UIEventListener.Get(snapshotToggle.gameObject).onClick = Toggle;
+
+		UIEventListener.Get(gmCommandButton.gameObject).onClick = go => GXChatInput.SendChat("//help");
 
 		Toggle(true);
 	}
