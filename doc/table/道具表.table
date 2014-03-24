@@ -11,6 +11,7 @@
 		<field column="职业" code="profession" type="uint8" default="0">
 			<regex>^[0123]$</regex>
 		</field>
+		<field column="需求等级" code="level" type="int32" default="1" />
 		<field column="icon" code="icon" type="string">
 			<regex>^[^\\]+$</regex>
 		</field>

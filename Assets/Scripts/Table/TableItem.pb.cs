@@ -36,8 +36,29 @@ namespace table
       get { return _desc; }
       set { _desc = value; }
     }
+    private uint _type;
+    [global::ProtoBuf.ProtoMember(4, IsRequired = true, Name=@"type", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint type
+    {
+      get { return _type; }
+      set { _type = value; }
+    }
+    private uint _profession;
+    [global::ProtoBuf.ProtoMember(5, IsRequired = true, Name=@"profession", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint profession
+    {
+      get { return _profession; }
+      set { _profession = value; }
+    }
+    private int _level;
+    [global::ProtoBuf.ProtoMember(6, IsRequired = true, Name=@"level", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int level
+    {
+      get { return _level; }
+      set { _level = value; }
+    }
     private string _icon;
-    [global::ProtoBuf.ProtoMember(4, IsRequired = true, Name=@"icon", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::ProtoBuf.ProtoMember(7, IsRequired = true, Name=@"icon", DataFormat = global::ProtoBuf.DataFormat.Default)]
     public string icon
     {
       get { return _icon; }

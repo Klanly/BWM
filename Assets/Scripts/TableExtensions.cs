@@ -26,6 +26,11 @@ namespace table
 			return (from i in Table.Query<TableAvatar>() where i.profession == pro && i.sex == sex select i).First();
 		}
 	}
+
+	partial class TableItem
+	{
+		public Profession Profession { get { return (Profession)this.profession; } }
+	}
 }
 
 public static class TableExtensions

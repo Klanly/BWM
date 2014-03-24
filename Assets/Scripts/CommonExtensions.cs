@@ -126,4 +126,19 @@ namespace Cmd
 
 static class CommonExtensions
 {
+	/// <summary>
+	/// 职业的中文名称
+	/// </summary>
+	/// <param name="profession"></param>
+	/// <returns></returns>
+	public static string GetName(this Cmd.Profession profession)
+	{
+		switch (profession)
+		{
+			case Cmd.Profession.Profession_ZhanShi: return "战士";
+			case Cmd.Profession.Profession_DaoShi: return "道士";
+			case Cmd.Profession.Profession_FaShi: return "法师";
+			default: return profession.ToString();
+		}
+	}
 }
