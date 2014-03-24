@@ -40,6 +40,8 @@ public class GXGmCommand : MonoBehaviour
 		canvas.gameObject.SetActive(true);
 		canvas.Reposition();
 		scrollView.ResetPosition();
+
+		NGUITools.BringForward(closeButton.gameObject);
 	}
 
 	[Execute]
