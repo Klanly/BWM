@@ -49,7 +49,7 @@ public class BattleScene : MonoBehaviour
 		MapNav = UnityEngine.Object.FindObjectOfType<MapNav>();
 
 		// 删除地图中在编辑器中预制的Npc
-		foreach(var npc in terrain.GetComponentsInChildren<Npc>())
+		foreach(var npc in terrain.GetComponentsInChildren<NpcEditor>())
 			GameObject.Destroy(npc.gameObject);
 		return true;
 	}
