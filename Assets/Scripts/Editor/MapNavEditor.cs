@@ -219,7 +219,7 @@ public class MapNavEditor : Editor
 	private bool ExportNpc(string path)
 	{
 		var host = Target.transform.parent;
-		var npc = host.GetComponentsInChildren<Npc>();
+		var npc = host.GetComponentsInChildren<NpcEditor>();
 		var db = Table.Query<table.TableNpc>().ToDictionary(i => i.id);
 
 		var error = from i in npc let id = (uint)i.baseId where db.ContainsKey(id) == false select i;

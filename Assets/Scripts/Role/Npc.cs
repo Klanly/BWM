@@ -5,31 +5,9 @@ using GX.Net;
 using System.Collections.Generic;
 using System.Linq;
 
-/// <remarks>
-/// TODO: 编辑时NPC应该和运行时NPC分开
-/// </remarks>
 [RequireComponent(typeof(Entity))]
 public class Npc : MonoBehaviour
 {
-#if UNITY_EDITOR
-	/// <summary>
-	/// NPC表中的ID
-	/// </summary>
-	public int baseId;
-	/// <summary>
-	/// 别名
-	/// </summary>
-	public string alias;
-	/// <summary>
-	/// 重生时间(秒)
-	/// </summary>
-	public int relivetime;
-	/// <summary>
-	/// 刷新概率
-	/// </summary>
-	public int rate = 100;
-#endif
-
 	public static Dictionary<ulong, Npc> All { get; private set; }
 	public MapNpcData ServerInfo { get; private set; }
 	public table.TableNpc TableInfo { get; private set; }
