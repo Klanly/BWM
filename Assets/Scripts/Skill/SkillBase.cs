@@ -8,8 +8,7 @@ public class SkillBase : MonoBehaviour
 	}
 
 	/// <summary>
-	/// 从所有子节点中找出指定名称的子节点
-	/// TODO: means parent.FindChild ?
+	/// 递归找出指定名称的子节点
 	/// </summary>
 	/// <param name="parent">Parent.</param>
 	/// <param name="childname">Childname.</param>
