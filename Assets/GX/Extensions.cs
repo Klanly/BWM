@@ -249,7 +249,7 @@ public static class Extensions
 	{
 		if (current.parent == null)
 			return "/" + current.name;
-		return current.parent.GetPath() + "/" + current.name;
+		return GetPath(current.parent) + "/" + current.name;
 	}
 	/// <summary>
 	/// 得到节点全路径
@@ -258,7 +258,7 @@ public static class Extensions
 	/// <returns></returns>
 	public static string GetPath(this Component component)
 	{
-		return component.transform.GetPath() + "/" + component.GetType().ToString();
+		return GetPath(component.transform) + ":" + component.GetType().ToString();
 	}
 	#endregion
 

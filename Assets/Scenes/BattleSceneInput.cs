@@ -31,6 +31,20 @@ public class BattleSceneInput : MonoBehaviour
 	/// <param name="isDown"></param>
 	void OnPress(bool isDown)
 	{
+		if (isDown)
+		{
+			var ray = Camera.main.ScreenPointToRay(new Vector3(UICamera.lastTouchPosition.x, UICamera.lastTouchPosition.y));
+			RaycastHit hit;
+			if (Physics.Raycast(ray, out hit))
+			{
+				var npc = hit.collider.gameObject.GetComponent<Npc>();
+				if (npc != null)
+				{
+					Debug.Log(string.Format("Npc点选: {0}({1})", npc.TableInfo.name, npc.ServerInfo.tempid));
+				}
+			}
+		}
+
 		pressing = isDown;
 	}
 
