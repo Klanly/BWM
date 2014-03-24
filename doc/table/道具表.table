@@ -5,6 +5,12 @@
 		<field column="id" code="id" type="uint32" />
 		<field column="名称" code="name" type="string" />
 		<field column="说明" code="desc" type="string" />
+		<field column="类型" code="type" type="uint8">
+			<regex>^[^0]\d*$</regex>
+		</field>
+		<field column="职业" code="profession" type="uint8" default="0">
+			<regex>^[0123]$</regex>
+		</field>
 		<field column="icon" code="icon" type="string">
 			<regex>^[^\\]+$</regex>
 		</field>
