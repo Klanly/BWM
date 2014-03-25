@@ -2,30 +2,28 @@
 using System.Collections;
 using GX.Net;
 using Cmd;
+using System.Linq;
 
 public class SelectTarget : MonoBehaviour
 {
-	public void Show<T>(object data) where T : MonoBehaviour, ISelectTarget
+	/// <summary>
+	/// 切换给定的SelectTargetX类型展示器可见，并返回其实例
+	/// </summary>
+	/// <typeparam name="T"></typeparam>
+	/// <returns></returns>
+	public T Toggle<T>() where T : MonoBehaviour
 	{
+		var present = default(T);
 		foreach (var c in this.transform.GetAllChildren())
 		{
-			var show = c.gameObject.GetComponent<T>();
-			c.gameObject.SetActive(data != null && show != null);
-			//if (c.gameObject.active)
-			//	show.Present(data);
+			var p = c.gameObject.GetComponent<T>();
+			c.gameObject.SetActive(p != null);
+			if (c.gameObject.activeSelf)
+				present = p;
 		}
-	}
-
-	// Use this for initialization
-	void Start()
-	{
-
-	}
-
-	// Update is called once per frame
-	void Update()
-	{
-
+		if (present != null)
+			NGUITools.BringForward(present.gameObject);
+		return present;
 	}
 
 	/// <summary>
@@ -35,13 +33,38 @@ public class SelectTarget : MonoBehaviour
 	[Execute]
 	static void Execute(SelectSceneEntryScriptUserCmd_CS cmd)
 	{
+		var my = BattleScene.Instance.Gui<SelectTarget>();
 		switch (cmd.entrytype)
 		{
 			case SceneEntryType.SceneEntryType_Npc:
-				//Npc.SceneSelect(cmd.entryid);
+				{
+					Npc target;
+					if (Npc.All.TryGetValue(cmd.entryid, out target))
+					{
+						switch (target.TableInfo.Type)
+						{
+							case table.NpcType.Boss:
+								my.Toggle<SelectTargetBoss>().Present(target);
+								break;
+							case table.NpcType.Elite:
+								my.Toggle<SelectTargetElite>().Present(target);
+								break;
+							case table.NpcType.Monster:
+								my.Toggle<SelectTargetMonster>().Present(target);
+								break;
+							default:
+								my.Toggle<SelectTargetNpc>().Present(target);
+								break;
+						}
+					}
+				}
 				break;
 			case SceneEntryType.SceneEntryType_Player:
-				//Role.SceneSelect(cmd.entryid);
+				{
+					Role target;
+					if (Role.All.TryGetValue(cmd.entryid, out target))
+						my.Toggle<SelectTargetRole>().Present(target);
+				}
 				break;
 			default:
 				break;

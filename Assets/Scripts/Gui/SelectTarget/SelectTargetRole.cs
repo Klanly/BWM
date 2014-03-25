@@ -3,16 +3,12 @@ using System.Collections;
 
 public class SelectTargetRole : MonoBehaviour
 {
-
-	// Use this for initialization
 	void Start()
 	{
-
 	}
 
-	// Update is called once per frame
-	void Update()
+	internal void Present(Role target)
 	{
-
+		throw new System.NotImplementedException();
 	}
 }
