@@ -5,7 +5,6 @@ using GX.Net;
 using System.Collections.Generic;
 using System.Linq;
 
-[RequireComponent(typeof(Entity))]
 public class Npc : MonoBehaviour, ISelectTarget
 {
 	public static Dictionary<ulong, Npc> All { get; private set; }

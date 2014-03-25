@@ -68,5 +68,6 @@ public class BattleScene : MonoBehaviour
 			throw new System.InvalidOperationException();
 		Instance = null;
 		Role.All.Clear();
+		Npc.All.Clear();
 	}
 }
