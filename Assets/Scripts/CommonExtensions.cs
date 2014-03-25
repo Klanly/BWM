@@ -130,6 +130,60 @@ namespace Cmd
 		}
 	}
 	#endregion
+
+	#region SaveSkill
+	partial class SaveSkill : System.IEquatable<SaveSkill>
+	{
+		public static bool operator ==(SaveSkill a, SaveSkill b)
+		{
+			if (System.Object.ReferenceEquals(a, b))
+				return true;
+			if (((object)a == null) || ((object)b == null))
+				return false;
+			return a.skillid == b.skillid && a.level == b.level;
+		}
+		public static bool operator !=(SaveSkill a, SaveSkill b)
+		{
+			return !(a == b);
+		}
+
+		public override bool Equals(object obj)
+		{
+			return this == obj as SaveSkill;
+		}
+
+		public override int GetHashCode()
+		{
+			return (int)(this.skillid << 16) | (int)this.level;
+		}
+
+		#region IEquatable<SaveSkill> Members
+
+		public bool Equals(SaveSkill other)
+		{
+			return this == other;
+		}
+
+		#endregion
+
+		private table.TableSkill tableInfoCache;
+		public table.TableSkill TableInfo
+		{
+			get
+			{
+				if (tableInfoCache != null && tableInfoCache.id == this.skillid)
+					return tableInfoCache;
+				tableInfoCache = Table.Query<table.TableSkill>().First(i => i.id == this.skillid);
+				return tableInfoCache;
+			}
+		}
+
+		public override string ToString()
+		{
+			return string.Format("{0},{1} {2}", TableInfo.id, TableInfo.level, TableInfo.name);
+		}
+	}
+	#endregion
 }
 
 static class CommonExtensions
