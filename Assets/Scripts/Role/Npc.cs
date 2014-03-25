@@ -82,4 +82,18 @@ public class Npc : MonoBehaviour
 
 		npc.entity.Grid = cmd.pos;
 	}
+
+	/// <summary>
+	/// 场景点选
+	/// </summary>
+	/// <param name="id"></param>
+	/// <returns></returns>
+	public static bool SceneSelect(ulong id)
+	{
+		Npc npc;
+		if(All.TryGetValue(id, out npc) == false)
+			return false;
+		Debug.Log("选中NPC：" + npc.transform.GetPath());
+		return true;
+	}
 }

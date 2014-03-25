@@ -95,4 +95,18 @@ public class Role : MonoBehaviour
 			role.entity.Position = BattleScene.Instance.MapNav.GetWorldPosition(cmd.pos);
 		}
 	}
+
+	/// <summary>
+	/// 场景点选
+	/// </summary>
+	/// <param name="id"></param>
+	/// <returns></returns>
+	public static bool SceneSelect(ulong id)
+	{
+		Role role;
+		if (All.TryGetValue(id, out role) == false)
+			return false;
+		Debug.Log("选中Role：" + role.transform.GetPath());
+		return true;
+	}
 }
