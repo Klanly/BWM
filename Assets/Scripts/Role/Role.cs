@@ -5,7 +5,7 @@ using Cmd;
 using System.Collections.Generic;
 using System;
 
-public class Role : MonoBehaviour
+public class Role : MonoBehaviour, ISelectTarget
 {
 	public static Dictionary<ulong, Role> All { get; private set; }
 
@@ -15,6 +15,21 @@ public class Role : MonoBehaviour
 	private Entity entity;
 	//private Animator animator;
 	private Move move;
+
+
+	#region ISelectTarget Members
+
+	public string Name
+	{
+		get { return ServerInfo.charname; }
+	}
+
+	public string RoleHeadSprite
+	{
+		get { return ServerInfo.GetRoleHeadSprite(); }
+	}
+
+	#endregion
 
 	static Role()
 	{
@@ -94,5 +109,19 @@ public class Role : MonoBehaviour
 		{
 			role.entity.Position = BattleScene.Instance.MapNav.GetWorldPosition(cmd.pos);
 		}
+	}
+
+	/// <summary>
+	/// 场景点选
+	/// </summary>
+	/// <param name="id"></param>
+	/// <returns></returns>
+	public static void SceneSelect(ulong id)
+	{
+		Role target;
+		if (Role.All.TryGetValue(id, out target) == false)
+			BattleScene.Instance.Gui<GXRoleHead>().Target = null;
+		else
+			BattleScene.Instance.Gui<GXRoleHead>().Target = target;
 	}
 }

@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Cmd;
 
 /// <summary>
 /// 战斗场景输入处理
@@ -40,7 +41,13 @@ public class BattleSceneInput : MonoBehaviour
 				var npc = hit.collider.gameObject.GetComponent<Npc>();
 				if (npc != null)
 				{
-					Debug.Log(string.Format("Npc点选: {0}({1})", npc.TableInfo.name, npc.ServerInfo.tempid));
+					Net.Instance.Send(new SelectSceneEntryScriptUserCmd_CS() { entrytype = SceneEntryType.SceneEntryType_Npc, entryid = npc.ServerInfo.tempid });
+				}
+
+				var role = hit.collider.gameObject.GetComponent<Role>();
+				if (role != null && role.ServerInfo.charid != MainRole.ServerInfo.charid)
+				{
+					Net.Instance.Send(new SelectSceneEntryScriptUserCmd_CS() { entrytype = SceneEntryType.SceneEntryType_Player, entryid = role.ServerInfo.charid });
 				}
 			}
 		}

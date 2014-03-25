@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 [RequireComponent(typeof(Entity))]
-public class Npc : MonoBehaviour
+public class Npc : MonoBehaviour, ISelectTarget
 {
 	public static Dictionary<ulong, Npc> All { get; private set; }
 	public MapNpcData ServerInfo { get; private set; }
@@ -16,6 +16,20 @@ public class Npc : MonoBehaviour
 	private Entity entity;
 	//private Animator animator;
 	//private Move move;
+
+	#region ISelectTarget Members
+
+	public string Name
+	{
+		get { return TableInfo.name; }
+	}
+
+	public string RoleHeadSprite
+	{
+		get { return null; }
+	}
+
+	#endregion
 
 	static Npc()
 	{
@@ -81,5 +95,19 @@ public class Npc : MonoBehaviour
 		}
 
 		npc.entity.Grid = cmd.pos;
+	}
+
+	/// <summary>
+	/// 场景点选
+	/// </summary>
+	/// <param name="id"></param>
+	/// <returns></returns>
+	public static void SceneSelect(ulong id)
+	{
+		Npc target;
+		if(Npc.All.TryGetValue(id, out target) == false)
+			BattleScene.Instance.Gui<GXRoleHead>().Target = null;
+		else
+			BattleScene.Instance.Gui<GXRoleHead>().Target = target;
 	}
 }
