@@ -8,12 +8,24 @@ public class GXRoleHead : MonoBehaviour
 	public UILabel myName;
 	public UILabel myLevel;
 	public UISlider myHp;
+	public UISprite myHead;
 
+	private ISelectTarget m_target;
+	public ISelectTarget Target
+	{
+		get { return m_target; }
+		set
+		{
+			this.m_target = value;
+			OnSelectTargetChanged();
+		}
+	}
 	public UILabel otherName;
-	public UILabel otherLevel;
+	public UISprite otherHead;
 
 	IEnumerator Start()
 	{
+		Target = null;
 		while (MainRole.Instance == null)
 			yield return new WaitForEndOfFrame();
 		MainRole.Instance.PropertyChanged += OnMainRolePropertyChanged;
@@ -30,13 +42,21 @@ public class GXRoleHead : MonoBehaviour
 
 	void OnMainRolePropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
 	{
-		var my = myName.transform.parent; // 主角自我信息所在节点
-		my.Find("head1").gameObject.SetActive(MainRole.ServerInfo.sexman);
-		my.Find("head2").gameObject.SetActive(!MainRole.ServerInfo.sexman);
-
 		myName.text = MainRole.ServerInfo.charname;
 		myLevel.text = MainRole.Instance.level.ToString();
-
+		myHead.spriteName = MainRole.ServerInfo.GetRoleHeadSprite();
 		myHp.value = MainRole.Instance.hp / (float)MainRole.Instance.maxhp;
+	}
+
+	void OnSelectTargetChanged()
+	{
+		if (Target == null)
+		{
+			this.otherName.parent.gameObject.SetActive(false);
+			return;
+		}
+		this.otherName.parent.gameObject.SetActive(true);
+		this.otherName.text = Target.Name;
+		this.otherHead.spriteName = Target.RoleHeadSprite;
 	}
 }

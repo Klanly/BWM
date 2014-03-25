@@ -97,6 +97,14 @@ namespace Cmd
 	partial class MapUserData
 	{
 		public static readonly MapUserData Empty = new MapUserData();
+
+		public string GetRoleHeadSprite()
+		{
+			if (this.sexman)
+				return "male";
+			else
+				return "female";
+		}
 	}
 	#endregion
 

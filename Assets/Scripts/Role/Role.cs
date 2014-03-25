@@ -5,7 +5,7 @@ using Cmd;
 using System.Collections.Generic;
 using System;
 
-public class Role : MonoBehaviour
+public class Role : MonoBehaviour, ISelectTarget
 {
 	public static Dictionary<ulong, Role> All { get; private set; }
 
@@ -15,6 +15,21 @@ public class Role : MonoBehaviour
 	private Entity entity;
 	//private Animator animator;
 	private Move move;
+
+
+	#region ISelectTarget Members
+
+	public string Name
+	{
+		get { return ServerInfo.charname; }
+	}
+
+	public string RoleHeadSprite
+	{
+		get { return ServerInfo.GetRoleHeadSprite(); }
+	}
+
+	#endregion
 
 	static Role()
 	{
@@ -101,12 +116,12 @@ public class Role : MonoBehaviour
 	/// </summary>
 	/// <param name="id"></param>
 	/// <returns></returns>
-	public static bool SceneSelect(ulong id)
+	public static void SceneSelect(ulong id)
 	{
-		Role role;
-		if (All.TryGetValue(id, out role) == false)
-			return false;
-		Debug.Log("选中Role：" + role.transform.GetPath());
-		return true;
+		Role target;
+		if (Role.All.TryGetValue(id, out target) == false)
+			BattleScene.Instance.Gui<GXRoleHead>().Target = null;
+		else
+			BattleScene.Instance.Gui<GXRoleHead>().Target = target;
 	}
 }
