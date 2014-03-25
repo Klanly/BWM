@@ -29,24 +29,4 @@ public static class NetMessageProcess
 	{
 		Net.Instance.Send(new TickReturnNullUserCmd_CS() { requesttime = cmd.requesttime, mytime = DateTime.Now.ToUnixTime() });
 	}
-
-	/// <summary>
-	/// 场景点选
-	/// </summary>
-	/// <param name="cmd"></param>
-	[Execute]
-	static void Execute(SelectSceneEntryScriptUserCmd_CS cmd)
-	{
-		switch (cmd.entrytype)
-		{
-			case SceneEntryType.SceneEntryType_Npc:
-				Npc.SceneSelect(cmd.entryid);
-				break;
-			case SceneEntryType.SceneEntryType_Player:
-				Role.SceneSelect(cmd.entryid);
-				break;
-			default:
-				break;
-		}
-	}
 }

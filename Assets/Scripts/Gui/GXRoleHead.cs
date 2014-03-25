@@ -10,22 +10,8 @@ public class GXRoleHead : MonoBehaviour
 	public UISlider myHp;
 	public UISprite myHead;
 
-	private ISelectTarget m_target;
-	public ISelectTarget Target
-	{
-		get { return m_target; }
-		set
-		{
-			this.m_target = value;
-			OnSelectTargetChanged();
-		}
-	}
-	public UILabel otherName;
-	public UISprite otherHead;
-
 	IEnumerator Start()
 	{
-		Target = null;
 		while (MainRole.Instance == null)
 			yield return new WaitForEndOfFrame();
 		MainRole.Instance.PropertyChanged += OnMainRolePropertyChanged;
@@ -46,17 +32,5 @@ public class GXRoleHead : MonoBehaviour
 		myLevel.text = MainRole.Instance.level.ToString();
 		myHead.spriteName = MainRole.ServerInfo.GetRoleHeadSprite();
 		myHp.value = MainRole.Instance.hp / (float)MainRole.Instance.maxhp;
-	}
-
-	void OnSelectTargetChanged()
-	{
-		if (Target == null)
-		{
-			this.otherName.parent.gameObject.SetActive(false);
-			return;
-		}
-		this.otherName.parent.gameObject.SetActive(true);
-		this.otherName.text = Target.Name;
-		this.otherHead.spriteName = Target.RoleHeadSprite;
 	}
 }
