@@ -7,6 +7,9 @@
 		<field column="模型" code="model" type="string">
 			<regex>^[^\\]+$</regex>
 		</field>
+		<field column="类型" code="type" type="uint8">
+			<regex>^[0-4]$</regex>
+		</field>
 	</output>
 	<output type="json-go" code="TableNpc" file="Npc表.xlsx" sheet="Sheet1">
 		<key code="id" />
