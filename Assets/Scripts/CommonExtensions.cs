@@ -11,6 +11,7 @@ namespace Cmd
 	/// </summary>
 	partial class Pos : System.IEquatable<Pos>
 	{
+		#region Equatable
 		public static bool operator ==(Pos a, Pos b)
 		{
 			if (System.Object.ReferenceEquals(a, b))
@@ -43,6 +44,8 @@ namespace Cmd
 
 		#endregion
 
+		#endregion
+
 		public override string ToString()
 		{
 			return string.Format("{{{0},{1}}}", x, y);
@@ -54,6 +57,7 @@ namespace Cmd
 	#region ItemLocation
 	partial class ItemLocation : System.IEquatable<ItemLocation>
 	{
+		#region Equatable
 		public static bool operator ==(ItemLocation a, ItemLocation b)
 		{
 			if (System.Object.ReferenceEquals(a, b))
@@ -86,6 +90,8 @@ namespace Cmd
 
 		#endregion
 
+		#endregion
+
 		public override string ToString()
 		{
 			return string.Format("{{{0},{1}}}", type, index);
@@ -111,6 +117,7 @@ namespace Cmd
 	#region SaveItem
 	partial class SaveItem
 	{
+		#region Table cache
 		private table.TableItem tableInfoCache;
 		public table.TableItem TableInfo
 		{
@@ -122,6 +129,7 @@ namespace Cmd
 				return tableInfoCache;
 			}
 		}
+		#endregion
 
 		public override string ToString()
 		{
@@ -134,6 +142,7 @@ namespace Cmd
 	#region SaveSkill
 	partial class SaveSkill : System.IEquatable<SaveSkill>
 	{
+		#region Equatable
 		public static bool operator ==(SaveSkill a, SaveSkill b)
 		{
 			if (System.Object.ReferenceEquals(a, b))
@@ -166,6 +175,9 @@ namespace Cmd
 
 		#endregion
 
+		#endregion
+
+		#region Table cache
 		private table.TableSkill tableInfoCache;
 		public table.TableSkill TableInfo
 		{
@@ -177,6 +189,7 @@ namespace Cmd
 				return tableInfoCache;
 			}
 		}
+		#endregion
 
 		public override string ToString()
 		{

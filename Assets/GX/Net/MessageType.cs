@@ -16,6 +16,7 @@ namespace GX.Net
 		public uint Cmd { get; set; }
 		public uint Param { get; set; }
 
+		#region Equatable
 		public static bool operator ==(MessageType a, MessageType b)
 		{
 			if (System.Object.ReferenceEquals(a, b))
@@ -28,25 +29,6 @@ namespace GX.Net
 		{
 			return !(a == b);
 		}
-
-		#region IComparable<MessageType> 成员
-
-		public int CompareTo(MessageType other)
-		{
-			if (this.Cmd > other.Cmd)
-				return 1;
-			else if (this.Cmd < other.Cmd)
-				return -1;
-
-			if (this.Param > other.Param)
-				return 1;
-			else if (this.Param < other.Param)
-				return -1;
-
-			return 0;
-		}
-
-		#endregion
 
 		#region IEquatable<MessageType> 成员
 
@@ -66,6 +48,26 @@ namespace GX.Net
 		{
 			return ((int)this.Cmd << 16) | ((int)this.Param & 0x0000FFFF);
 		}
+		#endregion
+
+		#region IComparable<MessageType> 成员
+
+		public int CompareTo(MessageType other)
+		{
+			if (this.Cmd > other.Cmd)
+				return 1;
+			else if (this.Cmd < other.Cmd)
+				return -1;
+
+			if (this.Param > other.Param)
+				return 1;
+			else if (this.Param < other.Param)
+				return -1;
+
+			return 0;
+		}
+
+		#endregion
 
 		public override string ToString()
 		{
