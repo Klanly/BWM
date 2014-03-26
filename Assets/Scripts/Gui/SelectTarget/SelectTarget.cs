@@ -18,11 +18,11 @@ public class SelectTarget : MonoBehaviour
 		{
 			var p = c.gameObject.GetComponent<T>();
 			c.gameObject.SetActive(p != null);
-			if (c.gameObject.activeSelf)
+			if (p != null)
 				present = p;
 		}
-		if (present != null)
-			NGUITools.BringForward(present.gameObject);
+		NGUITools.BringForward(present.gameObject);
+		Debug.Log(string.Format("SelectTarget: <color=green>{0}</color>", typeof(T).Name));
 		return present;
 	}
 
@@ -31,9 +31,11 @@ public class SelectTarget : MonoBehaviour
 	/// </summary>
 	/// <param name="cmd"></param>
 	[Execute]
-	static void Execute(SelectSceneEntryScriptUserCmd_CS cmd)
+	static IEnumerator Execute(SelectSceneEntryScriptUserCmd_CS cmd)
 	{
 		var my = BattleScene.Instance.Gui<SelectTarget>();
+		my.gameObject.SetActive(true);
+		yield return null;
 		switch (cmd.entrytype)
 		{
 			case SceneEntryType.SceneEntryType_Npc:
