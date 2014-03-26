@@ -3,12 +3,12 @@ using System.Collections;
 
 public class SelectTargetRole : MonoBehaviour
 {
-	void Start()
-	{
-	}
+	public UILabel uiName;
+	public UISprite uiHead;
 
 	internal void Present(Role target)
 	{
-		throw new System.NotImplementedException();
+		uiName.text = target.ServerInfo.charname;
+		uiHead.spriteName = target.ServerInfo.GetRoleHeadSprite();
 	}
 }

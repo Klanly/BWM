@@ -106,6 +106,7 @@ GameObject:
   - 4: {fileID: 400012}
   - 114: {fileID: 11400012}
   - 54: {fileID: 5400000}
+  - 114: {fileID: 11400014}
   m_Layer: 13
   m_Name: SelectTargetMonster
   m_TagString: Untagged
@@ -536,13 +537,25 @@ MonoBehaviour:
   alwaysOnScreen: 0
   anchorOffset: 0
   renderQueue: 0
-  startingRenderQueue: 3001
+  startingRenderQueue: 3000
   mAlpha: 1
   mClipping: 0
   mClipRange: {x: 0, y: 0, z: 300, w: 200}
   mClipSoftness: {x: 4, y: 4}
   mDepth: 1
   mClipOffset: {x: 0, y: 0}
+--- !u!114 &11400014
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100012}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71a1af31a288b0141a7073069b0e70a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nameLabel: {fileID: 11400010}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

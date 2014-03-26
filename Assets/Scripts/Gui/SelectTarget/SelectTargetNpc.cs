@@ -3,12 +3,12 @@ using System.Collections;
 
 public class SelectTargetNpc : MonoBehaviour
 {
-	void Start()
-	{
-	}
+	public UILabel nameLabel;
+	public UILabel infoLabel;
 
 	internal void Present(Npc target)
 	{
-		throw new System.NotImplementedException();
+		nameLabel.text = target.TableInfo.name;
+		infoLabel.text = "我是一枚NPC";
 	}
 }

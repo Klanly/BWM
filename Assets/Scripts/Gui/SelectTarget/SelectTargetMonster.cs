@@ -3,12 +3,10 @@ using System.Collections;
 
 public class SelectTargetMonster : MonoBehaviour
 {
-	void Start()
-	{
-	}
+	public UILabel nameLabel;
 
 	internal void Present(Npc target)
 	{
-		throw new System.NotImplementedException();
+		nameLabel.text = target.TableInfo.name;
 	}
 }
