@@ -280,7 +280,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100002}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 53, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400012}
@@ -433,7 +433,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -234, y: 83, z: 0}
+  m_LocalPosition: {x: -236, y: 53, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400000}
@@ -444,7 +444,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100030}
   m_LocalRotation: {x: .258819044, y: 0, z: 0, w: .965925813}
-  m_LocalPosition: {x: -2963.021, y: 27207.3203, z: -47666.7266}
+  m_LocalPosition: {x: -3216.39307, y: 27681.7031, z: -47392.8477}
   m_LocalScale: {x: 320, y: 320.000031, z: 320}
   m_Children: []
   m_Father: {fileID: 400000}
@@ -468,7 +468,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 1.20000005
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -1198,28 +1198,28 @@ MonoBehaviour:
   leftAnchor:
     target: {fileID: 400000}
     relative: .5
-    absolute: -334
+    absolute: -364
   rightAnchor:
     target: {fileID: 400000}
     relative: .5
-    absolute: -134
+    absolute: -108
   bottomAnchor:
     target: {fileID: 400000}
     relative: .5
-    absolute: -42
+    absolute: -75
   topAnchor:
     target: {fileID: 400000}
     relative: .5
-    absolute: 208
+    absolute: 181
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 200
-  mHeight: 250
+  mWidth: 256
+  mHeight: 256
   mDepth: 12
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: .800000012
+  aspectRatio: 1
   mRect:
     serializedVersion: 2
     x: 0
