@@ -3,7 +3,7 @@ using System.Collections;
 using Cmd;
 using GX.Net;
 
-public class GXRoleHead : MonoBehaviour
+public class RoleHead : MonoBehaviour
 {
 	public UILabel myName;
 	public UILabel myLevel;

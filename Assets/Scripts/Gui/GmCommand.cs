@@ -4,7 +4,7 @@ using GX.Net;
 using Cmd;
 using System.Collections.Generic;
 
-public class GXGmCommand : MonoBehaviour
+public class GmCommand : MonoBehaviour
 {
 	public GameObject itemTemplate;
 	public UIScrollView scrollView;
@@ -33,7 +33,7 @@ public class GXGmCommand : MonoBehaviour
 			UIEventListener.Get(item.GetComponentInChildren<UIButton>().gameObject).onClick = go =>
 			{
 				Debug.Log(info.ToStringDebug());
-				BattleScene.Instance.Gui<GXChatInput>().SetText(string.Format("//{0} {1}", info.method, info.example));
+				BattleScene.Instance.Gui<ChatInputBox>().SetText(string.Format("//{0} {1}", info.method, info.example));
 			};
 		}
 
@@ -47,7 +47,7 @@ public class GXGmCommand : MonoBehaviour
 	[Execute]
 	static IEnumerator Execute(GMCommandListChatUserCmd_S cmd)
 	{
-		var my = BattleScene.Instance.Gui<GXGmCommand>();
+		var my = BattleScene.Instance.Gui<GmCommand>();
 		my.gameObject.SetActive(true);
 		yield return new WaitForEndOfFrame();
 		my.SetValues(cmd.list);

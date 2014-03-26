@@ -7,7 +7,7 @@ using System.Text.RegularExpressions;
 /// <summary>
 /// </summary>
 /// <remarks>ChatInput和NGUI\Examples\Scripts\Other\ChatInput.cs重名</remarks>
-public class GXChatInput : MonoBehaviour
+public class ChatInputBox : MonoBehaviour
 {
 	public UIButton sendButton;
 	public UIInput chatInput;
@@ -32,7 +32,7 @@ public class GXChatInput : MonoBehaviour
 	public void SetText(string text)
 	{
 		chatInput.value = text;
-		BattleScene.Instance.Gui<GXChatOutput>().Toggle(false);
+		BattleScene.Instance.Gui<ChatOutput>().Toggle(false);
 		chatInput.isSelected = true;
 	}
 

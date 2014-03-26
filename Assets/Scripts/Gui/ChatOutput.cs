@@ -5,7 +5,7 @@ using Cmd;
 using System.Collections.Generic;
 using System.Linq;
 
-public class GXChatOutput : MonoBehaviour
+public class ChatOutput : MonoBehaviour
 {
 	public const int MaxChatLines = 10;
 	public const int MaxSnapshotLines = 2;
@@ -31,7 +31,7 @@ public class GXChatOutput : MonoBehaviour
 		snapshotChatMessage.text = string.Empty;
 		UIEventListener.Get(snapshotToggle.gameObject).onClick = Toggle;
 
-		UIEventListener.Get(gmCommandButton.gameObject).onClick = go => GXChatInput.SendChat("//help");
+		UIEventListener.Get(gmCommandButton.gameObject).onClick = go => ChatInputBox.SendChat("//help");
 
 		Toggle(true);
 	}
@@ -48,7 +48,7 @@ public class GXChatOutput : MonoBehaviour
 
 		NGUITools.BringForward(this.gameObject);
 
-		var input = BattleScene.Instance.Gui<GXChatInput>().gameObject;
+		var input = BattleScene.Instance.Gui<ChatInputBox>().gameObject;
 		input.SetActive(!toMinichat);
 		NGUITools.BringForward(input);
 	}
@@ -61,7 +61,7 @@ public class GXChatOutput : MonoBehaviour
 			Debug.LogWarning("进场景前收到聊天消息： " + cmd.info);
 			return;
 		}
-		var my = BattleScene.Instance.Gui<GXChatOutput>();
+		var my = BattleScene.Instance.Gui<ChatOutput>();
 		var chat = FormatChatMessage(cmd);
 		my.lines.Add(chat);
 		if (my.lines.Count > MaxChatLines)
