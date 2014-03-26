@@ -186,7 +186,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100010}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 479.333313, y: 270.327393, z: 0}
+  m_LocalPosition: {x: 283.551117, y: 269.999969, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400008}
@@ -403,10 +403,10 @@ MonoBehaviour:
   alwaysOnScreen: 0
   anchorOffset: 0
   renderQueue: 0
-  startingRenderQueue: 3001
+  startingRenderQueue: 3007
   mAlpha: 1
   mClipping: 3
-  mClipRange: {x: 0, y: 84.1636963, z: 1046.66663, w: 620.327393}
+  mClipRange: {x: 0, y: 84, z: 939.999939, w: 619.999939}
   mClipSoftness: {x: 4, y: 4}
   mDepth: 2
   mClipOffset: {x: 0, y: -84}
@@ -604,19 +604,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   leftAnchor:
-    target: {fileID: 400004}
-    relative: 1
-    absolute: -74
+    target: {fileID: 0}
+    relative: 0
+    absolute: 90
   rightAnchor:
-    target: {fileID: 400004}
+    target: {fileID: 0}
     relative: 1
-    absolute: -34
+    absolute: 130
   bottomAnchor:
-    target: {fileID: 400004}
-    relative: 1
+    target: {fileID: 0}
+    relative: 0
     absolute: -70
   topAnchor:
-    target: {fileID: 400004}
+    target: {fileID: 0}
     relative: 1
     absolute: -30
   mColor: {r: 1, g: 1, b: 1, a: 1}
