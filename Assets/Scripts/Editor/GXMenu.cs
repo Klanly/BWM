@@ -30,7 +30,8 @@ static class GXMenu
 		try
 		{
 			ProtobufBegin();
-			UniWebBegin();
+			WebSocket4NetBegin();
+			JsonFxBegin();
 
 			// 进行WP8项目生成
 			{
@@ -43,7 +44,8 @@ static class GXMenu
 			}
 
 			ProtobufEnd();
-			UniWebEnd();
+			WebSocket4NetEnd();
+			JsonFxEnd();
 
 			Debug.Log("OK");
 		}
@@ -58,8 +60,6 @@ static class GXMenu
 			AssetDatabase.Refresh();
 		}
 	}
-
-	
 
 	private static void ProtobufBegin()
 	{
@@ -82,15 +82,24 @@ static class GXMenu
 		File.Copy(Temp + "/protobuf-net.xml", "Assets/DLL/protobuf-net.xml", true);
 	}
 
-	private static void UniWebBegin()
+	private static void WebSocket4NetBegin()
 	{
-		Directory.Move("Assets/UniWeb", Temp + "/UniWeb");
+		File.Move("Assets/DLL/WebSocket4Net.dll", Temp + "/WebSocket4Net.dll");
 	}
 
-	private static void UniWebEnd()
+	private static void WebSocket4NetEnd()
 	{
-		Directory.Delete("Assets/UniWeb");
-		Directory.Move(Temp + "/UniWeb", "Assets/UniWeb");
+		File.Copy(Temp + "/WebSocket4Net.dll", "Assets/DLL/WebSocket4Net.dll", true);
+	}
+
+	private static void JsonFxBegin()
+	{
+		File.Move("Assets/DLL/JsonFx.Json.dll", Temp + "/JsonFx.Json.dll");
+	}
+
+	private static void JsonFxEnd()
+	{
+		File.Copy(Temp + "/JsonFx.Json.dll", "Assets/DLL/JsonFx.Json.dll", true);
 	}
 }
 #endif
