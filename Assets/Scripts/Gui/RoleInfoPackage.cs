@@ -68,6 +68,17 @@ public class RoleInfoPackage : MonoBehaviour
 			var tooltip = BattleScene.Instance.Gui<ItemTooltipEquip>();
 			tooltip.gameObject.SetActive(true);
 			tooltip.ServerInfo = item;
+
+			var equiped = (
+				from i in ItemManager.Instance.Where(ItemLocation.PackageType.Equip)
+				where i.TableInfo.Type.equipPos == item.TableInfo.Type.equipPos
+				select i).FirstOrDefault();
+			if (equiped != null)
+			{
+				var compare = BattleScene.Instance.Gui<ItemTooltipEquiped>();
+				compare.gameObject.SetActive(true);
+				compare.ServerInfo = item;
+			}
 		}
 		else
 		{
@@ -75,5 +86,12 @@ public class RoleInfoPackage : MonoBehaviour
 			tooltip.gameObject.SetActive(true);
 			tooltip.ServerInfo = item;
 		}
+	}
+
+	public void CloseAllTooltips()
+	{
+		BattleScene.Instance.Gui<ItemTooltipEquip>().gameObject.SetActive(false);
+		BattleScene.Instance.Gui<ItemTooltipEquiped>().gameObject.SetActive(false);
+		BattleScene.Instance.Gui<ItemTooltipItem>().gameObject.SetActive(false);
 	}
 }

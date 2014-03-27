@@ -30,7 +30,7 @@ public class ItemTooltipEquip : MonoBehaviour
 		UIEventListener.Get(uiDelete.gameObject).onClick = go =>
 		{
 			Net.Instance.Send(new RemoveItemItemUserCmd_CS() { thisid = ServerInfo.thisid });
-			this.gameObject.SetActive(false);
+			BattleScene.Instance.Gui<RoleInfoPackage>().CloseAllTooltips();
 		};
 		UIEventListener.Get(uiUse.gameObject).onClick = OnUse;
 	}
@@ -62,6 +62,7 @@ public class ItemTooltipEquip : MonoBehaviour
 		var setup = ServerInfo.DeepClone();
 		setup.loc.type = ItemLocation.PackageType.Equip;
 		Net.Instance.SendToMe(new AddItemItemUserCmd_S() { item = setup });
-		this.gameObject.SetActive(false);
+
+		BattleScene.Instance.Gui<RoleInfoPackage>().CloseAllTooltips();
 	}
 }

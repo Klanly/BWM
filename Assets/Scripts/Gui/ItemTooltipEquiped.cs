@@ -11,6 +11,7 @@ public class ItemTooltipEquiped : ItemTooltipEquip
 		var setup = ServerInfo.DeepClone();
 		setup.loc.type = ItemLocation.PackageType.Main;
 		Net.Instance.SendToMe(new AddItemItemUserCmd_S() { item = setup });
-		this.gameObject.SetActive(false);
+
+		BattleScene.Instance.Gui<RoleInfoPackage>().CloseAllTooltips();
 	}
 }

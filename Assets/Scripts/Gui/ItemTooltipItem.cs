@@ -28,7 +28,7 @@ public class ItemTooltipItem : MonoBehaviour
 		UIEventListener.Get(uiDelete.gameObject).onClick += go =>
 		{
 			Net.Instance.Send(new RemoveItemItemUserCmd_CS() { thisid = ServerInfo.thisid });
-			this.gameObject.SetActive(false);
+			BattleScene.Instance.Gui<RoleInfoPackage>().CloseAllTooltips();
 		};
 	}
 
