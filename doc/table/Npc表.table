@@ -10,6 +10,10 @@
 		<field column="类型" code="type" type="uint8">
 			<regex>^[0-4]$</regex>
 		</field>
+		<field column="血条贴图" code="hpBar" type="array" default="[&quot;BarRed&quot;]">
+			<field type="string" />
+		</field>
+		
 	</output>
 	<output type="json-go" code="TableNpc" file="Npc表.xlsx" sheet="Sheet1">
 		<key code="id" />
