@@ -3,7 +3,7 @@ using System.Collections;
 using Cmd;
 using System.Text;
 
-public class ItemTooltip : MonoBehaviour
+public class ItemTooltipItem : MonoBehaviour
 {
 	public UILabel nameLabel;
 	public UIButton closeButton;
