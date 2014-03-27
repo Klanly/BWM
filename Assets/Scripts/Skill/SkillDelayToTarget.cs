@@ -2,10 +2,8 @@
 using System.Collections;
 
 [RequireComponent(typeof(Skill))]
-public class SkillDelayToTarget : SkillBase
+public class SkillDelayToTarget : SendTargetEventBase
 {
-
-	public bool sendTargetEvent = false;
 	public float delay = 1.0f;
 
 	// Use this for initialization

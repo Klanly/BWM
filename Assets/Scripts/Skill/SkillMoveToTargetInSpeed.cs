@@ -2,10 +2,8 @@
 using System.Collections;
 
 [RequireComponent(typeof(Skill))]
-public class SkillMoveToTargetInSpeed : SkillBase
+public class SkillMoveToTargetInSpeed : SendTargetEventBase
 {
-
-	public bool sendTargetEvent;
 	public GameObject particle;
 	public string mountOfStartGo;
 	public string mountOfTargetGo;

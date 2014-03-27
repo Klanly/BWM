@@ -2,10 +2,8 @@
 using System.Collections;
 
 [RequireComponent(typeof(Skill))]
-public class SkillCurveToTargetInSpeed : SkillBase
+public class SkillCurveToTargetInSpeed : SendTargetEventBase
 {
-
-	public bool sendTargetEvent;
 	public GameObject particle;
 	public string mountOfStartGo;
 	public string mountOfTargetGo;

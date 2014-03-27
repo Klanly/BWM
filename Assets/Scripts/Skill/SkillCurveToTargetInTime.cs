@@ -3,10 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 
 [RequireComponent(typeof(Skill))]
-public class SkillCurveToTargetInTime : SkillBase
+public class SkillCurveToTargetInTime : SendTargetEventBase
 {
-
-	public bool sendTargetEvent = false;
 	public GameObject particle;
 	public string mountOfStartGo;
 	public string mountOfTargetGo;
