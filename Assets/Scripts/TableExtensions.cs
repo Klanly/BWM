@@ -30,6 +30,22 @@ namespace table
 	partial class TableItem
 	{
 		public Profession Profession { get { return (Profession)this.profession; } }
+
+		private table.TableItemType itemTypeCache;
+		public table.TableItemType Type
+		{
+			get
+			{
+				if (itemTypeCache == null || itemTypeCache.type != this.type)
+					itemTypeCache = Table.Query<table.TableItemType>().First(i => i.type == this.type);
+				return itemTypeCache;
+			}
+		}
+	}
+
+	partial class TableItemType
+	{
+		public bool IsEquip { get { return this.type != 0; } }
 	}
 
 	public enum NpcType

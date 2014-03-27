@@ -23,7 +23,7 @@ public class ItemTooltip : MonoBehaviour
 		set
 		{
 			serverInfo = value;
-			if (serverInfo.TableInfo.type < 100)
+			if (serverInfo.TableInfo.Type.IsEquip)
 				PresentEquip();
 			else
 				PresentItem();
@@ -80,7 +80,7 @@ public class ItemTooltip : MonoBehaviour
 		equipFightLabel.text = string.Format("战斗力{0}", item.id);
 		var sb = new StringBuilder();
 		sb
-			.AppendFormat("种类: {0}({1})", item.type, item.Profession.GetName()).AppendLine()
+			.AppendFormat("种类: {0}", item.Type.name).AppendLine()
 			.AppendFormat("等级: [ff0000]{0}[-]", item.level);
 		equipPropertyLabel.text = sb.ToString();
 		equipMessageLabel.text = item.desc;
