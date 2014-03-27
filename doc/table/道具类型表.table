@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<table>
+	<output type="protobuf" code="TableItemType" file="道具类型表.xlsm" sheet="Sheet1">
+		<key code="type" />
+		<field column="类型" code="type" type="uint8" />
+		<field column="类型名称" code="name" type="string" />
+		<field column="类型说明" code="desc" type="string" />
+	</output>
+</table>
