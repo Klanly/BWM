@@ -42,7 +42,8 @@ public class RoleInfoPackage : MonoBehaviour
 
 	void OnEnable()
 	{
-		NGUITools.BringForward(this.gameObject);		
+		NGUITools.BringForward(this.gameObject);
+		NGUITools.BringForward(BattleScene.Instance.Gui<RoleInfo>().closeButton.gameObject);
 	}
 
 	/// <summary>
