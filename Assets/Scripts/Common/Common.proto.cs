@@ -59,7 +59,10 @@ namespace Cmd
     {
             
       [global::ProtoBuf.ProtoEnum(Name=@"Main", Value=0)]
-      Main = 0
+      Main = 0,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"Equip", Value=1)]
+      Equip = 1
     }
   
     private global::ProtoBuf.IExtension extensionObject;
@@ -149,6 +152,32 @@ namespace Cmd
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
+  
+    [global::ProtoBuf.ProtoContract(Name=@"EquipPos")]
+    public enum EquipPos
+    {
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"Weapon", Value=1)]
+      Weapon = 1,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"Bracer", Value=2)]
+      Bracer = 2,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"Clothe", Value=3)]
+      Clothe = 3,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"Pants", Value=4)]
+      Pants = 4,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"Necklace", Value=5)]
+      Necklace = 5,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"Ring", Value=6)]
+      Ring = 6,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"Shoes", Value=7)]
+      Shoes = 7
+    }
   
     [global::ProtoBuf.ProtoContract(Name=@"Profession")]
     public enum Profession
