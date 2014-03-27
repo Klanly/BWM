@@ -63,8 +63,17 @@ public class RoleInfoPackage : MonoBehaviour
 		var item = items[index].ServerInfo;
 		if (item == null)
 			return;
-		//var tooltip = BattleScene.Instance.Gui<ItemTooltip>();
-		//tooltip.gameObject.SetActive(true);
-		//tooltip.ServerInfo = item;		
+		if (item.TableInfo.Type.IsEquip)
+		{
+			var tooltip = BattleScene.Instance.Gui<ItemTooltipEquip>();
+			tooltip.gameObject.SetActive(true);
+			tooltip.ServerInfo = item;
+		}
+		else
+		{
+			var tooltip = BattleScene.Instance.Gui<ItemTooltipItem>();
+			tooltip.gameObject.SetActive(true);
+			tooltip.ServerInfo = item;
+		}
 	}
 }

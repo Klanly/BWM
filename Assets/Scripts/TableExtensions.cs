@@ -45,7 +45,7 @@ namespace table
 
 	partial class TableItemType
 	{
-		public bool IsEquip { get { return this.type != 0; } }
+		public bool IsEquip { get { return this.package != 0; } }
 	}
 
 	public enum NpcType

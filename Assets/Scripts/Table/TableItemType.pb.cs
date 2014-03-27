@@ -22,15 +22,22 @@ namespace table
       get { return _type; }
       set { _type = value; }
     }
+    private uint _package;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"package", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint package
+    {
+      get { return _package; }
+      set { _package = value; }
+    }
     private string _name;
-    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"name", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"name", DataFormat = global::ProtoBuf.DataFormat.Default)]
     public string name
     {
       get { return _name; }
       set { _name = value; }
     }
     private string _desc;
-    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"desc", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::ProtoBuf.ProtoMember(4, IsRequired = true, Name=@"desc", DataFormat = global::ProtoBuf.DataFormat.Default)]
     public string desc
     {
       get { return _desc; }
