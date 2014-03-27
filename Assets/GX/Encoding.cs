@@ -5,39 +5,18 @@ namespace GX
 {
 	public class Encoding
 	{
-		public interface IProxy
+		private static readonly System.Text.Encoding encoding = System.Text.Encoding.UTF8;
+		public static byte[] GetBytes(string s)
 		{
-			byte[] GetBytes(string s);
-			string GetString(byte[] bytes);
+			return encoding.GetBytes(s);
 		}
-
-#if !UNITY_WINRT || UNITY_EDITOR
-
-		class DefaultEncoding : IProxy
-		{
-			private readonly System.Text.Encoding encoding;
-			public DefaultEncoding(System.Text.Encoding encoding = null) { this.encoding = encoding ?? System.Text.Encoding.UTF8; }
-
-			#region IProxy 成员
-
-			public byte[] GetBytes(string s) { return encoding.GetBytes(s); }
-			public string GetString(byte[] bytes) { return encoding.GetString(bytes); }
-
-			#endregion
-		}
-
-#endif
-
-		public static IProxy Proxy { get; set; }
-
-		static Encoding()
+		public static string GetString(byte[] bytes)
 		{
 #if !UNITY_WINRT || UNITY_EDITOR
-			Proxy = new DefaultEncoding();
+			return encoding.GetString(bytes);
+#else
+			return encoding.GetString(bytes, 0, bytes.Length); 
 #endif
 		}
-
-		public static byte[] GetBytes(string s) { return Proxy.GetBytes(s); }
-		public static string GetString(byte[] bytes) { return Proxy.GetString(bytes); }
 	}
 }
