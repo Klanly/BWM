@@ -19,7 +19,7 @@
 	<output type="protobuf" code="TableItemType" file="道具表.xlsx" sheet="道具类型">
 		<key code="type" />
 		<field column="类型" code="type" type="uint8" />
-		<field column="装备位置" code="package" type="uint8" />
+		<field column="装备位置" code="equipPos" type="uint8" />
 		<field column="类型名称" code="name" type="string" />
 		<field column="类型说明" code="desc" type="string" />
 	</output>

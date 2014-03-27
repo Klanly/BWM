@@ -22,12 +22,12 @@ namespace table
       get { return _type; }
       set { _type = value; }
     }
-    private uint _package;
-    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"package", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public uint package
+    private uint _equipPos;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"equipPos", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint equipPos
     {
-      get { return _package; }
-      set { _package = value; }
+      get { return _equipPos; }
+      set { _equipPos = value; }
     }
     private string _name;
     [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"name", DataFormat = global::ProtoBuf.DataFormat.Default)]
