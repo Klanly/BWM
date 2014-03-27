@@ -13,31 +13,12 @@ namespace GX
 			string Serialize(object value);
 		}
 
-#if !UNITY_WP8 || UNITY_EDITOR
-		class JsonFxProxy : IProxy
-		{
-			#region IProxy 成员
-
-			public T Deserialize<T>(string value)
-			{
-				return JsonFx.Json.JsonReader.Deserialize<T>(value);
-			}
-
-			public string Serialize(object value)
-			{
-				return JsonFx.Json.JsonWriter.Serialize(value);
-			}
-
-			#endregion
-		}
-#endif
-
 		public static IProxy Proxy { get; set; }
 
 		static Json()
 		{
 #if !UNITY_WP8 || UNITY_EDITOR
-			Proxy = new JsonFxProxy();
+			Proxy = new JsonJsonFx();
 #endif
 		}
 

@@ -7,7 +7,7 @@ using System.Text;
 using UnityEngine;
 using GX;
 
-public static class Extensions
+public static partial class Extensions
 {
 	#region Random
 	private static readonly System.Random random = new System.Random();
