@@ -88,8 +88,16 @@ public class SkillMoveToTargetInSpeed : SendTargetEventBase
 	{
 		if (particleGo != null)
 		{
-			foreach (ParticleSystem t in particleGo.GetComponentsInChildren<ParticleSystem>())
-				t.loop = false;
+			if(immediateDeleteParticle)
+			{
+				foreach (ParticleSystem t in particleGo.GetComponentsInChildren<ParticleSystem>())
+					Destroy(t.gameObject);
+			}
+			else
+			{
+				foreach (ParticleSystem t in particleGo.GetComponentsInChildren<ParticleSystem>())
+					t.loop = false;
+			}
 		}
 		if (sendTargetEvent)
 			gameObject.SendMessage("ApplyTargetEvent");
