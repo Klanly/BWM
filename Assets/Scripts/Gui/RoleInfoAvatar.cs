@@ -1,9 +1,29 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Cmd;
 
 public class RoleInfoAvatar : MonoBehaviour
 {
 	private GameObject avatar;
+	public ItemGrid[] items;
+
+	void Start()
+	{
+		for (var i = 1; i < items.Length; i++)
+		{
+			var index = i;
+			UIEventListener.Get(items[i].gameObject).onClick = go => OnItemGridClicked(index);
+		}
+
+		// 更新事件
+		ItemManager.Instance.ItemChanged += Present;
+		Present(ItemManager.Instance);
+	}
+
+	void OnDestroy()
+	{
+		ItemManager.Instance.ItemChanged -= Present;
+	}
 
 	void OnEnable()
 	{
@@ -23,5 +43,21 @@ public class RoleInfoAvatar : MonoBehaviour
 			GameObject.Destroy(avatar);
 			avatar = null;
 		}
+	}
+
+	void Present(ItemManager manager)
+	{
+		for (var i = 1; i < items.Length; i++)
+			items[i].ServerInfo = null;
+		foreach (var item in manager.Where(ItemLocation.PackageType.Equip))
+			items[item.TableInfo.Type.equipPos].ServerInfo = item;
+	}
+
+	private void OnItemGridClicked(int index)
+	{
+		var item = items[index].ServerInfo;
+		if (item == null)
+			return;
+		// TODO: show ItemTooltipEquiped
 	}
 }

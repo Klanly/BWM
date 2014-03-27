@@ -20,14 +20,15 @@ public class ItemGrid : MonoBehaviour
 			if (value == null)
 			{
 				icon.gameObject.SetActive(false);
-				num.gameObject.SetActive(false);
+				if (num != null)
+					num.gameObject.SetActive(false);
 			}
 			else
 			{
 				icon.gameObject.SetActive(true);
 				icon.spriteName = value.TableInfo.icon;
 
-				if (value.num > 1)
+				if (num != null && value.num > 1)
 				{
 					num.gameObject.SetActive(true);
 					num.text = value.num.ToString();

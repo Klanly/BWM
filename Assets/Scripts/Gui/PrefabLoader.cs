@@ -10,6 +10,8 @@ public class PrefabLoader : MonoBehaviour
 	{
 		foreach (var pf in prefabs)
 		{
+			if (pf == null)
+				continue;
 			var go = GameObject.Instantiate(pf) as GameObject;
 			go.transform.parent = this.transform;
 			go.transform.localScale = Vector3.one;
