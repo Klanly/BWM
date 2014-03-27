@@ -59,7 +59,8 @@ namespace ShenZuo
 		{
 			SetupGeolocator();
 
-			GX.Net.WebSocket.Proxy = new WebSocket4NetProxy();
+			GX.Net.WebSocket.Proxy = new GX.Net.WebSocket4NetProxy();
+			GX.Json.Proxy = new GX.JsonJsonNET();
 		}
 
 		private void PhoneApplicationPage_BackKeyPress(object sender, CancelEventArgs e)

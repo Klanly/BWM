@@ -91,6 +91,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="..\..\Assets\GX\Json\Json.JsonNET.cs">
+      <Link>Json.JsonNET.cs</Link>
+    </Compile>
     <Compile Include="..\..\Assets\GX\Net\WebSocket.WebSocket4Net.cs">
       <Link>WebSocket.WebSocket4Net.cs</Link>
     </Compile>
@@ -179,6 +182,9 @@
     </Reference>
     <Reference Include="Boo.Lang">
       <HintPath>Boo.Lang.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.1\lib\portable-net45+wp80+win8\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="protobuf-net, Version=2.0.0.668, Culture=neutral, PublicKeyToken=257b51d87d2e4d67, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>

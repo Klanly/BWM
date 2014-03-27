@@ -1,9 +1,9 @@
-﻿using System;
+﻿#if !UNITY_WINRT || UNITY_EDITOR
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-#if !UNITY_WINRT || UNITY_EDITOR
 namespace GX.Net
 {
 	class WebSocket4NetProxy : GX.Net.WebSocket.IProxy

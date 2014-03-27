@@ -1,23 +1,21 @@
-﻿#if !UNITY_WP8 || UNITY_EDITOR
+﻿#if WINDOWS_PHONE
 using UnityEngine;
 using System.Collections;
 
 namespace GX
 {
-	class JsonJsonFx : Json.IProxy
+	class JsonJsonNET : Json.IProxy
 	{
 		#region IProxy 成员
-
 		public T Deserialize<T>(string value)
 		{
-			return JsonFx.Json.JsonReader.Deserialize<T>(value);
+			return Newtonsoft.Json.JsonConvert.DeserializeObject<T>(value);
 		}
 
 		public string Serialize(object value)
 		{
-			return JsonFx.Json.JsonWriter.Serialize(value);
+			return Newtonsoft.Json.JsonConvert.SerializeObject(value);
 		}
-
 		#endregion
 	}
 }
