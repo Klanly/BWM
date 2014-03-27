@@ -73,8 +73,9 @@ static class ServerLog
 				return;
 			distinct.Add(key);
 		}
-		Send(new SortedList<string, string>()
+		Send(new Dictionary<string, string>()
 		{
+			{"platform", Application.platform.ToString()},
 			{"type", type.ToString()},
 			{"message", condition},
 			{"stack", stackTrace},
