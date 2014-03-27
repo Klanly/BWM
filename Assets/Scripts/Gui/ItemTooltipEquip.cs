@@ -32,6 +32,14 @@ public class ItemTooltipEquip : MonoBehaviour
 			Net.Instance.Send(new RemoveItemItemUserCmd_CS() { thisid = ServerInfo.thisid });
 			this.gameObject.SetActive(false);
 		};
+		UIEventListener.Get(uiSetup.gameObject).onClick += go =>
+		{
+			// TODO: 应发送服务器请求指令，以下为本地临时测试代码
+			var setup = ServerInfo.DeepClone();
+			setup.loc.type = ItemLocation.PackageType.Equip;
+			Net.Instance.SendToMe(new AddItemItemUserCmd_S() { item = setup });
+			this.gameObject.SetActive(false);
+		};
 	}
 
 	void OnEnable()

@@ -44,6 +44,14 @@ public class Net : Singleton<Net>
 		WebSocket.Send(message);
 	}
 
+	public void SendToMe(ProtoBuf.IExtensible message)
+	{
+		IEnumerator coroutine;
+		Dispatcher.Dispatch(message, out coroutine);
+		if (coroutine != null)
+			StartCoroutine(coroutine);
+	}
+
 	void Start()
 	{
 		StartCoroutine(Dispatch());
@@ -54,11 +62,11 @@ public class Net : Singleton<Net>
 		while (true)
 		{
 			yield return null;
-			foreach (var msg in WebSocket.Receive())
+			foreach (var message in WebSocket.Receive())
 			{
 				IEnumerator coroutine;
-				if (Dispatcher.Dispatch(msg, out coroutine) == false)
-					Debug.LogWarning(string.Format("未处理的消息: {0}\n{1}", msg.GetType(), msg.ToStringDebug()));
+				if (Dispatcher.Dispatch(message, out coroutine) == false)
+					Debug.LogWarning(string.Format("未处理的消息: {0}\n{1}", message.GetType(), message.ToStringDebug()));
 				if (coroutine != null)
 				{
 					while (coroutine.MoveNext())
