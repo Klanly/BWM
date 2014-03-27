@@ -84,7 +84,7 @@ static class ServerLog
 	public static void Send(IDictionary<string, string> log)
 	{
 		log["mid"] = SystemInfo.deviceUniqueIdentifier;
-		var json = SimpleJson.SimpleJson.SerializeObject(log);
+		var json = GX.Json.Serialize(log);
 		Net.Instance.StartCoroutine(Send(json));
 	}
 
