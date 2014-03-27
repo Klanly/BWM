@@ -133,7 +133,7 @@ public class RoleCreateScene : MonoBehaviour
 	}
 
 	[Execute]
-	static void Execute(CheckCharNameSelectUserCmd_CS cmd)
+	public static void Execute(CheckCharNameSelectUserCmd_CS cmd)
 	{
 		var my = Object.FindObjectOfType<RoleCreateScene>();
 		if (cmd.exist)

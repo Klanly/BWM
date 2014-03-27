@@ -54,7 +54,7 @@ public class ChatOutput : MonoBehaviour
 	}
 
 	[Execute]
-	static void ShowChat(CommonChatUserCmd_CS cmd)
+	public static void ShowChat(CommonChatUserCmd_CS cmd)
 	{
 		if (BattleScene.Instance == null)
 		{

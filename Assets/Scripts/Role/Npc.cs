@@ -66,7 +66,7 @@ public class Npc : MonoBehaviour
 	}
 
 	[Execute]
-	static void Execute(AddMapNpcDataAndPosMapUserCmd_S cmd)
+	public static void Execute(AddMapNpcDataAndPosMapUserCmd_S cmd)
 	{
 		Npc npc;
 		if (Npc.All.TryGetValue(cmd.data.tempid, out npc))

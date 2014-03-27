@@ -98,7 +98,7 @@ public class MainRole : MonoBehaviour, INotifyPropertyChanged
 	/// </summary>
 	/// <param name="cmd"></param>
 	[Execute]
-	static IEnumerator Execute(FirstMainUserDataAndPosMapUserCmd_S cmd)
+	public static IEnumerator Execute(FirstMainUserDataAndPosMapUserCmd_S cmd)
 	{
 		if (Application.loadedLevelName != "BattleScene")
 		{
@@ -114,7 +114,7 @@ public class MainRole : MonoBehaviour, INotifyPropertyChanged
 	}
 
 	[Execute]
-	static void Execute(SetUserHpSpDataUserCmd_S cmd)
+	public static void Execute(SetUserHpSpDataUserCmd_S cmd)
 	{
 		var my = MainRole.Instance;
 		if (my != null && cmd.charid == my.Role.ServerInfo.charid)
@@ -127,7 +127,7 @@ public class MainRole : MonoBehaviour, INotifyPropertyChanged
 	}
 
 	[Execute]
-	static void Execute(SetUserHpDataUserCmd_S cmd)
+	public static void Execute(SetUserHpDataUserCmd_S cmd)
 	{
 		if (cmd.charid == MainRole.ServerInfo.charid)
 		{
@@ -136,7 +136,7 @@ public class MainRole : MonoBehaviour, INotifyPropertyChanged
 	}
 
 	[Execute]
-	static void Execute(SetUserSpDataUserCmd_S cmd)
+	public static void Execute(SetUserSpDataUserCmd_S cmd)
 	{
 		if (cmd.charid == MainRole.ServerInfo.charid)
 		{

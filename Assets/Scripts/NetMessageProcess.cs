@@ -15,7 +15,7 @@ public static class NetMessageProcess
 	/// </summary>
 	/// <param name="cmd"></param>
 	[Execute]
-	static void Execute(MessageBoxChatUserCmd_S cmd)
+	public static void Execute(MessageBoxChatUserCmd_S cmd)
 	{
 		MessageBox.Show(cmd.info);
 	}
@@ -25,7 +25,7 @@ public static class NetMessageProcess
 	/// </summary>
 	/// <param name="cmd"></param>
 	[Execute]
-	static void Execute(TickRequestNullUserCmd_CS cmd)
+	public static void Execute(TickRequestNullUserCmd_CS cmd)
 	{
 		Net.Instance.Send(new TickReturnNullUserCmd_CS() { requesttime = cmd.requesttime, mytime = DateTime.Now.ToUnixTime() });
 	}

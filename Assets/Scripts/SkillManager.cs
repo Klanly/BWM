@@ -36,21 +36,21 @@ public class SkillManager : IEnumerable<SaveSkill>
 
 	#region 网络消息处理
 	[Execute]
-	static void Execute(AddSkillListSkillUserCmd_S cmd)
+	public static void Execute(AddSkillListSkillUserCmd_S cmd)
 	{
 		SkillManager.Instance.skills.Clear();
 		SkillManager.Instance.skills.AddRange(cmd.skilllist);
 		Debug.Log(SkillManager.Instance);
 	}
 	[Execute]
-	static void Execute(AddSkillSkillUserCmd_S cmd)
+	public static void Execute(AddSkillSkillUserCmd_S cmd)
 	{
 		SkillManager.Instance.skills.RemoveAll(i => i.skillid == cmd.skill.skillid);
 		SkillManager.Instance.skills.Add(cmd.skill);
 		Debug.Log(SkillManager.Instance);
 	}
 	[Execute]
-	static void Execute(RemoveSkillSkillUserCmd_CS cmd)
+	public static void Execute(RemoveSkillSkillUserCmd_CS cmd)
 	{
 		SkillManager.Instance.skills.RemoveAll(i => i.skillid == cmd.skillid);
 		Debug.Log(SkillManager.Instance);

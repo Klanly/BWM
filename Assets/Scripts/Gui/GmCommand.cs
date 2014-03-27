@@ -45,7 +45,7 @@ public class GmCommand : MonoBehaviour
 	}
 
 	[Execute]
-	static IEnumerator Execute(GMCommandListChatUserCmd_S cmd)
+	public static IEnumerator Execute(GMCommandListChatUserCmd_S cmd)
 	{
 		var my = BattleScene.Instance.Gui<GmCommand>();
 		my.gameObject.SetActive(true);

@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Linq;
+using System.Text;
 
 namespace GX.Net
 {
@@ -19,8 +20,7 @@ namespace GX.Net
 		/// </summary>
 		public static IEnumerable<MethodInfo> GetStaticExecuteMethod(Type type)
 		{
-			return GetExecuteMethod(type, BindingFlags.InvokeMethod | BindingFlags.NonPublic | BindingFlags.Public
-				| BindingFlags.Static);
+			return from m in GetExecuteMethod(type) where m.IsStatic select m;
 		}
 
 		/// <summary>
@@ -40,14 +40,29 @@ namespace GX.Net
 		/// </summary>
 		public static IEnumerable<MethodInfo> GetInstanceExecuteMethod(Type targetType)
 		{
-			return GetExecuteMethod(targetType, BindingFlags.InvokeMethod | BindingFlags.NonPublic | BindingFlags.Public
-				| BindingFlags.Instance);
+			return from m in GetExecuteMethod(targetType) where m.IsStatic == false select m;
 		}
 
-		private static IEnumerable<MethodInfo> GetExecuteMethod(Type targetType, BindingFlags flags)
+		private static IEnumerable<MethodInfo> GetExecuteMethod(Type targetType)
 		{
-			return
+#if UNITY_EDITOR
+			var flags = BindingFlags.InvokeMethod | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static;
+			var errors = (
 				from method in targetType.GetMethods(flags)
+				let tag = Attribute.GetCustomAttribute(method, typeof(ExecuteAttribute)) as ExecuteAttribute
+				where tag != null
+				select method).ToList();
+			if (errors.Any())
+			{
+				var sb = new StringBuilder();
+				sb.AppendLine("ExecuteAttribute 必须应用于 public 方法之上：");
+				foreach (var m in errors)
+					sb.Append(m.ToString()).Append(" @ ").AppendLine(m.ReflectedType.FullName);
+				Debug.LogError(sb.ToString());
+			}
+#endif
+			return
+				from method in GX.Reflection.GetRuntimeMethods(targetType)
 				let tag = Attribute.GetCustomAttribute(method, typeof(ExecuteAttribute)) as ExecuteAttribute
 				where tag != null
 				select method;

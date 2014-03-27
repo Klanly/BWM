@@ -31,7 +31,7 @@ public class SelectTarget : MonoBehaviour
 	/// </summary>
 	/// <param name="cmd"></param>
 	[Execute]
-	static IEnumerator Execute(SelectSceneEntryScriptUserCmd_CS cmd)
+	public static IEnumerator Execute(SelectSceneEntryScriptUserCmd_CS cmd)
 	{
 		var my = BattleScene.Instance.Gui<SelectTarget>();
 		my.gameObject.SetActive(true);

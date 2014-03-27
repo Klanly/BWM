@@ -91,7 +91,7 @@ public class RoleListScene : MonoBehaviour
 
 
 	[Execute]
-	static IEnumerator Execute(CharactorListReturnSelectUserCmd_S cmd)
+	public static IEnumerator Execute(CharactorListReturnSelectUserCmd_S cmd)
 	{
 		RoleList = cmd.list;
 		if (cmd.list.Count == 0)

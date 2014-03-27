@@ -77,7 +77,7 @@ public class ZoneListScene : MonoBehaviour
 	}
 
 	[Execute]
-	static IEnumerator Execute(ZoneInfoListLoginUserCmd_S cmd)
+	public static IEnumerator Execute(ZoneInfoListLoginUserCmd_S cmd)
 	{
 		ZoneList = cmd;
 		yield return Application.LoadLevelAsync("ZoneListScene");

@@ -114,7 +114,7 @@ public class ItemManager : IEnumerable<SaveItem>
 
 	#region 网络消息处理
 	[Execute]
-	static void Execute(ReplaceItemListItemUserCmd_S cmd)
+	public static void Execute(ReplaceItemListItemUserCmd_S cmd)
 	{
 		ItemManager.Instance.items.Clear();
 		ItemManager.Instance.items.AddRange(cmd.itemlist);
@@ -122,7 +122,7 @@ public class ItemManager : IEnumerable<SaveItem>
 	}
 
 	[Execute]
-	static void Execute(AddItemItemUserCmd_S cmd)
+	public static void Execute(AddItemItemUserCmd_S cmd)
 	{
 		ItemManager.Instance.Remove(cmd.item.thisid);
 		ItemManager.Instance.items.Add(cmd.item);
@@ -130,42 +130,42 @@ public class ItemManager : IEnumerable<SaveItem>
 	}
 
 	[Execute]
-	static void Execute(RemoveItemItemUserCmd_CS cmd)
+	public static void Execute(RemoveItemItemUserCmd_CS cmd)
 	{
 		if(ItemManager.Instance.Remove(cmd.thisid))
 			ItemManager.Instance.OnItemChanged();
 	}
 
 	[Execute]
-	static void Execute(SwapItemItemUserCmd_CS cmd)
+	public static void Execute(SwapItemItemUserCmd_CS cmd)
 	{
 		if(ItemManager.Instance.Swap(cmd.srcThisid, cmd.dstThisid))
 			ItemManager.Instance.OnItemChanged();
 	}
 
 	[Execute]
-	static void Execute(SplitItemItemUserCmd_CS cmd)
+	public static void Execute(SplitItemItemUserCmd_CS cmd)
 	{
 		if(ItemManager.Instance.Splite(cmd.thisid, cmd.num, cmd.dst))
 			ItemManager.Instance.OnItemChanged();
 	}
 
 	[Execute]
-	static void Execute(UnionItemItemUserCmd_CS cmd)
+	public static void Execute(UnionItemItemUserCmd_CS cmd)
 	{
 		if(ItemManager.Instance.Union(cmd.srcThisid, cmd.num, cmd.dstThisid))
 			ItemManager.Instance.OnItemChanged();
 	}
 
 	[Execute]
-	static void Execute(RefreshPosItemUserCmd_CS cmd)
+	public static void Execute(RefreshPosItemUserCmd_CS cmd)
 	{
 		ItemManager.Instance[cmd.thisid].loc = cmd.dst;
 		ItemManager.Instance.OnItemChanged();
 	}
 
 	[Execute]
-	static void Execute(RefreshCountItemItemUserCmd_CS cmd)
+	public static void Execute(RefreshCountItemItemUserCmd_CS cmd)
 	{
 		ItemManager.Instance[cmd.thisid].num = cmd.count;
 		ItemManager.Instance.OnItemChanged();

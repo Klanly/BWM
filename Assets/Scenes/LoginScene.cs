@@ -107,7 +107,7 @@ public class LoginScene : MonoBehaviour
 	/// </summary>
 	/// <param name="cmd"></param>
 	[Execute]
-	static IEnumerator Execute(UserLoginReturnOkLoginUserCmd_S cmd)
+	public static IEnumerator Execute(UserLoginReturnOkLoginUserCmd_S cmd)
 	{
 		Net.Instance.Close(); // 和LoginServer断开连接
 
@@ -117,7 +117,7 @@ public class LoginScene : MonoBehaviour
 	}
 
 	[Execute]
-	static void Execute(UserLoginReturnFailLoginUserCmd_S cmd)
+	public static void Execute(UserLoginReturnFailLoginUserCmd_S cmd)
 	{
 		MessageBox.Show(cmd.retcode.ToString(), cmd.desc);
 	}
