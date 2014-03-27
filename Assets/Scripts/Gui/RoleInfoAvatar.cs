@@ -58,6 +58,8 @@ public class RoleInfoAvatar : MonoBehaviour
 		var item = items[index].ServerInfo;
 		if (item == null)
 			return;
-		// TODO: show ItemTooltipEquiped
+		var tooltip = BattleScene.Instance.Gui<ItemTooltipEquiped>();
+		tooltip.gameObject.SetActive(true);
+		tooltip.ServerInfo = item;
 	}
 }

@@ -30,7 +30,7 @@ GameObject:
   - 114: {fileID: 11400006}
   - 65: {fileID: 6500002}
   m_Layer: 13
-  m_Name: Setdown
+  m_Name: Use
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1192,12 +1192,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80349b7506775394ab2d3b9bd0601663, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  uiName: {fileID: 0}
-  uiClose: {fileID: 0}
-  uiDelete: {fileID: 0}
-  uiFight: {fileID: 0}
-  uiProperty: {fileID: 0}
-  uiMessage: {fileID: 0}
+  uiName: {fileID: 11400016}
+  uiClose: {fileID: 11400000}
+  uiUse: {fileID: 11400006}
+  uiDelete: {fileID: 11400012}
+  uiFight: {fileID: 11400026}
+  uiProperty: {fileID: 11400028}
+  uiMessage: {fileID: 11400030}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

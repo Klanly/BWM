@@ -46,7 +46,7 @@ GameObject:
   - 114: {fileID: 11400006}
   - 65: {fileID: 6500002}
   m_Layer: 13
-  m_Name: Setup
+  m_Name: Use
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1117,7 +1117,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   uiName: {fileID: 11400016}
   uiClose: {fileID: 11400002}
-  uiSetup: {fileID: 11400006}
+  uiUse: {fileID: 11400006}
   uiDelete: {fileID: 11400012}
   uiFight: {fileID: 11400022}
   uiProperty: {fileID: 11400020}

@@ -7,7 +7,7 @@ public class ItemTooltipEquip : MonoBehaviour
 {
 	public UILabel uiName;
 	public UIButton uiClose;
-	public UIButton uiSetup;
+	public UIButton uiUse;
 	public UIButton uiDelete;
 
 	public UILabel uiFight;
@@ -26,20 +26,13 @@ public class ItemTooltipEquip : MonoBehaviour
 	}
 	void Start()
 	{
-		UIEventListener.Get(uiClose.gameObject).onClick += go => this.gameObject.SetActive(false);
-		UIEventListener.Get(uiDelete.gameObject).onClick += go =>
+		UIEventListener.Get(uiClose.gameObject).onClick = go => this.gameObject.SetActive(false);
+		UIEventListener.Get(uiDelete.gameObject).onClick = go =>
 		{
 			Net.Instance.Send(new RemoveItemItemUserCmd_CS() { thisid = ServerInfo.thisid });
 			this.gameObject.SetActive(false);
 		};
-		UIEventListener.Get(uiSetup.gameObject).onClick += go =>
-		{
-			// TODO: 应发送服务器请求指令，以下为本地临时测试代码
-			var setup = ServerInfo.DeepClone();
-			setup.loc.type = ItemLocation.PackageType.Equip;
-			Net.Instance.SendToMe(new AddItemItemUserCmd_S() { item = setup });
-			this.gameObject.SetActive(false);
-		};
+		UIEventListener.Get(uiUse.gameObject).onClick = OnUse;
 	}
 
 	void OnEnable()
@@ -61,5 +54,14 @@ public class ItemTooltipEquip : MonoBehaviour
 			.AppendFormat("等级: [ff0000]{0}[-]", item.level);
 		uiProperty.text = sb.ToString();
 		uiMessage.text = item.desc;
+	}
+
+	public virtual void OnUse(GameObject sender = null)
+	{
+		// TODO: 应发送服务器请求指令，以下为本地临时测试代码
+		var setup = ServerInfo.DeepClone();
+		setup.loc.type = ItemLocation.PackageType.Equip;
+		Net.Instance.SendToMe(new AddItemItemUserCmd_S() { item = setup });
+		this.gameObject.SetActive(false);
 	}
 }
