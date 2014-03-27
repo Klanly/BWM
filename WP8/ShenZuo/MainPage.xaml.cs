@@ -59,7 +59,7 @@ namespace ShenZuo
 		{
 			SetupGeolocator();
 
-			GX.Net.WebSocket.Proxy = new WebSocket();
+			GX.Net.WebSocket.Proxy = new WebSocket4NetProxy();
 		}
 
 		private void PhoneApplicationPage_BackKeyPress(object sender, CancelEventArgs e)
@@ -82,7 +82,7 @@ namespace ShenZuo
                 _useLocation = (bool)IsolatedStorageSettings.ApplicationSettings["LocationConsent"];
             else
             {
-                MessageBoxResult result = MessageBox.Show("Can this application use your location?",
+                MessageBoxResult result = System.Windows.MessageBox.Show("Can this application use your location?",
                     "Location Services", MessageBoxButton.OKCancel);
                 _useLocation = result == MessageBoxResult.OK;
                 IsolatedStorageSettings.ApplicationSettings["LocationConsent"] = _useLocation;
