@@ -5,17 +5,47 @@ using System.Collections.Generic;
 using GX.Net;
 using System.Linq;
 
-public class SkillManager : IEnumerable<SaveSkill>
+public class SkillManager : IEnumerable<KeyValuePair<uint, table.TableSkill>>
 {
 	public static SkillManager Instance { get; private set; }
 	static SkillManager() { Instance = new SkillManager(); }
-	private readonly List<SaveSkill> skills = new List<SaveSkill>();
+	private readonly Dictionary<uint, table.TableSkill> skillLevels = new Dictionary<uint, table.TableSkill>();
 
-	#region IEnumerable<SaveSkill> Members
-
-	public IEnumerator<SaveSkill> GetEnumerator()
+	void Clear()
 	{
-		return skills.GetEnumerator();
+		this.skillLevels.Clear();
+		// 对所有可能有的技能占位，方便访问
+		foreach (var id in table.TableSkill.Where(MainRole.ServerInfo.profession))
+			this.skillLevels[id] = null;
+	}
+
+	/// <summary>
+	/// 得到给定<paramref name="skillID"/>对应的技能。如果未学习，返回null
+	/// </summary>
+	/// <param name="skillID"></param>
+	/// <returns></returns>
+	public table.TableSkill GetSkill(uint skillID)
+	{
+		table.TableSkill s;
+		return skillLevels.TryGetValue(skillID, out s) ? s : null;
+	}
+
+	/// <summary>
+	/// 得到给定技能学习到的等级，未学习的返回0
+	/// </summary>
+	/// <param name="skillID"></param>
+	/// <returns></returns>
+	public uint GetLevel(uint skillID)
+	{
+		var s = GetSkill(skillID);
+		return s != null ? s.level : 0;
+	}
+
+	#region IEnumerable<KeyValuePair<uint,TableSkill>> Members
+
+	public IEnumerator<KeyValuePair<uint, table.TableSkill>> GetEnumerator()
+	{
+		return this.skillLevels.GetEnumerator();
 	}
 
 	#endregion
@@ -31,28 +61,28 @@ public class SkillManager : IEnumerable<SaveSkill>
 
 	public override string ToString()
 	{
-		return string.Join("\n", this.OrderBy(i => i.skillid).Select(i => i.ToString()).ToArray());
+		return string.Join("\n", this.skillLevels.Values.Select(i => i.ToString()).ToArray());
 	}
 
 	#region 网络消息处理
 	[Execute]
 	public static void Execute(AddSkillListSkillUserCmd_S cmd)
 	{
-		SkillManager.Instance.skills.Clear();
-		SkillManager.Instance.skills.AddRange(cmd.skilllist);
+		SkillManager.Instance.Clear();
+		foreach (var s in cmd.skilllist)
+			SkillManager.Instance.skillLevels[s.skillid] = s.TableInfo;
 		Debug.Log(SkillManager.Instance);
 	}
 	[Execute]
 	public static void Execute(AddSkillSkillUserCmd_S cmd)
 	{
-		SkillManager.Instance.skills.RemoveAll(i => i.skillid == cmd.skill.skillid);
-		SkillManager.Instance.skills.Add(cmd.skill);
+		SkillManager.Instance.skillLevels[cmd.skill.skillid] = cmd.skill.TableInfo;
 		Debug.Log(SkillManager.Instance);
 	}
 	[Execute]
 	public static void Execute(RemoveSkillSkillUserCmd_CS cmd)
 	{
-		SkillManager.Instance.skills.RemoveAll(i => i.skillid == cmd.skillid);
+		SkillManager.Instance.skillLevels.Remove(cmd.skillid);
 		Debug.Log(SkillManager.Instance);
 	}
 	#endregion

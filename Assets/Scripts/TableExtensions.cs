@@ -87,9 +87,18 @@ namespace table
 	{
 		public Profession Profession { get { return (Profession)this.profession; } }
 
-		public static TableSkill Where(SaveSkill ss)
+		/// <summary>
+		/// 得到和给定职业相符合的所有技能ID列表
+		/// </summary>
+		/// <param name="profession"></param>
+		/// <returns></returns>
+		public static IEnumerable<uint> Where(Profession profession)
 		{
-			return Table.Query<TableSkill>().First(i => i.id == ss.skillid && i.level == ss.level);
+			return
+				from s in Table.Query<table.TableSkill>()
+				where s.Profession == profession
+				group s by s.id into g
+				select g.Key;
 		}
 
 		public override string ToString()
