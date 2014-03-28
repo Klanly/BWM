@@ -3,10 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 
 [RequireComponent(typeof(Skill))]
-public class SkillCurveToTargetInTime : SkillBase
+public class SkillCurveToTargetInTime : SendTargetEventBase
 {
-
-	public bool sendTargetEvent = false;
 	public GameObject particle;
 	public string mountOfStartGo;
 	public string mountOfTargetGo;
@@ -90,8 +88,16 @@ public class SkillCurveToTargetInTime : SkillBase
 	{
 		if (particleGo != null)
 		{
-			foreach (ParticleSystem t in particleGo.GetComponentsInChildren<ParticleSystem>())
-				t.loop = false;
+			if(immediateDeleteParticle)
+			{
+				foreach (ParticleSystem t in particleGo.GetComponentsInChildren<ParticleSystem>())
+					Destroy(t.gameObject);
+			}
+			else
+			{
+				foreach (ParticleSystem t in particleGo.GetComponentsInChildren<ParticleSystem>())
+					t.loop = false;
+			}
 		}
 		if (sendTargetEvent)
 			gameObject.SendMessage("ApplyTargetEvent");
