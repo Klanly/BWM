@@ -132,6 +132,8 @@ public class MainRole : MonoBehaviour, INotifyPropertyChanged
 	[Execute]
 	public static void Execute(SetUserHpDataUserCmd_S cmd)
 	{
+		if (MainRole.ServerInfo == null)
+			return;
 		if (cmd.charid == MainRole.ServerInfo.userdata.charid)
 		{
 			MainRole.ServerInfo.hp = cmd.curhp;
@@ -141,6 +143,8 @@ public class MainRole : MonoBehaviour, INotifyPropertyChanged
 	[Execute]
 	public static void Execute(SetUserSpDataUserCmd_S cmd)
 	{
+		if (MainRole.ServerInfo == null)
+			return;
 		if (cmd.charid == MainRole.ServerInfo.userdata.charid)
 		{
 			MainRole.ServerInfo.sp = cmd.cursp;
