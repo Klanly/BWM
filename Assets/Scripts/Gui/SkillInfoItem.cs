@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class SkillInfoItem : MonoBehaviour
 {
-	public UISprite uiIcon;
+	public UIButton uiIcon;
 	public UILabel uiName;
 	public UISprite uiUpgrade;
 
@@ -21,9 +21,11 @@ public class SkillInfoItem : MonoBehaviour
 
 	private void Present()
 	{
-		var skill = Skill.Value ?? table.TableSkill.First(Skill.Key);
-		uiIcon.spriteName = skill.icon;
-		uiName.text = skill.name;
-		this.gameObject.GetComponent<UIButton>().isEnabled = Skill.Value != null;
+		var s = Skill.Value ?? table.TableSkill.First(Skill.Key);
+		uiName.text = s.name;
+		uiIcon.normalSprite = s.icon;
+		uiIcon.isEnabled = Skill.Value != null;
+		// 避免SkillInfo关闭再打开，disable掉的按钮没有变灰。NGUI混色同步有bug
+		uiIcon.defaultColor = uiIcon.isEnabled ? Color.white : Color.gray;
 	}
 }
