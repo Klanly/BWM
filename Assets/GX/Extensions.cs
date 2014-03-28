@@ -60,6 +60,66 @@ public static partial class Extensions
 			dic.Add(d.Key, d.Value);
 	}
 
+	/// <summary>
+	/// 从给定容器确保拿出给定数量的元素，不足按照<paramref name="valueFactory"/>给定的方式补齐
+	/// </summary>
+	/// <typeparam name="T"></typeparam>
+	/// <param name="data"></param>
+	/// <param name="count"></param>
+	/// <param name="valueFactory">为null将采用<c>default(T)</c>生成默认元素</param>
+	/// <returns></returns>
+	public static IEnumerable<T> Resize<T>(this IEnumerable<T> data, int count, Func<T> valueFactory = null)
+	{
+		int n = 0;
+		foreach (var d in data.Take(count))
+		{
+			n++;
+			yield return d;
+		}
+		for (int i = n; n < count; n++)
+			yield return valueFactory == null ? default(T) : valueFactory();
+	}
+
+	/// <summary>Merges two sequences by using the specified predicate function.</summary>
+	/// <returns>An <see cref="T:System.Collections.Generic.IEnumerable`1" /> that contains merged elements of two input sequences.</returns>
+	/// <param name="first">The first sequence to merge.</param>
+	/// <param name="second">The second sequence to merge.</param>
+	/// <param name="resultSelector">A function that specifies how to merge the elements from the two sequences.</param>
+	/// <typeparam name="TFirst">The type of the elements of the first input sequence.</typeparam>
+	/// <typeparam name="TSecond">The type of the elements of the second input sequence.</typeparam>
+	/// <typeparam name="TResult">The type of the elements of the result sequence.</typeparam>
+	/// <exception cref="T:System.ArgumentNullException">
+	/// <paramref name="first" /> or <paramref name="second" /> is null.</exception>
+	public static IEnumerable<TResult> Zip<TFirst, TSecond, TResult>(this IEnumerable<TFirst> first, IEnumerable<TSecond> second, Func<TFirst, TSecond, TResult> resultSelector)
+	{
+		return ZipIterator(first, second, resultSelector);
+	}
+
+	/// <summary>Merges two sequences by using the specified predicate function.</summary>
+	/// <returns>An <see cref="T:System.Collections.Generic.IEnumerable`1" /> that contains merged elements of two input sequences.</returns>
+	/// <param name="first">The first sequence to merge.</param>
+	/// <param name="second">The second sequence to merge.</param>
+	/// <typeparam name="TFirst">The type of the elements of the first input sequence.</typeparam>
+	/// <typeparam name="TSecond">The type of the elements of the second input sequence.</typeparam>
+	/// <exception cref="T:System.ArgumentNullException">
+	/// <paramref name="first" /> or <paramref name="second" /> is null.</exception>
+	public static IEnumerable<Tuple<TFirst, TSecond>> Zip<TFirst, TSecond>(this IEnumerable<TFirst> first, IEnumerable<TSecond> second)
+	{
+		return ZipIterator(first, second, (f, s) => Tuple.Create(f, s));
+	}
+
+	private static IEnumerable<TResult> ZipIterator<TFirst, TSecond, TResult>(IEnumerable<TFirst> first, IEnumerable<TSecond> second, Func<TFirst, TSecond, TResult> resultSelector)
+	{
+		using (IEnumerator<TFirst> f = first.GetEnumerator())
+		using (IEnumerator<TSecond> s = second.GetEnumerator())
+		{
+			while (f.MoveNext() && s.MoveNext())
+			{
+				yield return resultSelector(f.Current, s.Current);
+			}
+		}
+	}
+
 #if UNITY_METRO && !UNITY_EDITOR
 	public static void ForEach<T>(this List<T> list, Action<T> action)
 	{
