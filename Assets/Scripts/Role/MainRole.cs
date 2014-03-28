@@ -8,25 +8,18 @@ using System.ComponentModel;
 public class MainRole : MonoBehaviour, INotifyPropertyChanged
 {
 	/// <summary>
-	/// 主角对应的<see cref="Role.ServerInfo"/>
-	/// 主角无效时返回<see cref="MapUserData.Empty"/>而不是null，外部使用无需进行<c>null</c>判断
+	/// 主角基本信息
 	/// </summary>
-	public static MapUserData ServerInfo { get { return Instance != null ? Instance.Role.ServerInfo : MapUserData.Empty; } }
+	public static MainUserData ServerInfo { get; private set; }
 
 	#region 主角特有信息
 	public uint mapid { get; set; }
 	private int _maxhp;
 	public int maxhp { get { return _maxhp; } set { _maxhp = value; OnPropertyChanged("maxhp"); } }
-	private int _hp;
-	public int hp { get { return _hp; } set { _hp = value; OnPropertyChanged("hp"); } }
 	private int _maxsp;
 	public int maxsp { get { return _maxsp; } set { _maxsp = value; OnPropertyChanged("maxsp"); } }
-	private int _sp;
-	public int sp { get { return _sp; } set { _sp = value; OnPropertyChanged("sp"); } }
 	private int _exp;
 	public int exp { get { return _exp; } set { _exp = value; OnPropertyChanged("exp"); } }
-	public uint _level;
-	public uint level { get { return _level; } set { _level = value; OnPropertyChanged("level"); } }
 
 	#endregion
 
@@ -42,9 +35,9 @@ public class MainRole : MonoBehaviour, INotifyPropertyChanged
 
 	private MainRole() { }
 
-	public static MainRole Create(MapUserData info)
+	public static MainRole Create()
 	{
-		var role = Role.Create(info);
+		var role = Role.Create(ServerInfo.userdata);
 		role.gameObject.name = "Main" + role.gameObject.name;
 
 		var mainRole = role.gameObject.AddComponent<MainRole>();
@@ -94,11 +87,22 @@ public class MainRole : MonoBehaviour, INotifyPropertyChanged
 	#endregion
 
 	/// <summary>
-	/// 更新主角信息
+	/// 设置主角信息
 	/// </summary>
 	/// <param name="cmd"></param>
 	[Execute]
-	public static IEnumerator Execute(FirstMainUserDataAndPosMapUserCmd_S cmd)
+	public static void Execute(InitMainUserDataMapUserCmd_S cmd)
+	{
+		MainRole.ServerInfo = cmd.data;
+	}
+
+	/// <summary>
+	/// 进入场景
+	/// </summary>
+	/// <param name="cmd"></param>
+	/// <returns></returns>
+	[Execute]
+	public static IEnumerator Execute(MainUserIntoSceneMapUserCmd_S cmd)
 	{
 		if (Application.loadedLevelName != "BattleScene")
 		{
@@ -108,9 +112,8 @@ public class MainRole : MonoBehaviour, INotifyPropertyChanged
 			yield return new WaitForEndOfFrame();
 
 		BattleScene.Instance.LoadMap(table.TableMap.Where(cmd.mapid).mapfile);
-		var mainRole = MainRole.Create(cmd.data.userdata);
+		var mainRole = MainRole.Create();
 		mainRole.entity.Grid = cmd.pos;
-		mainRole.level = cmd.data.level;
 	}
 
 	[Execute]
@@ -120,27 +123,31 @@ public class MainRole : MonoBehaviour, INotifyPropertyChanged
 		if (my != null && cmd.charid == my.Role.ServerInfo.charid)
 		{
 			my.maxhp = cmd.maxhp;
-			my.hp = cmd.hp;
+			MainRole.ServerInfo.hp = cmd.hp;
 			my.maxsp = cmd.maxsp;
-			my.sp = cmd.sp;
+			MainRole.ServerInfo.sp = cmd.sp;
 		}
 	}
 
 	[Execute]
 	public static void Execute(SetUserHpDataUserCmd_S cmd)
 	{
-		if (cmd.charid == MainRole.ServerInfo.charid)
+		if (MainRole.ServerInfo == null)
+			return;
+		if (cmd.charid == MainRole.ServerInfo.userdata.charid)
 		{
-			MainRole.Instance.hp = cmd.curhp;
+			MainRole.ServerInfo.hp = cmd.curhp;
 		}
 	}
 
 	[Execute]
 	public static void Execute(SetUserSpDataUserCmd_S cmd)
 	{
-		if (cmd.charid == MainRole.ServerInfo.charid)
+		if (MainRole.ServerInfo == null)
+			return;
+		if (cmd.charid == MainRole.ServerInfo.userdata.charid)
 		{
-			MainRole.Instance.sp = cmd.cursp;
+			MainRole.ServerInfo.sp = cmd.cursp;
 		}
 	}
 }
