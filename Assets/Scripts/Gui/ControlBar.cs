@@ -5,6 +5,7 @@ using System.Linq;
 public class ControlBar : MonoBehaviour
 {
 	public UIButton roleInfoButton;
+	public UIButton skillInfoButton;
 
 	void Start()
 	{
@@ -12,7 +13,14 @@ public class ControlBar : MonoBehaviour
 		UIEventListener.Get(roleInfoButton.gameObject).onClick = go =>
 		{
 			var target = BattleScene.Instance.Gui<RoleInfo>();
-			BattleScene.Instance.Gui<RoleInfo>().gameObject.SetActive(!target.gameObject.activeSelf);
+			target.gameObject.SetActive(!target.gameObject.activeSelf);
+		};
+
+		// 切换SkillInfo界面的显隐
+		UIEventListener.Get(skillInfoButton.gameObject).onClick = go =>
+		{
+			var target = BattleScene.Instance.Gui<SkillInfo>();
+			target.gameObject.SetActive(!target.gameObject.activeSelf);
 		};
 	}
 }
