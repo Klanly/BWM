@@ -20,8 +20,8 @@ namespace Cmd
     public enum Param
     {
             
-      [global::ProtoBuf.ProtoEnum(Name=@"FirstMainUserDataAndPosMapUserCmd_S", Value=1)]
-      FirstMainUserDataAndPosMapUserCmd_S = 1,
+      [global::ProtoBuf.ProtoEnum(Name=@"InitMainUserDataMapUserCmd_S", Value=1)]
+      InitMainUserDataMapUserCmd_S = 1,
             
       [global::ProtoBuf.ProtoEnum(Name=@"AddMapUserDataAndPosMapUserCmd_S", Value=2)]
       AddMapUserDataAndPosMapUserCmd_S = 2,
@@ -33,7 +33,10 @@ namespace Cmd
       AddMapNpcDataAndPosMapUserCmd_S = 4,
             
       [global::ProtoBuf.ProtoEnum(Name=@"RemoveMapNpcMapUserCmd_S", Value=5)]
-      RemoveMapNpcMapUserCmd_S = 5
+      RemoveMapNpcMapUserCmd_S = 5,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"MainUserIntoSceneMapUserCmd_S", Value=6)]
+      MainUserIntoSceneMapUserCmd_S = 6
     }
   
     private global::ProtoBuf.IExtension extensionObject;
@@ -41,10 +44,10 @@ namespace Cmd
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"FirstMainUserDataAndPosMapUserCmd_S")]
-  public partial class FirstMainUserDataAndPosMapUserCmd_S : global::ProtoBuf.IExtensible
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"InitMainUserDataMapUserCmd_S")]
+  public partial class InitMainUserDataMapUserCmd_S : global::ProtoBuf.IExtensible
   {
-    public FirstMainUserDataAndPosMapUserCmd_S() {}
+    public InitMainUserDataMapUserCmd_S() {}
     
     private Cmd.MainUserData _data;
     [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"data", DataFormat = global::ProtoBuf.DataFormat.Default)]
@@ -59,20 +62,6 @@ namespace Cmd
     {
       get { return _homeland; }
       set { _homeland = value; }
-    }
-    private uint _mapid;
-    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"mapid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public uint mapid
-    {
-      get { return _mapid; }
-      set { _mapid = value; }
-    }
-    private Cmd.Pos _pos;
-    [global::ProtoBuf.ProtoMember(4, IsRequired = true, Name=@"pos", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public Cmd.Pos pos
-    {
-      get { return _pos; }
-      set { _pos = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -200,6 +189,37 @@ namespace Cmd
     {
       get { return _tempid; }
       set { _tempid = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"MainUserIntoSceneMapUserCmd_S")]
+  public partial class MainUserIntoSceneMapUserCmd_S : global::ProtoBuf.IExtensible
+  {
+    public MainUserIntoSceneMapUserCmd_S() {}
+    
+    private uint _countryid;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"countryid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint countryid
+    {
+      get { return _countryid; }
+      set { _countryid = value; }
+    }
+    private uint _mapid;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"mapid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint mapid
+    {
+      get { return _mapid; }
+      set { _mapid = value; }
+    }
+    private Cmd.Pos _pos;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"pos", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public Cmd.Pos pos
+    {
+      get { return _pos; }
+      set { _pos = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)

@@ -45,7 +45,7 @@ public class BattleSceneInput : MonoBehaviour
 				}
 
 				var role = hit.collider.gameObject.GetComponent<Role>();
-				if (role != null && role.ServerInfo.charid != MainRole.ServerInfo.charid)
+				if (role != null && role.ServerInfo.charid != MainRole.ServerInfo.userdata.charid)
 				{
 					Net.Instance.Send(new SelectSceneEntryScriptUserCmd_CS() { entrytype = SceneEntryType.SceneEntryType_Player, entryid = role.ServerInfo.charid });
 				}

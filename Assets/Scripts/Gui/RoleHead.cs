@@ -28,9 +28,9 @@ public class RoleHead : MonoBehaviour
 
 	void OnMainRolePropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
 	{
-		myName.text = MainRole.ServerInfo.charname;
-		myLevel.text = MainRole.Instance.level.ToString();
-		myHead.spriteName = MainRole.ServerInfo.GetRoleHeadSprite();
-		myHp.value = MainRole.Instance.hp / (float)MainRole.Instance.maxhp;
+		myName.text = MainRole.ServerInfo.userdata.charname;
+		myLevel.text = MainRole.ServerInfo.level.ToString();
+		myHead.spriteName = MainRole.ServerInfo.userdata.GetRoleHeadSprite();
+		myHp.value = MainRole.ServerInfo.hp / (float)MainRole.Instance.maxhp;
 	}
 }
