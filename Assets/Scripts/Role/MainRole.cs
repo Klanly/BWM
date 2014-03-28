@@ -107,7 +107,7 @@ public class MainRole : MonoBehaviour, INotifyPropertyChanged
 		while (BattleScene.Instance == null)
 			yield return new WaitForEndOfFrame();
 
-		BattleScene.Instance.LoadMap(table.TableMap.Select(cmd.mapid).mapfile);
+		BattleScene.Instance.LoadMap(table.TableMap.Where(cmd.mapid).mapfile);
 		var mainRole = MainRole.Create(cmd.data.userdata);
 		mainRole.entity.Grid = cmd.pos;
 		mainRole.level = cmd.data.level;

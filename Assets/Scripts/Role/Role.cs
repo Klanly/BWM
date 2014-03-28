@@ -25,7 +25,7 @@ public class Role : MonoBehaviour
 
 	public static Role Create(MapUserData info)
 	{
-		var tbl = table.TableAvatar.Select(info.profession, info.sexman);
+		var tbl = table.TableAvatar.Where(info.profession, info.sexman);
 		var avatar = Avatar.Create(tbl);
 		avatar.name = "Role." + info.charname;
 		avatar.transform.localScale = new Vector3(5, 5, 5);

@@ -7,26 +7,31 @@ using Cmd;
 
 namespace table
 {
+	#region TableMap
 	partial class TableMap
 	{
-		public static TableMap Select(uint id)
+		public static TableMap Where(uint id)
 		{
 			return (from i in Table.Query<TableMap>() where i.id == id select i).First();
 		}
 	}
+	#endregion
 
+	#region TableAvatar
 	partial class TableAvatar
 	{
 		public bool sexman { get { return this.sex == 1; } }
 
-		public static TableAvatar Select(Profession profession, bool sexman)
+		public static TableAvatar Where(Profession profession, bool sexman)
 		{
 			var pro = (uint)profession;
 			var sex = sexman ? 1 : 2;
 			return (from i in Table.Query<TableAvatar>() where i.profession == pro && i.sex == sex select i).First();
 		}
 	}
+	#endregion
 
+	#region TableItem
 	partial class TableItem
 	{
 		public Profession Profession { get { return (Profession)this.profession; } }
@@ -42,14 +47,18 @@ namespace table
 			}
 		}
 	}
+	#endregion
 
+	#region TableItemType
 	partial class TableItemType
 	{
 		public bool IsEquip { get { return this.equipPos != 0; } }
 
 		public EquipPos EquipPos { get { return (EquipPos)this.equipPos; } }
 	}
+	#endregion
 
+	#region TableNpc
 	public enum NpcType
 	{
 		Npc = 0,
@@ -71,6 +80,33 @@ namespace table
 	{
 		public NpcType Type { get { return (NpcType)this.type; } }
 	}
+	#endregion
+
+	#region TableSkill
+	partial class TableSkill
+	{
+		public Profession Profession { get { return (Profession)this.profession; } }
+
+		/// <summary>
+		/// 得到和给定职业相符合的所有技能ID列表
+		/// </summary>
+		/// <param name="profession"></param>
+		/// <returns></returns>
+		public static IEnumerable<uint> Where(Profession profession)
+		{
+			return
+				from s in Table.Query<table.TableSkill>()
+				where s.Profession == profession
+				group s by s.id into g
+				select g.Key;
+		}
+
+		public override string ToString()
+		{
+			return string.Format("{0},{1} {2}", this.id, this.level, this.name);
+		}
+	}
+	#endregion
 }
 
 public static class TableExtensions

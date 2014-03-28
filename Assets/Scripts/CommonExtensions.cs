@@ -193,7 +193,7 @@ namespace Cmd
 
 		public override string ToString()
 		{
-			return string.Format("{0},{1} {2}", TableInfo.id, TableInfo.level, TableInfo.name);
+			return TableInfo.ToString();
 		}
 	}
 	#endregion
