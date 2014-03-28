@@ -15,7 +15,7 @@ public class SkillManager : IEnumerable<KeyValuePair<uint, table.TableSkill>>
 	{
 		this.skillLevels.Clear();
 		// 对所有可能有的技能占位，方便访问
-		foreach (var id in table.TableSkill.Where(MainRole.ServerInfo.profession))
+		foreach (var id in table.TableSkill.Where(MainRole.ServerInfo.userdata.profession))
 			this.skillLevels[id] = null;
 	}
 
@@ -61,7 +61,13 @@ public class SkillManager : IEnumerable<KeyValuePair<uint, table.TableSkill>>
 
 	public override string ToString()
 	{
-		return string.Join("\n", this.skillLevels.Values.Select(i => i.ToString()).ToArray());
+		return string.Join("\n", this.skillLevels.Select(i => 
+		{
+			var s = i.Value ?? table.TableSkill.First(i.Key);
+			return string.Format("<color={0}>{1}:{2} {3}</color>", 
+				i.Value != null ? "green" : "orange",
+				s.id, s.level, s.name);
+		}).ToArray());
 	}
 
 	#region 网络消息处理

@@ -76,7 +76,7 @@ public static partial class Extensions
 			n++;
 			yield return d;
 		}
-		for (int i = n; n < count; n++)
+		for (; n < count; n++)
 			yield return valueFactory == null ? default(T) : valueFactory();
 	}
 

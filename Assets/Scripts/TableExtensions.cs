@@ -101,6 +101,20 @@ namespace table
 				select g.Key;
 		}
 
+		/// <summary>
+		/// 获得指定id的最低等级技能
+		/// </summary>
+		/// <param name="skillid"></param>
+		/// <returns></returns>
+		public static TableSkill First(uint skillid)
+		{
+			return (
+				from s in Table.Query<table.TableSkill>()
+				where s.id == skillid
+				orderby s.level
+				select s).First();
+		}
+
 		public override string ToString()
 		{
 			return string.Format("{0},{1} {2}", this.id, this.level, this.name);
