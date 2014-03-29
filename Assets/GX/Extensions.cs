@@ -193,9 +193,21 @@ public static partial class Extensions
 			else if (value is IList)
 			{
 				writer.Write('['); writer.WriteLine();
-				foreach (ProtoBuf.IExtensible line in value as IList)
+				foreach (var line in (value as IList))
 				{
-					writer.Write(prefix); writer.Write(tab); writer.Write(tab); WriteTo(line, writer, indent + 2);
+					writer.Write(prefix); writer.Write(tab); writer.Write(tab);
+					if (line is ProtoBuf.IExtensible)
+					{
+						WriteTo(line as ProtoBuf.IExtensible, writer, indent + 2);
+					}
+					else if (line is string)
+					{
+						writer.Write('"'); writer.Write(line); writer.Write('"');
+					}
+					else
+					{
+						writer.Write(line);
+					}
 					writer.WriteLine();
 				}
 				writer.Write(prefix); writer.Write(tab); writer.Write(']');
