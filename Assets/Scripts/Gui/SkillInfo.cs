@@ -9,7 +9,7 @@ public class SkillInfo : MonoBehaviour
 	public UIButton uiSkillFireOK;
 	private SkillInfoItem[] items;
 	private SkillInfoItem selected;
-	private int thumbIndex;
+	private int thumbIndex = -1;
 
 	public UILabel infoName;
 	public UILabel infoRequire;
@@ -34,7 +34,6 @@ public class SkillInfo : MonoBehaviour
 		}
 
 		// 技能释放按钮
-		Config.UserData.Instance.skillbar.Clear();
 		if(Config.UserData.Instance.skillbar.Count < uiSkillFireThumbs.Length)
 			Config.UserData.Instance.skillbar.AddRange(Enumerable.Repeat(0u, uiSkillFireThumbs.Length - Config.UserData.Instance.skillbar.Count));
 		if(Config.UserData.Instance.skillbar.Count > uiSkillFireThumbs.Length)
@@ -56,10 +55,11 @@ public class SkillInfo : MonoBehaviour
 			if (selected == null || selected.Skill.Value == null || thumbIndex < 0)
 				return;
 			Config.UserData.Instance.skillbar[thumbIndex] = selected.Skill.Value.id;
-			Config.UserData.Serialize();
-			PresentFireThumbs();
+			Config.UserData.Instance.FirePropertyChanged("skillbar");
+			thumbIndex = -1;
+			PresentFireThumbs(this.uiSkillFireThumbs);
 		};
-		PresentFireThumbs();
+		PresentFireThumbs(this.uiSkillFireThumbs);
 
 		// 更新事件
 		SkillManager.Instance.SkillChanged += PresentIcons;
@@ -102,7 +102,7 @@ public class SkillInfo : MonoBehaviour
 	private void PresentInfo(SkillInfoItem view)
 	{
 		selected = view;
-		PresentFireThumbs();
+		PresentFireThumbs(this.uiSkillFireThumbs);
 		if (view == null || view.Skill.Value == null)
 		{
 			infoName.text = string.Empty;
@@ -123,20 +123,19 @@ public class SkillInfo : MonoBehaviour
 	/// <summary>
 	/// 技能施法按钮显示状态和<see cref="Config.UserData.Instance"/>中的配置一致
 	/// </summary>
-	private void PresentFireThumbs()
+	public static void PresentFireThumbs(UIButton[] skillButtons)
 	{
-		thumbIndex = -1;
-		for (var i = 0; i < uiSkillFireThumbs.Length; i++)
+		for (var i = 0; i < skillButtons.Length; i++)
 		{
 			var skill = SkillManager.Instance.GetSkill(Config.UserData.Instance.skillbar[i]);
-			var button = uiSkillFireThumbs[i];
+			var button = skillButtons[i];
 			button.GetComponent<UISprite>().spriteName =
 				button.disabledSprite =
 				button.hoverSprite =
 				button.pressedSprite =
 				button.normalSprite =
 				skill != null ? skill.icon : string.Empty;
-			Debug.Log(string.Format("PresentFireThumbs {0}: {1}", i, button.normalSprite));
+			//Debug.Log(string.Format("PresentFireThumbs {0}: {1}", i, button.normalSprite));
 		}
 	}
 }

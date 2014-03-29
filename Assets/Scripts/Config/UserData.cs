@@ -10,6 +10,15 @@ namespace Config
 {
 	partial class UserData
 	{
+		/// <summary>
+		/// 触发<see cref="PropertyChanged"/>事件
+		/// </summary>
+		/// <param name="propertyName"></param>
+		public void FirePropertyChanged(string propertyName)
+		{
+			this.OnPropertyChanged(propertyName);
+		}
+
 		public static UserData Instance { get; private set; }
 
 		static UserData()
@@ -26,7 +35,7 @@ namespace Config
 			Instance.PropertyChanged += Serialize;
 		}
 
-		public static void Serialize(object sender = null, System.ComponentModel.PropertyChangedEventArgs e = null)
+		static void Serialize(object sender = null, System.ComponentModel.PropertyChangedEventArgs e = null)
 		{
 			Serialize(Instance);
 		}
