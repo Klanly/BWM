@@ -4,12 +4,22 @@ using Cmd;
 using System.Collections.Generic;
 using GX.Net;
 using System.Linq;
+using System;
 
 public class SkillManager : IEnumerable<KeyValuePair<uint, table.TableSkill>>
 {
 	public static SkillManager Instance { get; private set; }
 	static SkillManager() { Instance = new SkillManager(); }
 	private readonly Dictionary<uint, table.TableSkill> skillLevels = new Dictionary<uint, table.TableSkill>();
+
+	public event Action<SkillManager> SkillChanged;
+
+	protected void OnSkillChanged()
+	{
+		if (SkillChanged != null)
+			SkillChanged(this);
+		Debug.Log(this.ToString());
+	}
 
 	void Clear()
 	{
@@ -77,19 +87,19 @@ public class SkillManager : IEnumerable<KeyValuePair<uint, table.TableSkill>>
 		SkillManager.Instance.Clear();
 		foreach (var s in cmd.skilllist)
 			SkillManager.Instance.skillLevels[s.skillid] = s.TableInfo;
-		Debug.Log(SkillManager.Instance);
+		SkillManager.Instance.OnSkillChanged();
 	}
 	[Execute]
 	public static void Execute(AddSkillSkillUserCmd_S cmd)
 	{
 		SkillManager.Instance.skillLevels[cmd.skill.skillid] = cmd.skill.TableInfo;
-		Debug.Log(SkillManager.Instance);
+		SkillManager.Instance.OnSkillChanged();
 	}
 	[Execute]
 	public static void Execute(RemoveSkillSkillUserCmd_CS cmd)
 	{
 		SkillManager.Instance.skillLevels.Remove(cmd.skillid);
-		Debug.Log(SkillManager.Instance);
+		SkillManager.Instance.OnSkillChanged();
 	}
 	#endregion
 }

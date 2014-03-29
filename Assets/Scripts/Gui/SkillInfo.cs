@@ -25,18 +25,27 @@ public class SkillInfo : MonoBehaviour
 			UIEventListener.Get(grid.GetChild(i).gameObject).onClick = go => OnSkillItemClicked(view);
 		}
 
-		Present();
-		// TODO: update when SkillManager changed
+		SkillManager.Instance.SkillChanged += Present;
+		Present(SkillManager.Instance);
 	}
+
+	void OnDestroy()
+	{
+		SkillManager.Instance.SkillChanged -= Present;
+	}
+
 
 	void OnEnable()
 	{
 		NGUITools.BringForward(this.gameObject);
+		Present(SkillManager.Instance);
 	}
 
-	void Present()
+	void Present(SkillManager manager)
 	{
-		foreach (var i in items.Zip(SkillManager.Instance.OrderBy(i => i.Key)))
+		if (this.gameObject.activeSelf == false || items == null)
+			return;
+		foreach (var i in items.Zip(manager.OrderBy(i => i.Key)))
 			i.Item1.Skill = i.Item2;
 	}
 

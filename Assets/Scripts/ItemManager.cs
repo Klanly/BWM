@@ -22,7 +22,7 @@ public class ItemManager : IEnumerable<SaveItem>
 	{
 		if (ItemChanged != null)
 			ItemChanged(this);
-		Debug.Log(ItemManager.Instance.ToString());
+		Debug.Log(this.ToString());
 	}
 
 	/// <summary>
