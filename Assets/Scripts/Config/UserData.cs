@@ -26,7 +26,7 @@ namespace Config
 			Instance.PropertyChanged += Serialize;
 		}
 
-		static void Serialize(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+		public static void Serialize(object sender = null, System.ComponentModel.PropertyChangedEventArgs e = null)
 		{
 			Serialize(Instance);
 		}
