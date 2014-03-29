@@ -17,14 +17,13 @@ namespace Config
   {
     public UserData() {}
     
-    private string _test = "";
-    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"test", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
-    public string test
+    private readonly global::System.Collections.Generic.List<uint> _skillbar = new global::System.Collections.Generic.List<uint>();
+    [global::ProtoBuf.ProtoMember(1, Name=@"skillbar", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public global::System.Collections.Generic.List<uint> skillbar
     {
-      get { return _test; }
-      set { _test = value; OnPropertyChanged(@"test"); }
+      get { return _skillbar; }
     }
+  
     public event global::System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
     protected virtual void OnPropertyChanged(string propertyName)
       { if(PropertyChanged != null) PropertyChanged(this, new global::System.ComponentModel.PropertyChangedEventArgs(propertyName)); }

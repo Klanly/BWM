@@ -2,5 +2,5 @@ package Config;
 
 message UserData
 {
-	optional string test = 1;
+	repeated uint32 skillbar = 1; // 技能栏三个快捷按钮对应的技能ID
 }
