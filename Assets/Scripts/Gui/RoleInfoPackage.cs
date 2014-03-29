@@ -44,6 +44,7 @@ public class RoleInfoPackage : MonoBehaviour
 	{
 		NGUITools.BringForward(this.gameObject);
 		NGUITools.BringForward(BattleScene.Instance.Gui<RoleInfo>().closeButton.gameObject);
+		Present(ItemManager.Instance);
 	}
 
 	/// <summary>
@@ -51,6 +52,8 @@ public class RoleInfoPackage : MonoBehaviour
 	/// </summary>
 	void Present(ItemManager manager)
 	{
+		if (this.gameObject.activeSelf == false || items == null)
+			return;
 		var i = 0;
 		foreach (var item in manager.Where(ItemLocation.PackageType.Main).Take(items.Length))
 			items[i++].ServerInfo = item;
