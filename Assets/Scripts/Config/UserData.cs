@@ -25,14 +25,14 @@ namespace Config
 		{
 			ProtoBuf.Serializer.PrepareSerializer<UserData>();
 			Instance = Deserialize();
-			Instance.PropertyChanged += Serialize;
+			Instance.Init();
 		}
 
 		public static void Reset()
 		{
 			PlayerPrefs.DeleteAll();
 			Instance = new UserData();
-			Instance.PropertyChanged += Serialize;
+			Instance.Init();
 		}
 
 		static void Serialize(object sender = null, System.ComponentModel.PropertyChangedEventArgs e = null)
@@ -71,6 +71,15 @@ namespace Config
 				}
 			}
 			return new UserData();
+		}
+
+		/// <summary>
+		/// 档案加载后的预处理和规整
+		/// </summary>
+		private void Init()
+		{
+			this.skillbar.Resize<uint>(SkillManager.FireThumbsCount);
+			this.PropertyChanged += Serialize;
 		}
 	}
 }

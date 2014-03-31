@@ -7,6 +7,9 @@
 		<field column="地图文件名" code="mapfile" type="string">
 			<regex>^[^\\/]+$</regex>
 		</field>
+		<field column="小地图文件名" code="minimapfile" type="string">
+			<regex>^[^\\/]*$</regex>
+		</field>
 	</output>
 	<output type="json-go" code="TableMap" file="场景表.xlsx" sheet="Sheet1">
 		<key code="id" />

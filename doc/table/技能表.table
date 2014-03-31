@@ -9,7 +9,6 @@
 		<field column="名称" code="name" type="string" />
 		<field column="描述" code="desc" type="string" />
 		<field column="技能ICON" code="icon" type="string" />
-		<field column="最高等级" code="levelMax" type="uint16" />
 		<field column="距离" code="radius" type="float" />
 		<field column="职业类型" code="profession" type="uint8">
 			<regex>^[123]$</regex>
@@ -27,6 +26,7 @@
 		<field column="冷却时间" code="cd" type="uint32" />
 		<field column="准备时间" code="prepareTime" type="uint32" />
 		<field column="可否打断" code="interruptable" type="bool" />
+		<field column="技能路径" code="path" type="string" />
 	</output>
 	<output type="json-go" code="TableSkill" file="技能表.xlsx" sheet="Sheet1">
 		<key code="id" />

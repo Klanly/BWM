@@ -94,7 +94,7 @@ public class RoleCreateScene : MonoBehaviour
 		if (RoleListScene.RoleList == null)
 			return;
 		var quit = this.gameObject.GetComponent<EscapeQuit>();
-		quit.lastSceneName = RoleListScene.RoleList.Count == 0 ? "ZoneListScene" : "RoleListScene";
+		quit.lastSceneName = RoleListScene.RoleList.Count == 0 ? "LoginScene" : "RoleListScene";
 
 		UIEventListener.Get(GameObject.Find("btnMale")).onClick = this.btnMale_onClick;
 		UIEventListener.Get(GameObject.Find("btnFemale")).onClick = this.btnFemale_onClick;

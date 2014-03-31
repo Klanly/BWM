@@ -8,6 +8,10 @@ using System;
 
 public class SkillManager : IEnumerable<KeyValuePair<uint, table.TableSkill>>
 {
+	/// <summary>
+	/// 技能施法按钮数量
+	/// </summary>
+	public const int FireThumbsCount = 3;
 	public static SkillManager Instance { get; private set; }
 	static SkillManager() { Instance = new SkillManager(); }
 	private readonly Dictionary<uint, table.TableSkill> skillLevels = new Dictionary<uint, table.TableSkill>();
@@ -71,13 +75,29 @@ public class SkillManager : IEnumerable<KeyValuePair<uint, table.TableSkill>>
 
 	public override string ToString()
 	{
-		return string.Join("\n", this.skillLevels.Select(i => 
+		return string.Join("\n", this.skillLevels.Select(i =>
 		{
 			var s = i.Value ?? table.TableSkill.First(i.Key);
-			return string.Format("<color={0}>{1}:{2} {3}</color>", 
+			return string.Format("<color={0}>{1}:{2} {3}</color>",
 				i.Value != null ? "green" : "orange",
 				s.id, s.level, s.name);
 		}).ToArray());
+	}
+
+	/// <summary>
+	/// 释放给定的技能
+	/// </summary>
+	/// <param name="skillID"></param>
+	/// <returns></returns>
+	public bool FireSkill(uint skillID)
+	{
+		var skill = this.GetSkill(skillID);
+		if (skill == null)
+			return false;
+		Debug.Log("FireSkill: " + skill);
+		var target = SelectTarget.Selected.GetGameObject();
+		MainRole.Instance.castSkill.StartSkill("Prefabs/Skill/" + skill.path, target != null ? target.gameObject : null);
+		return false;
 	}
 
 	#region 网络消息处理

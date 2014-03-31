@@ -68,8 +68,9 @@ public static partial class Extensions
 	/// <param name="count"></param>
 	/// <param name="valueFactory">为null将采用<c>default(T)</c>生成默认元素</param>
 	/// <returns></returns>
-	public static IEnumerable<T> Resize<T>(this IEnumerable<T> data, int count, Func<T> valueFactory = null)
+	public static IEnumerable<T> TakeWhile<T>(this IEnumerable<T> data, int count, Func<T> valueFactory = null)
 	{
+
 		int n = 0;
 		foreach (var d in data.Take(count))
 		{
@@ -78,6 +79,24 @@ public static partial class Extensions
 		}
 		for (; n < count; n++)
 			yield return valueFactory == null ? default(T) : valueFactory();
+	}
+
+	/// <summary>
+	/// 将容器大小调整至<paramref name="count"/>
+	/// 容器过大则丢弃后面的元素，过小则根据<paramref name="valueFactory"/>提供的规则补齐
+	/// </summary>
+	/// <typeparam name="T"></typeparam>
+	/// <param name="data"></param>
+	/// <param name="count"></param>
+	/// <param name="valueFactory">容器大小不足扩容时的值填充，默认为<c>default(T)</c></param>
+	/// <returns></returns>
+	public static List<T> Resize<T>(this List<T> data, int count, Func<T> valueFactory = null)
+	{
+		while(data.Count < count)
+			data.Add(valueFactory != null ? valueFactory() : default(T));
+		if (data.Count > count)
+			data.RemoveRange(count, data.Count - count);
+		return data;
 	}
 
 	/// <summary>Merges two sequences by using the specified predicate function.</summary>
