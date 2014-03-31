@@ -24,8 +24,5 @@ public class SkillInfoItem : MonoBehaviour
 		var s = Skill.Value ?? table.TableSkill.First(Skill.Key);
 		uiName.text = s.name;
 		uiIcon.normalSprite = s.icon;
-		uiIcon.isEnabled = Skill.Value != null;
-		// 避免SkillInfo关闭再打开，disable掉的按钮没有变灰。NGUI混色同步有bug
-		uiIcon.defaultColor = uiIcon.isEnabled ? Color.white : Color.gray;
 	}
 }

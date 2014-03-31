@@ -96,6 +96,7 @@ public class SkillInfo : MonoBehaviour
 				var click = UIEventListener.Get(i.uiIcon.gameObject).onClick;
 				if(click != null)
 					click(i.uiIcon.gameObject);
+				i.uiIcon.GetComponent<UIToggle>().value = true;
 				selected = i;
 				break;
 			}
@@ -110,16 +111,17 @@ public class SkillInfo : MonoBehaviour
 	{
 		selected = view;
 		PresentFireThumbs(this.uiSkillFireThumbs);
-		if (view == null || view.Skill.Value == null)
+		if (view == null)
 		{
 			infoName.text = string.Empty;
 			infoRequire.text = string.Empty;
 			infoCD.text = string.Empty;
 			infoDesc.text = string.Empty;
+			return;
 		}
-		else
+		if(view.Skill.Value == null)
 		{
-			var s = view.Skill.Value;
+			var s = view.Skill.Value ?? table.TableSkill.First(view.Skill.Key);
 			infoName.text = string.Format("[e28c00]{0}  {1}级[-]", s.name, s.level);
 			infoRequire.text = string.Format("[e28c00]消耗真气: [-]{0}点  距离{1}码", s.requirePoint, s.radius);
 			infoCD.text = string.Format("[e28c00]冷却时间: [-]{0}秒", s.cd);
