@@ -83,6 +83,7 @@ public class MapNavEditor : Editor
 	/// </summary>
 	private static bool[] folds = { false, true, true, false, true, true, false, false };
 
+
 	static MapNavEditor()
 	{
 		ProtoBuf.Serializer.PrepareSerializer<MapNav>();
@@ -252,10 +253,10 @@ public class MapNavEditor : Editor
 			}
 
 			Handles.color = Color.red;
-			Handles.CubeCap(0, vecStart, new Quaternion(0,0,0,1), 0.2f);
+			Handles.CubeCap(0, vecStart, new Quaternion(0,0,0,1), 0.1f);
 			
 			Handles.color = Color.blue;
-			Handles.CubeCap(0, vecEnd, new Quaternion(0,0,0,1), 0.2f);
+			Handles.CubeCap(0, vecEnd, new Quaternion(0,0,0,1), 0.1f);
 
 			if(path.Count > 0)
 			{   
@@ -271,7 +272,7 @@ public class MapNavEditor : Editor
 					lastPoint = curPoint;
 
 					Handles.color = Color.cyan;
-					Handles.CubeCap(0, curPoint, new Quaternion(0,0,0,1), 0.2f);
+					Handles.CubeCap(0, curPoint, new Quaternion(0,0,0,1), 0.1f);
 				}
 			}
 		}
