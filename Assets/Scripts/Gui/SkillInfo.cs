@@ -74,11 +74,6 @@ public class SkillInfo : MonoBehaviour
 		PresentIcons(SkillManager.Instance);
 	}
 
-	void OnDisable()
-	{
-		selected = null;
-	}
-
 	/// <summary>
 	/// 显示最上面的技能按钮
 	/// </summary>
@@ -87,8 +82,24 @@ public class SkillInfo : MonoBehaviour
 	{
 		if (this.gameObject.activeSelf == false || items == null)
 			return;
+		// 为每个按钮关联对应的技能
 		foreach (var i in items.Zip(manager.OrderBy(i => i.Key)))
 			i.Item1.Skill = i.Item2;
+
+		// 默认选中第一个学会的技能
+		if (selected == null)
+		{
+			foreach (var i in items)
+			{
+				if (i.Skill.Value == null)
+					continue;
+				var click = UIEventListener.Get(i.uiIcon.gameObject).onClick;
+				if(click != null)
+					click(i.uiIcon.gameObject);
+				selected = i;
+				break;
+			}
+		}
 	}
 
 	/// <summary>
