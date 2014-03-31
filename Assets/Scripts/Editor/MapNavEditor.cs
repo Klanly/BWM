@@ -78,6 +78,11 @@ public class MapNavEditor : Editor
 	/// </summary>
 	private bool bSampleStart = true;
 
+	/// <summary>
+	/// The folds.
+	/// </summary>
+	private static bool[] folds = { false, true, true, false, true, true, false, false };
+
 	static MapNavEditor()
 	{
 		ProtoBuf.Serializer.PrepareSerializer<MapNav>();
@@ -97,9 +102,15 @@ public class MapNavEditor : Editor
 		EditorGUILayout.Space();
 		serializedObject.Update();
 
-		Target.ShowGrids = EditorGUILayout.BeginToggleGroup("显示格子", Target.ShowGrids);
-		if (Target.ShowGrids)
+		GUI.changed = false;
+
+		// 创建格子
+		folds[0] = EditorGUILayout.BeginToggleGroup("创建格子", folds[0]);
+		if(folds[0])
 		{
+			GUILayout.Label("注意这会删除当前格子", EditorStyles.label);
+			EditorGUILayout.Space();
+
 			EditorGUILayout.PropertyField(gridWidth, new GUIContent("格子宽(米)"));
 			EditorGUILayout.PropertyField(gridXNum, new GUIContent("X轴格子数"));
 			EditorGUILayout.PropertyField(gridZNum, new GUIContent("Z轴格子数"));
@@ -107,6 +118,17 @@ public class MapNavEditor : Editor
 			{
 				Target.Reset();
 			}
+		}
+		EditorGUILayout.EndToggleGroup();
+
+		// 刷格子
+		GUILayout.Space(20f);
+		folds[1] = EditorGUILayout.BeginToggleGroup("刷阻挡", folds[1]);
+		if(folds[1])
+		{
+			EditorGUILayout.Space();
+
+			Target.ShowGrids = EditorGUILayout.Toggle("显示格子", Target.ShowGrids);
 
 			this.curProcessType = (ProcessType)EditorGUILayout.EnumPopup("当前操作类型", this.curProcessType);
 			if(this.curProcessType == ProcessType.Set || this.curProcessType == ProcessType.Clear)
@@ -119,15 +141,24 @@ public class MapNavEditor : Editor
 				vecStart = EditorGUILayout.Vector3Field("起始点", vecStart);
 				vecEnd = EditorGUILayout.Vector3Field("结束点", vecEnd);
 			}
-
-			EditorUtility.SetDirty(this.target);
 		}
 		EditorGUILayout.EndToggleGroup();
 
-		if (GUILayout.Button("Export"))
+		if(GUI.changed || Target.ShowGrids)
+			EditorUtility.SetDirty(this.target);
+
+		// 导出地图信息
+		GUILayout.Space(20f);
+		folds[2] = EditorGUILayout.BeginToggleGroup("导出地图信息", folds[2]);
+		if(folds[2])
 		{
-			Export();
+			EditorGUILayout.Space();
+			if (GUILayout.Button("Export"))
+			{
+				Export();
+			}
 		}
+		EditorGUILayout.EndToggleGroup();
 
 		serializedObject.ApplyModifiedProperties();
 	}
