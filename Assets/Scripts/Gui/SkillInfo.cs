@@ -15,6 +15,7 @@ public class SkillInfo : MonoBehaviour
 	public UILabel infoRequire;
 	public UILabel infoCD;
 	public UILabel infoDesc;
+	public UIButton infoUpgrade;
 
 	void Start()
 	{
@@ -34,10 +35,6 @@ public class SkillInfo : MonoBehaviour
 		}
 
 		// 技能释放按钮
-		if(Config.UserData.Instance.skillbar.Count < uiSkillFireThumbs.Length)
-			Config.UserData.Instance.skillbar.AddRange(Enumerable.Repeat(0u, uiSkillFireThumbs.Length - Config.UserData.Instance.skillbar.Count));
-		if(Config.UserData.Instance.skillbar.Count > uiSkillFireThumbs.Length)
-			Config.UserData.Instance.skillbar.RemoveRange(uiSkillFireThumbs.Length, Config.UserData.Instance.skillbar.Count - uiSkillFireThumbs.Length);
 		for (var i = 0; i < uiSkillFireThumbs.Length; i++)
 		{
 			var button = uiSkillFireThumbs[i];
@@ -64,6 +61,9 @@ public class SkillInfo : MonoBehaviour
 		// 更新事件
 		SkillManager.Instance.SkillChanged += PresentIcons;
 		PresentIcons(SkillManager.Instance);
+
+		// 技能 升级/学习 按钮
+		UIEventListener.Get(infoUpgrade.gameObject).onClick = OnSkillUpgrade;
 	}
 
 	void OnDestroy()
@@ -78,11 +78,6 @@ public class SkillInfo : MonoBehaviour
 		PresentIcons(SkillManager.Instance);
 	}
 
-	void OnDisable()
-	{
-		selected = null;
-	}
-
 	/// <summary>
 	/// 显示最上面的技能按钮
 	/// </summary>
@@ -91,8 +86,25 @@ public class SkillInfo : MonoBehaviour
 	{
 		if (this.gameObject.activeSelf == false || items == null)
 			return;
+		// 为每个按钮关联对应的技能
 		foreach (var i in items.Zip(manager.OrderBy(i => i.Key)))
 			i.Item1.Skill = i.Item2;
+
+		// 默认选中第一个学会的技能
+		if (selected == null)
+		{
+			foreach (var i in items)
+			{
+				if (i.Skill.Value == null)
+					continue;
+				var click = UIEventListener.Get(i.uiIcon.gameObject).onClick;
+				if(click != null)
+					click(i.uiIcon.gameObject);
+				i.uiIcon.GetComponent<UIToggle>().value = true;
+				selected = i;
+				break;
+			}
+		}
 	}
 
 	/// <summary>
@@ -102,22 +114,20 @@ public class SkillInfo : MonoBehaviour
 	private void PresentInfo(SkillInfoItem view)
 	{
 		selected = view;
+		// 重置施法按钮为默认状态
 		PresentFireThumbs(this.uiSkillFireThumbs);
-		if (view == null || view.Skill.Value == null)
-		{
-			infoName.text = string.Empty;
-			infoRequire.text = string.Empty;
-			infoCD.text = string.Empty;
-			infoDesc.text = string.Empty;
-		}
-		else
-		{
-			var s = view.Skill.Value;
-			infoName.text = string.Format("[e28c00]{0}  {1}级[-]", s.name, s.level);
-			infoRequire.text = string.Format("[e28c00]消耗真气: [-]{0}点  距离{1}码", s.requirePoint, s.radius);
-			infoCD.text = string.Format("[e28c00]冷却时间: [-]{0}秒", s.cd);
-			infoDesc.text = s.desc;
-		}
+
+		// 基本技能信息显示
+		var s = view.Skill.Value ?? table.TableSkill.First(view.Skill.Key);
+		infoName.text = string.Format("[e28c00]{0}  {1}级[-]", s.name, s.level);
+		infoRequire.text = string.Format("[e28c00]消耗真气: [-]{0}点  距离{1}码", s.requirePoint, s.radius);
+		infoCD.text = string.Format("[e28c00]冷却时间: [-]{0}秒", s.cd);
+		infoDesc.text = s.desc;
+
+		// 升级/学习 按钮
+		infoUpgrade.isEnabled = view.Skill.Value == null || view.Skill.Value.level < view.Skill.Value.levelMax;
+		if (infoUpgrade.isEnabled)
+			infoUpgrade.GetComponentInChildren<UILabel>().text = view.Skill.Value != null ? "升级" : "学习";
 	}
 
 	/// <summary>
@@ -136,6 +146,22 @@ public class SkillInfo : MonoBehaviour
 				button.normalSprite =
 				skill != null ? skill.icon : string.Empty;
 			//Debug.Log(string.Format("PresentFireThumbs {0}: {1}", i, button.normalSprite));
+		}
+	}
+
+	/// <summary>
+	/// 升级/学习 技能
+	/// </summary>
+	/// <param name="go"></param>
+	private void OnSkillUpgrade(GameObject go)
+	{
+		if (selected.Skill.Value == null)
+		{
+			Debug.Log("TODO: study skill " + selected.Skill.Key);
+		}
+		else
+		{
+			Debug.Log("TODO: upgrade skill " + selected.Skill.Key);
 		}
 	}
 }

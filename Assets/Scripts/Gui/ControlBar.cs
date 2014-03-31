@@ -24,6 +24,14 @@ public class ControlBar : MonoBehaviour
 			target.gameObject.SetActive(!target.gameObject.activeSelf);
 		};
 
+		// 技能施法按钮点击
+		for (var i = 0; i < uiSkillFireThumbs.Length; i++)
+		{
+			var index = i;
+			UIEventListener.Get(uiSkillFireThumbs[index].gameObject).onClick = go => 
+				SkillManager.Instance.FireSkill(Config.UserData.Instance.skillbar[index]);
+		}
+
 		Config.UserData.Instance.PropertyChanged += OnConfigUserDataChanged;
 		OnConfigUserDataChanged(this, null);
 	}

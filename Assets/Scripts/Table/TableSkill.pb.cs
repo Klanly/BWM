@@ -134,6 +134,13 @@ namespace table
       get { return _interruptable; }
       set { _interruptable = value; }
     }
+    private string _path;
+    [global::ProtoBuf.ProtoMember(18, IsRequired = true, Name=@"path", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public string path
+    {
+      get { return _path; }
+      set { _path = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }

@@ -27,6 +27,7 @@
 		<field column="冷却时间" code="cd" type="uint32" />
 		<field column="准备时间" code="prepareTime" type="uint32" />
 		<field column="可否打断" code="interruptable" type="bool" />
+		<field column="技能路径" code="path" type="string" />
 	</output>
 	<output type="json-go" code="TableSkill" file="技能表.xlsx" sheet="Sheet1">
 		<key code="id" />
