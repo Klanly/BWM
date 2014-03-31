@@ -34,10 +34,6 @@ public class SkillInfo : MonoBehaviour
 		}
 
 		// 技能释放按钮
-		if(Config.UserData.Instance.skillbar.Count < uiSkillFireThumbs.Length)
-			Config.UserData.Instance.skillbar.AddRange(Enumerable.Repeat(0u, uiSkillFireThumbs.Length - Config.UserData.Instance.skillbar.Count));
-		if(Config.UserData.Instance.skillbar.Count > uiSkillFireThumbs.Length)
-			Config.UserData.Instance.skillbar.RemoveRange(uiSkillFireThumbs.Length, Config.UserData.Instance.skillbar.Count - uiSkillFireThumbs.Length);
 		for (var i = 0; i < uiSkillFireThumbs.Length; i++)
 		{
 			var button = uiSkillFireThumbs[i];
