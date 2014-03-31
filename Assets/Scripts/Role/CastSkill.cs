@@ -10,11 +10,17 @@ public class CastSkill : MonoBehaviour
 	/// <summary>
 	/// Starts the skill.
 	/// </summary>
-	/// <param name="strSkill">技能路径</param>
+	/// <param name="strSkill">技能prefab的全路径</param>
 	/// <param name="targetGo">技能释放的目标</param>
-	public void StartSkill(string strSkill, GameObject targetGo)
+	public bool StartSkill(string strSkill, GameObject targetGo)
 	{
-		var skill = Object.Instantiate(Resources.Load("Skill/" + strSkill)) as GameObject;
+		var res = Resources.Load(strSkill);
+		if (res == null)
+		{
+			Debug.LogError("无法加载技能文件: " + strSkill);
+			return false;
+		}
+		var skill = Object.Instantiate(res) as GameObject;
 		skill.GetComponent<Skill>().startGo = gameObject;
 		skill.GetComponent<Skill>().targetGo = targetGo;
 
@@ -28,7 +34,7 @@ public class CastSkill : MonoBehaviour
 			if(count >= 2)
 			{
 				Debug.LogError("技能(" + strSkill + ")有多个发送到达目标的组件");
-				return;
+				return false;
 			}
 		}
 
@@ -38,5 +44,6 @@ public class CastSkill : MonoBehaviour
 		}
 		skill.transform.parent = transform;
 		skill.transform.localPosition = Vector3.zero;
+		return true;
 	}
 }
