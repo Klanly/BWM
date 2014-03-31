@@ -26,6 +26,8 @@ public class SelectTarget : MonoBehaviour
 		return present;
 	}
 
+	public static SelectSceneEntryScriptUserCmd_CS Selected { get; set; }
+
 	/// <summary>
 	/// 场景点选
 	/// </summary>
@@ -33,6 +35,7 @@ public class SelectTarget : MonoBehaviour
 	[Execute]
 	public static IEnumerator Execute(SelectSceneEntryScriptUserCmd_CS cmd)
 	{
+		Selected = cmd;
 		var my = BattleScene.Instance.Gui<SelectTarget>();
 		my.gameObject.SetActive(true);
 		yield return null;

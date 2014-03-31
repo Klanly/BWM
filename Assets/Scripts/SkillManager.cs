@@ -95,7 +95,8 @@ public class SkillManager : IEnumerable<KeyValuePair<uint, table.TableSkill>>
 		if (skill == null)
 			return false;
 		Debug.Log("FireSkill: " + skill);
-		MainRole.Instance.castSkill.StartSkill("Prefabs/Skill/" + skill.path, MainRole.Instance.gameObject);
+		var target = SelectTarget.Selected.GetGameObject();
+		MainRole.Instance.castSkill.StartSkill("Prefabs/Skill/" + skill.path, target != null ? target.gameObject : null);
 		return false;
 	}
 

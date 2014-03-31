@@ -133,7 +133,7 @@ namespace Cmd
 
 		public override string ToString()
 		{
-			return string.Format("#{0} {1}({2})x{3} @{4}", 
+			return string.Format("#{0} {1}({2})x{3} @{4}",
 				this.thisid, this.TableInfo.name, this.baseid, this.num, this.loc);
 		}
 	}
@@ -215,5 +215,31 @@ static class CommonExtensions
 			case Cmd.Profession.Profession_FaShi: return "法师";
 			default: return profession.ToString();
 		}
+	}
+
+	public static MonoBehaviour GetGameObject(this Cmd.SelectSceneEntryScriptUserCmd_CS cmd)
+	{
+		if (cmd == null)
+			return null;
+		switch (cmd.entrytype)
+		{
+			case Cmd.SceneEntryType.SceneEntryType_Npc:
+				{
+					Npc target;
+					if (Npc.All.TryGetValue(cmd.entryid, out target))
+						return target;
+				}
+				break;
+			case Cmd.SceneEntryType.SceneEntryType_Player:
+				{
+					Role target;
+					if (Role.All.TryGetValue(cmd.entryid, out target))
+						return target;
+				}
+				break;
+			default:
+				break;
+		}
+		return null;
 	}
 }
