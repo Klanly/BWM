@@ -130,9 +130,8 @@ public class SkillInfo : MonoBehaviour
 		infoDesc.text = s.desc;
 
 		// 升级/学习 按钮
-		infoUpgrade.isEnabled = view.Skill.Value == null || view.Skill.Value.level < view.Skill.Value.levelMax;
-		if (infoUpgrade.isEnabled)
-			infoUpgrade.GetComponentInChildren<UILabel>().text = view.Skill.Value != null ? "升级" : "学习";
+		infoUpgrade.isEnabled = view.Skill.Value == null || view.Skill.Value.level < view.Skill.Value.MaxLevel;
+		infoUpgrade.GetComponentInChildren<UILabel>().text = view.Skill.Value != null ? "升级" : "学习";
 	}
 
 	/// <summary>

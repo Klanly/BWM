@@ -185,7 +185,7 @@ namespace Cmd
 			{
 				if (tableInfoCache != null && tableInfoCache.id == this.skillid)
 					return tableInfoCache;
-				tableInfoCache = Table.Query<table.TableSkill>().First(i => i.id == this.skillid);
+				tableInfoCache = Table.Query<table.TableSkill>().First(i => i.id == this.skillid && i.level == this.level);
 				return tableInfoCache;
 			}
 		}

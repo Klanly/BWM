@@ -88,6 +88,11 @@ namespace table
 		public Profession Profession { get { return (Profession)this.profession; } }
 
 		/// <summary>
+		/// 相同<see cref="id"/>的最高等级
+		/// </summary>
+		public uint MaxLevel { get { return Last(this.id).level; } }
+		 
+		/// <summary>
 		/// 得到和给定职业相符合的所有技能ID列表
 		/// </summary>
 		/// <param name="profession"></param>
@@ -112,6 +117,20 @@ namespace table
 				from s in Table.Query<table.TableSkill>()
 				where s.id == skillid
 				orderby s.level
+				select s).First();
+		}
+
+		/// <summary>
+		/// 获得指定id的最高等级技能
+		/// </summary>
+		/// <param name="skillid"></param>
+		/// <returns></returns>
+		public static TableSkill Last(uint skillid)
+		{
+			return (
+				from s in Table.Query<table.TableSkill>()
+				where s.id == skillid
+				orderby s.level descending
 				select s).First();
 		}
 
