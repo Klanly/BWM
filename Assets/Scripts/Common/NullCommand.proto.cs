@@ -26,7 +26,10 @@ namespace Cmd
       TickRequestNullUserCmd_CS = 1,
             
       [global::ProtoBuf.ProtoEnum(Name=@"TickReturnNullUserCmd_CS", Value=2)]
-      TickReturnNullUserCmd_CS = 2
+      TickReturnNullUserCmd_CS = 2,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"RequestCloseNullUserCmd_CS", Value=3)]
+      RequestCloseNullUserCmd_CS = 3
     }
   
     private global::ProtoBuf.IExtension extensionObject;
@@ -117,6 +120,23 @@ namespace Cmd
     {
       get { return _mytime; }
       set { _mytime = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"RequestCloseNullUserCmd_CS")]
+  public partial class RequestCloseNullUserCmd_CS : global::ProtoBuf.IExtensible
+  {
+    public RequestCloseNullUserCmd_CS() {}
+    
+    private string _reason;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"reason", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public string reason
+    {
+      get { return _reason; }
+      set { _reason = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
