@@ -154,4 +154,196 @@ public class MapNav : MonoBehaviour
 			}
 		}
 	}
+
+
+	#region AStar Find Path
+	/// <summary>
+	/// 给服务器发送行走信息，最长路段长度
+	/// </summary>
+	private const int PathSegment = 5;
+
+	class PathNode
+	{
+		public int index;
+		public int parentIndex;
+		public float g;
+		public float h;
+		public float f;
+
+		public Cmd.Pos grid;
+		public Vector3 position;
+
+		public PathNode(int _index, int _parentIndex, float _g, float _h, MapNav mapNav)
+		{
+			index = _index;
+			parentIndex = _parentIndex;
+			g = _g;
+			h = _h;
+			f = g + h;
+
+			grid = new Cmd.Pos(){x = index % mapNav.gridXNum, y = index / mapNav.gridXNum};
+			position = mapNav.GetWorldPosition(grid);
+		}
+
+		public void setG(float _g)
+		{
+			g = _g;
+			f = g + h;
+		}
+
+		public override string ToString()
+		{
+			return string.Format("PathNode:" + index + ",(" + grid.x + "," + grid.y + "),(" + g + "," + h + "," + f + "),(" + position.x + "," + position.y + "," + position.z + ")");
+		}
+	}
+
+	class NodeOffset
+	{
+		public int offset;
+		public float distance;
+
+		public NodeOffset(int _offset, float _distance)
+		{
+			offset = _offset;
+			distance = _distance;
+		}
+
+		public override string ToString()
+		{
+			return string.Format("offset:" + offset + "," + distance);
+		}
+	}
+
+	public List<Cmd.Pos> GetPath(Vector3 fromPosition, Vector3 toPosition, TileType validType)
+	{
+		return GetPath(GetGridX(fromPosition), GetGridZ(fromPosition), GetGridX(toPosition), GetGridZ(toPosition), validType);
+	}
+	
+	public List<Cmd.Pos> GetPath(Cmd.Pos fromPos, Cmd.Pos toPos, TileType validType)
+	{
+		return GetPath(fromPos.x, fromPos.y, toPos.x, toPos.y, validType);
+	}
+		
+	public List<Cmd.Pos> GetPath(int fromGridX, int fromGridZ, int toGridX, int toGridZ, TileType validType)
+	{
+		List<Cmd.Pos> path = new List<Cmd.Pos>();
+		if ((this[fromGridX, fromGridZ] & validType) == 0)
+			return path;
+		
+		if ((this[toGridX, toGridZ] & validType) == 0)
+			return path;
+
+		PathNode pnFrom = new PathNode(fromGridZ * gridXNum + fromGridX, 0, 0, 0, this);
+		PathNode pnTo = new PathNode(toGridZ * gridXNum + toGridX, 0, 0, 0, this);
+
+		Dictionary<int, PathNode> totalDic = new Dictionary<int, PathNode>();
+		Dictionary<int, PathNode> openDic = new Dictionary<int, PathNode>();
+		Dictionary<int, PathNode> closeDic = new Dictionary<int, PathNode>();
+		openDic.Add(pnFrom.index, pnFrom);
+		totalDic.Add(pnFrom.index, pnFrom);
+
+		float disCornor = Mathf.Sqrt(gridWidth * gridWidth + gridHeight * gridHeight);
+		NodeOffset[] offsets = new NodeOffset[]{new NodeOffset(gridXNum-1, disCornor), new NodeOffset(gridXNum, gridHeight),new NodeOffset(gridXNum+1, disCornor),
+			new NodeOffset(-1, gridWidth), new NodeOffset(1, gridWidth),
+			new NodeOffset(-gridXNum-1, disCornor), new NodeOffset(-gridXNum, gridHeight),new NodeOffset(-gridXNum+1, disCornor)};
+		while(openDic.Count > 0)
+		{
+			PathNode pn = null;
+			foreach(KeyValuePair<int, PathNode> t in openDic)
+			{
+				if (pn == null) pn = t.Value;
+				if (t.Value.f < pn.f) pn = t.Value;
+			}
+
+			closeDic.Add(pn.index, pn);
+			openDic.Remove(pn.index);
+
+			if (pn.index == pnTo.index) break;
+
+			foreach(NodeOffset offset in offsets)
+			{
+				int index = pn.index + offset.offset;
+				if (index < 0 || index > grids.Length) continue;
+				if (closeDic.ContainsKey(index)) continue;
+				if ((grids[index] & validType) == 0) continue;
+
+				PathNode pntmp = null;
+				float g = pn.g + offset.distance;
+
+				if (openDic.ContainsKey(index)) 
+				{
+					pntmp = openDic[index];
+					if (g < pntmp.g)
+					{
+						pntmp.parentIndex = pn.index;
+						pntmp.setG(g);
+					}
+				}
+				else
+				{
+					pntmp = new PathNode(index, pn.index, 0, 0, this);
+					openDic[index] = pntmp;
+					totalDic[index] = pntmp;
+					pntmp.h = Mathf.Abs(Vector3.Distance(pntmp.position, pnTo.position));
+					pntmp.setG(g);
+				}
+			}
+		}
+
+		if(!closeDic.ContainsKey(pnTo.index))
+			return path;
+
+		List<Cmd.Pos> tmpPath = new List<Cmd.Pos>();
+		PathNode node = closeDic[pnTo.index];
+		while(node != null)
+		{
+			tmpPath.Add(node.grid);
+
+			if(node.parentIndex == 0)
+				break;
+			node = totalDic[node.parentIndex];
+		}
+		tmpPath.Reverse();
+
+		// 去除中间相同方向的点，同时一段路径不能超过PathSegment长
+		int olddx = 0;
+		int olddy = 0;
+		int dx = 0;
+		int dy = 0;
+		int segment = 0;
+		foreach(Cmd.Pos grid in tmpPath)
+		{
+			if(path.Count < 2)
+			{
+				path.Add(grid);
+			}
+			else
+			{
+				if (olddx == 0 && olddy == 0)
+				{
+					olddx = path[path.Count-1].x - path[path.Count-2].x;
+					olddy = path[path.Count-1].y - path[path.Count-2].y;
+					segment = 1;
+				}
+
+				dx = grid.x - path[path.Count-1].x;
+				dy = grid.y - path[path.Count-1].y;
+				if (olddx == dx && olddy == dy && segment < PathSegment)
+				{
+					path[path.Count-1] = grid;
+					segment ++;
+				}
+				else
+				{
+					olddx = dx;
+					olddy = dy;
+					path.Add(grid);
+					segment = 1;
+				}
+			}
+		}
+
+		return path;
+	}
+	#endregion
 }

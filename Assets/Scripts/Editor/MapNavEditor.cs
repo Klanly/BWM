@@ -55,7 +55,28 @@ public class MapNavEditor : Editor
 		/// 清空
 		/// </summary>
 		Clear = 2,
+		/// <summary>
+		/// 寻路
+		/// </summary>
+		FindPath = 3,
 	}
+
+	/// <summary>
+	/// 自动寻路起始点
+	/// </summary>
+	private Vector3 vecStart = new Vector3(0,0,0);
+	/// <summary>
+	/// 自动寻路结束点
+	/// </summary>
+	private Vector3 vecEnd = new Vector3(0,0,0);
+	/// <summary>
+	/// 自动寻路路径
+	/// </summary>
+	private List<Cmd.Pos> path = new List<Cmd.Pos>();
+	/// <summary>
+	/// 是否采样寻路的起始点
+	/// </summary>
+	private bool bSampleStart = true;
 
 	static MapNavEditor()
 	{
@@ -88,8 +109,16 @@ public class MapNavEditor : Editor
 			}
 
 			this.curProcessType = (ProcessType)EditorGUILayout.EnumPopup("当前操作类型", this.curProcessType);
-			this.curTileType = (MapNav.TileType)EditorGUILayout.EnumPopup("当前格子类型", this.curTileType);
-			this.radius = EditorGUILayout.IntSlider("操作直径", this.radius, 1, 16);
+			if(this.curProcessType == ProcessType.Set || this.curProcessType == ProcessType.Clear)
+			{
+				this.curTileType = (MapNav.TileType)EditorGUILayout.EnumPopup("当前格子类型", this.curTileType);
+				this.radius = EditorGUILayout.IntSlider("操作直径", this.radius, 1, 16);
+			}
+			else if(this.curProcessType == ProcessType.FindPath)
+			{
+				vecStart = EditorGUILayout.Vector3Field("起始点", vecStart);
+				vecEnd = EditorGUILayout.Vector3Field("结束点", vecEnd);
+			}
 
 			EditorUtility.SetDirty(this.target);
 		}
@@ -110,59 +139,108 @@ public class MapNavEditor : Editor
 		if (curProcessType == ProcessType.None)
 			return;
 
-		Plane groundPlane = new Plane(Vector3.up, Vector3.zero);
-		float rayDistance;
-		Ray ray = HandleUtility.GUIPointToWorldRay(Event.current.mousePosition);
-		if (groundPlane.Raycast(ray, out rayDistance))
+		if(curProcessType == ProcessType.Set || curProcessType == ProcessType.Clear)
 		{
-			Vector3 hitPoint = ray.GetPoint(rayDistance);
-			if (hitPoint.x >= 0.0f && hitPoint.x <= mapNav.gridXNum * mapNav.gridWidth
-			   && hitPoint.z >= 0.0f && hitPoint.z <= mapNav.gridZNum * mapNav.gridHeight)
+			Plane groundPlane = new Plane(Vector3.up, Vector3.zero);
+			float rayDistance;
+			Ray ray = HandleUtility.GUIPointToWorldRay(Event.current.mousePosition);
+			if (groundPlane.Raycast(ray, out rayDistance))
 			{
-				Handles.color = Color.white;
-				float _radius = radius * 0.5f;
-				Handles.DrawPolyLine(new Vector3[]
+				Vector3 hitPoint = ray.GetPoint(rayDistance);
+				if (hitPoint.x >= 0.0f && hitPoint.x <= mapNav.gridXNum * mapNav.gridWidth
+				   && hitPoint.z >= 0.0f && hitPoint.z <= mapNav.gridZNum * mapNav.gridHeight)
 				{
-					new Vector3(hitPoint.x - _radius * mapNav.gridWidth, y, hitPoint.z - _radius * mapNav.gridHeight),
-					new Vector3(hitPoint.x - _radius * mapNav.gridWidth, y, hitPoint.z + _radius * mapNav.gridHeight),
-					new Vector3(hitPoint.x + _radius * mapNav.gridWidth, y, hitPoint.z + _radius * mapNav.gridHeight),
-					new Vector3(hitPoint.x + _radius * mapNav.gridWidth, y, hitPoint.z - _radius * mapNav.gridHeight),
-					new Vector3(hitPoint.x - _radius * mapNav.gridWidth, y, hitPoint.z - _radius * mapNav.gridHeight)
-				});
-
-				if (Event.current.type == EventType.MouseDown || Event.current.type == EventType.MouseDrag)
-				{
-					int x = mapNav.GetGridX(hitPoint);
-					int z = mapNav.GetGridZ(hitPoint);
-					for (int _z = z - Mathf.RoundToInt(_radius); _z <= z + Mathf.RoundToInt(_radius); ++_z)
+					Handles.color = Color.black;
+					float _radius = radius * 0.5f;
+					Handles.DrawPolyLine(new Vector3[]
 					{
-						if (_z < 0) continue;
-						if (_z > mapNav.gridZNum - 1) continue;
-						for (int _x = x - Mathf.RoundToInt(_radius); _x <= x + Mathf.RoundToInt(_radius); ++_x)
-						{
-							if (_x < 0) continue;
-							if (_x > mapNav.gridXNum - 1) continue;
+						new Vector3(hitPoint.x - _radius * mapNav.gridWidth, y, hitPoint.z - _radius * mapNav.gridHeight),
+						new Vector3(hitPoint.x - _radius * mapNav.gridWidth, y, hitPoint.z + _radius * mapNav.gridHeight),
+						new Vector3(hitPoint.x + _radius * mapNav.gridWidth, y, hitPoint.z + _radius * mapNav.gridHeight),
+						new Vector3(hitPoint.x + _radius * mapNav.gridWidth, y, hitPoint.z - _radius * mapNav.gridHeight),
+						new Vector3(hitPoint.x - _radius * mapNav.gridWidth, y, hitPoint.z - _radius * mapNav.gridHeight)
+					});
 
-							Vector3 position = mapNav.GetWorldPosition(_x, _z);
-							if (Mathf.Abs(position.x - hitPoint.x) <= _radius * mapNav.gridWidth
-							   && Mathf.Abs(position.z - hitPoint.z) <= _radius * mapNav.gridHeight)
+					if (Event.current.type == EventType.MouseDown || Event.current.type == EventType.MouseDrag)
+					{
+						int x = mapNav.GetGridX(hitPoint);
+						int z = mapNav.GetGridZ(hitPoint);
+						for (int _z = z - Mathf.RoundToInt(_radius); _z <= z + Mathf.RoundToInt(_radius); ++_z)
+						{
+							if (_z < 0) continue;
+							if (_z > mapNav.gridZNum - 1) continue;
+							for (int _x = x - Mathf.RoundToInt(_radius); _x <= x + Mathf.RoundToInt(_radius); ++_x)
 							{
-								switch (curProcessType)
+								if (_x < 0) continue;
+								if (_x > mapNav.gridXNum - 1) continue;
+
+								Vector3 position = mapNav.GetWorldPosition(_x, _z);
+								if (Mathf.Abs(position.x - hitPoint.x) <= _radius * mapNav.gridWidth
+								   && Mathf.Abs(position.z - hitPoint.z) <= _radius * mapNav.gridHeight)
 								{
-									case ProcessType.None:
-										break;
-									case ProcessType.Set:
-										mapNav[_x, _z] |= curTileType;
-										break;
-									case ProcessType.Clear:
-										mapNav[_x, _z] &= ~curTileType;
-										break;
-									default:
-										throw new System.NotImplementedException();
+									switch (curProcessType)
+									{
+										case ProcessType.Set:
+											mapNav[_x, _z] |= curTileType;
+											break;
+										case ProcessType.Clear:
+											mapNav[_x, _z] &= ~curTileType;
+											break;
+										default:
+											throw new System.NotImplementedException();
+									}
 								}
 							}
 						}
 					}
+				}
+			}
+		}
+		else if(curProcessType == ProcessType.FindPath)
+		{
+			if (Event.current.type == EventType.MouseDown)
+			{
+				Plane groundPlane = new Plane(Vector3.up, Vector3.zero);
+				float rayDistance;
+				Ray ray = HandleUtility.GUIPointToWorldRay(Event.current.mousePosition);
+				if (groundPlane.Raycast(ray, out rayDistance))
+				{
+					Vector3 hitPoint = ray.GetPoint(rayDistance);
+					if (hitPoint.x >= 0.0f && hitPoint.x <= mapNav.gridXNum * mapNav.gridWidth
+					    && hitPoint.z >= 0.0f && hitPoint.z <= mapNav.gridZNum * mapNav.gridHeight)
+					{
+						if(bSampleStart)
+							vecStart = hitPoint;
+						else
+							vecEnd = hitPoint;
+						bSampleStart = !bSampleStart;
+
+						path = mapNav.GetPath(vecStart, vecEnd, MapNav.TileType.Walk);
+					}
+				}
+			}
+
+			Handles.color = Color.red;
+			Handles.CubeCap(0, vecStart, new Quaternion(0,0,0,1), 0.2f);
+			
+			Handles.color = Color.blue;
+			Handles.CubeCap(0, vecEnd, new Quaternion(0,0,0,1), 0.2f);
+
+			if(path.Count > 0)
+			{   
+				Handles.color = Color.black;
+				Vector3 lastPoint = vecStart;
+				lastPoint.y = y;
+				foreach(Cmd.Pos grid in path)
+				{
+					Vector3 curPoint = mapNav.GetWorldPosition(grid);
+					curPoint.y = y;
+					Handles.color = Color.black;
+					Handles.DrawLine(lastPoint, curPoint);
+					lastPoint = curPoint;
+
+					Handles.color = Color.cyan;
+					Handles.CubeCap(0, curPoint, new Quaternion(0,0,0,1), 0.2f);
 				}
 			}
 		}
