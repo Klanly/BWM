@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Linq;
+using Cmd;
 
 public class SkillInfo : MonoBehaviour
 {
@@ -97,13 +98,17 @@ public class SkillInfo : MonoBehaviour
 			{
 				if (i.Skill.Value == null)
 					continue;
-				var click = UIEventListener.Get(i.uiIcon.gameObject).onClick;
-				if(click != null)
-					click(i.uiIcon.gameObject);
-				i.uiIcon.GetComponent<UIToggle>().value = true;
 				selected = i;
 				break;
 			}
+		}
+		// 更新选中技能信息
+		if (selected != null)
+		{
+			var click = UIEventListener.Get(selected.uiIcon.gameObject).onClick;
+			if (click != null)
+				click(selected.uiIcon.gameObject);
+			selected.uiIcon.GetComponent<UIToggle>().value = true;
 		}
 	}
 
@@ -155,13 +160,7 @@ public class SkillInfo : MonoBehaviour
 	/// <param name="go"></param>
 	private void OnSkillUpgrade(GameObject go)
 	{
-		if (selected.Skill.Value == null)
-		{
-			Debug.Log("TODO: study skill " + selected.Skill.Key);
-		}
-		else
-		{
-			Debug.Log("TODO: upgrade skill " + selected.Skill.Key);
-		}
+		// 学习和升级是同一个消息
+		Net.Instance.Send(new LearnSkillSkillUserCmd_C() { skillid = selected.Skill.Key });
 	}
 }
