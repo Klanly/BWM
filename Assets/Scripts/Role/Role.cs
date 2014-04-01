@@ -78,7 +78,16 @@ public class Role : MonoBehaviour
 		}
 		else
 		{
-			role = Role.Create(cmd.data);
+			if (cmd.data.charid == MainRole.ServerInfo.userdata.charid)
+			{
+				var mainRole = MainRole.Create();
+				role = mainRole.GetComponent<Role>();
+			}
+			else
+			{
+				role = Role.Create(cmd.data);
+			}
+			
 			Role.All[cmd.data.charid] = role;
 		}
 
