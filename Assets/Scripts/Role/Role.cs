@@ -113,7 +113,6 @@ public class Role : MonoBehaviour
 	[Execute]
 	public static void Execute(SetUserHpSpDataUserCmd_S cmd)
 	{
-		// TODO: 并非仅针对于主角
 		var my = MainRole.Instance;
 		if (my != null && cmd.charid == my.Role.ServerInfo.charid)
 		{
@@ -121,30 +120,47 @@ public class Role : MonoBehaviour
 			MainRole.ServerInfo.hp = cmd.hp;
 			my.maxsp = cmd.maxsp;
 			MainRole.ServerInfo.sp = cmd.sp;
+			return;
+		}
+
+		if (SelectTarget.Selected.entrytype == SceneEntryType.SceneEntryType_Player && SelectTarget.Selected.entryid == cmd.charid)
+		{
+			var view = BattleScene.Instance.Gui<SelectTargetRole>();
+			view.SetHp(cmd.hp, cmd.maxhp);
+			view.SetSp(cmd.sp, cmd.maxsp);
+			return;
 		}
 	}
 
 	[Execute]
 	public static void Execute(ChangeUserHpDataUserCmd_S cmd)
 	{
-		// TODO: 并非仅针对于主角
-		if (MainRole.ServerInfo == null)
-			return;
-		if (cmd.charid == MainRole.ServerInfo.userdata.charid)
+		if (MainRole.ServerInfo != null && cmd.charid == MainRole.ServerInfo.userdata.charid)
 		{
 			MainRole.ServerInfo.hp = cmd.curhp;
+			return;
+		}
+		if (SelectTarget.Selected.entrytype == SceneEntryType.SceneEntryType_Player && SelectTarget.Selected.entryid == cmd.charid)
+		{
+			var view = BattleScene.Instance.Gui<SelectTargetRole>();
+			view.SetHp(cmd.curhp);
+			return;
 		}
 	}
 
 	[Execute]
 	public static void Execute(ChangeUserSpDataUserCmd_S cmd)
 	{
-		// TODO: 并非仅针对于主角
-		if (MainRole.ServerInfo == null)
-			return;
-		if (cmd.charid == MainRole.ServerInfo.userdata.charid)
+		if (MainRole.ServerInfo != null && cmd.charid == MainRole.ServerInfo.userdata.charid)
 		{
 			MainRole.ServerInfo.sp = cmd.cursp;
+			return;
+		}
+		if (SelectTarget.Selected.entrytype == SceneEntryType.SceneEntryType_Player && SelectTarget.Selected.entryid == cmd.charid)
+		{
+			var view = BattleScene.Instance.Gui<SelectTargetRole>();
+			view.SetSp(cmd.cursp);
+			return;
 		}
 	}
 	#endregion

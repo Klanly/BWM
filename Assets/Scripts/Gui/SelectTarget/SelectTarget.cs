@@ -26,7 +26,7 @@ public class SelectTarget : MonoBehaviour
 		return present;
 	}
 
-	public static SelectSceneEntryScriptUserCmd_CS Selected { get; set; }
+	public static SceneEntryUid Selected { get; set; }
 
 	/// <summary>
 	/// 释放给定的技能
@@ -42,8 +42,8 @@ public class SelectTarget : MonoBehaviour
 		// TODO: 群攻搜索并批量发送攻击请求
 		//var target = SelectTarget.Selected == null ? null : SelectTarget.Selected.entry.GetGameObject();
 		var cmd = new RequestUseSkillUserCmd_C() { skillid = skill.id };
-		if (SelectTarget.Selected != null && SelectTarget.Selected.entry != null)
-			cmd.hurts.Add(SelectTarget.Selected.entry);
+		if (SelectTarget.Selected != null && SelectTarget.Selected != null)
+			cmd.hurts.Add(SelectTarget.Selected);
 		Net.Instance.Send(cmd);
 		//MainRole.Instance.castSkill.StartSkill("Prefabs/Skill/" + skill.path, target != null ? target.gameObject : null);
 		return false;
@@ -91,16 +91,16 @@ public class SelectTarget : MonoBehaviour
 	[Execute]
 	public static IEnumerator Execute(SelectSceneEntryScriptUserCmd_CS cmd)
 	{
-		Selected = cmd;
+		Selected = cmd.entry;
 		var my = BattleScene.Instance.Gui<SelectTarget>();
 		my.gameObject.SetActive(true);
 		yield return null;
-		switch (cmd.entry.entrytype)
+		switch (Selected.entrytype)
 		{
 			case SceneEntryType.SceneEntryType_Npc:
 				{
 					Npc target;
-					if (Npc.All.TryGetValue(cmd.entry.entryid, out target))
+					if (Npc.All.TryGetValue(Selected.entryid, out target))
 					{
 						switch (target.TableInfo.Type)
 						{
@@ -123,7 +123,7 @@ public class SelectTarget : MonoBehaviour
 			case SceneEntryType.SceneEntryType_Player:
 				{
 					Role target;
-					if (Role.All.TryGetValue(cmd.entry.entryid, out target))
+					if (Role.All.TryGetValue(Selected.entryid, out target))
 						my.Toggle<SelectTargetRole>().Present(target);
 				}
 				break;

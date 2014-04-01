@@ -5,6 +5,23 @@ public class SelectTargetRole : MonoBehaviour
 {
 	public UILabel uiName;
 	public UISprite uiHead;
+	public UISlider uiHp;
+
+	public int maxHp;
+	public int maxSp;
+
+	public void SetHp(int cur, int max = 0)
+	{
+		if (max != 0)
+			maxHp = max;
+		uiHp.value = cur / (float)maxHp;
+	}
+
+	public void SetSp(int cur, int max = 0)
+	{
+		if (max != 0)
+			maxSp = max;
+	}
 
 	internal void Present(Role target)
 	{
