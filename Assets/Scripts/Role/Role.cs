@@ -56,14 +56,14 @@ public class Role : MonoBehaviour
 		headTip.topAnchor.absolute = headTip.bottomAnchor.absolute + 30;
 	}
 
-	private CastSkill m_skillEmitCache;
-	public CastSkill SkillEmit
+	private CastSkill m_caseSkillCache;
+	public CastSkill CastSkill
 	{
 		get
 		{
-			if (m_skillEmitCache == null)
-				this.m_skillEmitCache = this.gameObject.AddComponent<CastSkill>();
-			return m_skillEmitCache;
+			if (m_caseSkillCache == null)
+				this.m_caseSkillCache = this.gameObject.AddComponent<CastSkill>();
+			return m_caseSkillCache;
 		}
 	}
 

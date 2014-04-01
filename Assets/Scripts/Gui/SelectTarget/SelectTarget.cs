@@ -56,21 +56,21 @@ public class SelectTarget : MonoBehaviour
 	[Execute]
 	public static void Execute(ReturnUseSkillUserCmd_S cmd)
 	{
-		CastSkill emit = null;
+		CastSkill cast = null;
 		switch (cmd.owner.entrytype)
 		{
 			case Cmd.SceneEntryType.SceneEntryType_Npc:
 				{
 					Npc owner;
 					if (Npc.All.TryGetValue(cmd.owner.entryid, out owner))
-						emit = owner.SkillEmit;
+						cast = owner.CastSkill;
 				}
 				break;
 			case Cmd.SceneEntryType.SceneEntryType_Player:
 				{
 					Role owner;
 					if (Role.All.TryGetValue(cmd.owner.entryid, out owner))
-						emit = owner.SkillEmit;
+						cast = owner.CastSkill;
 				}
 				break;
 			default:
@@ -78,10 +78,10 @@ public class SelectTarget : MonoBehaviour
 		}
 
 		var skill = table.TableSkill.Where(cmd.skillid, cmd.skilllevel);
-		if (emit == null || skill == null)
+		if (cast == null || skill == null)
 			return;
 		foreach (var target in cmd.hurts)
-			emit.StartSkill(skill, target);
+			cast.StartSkill(skill, target);
 	}
 
 	/// <summary>

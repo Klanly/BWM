@@ -23,14 +23,14 @@ public class Npc : MonoBehaviour
 
 	private Npc() { }
 
-	private CastSkill m_skillEmitCache;
-	public CastSkill SkillEmit
+	private CastSkill m_castSkillCache;
+	public CastSkill CastSkill
 	{
 		get
 		{
-			if (m_skillEmitCache == null)
-				this.m_skillEmitCache = this.gameObject.AddComponent<CastSkill>();
-			return m_skillEmitCache;
+			if (m_castSkillCache == null)
+				this.m_castSkillCache = this.gameObject.AddComponent<CastSkill>();
+			return m_castSkillCache;
 		}
 	}
 

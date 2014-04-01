@@ -86,7 +86,7 @@ public class MainRole : MonoBehaviour, INotifyPropertyChanged
 
 	#endregion
 
-	public CastSkill SkillEmit { get { return this.Role.SkillEmit; } }
+	public CastSkill CastSkill { get { return this.Role.CastSkill; } }
 
 	/// <summary>
 	/// 设置主角信息
