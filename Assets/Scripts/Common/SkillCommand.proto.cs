@@ -142,13 +142,13 @@ namespace Cmd
   {
     public SkillHurtData() {}
     
-    private readonly global::System.Collections.Generic.List<Cmd.SceneEntryUid> _hurtid = new global::System.Collections.Generic.List<Cmd.SceneEntryUid>();
-    [global::ProtoBuf.ProtoMember(1, Name=@"hurtid", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public global::System.Collections.Generic.List<Cmd.SceneEntryUid> hurtid
+    private Cmd.SceneEntryUid _hurtid;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"hurtid", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public Cmd.SceneEntryUid hurtid
     {
       get { return _hurtid; }
+      set { _hurtid = value; }
     }
-  
     private uint _hp = default(uint);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"hp", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     [global::System.ComponentModel.DefaultValue(default(uint))]
