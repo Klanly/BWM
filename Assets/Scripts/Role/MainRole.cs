@@ -38,7 +38,9 @@ public class MainRole : MonoBehaviour, INotifyPropertyChanged
 	public static MainRole Create()
 	{
 		var role = Role.Create(ServerInfo.userdata);
+#if UNITY_EDITOR
 		role.gameObject.name = "Main" + role.gameObject.name;
+#endif
 
 		var mainRole = role.gameObject.AddComponent<MainRole>();
 		mainRole.Role = role;

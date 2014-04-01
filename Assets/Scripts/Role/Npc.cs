@@ -46,7 +46,9 @@ public class Npc : MonoBehaviour
 		}
 
 		var avatar = Object.Instantiate(res) as GameObject;
+#if UNITY_EDITOR
 		avatar.name = string.Format("Npc.{0}({1})", tbl.name, info.tempid);
+#endif
 		avatar.transform.localScale = new Vector3(5, 5, 5);
 
 		var npc = avatar.AddComponent<Npc>();
@@ -68,7 +70,9 @@ public class Npc : MonoBehaviour
 	private static void CreateHeadTip(Npc npc)
 	{
 		var headTip = (GameObject.Instantiate(Resources.Load("Prefabs/Gui/HeadTip")) as GameObject).GetComponent<UILabel>();
+#if UNITY_EDITOR
 		headTip.name = npc.name;
+#endif
 		headTip.text = npc.TableInfo.name;
 		headTip.hideIfOffScreen = true;
 		headTip.SetAnchor(npc.gameObject);

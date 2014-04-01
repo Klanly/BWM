@@ -27,7 +27,9 @@ public class Role : MonoBehaviour
 	{
 		var tbl = table.TableAvatar.Where(info.profession, info.sexman);
 		var avatar = Avatar.Create(tbl);
+#if UNITY_EDITOR
 		avatar.name = "Role." + info.charname;
+#endif
 		avatar.transform.localScale = new Vector3(5, 5, 5);
 
 		var role = avatar.AddComponent<Role>();
@@ -48,7 +50,9 @@ public class Role : MonoBehaviour
 	private static void CreateHeadTip(Role role)
 	{
 		var headTip = (GameObject.Instantiate(Resources.Load("Prefabs/Gui/HeadTip")) as GameObject).GetComponent<UILabel>();
+#if UNITY_EDITOR
 		headTip.name = role.name;
+#endif
 		headTip.text = role.ServerInfo.charname;
 		headTip.hideIfOffScreen = true;
 		headTip.SetAnchor(role.gameObject);
