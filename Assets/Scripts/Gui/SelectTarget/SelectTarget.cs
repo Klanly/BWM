@@ -81,11 +81,7 @@ public class SelectTarget : MonoBehaviour
 		if (emit == null || skill == null)
 			return;
 		foreach (var target in cmd.hurts)
-		{
-			var t = target.hurtid.GetGameObject();
-			emit.StartSkill("Prefabs/Skill/" + skill.path, t != null ? t.gameObject : null);
-			// TODO: 对应角色的扣血
-		}
+			emit.StartSkill(skill, target);
 	}
 
 	/// <summary>
