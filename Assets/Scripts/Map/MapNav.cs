@@ -82,6 +82,11 @@ public class MapNav : MonoBehaviour
 		return (int)(worldPosition.z / gridHeight);
 	}
 
+	public Cmd.Pos GetGrid(Vector3 worldPosition)
+	{
+		return new Cmd.Pos(){x = GetGridX(worldPosition), y = GetGridZ(worldPosition)};
+	}
+
 	public Vector3 GetWorldPosition(Cmd.Pos pos)
 	{
 		return GetWorldPosition(pos.x, pos.y);
@@ -345,5 +350,55 @@ public class MapNav : MonoBehaviour
 
 		return path;
 	}
+
+	/// <summary>
+	/// 沿着指向源点的方向，把目标点前移一段距离
+	/// </summary>
+	/// <returns>The nearest grid.</returns>
+	/// <param name="src">Source.</param>
+	/// <param name="dst">Dst.</param>
+	/// <param name="mindis">gridnum.</param>
+	public Cmd.Pos GetNearestGrid(Cmd.Pos src, Cmd.Pos dst, int gridnum=1)
+	{
+		Cmd.Pos ptOut = src;
+		if(src == dst)
+			return ptOut;
+
+		Vector3 vecDir = this.GetWorldPosition(src) - this.GetWorldPosition(dst);
+		vecDir.Normalize();
+		Vector3 vecOut = this.GetWorldPosition(dst) + gridnum * gridWidth * vecDir;
+		ptOut = this.GetGrid(vecOut);
+		return ptOut;
+	}
+
+	/// <summary>
+	/// 在源点和目标点之间，找个有效的可到达点。搜寻范围在dst ~ (dst-radius)内
+	/// </summary>
+	/// <returns>The nearest valid grid.</returns>
+	/// <param name="src">Source.</param>
+	/// <param name="dst">Dst.</param>
+	/// <param name="validType">Valid type.</param>
+	/// <param name="radius">Grid Radius.</param>
+	public Cmd.Pos FindNearestValidGrid(Cmd.Pos src, Cmd.Pos dst, TileType validType, int gridRadius=-1)
+	{
+		Cmd.Pos ptOut = dst;
+		while((this[ptOut.x, ptOut.y] & validType) == 0)
+		{
+			ptOut = GetNearestGrid(src, ptOut);
+			if(ptOut == src) break;
+			if(gridRadius > 0)
+			{
+				gridRadius --;
+				if(gridRadius == 0)
+					break;
+			}
+		}
+
+		if((this[ptOut.x, ptOut.y] & validType) != 0)
+			return ptOut;
+		else
+			return null;
+	}
+
 	#endregion
 }

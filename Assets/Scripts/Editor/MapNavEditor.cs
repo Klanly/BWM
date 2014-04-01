@@ -247,7 +247,11 @@ public class MapNavEditor : Editor
 							vecEnd = hitPoint;
 						bSampleStart = !bSampleStart;
 
-						path = mapNav.GetPath(vecStart, vecEnd, MapNav.TileType.Walk);
+						Cmd.Pos gridEnd = mapNav.FindNearestValidGrid(mapNav.GetGrid(vecStart), mapNav.GetGrid(vecEnd), MapNav.TileType.Walk);
+						if(gridEnd != null)
+							path = mapNav.GetPath(mapNav.GetGrid(vecStart), gridEnd, MapNav.TileType.Walk);
+						else
+							path.Clear();
 					}
 				}
 			}
