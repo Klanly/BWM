@@ -50,6 +50,25 @@ public class SelectTarget : MonoBehaviour
 	}
 
 	/// <summary>
+	/// 服务器驱动的技能生效
+	/// </summary>
+	/// <param name="cmd"></param>
+	[Execute]
+	public static void Execute(ReturnUseSkillUserCmd_S cmd)
+	{
+		var skill = table.TableSkill.Where(cmd.skillid, cmd.skilllevel);
+		var emit = cmd.owner.GetGameObject() as ISkillEmit;
+		if (skill == null || emit == null)
+			return;
+		foreach (var target in cmd.hurts)
+		{
+			var t = target.hurtid.GetGameObject();
+			emit.SkillEmit.StartSkill("Prefabs/Skill/" + skill.path, t != null ? t.gameObject : null);
+			// TODO: 对应角色的扣血
+		}
+	}
+
+	/// <summary>
 	/// 场景点选
 	/// </summary>
 	/// <param name="cmd"></param>

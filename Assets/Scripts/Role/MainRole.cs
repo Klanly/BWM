@@ -5,7 +5,7 @@ using GX;
 using GX.Net;
 using System.ComponentModel;
 
-public class MainRole : MonoBehaviour, INotifyPropertyChanged
+public class MainRole : MonoBehaviour, INotifyPropertyChanged, ISkillEmit
 {
 	/// <summary>
 	/// 主角基本信息
@@ -30,7 +30,6 @@ public class MainRole : MonoBehaviour, INotifyPropertyChanged
 	public Animator animator;
 	public Move move;
 	public CameraFollow cameraFollow;
-	public CastSkill castSkill;
 
 	private Pos lastGird = new Pos();
 
@@ -47,7 +46,6 @@ public class MainRole : MonoBehaviour, INotifyPropertyChanged
 		mainRole.animator = role.gameObject.GetComponent<Animator>();
 		mainRole.move = role.gameObject.GetComponent<Move>();
 		mainRole.cameraFollow = role.gameObject.AddComponent<CameraFollow>();
-		mainRole.castSkill = role.gameObject.AddComponent<CastSkill>();
 
 		mainRole.entity.PositionChanged += mainRole.OnPositionChanged;
 		return mainRole;
@@ -86,6 +84,10 @@ public class MainRole : MonoBehaviour, INotifyPropertyChanged
 			PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 	}
 
+	#endregion
+
+	#region ISkillEmit Members
+	public CastSkill SkillEmit { get { return this.Role.SkillEmit; } }
 	#endregion
 
 	/// <summary>

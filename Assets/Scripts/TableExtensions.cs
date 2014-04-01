@@ -106,6 +106,14 @@ namespace table
 				select g.Key;
 		}
 
+		public static TableSkill Where(uint id, uint level)
+		{
+			return (
+				from s in Table.Query<table.TableSkill>()
+				where s.id == id && s.level == level
+				select s).FirstOrDefault();
+		}
+
 		/// <summary>
 		/// 获得指定id的最低等级技能
 		/// </summary>
