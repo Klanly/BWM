@@ -5,7 +5,7 @@ using Cmd;
 using System.Collections.Generic;
 using System;
 
-public class Role : MonoBehaviour, ISkillEmit
+public class Role : MonoBehaviour
 {
 	public static Dictionary<ulong, Role> All { get; private set; }
 
@@ -56,7 +56,6 @@ public class Role : MonoBehaviour, ISkillEmit
 		headTip.topAnchor.absolute = headTip.bottomAnchor.absolute + 30;
 	}
 
-	#region ISkillEmit Members
 	private CastSkill m_skillEmitCache;
 	public CastSkill SkillEmit
 	{
@@ -67,8 +66,6 @@ public class Role : MonoBehaviour, ISkillEmit
 			return m_skillEmitCache;
 		}
 	}
-
-	#endregion
 
 	[Execute]
 	public static void Execute(AddMapUserDataAndPosMapUserCmd_S cmd)

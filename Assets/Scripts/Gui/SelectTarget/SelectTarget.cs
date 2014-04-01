@@ -40,7 +40,7 @@ public class SelectTarget : MonoBehaviour
 			return false;
 		Debug.Log("FireSkill: " + skill);
 		// TODO: 群攻搜索并批量发送攻击请求
-		var target = SelectTarget.Selected == null ? null : SelectTarget.Selected.entry.GetGameObject();
+		//var target = SelectTarget.Selected == null ? null : SelectTarget.Selected.entry.GetGameObject();
 		var cmd = new RequestUseSkillUserCmd_C() { skillid = skill.id };
 		if (SelectTarget.Selected != null && SelectTarget.Selected.entry != null)
 			cmd.hurts.Add(SelectTarget.Selected.entry);
@@ -56,14 +56,34 @@ public class SelectTarget : MonoBehaviour
 	[Execute]
 	public static void Execute(ReturnUseSkillUserCmd_S cmd)
 	{
+		CastSkill emit = null;
+		switch (cmd.owner.entrytype)
+		{
+			case Cmd.SceneEntryType.SceneEntryType_Npc:
+				{
+					Npc owner;
+					if (Npc.All.TryGetValue(cmd.owner.entryid, out owner))
+						emit = owner.SkillEmit;
+				}
+				break;
+			case Cmd.SceneEntryType.SceneEntryType_Player:
+				{
+					Role owner;
+					if (Role.All.TryGetValue(cmd.owner.entryid, out owner))
+						emit = owner.SkillEmit;
+				}
+				break;
+			default:
+				break;
+		}
+
 		var skill = table.TableSkill.Where(cmd.skillid, cmd.skilllevel);
-		var emit = cmd.owner.GetGameObject() as ISkillEmit;
-		if (skill == null || emit == null)
+		if (emit == null || skill == null)
 			return;
 		foreach (var target in cmd.hurts)
 		{
 			var t = target.hurtid.GetGameObject();
-			emit.SkillEmit.StartSkill("Prefabs/Skill/" + skill.path, t != null ? t.gameObject : null);
+			emit.StartSkill("Prefabs/Skill/" + skill.path, t != null ? t.gameObject : null);
 			// TODO: 对应角色的扣血
 		}
 	}

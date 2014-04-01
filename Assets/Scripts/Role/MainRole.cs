@@ -5,7 +5,7 @@ using GX;
 using GX.Net;
 using System.ComponentModel;
 
-public class MainRole : MonoBehaviour, INotifyPropertyChanged, ISkillEmit
+public class MainRole : MonoBehaviour, INotifyPropertyChanged
 {
 	/// <summary>
 	/// 主角基本信息
@@ -86,9 +86,7 @@ public class MainRole : MonoBehaviour, INotifyPropertyChanged, ISkillEmit
 
 	#endregion
 
-	#region ISkillEmit Members
 	public CastSkill SkillEmit { get { return this.Role.SkillEmit; } }
-	#endregion
 
 	/// <summary>
 	/// 设置主角信息
