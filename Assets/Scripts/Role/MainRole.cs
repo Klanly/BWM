@@ -134,7 +134,7 @@ public class MainRole : MonoBehaviour, INotifyPropertyChanged, ISkillEmit
 	}
 
 	[Execute]
-	public static void Execute(SetUserHpDataUserCmd_S cmd)
+	public static void Execute(ChangeUserHpDataUserCmd_S cmd)
 	{
 		if (MainRole.ServerInfo == null)
 			return;
@@ -145,7 +145,7 @@ public class MainRole : MonoBehaviour, INotifyPropertyChanged, ISkillEmit
 	}
 
 	[Execute]
-	public static void Execute(SetUserSpDataUserCmd_S cmd)
+	public static void Execute(ChangeUserSpDataUserCmd_S cmd)
 	{
 		if (MainRole.ServerInfo == null)
 			return;

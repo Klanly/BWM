@@ -23,17 +23,23 @@ namespace Cmd
       [global::ProtoBuf.ProtoEnum(Name=@"MainUserDataUserCmd_S", Value=1)]
       MainUserDataUserCmd_S = 1,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"SetUserHpDataUserCmd_S", Value=2)]
-      SetUserHpDataUserCmd_S = 2,
+      [global::ProtoBuf.ProtoEnum(Name=@"ChangeUserHpDataUserCmd_S", Value=2)]
+      ChangeUserHpDataUserCmd_S = 2,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"SetUserSpDataUserCmd_S", Value=3)]
-      SetUserSpDataUserCmd_S = 3,
+      [global::ProtoBuf.ProtoEnum(Name=@"ChangeUserSpDataUserCmd_S", Value=3)]
+      ChangeUserSpDataUserCmd_S = 3,
             
       [global::ProtoBuf.ProtoEnum(Name=@"SetUserHpSpDataUserCmd_S", Value=4)]
       SetUserHpSpDataUserCmd_S = 4,
             
       [global::ProtoBuf.ProtoEnum(Name=@"RemoveNpcDataUserCmd_S", Value=5)]
-      RemoveNpcDataUserCmd_S = 5
+      RemoveNpcDataUserCmd_S = 5,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"ChangeNpcHpDataUserCmd_S", Value=6)]
+      ChangeNpcHpDataUserCmd_S = 6,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"SetNpcHpDataUserCmd_S", Value=7)]
+      SetNpcHpDataUserCmd_S = 7
     }
   
     private global::ProtoBuf.IExtension extensionObject;
@@ -58,10 +64,10 @@ namespace Cmd
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"SetUserHpDataUserCmd_S")]
-  public partial class SetUserHpDataUserCmd_S : global::ProtoBuf.IExtensible
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"ChangeUserHpDataUserCmd_S")]
+  public partial class ChangeUserHpDataUserCmd_S : global::ProtoBuf.IExtensible
   {
-    public SetUserHpDataUserCmd_S() {}
+    public ChangeUserHpDataUserCmd_S() {}
     
     private ulong _charid;
     [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"charid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
@@ -89,10 +95,10 @@ namespace Cmd
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"SetUserSpDataUserCmd_S")]
-  public partial class SetUserSpDataUserCmd_S : global::ProtoBuf.IExtensible
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"ChangeUserSpDataUserCmd_S")]
+  public partial class ChangeUserSpDataUserCmd_S : global::ProtoBuf.IExtensible
   {
-    public SetUserSpDataUserCmd_S() {}
+    public ChangeUserSpDataUserCmd_S() {}
     
     private ulong _charid;
     [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"charid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
@@ -159,6 +165,68 @@ namespace Cmd
     {
       get { return _maxsp; }
       set { _maxsp = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"ChangeNpcHpDataUserCmd_S")]
+  public partial class ChangeNpcHpDataUserCmd_S : global::ProtoBuf.IExtensible
+  {
+    public ChangeNpcHpDataUserCmd_S() {}
+    
+    private ulong _tempid;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"tempid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public ulong tempid
+    {
+      get { return _tempid; }
+      set { _tempid = value; }
+    }
+    private int _curhp;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"curhp", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int curhp
+    {
+      get { return _curhp; }
+      set { _curhp = value; }
+    }
+    private int _prehp;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"prehp", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int prehp
+    {
+      get { return _prehp; }
+      set { _prehp = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"SetNpcHpDataUserCmd_S")]
+  public partial class SetNpcHpDataUserCmd_S : global::ProtoBuf.IExtensible
+  {
+    public SetNpcHpDataUserCmd_S() {}
+    
+    private ulong _tempid;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"tempid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public ulong tempid
+    {
+      get { return _tempid; }
+      set { _tempid = value; }
+    }
+    private int _hp;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"hp", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int hp
+    {
+      get { return _hp; }
+      set { _hp = value; }
+    }
+    private int _maxhp;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"maxhp", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int maxhp
+    {
+      get { return _maxhp; }
+      set { _maxhp = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
