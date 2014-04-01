@@ -9,6 +9,6 @@ public class SelectTargetNpc : MonoBehaviour
 	internal void Present(Npc target)
 	{
 		nameLabel.text = target.TableInfo.name;
-		infoLabel.text = "我是一枚NPC";
+		infoLabel.text = target.TableInfo.label;
 	}
 }

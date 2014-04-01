@@ -29,22 +29,29 @@ namespace table
       get { return _name; }
       set { _name = value; }
     }
+    private string _label;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"label", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public string label
+    {
+      get { return _label; }
+      set { _label = value; }
+    }
     private string _model;
-    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"model", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::ProtoBuf.ProtoMember(4, IsRequired = true, Name=@"model", DataFormat = global::ProtoBuf.DataFormat.Default)]
     public string model
     {
       get { return _model; }
       set { _model = value; }
     }
     private uint _type;
-    [global::ProtoBuf.ProtoMember(4, IsRequired = true, Name=@"type", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoMember(5, IsRequired = true, Name=@"type", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     public uint type
     {
       get { return _type; }
       set { _type = value; }
     }
     private readonly global::System.Collections.Generic.List<string> _hpBar = new global::System.Collections.Generic.List<string>();
-    [global::ProtoBuf.ProtoMember(5, Name=@"hpBar", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::ProtoBuf.ProtoMember(6, Name=@"hpBar", DataFormat = global::ProtoBuf.DataFormat.Default)]
     public global::System.Collections.Generic.List<string> hpBar
     {
       get { return _hpBar; }
