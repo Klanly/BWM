@@ -84,22 +84,6 @@ public class SkillManager : IEnumerable<KeyValuePair<uint, table.TableSkill>>
 		}).ToArray());
 	}
 
-	/// <summary>
-	/// 释放给定的技能
-	/// </summary>
-	/// <param name="skillID"></param>
-	/// <returns></returns>
-	public bool FireSkill(uint skillID)
-	{
-		var skill = this.GetSkill(skillID);
-		if (skill == null)
-			return false;
-		Debug.Log("FireSkill: " + skill);
-		var target = SelectTarget.Selected == null ? null : SelectTarget.Selected.entry.GetGameObject();
-		MainRole.Instance.castSkill.StartSkill("Prefabs/Skill/" + skill.path, target != null ? target.gameObject : null);
-		return false;
-	}
-
 	#region 网络消息处理
 	[Execute]
 	public static void Execute(AddSkillListSkillUserCmd_S cmd)

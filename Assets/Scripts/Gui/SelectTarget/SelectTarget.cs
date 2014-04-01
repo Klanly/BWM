@@ -29,6 +29,27 @@ public class SelectTarget : MonoBehaviour
 	public static SelectSceneEntryScriptUserCmd_CS Selected { get; set; }
 
 	/// <summary>
+	/// 释放给定的技能
+	/// </summary>
+	/// <param name="skillID"></param>
+	/// <returns></returns>
+	public static bool FireSkill(uint skillID)
+	{
+		var skill = SkillManager.Instance.GetSkill(skillID);
+		if (skill == null)
+			return false;
+		Debug.Log("FireSkill: " + skill);
+		// TODO: 群攻搜索并批量发送攻击请求
+		var target = SelectTarget.Selected == null ? null : SelectTarget.Selected.entry.GetGameObject();
+		var cmd = new RequestUseSkillUserCmd_C() { skillid = skill.id };
+		if (SelectTarget.Selected != null && SelectTarget.Selected.entry != null)
+			cmd.hurts.Add(SelectTarget.Selected.entry);
+		Net.Instance.Send(cmd);
+		//MainRole.Instance.castSkill.StartSkill("Prefabs/Skill/" + skill.path, target != null ? target.gameObject : null);
+		return false;
+	}
+
+	/// <summary>
 	/// 场景点选
 	/// </summary>
 	/// <param name="cmd"></param>
