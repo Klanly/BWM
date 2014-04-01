@@ -93,6 +93,17 @@ public class Npc : MonoBehaviour
 
 		npc.entity.Grid = cmd.pos;
 	}
+
+	[Execute]
+	public static void Execute(RemoveMapNpcMapUserCmd_S cmd)
+	{
+		Npc npc;
+		if (Npc.All.TryGetValue(cmd.tempid, out npc))
+		{
+			Npc.All.Remove(cmd.tempid);
+			GameObject.Destroy(npc.gameObject);
+		}
+	}
 	#endregion
 
 	#region 网络消息 NPC血量变化
