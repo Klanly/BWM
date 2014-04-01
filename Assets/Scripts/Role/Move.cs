@@ -1,11 +1,17 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 /// <summary>
 /// 可将“角色”行走至指定的世界坐标位置
 /// </summary>
 public class Move : MonoBehaviour
 {
+	/// <summary>
+	/// 目标到达
+	/// </summary>
+	public delegate void TargetArrived();
+	public TargetArrived targetArrived;
 
 	private MapNav MapNav { get { return BattleScene.Instance.MapNav; } }
 	private Entity entity;
@@ -75,6 +81,9 @@ public class Move : MonoBehaviour
 
 				if (animator)
 					animator.SetFloat("speed", 0.0f);
+
+				if (targetArrived != null)
+					targetArrived();
 			}
 		}
 	}

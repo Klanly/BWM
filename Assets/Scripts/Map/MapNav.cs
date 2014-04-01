@@ -238,6 +238,14 @@ public class MapNav : MonoBehaviour
 		if ((this[toGridX, toGridZ] & validType) == 0)
 			return path;
 
+		// 同一个点也导出路径
+		if(fromGridX == toGridX && fromGridZ == toGridZ)
+		{
+			path.Add(new Cmd.Pos(){x = fromGridX, y = fromGridZ});
+			path.Add(new Cmd.Pos(){x = toGridX, y = toGridZ});
+			return path;
+		}
+
 		PathNode pnFrom = new PathNode(fromGridZ * gridXNum + fromGridX, 0, 0, 0, this);
 		PathNode pnTo = new PathNode(toGridZ * gridXNum + toGridX, 0, 0, 0, this);
 
@@ -379,7 +387,7 @@ public class MapNav : MonoBehaviour
 	/// <param name="dst">Dst.</param>
 	/// <param name="validType">Valid type.</param>
 	/// <param name="radius">Grid Radius.</param>
-	public Cmd.Pos FindNearestValidGrid(Cmd.Pos src, Cmd.Pos dst, TileType validType, int gridRadius=-1)
+	public Cmd.Pos GetNearestValidGrid(Cmd.Pos src, Cmd.Pos dst, TileType validType, int gridRadius=-1)
 	{
 		Cmd.Pos ptOut = dst;
 		while((this[ptOut.x, ptOut.y] & validType) == 0)
