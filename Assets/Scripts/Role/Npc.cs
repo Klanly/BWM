@@ -76,6 +76,7 @@ public class Npc : MonoBehaviour
 		headTip.topAnchor.absolute = headTip.bottomAnchor.absolute + 30;
 	}
 
+	#region 网络消息 NPC移动
 	[Execute]
 	public static void Execute(AddMapNpcDataAndPosMapUserCmd_S cmd)
 	{
@@ -92,16 +93,26 @@ public class Npc : MonoBehaviour
 
 		npc.entity.Grid = cmd.pos;
 	}
+	#endregion
+
+	#region 网络消息 NPC血量变化
+	[Execute]
+	public static void Execute(SetNpcHpDataUserCmd_S cmd)
+	{
+		Npc target;
+		if (All.TryGetValue(cmd.tempid, out target) == false)
+			return;
+		target.ServerInfo.maxhp = cmd.maxhp;
+		target.ServerInfo.hp = cmd.hp;
+	}
 
 	[Execute]
 	public static void Execute(ChangeNpcHpDataUserCmd_S cmd)
 	{
-		// TODO: NPC血量更新未处理
+		Npc target;
+		if(All.TryGetValue(cmd.tempid, out target) == false)
+			return;
+		target.ServerInfo.hp = cmd.curhp;
 	}
-
-	[Execute]
-	public static void Execute(SetNpcHpDataUserCmd_S cmd)
-	{
-		// TODO: NPC血量更新未处理
-	}
+	#endregion
 }
