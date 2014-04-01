@@ -94,6 +94,10 @@ public class MapNavEditor : Editor
 		gridWidth = serializedObject.FindProperty("gridWidth");
 		gridXNum = serializedObject.FindProperty("gridXNum");
 		gridZNum = serializedObject.FindProperty("gridZNum");
+
+		vecStart = new Vector3(0,0,0);
+		vecEnd = new Vector3(0,0,0);
+		bSampleStart = true;
 	}
 
 	public override void OnInspectorGUI()

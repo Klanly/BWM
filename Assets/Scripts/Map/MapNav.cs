@@ -162,10 +162,11 @@ public class MapNav : MonoBehaviour
 
 
 	#region AStar Find Path
+	public const float ShortestMoveDst = 0.1f;
 	/// <summary>
 	/// 给服务器发送行走信息，最长路段长度
 	/// </summary>
-	private const int PathSegment = 5;
+	private const float MaxPathLen = 5.0f;
 
 	class PathNode
 	{
@@ -316,46 +317,8 @@ public class MapNav : MonoBehaviour
 				break;
 			node = totalDic[node.parentIndex];
 		}
-		tmpPath.Reverse();
 
-		// 去除中间相同方向的点，同时一段路径不能超过PathSegment长
-		int olddx = 0;
-		int olddy = 0;
-		int dx = 0;
-		int dy = 0;
-		int segment = 0;
-		foreach(Cmd.Pos grid in tmpPath)
-		{
-			if(path.Count < 2)
-			{
-				path.Add(grid);
-			}
-			else
-			{
-				if (olddx == 0 && olddy == 0)
-				{
-					olddx = path[path.Count-1].x - path[path.Count-2].x;
-					olddy = path[path.Count-1].y - path[path.Count-2].y;
-					segment = 1;
-				}
-
-				dx = grid.x - path[path.Count-1].x;
-				dy = grid.y - path[path.Count-1].y;
-				if (olddx == dx && olddy == dy && segment < PathSegment)
-				{
-					path[path.Count-1] = grid;
-					segment ++;
-				}
-				else
-				{
-					olddx = dx;
-					olddy = dy;
-					path.Add(grid);
-					segment = 1;
-				}
-			}
-		}
-
+		path = LinePathEx(tmpPath, validType);
 		return path;
 	}
 
@@ -408,5 +371,164 @@ public class MapNav : MonoBehaviour
 			return null;
 	}
 
+	/// <summary>
+	/// 把AStar算出的倒叙路径变正序，并拉直
+	/// </summary>
+	/// <returns>The path ex.</returns>
+	/// <param name="srcPath">Source path.</param>
+	private List<Cmd.Pos> LinePathEx(List<Cmd.Pos> srcPath, TileType validType = TileType.Walk)
+	{
+		List<Cmd.Pos> dstPath = srcPath;
+		dstPath.Reverse();
+
+		int nStartIndex = 0;
+		int nEndIndex = 0;
+		int nSize = dstPath.Count;
+		for(; nStartIndex < nSize - 2; ++nStartIndex)
+		{
+			for(nEndIndex = nStartIndex + 2; nEndIndex < nSize;)
+			{
+				if(LinePathClear(dstPath[nStartIndex], dstPath[nEndIndex], validType))
+				{
+					dstPath.RemoveRange(nStartIndex + 1, nEndIndex - nStartIndex - 1);
+					nSize = dstPath.Count;
+					nEndIndex = nStartIndex + 2;
+				}
+				else
+				{
+					nEndIndex ++;
+				}
+			}
+		}
+
+		nSize = dstPath.Count;
+		nStartIndex = 0;
+		nEndIndex = nStartIndex + 1;
+		int nDelta = 0;
+		for(; nEndIndex < nSize;)
+		{
+			nDelta = 0;
+
+			List<Cmd.Pos> path;
+			SplitBlockLineEx(dstPath[nStartIndex], dstPath[nEndIndex], out path);
+			if(path.Count >= 3)
+			{
+				path.RemoveAt(0);
+				path.RemoveAt(path.Count-1);
+				dstPath.InsertRange(nStartIndex + 1, path);
+				nDelta = path.Count;
+			}
+
+			nSize += nDelta;
+			nStartIndex = nEndIndex + nDelta;
+			nEndIndex = nStartIndex + 1;
+		}
+
+		return dstPath;
+	}
+
+	/// <summary>
+	/// 严格检查两点之间是否通畅
+	/// </summary>
+	/// <returns><c>true</c>, if path clear was lined, <c>false</c> otherwise.</returns>
+	/// <param name="vecSrc">Vec source.</param>
+	/// <param name="vecDst">Vec dst.</param>
+	public bool LinePathClear(Vector3 vecSrc, Vector3 vecDst, TileType validType = TileType.Walk)
+	{
+		Cmd.Pos dstPt = GetGrid(vecDst);
+
+		Vector3 dir = vecDst - vecSrc;
+		dir.Normalize();
+		dir *= ShortestMoveDst;
+
+		Vector3 curPos = vecSrc;
+		Cmd.Pos curPt = new Cmd.Pos(){x=0, y=0};
+
+		for(; (vecDst - curPos).magnitude > ShortestMoveDst; curPos += dir)
+		{
+			if(curPt != GetGrid(curPos))
+			{
+				curPt = GetGrid(curPos);
+			}
+			else
+			{
+				continue;
+			}
+
+			if((this[curPt.x, curPt.y] & validType) == 0)
+			{
+				return false;
+			}
+
+			if(curPt == dstPt)
+				break;
+		}
+
+		return true;
+	}
+
+	public bool LinePathClear(Cmd.Pos gridSrc, Cmd.Pos gridDst, TileType validType = TileType.Walk)
+	{
+		return LinePathClear(GetWorldPosition(gridSrc), GetWorldPosition(gridDst), validType);
+	}
+
+	/// <summary>
+	/// 两点间要是超过最大路径距离，就切分路段
+	/// </summary>
+	/// <param name="grid1">Grid1.</param>
+	/// <param name="grid2">Grid2.</param>
+	/// <param name="path">Path.</param>
+	private void SplitBlockLineEx(Cmd.Pos grid1, Cmd.Pos grid2, out List<Cmd.Pos> path)
+	{
+		path = new List<Cmd.Pos>();
+		if(grid1.x == grid2.x && grid1.y == grid2.y)
+			return;
+
+		path = new List<Cmd.Pos>();
+		path.Clear();
+
+		Vector3 vecSrc = GetWorldPosition(grid1);
+		Vector3 vecDst = GetWorldPosition(grid2);
+		Vector3 dir = vecDst - vecSrc;
+		float fLength = dir.magnitude;
+		if(fLength < ShortestMoveDst)
+			return;
+		dir.Normalize();
+		dir *= ShortestMoveDst;
+
+		Vector3 curPos = vecSrc;
+		Cmd.Pos curPt = grid1;
+
+		path.Add(grid1);
+		for(;;)
+		{
+			curPos += dir;
+			if(GetGrid(curPos) == curPt)
+				continue;
+
+			curPt = GetGrid(curPos);
+
+			// 已经是最后一个节点，退出
+			if(curPt == grid2)
+			{
+				if(path[path.Count-1] != grid2)
+					path.Add(grid2);
+				break;
+			}
+
+			// 大于一段路的最大长度，加入变换点
+			if(path.Count > 0)
+			{
+				if((GetWorldPosition(curPt) - GetWorldPosition(path[path.Count-1])).magnitude >= MaxPathLen)
+				{
+					path.Add(curPt);
+				}
+			}
+		}
+
+		return;
+	}
+
 	#endregion
+
 }

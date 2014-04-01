@@ -65,6 +65,7 @@ public class BattleSceneInput : MonoBehaviour
 			if (terrain.Raycast(ray, out hit, 1000))
 			{
 				mainRole.move.TargetPosition = hit.point;
+				//mainRole.pathMove.WalkTo(hit.point);
 			}
 		}
 	}
