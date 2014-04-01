@@ -153,6 +153,30 @@ namespace Cmd
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"SceneEntryUid")]
+  public partial class SceneEntryUid : global::ProtoBuf.IExtensible
+  {
+    public SceneEntryUid() {}
+    
+    private Cmd.SceneEntryType _entrytype;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"entrytype", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public Cmd.SceneEntryType entrytype
+    {
+      get { return _entrytype; }
+      set { _entrytype = value; }
+    }
+    private ulong _entryid;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"entryid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public ulong entryid
+    {
+      get { return _entryid; }
+      set { _entryid = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
     [global::ProtoBuf.ProtoContract(Name=@"EquipPos")]
     public enum EquipPos
     {

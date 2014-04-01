@@ -39,12 +39,12 @@ public class SelectTarget : MonoBehaviour
 		var my = BattleScene.Instance.Gui<SelectTarget>();
 		my.gameObject.SetActive(true);
 		yield return null;
-		switch (cmd.entrytype)
+		switch (cmd.entry.entrytype)
 		{
 			case SceneEntryType.SceneEntryType_Npc:
 				{
 					Npc target;
-					if (Npc.All.TryGetValue(cmd.entryid, out target))
+					if (Npc.All.TryGetValue(cmd.entry.entryid, out target))
 					{
 						switch (target.TableInfo.Type)
 						{
@@ -67,7 +67,7 @@ public class SelectTarget : MonoBehaviour
 			case SceneEntryType.SceneEntryType_Player:
 				{
 					Role target;
-					if (Role.All.TryGetValue(cmd.entryid, out target))
+					if (Role.All.TryGetValue(cmd.entry.entryid, out target))
 						my.Toggle<SelectTargetRole>().Present(target);
 				}
 				break;

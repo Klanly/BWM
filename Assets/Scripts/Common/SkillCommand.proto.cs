@@ -31,7 +31,13 @@ namespace Cmd
       RemoveSkillSkillUserCmd_CS = 3,
             
       [global::ProtoBuf.ProtoEnum(Name=@"LearnSkillSkillUserCmd_C", Value=4)]
-      LearnSkillSkillUserCmd_C = 4
+      LearnSkillSkillUserCmd_C = 4,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"RequestUseSkillUserCmd_C", Value=5)]
+      RequestUseSkillUserCmd_C = 5,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"ReturnUseSkillUserCmd_S", Value=6)]
+      ReturnUseSkillUserCmd_S = 6
     }
   
     private global::ProtoBuf.IExtension extensionObject;
@@ -102,6 +108,86 @@ namespace Cmd
       get { return _skillid; }
       set { _skillid = value; }
     }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"RequestUseSkillUserCmd_C")]
+  public partial class RequestUseSkillUserCmd_C : global::ProtoBuf.IExtensible
+  {
+    public RequestUseSkillUserCmd_C() {}
+    
+    private uint _skillid;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"skillid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint skillid
+    {
+      get { return _skillid; }
+      set { _skillid = value; }
+    }
+    private readonly global::System.Collections.Generic.List<Cmd.SceneEntryUid> _hurts = new global::System.Collections.Generic.List<Cmd.SceneEntryUid>();
+    [global::ProtoBuf.ProtoMember(2, Name=@"hurts", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<Cmd.SceneEntryUid> hurts
+    {
+      get { return _hurts; }
+    }
+  
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"SkillHurtData")]
+  public partial class SkillHurtData : global::ProtoBuf.IExtensible
+  {
+    public SkillHurtData() {}
+    
+    private readonly global::System.Collections.Generic.List<Cmd.SceneEntryUid> _hurtid = new global::System.Collections.Generic.List<Cmd.SceneEntryUid>();
+    [global::ProtoBuf.ProtoMember(1, Name=@"hurtid", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<Cmd.SceneEntryUid> hurtid
+    {
+      get { return _hurtid; }
+    }
+  
+    private uint _hp = default(uint);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"hp", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint hp
+    {
+      get { return _hp; }
+      set { _hp = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"ReturnUseSkillUserCmd_S")]
+  public partial class ReturnUseSkillUserCmd_S : global::ProtoBuf.IExtensible
+  {
+    public ReturnUseSkillUserCmd_S() {}
+    
+    private uint _skillid;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"skillid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint skillid
+    {
+      get { return _skillid; }
+      set { _skillid = value; }
+    }
+    private Cmd.SceneEntryUid _owner;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"owner", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public Cmd.SceneEntryUid owner
+    {
+      get { return _owner; }
+      set { _owner = value; }
+    }
+    private readonly global::System.Collections.Generic.List<Cmd.SkillHurtData> _hurts = new global::System.Collections.Generic.List<Cmd.SkillHurtData>();
+    [global::ProtoBuf.ProtoMember(3, Name=@"hurts", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<Cmd.SkillHurtData> hurts
+    {
+      get { return _hurts; }
+    }
+  
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }

@@ -217,23 +217,23 @@ static class CommonExtensions
 		}
 	}
 
-	public static MonoBehaviour GetGameObject(this Cmd.SelectSceneEntryScriptUserCmd_CS cmd)
+	public static MonoBehaviour GetGameObject(this Cmd.SceneEntryUid entry)
 	{
-		if (cmd == null)
+		if (entry == null)
 			return null;
-		switch (cmd.entrytype)
+		switch (entry.entrytype)
 		{
 			case Cmd.SceneEntryType.SceneEntryType_Npc:
 				{
 					Npc target;
-					if (Npc.All.TryGetValue(cmd.entryid, out target))
+					if (Npc.All.TryGetValue(entry.entryid, out target))
 						return target;
 				}
 				break;
 			case Cmd.SceneEntryType.SceneEntryType_Player:
 				{
 					Role target;
-					if (Role.All.TryGetValue(cmd.entryid, out target))
+					if (Role.All.TryGetValue(entry.entryid, out target))
 						return target;
 				}
 				break;
