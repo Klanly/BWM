@@ -117,42 +117,4 @@ public class MainRole : MonoBehaviour, INotifyPropertyChanged
 		var mainRole = MainRole.Create();
 		mainRole.entity.Grid = cmd.pos;
 	}
-
-	[Execute]
-	public static void Execute(SetUserHpSpDataUserCmd_S cmd)
-	{
-		// TODO: 并非仅针对于主角
-		var my = MainRole.Instance;
-		if (my != null && cmd.charid == my.Role.ServerInfo.charid)
-		{
-			my.maxhp = cmd.maxhp;
-			MainRole.ServerInfo.hp = cmd.hp;
-			my.maxsp = cmd.maxsp;
-			MainRole.ServerInfo.sp = cmd.sp;
-		}
-	}
-
-	[Execute]
-	public static void Execute(ChangeUserHpDataUserCmd_S cmd)
-	{
-		// TODO: 并非仅针对于主角
-		if (MainRole.ServerInfo == null)
-			return;
-		if (cmd.charid == MainRole.ServerInfo.userdata.charid)
-		{
-			MainRole.ServerInfo.hp = cmd.curhp;
-		}
-	}
-
-	[Execute]
-	public static void Execute(ChangeUserSpDataUserCmd_S cmd)
-	{
-		// TODO: 并非仅针对于主角
-		if (MainRole.ServerInfo == null)
-			return;
-		if (cmd.charid == MainRole.ServerInfo.userdata.charid)
-		{
-			MainRole.ServerInfo.sp = cmd.cursp;
-		}
-	}
 }

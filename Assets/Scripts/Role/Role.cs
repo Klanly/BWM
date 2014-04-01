@@ -67,6 +67,7 @@ public class Role : MonoBehaviour
 		}
 	}
 
+	#region 网络消息 角色移动
 	[Execute]
 	public static void Execute(AddMapUserDataAndPosMapUserCmd_S cmd)
 	{
@@ -106,4 +107,45 @@ public class Role : MonoBehaviour
 			role.entity.Position = BattleScene.Instance.MapNav.GetWorldPosition(cmd.pos);
 		}
 	}
+	#endregion
+
+	#region 网络消息 角色血量变化
+	[Execute]
+	public static void Execute(SetUserHpSpDataUserCmd_S cmd)
+	{
+		// TODO: 并非仅针对于主角
+		var my = MainRole.Instance;
+		if (my != null && cmd.charid == my.Role.ServerInfo.charid)
+		{
+			my.maxhp = cmd.maxhp;
+			MainRole.ServerInfo.hp = cmd.hp;
+			my.maxsp = cmd.maxsp;
+			MainRole.ServerInfo.sp = cmd.sp;
+		}
+	}
+
+	[Execute]
+	public static void Execute(ChangeUserHpDataUserCmd_S cmd)
+	{
+		// TODO: 并非仅针对于主角
+		if (MainRole.ServerInfo == null)
+			return;
+		if (cmd.charid == MainRole.ServerInfo.userdata.charid)
+		{
+			MainRole.ServerInfo.hp = cmd.curhp;
+		}
+	}
+
+	[Execute]
+	public static void Execute(ChangeUserSpDataUserCmd_S cmd)
+	{
+		// TODO: 并非仅针对于主角
+		if (MainRole.ServerInfo == null)
+			return;
+		if (cmd.charid == MainRole.ServerInfo.userdata.charid)
+		{
+			MainRole.ServerInfo.sp = cmd.cursp;
+		}
+	}
+	#endregion
 }
