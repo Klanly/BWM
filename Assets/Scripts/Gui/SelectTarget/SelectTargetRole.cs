@@ -7,8 +7,8 @@ public class SelectTargetRole : MonoBehaviour
 	public UISprite uiHead;
 	public UISlider uiHp;
 
-	public int maxHp;
-	public int maxSp;
+	private int maxHp;
+	private int maxSp;
 
 	public void SetHp(int cur, int max = 0)
 	{
