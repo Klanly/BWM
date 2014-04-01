@@ -174,15 +174,22 @@ namespace Cmd
       get { return _skillid; }
       set { _skillid = value; }
     }
+    private uint _skilllevel;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"skilllevel", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint skilllevel
+    {
+      get { return _skilllevel; }
+      set { _skilllevel = value; }
+    }
     private Cmd.SceneEntryUid _owner;
-    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"owner", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"owner", DataFormat = global::ProtoBuf.DataFormat.Default)]
     public Cmd.SceneEntryUid owner
     {
       get { return _owner; }
       set { _owner = value; }
     }
     private readonly global::System.Collections.Generic.List<Cmd.SkillHurtData> _hurts = new global::System.Collections.Generic.List<Cmd.SkillHurtData>();
-    [global::ProtoBuf.ProtoMember(3, Name=@"hurts", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::ProtoBuf.ProtoMember(4, Name=@"hurts", DataFormat = global::ProtoBuf.DataFormat.Default)]
     public global::System.Collections.Generic.List<Cmd.SkillHurtData> hurts
     {
       get { return _hurts; }
