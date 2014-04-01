@@ -92,4 +92,16 @@ public class Npc : MonoBehaviour
 
 		npc.entity.Grid = cmd.pos;
 	}
+
+	[Execute]
+	public static void Execute(ChangeNpcHpDataUserCmd_S cmd)
+	{
+		// TODO: NPC血量更新未处理
+	}
+
+	[Execute]
+	public static void Execute(SetNpcHpDataUserCmd_S cmd)
+	{
+		// TODO: NPC血量更新未处理
+	}
 }

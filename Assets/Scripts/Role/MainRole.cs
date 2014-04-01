@@ -121,6 +121,7 @@ public class MainRole : MonoBehaviour, INotifyPropertyChanged
 	[Execute]
 	public static void Execute(SetUserHpSpDataUserCmd_S cmd)
 	{
+		// TODO: 并非仅针对于主角
 		var my = MainRole.Instance;
 		if (my != null && cmd.charid == my.Role.ServerInfo.charid)
 		{
@@ -134,6 +135,7 @@ public class MainRole : MonoBehaviour, INotifyPropertyChanged
 	[Execute]
 	public static void Execute(ChangeUserHpDataUserCmd_S cmd)
 	{
+		// TODO: 并非仅针对于主角
 		if (MainRole.ServerInfo == null)
 			return;
 		if (cmd.charid == MainRole.ServerInfo.userdata.charid)
@@ -145,6 +147,7 @@ public class MainRole : MonoBehaviour, INotifyPropertyChanged
 	[Execute]
 	public static void Execute(ChangeUserSpDataUserCmd_S cmd)
 	{
+		// TODO: 并非仅针对于主角
 		if (MainRole.ServerInfo == null)
 			return;
 		if (cmd.charid == MainRole.ServerInfo.userdata.charid)
