@@ -29,6 +29,46 @@ public class SelectTarget : MonoBehaviour
 	public static SelectSceneEntryScriptUserCmd_CS Selected { get; set; }
 
 	/// <summary>
+	/// 释放给定的技能
+	/// </summary>
+	/// <param name="skillID"></param>
+	/// <returns></returns>
+	public static bool FireSkill(uint skillID)
+	{
+		var skill = SkillManager.Instance.GetSkill(skillID);
+		if (skill == null)
+			return false;
+		Debug.Log("FireSkill: " + skill);
+		// TODO: 群攻搜索并批量发送攻击请求
+		var target = SelectTarget.Selected == null ? null : SelectTarget.Selected.entry.GetGameObject();
+		var cmd = new RequestUseSkillUserCmd_C() { skillid = skill.id };
+		if (SelectTarget.Selected != null && SelectTarget.Selected.entry != null)
+			cmd.hurts.Add(SelectTarget.Selected.entry);
+		Net.Instance.Send(cmd);
+		//MainRole.Instance.castSkill.StartSkill("Prefabs/Skill/" + skill.path, target != null ? target.gameObject : null);
+		return false;
+	}
+
+	/// <summary>
+	/// 服务器驱动的技能生效
+	/// </summary>
+	/// <param name="cmd"></param>
+	[Execute]
+	public static void Execute(ReturnUseSkillUserCmd_S cmd)
+	{
+		var skill = table.TableSkill.Where(cmd.skillid, cmd.skilllevel);
+		var emit = cmd.owner.GetGameObject() as ISkillEmit;
+		if (skill == null || emit == null)
+			return;
+		foreach (var target in cmd.hurts)
+		{
+			var t = target.hurtid.GetGameObject();
+			emit.SkillEmit.StartSkill("Prefabs/Skill/" + skill.path, t != null ? t.gameObject : null);
+			// TODO: 对应角色的扣血
+		}
+	}
+
+	/// <summary>
 	/// 场景点选
 	/// </summary>
 	/// <param name="cmd"></param>
@@ -39,12 +79,12 @@ public class SelectTarget : MonoBehaviour
 		var my = BattleScene.Instance.Gui<SelectTarget>();
 		my.gameObject.SetActive(true);
 		yield return null;
-		switch (cmd.entrytype)
+		switch (cmd.entry.entrytype)
 		{
 			case SceneEntryType.SceneEntryType_Npc:
 				{
 					Npc target;
-					if (Npc.All.TryGetValue(cmd.entryid, out target))
+					if (Npc.All.TryGetValue(cmd.entry.entryid, out target))
 					{
 						switch (target.TableInfo.Type)
 						{
@@ -67,7 +107,7 @@ public class SelectTarget : MonoBehaviour
 			case SceneEntryType.SceneEntryType_Player:
 				{
 					Role target;
-					if (Role.All.TryGetValue(cmd.entryid, out target))
+					if (Role.All.TryGetValue(cmd.entry.entryid, out target))
 						my.Toggle<SelectTargetRole>().Present(target);
 				}
 				break;

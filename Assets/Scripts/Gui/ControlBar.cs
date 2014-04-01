@@ -29,7 +29,7 @@ public class ControlBar : MonoBehaviour
 		{
 			var index = i;
 			UIEventListener.Get(uiSkillFireThumbs[index].gameObject).onClick = go => 
-				SkillManager.Instance.FireSkill(Config.UserData.Instance.skillbar[index]);
+				SelectTarget.FireSkill(Config.UserData.Instance.skillbar[index]);
 		}
 
 		Config.UserData.Instance.PropertyChanged += OnConfigUserDataChanged;

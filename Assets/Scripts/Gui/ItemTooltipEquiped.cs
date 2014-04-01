@@ -7,10 +7,11 @@ public class ItemTooltipEquiped : ItemTooltipEquip
 {
 	public override void OnUse(GameObject sender = null)
 	{
-		// TODO: 应发送服务器请求指令，以下为本地临时测试代码
-		var setup = ServerInfo.DeepClone();
-		setup.loc.type = ItemLocation.PackageType.Main;
-		Net.Instance.SendToMe(new AddItemItemUserCmd_S() { item = setup });
+		Net.Instance.Send(new RefreshPosItemUserCmd_CS()
+		{
+			thisid = ServerInfo.thisid,
+			dst = new ItemLocation() { type = ItemLocation.PackageType.Main },
+		});
 
 		BattleScene.Instance.Gui<RoleInfoPackage>().CloseAllTooltips();
 	}

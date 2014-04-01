@@ -86,15 +86,29 @@ namespace Cmd
       get { return _hp; }
       set { _hp = value; }
     }
+    private int _maxhp;
+    [global::ProtoBuf.ProtoMember(14, IsRequired = true, Name=@"maxhp", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int maxhp
+    {
+      get { return _maxhp; }
+      set { _maxhp = value; }
+    }
     private int _sp;
-    [global::ProtoBuf.ProtoMember(14, IsRequired = true, Name=@"sp", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoMember(15, IsRequired = true, Name=@"sp", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     public int sp
     {
       get { return _sp; }
       set { _sp = value; }
     }
+    private int _maxsp;
+    [global::ProtoBuf.ProtoMember(16, IsRequired = true, Name=@"maxsp", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int maxsp
+    {
+      get { return _maxsp; }
+      set { _maxsp = value; }
+    }
     private long _exp;
-    [global::ProtoBuf.ProtoMember(15, IsRequired = true, Name=@"exp", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoMember(17, IsRequired = true, Name=@"exp", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     public long exp
     {
       get { return _exp; }

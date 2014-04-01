@@ -5,7 +5,7 @@ using GX.Net;
 using System.Collections.Generic;
 using System.Linq;
 
-public class Npc : MonoBehaviour
+public class Npc : MonoBehaviour, ISkillEmit
 {
 	public static Dictionary<ulong, Npc> All { get; private set; }
 	public MapNpcData ServerInfo { get; private set; }
@@ -22,6 +22,20 @@ public class Npc : MonoBehaviour
 	}
 
 	private Npc() { }
+
+	#region ISkillEmit Members
+	private CastSkill m_skillEmitCache;
+	public CastSkill SkillEmit
+	{
+		get
+		{
+			if (m_skillEmitCache == null)
+				this.m_skillEmitCache = this.gameObject.AddComponent<CastSkill>();
+			return m_skillEmitCache;
+		}
+	}
+
+	#endregion
 
 	public static Npc Create(uint baseid, MapNpcData info)
 	{
