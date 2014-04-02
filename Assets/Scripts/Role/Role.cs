@@ -99,6 +99,17 @@ public class Role : MonoBehaviour
 	}
 
 	[Execute]
+	public static void Execute(RemoveMapUserMapUserCmd_S cmd)
+	{
+		Role role;
+		if (Role.All.TryGetValue(cmd.charid, out role))
+		{
+			Role.All.Remove(cmd.charid);
+			GameObject.Destroy(role.gameObject);
+		}
+	}
+
+	[Execute]
 	public static void Execute(UserMoveDownMoveUserCmd_S cmd)
 	{
 		if (cmd.charid == MainRole.ServerInfo.userdata.charid)
