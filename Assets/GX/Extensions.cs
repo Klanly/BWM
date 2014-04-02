@@ -353,6 +353,17 @@ public static partial class Extensions
 	}
 	#endregion
 
+	#region NGUI
+	/// <summary>
+	/// 得到鼠标点击/悬浮处的URL内容
+	/// </summary>
+	/// <returns>失败返回<c>null</c></returns>
+	public static string GetUrlTouch(this UILabel label)
+	{
+		return label != null ? label.GetUrlAtPosition(UICamera.lastHit.point) : null;
+	}
+	#endregion
+
 	#region Google Protocol Buffers
 	/// <summary>
 	/// Create a deep clone of the supplied instance; any sub-items are also cloned.
