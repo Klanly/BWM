@@ -16,6 +16,10 @@ public class PrefabLoader : MonoBehaviour
 			go.transform.parent = this.transform;
 			go.transform.localScale = Vector3.one;
 			go.transform.position = Vector3.zero;
+
+			var widget = go.transform.GetComponent<UIWidget>();
+			if (widget != null)
+				widget.SetAnchor(this.transform);
 		}
 		Done = true;
 	}
