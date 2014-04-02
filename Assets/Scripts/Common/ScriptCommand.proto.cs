@@ -34,19 +34,12 @@ namespace Cmd
   {
     public SelectSceneEntryScriptUserCmd_CS() {}
     
-    private Cmd.SceneEntryType _entrytype;
-    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"entrytype", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public Cmd.SceneEntryType entrytype
+    private Cmd.SceneEntryUid _entry;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"entry", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public Cmd.SceneEntryUid entry
     {
-      get { return _entrytype; }
-      set { _entrytype = value; }
-    }
-    private ulong _entryid;
-    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"entryid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public ulong entryid
-    {
-      get { return _entryid; }
-      set { _entryid = value; }
+      get { return _entry; }
+      set { _entry = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)

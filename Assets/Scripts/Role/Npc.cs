@@ -23,6 +23,17 @@ public class Npc : MonoBehaviour
 
 	private Npc() { }
 
+	private CastSkill m_castSkillCache;
+	public CastSkill CastSkill
+	{
+		get
+		{
+			if (m_castSkillCache == null)
+				this.m_castSkillCache = this.gameObject.AddComponent<CastSkill>();
+			return m_castSkillCache;
+		}
+	}
+
 	public static Npc Create(uint baseid, MapNpcData info)
 	{
 		var tbl = Table.Query<table.TableNpc>().First(i => i.id == baseid);
@@ -35,7 +46,9 @@ public class Npc : MonoBehaviour
 		}
 
 		var avatar = Object.Instantiate(res) as GameObject;
+#if UNITY_EDITOR
 		avatar.name = string.Format("Npc.{0}({1})", tbl.name, info.tempid);
+#endif
 		avatar.transform.localScale = new Vector3(5, 5, 5);
 
 		var npc = avatar.AddComponent<Npc>();
@@ -57,7 +70,9 @@ public class Npc : MonoBehaviour
 	private static void CreateHeadTip(Npc npc)
 	{
 		var headTip = (GameObject.Instantiate(Resources.Load("Prefabs/Gui/HeadTip")) as GameObject).GetComponent<UILabel>();
+#if UNITY_EDITOR
 		headTip.name = npc.name;
+#endif
 		headTip.text = npc.TableInfo.name;
 		headTip.hideIfOffScreen = true;
 		headTip.SetAnchor(npc.gameObject);
@@ -65,6 +80,7 @@ public class Npc : MonoBehaviour
 		headTip.topAnchor.absolute = headTip.bottomAnchor.absolute + 30;
 	}
 
+	#region 网络消息 NPC移动
 	[Execute]
 	public static void Execute(AddMapNpcDataAndPosMapUserCmd_S cmd)
 	{
@@ -81,4 +97,73 @@ public class Npc : MonoBehaviour
 
 		npc.entity.Grid = cmd.pos;
 	}
+
+	[Execute]
+	public static void Execute(RemoveMapNpcMapUserCmd_S cmd)
+	{
+		Npc npc;
+		if (Npc.All.TryGetValue(cmd.tempid, out npc))
+		{
+			Npc.All.Remove(cmd.tempid);
+			GameObject.Destroy(npc.gameObject);
+		}
+	}
+	#endregion
+
+	#region 网络消息 NPC血量变化
+	[Execute]
+	public static void Execute(SetNpcHpDataUserCmd_S cmd)
+	{
+		Npc target;
+		if (All.TryGetValue(cmd.tempid, out target) == false)
+			return;
+		target.ServerInfo.maxhp = cmd.maxhp;
+		target.ServerInfo.hp = cmd.hp;
+
+		if (SelectTarget.Selected.entrytype == SceneEntryType.SceneEntryType_Npc && SelectTarget.Selected.entryid == cmd.tempid)
+		{
+			switch (target.TableInfo.Type)
+			{
+				case table.NpcType.Boss:
+					BattleScene.Instance.Gui<SelectTargetBoss>().SetHp(cmd.hp, cmd.maxhp);
+					break;
+				case table.NpcType.Elite:
+					BattleScene.Instance.Gui<SelectTargetElite>().SetHp(cmd.hp, cmd.maxhp);
+					break;
+				case table.NpcType.Monster:
+					BattleScene.Instance.Gui<SelectTargetMonster>().SetHp(cmd.hp, cmd.maxhp);
+					break;
+				default:
+					break;
+			}
+		}
+	}
+
+	[Execute]
+	public static void Execute(ChangeNpcHpDataUserCmd_S cmd)
+	{
+		Npc target;
+		if(All.TryGetValue(cmd.tempid, out target) == false)
+			return;
+		target.ServerInfo.hp = cmd.curhp;
+
+		if (SelectTarget.Selected.entrytype == SceneEntryType.SceneEntryType_Npc && SelectTarget.Selected.entryid == cmd.tempid)
+		{
+			switch (target.TableInfo.Type)
+			{
+				case table.NpcType.Boss:
+					BattleScene.Instance.Gui<SelectTargetBoss>().SetHp(cmd.curhp);
+					break;
+				case table.NpcType.Elite:
+					BattleScene.Instance.Gui<SelectTargetElite>().SetHp(cmd.curhp);
+					break;
+				case table.NpcType.Monster:
+					BattleScene.Instance.Gui<SelectTargetMonster>().SetHp(cmd.curhp);
+					break;
+				default:
+					break;
+			}
+		}
+	}
+	#endregion
 }

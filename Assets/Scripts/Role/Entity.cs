@@ -54,5 +54,11 @@ public class Entity : MonoBehaviour
 		set { Position = MapNav.GetWorldPosition(value); }
 	}
 
+	/// <summary>
+	/// 当前可接受的阻挡类型
+	/// </summary>
+	/// <value>The type of the tile.</value>
+	public MapNav.TileType TileType	{ get { return MapNav.TileType.Walk; } }
+
 
 }

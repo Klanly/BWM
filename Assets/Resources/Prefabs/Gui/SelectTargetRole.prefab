@@ -430,8 +430,8 @@ MonoBehaviour:
   aspectRatio: 10.5
   mAtlas: {fileID: 11400000, guid: 81897fcdc0d7fb04bb512167943f2aab, type: 2}
   mSpriteName: hp
-  mType: 1
-  mFillDirection: 4
+  mType: 2
+  mFillDirection: 0
   mFillAmount: 1
   mInvert: 0
   mFlip: 0
@@ -613,6 +613,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   uiName: {fileID: 11400012}
   uiHead: {fileID: 11400014}
+  uiHp: {fileID: 11400006}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

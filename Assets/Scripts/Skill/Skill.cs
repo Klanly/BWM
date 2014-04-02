@@ -6,24 +6,11 @@ using System.Collections;
 /// </summary>
 public class Skill : SkillBase
 {
-	// TODO: 尽量使用TableSkill
-	public int skillId;
 	public GameObject startGo;
 	public GameObject targetGo;
 
-	#region 和技能相关的服务器下发的信息
-	public int attackId;
-	public int attackType;
-	public int attackHp;
-
-	public struct DefenceInfo
-	{
-		int defenceType;
-		int defenceID;
-		int definecHp;
-	}
-	public DefenceInfo[] defenceInfo;
-	#endregion
+	public table.TableSkill TableInfo { get; set; }
+	public Cmd.SkillHurtData Hurt { get; set; }
 
 	void Update()
 	{

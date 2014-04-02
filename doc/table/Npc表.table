@@ -4,6 +4,7 @@
 		<key code="id" />
 		<field column="id" code="id" type="uint32" />
 		<field column="名称" code="name" type="string" />
+		<field column="标签" code="label" type="string" />
 		<field column="模型" code="model" type="string">
 			<regex>^[^\\]+$</regex>
 		</field>
@@ -19,5 +20,6 @@
 		<key code="id" />
 		<field column="id" code="id" type="uint32" />
 		<field column="名称" code="name" type="string" />
+		<field column="生命值" code="maxHp" type="int32" />
 	</output>
 </table>

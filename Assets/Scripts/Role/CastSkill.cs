@@ -2,27 +2,27 @@
 using System.Collections;
 
 /// <summary>
-/// 可指定目标释放技能
+/// 技能发射器，可指定目标释放技能
 /// </summary>
 public class CastSkill : MonoBehaviour
 {
-
-	/// <summary>
-	/// Starts the skill.
-	/// </summary>
-	/// <param name="strSkill">技能prefab的全路径</param>
-	/// <param name="targetGo">技能释放的目标</param>
-	public bool StartSkill(string strSkill, GameObject targetGo)
+	public bool StartSkill(table.TableSkill skillTableInfo, Cmd.SkillHurtData hurt)
 	{
-		var res = Resources.Load(strSkill);
+		var path = "Prefabs/Skill/" + skillTableInfo.path;
+		var res = Resources.Load(path);
 		if (res == null)
 		{
-			Debug.LogError("无法加载技能文件: " + strSkill);
+			Debug.LogError("无法加载技能文件: " + path);
 			return false;
 		}
+
 		var skill = Object.Instantiate(res) as GameObject;
-		skill.GetComponent<Skill>().startGo = gameObject;
-		skill.GetComponent<Skill>().targetGo = targetGo;
+		var s = skill.GetComponent<Skill>();
+		s.startGo = gameObject;
+		var tg = hurt.hurtid.GetGameObject();
+		s.targetGo = tg != null ? tg.gameObject : null;
+		s.TableInfo = skillTableInfo;
+		s.Hurt = hurt;
 
 		// 检查技能的有效性
 		int count = 0;
@@ -33,7 +33,7 @@ public class CastSkill : MonoBehaviour
 			
 			if(count >= 2)
 			{
-				Debug.LogError("技能(" + strSkill + ")有多个发送到达目标的组件");
+				Debug.LogError("技能(" + path + ")有多个发送到达目标的组件");
 				return false;
 			}
 		}

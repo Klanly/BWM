@@ -9,12 +9,12 @@ public class SelectTargetBoss : MonoBehaviour
 	public UISprite uiHp;
 	public UISprite uiHpBack;
 	private List<string> bars = new List<string>();
+	private int maxHp;
 
 	internal void Present(Npc target)
 	{
 		nameLabel.text = target.TableInfo.name;
 		SetupBars(target.TableInfo.hpBar);
-		// TODO: Npc血量变化事件挂载 -> OnHpUpdate
 	}
 
 	/// <summary>
@@ -38,5 +38,12 @@ public class SelectTargetBoss : MonoBehaviour
 		uiHpBack.spriteName = bars[index];
 		uiHp.spriteName = bars[index + 1];
 		uiHp.fillAmount = remainder;
+	}
+
+	public void SetHp(int cur, int max = 0)
+	{
+		if (max != 0)
+			maxHp = max;
+		OnHpUpdate(cur / (float)maxHp);
 	}
 }

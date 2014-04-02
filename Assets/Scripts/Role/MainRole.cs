@@ -30,7 +30,7 @@ public class MainRole : MonoBehaviour, INotifyPropertyChanged
 	public Animator animator;
 	public Move move;
 	public CameraFollow cameraFollow;
-	public CastSkill castSkill;
+	public PathMove pathMove;
 
 	private Pos lastGird = new Pos();
 
@@ -39,7 +39,9 @@ public class MainRole : MonoBehaviour, INotifyPropertyChanged
 	public static MainRole Create()
 	{
 		var role = Role.Create(ServerInfo.userdata);
+#if UNITY_EDITOR
 		role.gameObject.name = "Main" + role.gameObject.name;
+#endif
 
 		var mainRole = role.gameObject.AddComponent<MainRole>();
 		mainRole.Role = role;
@@ -47,7 +49,7 @@ public class MainRole : MonoBehaviour, INotifyPropertyChanged
 		mainRole.animator = role.gameObject.GetComponent<Animator>();
 		mainRole.move = role.gameObject.GetComponent<Move>();
 		mainRole.cameraFollow = role.gameObject.AddComponent<CameraFollow>();
-		mainRole.castSkill = role.gameObject.AddComponent<CastSkill>();
+		mainRole.pathMove = role.gameObject.AddComponent<PathMove>();
 
 		mainRole.entity.PositionChanged += mainRole.OnPositionChanged;
 		return mainRole;
@@ -88,6 +90,8 @@ public class MainRole : MonoBehaviour, INotifyPropertyChanged
 
 	#endregion
 
+	public CastSkill CastSkill { get { return this.Role.CastSkill; } }
+
 	/// <summary>
 	/// 设置主角信息
 	/// </summary>
@@ -112,44 +116,6 @@ public class MainRole : MonoBehaviour, INotifyPropertyChanged
 		}
 		while (BattleScene.Instance == null)
 			yield return new WaitForEndOfFrame();
-
 		BattleScene.Instance.LoadMap(table.TableMap.Where(cmd.mapid).mapfile);
-		var mainRole = MainRole.Create();
-		mainRole.entity.Grid = cmd.pos;
-	}
-
-	[Execute]
-	public static void Execute(SetUserHpSpDataUserCmd_S cmd)
-	{
-		var my = MainRole.Instance;
-		if (my != null && cmd.charid == my.Role.ServerInfo.charid)
-		{
-			my.maxhp = cmd.maxhp;
-			MainRole.ServerInfo.hp = cmd.hp;
-			my.maxsp = cmd.maxsp;
-			MainRole.ServerInfo.sp = cmd.sp;
-		}
-	}
-
-	[Execute]
-	public static void Execute(SetUserHpDataUserCmd_S cmd)
-	{
-		if (MainRole.ServerInfo == null)
-			return;
-		if (cmd.charid == MainRole.ServerInfo.userdata.charid)
-		{
-			MainRole.ServerInfo.hp = cmd.curhp;
-		}
-	}
-
-	[Execute]
-	public static void Execute(SetUserSpDataUserCmd_S cmd)
-	{
-		if (MainRole.ServerInfo == null)
-			return;
-		if (cmd.charid == MainRole.ServerInfo.userdata.charid)
-		{
-			MainRole.ServerInfo.sp = cmd.cursp;
-		}
 	}
 }

@@ -27,7 +27,9 @@ public class Role : MonoBehaviour
 	{
 		var tbl = table.TableAvatar.Where(info.profession, info.sexman);
 		var avatar = Avatar.Create(tbl);
+#if UNITY_EDITOR
 		avatar.name = "Role." + info.charname;
+#endif
 		avatar.transform.localScale = new Vector3(5, 5, 5);
 
 		var role = avatar.AddComponent<Role>();
@@ -48,7 +50,9 @@ public class Role : MonoBehaviour
 	private static void CreateHeadTip(Role role)
 	{
 		var headTip = (GameObject.Instantiate(Resources.Load("Prefabs/Gui/HeadTip")) as GameObject).GetComponent<UILabel>();
+#if UNITY_EDITOR
 		headTip.name = role.name;
+#endif
 		headTip.text = role.ServerInfo.charname;
 		headTip.hideIfOffScreen = true;
 		headTip.SetAnchor(role.gameObject);
@@ -56,6 +60,18 @@ public class Role : MonoBehaviour
 		headTip.topAnchor.absolute = headTip.bottomAnchor.absolute + 30;
 	}
 
+	private CastSkill m_caseSkillCache;
+	public CastSkill CastSkill
+	{
+		get
+		{
+			if (m_caseSkillCache == null)
+				this.m_caseSkillCache = this.gameObject.AddComponent<CastSkill>();
+			return m_caseSkillCache;
+		}
+	}
+
+	#region 网络消息 角色移动
 	[Execute]
 	public static void Execute(AddMapUserDataAndPosMapUserCmd_S cmd)
 	{
@@ -66,11 +82,31 @@ public class Role : MonoBehaviour
 		}
 		else
 		{
-			role = Role.Create(cmd.data);
+			if (cmd.data.charid == MainRole.ServerInfo.userdata.charid)
+			{
+				var mainRole = MainRole.Create();
+				role = mainRole.GetComponent<Role>();
+			}
+			else
+			{
+				role = Role.Create(cmd.data);
+			}
+			
 			Role.All[cmd.data.charid] = role;
 		}
 
 		role.entity.Grid = cmd.pos;
+	}
+
+	[Execute]
+	public static void Execute(RemoveMapUserMapUserCmd_S cmd)
+	{
+		Role role;
+		if (Role.All.TryGetValue(cmd.charid, out role))
+		{
+			Role.All.Remove(cmd.charid);
+			GameObject.Destroy(role.gameObject);
+		}
 	}
 
 	[Execute]
@@ -95,4 +131,61 @@ public class Role : MonoBehaviour
 			role.entity.Position = BattleScene.Instance.MapNav.GetWorldPosition(cmd.pos);
 		}
 	}
+	#endregion
+
+	#region 网络消息 角色血量变化
+	[Execute]
+	public static void Execute(SetUserHpSpDataUserCmd_S cmd)
+	{
+		var my = MainRole.Instance;
+		if (my != null && cmd.charid == my.Role.ServerInfo.charid)
+		{
+			my.maxhp = cmd.maxhp;
+			MainRole.ServerInfo.hp = cmd.hp;
+			my.maxsp = cmd.maxsp;
+			MainRole.ServerInfo.sp = cmd.sp;
+			return;
+		}
+
+		if (SelectTarget.Selected.entrytype == SceneEntryType.SceneEntryType_Player && SelectTarget.Selected.entryid == cmd.charid)
+		{
+			var view = BattleScene.Instance.Gui<SelectTargetRole>();
+			view.SetHp(cmd.hp, cmd.maxhp);
+			view.SetSp(cmd.sp, cmd.maxsp);
+			return;
+		}
+	}
+
+	[Execute]
+	public static void Execute(ChangeUserHpDataUserCmd_S cmd)
+	{
+		if (MainRole.ServerInfo != null && cmd.charid == MainRole.ServerInfo.userdata.charid)
+		{
+			MainRole.ServerInfo.hp = cmd.curhp;
+			return;
+		}
+		if (SelectTarget.Selected.entrytype == SceneEntryType.SceneEntryType_Player && SelectTarget.Selected.entryid == cmd.charid)
+		{
+			var view = BattleScene.Instance.Gui<SelectTargetRole>();
+			view.SetHp(cmd.curhp);
+			return;
+		}
+	}
+
+	[Execute]
+	public static void Execute(ChangeUserSpDataUserCmd_S cmd)
+	{
+		if (MainRole.ServerInfo != null && cmd.charid == MainRole.ServerInfo.userdata.charid)
+		{
+			MainRole.ServerInfo.sp = cmd.cursp;
+			return;
+		}
+		if (SelectTarget.Selected.entrytype == SceneEntryType.SceneEntryType_Player && SelectTarget.Selected.entryid == cmd.charid)
+		{
+			var view = BattleScene.Instance.Gui<SelectTargetRole>();
+			view.SetSp(cmd.cursp);
+			return;
+		}
+	}
+	#endregion
 }

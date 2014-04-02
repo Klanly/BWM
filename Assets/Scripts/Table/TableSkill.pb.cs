@@ -50,92 +50,85 @@ namespace table
       get { return _icon; }
       set { _icon = value; }
     }
-    private uint _levelMax;
-    [global::ProtoBuf.ProtoMember(6, IsRequired = true, Name=@"levelMax", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public uint levelMax
-    {
-      get { return _levelMax; }
-      set { _levelMax = value; }
-    }
     private float _radius;
-    [global::ProtoBuf.ProtoMember(7, IsRequired = true, Name=@"radius", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    [global::ProtoBuf.ProtoMember(6, IsRequired = true, Name=@"radius", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
     public float radius
     {
       get { return _radius; }
       set { _radius = value; }
     }
     private uint _profession;
-    [global::ProtoBuf.ProtoMember(8, IsRequired = true, Name=@"profession", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoMember(7, IsRequired = true, Name=@"profession", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     public uint profession
     {
       get { return _profession; }
       set { _profession = value; }
     }
     private uint _type;
-    [global::ProtoBuf.ProtoMember(9, IsRequired = true, Name=@"type", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoMember(8, IsRequired = true, Name=@"type", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     public uint type
     {
       get { return _type; }
       set { _type = value; }
     }
     private uint _requirePoint;
-    [global::ProtoBuf.ProtoMember(10, IsRequired = true, Name=@"requirePoint", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoMember(9, IsRequired = true, Name=@"requirePoint", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     public uint requirePoint
     {
       get { return _requirePoint; }
       set { _requirePoint = value; }
     }
     private uint _requireType;
-    [global::ProtoBuf.ProtoMember(11, IsRequired = true, Name=@"requireType", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoMember(10, IsRequired = true, Name=@"requireType", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     public uint requireType
     {
       get { return _requireType; }
       set { _requireType = value; }
     }
     private uint _requireLevel;
-    [global::ProtoBuf.ProtoMember(12, IsRequired = true, Name=@"requireLevel", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoMember(11, IsRequired = true, Name=@"requireLevel", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     public uint requireLevel
     {
       get { return _requireLevel; }
       set { _requireLevel = value; }
     }
     private uint _requireSkill;
-    [global::ProtoBuf.ProtoMember(13, IsRequired = true, Name=@"requireSkill", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoMember(12, IsRequired = true, Name=@"requireSkill", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     public uint requireSkill
     {
       get { return _requireSkill; }
       set { _requireSkill = value; }
     }
     private uint _requireSkillLevel;
-    [global::ProtoBuf.ProtoMember(14, IsRequired = true, Name=@"requireSkillLevel", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoMember(13, IsRequired = true, Name=@"requireSkillLevel", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     public uint requireSkillLevel
     {
       get { return _requireSkillLevel; }
       set { _requireSkillLevel = value; }
     }
     private uint _cd;
-    [global::ProtoBuf.ProtoMember(15, IsRequired = true, Name=@"cd", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoMember(14, IsRequired = true, Name=@"cd", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     public uint cd
     {
       get { return _cd; }
       set { _cd = value; }
     }
     private uint _prepareTime;
-    [global::ProtoBuf.ProtoMember(16, IsRequired = true, Name=@"prepareTime", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoMember(15, IsRequired = true, Name=@"prepareTime", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     public uint prepareTime
     {
       get { return _prepareTime; }
       set { _prepareTime = value; }
     }
     private bool _interruptable;
-    [global::ProtoBuf.ProtoMember(17, IsRequired = true, Name=@"interruptable", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::ProtoBuf.ProtoMember(16, IsRequired = true, Name=@"interruptable", DataFormat = global::ProtoBuf.DataFormat.Default)]
     public bool interruptable
     {
       get { return _interruptable; }
       set { _interruptable = value; }
     }
     private string _path;
-    [global::ProtoBuf.ProtoMember(18, IsRequired = true, Name=@"path", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::ProtoBuf.ProtoMember(17, IsRequired = true, Name=@"path", DataFormat = global::ProtoBuf.DataFormat.Default)]
     public string path
     {
       get { return _path; }

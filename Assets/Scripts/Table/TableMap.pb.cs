@@ -36,6 +36,13 @@ namespace table
       get { return _mapfile; }
       set { _mapfile = value; }
     }
+    private string _minimapfile;
+    [global::ProtoBuf.ProtoMember(4, IsRequired = true, Name=@"minimapfile", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public string minimapfile
+    {
+      get { return _minimapfile; }
+      set { _minimapfile = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }

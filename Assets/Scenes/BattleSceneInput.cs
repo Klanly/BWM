@@ -41,13 +41,13 @@ public class BattleSceneInput : MonoBehaviour
 				var npc = hit.collider.gameObject.GetComponent<Npc>();
 				if (npc != null)
 				{
-					Net.Instance.Send(new SelectSceneEntryScriptUserCmd_CS() { entrytype = SceneEntryType.SceneEntryType_Npc, entryid = npc.ServerInfo.tempid });
+					Net.Instance.Send(new SelectSceneEntryScriptUserCmd_CS() { entry = new SceneEntryUid() { entrytype = SceneEntryType.SceneEntryType_Npc, entryid = npc.ServerInfo.tempid } });
 				}
 
 				var role = hit.collider.gameObject.GetComponent<Role>();
 				if (role != null && role.ServerInfo.charid != MainRole.ServerInfo.userdata.charid)
 				{
-					Net.Instance.Send(new SelectSceneEntryScriptUserCmd_CS() { entrytype = SceneEntryType.SceneEntryType_Player, entryid = role.ServerInfo.charid });
+					Net.Instance.Send(new SelectSceneEntryScriptUserCmd_CS() { entry = new SceneEntryUid() { entrytype = SceneEntryType.SceneEntryType_Player, entryid = role.ServerInfo.charid } });
 				}
 			}
 		}
@@ -65,6 +65,7 @@ public class BattleSceneInput : MonoBehaviour
 			if (terrain.Raycast(ray, out hit, 1000))
 			{
 				mainRole.move.TargetPosition = hit.point;
+				//mainRole.pathMove.WalkTo(hit.point);
 			}
 		}
 	}
@@ -76,7 +77,7 @@ public class BattleSceneInput : MonoBehaviour
 	void OnKey(KeyCode key)
 	{
 		var distance = 2;
-		switch(key)
+		switch (key)
 		{
 			case KeyCode.UpArrow:
 				mainRole.move.TargetPosition = mainRole.entity.Position + new Vector3(0, 0, +distance);
