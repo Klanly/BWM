@@ -248,10 +248,10 @@ public static partial class Extensions
 	#region Unity
 	/// <summary>
 	/// Gets or add a component. Usage example:
-	/// BoxCollider boxCollider = transform.GetOrAddComponent<BoxCollider>();
+	/// BoxCollider boxCollider = transform.GetOrAddComponent&lt;BoxCollider&gt;();
 	/// </summary>
 	/// <example><code>
-	/// BoxCollider boxCollider = transform.GetOrAddComponent<BoxCollider>();
+	/// BoxCollider boxCollider = transform.GetOrAddComponent&lt;BoxCollider&gt;();
 	/// </code></example>
 	/// <remarks> ref: http://wiki.unity3d.com/index.php?title=Singleton </remarks>
 	public static T GetOrAddComponent<T>(this Component child) where T : Component
