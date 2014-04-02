@@ -294,7 +294,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -228.5, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400022}
@@ -305,7 +305,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100012}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 399, y: -137, z: 0}
+  m_LocalPosition: {x: 580.5, y: -137, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400028}
@@ -317,7 +317,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100004}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 469, y: -76, z: 0}
+  m_LocalPosition: {x: 649.5, y: -76, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400008}
@@ -360,7 +360,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100010}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 315, y: -189, z: 0}
+  m_LocalPosition: {x: 496.5, y: -189, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400030}
@@ -372,7 +372,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100002}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 310, y: -278, z: 0}
+  m_LocalPosition: {x: 491.5, y: -278, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400032}
@@ -406,7 +406,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100018}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -378, y: -224, z: 0}
+  m_LocalPosition: {x: -558.5, y: -224, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400006}
@@ -418,7 +418,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100020}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 460, y: -291, z: 0}
+  m_LocalPosition: {x: 640.5, y: -291, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400008}
@@ -441,7 +441,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100024}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -229.505127, y: -.145324707, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400026}
@@ -599,21 +599,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   leftAnchor:
-    target: {fileID: 0}
+    target: {fileID: 400008}
     relative: 0
-    absolute: 0
+    absolute: -29
   rightAnchor:
-    target: {fileID: 0}
-    relative: 1
-    absolute: 0
-  bottomAnchor:
-    target: {fileID: 0}
+    target: {fileID: 400008}
     relative: 0
-    absolute: 0
+    absolute: 65
+  bottomAnchor:
+    target: {fileID: 400008}
+    relative: 0
+    absolute: 375
   topAnchor:
-    target: {fileID: 0}
-    relative: 1
-    absolute: 0
+    target: {fileID: 400008}
+    relative: 0
+    absolute: 469
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
   mWidth: 94
@@ -648,21 +648,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   leftAnchor:
-    target: {fileID: 0}
+    target: {fileID: 400008}
     relative: 0
-    absolute: 0
+    absolute: -32
   rightAnchor:
-    target: {fileID: 0}
-    relative: 1
-    absolute: 0
-  bottomAnchor:
-    target: {fileID: 0}
+    target: {fileID: 400008}
     relative: 0
-    absolute: 0
+    absolute: 62
+  bottomAnchor:
+    target: {fileID: 400008}
+    relative: 0
+    absolute: 188
   topAnchor:
-    target: {fileID: 0}
-    relative: 1
-    absolute: 0
+    target: {fileID: 400008}
+    relative: 0
+    absolute: 282
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
   mWidth: 94
@@ -719,21 +719,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   leftAnchor:
-    target: {fileID: 0}
+    target: {fileID: 400008}
     relative: 1
-    absolute: -193
+    absolute: -113
   rightAnchor:
-    target: {fileID: 0}
+    target: {fileID: 400008}
     relative: 1
-    absolute: -118
+    absolute: -47
   bottomAnchor:
-    target: {fileID: 0}
+    target: {fileID: 400008}
     relative: 0
-    absolute: 115
+    absolute: 150
   topAnchor:
-    target: {fileID: 0}
+    target: {fileID: 400008}
     relative: 0
-    absolute: 189
+    absolute: 216
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
   mWidth: 66
@@ -877,21 +877,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   leftAnchor:
-    target: {fileID: 0}
-    relative: 0
-    absolute: 0
+    target: {fileID: 400018}
+    relative: .5
+    absolute: -29
   rightAnchor:
-    target: {fileID: 0}
-    relative: 1
-    absolute: 0
+    target: {fileID: 400018}
+    relative: .5
+    absolute: 29
   bottomAnchor:
-    target: {fileID: 0}
-    relative: 0
-    absolute: 0
+    target: {fileID: 400018}
+    relative: .5
+    absolute: -29
   topAnchor:
-    target: {fileID: 0}
-    relative: 1
-    absolute: 0
+    target: {fileID: 400018}
+    relative: .5
+    absolute: 29
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
   mWidth: 58
@@ -943,13 +943,13 @@ MonoBehaviour:
     absolute: 0
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 960
+  mWidth: 1321
   mHeight: 640
   mDepth: 0
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 1.5
+  aspectRatio: 2.2203126
 --- !u!114 &11400022
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1144,8 +1144,8 @@ MonoBehaviour:
     absolute: 14
   topAnchor:
     target: {fileID: 400008}
-    relative: .5
-    absolute: -142
+    relative: 0
+    absolute: 178
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
   mWidth: 164
@@ -1298,21 +1298,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   leftAnchor:
-    target: {fileID: 0}
+    target: {fileID: 400008}
     relative: 1
-    absolute: -193
+    absolute: -197
   rightAnchor:
-    target: {fileID: 0}
+    target: {fileID: 400008}
     relative: 1
-    absolute: -118
+    absolute: -131
   bottomAnchor:
-    target: {fileID: 0}
+    target: {fileID: 400008}
     relative: 0
-    absolute: 115
+    absolute: 98
   topAnchor:
-    target: {fileID: 0}
+    target: {fileID: 400008}
     relative: 0
-    absolute: 189
+    absolute: 164
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
   mWidth: 66
@@ -1418,21 +1418,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   leftAnchor:
-    target: {fileID: 0}
+    target: {fileID: 400008}
     relative: 1
-    absolute: -193
+    absolute: -202
   rightAnchor:
-    target: {fileID: 0}
+    target: {fileID: 400008}
     relative: 1
-    absolute: -118
+    absolute: -136
   bottomAnchor:
-    target: {fileID: 0}
+    target: {fileID: 400008}
     relative: 0
-    absolute: 115
+    absolute: 9
   topAnchor:
-    target: {fileID: 0}
+    target: {fileID: 400008}
     relative: 0
-    absolute: 189
+    absolute: 75
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
   mWidth: 66
