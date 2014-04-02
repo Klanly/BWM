@@ -8,8 +8,7 @@ public class RichTextTest : MonoBehaviour
 
 	void Start()
 	{
-		//uiRichText.AddLabel("hello world");
-		uiRichText.AddLink("HELLO WORLD!");
+		uiRichText.AddLabel("hello world");
 		uiRichText.AddWidget(testWidget.gameObject);
 	}
 
