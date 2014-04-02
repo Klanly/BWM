@@ -77,7 +77,7 @@ public class BattleSceneInput : MonoBehaviour
 	void OnKey(KeyCode key)
 	{
 		var distance = 2;
-		switch(key)
+		switch (key)
 		{
 			case KeyCode.UpArrow:
 				mainRole.move.TargetPosition = mainRole.entity.Position + new Vector3(0, 0, +distance);
