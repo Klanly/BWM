@@ -14,25 +14,22 @@ public class UIRichText : MonoBehaviour
 		host.height = 0;
 	}
 
-	public void AddParagraph(string text)
+	public void AddParagraph(string text = null)
 	{
-		if(string.IsNullOrEmpty(text))
-			return;
-		var str = text.Replace("\t", "    "); // 暂不支持tab字符的显示
 		var item = NGUITools.AddChild(this.gameObject, protoLabel);
 		item.transform.localPosition = new Vector3(0, -host.height, 0);
 		var c = item.GetComponent<UILabel>();
 		c.width = host.width;
 
-		c.text = str;
-		
-		//c.AssumeNaturalSize();
-		//Debug.Log(string.Format("{0}, {1}", c.width, c.localSize.x));
-		//if (c.width > layoutWidth)
-		//{
-		//	c.width = layoutWidth;
-		//	c.AssumeNaturalSize();
-		//}
+		if (string.IsNullOrEmpty(text))
+		{
+			c.text = string.Empty;
+		}
+		else
+		{
+			var str = text.Replace("\t", "    "); // 暂不支持tab字符的显示
+			c.text = str;
+		}
 		host.height += (int)c.localSize.y;
 	}
 
