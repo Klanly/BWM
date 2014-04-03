@@ -171,8 +171,9 @@ namespace NLua
 
 #if WINDOWS_PHONE
 			Debug.WriteLine("lua stack depth: {0}", depth);
-#elif !SILVERLIGHT
-			Debug.Print ("lua stack depth: {0}", depth);
+#elif SILVERLIGHT
+#else
+			UnityEngine.Debug.Log(string.Format("lua stack depth: {0}", depth));
 #endif
 
 			for (int i = 1; i <= depth; i++) {
@@ -188,8 +189,9 @@ namespace NLua
 
 #if WINDOWS_PHONE
                 Debug.WriteLine("{0}: ({1}) {2}", i, typestr, strrep);
-#elif !SILVERLIGHT
-				Debug.Print ("{0}: ({1}) {2}", i, typestr, strrep);
+#elif SILVERLIGHT
+#else
+				UnityEngine.Debug.Log(string.Format("{0}: ({1}) {2}", i, typestr, strrep));
 #endif
 			}
 		}
