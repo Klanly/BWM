@@ -32,7 +32,20 @@ public class PathMove : MonoBehaviour {
 	{
 		Cmd.Pos gridOriginSrc = entity.Grid;
 		Cmd.Pos gridOriginDst = MapNav.GetGrid(_dst);
-		Cmd.Pos gridRealDst = MapNav.GetNearestValidGrid(gridOriginSrc, gridOriginDst, entity.TileType);
+
+		// 如果起始点是阻挡，检测方向是否为走出阻挡的方向
+		Cmd.Pos gridRealSrc = gridOriginSrc;
+		if((MapNav[gridRealSrc.x, gridRealSrc.y] & entity.TileType) == 0)
+		{
+			gridRealSrc = MapNav.GetNearestValidGrid(gridOriginDst, gridOriginSrc, entity.TileType, 1);
+			if(gridRealSrc == null)
+			{
+				StopPath();
+				return;
+			}
+		}
+
+		Cmd.Pos gridRealDst = MapNav.GetNearestValidGrid(gridRealSrc, gridOriginDst, entity.TileType);
 		if (gridRealDst == null)
 		{
 			StopPath();
@@ -47,7 +60,7 @@ public class PathMove : MonoBehaviour {
 			return;
 		}
 
-		path = MapNav.GetPath(gridOriginSrc, gridRealDst, entity.TileType);
+		path = MapNav.GetPath(gridRealSrc, gridRealDst, entity.TileType);
 		if(path.Count == 0)
 		{
 			StopPath();
