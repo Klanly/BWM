@@ -153,7 +153,11 @@ PlayerSettings:
   flashStrippingLevel: 2
   spritePackerPolicy: 
   scriptingDefineSymbols:
+    1: USE_KOPILUA;LUA_CORE
+    4: USE_KOPILUA;LUA_CORE
     7: USE_KOPILUA;LUA_CORE
+    14: USE_KOPILUA;LUA_CORE
+    15: USE_KOPILUA;LUA_CORE
   metroPackageName: shen
   metroPackageLogo: 
   metroPackageVersion: 
