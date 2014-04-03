@@ -152,7 +152,8 @@ PlayerSettings:
   ps3TrialMode: 0
   flashStrippingLevel: 2
   spritePackerPolicy: 
-  scriptingDefineSymbols: {}
+  scriptingDefineSymbols:
+    7: USE_KOPILUA;LUA_CORE
   metroPackageName: shen
   metroPackageLogo: 
   metroPackageVersion: 
