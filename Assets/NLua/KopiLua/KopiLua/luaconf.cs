@@ -851,7 +851,7 @@ namespace KopiLua
 		public static char tolower(int c) { return Char.ToLower((char)c); }
 		public static char toupper(int c) { return Char.ToUpper((char)c); }
 
-		[CLSCompliantAttribute(false)]
+		//[CLSCompliantAttribute(false)]
 		public static ulong strtoul(CharPtr s, out CharPtr end, int base_)
 		{
 			try
@@ -1031,7 +1031,7 @@ namespace KopiLua
 			return null;
 		}
 		
-		[CLSCompliantAttribute(false)]
+		//[CLSCompliantAttribute(false)]
 		public static int memcmp(CharPtr ptr1, CharPtr ptr2, uint size) { return memcmp(ptr1, ptr2, (int)size); }
 		public static int memcmp(CharPtr ptr1, CharPtr ptr2, int size)
 		{
@@ -1046,7 +1046,7 @@ namespace KopiLua
 			return 0;
 		}
 
-		[CLSCompliantAttribute(false)]
+		//[CLSCompliantAttribute(false)]
 		public static CharPtr memchr(CharPtr ptr, char c, uint count)
 		{
 			for (uint i = 0; i < count; i++)
@@ -1105,7 +1105,7 @@ namespace KopiLua
 			return dst;
 		}
 
-		[CLSCompliantAttribute(false)]
+		//[CLSCompliantAttribute(false)]
 		public static uint strcspn(CharPtr str, CharPtr charset)
 		{
 			int index = str.ToString().IndexOfAny(charset.ToString().ToCharArray());
@@ -1389,7 +1389,7 @@ namespace KopiLua
 			return 0;
 		}
 
-		[CLSCompliantAttribute(false)]
+		//[CLSCompliantAttribute(false)]
 		public static int setvbuf(Stream stream, CharPtr buffer, int mode, uint size)
 		{
 			Debug.Assert(false, "setvbuf not implemented yet - mjf");
@@ -1414,7 +1414,7 @@ namespace KopiLua
 				dst[i] = src[srcofs+i];
 		}
 
-		[CLSCompliantAttribute(false)]
+		//[CLSCompliantAttribute(false)]
 		public static void memcpy(CharPtr ptr1, CharPtr ptr2, uint size) { memcpy(ptr1, ptr2, (int)size); }
 		public static void memcpy(CharPtr ptr1, CharPtr ptr2, int size)
 		{
@@ -1425,14 +1425,14 @@ namespace KopiLua
 		public static object VOID(object f) { return f; }
 
 		public const double HUGE_VAL = System.Double.MaxValue;
-		[CLSCompliantAttribute(false)]
+		//[CLSCompliantAttribute(false)]
 		public const uint SHRT_MAX = System.UInt16.MaxValue;
 
-		[CLSCompliantAttribute(false)]
+		//[CLSCompliantAttribute(false)]
 		public const int _IONBF = 0;
-		[CLSCompliantAttribute(false)]
+		//[CLSCompliantAttribute(false)]
 		public const int _IOFBF = 1;
-		[CLSCompliantAttribute(false)]
+		//[CLSCompliantAttribute(false)]
 		public const int _IOLBF = 2;
 
 		public const int SEEK_SET = 0;

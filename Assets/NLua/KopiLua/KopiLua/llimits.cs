@@ -35,9 +35,9 @@ namespace KopiLua
 		/* chars used as small naturals (so that `char' is reserved for characters) */
 		//typedef unsigned char lu_byte;
 
-		[CLSCompliantAttribute(false)]
+		//[CLSCompliantAttribute(false)]
 		public const uint MAXSIZET	= uint.MaxValue - 2;
-		[CLSCompliantAttribute(false)]
+		//[CLSCompliantAttribute(false)]
 		public const lu_mem MAXLUMEM	= lu_mem.MaxValue - 2;
 
 

@@ -65,11 +65,11 @@ namespace KopiLua
 		//public const int MAXARG_sBx			= System.Int32.MaxValue;
 		//#endif
 
-		[CLSCompliantAttribute(false)]
+		//[CLSCompliantAttribute(false)]
 		public const uint MAXARG_A        = (uint)((1 << (int)SIZE_A) -1);
-		[CLSCompliantAttribute(false)]
+		//[CLSCompliantAttribute(false)]
 		public const uint MAXARG_B		  = (uint)((1 << (int)SIZE_B) -1);
-		[CLSCompliantAttribute(false)]
+		//[CLSCompliantAttribute(false)]
 		public const uint MAXARG_C        = (uint)((1 << (int)SIZE_C) -1);
 
 

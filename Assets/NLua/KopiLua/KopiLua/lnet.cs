@@ -156,7 +156,7 @@ namespace KopiLua
 			return LuaPCall (L, nargs, nresults, errfunc);
 		}
 
-		[CLSCompliantAttribute (false)]
+		//[CLSCompliantAttribute (false)]
 		public static int LuaNetLoadBuffer (LuaState L, string buff, uint sz, string name)
 		{
 			if (sz == 0)
@@ -164,7 +164,7 @@ namespace KopiLua
 			return LuaLLoadBuffer (L, buff, sz, name);
 		}
 
-		[CLSCompliantAttribute (false)]
+		//[CLSCompliantAttribute (false)]
 		public static int LuaNetLoadBuffer (LuaState L, byte [] buff, uint sz, string name)
 		{
 			return LuaLLoadBuffer (L, buff, sz, name);
@@ -185,7 +185,7 @@ namespace KopiLua
 			return LuaEqual (L, idx1, idx2);
 		}
 
-		[CLSCompliantAttribute (false)]
+		//[CLSCompliantAttribute (false)]
 		public static void LuaNetPushLString (LuaState L, string s, uint len)
 		{
 			LuaPushLString (L, s, len);
