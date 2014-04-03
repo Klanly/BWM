@@ -64,10 +64,12 @@ public class BattleSceneInput : MonoBehaviour
 			RaycastHit hit;
 			if (terrain.Raycast(ray, out hit, 1000))
 			{
-				mainRole.move.TargetPosition = hit.point;
-				//mainRole.pathMove.WalkTo(hit.point);
+				mainRole.pathMove.WalkTo(hit.point);
 			}
 		}
+
+		// 键盘控制移动
+		mainRole.controlMove.MoveByKeyboard();
 	}
 
 	/// <summary>
@@ -76,23 +78,6 @@ public class BattleSceneInput : MonoBehaviour
 	/// <param name="key"></param>
 	void OnKey(KeyCode key)
 	{
-		var distance = 2;
-		switch (key)
-		{
-			case KeyCode.UpArrow:
-				mainRole.move.TargetPosition = mainRole.entity.Position + new Vector3(0, 0, +distance);
-				break;
-			case KeyCode.DownArrow:
-				mainRole.move.TargetPosition = mainRole.entity.Position + new Vector3(0, 0, -distance);
-				break;
-			case KeyCode.LeftArrow:
-				mainRole.move.TargetPosition = mainRole.entity.Position + new Vector3(-distance, 0, 0);
-				break;
-			case KeyCode.RightArrow:
-				mainRole.move.TargetPosition = mainRole.entity.Position + new Vector3(+distance, 0, 0);
-				break;
-			default:
-				break;
-		}
+
 	}
 }

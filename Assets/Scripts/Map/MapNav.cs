@@ -529,6 +529,70 @@ public class MapNav : MonoBehaviour
 		return;
 	}
 
+	/// <summary>
+	/// 严格检查两点是否可达，若不可达，则修正目标点为最远可达点
+	/// </summary>
+	/// <returns><c>true</c> if this instance is path reached the specified vecSrc vecDst validType; otherwise, <c>false</c>.</returns>
+	/// <param name="vecSrc">Vec source.</param>
+	/// <param name="vecDst">Vec dst.</param>
+	/// <param name="validType">Valid type.</param>
+	public bool IsPathReached(Vector3 vecSrc, Vector3 vecOriginDst ,out Vector3 vecDst, TileType validType = TileType.Walk)
+	{
+		Cmd.Pos ptSrc = GetGrid(vecSrc);
+		Cmd.Pos ptDst = GetGrid(vecOriginDst);
+
+		Vector3 dir = vecOriginDst - vecSrc;
+		float length = dir.magnitude;
+		dir.Normalize();
+		dir *= ShortestMoveDst;
+
+		Vector3 vecCur = vecSrc;
+		Cmd.Pos ptCur = new Cmd.Pos(){x=0, y=0};
+		vecDst = vecCur;
+
+		// 如果起始点是阻挡，检测方向是否为走出阻挡的方向
+		if((this[ptSrc.x, ptSrc.y] & validType) == 0)
+		{
+			Vector3 vecForward = vecSrc + dir * gridWidth;
+			Cmd.Pos ptForward = GetGrid(vecSrc + dir * gridWidth);
+			if(ptForward == ptSrc || (this[ptForward.x, ptForward.y] & validType) == 0)
+				return false;
+		}
+
+		int i = 0;
+		for(; (vecOriginDst - vecCur).magnitude > ShortestMoveDst; vecCur += dir)
+		{
+			if(ptCur != GetGrid(vecCur))
+			{
+				ptCur = GetGrid(vecCur);
+
+				// 遇到阻挡，不考虑起始点的阻挡，有可能会走进去
+				if((ptCur != ptSrc) && (this[ptCur.x, ptCur.y] & validType) == 0)
+				{
+					// 回退一小格，免得和阻挡格子太接近
+					if(i <= 1) 
+						vecDst = vecSrc;
+					else
+						vecDst -= dir;
+
+					break;
+				}
+				
+				// 到达目标点
+				if(ptCur == ptDst)
+				{
+					vecDst = vecOriginDst;
+					break;
+				}
+			}
+
+			vecDst = vecCur;
+			i++;
+		}
+		
+		return (vecDst - vecSrc).magnitude > ShortestMoveDst;
+	}
+
 	#endregion
 
 }

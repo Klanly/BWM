@@ -22,7 +22,7 @@ public class Move : MonoBehaviour
 	/// 行走目标点
 	/// </summary>
 	/// <remarks>
-	/// TODO: 不再以Vector3.one作为无效标志
+	/// TODO: 不再以Vector3.zero作为无效标志
 	/// </remarks>
 	public Vector3 TargetPosition
 	{
@@ -43,9 +43,30 @@ public class Move : MonoBehaviour
 				var relativePos = TargetPosition - entity.Position;
 				this.transform.rotation = Quaternion.LookRotation(relativePos);
 			}
+			else
+			{
+				if (animator && animator.GetFloat("speed") > 0.0f)
+					animator.SetFloat("speed", 0.0f);
+			}
 		}
 	}
 
+	/// <summary>
+	/// 是否在移动中
+	/// </summary>
+	/// <returns><c>true</c>, if moving was ined, <c>false</c> otherwise.</returns>
+	public bool InMoving()
+	{
+		return (TargetPosition != Vector3.zero);
+	}
+
+	/// <summary>
+	/// 停止移动
+	/// </summary>
+	public void Stop()
+	{
+		TargetPosition = Vector3.zero;
+	}
 
 	// Use this for initialization
 	void Start()
@@ -57,7 +78,7 @@ public class Move : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
-		if (TargetPosition != Vector3.zero)
+		if (InMoving())
 		{
 			Vector3 vDelta = TargetPosition - entity.Position;
 			float fDeltaLen = vDelta.magnitude;
@@ -75,12 +96,9 @@ public class Move : MonoBehaviour
 			entity.Position = vOldPosition + vDelta * fMoveLen;
 			if (bFinish)
 			{
-				TargetPosition = Vector3.zero;
+				Stop();
 				//var oldRotate = this.transform.rotation;
 				//this.transform.rotation = oldRotate;
-
-				if (animator)
-					animator.SetFloat("speed", 0.0f);
 
 				if (targetArrived != null)
 					targetArrived();

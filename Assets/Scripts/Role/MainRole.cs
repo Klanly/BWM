@@ -31,6 +31,7 @@ public class MainRole : MonoBehaviour, INotifyPropertyChanged
 	public Move move;
 	public CameraFollow cameraFollow;
 	public PathMove pathMove;
+	public ControlMove controlMove;
 
 	private Pos lastGird = new Pos();
 
@@ -50,6 +51,7 @@ public class MainRole : MonoBehaviour, INotifyPropertyChanged
 		mainRole.move = role.gameObject.GetComponent<Move>();
 		mainRole.cameraFollow = role.gameObject.AddComponent<CameraFollow>();
 		mainRole.pathMove = role.gameObject.AddComponent<PathMove>();
+		mainRole.controlMove = role.gameObject.AddComponent<ControlMove>();
 
 		mainRole.entity.PositionChanged += mainRole.OnPositionChanged;
 		return mainRole;
