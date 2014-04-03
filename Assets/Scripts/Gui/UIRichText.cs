@@ -101,5 +101,15 @@ public class UIRichText : MonoBehaviour
 		host.height += (int)widget.localSize.y;
 		return widget;
 	}
+
+	/// <summary>
+	/// 转义给定字符串中的BBCode代码
+	/// </summary>
+	/// <param name="str"></param>
+	/// <returns></returns>
+	public static string SafeBBCode(string str)
+	{
+		return str.Replace('[', '{').Replace(']', '}');
+	}
 }
 
