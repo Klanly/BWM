@@ -40,12 +40,19 @@ namespace Cmd
   {
     public UserMoveUpMoveUserCmd_C() {}
     
-    private Cmd.Pos _pos;
-    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"pos", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public Cmd.Pos pos
+    private Cmd.Pos _poscm;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"poscm", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public Cmd.Pos poscm
     {
-      get { return _pos; }
-      set { _pos = value; }
+      get { return _poscm; }
+      set { _poscm = value; }
+    }
+    private uint _dir;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"dir", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint dir
+    {
+      get { return _dir; }
+      set { _dir = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -64,12 +71,19 @@ namespace Cmd
       get { return _charid; }
       set { _charid = value; }
     }
-    private Cmd.Pos _pos;
-    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"pos", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public Cmd.Pos pos
+    private Cmd.Pos _poscm;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"poscm", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public Cmd.Pos poscm
     {
-      get { return _pos; }
-      set { _pos = value; }
+      get { return _poscm; }
+      set { _poscm = value; }
+    }
+    private uint _dir;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"dir", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint dir
+    {
+      get { return _dir; }
+      set { _dir = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -88,15 +102,22 @@ namespace Cmd
       get { return _charid; }
       set { _charid = value; }
     }
-    private Cmd.Pos _pos;
-    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"pos", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public Cmd.Pos pos
+    private Cmd.Pos _poscm;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"poscm", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public Cmd.Pos poscm
     {
-      get { return _pos; }
-      set { _pos = value; }
+      get { return _poscm; }
+      set { _poscm = value; }
+    }
+    private uint _dir;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"dir", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint dir
+    {
+      get { return _dir; }
+      set { _dir = value; }
     }
     private uint _mapid;
-    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"mapid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoMember(4, IsRequired = true, Name=@"mapid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     public uint mapid
     {
       get { return _mapid; }
