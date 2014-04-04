@@ -17,7 +17,7 @@ public class ParticleParentAutoDestroy : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
-		if (GetComponentsInChildren<ParticleSystem>().Length == 0 && GetComponentsInChildren<Animator>().Length == 0 && GetComponentsInChildren<Animation>().Length == 0)
+		if (GetComponentsInChildren<ParticleSystem>().Length == 0 && GetComponentsInChildren<Animation>().Length == 0)
 			Destroy(gameObject);
 	}
 
@@ -29,14 +29,6 @@ public class ParticleParentAutoDestroy : MonoBehaviour
 		foreach(ParticleSystem ps in GetComponentsInChildren<ParticleSystem>())
 		{
 			ps.loop = false;
-		}
-
-		foreach(Animator animator in GetComponentsInChildren<Animator>())
-		{
-			foreach(AnimationInfo info in animator.GetCurrentAnimationClipState(0))
-			{
-				info.clip.wrapMode = WrapMode.Once;
-			}
 		}
 
 		foreach(Animation ani in GetComponentsInChildren<Animation>())
