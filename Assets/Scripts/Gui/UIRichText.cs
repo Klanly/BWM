@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System;
+using System.Text;
+using System.Xml.Linq;
 
 /// <summary>
 /// 富文本控件
@@ -24,41 +26,7 @@ public class UIRichText : MonoBehaviour
 	public event Action<string> UrlClicked;
 
 	private UIWidget host;
-
-	#region LastLabel
-	private UILabel m_lastLabel;
-	private UILabel LastLabel
-	{
-		get
-		{
-			if (m_lastLabel == null)
-			{
-				var item = NGUITools.AddChild(this.gameObject, protoLabel);
-				item.transform.localPosition = new Vector3(0, -host.height, 0);
-				var label = item.GetComponent<UILabel>();
-				label.width = host.width;
-				label.height = 0;
-				label.text = string.Empty;
-
-				// url 点击事件
-				if (item.GetComponent<BoxCollider>() != null)
-				{
-					UIEventListener.Get(item).onClick = go =>
-					{
-						if (UrlClicked != null)
-							UrlClicked(label.GetUrlTouch());
-					};
-				}
-				m_lastLabel = label;
-			}
-			return m_lastLabel;
-		}
-		set
-		{
-			m_lastLabel = value;
-		}
-	}
-	#endregion
+	private Vector2 layout;
 
 	void Start()
 	{
@@ -70,36 +38,38 @@ public class UIRichText : MonoBehaviour
 	/// 添加一个文本段落，支持NGUI的BBCode富文本编码。
 	/// </summary>
 	/// <param name="text">为空表示添加要给空行</param>
-	/// <returns></returns>
-	public UILabel AddParagraph(string text = null)
+	public void AddParagraph(string text)
 	{
-		var lastHeight = LastLabel.localSize.y;
-		if (string.IsNullOrEmpty(text))
+		if(string.IsNullOrEmpty(text))
+			return;
+		var label = CreateLabel();
+		var index = 0;
+		while (index < text.Length)
 		{
-			LastLabel.text += "\n";
+			var cut = label.WrapLine(text, index);
+			label.text = text.Substring(index, cut - index);
+			layout.x += label.localSize.x;
+			if (host.width - layout.x < NGUIText.finalLineHeight)
+			{
+				layout.x = 0;
+				layout.y -= NGUIText.finalLineHeight;
+			}
+			//Debug.Log(string.Format("{0} {1}", label.localSize, label.text));
+			if (cut >= text.Length)
+				break;
+			label = CreateLabel();
+			index = cut;
 		}
-		else
-		{
-			var str = text.Replace("\t", "    "); // 暂不支持tab字符的显示
-			LastLabel.text += str + "\n";
-		}
-		host.height += (int)(LastLabel.localSize.y - lastHeight);
-		return LastLabel;
 	}
 
-	/// <summary>
-	/// 添加一个<paramref name="widget"/>控件，将占有独立的一行
-	/// </summary>
-	/// <param name="widget"></param>
-	/// <returns></returns>
-	public UIWidget AddWidget(UIWidget widget)
+	private UILabel CreateLabel()
 	{
-		LastLabel = null;
-		widget.gameObject.layer = this.gameObject.layer;
-		widget.transform.parent = this.transform;
-		widget.transform.localPosition = new Vector3(0, -host.height, 0);
-		host.height += (int)widget.localSize.y;
-		return widget;
+		var item = NGUITools.AddChild(this.gameObject, protoLabel);
+		item.transform.localPosition = layout;
+		var label = item.GetComponent<UILabel>();
+		label.supportEncoding = false;
+		label.maxLineCount = 1;
+		label.width = host.width - Mathf.CeilToInt(layout.x);
+		return label;
 	}
 }
-
