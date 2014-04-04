@@ -118,7 +118,7 @@ public class Role : MonoBehaviour
 		Role role;
 		if (Role.All.TryGetValue(cmd.charid, out role))
 		{
-			role.move.TargetPosition = BattleScene.Instance.MapNav.GetWorldPosition(cmd.pos);
+			role.move.TargetPosition = BattleScene.Instance.MapNav.GetWorldPosition(cmd.poscm);
 		}
 	}
 
@@ -128,7 +128,7 @@ public class Role : MonoBehaviour
 		Role role;
 		if (Role.All.TryGetValue(cmd.charid, out role))
 		{
-			role.entity.Position = BattleScene.Instance.MapNav.GetWorldPosition(cmd.pos);
+			role.entity.Position = BattleScene.Instance.MapNav.GetWorldPosition(cmd.poscm);
 		}
 	}
 	#endregion

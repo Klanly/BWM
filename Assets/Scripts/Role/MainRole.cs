@@ -76,7 +76,7 @@ public class MainRole : MonoBehaviour, INotifyPropertyChanged
 		var cur = entity.Grid;
 		if (cur != lastGird)
 		{
-			Net.Instance.Send(new UserMoveUpMoveUserCmd_C() { pos = cur });
+			Net.Instance.Send(new UserMoveUpMoveUserCmd_C() { poscm = cur });
 			lastGird = cur;
 		}
 	}
