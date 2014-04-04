@@ -3,6 +3,7 @@ using System.Collections;
 using System;
 using System.Text;
 using System.Xml.Linq;
+using System.Collections.Generic;
 
 /// <summary>
 /// 富文本控件
@@ -59,6 +60,30 @@ public class UIRichText : MonoBehaviour
 				break;
 			label = CreateLabel();
 			index = cut;
+		}
+	}
+	public void AddXml(string text)
+	{
+		AddXml(XDocument.Parse("<root>" + text + "</root>").Root.Elements());
+		//AddXml(XDocument.Parse(text).Elements());
+	}
+
+	public void AddXml(IEnumerable<XElement> items)
+	{
+		foreach (var e in items)
+		{
+			Debug.Log(e);
+			switch (e.Name.ToString())
+			{
+				case "n":
+					AddParagraph(e.Value);
+					break;
+				case "br":
+					AddParagraph("\n");
+					break;
+				default:
+					break;
+			}
 		}
 	}
 
