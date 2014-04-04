@@ -72,7 +72,7 @@ public class ChatInputBox : MonoBehaviour
 		return new CommonChatUserCmd_CS()
 		{
 			chatpos = CommonChatUserCmd_CS.ChatPos.ChatPos_Normal,
-			info = UIRichText.SafeBBCode(message),
+			info = NGUIText.StripSymbols(message),
 		};
 	}
 
