@@ -362,6 +362,44 @@ public static partial class Extensions
 	{
 		return label != null ? label.GetUrlAtPosition(UICamera.lastHit.point) : null;
 	}
+
+	/// <summary>
+	/// 测量给定<see cref="UILabel"/>的宽度能容纳的字符串长度
+	/// </summary>
+	/// <param name="label"></param>
+	/// <param name="text">要测量的字符串，为null则采用<c>label.text</c></param>
+	/// <param name="startIndex">起始下标</param>
+	/// <returns>满足<paramref name="label"/>一行宽度的字符串末尾下标，其他则返回<paramref name="startIndex"/></returns>
+	/// <remarks>该函数不会改变<paramref name="label"/>的状态，但会污染<see cref="NGUIText"/>的状态</remarks>
+	public static int WrapLine(this UILabel label, string text = null, int startIndex = 0)
+	{
+		if (label == null)
+			return startIndex;
+		if (text == null)
+			text = label.text;
+		if (startIndex < 0 || startIndex >= text.Length)
+			return startIndex;
+
+		label.UpdateNGUIText(); // 更新 NGUIText 的状态
+		if (NGUIText.rectWidth < 1 || NGUIText.rectHeight < 1 || NGUIText.finalLineHeight < 1f)
+			return startIndex;
+		NGUIText.Prepare(text); // 准备字体以备测量
+
+		var cur_extent = 0f;
+		var prev = 0;
+		for (var c = startIndex; c < text.Length; ++c)
+		{
+			var ch = text[c];
+			var w = NGUIText.GetGlyphWidth(ch, prev);
+			if (w == 0f)
+				continue;
+			cur_extent += w + NGUIText.finalSpacingX;
+			if (NGUIText.rectWidth < cur_extent)
+				return c;
+		}
+
+		return text.Length;
+	}
 	#endregion
 
 	#region Google Protocol Buffers
