@@ -11,7 +11,10 @@ public class SkillPlayStartParticle : SkillBase
 	override public void StartSkill()
 	{
 		if (particle == null)
+		{
+			Destroy(this);
 			return;
+		}
 
 		var skill = gameObject.GetComponent<Skill>();
 		if (skill && skill.startGo)
@@ -20,9 +23,11 @@ public class SkillPlayStartParticle : SkillBase
 			if (!mount)
 				mount = skill.startGo.transform;
 
-			var par = Instantiate(particle) as GameObject;
-			par.transform.parent = mount;
-			par.transform.localPosition = Vector3.zero;
+			var particleGo = Instantiate(particle) as GameObject;
+			if(particleGo.GetComponent<ParticleParentAutoDestroy>() == null)
+				particleGo.AddComponent<ParticleParentAutoDestroy>();
+			particleGo.transform.parent = mount;
+			particleGo.transform.localPosition = Vector3.zero;
 		}
 
 		Destroy(this);

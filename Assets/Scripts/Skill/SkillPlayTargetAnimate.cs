@@ -10,9 +10,6 @@ public class SkillPlayTargetAnimate : SkillBase
 
 	void ApplyTargetEvent()
 	{
-		if (string.IsNullOrEmpty(action))
-			return;
-
 		if (delay > 0.0f)
 		{
 			iTween.ValueTo(gameObject, iTween.Hash(
@@ -32,6 +29,12 @@ public class SkillPlayTargetAnimate : SkillBase
 
 	void PlayAnimate()
 	{
+		if (string.IsNullOrEmpty(action))
+		{
+			Destroy(this);
+			return;
+		}
+
 		var skill = gameObject.GetComponent<Skill>();
 		if (skill && skill.targetGo)
 		{
