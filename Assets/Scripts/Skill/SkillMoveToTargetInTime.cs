@@ -54,6 +54,8 @@ public class SkillMoveToTargetInTime : SendTargetEventBase
 			mountTargetGo = skill.targetGo.transform;
 
 		particleGo = Instantiate(particle) as GameObject;
+		if(particleGo.GetComponent<ParticleParentAutoDestroy>() == null)
+			particleGo.AddComponent<ParticleParentAutoDestroy>();
 		particleGo.transform.localPosition = Vector3.zero;
 		path = new Vector3[2] { mountStartGo.transform.position, mountTargetGo.transform.position };
 		iTween.ValueTo(gameObject, iTween.Hash(
@@ -82,15 +84,9 @@ public class SkillMoveToTargetInTime : SendTargetEventBase
 		if (particleGo != null)
 		{
 			if(immediateDeleteParticle)
-			{
-				foreach (ParticleSystem t in particleGo.GetComponentsInChildren<ParticleSystem>())
-					Destroy(t.gameObject);
-			}
+				Destroy(particleGo);
 			else
-			{
-				foreach (ParticleSystem t in particleGo.GetComponentsInChildren<ParticleSystem>())
-					t.loop = false;
-			}
+				particleGo.GetComponent<ParticleParentAutoDestroy>().SetOnce();
 		}
 		if (sendTargetEvent)
 			gameObject.SendMessage("ApplyTargetEvent");

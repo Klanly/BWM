@@ -13,7 +13,10 @@ public class SkillPlayStartAnimate : SkillBase
 	override public void StartSkill()
 	{
 		if (string.IsNullOrEmpty(action))
+		{
+			Destroy(this);
 			return;
+		}
 
 		var skill = gameObject.GetComponent<Skill>();
 		if (skill && skill.startGo)

@@ -11,9 +11,6 @@ public class SkillPlayTargetParticle : SkillBase
 
 	void ApplyTargetEvent()
 	{
-		if (particle == null)
-			return;
-
 		if (delay > 0.0f)
 		{
 			iTween.ValueTo(gameObject, iTween.Hash(
@@ -33,6 +30,12 @@ public class SkillPlayTargetParticle : SkillBase
 
 	void PlayParticle()
 	{
+		if(particle == null)
+		{
+			Destroy(this);
+			return;
+		}
+
 		var skill = gameObject.GetComponent<Skill>();
 		if (skill && skill.targetGo)
 		{
@@ -40,9 +43,11 @@ public class SkillPlayTargetParticle : SkillBase
 			if (!mount)
 				mount = skill.targetGo.transform;
 
-			var par = Instantiate(particle) as GameObject;
-			par.transform.parent = mount;
-			par.transform.localPosition = Vector3.zero;
+			var particleGo = Instantiate(particle) as GameObject;
+			if(particleGo.GetComponent<ParticleParentAutoDestroy>() == null)
+				particleGo.AddComponent<ParticleParentAutoDestroy>();
+			particleGo.transform.parent = mount;
+			particleGo.transform.localPosition = Vector3.zero;
 		}
 
 		Destroy(this);

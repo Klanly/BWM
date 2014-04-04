@@ -56,6 +56,8 @@ public class SkillCurveToTargetInSpeed : SendTargetEventBase
 			mountTargetGo = skill.targetGo.transform;
 
 		particleGo = Instantiate(particle) as GameObject;
+		if(particleGo.GetComponent<ParticleParentAutoDestroy>() == null)
+			particleGo.AddComponent<ParticleParentAutoDestroy>();
 		particleGo.transform.localPosition = Vector3.zero;
 		particleGo.transform.position = mountStartGo.transform.position;
 		path = new Vector3[3];
@@ -111,13 +113,11 @@ public class SkillCurveToTargetInSpeed : SendTargetEventBase
 		{
 			if(immediateDeleteParticle)
 			{
-				foreach (ParticleSystem t in particleGo.GetComponentsInChildren<ParticleSystem>())
-					Destroy(t.gameObject);
+				Destroy(particleGo);
 			}
 			else
 			{
-				foreach (ParticleSystem t in particleGo.GetComponentsInChildren<ParticleSystem>())
-					t.loop = false;
+				particleGo.GetComponent<ParticleParentAutoDestroy>().SetOnce();
 			}
 		}
 		if (sendTargetEvent)

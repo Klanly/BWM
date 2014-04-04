@@ -10,8 +10,7 @@ public class SkillDrawHurt : SkillBase
 
 	public float delay;
 
-	// Use this for initialization
-	override public void StartSkill()
+	void ApplyTargetEvent()
 	{
 		if (delay > 0.0f)
 		{
