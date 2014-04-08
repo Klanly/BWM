@@ -4,6 +4,7 @@ using System;
 using System.Text;
 using System.Xml.Linq;
 using System.Collections.Generic;
+using System.Linq;
 
 /// <summary>
 /// 富文本控件
@@ -27,7 +28,34 @@ public class UIRichText : MonoBehaviour
 	public event Action<string> UrlClicked;
 
 	private UIWidget host;
-	private Vector2 layout;
+
+	#region Layout
+	private Vector2 m_layout;
+
+	public void AddLine()
+	{
+		m_layout.x = 0;
+		m_layout.y -= NGUIText.finalLineHeight;
+	}
+	private void Layout(UIWidget widget)
+	{
+		var space = host.width - m_layout.x;
+		if (widget.localSize.x <= space)
+		{
+			widget.gameObject.transform.localPosition = m_layout;
+		}
+		else
+		{
+			AddLine();
+			widget.gameObject.transform.localPosition = m_layout;
+		}
+
+		m_layout.x += widget.localSize.x;
+		if (host.width - m_layout.x < NGUIText.finalLineHeight)
+			AddLine();
+		Debug.Log(string.Format("Layot: {0}", m_layout));
+	}
+	#endregion
 
 	void Start()
 	{
@@ -36,32 +64,57 @@ public class UIRichText : MonoBehaviour
 	}
 
 	/// <summary>
-	/// 添加一个文本段落，不支持NGUI的BBCode富文本编码。
+	/// 添加文本，不支持NGUI的BBCode富文本编码。
 	/// </summary>
-	/// <param name="text">为空表示添加要给空行</param>
-	public void AddParagraph(string text)
+	private void AddRawText(string text)
 	{
-		if(string.IsNullOrEmpty(text))
+		if (string.IsNullOrEmpty(text))
 			return;
-		var label = CreateLabel();
+		text = text.Replace("\t", "    ");
+		var c = CreateLabel();
 		var index = 0;
 		while (index < text.Length)
 		{
-			var cut = label.WrapLine(text, index);
-			label.text = text.Substring(index, cut - index);
-			layout.x += label.localSize.x;
-			if (host.width - layout.x < NGUIText.finalLineHeight)
-			{
-				layout.x = 0;
-				layout.y -= NGUIText.finalLineHeight;
-			}
-			//Debug.Log(string.Format("{0} {1}", label.localSize, label.text));
+			var cut = c.WrapLine(text, index);
+			c.overflowMethod = UILabel.Overflow.ResizeFreely;
+			c.text = text.Substring(index, cut - index);
+			c.MakePixelPerfect();
+			Layout(c);
 			if (cut >= text.Length)
 				break;
-			label = CreateLabel();
+			c = CreateLabel();
 			index = cut;
 		}
 	}
+
+	public void AddText(string text)
+	{
+		if (string.IsNullOrEmpty(text))
+			return;
+		text = NGUIText.StripSymbols(text);
+		var lines = text.Split(new char[] { '\n' });
+		for (var i = 0; i < lines.Length - 1; i++)
+		{
+			AddRawText(lines[i]);
+			AddLine();
+		}
+		AddRawText(lines.Last());
+	}
+
+
+	public UISprite AddSprite(string atlas, string sprite)
+	{
+		var res = Resources.Load<UIAtlas>(atlas);
+		if (res == null)
+			return null;
+		var c = CreateSprite();
+		c.atlas = res;
+		c.spriteName = sprite;
+		c.MakePixelPerfect();
+		Layout(c);
+		return c;
+	}
+
 	public void AddXml(string text)
 	{
 		AddXml(XDocument.Parse("<root>" + text + "</root>").Root.Elements());
@@ -76,10 +129,10 @@ public class UIRichText : MonoBehaviour
 			switch (e.Name.ToString())
 			{
 				case "n":
-					AddParagraph(e.Value);
+					AddText(e.Value);
 					break;
 				case "br":
-					AddParagraph("\n");
+					AddLine();
 					break;
 				default:
 					break;
@@ -91,23 +144,21 @@ public class UIRichText : MonoBehaviour
 	{
 		var item = NGUITools.AddChild(this.gameObject, protoLabel);
 		item.name = this.transform.childCount.ToString();
-		item.transform.localPosition = layout;
 		var c = item.GetComponent<UILabel>();
 		c.supportEncoding = false;
+		c.overflowMethod = UILabel.Overflow.ResizeHeight;
+		c.width = host.width - Mathf.CeilToInt(m_layout.x);
 		c.maxLineCount = 1;
-		c.width = host.width - Mathf.CeilToInt(layout.x);
+		c.rawPivot = UIWidget.Pivot.TopLeft;
 		return c;
 	}
-
-	public UISprite CreateSprite(string atlas, string sprite)
+	private UISprite CreateSprite()
 	{
 		var item = NGUITools.AddChild(this.gameObject);
 		item.name = this.transform.childCount.ToString();
-		item.transform.localPosition = layout;
 		var c = item.AddComponent<UISprite>();
-		c.atlas = Resources.Load<UIAtlas>(atlas);
-		c.spriteName = sprite;
-		c.MakePixelPerfect();
+		Debug.Log(c.rawPivot);
+		c.rawPivot = UIWidget.Pivot.TopLeft;
 		return c;
 	}
 }
