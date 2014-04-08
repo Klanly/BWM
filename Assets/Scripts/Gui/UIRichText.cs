@@ -36,7 +36,7 @@ public class UIRichText : MonoBehaviour
 	}
 
 	/// <summary>
-	/// 添加一个文本段落，支持NGUI的BBCode富文本编码。
+	/// 添加一个文本段落，不支持NGUI的BBCode富文本编码。
 	/// </summary>
 	/// <param name="text">为空表示添加要给空行</param>
 	public void AddParagraph(string text)
@@ -90,11 +90,24 @@ public class UIRichText : MonoBehaviour
 	private UILabel CreateLabel()
 	{
 		var item = NGUITools.AddChild(this.gameObject, protoLabel);
+		item.name = this.transform.childCount.ToString();
 		item.transform.localPosition = layout;
-		var label = item.GetComponent<UILabel>();
-		label.supportEncoding = false;
-		label.maxLineCount = 1;
-		label.width = host.width - Mathf.CeilToInt(layout.x);
-		return label;
+		var c = item.GetComponent<UILabel>();
+		c.supportEncoding = false;
+		c.maxLineCount = 1;
+		c.width = host.width - Mathf.CeilToInt(layout.x);
+		return c;
+	}
+
+	public UISprite CreateSprite(string atlas, string sprite)
+	{
+		var item = NGUITools.AddChild(this.gameObject);
+		item.name = this.transform.childCount.ToString();
+		item.transform.localPosition = layout;
+		var c = item.AddComponent<UISprite>();
+		c.atlas = Resources.Load<UIAtlas>(atlas);
+		c.spriteName = sprite;
+		c.MakePixelPerfect();
+		return c;
 	}
 }
