@@ -12,8 +12,13 @@ using System.Xml.Linq;
 ///	文字：
 ///		<n>text node</n>
 ///		simple <n>text node</n> supported
+///	文字修饰：
+///		<b>...</b> 粗体
+///		<i>...</i> 斜体
+///		<u>...</u> 下划线
+///		<s>...</s> 删除线
 /// 段落：段前自动插入缩进，并在有必要时插入换行；段后自动插入换行；其中可以嵌套任意节点
-///		<p><n>text</n></p>
+///		<p>...</p>
 ///	超链接：url为空时将退化为纯文本节点
 ///		<a href="url">text</a> 
 ///	图片：
@@ -24,34 +29,29 @@ public class UIXmlRichText : UIRichText
 {
 	public void AddXml(string text)
 	{
-		foreach (var c in XDocument.Parse("<root>" + text + "</root>").Root.Nodes())
-		{
-			Debug.Log(string.Format("{0}, {1}", c.GetType().Name, c));
-		}
-		AddXml(XDocument.Parse("<root>" + text + "</root>").Root.Nodes());
-		//AddXml(XDocument.Parse(text).Elements());
+		AddXml(XDocument.Parse("<root>" + text + "</root>").Root.Nodes(), null);
 	}
 
-	public void AddXml(IEnumerable<XNode> nodes)
+	public void AddXml(IEnumerable<XNode> nodes, ICollection<UILabel> paragraph = null)
 	{
 		foreach (var n in nodes)
 		{
 			var e = n as XElement;
 			if (e != null)
 			{
-				AddXml(e);
+				AddXml(e, paragraph);
 				continue;
 			}
 			var t = n as XText;
 			if (t != null)
 			{
-				AddText(t.Value);
+				AddText(t.Value, paragraph);
 				continue;
 			}
 		}
 	}
 
-	public void AddXml(XElement e)
+	public void AddXml(XElement e, ICollection<UILabel> paragraph = null)
 	{
 		switch (e.Name.ToString())
 		{
@@ -59,16 +59,30 @@ public class UIXmlRichText : UIRichText
 				AddNewLine();
 				break;
 			case "n":
-				AddText(e.Value);
+				AddText(e.Value, paragraph);
 				break;
 			case "a":
-				AddLink(e.Value, e.Attribute("href").Value);
+				AddLink(e.Value, e.Attribute("href").Value, paragraph);
+				break;
+			case "b":
+			case "i":
+			case "u":
+			case "s":
+				var p = new List<UILabel>();
+				AddXml(e.Nodes(), p);
+				foreach (var n in p)
+				{
+					n.supportEncoding = true;
+					n.text = string.Format("[{0}]{1}[/{0}]", e.Name, n.text);
+					if(paragraph != null)
+						paragraph.Add(n);
+				}
 				break;
 			case "p":
 				if (IsNewLine() == false)
 					AddNewLine();
-				AddText("\t");
-				AddXml(e.Nodes());
+				AddText("\t", paragraph);
+				AddXml(e.Nodes(), paragraph);
 				AddNewLine();
 				break;
 			case "img":

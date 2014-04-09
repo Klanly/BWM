@@ -102,7 +102,7 @@ public class UIRichText : MonoBehaviour
 	/// 添加文本
 	/// 不支持NGUI的BBCode富文本编码！
 	/// </summary>
-	protected void AddRawText(string text, string link, IList<UILabel> paragraph)
+	protected void AddRawText(string text, string link, ICollection<UILabel> paragraph)
 	{
 		if (string.IsNullOrEmpty(text))
 			return;
@@ -123,7 +123,8 @@ public class UIRichText : MonoBehaviour
 				c.text = text.Substring(index, cut - index);
 			else
 				c.text = string.Format("[u][url={0}]{1}[/url][/u]", link, text.Substring(index, cut - index));
-			paragraph.Add(c);
+			if (paragraph != null)
+				paragraph.Add(c);
 			Layout(c);
 			if (cut >= text.Length)
 				break;
@@ -136,10 +137,10 @@ public class UIRichText : MonoBehaviour
 	/// 添加文本
 	/// </summary>
 	/// <param name="text">要添加的文本。'\n'表示换行，'\t'将被替换为"    "</param>
-	/// <returns>本次添加生成的所有<see cref="UILabel"/></returns>
-	public IEnumerable<UILabel> AddText(string text)
+	/// <param name="paragraph">本次添加生成的所有<see cref="UILabel"/></param>
+	public void AddText(string text, ICollection<UILabel> paragraph = null)
 	{
-		return AddLink(text, null);
+		AddLink(text, null, paragraph);
 	}
 
 	/// <summary>
@@ -148,12 +149,11 @@ public class UIRichText : MonoBehaviour
 	/// </summary>
 	/// <param name="text">要添加的文本。'\n'表示换行，'\t'将被替换为"    "</param>
 	/// <param name="url"></param>
-	/// <returns>本次添加生成的所有<see cref="UILabel"/></returns>
-	public IEnumerable<UILabel> AddLink(string text, string url)
+	/// <param name="paragraph">本次添加生成的所有<see cref="UILabel"/></param>
+	public void AddLink(string text, string url, ICollection<UILabel> paragraph = null)
 	{
 		if (string.IsNullOrEmpty(text))
-			return Enumerable.Empty<UILabel>();
-		var paragraph = new List<UILabel>();
+			return;
 		text = NGUIText.StripSymbols(text);
 		var lines = text.Split(new char[] { '\n' });
 		for (var i = 0; i < lines.Length - 1; i++)
@@ -162,7 +162,6 @@ public class UIRichText : MonoBehaviour
 			AddNewLine();
 		}
 		AddRawText(lines.Last(), url, paragraph);
-		return paragraph;
 	}
 
 	/// <summary>

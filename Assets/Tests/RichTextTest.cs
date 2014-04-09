@@ -11,6 +11,7 @@ public class RichTextTest : MonoBehaviour
 	{
 		var t = test as UIXmlRichText;
 		t.UrlClicked += (sender, url) => Debug.Log(string.Format("{0}, {1}", sender.text, url));
+		t.AddXml("<p><b><n>粗体</n>\t<i>粗体斜体</i>\t<u>粗体下划线</u></b>\t<s>非粗体的删除线</s></p>");
 		t.AddXml("simple <n>text</n> support<p><n>text</n><p><n>text</n></p></p>");
 		t.AddText("A");
 		t.AddText("B");
