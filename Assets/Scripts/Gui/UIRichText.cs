@@ -35,7 +35,7 @@ public class UIRichText : MonoBehaviour
 	/// </summary>
 	private float m_maxLineHeight;
 
-	public void AddLine()
+	public void AddNewLine()
 	{
 		m_layout.x = 0;
 		m_layout.y -= NGUIText.finalLineHeight;
@@ -43,6 +43,11 @@ public class UIRichText : MonoBehaviour
 
 		m_maxLineHeight = NGUIText.finalLineHeight;
 		m_line.Clear();
+	}
+
+	public bool IsNewLine()
+	{
+		return m_line.Count == 0;
 	}
 	private void Layout(UIWidget widget)
 	{
@@ -59,7 +64,7 @@ public class UIRichText : MonoBehaviour
 		}
 		else // 本行放不下，换行再放
 		{
-			AddLine();
+			AddNewLine();
 			widget.gameObject.transform.localPosition = m_layout;
 		}
 
@@ -82,7 +87,7 @@ public class UIRichText : MonoBehaviour
 
 		// 已经接近行尾则换行
 		if (host.width - m_layout.x < NGUIText.finalLineHeight)
-			AddLine();
+			AddNewLine();
 		//Debug.Log(string.Format("Layot: {0}: {1}, {2}, {3}", widget.name, m_layout.y, m_layout.x, widget.localSize));
 	}
 	#endregion
@@ -90,7 +95,7 @@ public class UIRichText : MonoBehaviour
 	void Start()
 	{
 		host = this.GetComponent<UIWidget>();
-		AddLine();
+		AddNewLine();
 	}
 
 	/// <summary>
@@ -109,7 +114,7 @@ public class UIRichText : MonoBehaviour
 			var cut = c.WrapLine(text, index);
 			if (cut == index)
 			{
-				AddLine();
+				AddNewLine();
 				c.width = host.width;
 				continue;
 			}
@@ -154,7 +159,7 @@ public class UIRichText : MonoBehaviour
 		for (var i = 0; i < lines.Length - 1; i++)
 		{
 			AddRawText(lines[i], url, paragraph);
-			AddLine();
+			AddNewLine();
 		}
 		AddRawText(lines.Last(), url, paragraph);
 		return paragraph;
