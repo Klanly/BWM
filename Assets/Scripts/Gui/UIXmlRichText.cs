@@ -17,7 +17,6 @@ using System.Linq;
 ///		'\t' -> "    "
 ///		'\n' -> <br />
 ///	文字修饰：
-///	  TODO: sub和sup因是排版后才加的修饰，会出现多余的空白，应该在排版前就予以考虑
 ///		<b>...</b> 粗体
 ///		<i>...</i> 斜体
 ///		<u>...</u> 下划线
@@ -31,13 +30,15 @@ using System.Linq;
 ///		<color value="颜色">...</color>
 /// 段落：
 ///	  段前自动插入缩进，并在有必要时插入换行；段后自动插入换行；其中可以嵌套任意节点
-///	  TODO: p节点的嵌套"<p><p></p></p>"不同于序列"<p></p><p></p>"，应该逐级嵌套缩进
 ///		<p>...</p>
 ///	超链接：
-///	  url为空时将退化为纯文本节点
-///		<a href="url">...</a> 
+///		<a href="link">...</a> 
 ///	图片：
 ///		<img atlas="atlas path" sprite="sprite name" />
+///		
+/// TODO:
+///		sub和sup因是排版后才加的修饰，会出现多余的空白，应该在排版前就予以考虑
+///		p节点的嵌套"<p><p></p></p>"不同于序列"<p></p><p></p>"，应该逐级嵌套缩进
 /// ]]>
 /// </summary>
 public class UIXmlRichText : UIRichText
@@ -86,8 +87,8 @@ public class UIXmlRichText : UIRichText
 				break;
 			case "a":
 				{
-					var widgets = new List<UIWidget>();
 					var link = e.Attribute("href").Value;
+					var widgets = new List<UIWidget>();
 					Add(e.Nodes(), widgets, color);
 					foreach (var w in widgets)
 					{
