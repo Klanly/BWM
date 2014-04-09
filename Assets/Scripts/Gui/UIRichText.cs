@@ -9,11 +9,6 @@ using System.Linq;
 /// <summary>
 /// 富文本控件
 /// </summary>
-/// <remarks>
-/// 在<see cref="UILabel"/>所支持的BBCode富文本协议基础上，支持多文本段落的加入。
-/// 支持自定义控件的加入，但仅可用于单行布局。
-/// 不支持同一行的多个子元素混合布局。
-/// </remarks>
 [RequireComponent(typeof(UIWidget))]
 public class UIRichText : MonoBehaviour
 {
@@ -99,9 +94,10 @@ public class UIRichText : MonoBehaviour
 	}
 
 	/// <summary>
-	/// 添加文本，不支持NGUI的BBCode富文本编码。
+	/// 添加文本
+	/// 不支持NGUI的BBCode富文本编码！
 	/// </summary>
-	private void AddRawText(string text, string link, IList<UILabel> paragraph)
+	protected void AddRawText(string text, string link, IList<UILabel> paragraph)
 	{
 		if (string.IsNullOrEmpty(text))
 			return;
@@ -131,11 +127,23 @@ public class UIRichText : MonoBehaviour
 		}
 	}
 
+	/// <summary>
+	/// 添加文本
+	/// </summary>
+	/// <param name="text">要添加的文本。'\n'表示换行，'\t'将被替换为"    "</param>
+	/// <returns>本次添加生成的所有<see cref="UILabel"/></returns>
 	public IEnumerable<UILabel> AddText(string text)
 	{
 		return AddLink(text, null);
 	}
 
+	/// <summary>
+	/// 添加超链接，超链接点击事件为<see cref="UrlClicked"/>
+	/// <paramref name="url"/>为空则退化为普通文本添加，相当于<see cref="AddText"/>
+	/// </summary>
+	/// <param name="text">要添加的文本。'\n'表示换行，'\t'将被替换为"    "</param>
+	/// <param name="url"></param>
+	/// <returns>本次添加生成的所有<see cref="UILabel"/></returns>
 	public IEnumerable<UILabel> AddLink(string text, string url)
 	{
 		if (string.IsNullOrEmpty(text))
@@ -152,6 +160,12 @@ public class UIRichText : MonoBehaviour
 		return paragraph;
 	}
 
+	/// <summary>
+	/// 添加图片
+	/// </summary>
+	/// <param name="atlas">图片atlas的Resouces路径</param>
+	/// <param name="sprite">atlas中的name</param>
+	/// <returns>失败返回null</returns>
 	public UISprite AddSprite(string atlas, string sprite)
 	{
 		var res = Resources.Load<UIAtlas>(atlas);
@@ -164,31 +178,7 @@ public class UIRichText : MonoBehaviour
 		return c;
 	}
 
-	public void AddXml(string text)
-	{
-		AddXml(XDocument.Parse("<root>" + text + "</root>").Root.Elements());
-		//AddXml(XDocument.Parse(text).Elements());
-	}
-
-	public void AddXml(IEnumerable<XElement> items)
-	{
-		foreach (var e in items)
-		{
-			switch (e.Name.ToString())
-			{
-				case "n":
-					AddText(e.Value);
-					break;
-				case "br":
-					AddLine();
-					break;
-				default:
-					break;
-			}
-		}
-	}
-
-	private UILabel CreateLabel(string link)
+	protected UILabel CreateLabel(string link)
 	{
 		var item = NGUITools.AddChild(this.gameObject, protoLabel);
 		var c = item.GetComponent<UILabel>();
@@ -212,7 +202,7 @@ public class UIRichText : MonoBehaviour
 		return c;
 	}
 
-	private UISprite CreateSprite()
+	protected UISprite CreateSprite()
 	{
 		var item = NGUITools.AddChild(this.gameObject);
 		var c = item.AddComponent<UISprite>();

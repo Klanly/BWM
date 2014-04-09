@@ -100,8 +100,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 2102698260}
   - {fileID: 197023107}
+  - {fileID: 2102698260}
   m_Father: {fileID: 1987149024}
 --- !u!114 &62544261
 MonoBehaviour:
@@ -477,51 +477,11 @@ MonoBehaviour:
   mMaxLineHeight: 0
   mLineWidth: 0
   mMultiline: 1
---- !u!1001 &953329071
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 197023107}
-    m_Modifications:
-    - target: {fileID: 400000, guid: aa1b16e586216364ea3bf09ea1be441c, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: -250
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: aa1b16e586216364ea3bf09ea1be441c, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 150
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: aa1b16e586216364ea3bf09ea1be441c, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: aa1b16e586216364ea3bf09ea1be441c, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: aa1b16e586216364ea3bf09ea1be441c, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: aa1b16e586216364ea3bf09ea1be441c, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: aa1b16e586216364ea3bf09ea1be441c, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: aa1b16e586216364ea3bf09ea1be441c, type: 2}
-  m_RootGameObject: {fileID: 1042685593}
-  m_IsPrefabParent: 0
-  m_IsExploded: 1
 --- !u!1 &1042685593
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 100000, guid: aa1b16e586216364ea3bf09ea1be441c, type: 2}
-  m_PrefabInternal: {fileID: 953329071}
+  m_PrefabInternal: {fileID: 0}
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 1042685595}
@@ -539,11 +499,11 @@ MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 11400000, guid: aa1b16e586216364ea3bf09ea1be441c,
     type: 2}
-  m_PrefabInternal: {fileID: 953329071}
+  m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1042685593}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 769fb9edf63a2d34ea17a68a1fb9d004, type: 3}
+  m_Script: {fileID: 11500000, guid: 53c1d8e730456b74db19ebace36dced4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   protoLabel: {fileID: 100000, guid: 84307d4497ba458439c4efb2c3a7f91f, type: 2}
@@ -551,7 +511,7 @@ MonoBehaviour:
 Transform:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 400000, guid: aa1b16e586216364ea3bf09ea1be441c, type: 2}
-  m_PrefabInternal: {fileID: 953329071}
+  m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1042685593}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -250, y: 150, z: 0}
@@ -563,7 +523,7 @@ MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 11400002, guid: aa1b16e586216364ea3bf09ea1be441c,
     type: 2}
-  m_PrefabInternal: {fileID: 953329071}
+  m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1042685593}
   m_Enabled: 1
   m_EditorHideFlags: 0
@@ -653,6 +613,10 @@ Prefab:
     - target: {fileID: 11400008, guid: df7390d50d06a4b4b893085286142266, type: 2}
       propertyPath: mSize
       value: .973333359
+      objectReference: {fileID: 0}
+    - target: {fileID: 100002, guid: df7390d50d06a4b4b893085286142266, type: 2}
+      propertyPath: m_Name
+      value: VerticalScrollBar
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: df7390d50d06a4b4b893085286142266, type: 2}
@@ -821,7 +785,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 773be1e930c6ac84daa4db834eac3de3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  uiRichText: {fileID: 1042685594}
+  test: {fileID: 1042685594}
   testWidget: {fileID: 1546827908}
   scrollView: {fileID: 197023109}
 --- !u!54 &1472704909
@@ -1472,7 +1436,7 @@ GameObject:
   - 65: {fileID: 2102698262}
   - 114: {fileID: 2102698261}
   m_Layer: 13
-  m_Name: Control - Simple Vertical Scroll Bar
+  m_Name: VerticalScrollBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
