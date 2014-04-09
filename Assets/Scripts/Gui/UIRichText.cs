@@ -21,6 +21,11 @@ public class UIRichText : MonoBehaviour
 	/// URL点击事件
 	/// </summary>
 	public event Action<UILabel, string> UrlClicked;
+	protected void OnUrlClicked(UILabel sender, string link)
+	{
+		if (this.UrlClicked != null)
+			this.UrlClicked(sender, link);
+	}
 
 	private UIWidget host;
 
@@ -197,11 +202,7 @@ public class UIRichText : MonoBehaviour
 			c.supportEncoding = true;
 			var collider = c.gameObject.AddComponent<BoxCollider>();
 			collider.isTrigger = true;
-			UIEventListener.Get(item).onClick += go =>
-			{
-				if (this.UrlClicked != null)
-					this.UrlClicked(c, link);
-			};
+			UIEventListener.Get(item).onClick += go => OnUrlClicked(c, link);
 		}
 		return c;
 	}
