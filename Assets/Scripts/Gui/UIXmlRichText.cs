@@ -9,6 +9,7 @@ using System.Xml.Linq;
 /// 用法说明：
 ///	<br /> 换行
 ///	<n>text</n> 纯文本标签
+///	<p><n>text</n></p> 定义段落，段前自动插入缩进，段后自动插入换行
 ///	<a href="url">text</a> 超链接
 /// <img atlas="atlas path" sprite="sprite name" /> Sprite图片
 /// ]]>
@@ -35,6 +36,11 @@ public class UIXmlRichText : UIRichText
 					break;
 				case "a":
 					AddLink(e.Value, e.Attribute("href").Value);
+					break;
+				case "p":
+					AddText("\t");
+					AddXml(e.Elements());
+					AddLine();
 					break;
 				case "img":
 					var atlas = e.Attribute("atlas").Value;

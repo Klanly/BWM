@@ -16,7 +16,7 @@ public class RichTextTest : MonoBehaviour
 		t.AddText("C");
 		t.AddText("D");
 		t.AddXml("<n>\t</n><a href=\"a test\">A TEST</a><br/>");
-		t.AddXml("<n>image</n><img atlas=\"Atlases/SkillIcon\" sprite=\"1000\"/><img atlas=\"Atlases/SkillIcon\" sprite=\"1001\"/><img atlas=\"Atlases/SkillIcon\" sprite=\"1002\"/><br/>");
+		t.AddXml("<p><n>image</n><img atlas=\"Atlases/SkillIcon\" sprite=\"1000\"/><img atlas=\"Atlases/SkillIcon\" sprite=\"1001\"/><img atlas=\"Atlases/SkillIcon\" sprite=\"1002\"/></p>");
 		t.AddXml("<n>begin1</n><br/><n>end1</n>");
 		t.AddXml("<n>begin2\nend2</n>");
 		t.AddSprite("Atlases/SkillIcon", "1000");
