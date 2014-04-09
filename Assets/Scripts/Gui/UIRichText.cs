@@ -156,32 +156,40 @@ public class UIRichText : MonoBehaviour
 
 	/// <summary>
 	/// 添加超链接，超链接点击事件为<see cref="UrlClicked"/>
-	/// <paramref name="url"/>为空则退化为普通文本添加，相当于<see cref="AddText"/>
+	/// <paramref name="link"/>为空则退化为普通文本添加，相当于<see cref="AddText"/>
 	/// </summary>
 	/// <param name="text">要添加的文本。'\n'表示换行，'\t'将被替换为"    "</param>
-	/// <param name="url"></param>
+	/// <param name="link"></param>
 	/// <param name="paragraph">本次添加生成的所有<see cref="UILabel"/></param>
-	public void AddLink(string text, string url, ICollection<UIWidget> paragraph = null)
+	public void AddLink(string text, string link, ICollection<UIWidget> paragraph = null)
 	{
 		var widgets = new List<UIWidget>();
 		AddText(text, widgets);
 		foreach (var w in widgets)
 		{
-			w.gameObject.AddComponent<BoxCollider>().isTrigger = true;
-			w.ResizeCollider();
-			var sender = w;
-			UIEventListener.Get(w.gameObject).onClick = go => OnUrlClicked(sender, url);
-
-			var label = w as UILabel;
-			if (label != null)
-			{
-				label.supportEncoding = true;
-				label.text = string.Format("[u]{0}[/u]", label.text);
-			}
-
+			AttachLink(w, link);
 			if (paragraph != null)
 				paragraph.Add(w);
 		}
+	}
+
+	protected UIWidget AttachLink(UIWidget widget, string link)
+	{
+		var collider = widget.GetOrAddComponent<BoxCollider>();
+		collider.isTrigger = true;
+		widget.ResizeCollider();
+
+		var sender = widget;
+		UIEventListener.Get(widget.gameObject).onClick = go => OnUrlClicked(sender, link);
+
+		var label = widget as UILabel;
+		if (label != null)
+		{
+			label.supportEncoding = true;
+			label.text = string.Format("[u]{0}[/u]", label.text);
+		}
+
+		return widget;
 	}
 
 	/// <summary>

@@ -90,18 +90,7 @@ public class UIXmlRichText : UIRichText
 					Add(e.Nodes(), widgets, color);
 					foreach (var w in widgets)
 					{
-						w.gameObject.AddComponent<BoxCollider>().isTrigger = true;
-						w.ResizeCollider();
-						var sender = w;
-						UIEventListener.Get(w.gameObject).onClick = go => base.OnUrlClicked(sender, link);
-
-						var label = w as UILabel;
-						if (label != null)
-						{
-							label.supportEncoding = true;
-							label.text = string.Format("[u]{0}[/u]", label.text);
-						}
-
+						base.AttachLink(w, link);
 						if (paragraph != null)
 							paragraph.Add(w);
 					}
