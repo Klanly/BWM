@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Xml.Linq;
+using System.Linq;
 
 /// <summary>
 /// 基于XML接口的富文本控件
@@ -40,7 +41,7 @@ public class UIXmlRichText : UIRichText
 		AddXml(XDocument.Parse("<root>" + text + "</root>").Root.Nodes(), null);
 	}
 
-	public void AddXml(IEnumerable<XNode> nodes, ICollection<UILabel> paragraph = null)
+	public void AddXml(IEnumerable<XNode> nodes, ICollection<UIWidget> paragraph = null)
 	{
 		foreach (var n in nodes)
 		{
@@ -59,7 +60,7 @@ public class UIXmlRichText : UIRichText
 		}
 	}
 
-	public void AddXml(XElement e, ICollection<UILabel> paragraph = null)
+	public void AddXml(XElement e, ICollection<UIWidget> paragraph = null)
 	{
 		switch (e.Name.ToString())
 		{
@@ -78,14 +79,18 @@ public class UIXmlRichText : UIRichText
 			case "s":
 			case "sub":
 			case "sup":
-				var p = new List<UILabel>();
-				AddXml(e.Nodes(), p);
-				foreach (var n in p)
+				var widgets = new List<UIWidget>();
+				AddXml(e.Nodes(), widgets);
+				foreach (var w in widgets)
 				{
-					n.supportEncoding = true;
-					n.text = string.Format("[{0}]{1}[/{0}]", e.Name, n.text);
+					var label = w as UILabel;
+					if (label != null)
+					{
+						label.supportEncoding = true;
+						label.text = string.Format("[{0}]{1}[/{0}]", e.Name, label.text);
+					}
 					if(paragraph != null)
-						paragraph.Add(n);
+						paragraph.Add(w);
 				}
 				break;
 			case "p":
@@ -100,7 +105,9 @@ public class UIXmlRichText : UIRichText
 				var sprite = e.Attribute("sprite").Value;
 				if (string.IsNullOrEmpty(atlas) == false && string.IsNullOrEmpty(sprite) == false)
 				{
-					AddSprite(atlas, sprite);
+					var w = AddSprite(atlas, sprite);
+					if (paragraph != null)
+						paragraph.Add(w);
 					break;
 				}
 				break;

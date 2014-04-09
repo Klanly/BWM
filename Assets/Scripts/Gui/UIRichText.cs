@@ -102,7 +102,7 @@ public class UIRichText : MonoBehaviour
 	/// 添加文本
 	/// 不支持NGUI的BBCode富文本编码！
 	/// </summary>
-	protected void AddRawText(string text, string link, ICollection<UILabel> paragraph)
+	protected void AddRawText(string text, string link, ICollection<UIWidget> paragraph)
 	{
 		if (string.IsNullOrEmpty(text))
 			return;
@@ -138,7 +138,7 @@ public class UIRichText : MonoBehaviour
 	/// </summary>
 	/// <param name="text">要添加的文本。'\n'表示换行，'\t'将被替换为"    "</param>
 	/// <param name="paragraph">本次添加生成的所有<see cref="UILabel"/></param>
-	public void AddText(string text, ICollection<UILabel> paragraph = null)
+	public void AddText(string text, ICollection<UIWidget> paragraph = null)
 	{
 		AddLink(text, null, paragraph);
 	}
@@ -150,7 +150,7 @@ public class UIRichText : MonoBehaviour
 	/// <param name="text">要添加的文本。'\n'表示换行，'\t'将被替换为"    "</param>
 	/// <param name="url"></param>
 	/// <param name="paragraph">本次添加生成的所有<see cref="UILabel"/></param>
-	public void AddLink(string text, string url, ICollection<UILabel> paragraph = null)
+	public void AddLink(string text, string url, ICollection<UIWidget> paragraph = null)
 	{
 		if (string.IsNullOrEmpty(text))
 			return;
