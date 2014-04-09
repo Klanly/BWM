@@ -31,36 +31,70 @@ public class UIRichText : MonoBehaviour
 
 	#region Layout
 	private Vector2 m_layout;
+	/// <summary>
+	/// 用于当前行元素的高度调整
+	/// </summary>
+	private readonly List<UIWidget> m_line = new List<UIWidget>();
+	/// <summary>
+	/// 当前行的最大元素高度
+	/// </summary>
+	private float m_maxLineHeight;
 
 	public void AddLine()
 	{
 		m_layout.x = 0;
 		m_layout.y -= NGUIText.finalLineHeight;
+		host.height = Mathf.CeilToInt(-m_layout.y);
+
+		m_maxLineHeight = NGUIText.finalLineHeight;
+		m_line.Clear();
 	}
 	private void Layout(UIWidget widget)
 	{
-		var space = host.width - m_layout.x;
-		if (widget.localSize.x <= space)
+		widget.name = this.transform.childCount.ToString();
+
+		// 记录行元素，用于可能发生的高度调整
+		m_line.Add(widget);
+
+		// 本行能放下，直接放
+		if (widget.localSize.x <= host.width - m_layout.x)
 		{
 			widget.gameObject.transform.localPosition = m_layout;
 		}
-		else
+		else // 本行放不下，换行再放
 		{
 			AddLine();
 			widget.gameObject.transform.localPosition = m_layout;
 		}
 
 		m_layout.x += widget.localSize.x;
+
+		// 调整行高度
+		if (widget.localSize.y > m_maxLineHeight)
+		{
+			var delta = widget.localSize.y - m_maxLineHeight;
+			m_maxLineHeight = widget.localSize.y;
+			m_layout.y -= delta;
+			host.height = Mathf.CeilToInt(-m_layout.y);
+			foreach (var c in m_line)
+			{
+				var pos = c.gameObject.transform.localPosition;
+				pos.y -= delta;
+				c.gameObject.transform.localPosition = pos;
+			}
+		}
+
+		// 已经接近行尾则换行
 		if (host.width - m_layout.x < NGUIText.finalLineHeight)
 			AddLine();
-		Debug.Log(string.Format("Layot: {0}", m_layout));
+		//Debug.Log(string.Format("Layot: {0}: {1}, {2}, {3}", widget.name, m_layout.y, m_layout.x, widget.localSize));
 	}
 	#endregion
 
 	void Start()
 	{
 		host = this.GetComponent<UIWidget>();
-		host.height = 0;
+		AddLine();
 	}
 
 	/// <summary>
@@ -131,7 +165,6 @@ public class UIRichText : MonoBehaviour
 	{
 		foreach (var e in items)
 		{
-			Debug.Log(e);
 			switch (e.Name.ToString())
 			{
 				case "n":
@@ -149,23 +182,20 @@ public class UIRichText : MonoBehaviour
 	private UILabel CreateLabel()
 	{
 		var item = NGUITools.AddChild(this.gameObject, protoLabel);
-		item.name = this.transform.childCount.ToString();
 		var c = item.GetComponent<UILabel>();
 		c.text = string.Empty;
 		c.supportEncoding = false;
 		c.overflowMethod = UILabel.Overflow.ResizeHeight;
 		c.width = host.width - Mathf.CeilToInt(m_layout.x);
 		c.maxLineCount = 1;
-		c.rawPivot = UIWidget.Pivot.TopLeft;
+		c.rawPivot = UIWidget.Pivot.BottomLeft;
 		return c;
 	}
 	private UISprite CreateSprite()
 	{
 		var item = NGUITools.AddChild(this.gameObject);
-		item.name = this.transform.childCount.ToString();
 		var c = item.AddComponent<UISprite>();
-		Debug.Log(c.rawPivot);
-		c.rawPivot = UIWidget.Pivot.TopLeft;
+		c.rawPivot = UIWidget.Pivot.BottomLeft;
 		return c;
 	}
 }
