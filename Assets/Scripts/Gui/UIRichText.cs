@@ -25,7 +25,7 @@ public class UIRichText : MonoBehaviour
 	/// <summary>
 	/// URL点击事件
 	/// </summary>
-	public event Action<string> UrlClicked;
+	public event Action<UILabel, string> UrlClicked;
 
 	private UIWidget host;
 
@@ -100,12 +100,12 @@ public class UIRichText : MonoBehaviour
 	/// <summary>
 	/// 添加文本，不支持NGUI的BBCode富文本编码。
 	/// </summary>
-	private void AddRawText(string text)
+	private void AddRawText(string text, string link)
 	{
 		if (string.IsNullOrEmpty(text))
 			return;
 		text = text.Replace("\t", "    ");
-		var c = CreateLabel();
+		var c = CreateLabel(link);
 		var index = 0;
 		while (index < text.Length)
 		{
@@ -117,17 +117,25 @@ public class UIRichText : MonoBehaviour
 				continue;
 			}
 			c.overflowMethod = UILabel.Overflow.ResizeFreely;
-			c.text = text.Substring(index, cut - index);
+			if (string.IsNullOrEmpty(link))
+				c.text = text.Substring(index, cut - index);
+			else
+				c.text = string.Format("[u][url={0}]{1}[/url][/u]", link, text.Substring(index, cut - index));
 			c.MakePixelPerfect();
 			Layout(c);
 			if (cut >= text.Length)
 				break;
-			c = CreateLabel();
+			c = CreateLabel(link);
 			index = cut;
 		}
 	}
 
 	public void AddText(string text)
+	{
+		AddLink(text, null);
+	}
+
+	public void AddLink(string text, string url)
 	{
 		if (string.IsNullOrEmpty(text))
 			return;
@@ -135,12 +143,11 @@ public class UIRichText : MonoBehaviour
 		var lines = text.Split(new char[] { '\n' });
 		for (var i = 0; i < lines.Length - 1; i++)
 		{
-			AddRawText(lines[i]);
+			AddRawText(lines[i], url);
 			AddLine();
 		}
-		AddRawText(lines.Last());
+		AddRawText(lines.Last(), url);
 	}
-
 
 	public UISprite AddSprite(string atlas, string sprite)
 	{
@@ -179,7 +186,7 @@ public class UIRichText : MonoBehaviour
 		}
 	}
 
-	private UILabel CreateLabel()
+	private UILabel CreateLabel(string link)
 	{
 		var item = NGUITools.AddChild(this.gameObject, protoLabel);
 		var c = item.GetComponent<UILabel>();
@@ -189,8 +196,20 @@ public class UIRichText : MonoBehaviour
 		c.width = host.width - Mathf.CeilToInt(m_layout.x);
 		c.maxLineCount = 1;
 		c.rawPivot = UIWidget.Pivot.BottomLeft;
+		if (string.IsNullOrEmpty(link) == false)
+		{
+			c.supportEncoding = true;
+			var collider = c.gameObject.AddComponent<BoxCollider>();
+			collider.isTrigger = true;
+			UIEventListener.Get(item).onClick += go =>
+			{
+				if (this.UrlClicked != null)
+					this.UrlClicked(c, link);
+			};
+		}
 		return c;
 	}
+
 	private UISprite CreateSprite()
 	{
 		var item = NGUITools.AddChild(this.gameObject);
