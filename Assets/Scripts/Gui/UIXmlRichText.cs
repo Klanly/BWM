@@ -23,6 +23,10 @@ using System.Linq;
 ///		<s>...</s> 删除线
 ///		<sup>...<sup> 上标
 ///		<sub>...<sub> 下标
+///	节点颜色：
+///	  适用于所有节点类型
+///	  支持的颜色格式：#RGB, #RRGGBB, #RRGGBBAA, black, blue, clear, cyan, gray, green, magenta, red, white, yellow
+///		<color value="颜色">...</color>
 /// 段落：
 ///	  段前自动插入缩进，并在有必要时插入换行；段后自动插入换行；其中可以嵌套任意节点
 ///	  TODO: p节点的嵌套"<p><p></p></p>"不同于序列"<p></p><p></p>"，应该逐级嵌套缩进
@@ -79,18 +83,37 @@ public class UIXmlRichText : UIRichText
 			case "s":
 			case "sub":
 			case "sup":
-				var widgets = new List<UIWidget>();
-				AddXml(e.Nodes(), widgets);
-				foreach (var w in widgets)
 				{
-					var label = w as UILabel;
-					if (label != null)
+					var widgets = new List<UIWidget>();
+					AddXml(e.Nodes(), widgets);
+					foreach (var w in widgets)
 					{
-						label.supportEncoding = true;
-						label.text = string.Format("[{0}]{1}[/{0}]", e.Name, label.text);
+						var label = w as UILabel;
+						if (label != null)
+						{
+							label.supportEncoding = true;
+							label.text = string.Format("[{0}]{1}[/{0}]", e.Name, label.text);
+						}
+						if (paragraph != null)
+							paragraph.Add(w);
 					}
-					if(paragraph != null)
-						paragraph.Add(w);
+				}
+				break;
+			case "color":
+				{
+					var value = e.Attribute("value").Value;
+					Color color;
+					if (Extensions.ParseColor(out color, value))
+					{
+						var widgets = new List<UIWidget>();
+						AddXml(e.Nodes(), widgets);
+						foreach (var w in widgets)
+							w.color = color;
+					}
+					else
+					{
+						AddXml(e.Nodes(), paragraph);
+					}
 				}
 				break;
 			case "p":
@@ -101,14 +124,16 @@ public class UIXmlRichText : UIRichText
 				AddNewLine();
 				break;
 			case "img":
-				var atlas = e.Attribute("atlas").Value;
-				var sprite = e.Attribute("sprite").Value;
-				if (string.IsNullOrEmpty(atlas) == false && string.IsNullOrEmpty(sprite) == false)
 				{
-					var w = AddSprite(atlas, sprite);
-					if (paragraph != null)
-						paragraph.Add(w);
-					break;
+					var atlas = e.Attribute("atlas").Value;
+					var sprite = e.Attribute("sprite").Value;
+					if (string.IsNullOrEmpty(atlas) == false && string.IsNullOrEmpty(sprite) == false)
+					{
+						var w = AddSprite(atlas, sprite);
+						if (paragraph != null)
+							paragraph.Add(w);
+						break;
+					}
 				}
 				break;
 			default:

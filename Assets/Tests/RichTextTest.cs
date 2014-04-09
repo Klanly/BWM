@@ -11,8 +11,8 @@ public class RichTextTest : MonoBehaviour
 	{
 		var t = test as UIXmlRichText;
 		t.UrlClicked += (sender, url) => Debug.Log(string.Format("{0}, {1}", sender.text, url));
-		t.AddXml("<p>正常文本<sup><b>粗体</b>上标</sup></p>");
-		t.AddXml("<p>正常文本<sub><i>斜体</i>下标</sub></p>");
+		t.AddXml("<color value='red'><p>正常文本<sup><b>粗体</b>上标</sup></p></color>");
+		t.AddXml("<color value='#9932CC'><p>正常文本<sub><i>斜体</i>下标</sub></p></color>");
 		t.AddXml("<p><b><n>粗体</n>\t<i>粗体斜体</i>\t<u>粗体下划线</u></b>\t<s>非粗体的删除线</s></p>");
 		t.AddXml("simple <n>text</n> support<p><n>text</n><p><n>text</n></p></p>");
 		t.AddText("A");
@@ -20,7 +20,11 @@ public class RichTextTest : MonoBehaviour
 		t.AddText("C");
 		t.AddText("D");
 		t.AddXml("<n>\t</n><a href=\"a test\">A TEST</a><br/>");
-		t.AddXml("<p><n>image</n><img atlas=\"Atlases/SkillIcon\" sprite=\"1000\"/><img atlas=\"Atlases/SkillIcon\" sprite=\"1001\"/><img atlas=\"Atlases/SkillIcon\" sprite=\"1002\"/></p>");
+		t.AddXml("<p><color value='black'><n>image</n>" +
+			"<color value='#FF0000FF'><img atlas=\"Atlases/SkillIcon\" sprite=\"1000\"/></color>" +
+			"<color value='#00FF00'><img atlas=\"Atlases/SkillIcon\" sprite=\"1001\"/></color>" +
+			"<color value='#00F'><img atlas=\"Atlases/SkillIcon\" sprite=\"1002\"/></color>" +
+			"</color></p>");
 		t.AddXml("<n>begin1</n><br/><n>end1</n>");
 		t.AddXml("<n>begin2\nend2</n>");
 		t.AddSprite("Atlases/SkillIcon", "1000");
