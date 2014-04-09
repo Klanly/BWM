@@ -353,6 +353,83 @@ public static partial class Extensions
 	}
 	#endregion
 
+	#region Color
+	/// <summary>
+	/// 颜色值解析
+	/// </summary>
+	/// <param name="color"></param>
+	/// <param name="value">支持的格式：#RGB, #RRGGBB, #RRGGBBAA, ColorName</param>
+	/// <returns></returns>
+	public static bool ParseColor(out Color color, string value)
+	{
+		color = Color.white;
+		if (string.IsNullOrEmpty(value))
+			return false;
+		if (value.StartsWith("#"))
+			return Extensions.ParseColorFromRGBA(out color, value.Substring(1));
+		else
+			return Extensions.ParseColorFromName(out color, value);
+	}
+	/// <summary>
+	/// 颜色值解析
+	/// ref: http://www.dreamdu.com/css/css_colors/
+	/// </summary>
+	/// <param name="color"></param>
+	/// <param name="rgba">支持的格式：RGB, RRGGBB, RRGGBBAA</param>
+	/// <returns></returns>
+	public static bool ParseColorFromRGBA(out Color color, string rgba)
+	{
+		color = Color.white;
+		if (string.IsNullOrEmpty(rgba))
+			return false;
+		switch(rgba.Length)
+		{
+			case 3:
+				rgba = new string(new char[] { rgba[0], rgba[0], rgba[1], rgba[1], rgba[2], rgba[2], 'F', 'F' });
+				goto case 8;
+			case 6:
+				rgba += "FF";
+				goto case 8;
+			case 8:
+				uint result;
+				if (uint.TryParse(rgba, System.Globalization.NumberStyles.AllowHexSpecifier, null, out result))
+				{
+					color = NGUIMath.HexToColor(result);
+					return true;
+				}
+				break;
+			default:
+				break;
+		}
+		return false;
+	}
+
+	/// <summary>
+	/// 颜色值解析
+	/// </summary>
+	/// <param name="color"></param>
+	/// <param name="colorName">支持的颜色名：black, blue, clear, cyan, gray, green, magenta, red, white, yellow</param>
+	/// <returns></returns>
+	public static bool ParseColorFromName(out Color color, string colorName)
+	{
+		switch (colorName)
+		{
+			case "black": color = Color.black; return true;
+			case "blue": color = Color.blue; return true;
+			case "clear": color = Color.clear; return true;
+			case "cyan": color = Color.cyan; return true;
+			case "gray": color = Color.gray; return true;
+			case "green": color = Color.green; return true;
+			case "grey": color = Color.grey; return true;
+			case "magenta": color = Color.magenta; return true;
+			case "red": color = Color.red; return true;
+			case "white": color = Color.white; return true;
+			case "yellow": color = Color.yellow; return true;
+			default: color = Color.white; return false;
+		}
+	}
+	#endregion
+
 	#region NGUI
 	/// <summary>
 	/// 得到鼠标点击/悬浮处的URL内容
