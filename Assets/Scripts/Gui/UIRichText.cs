@@ -20,7 +20,12 @@ public class UIRichText : MonoBehaviour
 	/// <summary>
 	/// URL点击事件
 	/// </summary>
-	public event Action<UILabel, string> UrlClicked;
+	public event Action<UIWidget, string> UrlClicked;
+	protected void OnUrlClicked(UIWidget sender, string link)
+	{
+		if (this.UrlClicked != null)
+			this.UrlClicked(sender, link);
+	}
 
 	private UIWidget host;
 
@@ -102,12 +107,12 @@ public class UIRichText : MonoBehaviour
 	/// 添加文本
 	/// 不支持NGUI的BBCode富文本编码！
 	/// </summary>
-	protected void AddRawText(string text, string link, ICollection<UIWidget> paragraph)
+	protected void AddRawText(string text, ICollection<UIWidget> paragraph)
 	{
 		if (string.IsNullOrEmpty(text))
 			return;
 		text = text.Replace("\t", "    ");
-		var c = CreateLabel(link);
+		var c = CreateLabel();
 		var index = 0;
 		while (index < text.Length)
 		{
@@ -119,16 +124,13 @@ public class UIRichText : MonoBehaviour
 				continue;
 			}
 			c.overflowMethod = UILabel.Overflow.ResizeFreely; // 测量结束后，恢复溢出模式
-			if (string.IsNullOrEmpty(link))
-				c.text = text.Substring(index, cut - index);
-			else
-				c.text = string.Format("[u][url={0}]{1}[/url][/u]", link, text.Substring(index, cut - index));
+			c.text = text.Substring(index, cut - index);
 			if (paragraph != null)
 				paragraph.Add(c);
 			Layout(c);
 			if (cut >= text.Length)
 				break;
-			c = CreateLabel(link);
+			c = CreateLabel();
 			index = cut;
 		}
 	}
@@ -140,28 +142,54 @@ public class UIRichText : MonoBehaviour
 	/// <param name="paragraph">本次添加生成的所有<see cref="UILabel"/></param>
 	public void AddText(string text, ICollection<UIWidget> paragraph = null)
 	{
-		AddLink(text, null, paragraph);
-	}
-
-	/// <summary>
-	/// 添加超链接，超链接点击事件为<see cref="UrlClicked"/>
-	/// <paramref name="url"/>为空则退化为普通文本添加，相当于<see cref="AddText"/>
-	/// </summary>
-	/// <param name="text">要添加的文本。'\n'表示换行，'\t'将被替换为"    "</param>
-	/// <param name="url"></param>
-	/// <param name="paragraph">本次添加生成的所有<see cref="UILabel"/></param>
-	public void AddLink(string text, string url, ICollection<UIWidget> paragraph = null)
-	{
 		if (string.IsNullOrEmpty(text))
 			return;
 		text = NGUIText.StripSymbols(text);
 		var lines = text.Split(new char[] { '\n' });
 		for (var i = 0; i < lines.Length - 1; i++)
 		{
-			AddRawText(lines[i], url, paragraph);
+			AddRawText(lines[i], paragraph);
 			AddNewLine();
 		}
-		AddRawText(lines.Last(), url, paragraph);
+		AddRawText(lines.Last(), paragraph);
+	}
+
+	/// <summary>
+	/// 添加超链接，超链接点击事件为<see cref="UrlClicked"/>
+	/// <paramref name="link"/>为空则退化为普通文本添加，相当于<see cref="AddText"/>
+	/// </summary>
+	/// <param name="text">要添加的文本。'\n'表示换行，'\t'将被替换为"    "</param>
+	/// <param name="link"></param>
+	/// <param name="paragraph">本次添加生成的所有<see cref="UILabel"/></param>
+	public void AddLink(string text, string link, ICollection<UIWidget> paragraph = null)
+	{
+		var widgets = new List<UIWidget>();
+		AddText(text, widgets);
+		foreach (var w in widgets)
+		{
+			AttachLink(w, link);
+			if (paragraph != null)
+				paragraph.Add(w);
+		}
+	}
+
+	protected UIWidget AttachLink(UIWidget widget, string link)
+	{
+		var collider = widget.GetOrAddComponent<BoxCollider>();
+		collider.isTrigger = true;
+		widget.ResizeCollider();
+
+		var sender = widget;
+		UIEventListener.Get(widget.gameObject).onClick = go => OnUrlClicked(sender, link);
+
+		var label = widget as UILabel;
+		if (label != null)
+		{
+			label.supportEncoding = true;
+			label.text = string.Format("[u]{0}[/u]", label.text);
+		}
+
+		return widget;
 	}
 
 	/// <summary>
@@ -182,7 +210,7 @@ public class UIRichText : MonoBehaviour
 		return c;
 	}
 
-	protected UILabel CreateLabel(string link)
+	protected UILabel CreateLabel()
 	{
 		var item = NGUITools.AddChild(this.gameObject, protoLabel);
 		var c = item.GetComponent<UILabel>();
@@ -192,17 +220,6 @@ public class UIRichText : MonoBehaviour
 		c.width = host.width - Mathf.CeilToInt(m_layout.x);
 		c.maxLineCount = 1;
 		c.rawPivot = UIWidget.Pivot.BottomLeft;
-		if (string.IsNullOrEmpty(link) == false)
-		{
-			c.supportEncoding = true;
-			var collider = c.gameObject.AddComponent<BoxCollider>();
-			collider.isTrigger = true;
-			UIEventListener.Get(item).onClick += go =>
-			{
-				if (this.UrlClicked != null)
-					this.UrlClicked(c, link);
-			};
-		}
 		return c;
 	}
 

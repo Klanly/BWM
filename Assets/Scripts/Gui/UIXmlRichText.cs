@@ -13,6 +13,7 @@ using System.Linq;
 ///	文字：
 ///		<n>text node</n>
 ///		simple <n>text node</n> supported
+///		<n><b>bold</b> text node</n>
 ///		'\t' -> "    "
 ///		'\n' -> <br />
 ///	文字修饰：
@@ -34,7 +35,7 @@ using System.Linq;
 ///		<p>...</p>
 ///	超链接：
 ///	  url为空时将退化为纯文本节点
-///		<a href="url">text</a> 
+///		<a href="url">...</a> 
 ///	图片：
 ///		<img atlas="atlas path" sprite="sprite name" />
 /// ]]>
@@ -67,7 +68,7 @@ public class UIXmlRichText : UIRichText
 			var t = n as XText;
 			if (t != null)
 			{
-				Add(t.Value, null, paragraph, color);
+				Add(t.Value, paragraph, color);
 				continue;
 			}
 		}
@@ -81,10 +82,20 @@ public class UIXmlRichText : UIRichText
 				base.AddNewLine();
 				break;
 			case "n":
-				Add(e.Value, null, paragraph, color);
+				Add(e.Nodes(), paragraph, color);
 				break;
 			case "a":
-				Add(e.Value, e.Attribute("href").Value, paragraph, color);
+				{
+					var widgets = new List<UIWidget>();
+					var link = e.Attribute("href").Value;
+					Add(e.Nodes(), widgets, color);
+					foreach (var w in widgets)
+					{
+						base.AttachLink(w, link);
+						if (paragraph != null)
+							paragraph.Add(w);
+					}
+				}
 				break;
 			case "b":
 			case "i":
@@ -125,7 +136,7 @@ public class UIXmlRichText : UIRichText
 			case "p":
 				if (base.IsNewLine() == false)
 					base.AddNewLine();
-				Add("\t", null, paragraph, color);
+				Add("\t", paragraph, color);
 				Add(e.Nodes(), paragraph, color);
 				base.AddNewLine();
 				break;
@@ -149,12 +160,12 @@ public class UIXmlRichText : UIRichText
 		}
 	}
 	
-	private void Add(string text, string link, ICollection<UIWidget> paragraph, Color? color)
+	private void Add(string text, ICollection<UIWidget> paragraph, Color? color)
 	{
 		if (color.HasValue)
 		{
 			var widgets = new List<UIWidget>();
-			base.AddLink(text, link, widgets);
+			base.AddText(text, widgets);
 			foreach (var w in widgets)
 			{
 				w.color = color.Value;
@@ -164,7 +175,7 @@ public class UIXmlRichText : UIRichText
 		}
 		else
 		{
-			base.AddLink(text, link, paragraph);
+			base.AddText(text, paragraph);
 		}
 	}
 }
