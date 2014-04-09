@@ -13,6 +13,7 @@ using System.Linq;
 ///	文字：
 ///		<n>text node</n>
 ///		simple <n>text node</n> supported
+///		<n><b>bold</b> text node</n>
 ///		'\t' -> "    "
 ///		'\n' -> <br />
 ///	文字修饰：
@@ -34,7 +35,7 @@ using System.Linq;
 ///		<p>...</p>
 ///	超链接：
 ///	  url为空时将退化为纯文本节点
-///		<a href="url">text</a> 
+///		<a href="url">...</a> 
 ///	图片：
 ///		<img atlas="atlas path" sprite="sprite name" />
 /// ]]>
@@ -81,7 +82,7 @@ public class UIXmlRichText : UIRichText
 				base.AddNewLine();
 				break;
 			case "n":
-				Add(e.Value, paragraph, color);
+				Add(e.Nodes(), paragraph, color);
 				break;
 			case "a":
 				{
