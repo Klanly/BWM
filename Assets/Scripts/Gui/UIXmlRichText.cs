@@ -67,7 +67,7 @@ public class UIXmlRichText : UIRichText
 			var t = n as XText;
 			if (t != null)
 			{
-				Add(t.Value, null, paragraph, color);
+				Add(t.Value, paragraph, color);
 				continue;
 			}
 		}
@@ -81,10 +81,31 @@ public class UIXmlRichText : UIRichText
 				base.AddNewLine();
 				break;
 			case "n":
-				Add(e.Value, null, paragraph, color);
+				Add(e.Value, paragraph, color);
 				break;
 			case "a":
-				Add(e.Value, e.Attribute("href").Value, paragraph, color);
+				{
+					var widgets = new List<UIWidget>();
+					var link = e.Attribute("href").Value;
+					Add(e.Nodes(), widgets, color);
+					foreach (var w in widgets)
+					{
+						w.gameObject.AddComponent<BoxCollider>().isTrigger = true;
+						w.ResizeCollider();
+						var sender = w;
+						UIEventListener.Get(w.gameObject).onClick = go => base.OnUrlClicked(sender, link);
+
+						var label = w as UILabel;
+						if (label != null)
+						{
+							label.supportEncoding = true;
+							label.text = string.Format("[u]{0}[/u]", label.text);
+						}
+
+						if (paragraph != null)
+							paragraph.Add(w);
+					}
+				}
 				break;
 			case "b":
 			case "i":
@@ -125,7 +146,7 @@ public class UIXmlRichText : UIRichText
 			case "p":
 				if (base.IsNewLine() == false)
 					base.AddNewLine();
-				Add("\t", null, paragraph, color);
+				Add("\t", paragraph, color);
 				Add(e.Nodes(), paragraph, color);
 				base.AddNewLine();
 				break;
@@ -149,12 +170,12 @@ public class UIXmlRichText : UIRichText
 		}
 	}
 	
-	private void Add(string text, string link, ICollection<UIWidget> paragraph, Color? color)
+	private void Add(string text, ICollection<UIWidget> paragraph, Color? color)
 	{
 		if (color.HasValue)
 		{
 			var widgets = new List<UIWidget>();
-			base.AddLink(text, link, widgets);
+			base.AddText(text, widgets);
 			foreach (var w in widgets)
 			{
 				w.color = color.Value;
@@ -164,7 +185,7 @@ public class UIXmlRichText : UIRichText
 		}
 		else
 		{
-			base.AddLink(text, link, paragraph);
+			base.AddText(text, paragraph);
 		}
 	}
 }
