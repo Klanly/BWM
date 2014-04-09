@@ -3,7 +3,7 @@ using System.Collections;
 
 public class RichTextTest : MonoBehaviour
 {
-	public UIRichText test;
+	public UIXmlRichText test;
 	public UIWidget testWidget;
 	public UIScrollView scrollView;
 

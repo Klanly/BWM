@@ -25,6 +25,7 @@ using System.Linq;
 ///		<sub>...<sub> 下标
 ///	节点颜色：
 ///	  适用于所有节点类型
+///	  color嵌套时，内节点的值优先
 ///	  支持的颜色格式：#RGB, #RRGGBB, #RRGGBBAA, black, blue, clear, cyan, gray, green, magenta, red, white, yellow
 ///		<color value="颜色">...</color>
 /// 段落：
@@ -42,40 +43,48 @@ public class UIXmlRichText : UIRichText
 {
 	public void AddXml(string text)
 	{
-		AddXml(XDocument.Parse("<root>" + text + "</root>").Root.Nodes(), null);
+		Add(XDocument.Parse("<root>" + text + "</root>").Root.Nodes(), null, null);
+	}
+	public void AddXml(IEnumerable<XNode> nodes)
+	{
+		Add(nodes, null, null);
+	}
+	public void AddXml(XElement e)
+	{
+		Add(e, null, null);
 	}
 
-	public void AddXml(IEnumerable<XNode> nodes, ICollection<UIWidget> paragraph = null)
+	private void Add(IEnumerable<XNode> nodes, ICollection<UIWidget> paragraph, Color? color)
 	{
 		foreach (var n in nodes)
 		{
 			var e = n as XElement;
 			if (e != null)
 			{
-				AddXml(e, paragraph);
+				Add(e, paragraph, color);
 				continue;
 			}
 			var t = n as XText;
 			if (t != null)
 			{
-				AddText(t.Value, paragraph);
+				Add(t.Value, null, paragraph, color);
 				continue;
 			}
 		}
 	}
 
-	public void AddXml(XElement e, ICollection<UIWidget> paragraph = null)
+	private void Add(XElement e, ICollection<UIWidget> paragraph, Color? color)
 	{
 		switch (e.Name.ToString())
 		{
 			case "br":
-				AddNewLine();
+				base.AddNewLine();
 				break;
 			case "n":
-				AddText(e.Value, paragraph);
+				Add(e.Value, null, paragraph, color);
 				break;
 			case "a":
-				AddLink(e.Value, e.Attribute("href").Value, paragraph);
+				Add(e.Value, e.Attribute("href").Value, paragraph, color);
 				break;
 			case "b":
 			case "i":
@@ -85,7 +94,7 @@ public class UIXmlRichText : UIRichText
 			case "sup":
 				{
 					var widgets = new List<UIWidget>();
-					AddXml(e.Nodes(), widgets);
+					Add(e.Nodes(), widgets, color);
 					foreach (var w in widgets)
 					{
 						var label = w as UILabel;
@@ -102,26 +111,23 @@ public class UIXmlRichText : UIRichText
 			case "color":
 				{
 					var value = e.Attribute("value").Value;
-					Color color;
-					if (Extensions.ParseColor(out color, value))
+					Color c;
+					if (Extensions.ParseColor(out c, value))
 					{
-						var widgets = new List<UIWidget>();
-						AddXml(e.Nodes(), widgets);
-						foreach (var w in widgets)
-							w.color = color;
+						Add(e.Nodes(), paragraph, c);
 					}
 					else
 					{
-						AddXml(e.Nodes(), paragraph);
+						Add(e.Nodes(), paragraph, color);
 					}
 				}
 				break;
 			case "p":
-				if (IsNewLine() == false)
-					AddNewLine();
-				AddText("\t", paragraph);
-				AddXml(e.Nodes(), paragraph);
-				AddNewLine();
+				if (base.IsNewLine() == false)
+					base.AddNewLine();
+				Add("\t", null, paragraph, color);
+				Add(e.Nodes(), paragraph, color);
+				base.AddNewLine();
 				break;
 			case "img":
 				{
@@ -129,7 +135,9 @@ public class UIXmlRichText : UIRichText
 					var sprite = e.Attribute("sprite").Value;
 					if (string.IsNullOrEmpty(atlas) == false && string.IsNullOrEmpty(sprite) == false)
 					{
-						var w = AddSprite(atlas, sprite);
+						var w = base.AddSprite(atlas, sprite);
+						if (color.HasValue)
+							w.color = color.Value;
 						if (paragraph != null)
 							paragraph.Add(w);
 						break;
@@ -138,6 +146,25 @@ public class UIXmlRichText : UIRichText
 				break;
 			default:
 				break;
+		}
+	}
+	
+	private void Add(string text, string link, ICollection<UIWidget> paragraph, Color? color)
+	{
+		if (color.HasValue)
+		{
+			var widgets = new List<UIWidget>();
+			base.AddLink(text, link, widgets);
+			foreach (var w in widgets)
+			{
+				w.color = color.Value;
+				if (paragraph != null)
+					paragraph.Add(w);
+			}
+		}
+		else
+		{
+			base.AddLink(text, link, paragraph);
 		}
 	}
 }
