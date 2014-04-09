@@ -51,6 +51,7 @@ public class UIRichText : MonoBehaviour
 	}
 	private void Layout(UIWidget widget)
 	{
+		widget.MakePixelPerfect();
 		widget.name = this.transform.childCount.ToString();
 
 		// 记录行元素，用于可能发生的高度调整
@@ -100,7 +101,7 @@ public class UIRichText : MonoBehaviour
 	/// <summary>
 	/// 添加文本，不支持NGUI的BBCode富文本编码。
 	/// </summary>
-	private void AddRawText(string text, string link)
+	private void AddRawText(string text, string link, IList<UILabel> paragraph)
 	{
 		if (string.IsNullOrEmpty(text))
 			return;
@@ -116,12 +117,12 @@ public class UIRichText : MonoBehaviour
 				c.width = host.width;
 				continue;
 			}
-			c.overflowMethod = UILabel.Overflow.ResizeFreely;
+			c.overflowMethod = UILabel.Overflow.ResizeFreely; // 测量结束后，恢复溢出模式
 			if (string.IsNullOrEmpty(link))
 				c.text = text.Substring(index, cut - index);
 			else
 				c.text = string.Format("[u][url={0}]{1}[/url][/u]", link, text.Substring(index, cut - index));
-			c.MakePixelPerfect();
+			paragraph.Add(c);
 			Layout(c);
 			if (cut >= text.Length)
 				break;
@@ -130,23 +131,25 @@ public class UIRichText : MonoBehaviour
 		}
 	}
 
-	public void AddText(string text)
+	public IEnumerable<UILabel> AddText(string text)
 	{
-		AddLink(text, null);
+		return AddLink(text, null);
 	}
 
-	public void AddLink(string text, string url)
+	public IEnumerable<UILabel> AddLink(string text, string url)
 	{
 		if (string.IsNullOrEmpty(text))
-			return;
+			return Enumerable.Empty<UILabel>();
+		var paragraph = new List<UILabel>();
 		text = NGUIText.StripSymbols(text);
 		var lines = text.Split(new char[] { '\n' });
 		for (var i = 0; i < lines.Length - 1; i++)
 		{
-			AddRawText(lines[i], url);
+			AddRawText(lines[i], url, paragraph);
 			AddLine();
 		}
-		AddRawText(lines.Last(), url);
+		AddRawText(lines.Last(), url, paragraph);
+		return paragraph;
 	}
 
 	public UISprite AddSprite(string atlas, string sprite)
@@ -157,7 +160,6 @@ public class UIRichText : MonoBehaviour
 		var c = CreateSprite();
 		c.atlas = res;
 		c.spriteName = sprite;
-		c.MakePixelPerfect();
 		Layout(c);
 		return c;
 	}
