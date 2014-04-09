@@ -76,6 +76,12 @@ public class UIRichText : MonoBehaviour
 		while (index < text.Length)
 		{
 			var cut = c.WrapLine(text, index);
+			if (cut == index)
+			{
+				AddLine();
+				c.width = host.width;
+				continue;
+			}
 			c.overflowMethod = UILabel.Overflow.ResizeFreely;
 			c.text = text.Substring(index, cut - index);
 			c.MakePixelPerfect();
@@ -145,6 +151,7 @@ public class UIRichText : MonoBehaviour
 		var item = NGUITools.AddChild(this.gameObject, protoLabel);
 		item.name = this.transform.childCount.ToString();
 		var c = item.GetComponent<UILabel>();
+		c.text = string.Empty;
 		c.supportEncoding = false;
 		c.overflowMethod = UILabel.Overflow.ResizeHeight;
 		c.width = host.width - Mathf.CeilToInt(m_layout.x);
