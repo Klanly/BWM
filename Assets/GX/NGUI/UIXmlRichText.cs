@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Xml.Linq;
 using System.Linq;
+using System;
 
 /// <summary>
 /// 基于XML接口的富文本控件
@@ -43,7 +44,14 @@ public class UIXmlRichText : UIRichText
 {
 	public void AddXml(string text)
 	{
-		Add(XDocument.Parse("<root>" + text + "</root>").Root.Nodes(), null, null);
+		try
+		{
+			Add(XDocument.Parse("<root>" + text + "</root>").Root.Nodes(), null, null);
+		}
+		catch (Exception ex)
+		{
+			Debug.LogError("Xml解析报错: " + ex.Message + "\n" + text);
+		}
 	}
 	public void AddXml(IEnumerable<XNode> nodes)
 	{

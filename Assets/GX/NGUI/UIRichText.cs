@@ -100,6 +100,12 @@ public class UIRichText : MonoBehaviour
 	void Start()
 	{
 		host = this.GetComponent<UIWidget>();
+		Clear();
+	}
+
+	public void Clear()
+	{
+		this.transform.DestroyAllChildren();
 		AddNewLine();
 	}
 

@@ -328,6 +328,14 @@ public static partial class Extensions
 			yield return transform.GetChild(i);
 	}
 
+	public static void DestroyAllChildren(this Transform transform)
+	{
+		if (transform == null)
+			return;
+		foreach (Transform t in transform)
+			GameObject.Destroy(t.gameObject);
+	}
+
 	/// <summary>
 	/// 得到节点全路径
 	/// </summary>
