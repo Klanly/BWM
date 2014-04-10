@@ -11,9 +11,7 @@ using System.Linq;
 ///	换行：
 ///		<br />
 ///	文字：
-///		<n>text node</n>
-///		simple <n>text node</n> supported
-///		<n><b>bold</b> text node</n>
+///	  直接输入
 ///		'\t' -> "    "
 ///		'\n' -> <br />
 ///	文字修饰：
@@ -81,9 +79,6 @@ public class UIXmlRichText : UIRichText
 		{
 			case "br":
 				base.AddNewLine();
-				break;
-			case "n":
-				Add(e.Nodes(), paragraph, color);
 				break;
 			case "a":
 				{
