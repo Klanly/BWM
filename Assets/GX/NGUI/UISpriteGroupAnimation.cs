@@ -1,88 +1,59 @@
-﻿//----------------------------------------------
-//            NGUI: Next-Gen UI kit
-// Copyright © 2011-2014 Tasharen Entertainment
-//----------------------------------------------
-
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections.Generic;
 
 /// <summary>
-/// Very simple sprite animation. Attach to a sprite and specify a common prefix such as "idle" and it will cycle through them.
+/// 支持自定义帧的NGUI序列帧动画。
+/// 因<see cref="UISpriteAnimation"/>无法进行非侵入式扩展，故拷贝重写
 /// </summary>
-
 [ExecuteInEditMode]
 [RequireComponent(typeof(UISprite))]
 [AddComponentMenu("NGUI/UI/Sprite Group Animation")]
 public class UISpriteGroupAnimation : MonoBehaviour
 {
-	[HideInInspector]
-	[SerializeField]
-	int mFPS = 30;
-	[HideInInspector]
-	[SerializeField]
-	string mPrefix = "";
-	[HideInInspector]
-	[SerializeField]
-	bool mLoop = true;
+	public int FPS = 30;
+	public bool loop = true;
 
 	UISprite mSprite;
 	float mDelta = 0f;
 	int mIndex = 0;
 	bool mActive = true;
-	List<string> mSpriteNames = new List<string>();
+	public string[] spriteNames;
 
 	/// <summary>
 	/// Number of frames in the animation.
 	/// </summary>
-
-	public int frames { get { return mSpriteNames.Count; } }
+	public int frames { get { return spriteNames == null ? 0 : spriteNames.Length; } }
 
 	/// <summary>
 	/// Animation framerate.
 	/// </summary>
-
-	public int framesPerSecond { get { return mFPS; } set { mFPS = value; } }
-
-	/// <summary>
-	/// Set the name prefix used to filter sprites from the atlas.
-	/// </summary>
-
-	public string namePrefix { get { return mPrefix; } set { if (mPrefix != value) { mPrefix = value; RebuildSpriteList(); } } }
-
-	/// <summary>
-	/// Set the animation to be looping or not
-	/// </summary>
-
-	public bool loop { get { return mLoop; } set { mLoop = value; } }
+	public int framesPerSecond { get { return FPS; } set { FPS = value; } }
 
 	/// <summary>
 	/// Returns is the animation is still playing or not
 	/// </summary>
-
 	public bool isPlaying { get { return mActive; } }
 
-	/// <summary>
-	/// Rebuild the sprite list first thing.
-	/// </summary>
-
-	void Start() { RebuildSpriteList(); }
+	void Start()
+	{
+		mSprite = GetComponent<UISprite>();
+	}
 
 	/// <summary>
 	/// Advance the sprite animation process.
 	/// </summary>
-
 	void Update()
 	{
-		if (mActive && mSpriteNames.Count > 1 && Application.isPlaying && mFPS > 0f)
+		if (mActive && frames > 1 && Application.isPlaying && FPS > 0f)
 		{
 			mDelta += RealTime.deltaTime;
-			float rate = 1f / mFPS;
+			float rate = 1f / FPS;
 
 			if (rate < mDelta)
 			{
 
 				mDelta = (rate > 0f) ? mDelta - rate : 0f;
-				if (++mIndex >= mSpriteNames.Count)
+				if (++mIndex >= spriteNames.Length)
 				{
 					mIndex = 0;
 					mActive = loop;
@@ -90,7 +61,7 @@ public class UISpriteGroupAnimation : MonoBehaviour
 
 				if (mActive)
 				{
-					mSprite.spriteName = mSpriteNames[mIndex];
+					mSprite.spriteName = spriteNames[mIndex];
 					mSprite.MakePixelPerfect();
 				}
 			}
@@ -98,43 +69,16 @@ public class UISpriteGroupAnimation : MonoBehaviour
 	}
 
 	/// <summary>
-	/// Rebuild the sprite list after changing the sprite name.
-	/// </summary>
-
-	void RebuildSpriteList()
-	{
-		if (mSprite == null) mSprite = GetComponent<UISprite>();
-		mSpriteNames.Clear();
-
-		if (mSprite != null && mSprite.atlas != null)
-		{
-			List<UISpriteData> sprites = mSprite.atlas.spriteList;
-
-			for (int i = 0, imax = sprites.Count; i < imax; ++i)
-			{
-				UISpriteData sprite = sprites[i];
-
-				if (string.IsNullOrEmpty(mPrefix) || sprite.name.StartsWith(mPrefix))
-				{
-					mSpriteNames.Add(sprite.name);
-				}
-			}
-			mSpriteNames.Sort();
-		}
-	}
-
-	/// <summary>
 	/// Reset the animation to frame 0 and activate it.
 	/// </summary>
-
 	public void Reset()
 	{
 		mActive = true;
 		mIndex = 0;
 
-		if (mSprite != null && mSpriteNames.Count > 0)
+		if (mSprite != null && frames > 0)
 		{
-			mSprite.spriteName = mSpriteNames[mIndex];
+			mSprite.spriteName = spriteNames[mIndex];
 			mSprite.MakePixelPerfect();
 		}
 	}
