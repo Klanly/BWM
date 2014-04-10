@@ -69,7 +69,10 @@ public class BattleSceneInput : MonoBehaviour
 		}
 
 		// 键盘控制移动
-		mainRole.controlMove.MoveByKeyboard();
+		if (mainRole != null)
+		{
+			mainRole.controlMove.MoveByKeyboard();
+		}
 	}
 
 	/// <summary>
