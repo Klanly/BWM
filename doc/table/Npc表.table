@@ -8,11 +8,11 @@
 		<field column="模型" code="model" type="string">
 			<regex>^[^\\]+$</regex>
 		</field>
-		<field column="类型" code="type" type="uint8">
+		<field column="基本类型" code="type" type="uint8">
 			<regex>^[0-4]$</regex>
 		</field>
 		<field column="访问类型" code="clickType" type="uint8">
-			<regex>^[0-3]$</regex>
+			<regex>^[0-7]$</regex>
 		</field>
 		<field column="血条贴图" code="hpBar" type="array" default="[&quot;BarRed&quot;]">
 			<field type="string" />
@@ -23,7 +23,7 @@
 		<key code="id" />
 		<field column="id" code="id" type="uint32" />
 		<field column="名称" code="name" type="string" />
-		<field column="类型" code="type" type="uint8" />
+		<field column="基本类型" code="type" type="uint8" />
 		<field column="访问类型" code="clickType" type="uint8" />
 		<field column="生命值" code="maxHp" type="int32" />
 	</output>
