@@ -17,8 +17,13 @@ public class NpcDialog : MonoBehaviour
 
 	void Start()
 	{
-		UIEventListener.Get(uiClose.gameObject).onClick = go => this.gameObject.SetActive(false);
+		UIEventListener.Get(uiClose.gameObject).onClick = Close;
 		uiXmlRichText.UrlClicked += OnUrlClicked;
+	}
+
+	public void Close(GameObject sender = null)
+	{
+		this.gameObject.SetActive(false);
 	}
 
 	void OnEnable()
@@ -51,6 +56,7 @@ public class NpcDialog : MonoBehaviour
 					token = this.token,
 					index = index,
 				});
+				Close();
 			}
 		}
 	}
