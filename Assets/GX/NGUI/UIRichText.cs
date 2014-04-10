@@ -106,6 +106,7 @@ public class UIRichText : MonoBehaviour
 	public void Clear()
 	{
 		this.transform.DestroyAllChildren();
+		m_layout = Vector2.zero;
 		AddNewLine();
 	}
 
