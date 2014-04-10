@@ -50,8 +50,15 @@ namespace table
       get { return _type; }
       set { _type = value; }
     }
+    private uint _clickType;
+    [global::ProtoBuf.ProtoMember(6, IsRequired = true, Name=@"clickType", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint clickType
+    {
+      get { return _clickType; }
+      set { _clickType = value; }
+    }
     private readonly global::System.Collections.Generic.List<string> _hpBar = new global::System.Collections.Generic.List<string>();
-    [global::ProtoBuf.ProtoMember(6, Name=@"hpBar", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::ProtoBuf.ProtoMember(7, Name=@"hpBar", DataFormat = global::ProtoBuf.DataFormat.Default)]
     public global::System.Collections.Generic.List<string> hpBar
     {
       get { return _hpBar; }
