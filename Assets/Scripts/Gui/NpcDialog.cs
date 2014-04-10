@@ -13,7 +13,9 @@ public class NpcDialog : MonoBehaviour
 	void Start()
 	{
 		UIEventListener.Get(uiClose.gameObject).onClick = go => this.gameObject.SetActive(false);
+		uiXmlRichText.UrlClicked += OnUrlClicked;
 	}
+
 	void OnEnable()
 	{
 		NGUITools.BringForward(this.gameObject);
@@ -28,6 +30,11 @@ public class NpcDialog : MonoBehaviour
 	{
 		uiXmlRichText.Clear();
 		uiXmlRichText.AddXml(xml);
+	}
+
+	private void OnUrlClicked(UIWidget sender, string url)
+	{
+		Debug.Log(string.Format("OnUrlClicked: {0}, {1}", sender.name, url));
 	}
 
 	[Execute]

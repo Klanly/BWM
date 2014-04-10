@@ -98,14 +98,14 @@ public class PathMove : MonoBehaviour {
 		{
 			move.TargetPosition = dst;
 			path.RemoveAt(0);
-			Debug.Log("发送移动消息:dst:" + move.TargetPosition + ",dir:" + this.transform.rotation);
+			//Debug.Log("发送移动消息:dst:" + move.TargetPosition + ",dir:" + this.transform.rotation);
 		}
 		// 中间节点
 		else
 		{
 			move.TargetPosition = MapNav.GetWorldPosition(path[0]);
 			path.RemoveAt(0);
-			Debug.Log("发送移动消息:dst:" + move.TargetPosition + ",dir:" + this.transform.rotation);
+			//Debug.Log("发送移动消息:dst:" + move.TargetPosition + ",dir:" + this.transform.rotation);
 		}
 	}
 
