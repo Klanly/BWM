@@ -59,26 +59,10 @@ namespace table
 	#endregion
 
 	#region TableNpc
-	public enum NpcType
-	{
-		Npc = 0,
-		/// <summary>
-		/// 普通怪物
-		/// </summary>
-		Monster = 1,
-		/// <summary>
-		/// 精英怪物
-		/// </summary>
-		Elite = 2,
-		Boss = 3,
-		/// <summary>
-		/// 宝箱
-		/// </summary>
-		Box = 4,
-	}
 	partial class TableNpc
 	{
-		public NpcType Type { get { return (NpcType)this.type; } }
+		public NpcBaseType BaseType { get { return (NpcBaseType)this.baseType; } }
+		public NpcClickType ClickType { get { return (NpcClickType)this.clickType; } }
 	}
 	#endregion
 

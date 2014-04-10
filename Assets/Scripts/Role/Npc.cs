@@ -122,15 +122,15 @@ public class Npc : MonoBehaviour
 
 		if (SelectTarget.Selected.entrytype == SceneEntryType.SceneEntryType_Npc && SelectTarget.Selected.entryid == cmd.tempid)
 		{
-			switch (target.TableInfo.Type)
+			switch (target.TableInfo.BaseType)
 			{
-				case table.NpcType.Boss:
+				case NpcBaseType.NpcBaseType_Boss:
 					BattleScene.Instance.Gui<SelectTargetBoss>().SetHp(cmd.hp, cmd.maxhp);
 					break;
-				case table.NpcType.Elite:
+				case NpcBaseType.NpcBaseType_Elite:
 					BattleScene.Instance.Gui<SelectTargetElite>().SetHp(cmd.hp, cmd.maxhp);
 					break;
-				case table.NpcType.Monster:
+				case NpcBaseType.NpcBaseType_Monster:
 					BattleScene.Instance.Gui<SelectTargetMonster>().SetHp(cmd.hp, cmd.maxhp);
 					break;
 				default:
@@ -149,15 +149,15 @@ public class Npc : MonoBehaviour
 
 		if (SelectTarget.Selected.entrytype == SceneEntryType.SceneEntryType_Npc && SelectTarget.Selected.entryid == cmd.tempid)
 		{
-			switch (target.TableInfo.Type)
+			switch (target.TableInfo.BaseType)
 			{
-				case table.NpcType.Boss:
+				case NpcBaseType.NpcBaseType_Boss:
 					BattleScene.Instance.Gui<SelectTargetBoss>().SetHp(cmd.curhp);
 					break;
-				case table.NpcType.Elite:
+				case NpcBaseType.NpcBaseType_Elite:
 					BattleScene.Instance.Gui<SelectTargetElite>().SetHp(cmd.curhp);
 					break;
-				case table.NpcType.Monster:
+				case NpcBaseType.NpcBaseType_Monster:
 					BattleScene.Instance.Gui<SelectTargetMonster>().SetHp(cmd.curhp);
 					break;
 				default:

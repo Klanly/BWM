@@ -102,15 +102,15 @@ public class SelectTarget : MonoBehaviour
 					Npc target;
 					if (Npc.All.TryGetValue(Selected.entryid, out target))
 					{
-						switch (target.TableInfo.Type)
+						switch (target.TableInfo.BaseType)
 						{
-							case table.NpcType.Boss:
+							case NpcBaseType.NpcBaseType_Boss:
 								my.Toggle<SelectTargetBoss>().Present(target);
 								break;
-							case table.NpcType.Elite:
+							case NpcBaseType.NpcBaseType_Elite:
 								my.Toggle<SelectTargetElite>().Present(target);
 								break;
-							case table.NpcType.Monster:
+							case NpcBaseType.NpcBaseType_Monster:
 								my.Toggle<SelectTargetMonster>().Present(target);
 								break;
 							default:

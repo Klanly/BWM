@@ -43,12 +43,12 @@ namespace table
       get { return _model; }
       set { _model = value; }
     }
-    private uint _type;
-    [global::ProtoBuf.ProtoMember(5, IsRequired = true, Name=@"type", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public uint type
+    private uint _baseType;
+    [global::ProtoBuf.ProtoMember(5, IsRequired = true, Name=@"baseType", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint baseType
     {
-      get { return _type; }
-      set { _type = value; }
+      get { return _baseType; }
+      set { _baseType = value; }
     }
     private uint _clickType;
     [global::ProtoBuf.ProtoMember(6, IsRequired = true, Name=@"clickType", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]

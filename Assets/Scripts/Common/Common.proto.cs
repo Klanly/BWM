@@ -231,4 +231,41 @@ namespace Cmd
       SceneEntryType_Item = 2
     }
   
+    [global::ProtoBuf.ProtoContract(Name=@"NpcBaseType")]
+    public enum NpcBaseType
+    {
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"NpcBaseType_None", Value=0)]
+      NpcBaseType_None = 0,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"NpcBaseType_Monster", Value=1)]
+      NpcBaseType_Monster = 1,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"NpcBaseType_Elite", Value=2)]
+      NpcBaseType_Elite = 2,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"NpcBaseType_Boss", Value=3)]
+      NpcBaseType_Boss = 3,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"NpcBaseType_Box", Value=4)]
+      NpcBaseType_Box = 4
+    }
+  
+    [global::ProtoBuf.ProtoContract(Name=@"NpcClickType")]
+    public enum NpcClickType
+    {
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"NpcClickType_None", Value=0)]
+      NpcClickType_None = 0,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"NpcClickType_Homeland", Value=1)]
+      NpcClickType_Homeland = 1,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"NpcClickType_FriendCountry", Value=2)]
+      NpcClickType_FriendCountry = 2,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"NpcClickType_OtherCountry", Value=4)]
+      NpcClickType_OtherCountry = 4
+    }
+  
 }

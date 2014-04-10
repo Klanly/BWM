@@ -8,7 +8,7 @@
 		<field column="模型" code="model" type="string">
 			<regex>^[^\\]+$</regex>
 		</field>
-		<field column="基本类型" code="type" type="uint8">
+		<field column="基本类型" code="baseType" type="uint8">
 			<regex>^[0-4]$</regex>
 		</field>
 		<field column="访问类型" code="clickType" type="uint8">
@@ -23,7 +23,7 @@
 		<key code="id" />
 		<field column="id" code="id" type="uint32" />
 		<field column="名称" code="name" type="string" />
-		<field column="基本类型" code="type" type="uint8" />
+		<field column="基本类型" code="baseType" type="uint8" />
 		<field column="访问类型" code="clickType" type="uint8" />
 		<field column="生命值" code="maxHp" type="int32" />
 	</output>
