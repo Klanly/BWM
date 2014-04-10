@@ -36,7 +36,6 @@ public class NpcDialog : MonoBehaviour
 		Npc npc;
 		if (Npc.All.TryGetValue(cmd.tempid, out npc) == false)
 			yield break;
-		cmd.script = "<a href='lua://g_gmCmd?id=1001&amp;num=5'>来5个id为1001的道具</a>";
 		var my = BattleScene.Instance.Gui<NpcDialog>();
 		my.gameObject.SetActive(true);
 		my.SetTitle(npc.TableInfo.name);
