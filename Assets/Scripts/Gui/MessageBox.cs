@@ -19,17 +19,16 @@ public class MessageBox : MonoBehaviour
 		NGUITools.Destroy(this.gameObject);
 	}
 
-	public static void Show(string message, UIEventListener.VoidDelegate onOK = null, UIEventListener.VoidDelegate onCancel = null)
+	public static MessageBox Show(string message, UIEventListener.VoidDelegate onOK = null, UIEventListener.VoidDelegate onCancel = null)
 	{
-		Show(string.Empty, message, onOK, onCancel);
+		return Show(string.Empty, message, onOK, onCancel);
 	}
 
-	public static void Show(string title, string message, UIEventListener.VoidDelegate onOK = null, UIEventListener.VoidDelegate onCancel = null)
+	public static MessageBox Show(string title, string message, UIEventListener.VoidDelegate onOK = null, UIEventListener.VoidDelegate onCancel = null)
 	{
-		var my = (GameObject.Instantiate(Resources.Load("Prefabs/Gui/MessageBox")) as GameObject).GetComponent<MessageBox>();
-		my.transform.parent = GameObject.Find("UI Root").transform;
-		my.transform.localScale = Vector3.one;
-		my.transform.position = Vector3.zero;
+		var root = GameObject.Find("UI Root");
+		var my = NGUITools.AddChild(root, (GameObject)Resources.Load("Prefabs/Gui/MessageBox")).GetComponent<MessageBox>();
+		my.GetComponent<UIWidget>().SetAnchor(root, 0, 0, 0, 0);
 		NGUITools.BringForward(my.gameObject);
 
 		my.messageBoxTitle.text = title ?? string.Empty;
@@ -39,5 +38,7 @@ public class MessageBox : MonoBehaviour
 		onOK = onOK ?? onCancel;
 		UIEventListener.Get(my.messageBoxOK).onClick = onOK;
 		UIEventListener.Get(my.messageBoxCancel).onClick = onCancel;
+
+		return my;
 	}
 }
