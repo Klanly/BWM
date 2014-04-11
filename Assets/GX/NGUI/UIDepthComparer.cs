@@ -26,7 +26,7 @@ public class UIDepthComparer : Comparer<Transform>
 	/// </summary>
 	/// <param name="go"></param>
 	/// <returns></returns>
-	private Tuple<int, int> GetDepth(Transform go)
+	public static Tuple<int, int> GetDepth(Transform go)
 	{
 		UIPanel panel = null;
 		UIWidget widget = null;

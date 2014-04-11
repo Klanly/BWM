@@ -9,6 +9,11 @@ public class GmCommand : MonoBehaviour
 	public GameObject itemTemplate;
 	public UIScrollView scrollView;
 
+	void OnEnable()
+	{
+		NGUITools.BringForward(this.gameObject);
+	}
+
 	void SetValues(IEnumerable<GMHelpInfo> infos)
 	{
 		var canvas = scrollView.GetComponentInChildren<UIGrid>();

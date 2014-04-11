@@ -15,12 +15,22 @@ public static class Tuple
 public class Tuple<T1>
 {
 	public T1 Item1 { get; set; }
+
+	public override string ToString()
+	{
+		return string.Format("{{{0}}}", Item1);
+	}
 }
 
 public class Tuple<T1, T2>
 {
 	public T1 Item1 { get; set; }
 	public T2 Item2 { get; set; }
+
+	public override string ToString()
+	{
+		return string.Format("{{{0}, {1}}}", Item1, Item2);
+	}
 }
 
 public class Tuple<T1, T2, T3>
@@ -28,6 +38,11 @@ public class Tuple<T1, T2, T3>
 	public T1 Item1 { get; set; }
 	public T2 Item2 { get; set; }
 	public T3 Item3 { get; set; }
+
+	public override string ToString()
+	{
+		return string.Format("{{{0}, {1}, {2}}}", Item1, Item2, Item3);
+	}
 }
 
 public class Tuple<T1, T2, T3, T4>
@@ -36,6 +51,11 @@ public class Tuple<T1, T2, T3, T4>
 	public T2 Item2 { get; set; }
 	public T3 Item3 { get; set; }
 	public T4 Item4 { get; set; }
+
+	public override string ToString()
+	{
+		return string.Format("{{{0}, {1}, {2}, {3}}}", Item1, Item2, Item3, Item4);
+	}
 }
 
 public class Tuple<T1, T2, T3, T4, T5>
@@ -45,6 +65,11 @@ public class Tuple<T1, T2, T3, T4, T5>
 	public T3 Item3 { get; set; }
 	public T4 Item4 { get; set; }
 	public T5 Item5 { get; set; }
+
+	public override string ToString()
+	{
+		return string.Format("{{{0}, {1}, {2}, {3}, {4}}}", Item1, Item2, Item3, Item4, Item5);
+	}
 }
 
 public class Tuple<T1, T2, T3, T4, T5, T6>
@@ -55,6 +80,11 @@ public class Tuple<T1, T2, T3, T4, T5, T6>
 	public T4 Item4 { get; set; }
 	public T5 Item5 { get; set; }
 	public T6 Item6 { get; set; }
+
+	public override string ToString()
+	{
+		return string.Format("{{{0}, {1}, {2}, {3}, {4}, {5}}}", Item1, Item2, Item3, Item4, Item5, Item6);
+	}
 }
 
 public class Tuple<T1, T2, T3, T4, T5, T6, T7>
@@ -66,4 +96,9 @@ public class Tuple<T1, T2, T3, T4, T5, T6, T7>
 	public T5 Item5 { get; set; }
 	public T6 Item6 { get; set; }
 	public T7 Item7 { get; set; }
+
+	public override string ToString()
+	{
+		return string.Format("{{{0}, {1}, {2}, {3}, {4}, {5}, {6}}}", Item1, Item2, Item3, Item4, Item5, Item6, Item7);
+	}
 }
