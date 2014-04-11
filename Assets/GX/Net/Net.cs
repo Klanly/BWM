@@ -54,12 +54,12 @@ public class Net : Singleton<Net>
 
 	void Start()
 	{
-		StartCoroutine(Dispatch());
+		StartCoroutine("Dispatch");
 	}
 
 	IEnumerator Dispatch()
 	{
-		while (true)
+		while (Application.isPlaying)
 		{
 			yield return null;
 			foreach (var message in WebSocket.Receive())
@@ -78,6 +78,7 @@ public class Net : Singleton<Net>
 
 	protected override void OnDestroy()
 	{
+		StopCoroutine("Dispatch");
 		WebSocket.Proxy.Close();
 		WebSocket.Proxy = null;
 

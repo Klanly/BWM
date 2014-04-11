@@ -46,7 +46,11 @@ namespace GX.Net
 			};
 			socket.Closed += (s, e) => Debug.Log("WebSocket Closed");
 			socket.Opened += (s, e) => Debug.Log("WebSocket Opened");
-			socket.Error += (s, e) => Debug.Log("WebSocket Error: " + e.Exception.Message);
+			socket.Error += (s, e) =>
+			{
+				Close();
+				Debug.LogError("WebSocket Error: " + e.Exception.Message);
+			};
 			socket.MessageReceived += (s, e) => Debug.Log("WebSocket MessageReceived: " + e.Message);
 
 			socket.Open();
@@ -54,12 +58,15 @@ namespace GX.Net
 
 		public void Close()
 		{
-			receiveQueue.Clear();
-			if (socket != null)
+			lock (syncRoot)
 			{
-				try { socket.Close(); }
-				catch { }
-				socket = null;
+				receiveQueue.Clear();
+				if (socket != null)
+				{
+					try { socket.Close(); }
+					catch { }
+					socket = null;
+				}
 			}
 		}
 
