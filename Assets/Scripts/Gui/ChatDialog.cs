@@ -5,20 +5,14 @@ using Cmd;
 using System.Collections.Generic;
 using System.Linq;
 
-public class ChatOutput : MonoBehaviour
+public class ChatDialog : MonoBehaviour
 {
 	public const int MaxChatLines = 10;
-	public const int MaxSnapshotLines = 2;
 
 	private readonly List<string> lines = new List<string>();
 
 	public GameObject content;
 	public UILabel contentChatMessage;
-	public UIButton contentToggle;
-
-	public GameObject snapshot;
-	public UILabel snapshotChatMessage;
-	public UIButton snapshotToggle;
 
 	public UIButton gmCommandButton;
 
@@ -26,31 +20,19 @@ public class ChatOutput : MonoBehaviour
 	{
 		lines.Clear();
 		contentChatMessage.text = string.Empty;
-		UIEventListener.Get(contentToggle.gameObject).onClick = Toggle;
-
-		snapshotChatMessage.text = string.Empty;
-		UIEventListener.Get(snapshotToggle.gameObject).onClick = Toggle;
 
 		UIEventListener.Get(gmCommandButton.gameObject).onClick = go => ChatInputBox.SendChat("//help");
-
-		Toggle(true);
 	}
 
-	void Toggle(GameObject sender)
+	void OnEnable()
 	{
-		Toggle(content.activeSelf);
-	}
-
-	public void Toggle(bool toMinichat)
-	{
-		content.SetActive(!toMinichat);
-		snapshot.SetActive(toMinichat);
-
+		BattleScene.Instance.Gui<ChatSnapshot>().gameObject.SetActive(false);
 		NGUITools.BringForward(this.gameObject);
+	}
 
-		var input = BattleScene.Instance.Gui<ChatInputBox>().gameObject;
-		input.SetActive(!toMinichat);
-		NGUITools.BringForward(input);
+	void OnDisable()
+	{
+		BattleScene.Instance.Gui<ChatSnapshot>().gameObject.SetActive(true);
 	}
 
 	[Execute]
@@ -61,7 +43,7 @@ public class ChatOutput : MonoBehaviour
 			Debug.LogWarning("进场景前收到聊天消息： " + cmd.info);
 			return;
 		}
-		var my = BattleScene.Instance.Gui<ChatOutput>();
+		var my = BattleScene.Instance.Gui<ChatDialog>();
 		var chat = FormatChatMessage(cmd);
 		my.lines.Add(chat);
 		if (my.lines.Count > MaxChatLines)
@@ -74,11 +56,12 @@ public class ChatOutput : MonoBehaviour
 			my.contentChatMessage.text += chat;
 		}
 
-		my.snapshotChatMessage.text = string.Join(string.Empty, my.lines.Skip(my.lines.Count - MaxSnapshotLines).ToArray());
+		// 显示缩略聊天消息
+		BattleScene.Instance.Gui<ChatSnapshot>().ShowChat(chat);
 	}
 
 	/// <summary>
-	/// 格式化聊天输出文本
+	/// 格式化聊天输出文本，确保换行结尾
 	/// </summary>
 	/// <remarks>
 	/// NGUI Rich Text Manual

@@ -25,6 +25,11 @@ public class ChatInputBox : MonoBehaviour
 			SendChat();
 	}
 
+	void OnEnable()
+	{
+		chatInput.isSelected = true;
+	}
+
 	/// <summary>
 	/// 设置聊天输入框中的文字
 	/// </summary>
@@ -32,8 +37,7 @@ public class ChatInputBox : MonoBehaviour
 	public void SetText(string text)
 	{
 		chatInput.value = text;
-		BattleScene.Instance.Gui<ChatOutput>().Toggle(false);
-		chatInput.isSelected = true;
+		BattleScene.Instance.Gui<ChatDialog>().gameObject.SetActive(true);
 	}
 
 	private void SendChat()
