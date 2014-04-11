@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 using GX;
+using System.Xml.Linq;
 
 public static partial class Extensions
 {
@@ -243,6 +244,45 @@ public static partial class Extensions
 		}
 		writer.Write(prefix); writer.Write("}");
 	}
+	#endregion
+
+	#region XML
+	/// <summary>
+	/// 获取指定名称的xml属性值
+	/// </summary>
+	/// <param name="e"></param>
+	/// <param name="name"></param>
+	/// <returns>失败返回null</returns>
+	public static string AttributeValue(this XElement e, XName name)
+	{
+		if (e != null)
+		{
+			var a = e.Attribute(name);
+			if (a != null)
+				return a.Value;
+		}
+		return null;
+	}
+	#endregion
+
+	#region String
+	public static bool Parse(this string str, bool defaultValue)
+	{
+		bool ret;
+		return bool.TryParse(str, out ret) ? ret : defaultValue;
+	}
+
+	public static int Parse(this string str, int defaultValue)
+	{
+		int ret;
+		return int.TryParse(str, out ret) ? ret : defaultValue;
+	}
+	public static uint Parse(this string str, uint defaultValue)
+	{
+		uint ret;
+		return uint.TryParse(str, out ret) ? ret : defaultValue;
+	}
+
 	#endregion
 
 	#region Unity

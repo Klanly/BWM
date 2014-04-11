@@ -36,10 +36,18 @@ using System;
 ///		<a href="link">...</a> 
 ///	图片：
 ///		<img atlas="atlas path" sprite="sprite name" />
+/// 序列帧动画：
+///   fps属性可缺省，默认值为30帧
+///   loop属性可缺省，默认为true
+///   frames中的'/'为sprite名称之间的分隔符
+///		<ani fps="30" loop="true" atlas="atlas path" frames="sprite1/sprite2/sprite3" />
+///	  prefix属性可缺省，表示该atlas中所有的图片
+///		<ani fps="30" loop="true" atlas="atlas path" prefix="sprite name" />
 ///		
 /// TODO:
 ///		sub和sup因是排版后才加的修饰，会出现多余的空白，应该在排版前就予以考虑
 ///		p节点的嵌套"<p><p></p></p>"不同于序列"<p></p><p></p>"，应该逐级嵌套缩进
+///		ani多帧图片大小不一致会造成排版错乱
 /// ]]>
 /// </summary>
 public class UIXmlRichText : UIRichText
@@ -95,7 +103,7 @@ public class UIXmlRichText : UIRichText
 				break;
 			case "a":
 				{
-					var link = e.Attribute("href").Value;
+					var link = e.AttributeValue("href");
 					var widgets = new List<UIWidget>();
 					Add(e.Nodes(), widgets, color);
 					foreach (var w in widgets)
@@ -130,7 +138,7 @@ public class UIXmlRichText : UIRichText
 				break;
 			case "color":
 				{
-					var value = e.Attribute("value").Value;
+					var value = e.AttributeValue("value");
 					Color c;
 					if (Extensions.ParseColor(out c, value))
 					{
@@ -151,16 +159,56 @@ public class UIXmlRichText : UIRichText
 				break;
 			case "img":
 				{
-					var atlas = e.Attribute("atlas").Value;
-					var sprite = e.Attribute("sprite").Value;
-					if (string.IsNullOrEmpty(atlas) == false && string.IsNullOrEmpty(sprite) == false)
+					var atlas = e.AttributeValue("atlas");
+					var sprite = e.AttributeValue("sprite");
+					if (string.IsNullOrEmpty(atlas) || string.IsNullOrEmpty(sprite))
+						break;
+					var w = base.AddSprite(atlas, sprite);
+					if (color.HasValue)
+						w.color = color.Value;
+					if (paragraph != null)
+						paragraph.Add(w);
+				}
+				break;
+			case "ani":
+				{
+					var atlas = e.AttributeValue("atlas");
+					if (string.IsNullOrEmpty(atlas))
+						break;
+
+					var fps = e.AttributeValue("fps").Parse(30);
+					var loop = e.AttributeValue("fps").Parse(true);
+
+					var frames = e.AttributeValue("frames");
+					if (string.IsNullOrEmpty(frames) == false)
 					{
-						var w = base.AddSprite(atlas, sprite);
+						var names = frames.Split(new char[] { '/' }, StringSplitOptions.RemoveEmptyEntries);
+						if (names.Length > 0)
+						{
+							var w = base.AddSprite(atlas);
+							var c = w.gameObject.AddComponent<UISpriteGroupAnimation>();
+							c.framesPerSecond = fps;
+							c.loop = loop;
+							c.spriteNames = names;
+							if (color.HasValue)
+								w.color = color.Value;
+							if (paragraph != null)
+								paragraph.Add(w);
+						}
+						break;
+					}
+
+					{
+						var prefix = e.AttributeValue("prefix");
+						var w = base.AddSprite(atlas);
+						var c = w.gameObject.AddComponent<UISpriteAnimation>();
+						c.framesPerSecond = fps;
+						c.loop = loop;
+						c.namePrefix = prefix;
 						if (color.HasValue)
 							w.color = color.Value;
 						if (paragraph != null)
 							paragraph.Add(w);
-						break;
 					}
 				}
 				break;

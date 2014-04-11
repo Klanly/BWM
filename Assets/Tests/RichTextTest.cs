@@ -14,18 +14,20 @@ public class RichTextTest : MonoBehaviour
 		t.AddXml("<n><color value='red'>彩色</color>文字</n>");
 		t.AddXml("<color value='red'><p>正常文本<sup><b>粗体</b>上标</sup></p></color>");
 		t.AddXml("<color value='#9932CC'><p>正常文本<sub><i>斜体</i>下标</sub></p></color>");
-		t.AddXml("<p><a href='图片超链接'>a<img atlas=\"Atlases/SkillIcon\" sprite=\"1000\"/>b</a></p>");
+		t.AddXml("<p><a href='图片超链接'>a<img atlas='Atlases/SkillIcon' sprite='1000'/>b</a></p>");
 		t.AddXml("<p><b><n>粗体</n>\t<i>粗体斜体</i>\t<u>粗体下划线</u></b>\t<s>非粗体的删除线</s></p>");
 		t.AddXml("simple <n>text</n> support<p><n>text</n><p><n>text</n></p></p>");
 		t.AddText("A");
 		t.AddText("B");
 		t.AddText("C");
 		t.AddText("D");
-		t.AddXml("<n>\t</n><a href=\"a test\">A TEST</a><br/>");
+		t.AddXml("<ani fps='1' loop='true' atlas='Atlases/SkillIcon' frames='1000/1001/1002' />");
+		t.AddXml("<ani fps='15' loop='true' atlas='Atlases/SkillIcon' />");
+		t.AddXml("<n>\t</n><a href='a test'>A TEST</a><br/>");
 		t.AddXml("<p><color value='black'><n>image</n>" +
-			"<color value='#FF0000FF'><img atlas=\"Atlases/SkillIcon\" sprite=\"1000\"/></color>" +
-			"<color value='#00FF00'><img atlas=\"Atlases/SkillIcon\" sprite=\"1001\"/></color>" +
-			"<color value='#00F'><img atlas=\"Atlases/SkillIcon\" sprite=\"1002\"/></color>" +
+			"<color value='#FF0000FF'><img atlas='Atlases/SkillIcon' sprite='1000'/></color>" +
+			"<color value='#00FF00'><img atlas='Atlases/SkillIcon' sprite='1001'/></color>" +
+			"<color value='#00F'><img atlas='Atlases/SkillIcon' sprite='1002'/></color>" +
 			"</color></p>");
 		t.AddXml("<n>begin1</n><br/><n>end1</n>");
 		t.AddXml("<n>begin2\nend2</n>");

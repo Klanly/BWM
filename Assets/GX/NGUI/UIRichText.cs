@@ -205,7 +205,7 @@ public class UIRichText : MonoBehaviour
 	/// <param name="atlas">图片atlas的Resouces路径</param>
 	/// <param name="sprite">atlas中的name</param>
 	/// <returns>失败返回null</returns>
-	public UISprite AddSprite(string atlas, string sprite)
+	public UISprite AddSprite(string atlas, string sprite = null)
 	{
 		var res = Resources.Load<UIAtlas>(atlas);
 		if (res == null)
