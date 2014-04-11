@@ -23,6 +23,12 @@ public class ParticleAndAnimation : MonoBehaviour
 			an.wrapMode = WrapMode.Loop;
 			an.Play();
 		}
+		Animator[] animators = GetComponentsInChildren<Animator>(true);
+		foreach(Animator an2 in animators)
+		{
+			an2.CrossFade("end", 0);
+			an2.Play("start");
+		}
 	}
 	
 	[ContextMenu("Play Once")]
@@ -39,6 +45,12 @@ public class ParticleAndAnimation : MonoBehaviour
 		{
 			an.wrapMode = WrapMode.Once;
 			an.Play();
+		}
+		Animator[] animators = GetComponentsInChildren<Animator>(true);
+		foreach(Animator an2 in animators)
+		{
+			an2.CrossFade("end", 0);
+			an2.Play("start");
 		}
 	}
 }
