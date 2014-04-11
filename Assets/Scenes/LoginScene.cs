@@ -21,15 +21,21 @@ public class LoginScene : MonoBehaviour
 		{
 			if (string.IsNullOrEmpty(accountInput.value))
 				return;
-			StartCoroutine(ConnectLoginServer(new AccountTokenVerifyLoginUserCmd_CS()
+			StopCoroutine("ConnectLoginServer");
+			StartCoroutine("ConnectLoginServer", new AccountTokenVerifyLoginUserCmd_CS()
 			{
 				version = (uint)Cmd.Config.Version.Version_Login,
 				gameid = GameID,
 				account = accountInput.value,
 				token = "dev",
 				mid = SystemInfo.deviceUniqueIdentifier,
-			}));
+			});
 		};
+	}
+
+	void OnDestroy()
+	{
+		StopCoroutine("ConnectLoginServer");
 	}
 
 	/// <summary>
@@ -54,8 +60,10 @@ public class LoginScene : MonoBehaviour
 				Net.Instance.Send(cmd);
 				yield break;
 			}
+			Debug.LogWarning("登陆服务器连接错误: " + url);
 		}
 
+		Debug.LogError("无法连接到登陆服务器");
 		MessageBox.Show("无法连接到登陆服务器");
 	}
 
