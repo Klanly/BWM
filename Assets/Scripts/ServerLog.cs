@@ -20,7 +20,7 @@ static class ServerLog
 	}
 
 	[Execute]
-	public static void Execute(ClintLogUrlLoginUserCmd_S cmd)
+	public static void Execute(ClientLogUrlLoginUserCmd_S cmd)
 	{
 		distinct = cmd.distinct ? new HashSet<int>() : null;
 		URL = cmd.logurl;
