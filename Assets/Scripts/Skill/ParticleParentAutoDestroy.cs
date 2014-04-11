@@ -13,14 +13,14 @@ public class ParticleParentAutoDestroy : MonoBehaviour
 			}
 		}
 	}
-
+	
 	// Update is called once per frame
 	void Update()
 	{
-		if (GetComponentsInChildren<ParticleSystem>().Length == 0 && GetComponentsInChildren<Animation>().Length == 0)
+		if (GetComponentsInChildren<ParticleSystem>().Length == 0 && GetComponentsInChildren<Animator>().Length == 0 && GetComponentsInChildren<Animation>().Length == 0)
 			Destroy(gameObject);
 	}
-
+	
 	/// <summary>
 	/// 设置所有子节点的特效和动画的loop为false
 	/// </summary>
@@ -30,7 +30,19 @@ public class ParticleParentAutoDestroy : MonoBehaviour
 		{
 			ps.loop = false;
 		}
-
+		
+		foreach(Animator animator in GetComponentsInChildren<Animator>())
+		{
+			if(animator.GetBool("end"))
+			{
+				animator.SetBool("end", true);
+			}
+			else
+			{
+				Destroy(animator);
+			}
+		}
+		
 		foreach(Animation ani in GetComponentsInChildren<Animation>())
 		{
 			ani.clip.wrapMode = WrapMode.Once;
