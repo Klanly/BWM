@@ -57,6 +57,7 @@ public class BattleSceneInput : MonoBehaviour
 
 	void Update()
 	{
+		// 点击场景控制角色移动
 		if (pressing)
 		{
 			var ray = Camera.main.ScreenPointToRay(new Vector3(UICamera.lastTouchPosition.x, UICamera.lastTouchPosition.y));
@@ -66,12 +67,6 @@ public class BattleSceneInput : MonoBehaviour
 			{
 				mainRole.pathMove.WalkTo(hit.point);
 			}
-		}
-
-		// 键盘控制移动
-		if (mainRole != null)
-		{
-			mainRole.controlMove.MoveByKeyboard();
 		}
 
 		// Esc关闭界面或退出场景
@@ -95,6 +90,10 @@ public class BattleSceneInput : MonoBehaviour
 	/// <param name="key"></param>
 	void OnKey(KeyCode key)
 	{
-
+		// 键盘控制角色移动
+		if (mainRole != null)
+		{
+			mainRole.controlMove.MoveByKeyboard();
+		}
 	}
 }
