@@ -3,11 +3,6 @@ using System.Collections;
 
 public class ParticleAndAnimation : MonoBehaviour
 {
-	void Start () 
-	{	
-		PlayOnce();
-	}
-	
 	[ContextMenu("Play Loop")]
 	public void PlayLoop()
 	{
