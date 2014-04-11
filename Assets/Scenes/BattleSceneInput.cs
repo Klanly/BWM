@@ -73,6 +73,20 @@ public class BattleSceneInput : MonoBehaviour
 		{
 			mainRole.controlMove.MoveByKeyboard();
 		}
+
+		// Esc关闭界面或退出场景
+		if (Input.GetKeyDown(KeyCode.Escape))
+		{
+			var topmost = Closeable.TopMost();
+			if (topmost != null)
+			{
+				topmost.gameObject.SetActive(false);
+			}
+			else
+			{
+				Application.LoadLevel("RoleListScene");
+			}
+		}
 	}
 
 	/// <summary>

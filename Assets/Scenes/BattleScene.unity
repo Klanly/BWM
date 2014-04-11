@@ -85,7 +85,6 @@ GameObject:
   - 114: {fileID: 256517000}
   - 114: {fileID: 256516999}
   - 54: {fileID: 256516998}
-  - 114: {fileID: 256517001}
   - 114: {fileID: 256517003}
   - 114: {fileID: 256517002}
   - 114: {fileID: 256517004}
@@ -184,18 +183,6 @@ MonoBehaviour:
   manualHeight: 640
   minimumHeight: 320
   maximumHeight: 1536
---- !u!114 &256517001
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 256516996}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ea5b03183f4ddda49abb1772ad9fd055, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  lastSceneName: RoleListScene
 --- !u!114 &256517002
 MonoBehaviour:
   m_ObjectHideFlags: 0
