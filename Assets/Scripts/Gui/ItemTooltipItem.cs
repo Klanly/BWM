@@ -6,7 +6,6 @@ using System.Text;
 public class ItemTooltipItem : MonoBehaviour
 {
 	public UILabel uiName;
-	public UIButton uiClose;
 	public UIButton uiDelete;
 
 	public UILabel uiProperty;
@@ -24,7 +23,6 @@ public class ItemTooltipItem : MonoBehaviour
 	}
 	void Start()
 	{
-		UIEventListener.Get(uiClose.gameObject).onClick = go => this.gameObject.SetActive(false);
 		UIEventListener.Get(uiDelete.gameObject).onClick = go =>
 		{
 			Net.Instance.Send(new RemoveItemItemUserCmd_CS() { thisid = ServerInfo.thisid });

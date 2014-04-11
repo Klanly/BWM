@@ -8,7 +8,6 @@ public class NpcDialog : MonoBehaviour
 	public const string UriSchemeIndex = "index://";
 
 	public UILabel uiTitle;
-	public UIButton uiClose;
 	public UIScrollView uiScrollView;
 	public UIXmlRichText uiXmlRichText;
 
@@ -17,13 +16,7 @@ public class NpcDialog : MonoBehaviour
 
 	void Start()
 	{
-		UIEventListener.Get(uiClose.gameObject).onClick = Close;
 		uiXmlRichText.UrlClicked += OnUrlClicked;
-	}
-
-	public void Close(GameObject sender = null)
-	{
-		this.gameObject.SetActive(false);
 	}
 
 	void OnEnable()
@@ -56,7 +49,7 @@ public class NpcDialog : MonoBehaviour
 					token = this.token,
 					index = index,
 				});
-				Close();
+				this.GetComponent<Closeable>().Close();
 			}
 		}
 	}

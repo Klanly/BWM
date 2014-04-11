@@ -853,6 +853,7 @@ GameObject:
   - 114: {fileID: 11400128}
   - 65: {fileID: 6500016}
   - 114: {fileID: 11400138}
+  - 114: {fileID: 11400166}
   m_Layer: 13
   m_Name: SkillInfo
   m_TagString: Untagged
@@ -4316,7 +4317,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9369490ef06df31468618771d8d66690, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  uiClose: {fileID: 11400110}
   uiSkillFireThumbs:
   - {fileID: 11400026}
   - {fileID: 11400020}
@@ -4793,6 +4793,18 @@ MonoBehaviour:
   rightType: 1
   bottomType: 1
   topType: 1
+--- !u!114 &11400166
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100104}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa7fa03aa64ee7d4fb73148d370f293f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  closeButton: {fileID: 11400110}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

@@ -248,6 +248,7 @@ GameObject:
   - 114: {fileID: 11400002}
   - 114: {fileID: 11400004}
   - 65: {fileID: 6500010}
+  - 114: {fileID: 11400006}
   m_Layer: 13
   m_Name: RoleInfo
   m_TagString: Untagged
@@ -961,7 +962,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07c32d7d30ffd3748bf3160ff39c426e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  closeButton: {fileID: 11400252}
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -998,6 +998,18 @@ MonoBehaviour:
   hideIfOffScreen: 0
   keepAspectRatio: 0
   aspectRatio: 1.5
+--- !u!114 &11400006
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100098}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa7fa03aa64ee7d4fb73148d370f293f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  closeButton: {fileID: 11400252}
 --- !u!114 &11400044
 MonoBehaviour:
   m_ObjectHideFlags: 1

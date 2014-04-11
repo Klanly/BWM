@@ -8,13 +8,6 @@ public class GmCommand : MonoBehaviour
 {
 	public GameObject itemTemplate;
 	public UIScrollView scrollView;
-	public GameObject closeButton;
-
-	void Start()
-	{
-		UIEventListener.Get(closeButton).onClick = go => this.gameObject.SetActive(false);
-	}
-
 
 	void SetValues(IEnumerable<GMHelpInfo> infos)
 	{
@@ -40,8 +33,6 @@ public class GmCommand : MonoBehaviour
 		canvas.gameObject.SetActive(true);
 		canvas.Reposition();
 		scrollView.ResetPosition();
-
-		NGUITools.BringForward(closeButton.gameObject);
 	}
 
 	[Execute]

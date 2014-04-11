@@ -142,6 +142,7 @@ GameObject:
   - 4: {fileID: 400012}
   - 114: {fileID: 11400010}
   - 114: {fileID: 11400022}
+  - 114: {fileID: 11400024}
   m_Layer: 13
   m_Name: ItemTooltipItem
   m_TagString: Untagged
@@ -825,10 +826,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uiName: {fileID: 11400000}
-  uiClose: {fileID: 11400018}
   uiDelete: {fileID: 11400014}
   uiProperty: {fileID: 11400004}
   uiMessage: {fileID: 11400002}
+--- !u!114 &11400024
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100016}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa7fa03aa64ee7d4fb73148d370f293f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  closeButton: {fileID: 11400018}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

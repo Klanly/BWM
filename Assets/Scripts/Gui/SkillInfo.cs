@@ -5,7 +5,6 @@ using Cmd;
 
 public class SkillInfo : MonoBehaviour
 {
-	public UIButton uiClose;
 	public UIButton[] uiSkillFireThumbs;
 	public UIButton uiSkillFireOK;
 	private SkillInfoItem[] items;
@@ -20,8 +19,6 @@ public class SkillInfo : MonoBehaviour
 
 	void Start()
 	{
-		UIEventListener.Get(uiClose.gameObject).onClick = go => this.gameObject.SetActive(false);
-
 		// 技能格子初始化
 		var grid = this.transform.FindChild("SkillBar");
 		items = new SkillInfoItem[grid.childCount];
