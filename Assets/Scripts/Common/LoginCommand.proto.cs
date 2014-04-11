@@ -40,8 +40,8 @@ namespace Cmd
       [global::ProtoBuf.ProtoEnum(Name=@"UserLoginTokenLoginUserCmd_C", Value=7)]
       UserLoginTokenLoginUserCmd_C = 7,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"ClintLogUrlLoginUserCmd_S", Value=8)]
-      ClintLogUrlLoginUserCmd_S = 8
+      [global::ProtoBuf.ProtoEnum(Name=@"ClientLogUrlLoginUserCmd_S", Value=8)]
+      ClientLogUrlLoginUserCmd_S = 8
     }
   
     private global::ProtoBuf.IExtension extensionObject;
@@ -402,10 +402,10 @@ namespace Cmd
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"ClintLogUrlLoginUserCmd_S")]
-  public partial class ClintLogUrlLoginUserCmd_S : global::ProtoBuf.IExtensible
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"ClientLogUrlLoginUserCmd_S")]
+  public partial class ClientLogUrlLoginUserCmd_S : global::ProtoBuf.IExtensible
   {
-    public ClintLogUrlLoginUserCmd_S() {}
+    public ClientLogUrlLoginUserCmd_S() {}
     
     private string _loglevel;
     [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"loglevel", DataFormat = global::ProtoBuf.DataFormat.Default)]
