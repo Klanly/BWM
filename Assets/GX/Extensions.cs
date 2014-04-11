@@ -271,7 +271,6 @@ public static partial class Extensions
 		bool ret;
 		return bool.TryParse(str, out ret) ? ret : defaultValue;
 	}
-
 	public static int Parse(this string str, int defaultValue)
 	{
 		int ret;
@@ -282,7 +281,16 @@ public static partial class Extensions
 		uint ret;
 		return uint.TryParse(str, out ret) ? ret : defaultValue;
 	}
-
+	public static ulong Parse(this string str, ulong defaultValue)
+	{
+		ulong ret;
+		return ulong.TryParse(str, out ret) ? ret : defaultValue;
+	}
+	public static float Parse(this string str, float defaultValue)
+	{
+		float ret;
+		return float.TryParse(str, out ret) ? ret : defaultValue;
+	}
 	#endregion
 
 	#region Unity
