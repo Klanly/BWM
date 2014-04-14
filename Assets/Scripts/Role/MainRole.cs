@@ -62,6 +62,7 @@ public class MainRole : MonoBehaviour, INotifyPropertyChanged
 	void Start()
 	{
 		Instance = this;
+		BattleScene.Instance.Gui<Minimap>().Setup();
 	}
 
 	void OnDestroy()
