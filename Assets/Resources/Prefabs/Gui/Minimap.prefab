@@ -562,7 +562,7 @@ MonoBehaviour:
     height: 1
   mTexture: {fileID: 0}
   mMat: {fileID: 2100000, guid: ee47faab4d1bc19408f13e2663baded5, type: 2}
-  mShader: {fileID: 4800000, guid: e75727d9555d9d14ca51d91908c681bc, type: 3}
+  mShader: {fileID: 4800000, guid: 0be44cebe3d199d4984d7c54f2fe5ea8, type: 3}
 --- !u!114 &11400014
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -574,7 +574,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d56afda051450841b476083c120bf21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  map: {fileID: 11400012}
+  mapTexture: {fileID: 11400012}
 --- !u!114 &11400016
 MonoBehaviour:
   m_ObjectHideFlags: 1
