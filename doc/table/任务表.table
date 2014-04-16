@@ -1,14 +1,19 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <table>
-	<output type="protobuf" code="TableQuest" file="任务表.xlsx" sheet="Sheet1">
-		<key code="id" />
-		<field column="id" code="id" type="uint32" />
-		<field column="名称" code="name" type="string" />
-		<field column="描述" code="desc" type="string" />
-	</output>
 	<output type="json-go" code="TableQuest" file="任务表.xlsx" sheet="Sheet1">
 		<key code="id" />
 		<field column="id" code="id" type="uint32" />
 		<field column="名称" code="name" type="string" />
+		<field column="任务类型" code="type" type="uint8">
+			<regex>^[0-3]$</regex>
+		</field>
+		<field column="前置任务" code="preQuest" type="uint32" />
+		<field column="最低等级" code="minLevel" type="uint32" />
+		<field column="最高等级" code="maxLevel" type="uint32" />
+		<field column="接npc" code="beginNpc" type="uint32" />
+		<field column="交npc" code="endNpc" type="uint32" />
+		<field column="任务计数" code="step" type="uint32" />
+		<field column="经验奖励" code="exp" type="uint32" />
+		<field column="道具奖励" code="items" type="string" />
 	</output>
 </table>
