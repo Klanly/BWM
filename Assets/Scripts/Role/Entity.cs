@@ -58,7 +58,7 @@ public class Entity : MonoBehaviour
 	/// 当前可接受的阻挡类型
 	/// </summary>
 	/// <value>The type of the tile.</value>
-	public MapNav.TileType TileType	{ get { return MapNav.TileType.Walk; } }
+	public TileType TileType	{ get { return TileType.TileType_Walk; } }
 
 
 }

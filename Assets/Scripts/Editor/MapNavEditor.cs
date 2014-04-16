@@ -4,6 +4,7 @@ using System.Collections;
 using System.IO;
 using System.Linq;
 using System.Collections.Generic;
+using Cmd;
 
 [CustomEditor(typeof(MapNav))]
 public class MapNavEditor : Editor
@@ -26,7 +27,7 @@ public class MapNavEditor : Editor
 	/// <summary>
 	/// 当前修改的阻挡标志
 	/// </summary>
-	private MapNav.TileType curTileType = MapNav.TileType.Walk;
+	private TileType curTileType = TileType.TileType_Walk;
 	/// <summary>
 	/// 当前操作类型
 	/// </summary>
@@ -138,7 +139,7 @@ public class MapNavEditor : Editor
 			this.curProcessType = (ProcessType)EditorGUILayout.EnumPopup("当前操作类型", this.curProcessType);
 			if (this.curProcessType == ProcessType.Set || this.curProcessType == ProcessType.Clear)
 			{
-				this.curTileType = (MapNav.TileType)EditorGUILayout.EnumPopup("当前格子类型", this.curTileType);
+				this.curTileType = (TileType)EditorGUILayout.EnumPopup("当前格子类型", this.curTileType);
 				this.radius = EditorGUILayout.IntSlider("操作直径", this.radius, 1, 16);
 			}
 			else if (this.curProcessType == ProcessType.FindPath)
@@ -251,9 +252,9 @@ public class MapNavEditor : Editor
 							vecEnd = hitPoint;
 						bSampleStart = !bSampleStart;
 
-						Cmd.Pos gridEnd = mapNav.GetNearestValidGrid(mapNav.GetGrid(vecStart), mapNav.GetGrid(vecEnd), MapNav.TileType.Walk);
+						Cmd.Pos gridEnd = mapNav.GetNearestValidGrid(mapNav.GetGrid(vecStart), mapNav.GetGrid(vecEnd), TileType.TileType_Walk);
 						if(gridEnd != null)
-							path = mapNav.GetPath(mapNav.GetGrid(vecStart), gridEnd, MapNav.TileType.Walk);
+							path = mapNav.GetPath(mapNav.GetGrid(vecStart), gridEnd, TileType.TileType_Walk);
 						else
 							path.Clear();
 					}

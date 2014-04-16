@@ -1,28 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using Cmd;
 
 [ExecuteInEditMode]
 public class MapNav : MonoBehaviour
 {
-	/// <summary>
-	/// 格子类型，0表示都不能走，每位0表示不可走，1表示可以走
-	/// TODO: move to common, server and client use a same code.
-	/// </summary>
-	[System.Flags]
-	public enum TileType
-	{
-		None = 0,
-		/// <summary>
-		/// 可以行走
-		/// </summary>
-		Walk = 0x1,
-		/// <summary>
-		/// 可以游泳
-		/// </summary>
-		Water = 0x2,
-	}
-
 	#region SerializedProperty
 	public float gridWidth = 0.25f;
 	public int gridXNum = 128;
@@ -51,7 +34,7 @@ public class MapNav : MonoBehaviour
 		{
 			var index = z * gridXNum + x;
 			if (grids == null || index < 0 || index > grids.Length)
-				return TileType.None;
+				return TileType.TileType_None;
 			return grids[index];
 		}
 		set
@@ -140,7 +123,7 @@ public class MapNav : MonoBehaviour
 			for (int x = 0; x < gridXNum; ++x)
 			{
 				var flag = this[x, z];
-				if (flag == TileType.None)
+				if (flag == TileType.TileType_None)
 					Gizmos.color = new Color(0.5f, 0.0f, 0.0f, 0.5f);
 				else
 					Gizmos.color = new Color(0.5f, 0.5f, 0.5f, 0.5f);
@@ -149,7 +132,7 @@ public class MapNav : MonoBehaviour
 				Vector3 size = new Vector3(gridWidth, 0, gridHeight);
 				Gizmos.DrawCube(center, size);
 
-				if ((flag & TileType.Walk) != 0)
+				if ((flag & TileType.TileType_Walk) != 0)
 				{
 					Gizmos.color = tileColor[0];
 					center = new Vector3(x * gridWidth + gridWidth * 0.5f - gridWidth * 0.25f, y, z * gridHeight + gridHeight * 0.5f - gridHeight * 0.25f);
@@ -376,7 +359,7 @@ public class MapNav : MonoBehaviour
 	/// </summary>
 	/// <returns>The path ex.</returns>
 	/// <param name="srcPath">Source path.</param>
-	private List<Cmd.Pos> LinePathEx(List<Cmd.Pos> srcPath, TileType validType = TileType.Walk)
+	private List<Cmd.Pos> LinePathEx(List<Cmd.Pos> srcPath, TileType validType = TileType.TileType_Walk)
 	{
 		List<Cmd.Pos> dstPath = srcPath;
 		dstPath.Reverse();
@@ -433,7 +416,7 @@ public class MapNav : MonoBehaviour
 	/// <returns><c>true</c>, if path clear was lined, <c>false</c> otherwise.</returns>
 	/// <param name="vecSrc">Vec source.</param>
 	/// <param name="vecDst">Vec dst.</param>
-	public bool LinePathClear(Vector3 vecSrc, Vector3 vecDst, TileType validType = TileType.Walk)
+	public bool LinePathClear(Vector3 vecSrc, Vector3 vecDst, TileType validType = TileType.TileType_Walk)
 	{
 		Cmd.Pos dstPt = GetGrid(vecDst);
 
@@ -467,7 +450,7 @@ public class MapNav : MonoBehaviour
 		return true;
 	}
 
-	public bool LinePathClear(Cmd.Pos gridSrc, Cmd.Pos gridDst, TileType validType = TileType.Walk)
+	public bool LinePathClear(Cmd.Pos gridSrc, Cmd.Pos gridDst, TileType validType = TileType.TileType_Walk)
 	{
 		return LinePathClear(GetWorldPosition(gridSrc), GetWorldPosition(gridDst), validType);
 	}
@@ -536,7 +519,7 @@ public class MapNav : MonoBehaviour
 	/// <param name="vecSrc">Vec source.</param>
 	/// <param name="vecDst">Vec dst.</param>
 	/// <param name="validType">Valid type.</param>
-	public bool IsPathReached(Vector3 vecSrc, Vector3 vecOriginDst ,out Vector3 vecDst, TileType validType = TileType.Walk)
+	public bool IsPathReached(Vector3 vecSrc, Vector3 vecOriginDst ,out Vector3 vecDst, TileType validType = TileType.TileType_Walk)
 	{
 		Cmd.Pos ptSrc = GetGrid(vecSrc);
 		Cmd.Pos ptDst = GetGrid(vecOriginDst);

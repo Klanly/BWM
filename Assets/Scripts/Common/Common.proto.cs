@@ -268,4 +268,18 @@ namespace Cmd
       NpcClickType_OtherCountry = 4
     }
   
+    [global::ProtoBuf.ProtoContract(Name=@"TileType")]
+    public enum TileType
+    {
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"TileType_None", Value=0)]
+      TileType_None = 0,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"TileType_Walk", Value=1)]
+      TileType_Walk = 1,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"TileType_Water", Value=2)]
+      TileType_Water = 2
+    }
+  
 }
