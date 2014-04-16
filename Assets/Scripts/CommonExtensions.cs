@@ -197,6 +197,24 @@ namespace Cmd
 		}
 	}
 	#endregion
+
+	#region Quest
+	partial class SaveQuest
+	{
+		public override string ToString()
+		{
+			return string.Format("#{0}, {1}, {2}", questid, operate, state);
+		}
+	}
+
+	partial class ClientQuest
+	{
+		public override string ToString()
+		{
+			return squest.ToString() + ": " + desc;
+		}
+	}
+	#endregion
 }
 
 static class CommonExtensions
