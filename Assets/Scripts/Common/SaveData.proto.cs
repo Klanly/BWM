@@ -217,19 +217,19 @@ namespace Cmd
       get { return _questid; }
       set { _questid = value; }
     }
-    private uint _operate;
-    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"operate", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public uint operate
+    private uint _stepcur;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"stepcur", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint stepcur
     {
-      get { return _operate; }
-      set { _operate = value; }
+      get { return _stepcur; }
+      set { _stepcur = value; }
     }
-    private uint _state;
-    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"state", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public uint state
+    private uint _stepall;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"stepall", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint stepall
     {
-      get { return _state; }
-      set { _state = value; }
+      get { return _stepall; }
+      set { _stepall = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)

@@ -203,7 +203,7 @@ namespace Cmd
 	{
 		public override string ToString()
 		{
-			return string.Format("#{0}, {1}, {2}", questid, operate, state);
+			return string.Format("#{0}, {1}, {2}", questid, stepcur, stepall);
 		}
 	}
 
@@ -215,7 +215,7 @@ namespace Cmd
 			{
 				try
 				{
-					return string.Format(desc, squest.questid, squest.operate, squest.state);
+					return string.Format(desc, squest.questid, squest.stepcur, squest.stepall);
 				}
 				catch(System.Exception ex)
 				{
