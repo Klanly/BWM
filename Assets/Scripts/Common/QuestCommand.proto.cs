@@ -21,14 +21,17 @@ namespace Cmd
     public enum Param
     {
             
-      [global::ProtoBuf.ProtoEnum(Name=@"AddQuestQuestUserCmd_S", Value=1)]
-      AddQuestQuestUserCmd_S = 1,
+      [global::ProtoBuf.ProtoEnum(Name=@"AddClintQuestQuestUserCmd_S", Value=1)]
+      AddClintQuestQuestUserCmd_S = 1,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"AddQuestListQuestUserCmd_S", Value=2)]
-      AddQuestListQuestUserCmd_S = 2,
+      [global::ProtoBuf.ProtoEnum(Name=@"AddClientQuestListQuestUserCmd_S", Value=2)]
+      AddClientQuestListQuestUserCmd_S = 2,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"RemoveQuestQuestUserCmd_CS", Value=3)]
-      RemoveQuestQuestUserCmd_CS = 3
+      [global::ProtoBuf.ProtoEnum(Name=@"RefreshQeustStateQuestUserCmd_S", Value=3)]
+      RefreshQeustStateQuestUserCmd_S = 3,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"RemoveQuestQuestUserCmd_CS", Value=4)]
+      RemoveQuestQuestUserCmd_CS = 4
     }
   
     private global::ProtoBuf.IExtension extensionObject;
@@ -36,14 +39,38 @@ namespace Cmd
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"AddQuestQuestUserCmd_S")]
-  public partial class AddQuestQuestUserCmd_S : global::ProtoBuf.IExtensible
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"ClientQuest")]
+  public partial class ClientQuest : global::ProtoBuf.IExtensible
   {
-    public AddQuestQuestUserCmd_S() {}
+    public ClientQuest() {}
     
-    private Cmd.SaveQuest _quest;
+    private Cmd.SaveQuest _squest;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"squest", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public Cmd.SaveQuest squest
+    {
+      get { return _squest; }
+      set { _squest = value; }
+    }
+    private string _desc;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"desc", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public string desc
+    {
+      get { return _desc; }
+      set { _desc = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"AddClintQuestQuestUserCmd_S")]
+  public partial class AddClintQuestQuestUserCmd_S : global::ProtoBuf.IExtensible
+  {
+    public AddClintQuestQuestUserCmd_S() {}
+    
+    private Cmd.ClientQuest _quest;
     [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"quest", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public Cmd.SaveQuest quest
+    public Cmd.ClientQuest quest
     {
       get { return _quest; }
       set { _quest = value; }
@@ -53,18 +80,35 @@ namespace Cmd
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"AddQuestListQuestUserCmd_S")]
-  public partial class AddQuestListQuestUserCmd_S : global::ProtoBuf.IExtensible
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"AddClientQuestListQuestUserCmd_S")]
+  public partial class AddClientQuestListQuestUserCmd_S : global::ProtoBuf.IExtensible
   {
-    public AddQuestListQuestUserCmd_S() {}
+    public AddClientQuestListQuestUserCmd_S() {}
     
-    private readonly global::System.Collections.Generic.List<Cmd.SaveQuest> _questlist = new global::System.Collections.Generic.List<Cmd.SaveQuest>();
+    private readonly global::System.Collections.Generic.List<Cmd.ClientQuest> _questlist = new global::System.Collections.Generic.List<Cmd.ClientQuest>();
     [global::ProtoBuf.ProtoMember(1, Name=@"questlist", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public global::System.Collections.Generic.List<Cmd.SaveQuest> questlist
+    public global::System.Collections.Generic.List<Cmd.ClientQuest> questlist
     {
       get { return _questlist; }
     }
   
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"RefreshQeustStateQuestUserCmd_S")]
+  public partial class RefreshQeustStateQuestUserCmd_S : global::ProtoBuf.IExtensible
+  {
+    public RefreshQeustStateQuestUserCmd_S() {}
+    
+    private Cmd.SaveQuest _squest;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"squest", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public Cmd.SaveQuest squest
+    {
+      get { return _squest; }
+      set { _squest = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
