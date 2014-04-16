@@ -46,8 +46,8 @@ public class Minimap : MonoBehaviour
 
 			var material = mapTexture.material;
 			material.mainTextureOffset = new Vector2(
-				(pos.x - Extent / mapTexture.mainTexture.width * 0.5f) / size.x,
-				(pos.y - Extent / mapTexture.mainTexture.height * 0.5f) / size.y);
+				Mathf.Clamp((pos.x - Extent / mapTexture.mainTexture.width * 0.5f) / size.x, 0, 1 - Extent / mapTexture.mainTexture.width),
+				Mathf.Clamp((pos.y - Extent / mapTexture.mainTexture.height * 0.5f) / size.y, 0, 1 - Extent / mapTexture.mainTexture.height));
 			material.mainTextureScale = new Vector2(
 				Extent / mapTexture.mainTexture.width,
 				Extent / mapTexture.mainTexture.height);
