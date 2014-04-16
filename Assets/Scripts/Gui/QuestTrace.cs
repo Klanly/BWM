@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Linq;
 
-public class QuestTrack : MonoBehaviour
+public class QuestTrace : MonoBehaviour
 {
 	public UIXmlRichText uiXmlRichText;
 	public GameObject uiBackground;
