@@ -5,45 +5,59 @@ public class Minimap : MonoBehaviour
 {
 	public UITexture mapTexture;
 
-	private float m_extent = 512;
+	private float m_extent = 1024;
 	public float Extent
 	{
 		get { return m_extent; }
-		set { m_extent = value; Layout(); }
+		set { m_extent = value; Layout = true; }
 	}
+
+	public bool Layout { get; set; }
 
 	public void Setup()
 	{
 		if (MainRole.Instance != null)
-			MainRole.Instance.entity.PositionChanged += Layout;
-	}
-
-	void Start()
-	{
-		
+			MainRole.Instance.entity.PositionChanged += OnMainRolePositionChanged;
+		OnMainRolePositionChanged(MainRole.Instance.entity);		
 	}
 
 	void OnDestroy()
 	{
 		if (MainRole.Instance != null)
-			MainRole.Instance.entity.PositionChanged -= Layout;
+			MainRole.Instance.entity.PositionChanged -= OnMainRolePositionChanged;
 	}
 
-	private void Layout(Entity obj = null)
+	void OnMainRolePositionChanged(Entity sender)
 	{
-		if (mapTexture.mainTexture == null)
-			mapTexture.mainTexture = BattleScene.Instance.MapNav.transform.parent.GetComponentInChildren<MapTexture>().texture;
-		var mapNav = BattleScene.Instance.MapNav;
-		var size = new Vector2(mapNav.gridWidth * mapNav.gridXNum, mapNav.gridHeight * mapNav.gridZNum);
+		Layout = true;
+	}
 
-		var pos = MainRole.Instance.entity.Position;
+	void Update()
+	{
+		if (Layout)
+		{
+			Layout = false;
+			if (mapTexture.mainTexture == null)
+				mapTexture.mainTexture = BattleScene.Instance.MapNav.transform.parent.GetComponentInChildren<MapTexture>().texture;
+			var mapNav = BattleScene.Instance.MapNav;
+			var size = new Vector2(mapNav.gridWidth * mapNav.gridXNum, mapNav.gridHeight * mapNav.gridZNum);
 
-		//mapTexture.material.mainTextureOffset = new Vector2(
-		//	(pos.x - Extent * 0.5f) / size.x,
-		//	(pos.y - Extent * 0.5f) / size.y);
-		//mapTexture.material.mainTextureScale = new Vector2(
-		//	size.x / Extent,
-		//	size.y / Extent);
-		//mapTexture.SetDirty();
+			var pos = MainRole.Instance.entity.Position;
+
+			var material = mapTexture.material;
+			material.mainTextureOffset = new Vector2(
+				(pos.x - Extent / mapTexture.mainTexture.width * 0.5f) / size.x,
+				(pos.y - Extent / mapTexture.mainTexture.height * 0.5f) / size.y);
+			material.mainTextureScale = new Vector2(
+				Extent / mapTexture.mainTexture.width,
+				Extent / mapTexture.mainTexture.height);
+
+			// force update
+			if (mapTexture.panel != null)
+			{
+				mapTexture.panel.RemoveWidget(mapTexture);
+				mapTexture.panel = null;
+			}
+		}
 	}
 }
