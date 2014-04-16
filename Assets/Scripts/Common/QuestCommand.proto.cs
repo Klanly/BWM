@@ -64,9 +64,9 @@ namespace Cmd
   }
   
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"AddClintQuestQuestUserCmd_S")]
-  public partial class AddClintQuestQuestUserCmd_S : global::ProtoBuf.IExtensible
+  public partial class AddClientQuestQuestUserCmd_S : global::ProtoBuf.IExtensible
   {
-    public AddClintQuestQuestUserCmd_S() {}
+    public AddClientQuestQuestUserCmd_S() {}
     
     private Cmd.ClientQuest _quest;
     [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"quest", DataFormat = global::ProtoBuf.DataFormat.Default)]

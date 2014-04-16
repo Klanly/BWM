@@ -88,7 +88,9 @@ namespace GX.Net
 						msg.GetType() != typeof(Cmd.TickReturnNullUserCmd_CS) &&
 						msg.GetType() != typeof(Cmd.UserMoveDownMoveUserCmd_S) &&
 						msg.GetType() != typeof(Cmd.SetUserHpSpDataUserCmd_S) &&
-						msg.GetType() != typeof(Cmd.ChangeUserHpDataUserCmd_S))
+						msg.GetType() != typeof(Cmd.ChangeUserHpDataUserCmd_S) &&
+						msg.GetType() != typeof(Cmd.AddMapUserDataAndPosMapUserCmd_S) &&
+						msg.GetType() != typeof(Cmd.AddMapNpcDataAndPosMapUserCmd_S))
 						Debug.Log("<color=yellow>[RECV]</color>" + msg.ToStringDebug());
 					yield return msg;
 				}

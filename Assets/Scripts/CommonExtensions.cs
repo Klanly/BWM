@@ -209,6 +209,22 @@ namespace Cmd
 
 	partial class ClientQuest
 	{
+		public string Content
+		{
+			get
+			{
+				try
+				{
+					return string.Format(desc, squest.questid, squest.operate, squest.state);
+				}
+				catch(System.Exception ex)
+				{
+					Debug.LogError("Quest content format error: " + ex.Message + "\n" + this);
+					return desc;
+				}
+			}
+		}
+		
 		public override string ToString()
 		{
 			return squest.ToString() + ": " + desc;

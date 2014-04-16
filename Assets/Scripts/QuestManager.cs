@@ -83,7 +83,7 @@ public class QuestManager : IEnumerable<ClientQuest>
 	}
 
 	[Execute]
-	public static void Execute(AddClintQuestQuestUserCmd_S cmd)
+	public static void Execute(AddClientQuestQuestUserCmd_S cmd)
 	{
 		QuestManager.Instance.Add(cmd.quest);
 		QuestManager.Instance.OnChanged();

@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Linq;
 
 public class QuestTrack : MonoBehaviour
 {
@@ -9,16 +10,23 @@ public class QuestTrack : MonoBehaviour
 	IEnumerator Start()
 	{
 		yield return new WaitForEndOfFrame();
-		uiXmlRichText.AddXml("测试测试测试\n");
-		uiXmlRichText.AddXml("测试测试测试\n");
-		uiXmlRichText.AddXml("测试测试测试\n");
-		uiXmlRichText.AddXml("测试测试测试\n");
-		uiXmlRichText.AddXml("测试测试测试");
+		QuestManager.Instance.Changed += OnQuestChanged;
+		OnQuestChanged(QuestManager.Instance);
 	}
 
-	// Update is called once per frame
-	void Update()
+	void OnDestroy()
 	{
+		QuestManager.Instance.Changed -= OnQuestChanged;
+	}
 
+	private void OnQuestChanged(QuestManager quests)
+	{
+		Debug.LogError(quests);
+		uiXmlRichText.gameObject.SetActive(quests.Any());
+		uiXmlRichText.Clear();
+		foreach (var q in quests)
+		{
+			uiXmlRichText.AddXml(q.Content);
+		}
 	}
 }
