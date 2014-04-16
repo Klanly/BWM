@@ -6,6 +6,7 @@ using Cmd;
 using GX.Net;
 using System.Collections.Generic;
 
+/// <remarks>客户端不应该对任务项的顺序做任何调整</remarks>
 public class QuestManager : IEnumerable<ClientQuest>
 {
 	public static QuestManager Instance { get; private set; }
@@ -51,7 +52,7 @@ public class QuestManager : IEnumerable<ClientQuest>
 
 	public override string ToString()
 	{
-		return string.Join("\n", items.OrderBy(i => i.squest.questid).Select(i => i.ToString()).ToArray());
+		return string.Join("\n", items.Select(i => i.ToString()).ToArray());
 	}
 
 

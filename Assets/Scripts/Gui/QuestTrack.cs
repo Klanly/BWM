@@ -5,6 +5,7 @@ using System.Linq;
 public class QuestTrack : MonoBehaviour
 {
 	public UIXmlRichText uiXmlRichText;
+	public GameObject uiBackground;
 
 	// Use this for initialization
 	IEnumerator Start()
@@ -21,12 +22,10 @@ public class QuestTrack : MonoBehaviour
 
 	private void OnQuestChanged(QuestManager quests)
 	{
-		Debug.LogError(quests);
 		uiXmlRichText.gameObject.SetActive(quests.Any());
+		uiBackground.SetActive(uiXmlRichText.gameObject.activeSelf);
+
 		uiXmlRichText.Clear();
-		foreach (var q in quests)
-		{
-			uiXmlRichText.AddXml(q.Content);
-		}
+		uiXmlRichText.AddXml(string.Join("\n", quests.Select(i => i.Content).ToArray()));
 	}
 }
