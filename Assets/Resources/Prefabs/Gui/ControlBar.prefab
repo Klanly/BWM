@@ -431,7 +431,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100022}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -433, y: 102, z: 0}
+  m_LocalPosition: {x: -433, y: 12, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400000}
@@ -1586,11 +1586,11 @@ MonoBehaviour:
   bottomAnchor:
     target: {fileID: 400008}
     relative: .5
-    absolute: 52
+    absolute: -38
   topAnchor:
     target: {fileID: 400008}
     relative: .5
-    absolute: 152
+    absolute: 62
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
   mWidth: 100
