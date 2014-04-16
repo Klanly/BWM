@@ -21,8 +21,8 @@ namespace Cmd
     public enum Param
     {
             
-      [global::ProtoBuf.ProtoEnum(Name=@"AddClintQuestQuestUserCmd_S", Value=1)]
-      AddClintQuestQuestUserCmd_S = 1,
+      [global::ProtoBuf.ProtoEnum(Name=@"AddClientQuestQuestUserCmd_S", Value=1)]
+      AddClientQuestQuestUserCmd_S = 1,
             
       [global::ProtoBuf.ProtoEnum(Name=@"AddClientQuestListQuestUserCmd_S", Value=2)]
       AddClientQuestListQuestUserCmd_S = 2,
@@ -63,7 +63,7 @@ namespace Cmd
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"AddClintQuestQuestUserCmd_S")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"AddClientQuestQuestUserCmd_S")]
   public partial class AddClientQuestQuestUserCmd_S : global::ProtoBuf.IExtensible
   {
     public AddClientQuestQuestUserCmd_S() {}

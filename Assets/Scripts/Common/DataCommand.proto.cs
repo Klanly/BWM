@@ -32,9 +32,6 @@ namespace Cmd
       [global::ProtoBuf.ProtoEnum(Name=@"SetUserHpSpDataUserCmd_S", Value=4)]
       SetUserHpSpDataUserCmd_S = 4,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"RemoveNpcDataUserCmd_S", Value=5)]
-      RemoveNpcDataUserCmd_S = 5,
-            
       [global::ProtoBuf.ProtoEnum(Name=@"ChangeNpcHpDataUserCmd_S", Value=6)]
       ChangeNpcHpDataUserCmd_S = 6,
             
