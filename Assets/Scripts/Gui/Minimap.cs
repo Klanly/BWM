@@ -3,7 +3,8 @@ using System.Collections;
 
 public class Minimap : MonoBehaviour
 {
-	public UITexture mapTexture;
+	public UITexture uiMapTexture;
+	public GameObject uiFlagMainRole;
 
 	private float m_extent = 1024;
 	public float Extent
@@ -16,8 +17,8 @@ public class Minimap : MonoBehaviour
 
 	public void Setup()
 	{
-		mapTexture.mainTexture = BattleScene.Instance.MapNav.transform.parent.GetComponentInChildren<MapTexture>().texture;
-		mapTexture.gameObject.SetActive(mapTexture.mainTexture != null);
+		uiMapTexture.mainTexture = BattleScene.Instance.MapNav.transform.parent.GetComponentInChildren<MapTexture>().texture;
+		uiMapTexture.gameObject.SetActive(uiMapTexture.mainTexture != null);
 
 		if (MainRole.Instance != null)
 			MainRole.Instance.entity.PositionChanged += OnMainRolePositionChanged;
@@ -37,7 +38,7 @@ public class Minimap : MonoBehaviour
 
 	void Update()
 	{
-		if (Layout && mapTexture.gameObject.activeSelf)
+		if (Layout && uiMapTexture.gameObject.activeSelf)
 		{
 			Layout = false;
 			var mapNav = BattleScene.Instance.MapNav;
@@ -45,20 +46,20 @@ public class Minimap : MonoBehaviour
 
 			var pos = MainRole.Instance.entity.Position;
 
-			var material = mapTexture.material;
-			material.SetFloat("_Cutoff", mapTexture.mainTexture == null ? 0 : 0.1f);
+			var material = uiMapTexture.material;
+			material.SetFloat("_Cutoff", uiMapTexture.mainTexture == null ? 0 : 0.1f);
 			material.mainTextureOffset = new Vector2(
-				Mathf.Clamp((pos.x - Extent / mapTexture.mainTexture.width * 0.5f) / size.x, 0, 1 - Extent / mapTexture.mainTexture.width),
-				Mathf.Clamp((pos.y - Extent / mapTexture.mainTexture.height * 0.5f) / size.y, 0, 1 - Extent / mapTexture.mainTexture.height));
+				Mathf.Clamp((pos.x - Extent / uiMapTexture.mainTexture.width * 0.5f) / size.x, 0, 1 - Extent / uiMapTexture.mainTexture.width),
+				Mathf.Clamp((pos.y - Extent / uiMapTexture.mainTexture.height * 0.5f) / size.y, 0, 1 - Extent / uiMapTexture.mainTexture.height));
 			material.mainTextureScale = new Vector2(
-				Extent / mapTexture.mainTexture.width,
-				Extent / mapTexture.mainTexture.height);
+				Extent / uiMapTexture.mainTexture.width,
+				Extent / uiMapTexture.mainTexture.height);
 
 			// force update
-			if (mapTexture.panel != null)
+			if (uiMapTexture.panel != null)
 			{
-				mapTexture.panel.RemoveWidget(mapTexture);
-				mapTexture.panel = null;
+				uiMapTexture.panel.RemoveWidget(uiMapTexture);
+				uiMapTexture.panel = null;
 			}
 		}
 	}

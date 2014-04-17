@@ -574,7 +574,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d56afda051450841b476083c120bf21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mapTexture: {fileID: 11400012}
+  uiMapTexture: {fileID: 11400012}
+  uiFlagMainRole: {fileID: 100010}
 --- !u!114 &11400016
 MonoBehaviour:
   m_ObjectHideFlags: 1
