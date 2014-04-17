@@ -38,6 +38,8 @@ public class QuestDialog : MonoBehaviour
 					questid = QuestID,
 				});
 			}
+
+			this.GetComponent<Closeable>().Close();
 		};
 
 		uiXmlRichText.UrlClicked += OnUrlClicked;
