@@ -85,7 +85,7 @@ public class UIXmlRichText : UIRichText
 			var t = n as XText;
 			if (t != null)
 			{
-				Add(t.Value, paragraph, color);
+				AddText(t.Value, paragraph, color);
 				continue;
 			}
 		}
@@ -102,17 +102,7 @@ public class UIXmlRichText : UIRichText
 				Add(e.Nodes(), paragraph, color);
 				break;
 			case "a":
-				{
-					var link = e.AttributeValue("href");
-					var widgets = new List<UIWidget>();
-					Add(e.Nodes(), widgets, color);
-					foreach (var w in widgets)
-					{
-						base.AttachLink(w, link);
-						if (paragraph != null)
-							paragraph.Add(w);
-					}
-				}
+				AddLink(e, paragraph, color);
 				break;
 			case "b":
 			case "i":
@@ -120,104 +110,26 @@ public class UIXmlRichText : UIRichText
 			case "s":
 			case "sub":
 			case "sup":
-				{
-					var widgets = new List<UIWidget>();
-					Add(e.Nodes(), widgets, color);
-					foreach (var w in widgets)
-					{
-						var label = w as UILabel;
-						if (label != null)
-						{
-							label.supportEncoding = true;
-							label.text = string.Format("[{0}]{1}[/{0}]", e.Name, label.text);
-						}
-						if (paragraph != null)
-							paragraph.Add(w);
-					}
-				}
+				AddDecorateText(e, paragraph, color);
 				break;
 			case "color":
-				{
-					var value = e.AttributeValue("value");
-					Color c;
-					if (Extensions.ParseColor(out c, value))
-					{
-						Add(e.Nodes(), paragraph, c);
-					}
-					else
-					{
-						Add(e.Nodes(), paragraph, color);
-					}
-				}
+				AddColor(e, paragraph, color);
 				break;
 			case "p":
-				if (base.IsNewLine() == false)
-					base.AddNewLine();
-				Add("\t", paragraph, color);
-				Add(e.Nodes(), paragraph, color);
-				base.AddNewLine();
+				AddParagraph(e, paragraph, color);
 				break;
 			case "img":
-				{
-					var atlas = e.AttributeValue("atlas");
-					var sprite = e.AttributeValue("sprite");
-					if (string.IsNullOrEmpty(atlas) || string.IsNullOrEmpty(sprite))
-						break;
-					var w = base.AddSprite(atlas, sprite);
-					if (color.HasValue)
-						w.color = color.Value;
-					if (paragraph != null)
-						paragraph.Add(w);
-				}
+				AddImage(e, paragraph, color);
 				break;
 			case "ani":
-				{
-					var atlas = e.AttributeValue("atlas");
-					if (string.IsNullOrEmpty(atlas))
-						break;
-
-					var fps = e.AttributeValue("fps").Parse(30);
-					var loop = e.AttributeValue("fps").Parse(true);
-
-					var frames = e.AttributeValue("frames");
-					if (string.IsNullOrEmpty(frames) == false)
-					{
-						var names = frames.Split(new char[] { '/' }, StringSplitOptions.RemoveEmptyEntries);
-						if (names.Length > 0)
-						{
-							var w = base.AddSprite(atlas);
-							var c = w.gameObject.AddComponent<UISpriteGroupAnimation>();
-							c.framesPerSecond = fps;
-							c.loop = loop;
-							c.spriteNames = names;
-							if (color.HasValue)
-								w.color = color.Value;
-							if (paragraph != null)
-								paragraph.Add(w);
-						}
-						break;
-					}
-
-					{
-						var prefix = e.AttributeValue("prefix");
-						var w = base.AddSprite(atlas);
-						var c = w.gameObject.AddComponent<UISpriteAnimation>();
-						c.framesPerSecond = fps;
-						c.loop = loop;
-						c.namePrefix = prefix;
-						if (color.HasValue)
-							w.color = color.Value;
-						if (paragraph != null)
-							paragraph.Add(w);
-					}
-				}
+				AddImage(e, paragraph, color);
 				break;
 			default:
 				break;
 		}
 	}
-	
-	private void Add(string text, ICollection<UIWidget> paragraph, Color? color)
+
+	private void AddText(string text, ICollection<UIWidget> paragraph, Color? color)
 	{
 		if (color.HasValue)
 		{
@@ -233,6 +145,115 @@ public class UIXmlRichText : UIRichText
 		else
 		{
 			base.AddText(text, paragraph);
+		}
+	}
+
+	private void AddLink(XElement e, ICollection<UIWidget> paragraph, Color? color)
+	{
+		var link = e.AttributeValue("href");
+		var widgets = new List<UIWidget>();
+		Add(e.Nodes(), widgets, color);
+		foreach (var w in widgets)
+		{
+			base.AttachLink(w, link);
+			if (paragraph != null)
+				paragraph.Add(w);
+		}
+	}
+
+	private void AddDecorateText(XElement e, ICollection<UIWidget> paragraph, Color? color)
+	{
+		var widgets = new List<UIWidget>();
+		Add(e.Nodes(), widgets, color);
+		foreach (var w in widgets)
+		{
+			var label = w as UILabel;
+			if (label != null)
+			{
+				label.supportEncoding = true;
+				label.text = string.Format("[{0}]{1}[/{0}]", e.Name, label.text);
+			}
+			if (paragraph != null)
+				paragraph.Add(w);
+		}
+	}
+
+	private void AddColor(XElement e, ICollection<UIWidget> paragraph, Color? color)
+	{
+		var value = e.AttributeValue("value");
+		Color c;
+		if (Extensions.ParseColor(out c, value))
+		{
+			Add(e.Nodes(), paragraph, c);
+		}
+		else
+		{
+			Add(e.Nodes(), paragraph, color);
+		}
+	}
+
+	private void AddParagraph(XElement e, ICollection<UIWidget> paragraph, Color? color)
+	{
+		if (base.IsNewLine() == false)
+			base.AddNewLine();
+		AddText("\t", paragraph, color);
+		Add(e.Nodes(), paragraph, color);
+		base.AddNewLine();
+	}
+
+	private void AddImage(XElement e, ICollection<UIWidget> paragraph, Color? color)
+	{
+		var atlas = e.AttributeValue("atlas");
+		var sprite = e.AttributeValue("sprite");
+		if (string.IsNullOrEmpty(atlas) == false && string.IsNullOrEmpty(sprite) == false)
+		{
+			var w = base.AddSprite(atlas, sprite);
+			if (color.HasValue)
+				w.color = color.Value;
+			if (paragraph != null)
+				paragraph.Add(w);
+		}
+	}
+
+	private void AddAnimation(XElement e, ICollection<UIWidget> paragraph, Color? color)
+	{
+		var atlas = e.AttributeValue("atlas");
+		if (string.IsNullOrEmpty(atlas))
+			return;
+
+		var fps = e.AttributeValue("fps").Parse(30);
+		var loop = e.AttributeValue("fps").Parse(true);
+
+		var frames = e.AttributeValue("frames");
+		if (string.IsNullOrEmpty(frames) == false)
+		{
+			var names = frames.Split(new char[] { '/' }, StringSplitOptions.RemoveEmptyEntries);
+			if (names.Length > 0)
+			{
+				var w = base.AddSprite(atlas);
+				var c = w.gameObject.AddComponent<UISpriteGroupAnimation>();
+				c.framesPerSecond = fps;
+				c.loop = loop;
+				c.spriteNames = names;
+				if (color.HasValue)
+					w.color = color.Value;
+				if (paragraph != null)
+					paragraph.Add(w);
+			}
+			return;
+		}
+
+		{
+			var prefix = e.AttributeValue("prefix");
+			var w = base.AddSprite(atlas);
+			var c = w.gameObject.AddComponent<UISpriteAnimation>();
+			c.framesPerSecond = fps;
+			c.loop = loop;
+			c.namePrefix = prefix;
+			if (color.HasValue)
+				w.color = color.Value;
+			if (paragraph != null)
+				paragraph.Add(w);
 		}
 	}
 }
