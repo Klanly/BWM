@@ -112,7 +112,7 @@ public class Role : MonoBehaviour
 	[Execute]
 	public static void Execute(UserMoveDownMoveUserCmd_S cmd)
 	{
-		if (cmd.charid == MainRole.ServerInfo.userdata.charid)
+		if (MainRole.ServerInfo == null || cmd.charid == MainRole.ServerInfo.userdata.charid)
 			return;
 
 		Role role;
