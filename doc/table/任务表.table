@@ -15,7 +15,7 @@
 		<field column="任务计数" code="step" type="uint32" />
 		<field column="经验奖励" code="exp" type="uint32" />
 		<field column="道具奖励" code="items" type="string" />
-		<field column="任务描述" code="desc" type="string" />
+		<field column="任务描述" code="info" type="string" />
 		<field column="任务追踪接取" code="traceBegin" type="string" />
 		<field column="任务追踪完成" code="traceEnd" type="string" />
 	</output>
