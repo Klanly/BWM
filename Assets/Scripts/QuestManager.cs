@@ -39,6 +39,19 @@ public class QuestManager : IEnumerable<ClientQuest>
 		}
 	}
 
+	protected void Add(SaveQuest quest)
+	{
+		var index = items.FindIndex(i => i.squest.questid == quest.questid);
+		if (index >= 0)
+		{
+			items[index].squest = quest;
+		}
+		else
+		{
+			items.Add(new ClientQuest() { squest = quest, desc = string.Empty });
+		}
+	}
+
 	protected bool Remove(uint questid)
 	{
 		var index = items.FindIndex(i => i.squest.questid == questid);
@@ -106,6 +119,18 @@ public class QuestManager : IEnumerable<ClientQuest>
 	{
 		if(QuestManager.Instance.Remove(cmd.questid))
 			QuestManager.Instance.OnChanged();
+	}
+
+	[Execute]
+	public static void Execute(ReturnQuestDetailInfoQuestUserCmd_S cmd)
+	{
+		QuestManager.Instance.Add(cmd.squest);
+		QuestManager.Instance.OnChanged();
+
+		var dlg = BattleScene.Instance.Gui<QuestDialog>();
+		dlg.gameObject.SetActive(true);
+		dlg.QuestDetail = cmd.detail;
+		dlg.QuestID = cmd.squest.questid;
 	}
 	#endregion
 }

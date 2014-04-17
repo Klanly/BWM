@@ -3,6 +3,9 @@ using System.Collections;
 using Cmd;
 using GX.Net;
 
+/// <summary>
+/// 任务交接界面
+/// </summary>
 public class QuestDialog : MonoBehaviour
 {
 	public const string UriSchemeIndex = "index://";
@@ -11,12 +14,14 @@ public class QuestDialog : MonoBehaviour
 	public UIScrollView uiScrollView;
 	public UIXmlRichText uiXmlRichText;
 
-	public ulong tempid { get; private set; }
-	public string token { get; private set; }
+	public string QuestDetail { get; set; }
+	public uint QuestID { get; set; }
 
 	void Start()
 	{
 		uiXmlRichText.UrlClicked += OnUrlClicked;
+		SetTitle("任务交接");
+		SetMessage(QuestDetail);
 	}
 
 	void OnEnable()

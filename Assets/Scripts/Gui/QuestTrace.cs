@@ -2,6 +2,9 @@
 using System.Collections;
 using System.Linq;
 
+/// <summary>
+/// 任务追踪界面
+/// </summary>
 public class QuestTrace : MonoBehaviour
 {
 	public UIXmlRichText uiXmlRichText;

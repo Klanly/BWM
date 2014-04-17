@@ -240,12 +240,12 @@ namespace Cmd
   {
     public ReturnQuestDetailInfoQuestUserCmd_S() {}
     
-    private Cmd.ClientQuest _quest;
-    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"quest", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public Cmd.ClientQuest quest
+    private Cmd.SaveQuest _squest;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"squest", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public Cmd.SaveQuest squest
     {
-      get { return _quest; }
-      set { _quest = value; }
+      get { return _squest; }
+      set { _squest = value; }
     }
     private string _detail;
     [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"detail", DataFormat = global::ProtoBuf.DataFormat.Default)]
