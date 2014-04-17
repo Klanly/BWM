@@ -1996,7 +1996,7 @@ Camera:
     height: 1
   near clip plane: .300000012
   far clip plane: 1000
-  field of view: 60
+  field of view: 36.5999985
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -2013,8 +2013,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1860885273}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalRotation: {x: .221499234, y: -.462986827, z: .120689064, w: .849714994}
+  m_LocalPosition: {x: 10.1756687, y: 7.27151012, z: -1.49502456}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -2297,7 +2297,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startGo: {fileID: 1641303619}
   targetGo: {fileID: 1614362384}
-  skillGo: {fileID: 100000, guid: cfa62d1ff4e52894f89eaceb94f327f1, type: 2}
+  skillGo: {fileID: 100000, guid: e0f9b8697d1854344a35709056611995, type: 2}
   buffGo: {fileID: 0}
 --- !u!4 &2103834966
 Transform:
@@ -2306,7 +2306,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2103834964}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.66615915, y: 2.12395906, z: 3.07828522}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
