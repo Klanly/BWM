@@ -33,7 +33,8 @@ using System;
 ///	  段前自动插入缩进，并在有必要时插入换行；段后自动插入换行；其中可以嵌套任意节点
 ///		<p>...</p>
 ///	超链接：
-///		<a href="link">...</a> 
+///		<a href="link">...</a>
+///		<a><href>link</href>...</a>
 ///	图片：
 ///		<img atlas="atlas path" sprite="sprite name" />
 /// 序列帧动画：
@@ -91,6 +92,10 @@ public class UIXmlRichText : UIRichText
 		}
 	}
 
+	/// <remarks>
+	/// 需要通过继承并<c>override</c>的方式进行行为扩展。
+	/// 通过delegate不能访问<see cref="UIXmlRichText"/>和<see cref="UIRichText"/>的<c>protected</c>方法，而这些过于细节的方法也不适合<c>public</c>暴露。
+	/// </remarks>
 	protected virtual bool AddNode(XElement e, ICollection<UIWidget> paragraph, Color? color)
 	{
 		switch (e.Name.ToString())
@@ -152,6 +157,12 @@ public class UIXmlRichText : UIRichText
 	protected void AddLink(XElement e, ICollection<UIWidget> paragraph, Color? color)
 	{
 		var link = e.AttributeValue("href");
+		if (link == null)
+		{
+			var href = e.Element("href");
+			if(href != null)
+				link = href.Value;
+		}
 		var widgets = new List<UIWidget>();
 		AddNodes(e.Nodes(), widgets, color);
 		foreach (var w in widgets)

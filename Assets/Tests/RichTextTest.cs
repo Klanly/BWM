@@ -11,6 +11,7 @@ public class RichTextTest : MonoBehaviour
 	{
 		var t = test as UIXmlRichText;
 		t.UrlClicked += (sender, url) => Debug.Log(string.Format("{0}, {1}", sender.name, url));
+		t.AddXml("<a><href><![CDATA[<n>test</n>]]></href>sub node for href</a><br/>");
 		t.AddXml("<n><color value='red'>彩色</color>文字</n>");
 		t.AddXml("<color value='red'><p>正常文本<sup><b>粗体</b>上标</sup></p></color>");
 		t.AddXml("<color value='#9932CC'><p>正常文本<sub><i>斜体</i>下标</sub></p></color>");
