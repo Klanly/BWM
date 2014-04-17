@@ -119,6 +119,30 @@ namespace Cmd
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"KeyValue")]
+  public partial class KeyValue : global::ProtoBuf.IExtensible
+  {
+    public KeyValue() {}
+    
+    private ulong _key;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"key", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public ulong key
+    {
+      get { return _key; }
+      set { _key = value; }
+    }
+    private uint _value;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"value", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint value
+    {
+      get { return _value; }
+      set { _value = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"SaveItem")]
   public partial class SaveItem : global::ProtoBuf.IExtensible
   {
@@ -152,6 +176,13 @@ namespace Cmd
       get { return _loc; }
       set { _loc = value; }
     }
+    private readonly global::System.Collections.Generic.List<Cmd.KeyValue> _kvsyslist = new global::System.Collections.Generic.List<Cmd.KeyValue>();
+    [global::ProtoBuf.ProtoMember(5, Name=@"kvsyslist", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<Cmd.KeyValue> kvsyslist
+    {
+      get { return _kvsyslist; }
+    }
+  
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -176,6 +207,13 @@ namespace Cmd
       get { return _level; }
       set { _level = value; }
     }
+    private uint _cold;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"cold", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint cold
+    {
+      get { return _cold; }
+      set { _cold = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -199,6 +237,27 @@ namespace Cmd
     {
       get { return _level; }
       set { _level = value; }
+    }
+    private uint _time;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"time", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint time
+    {
+      get { return _time; }
+      set { _time = value; }
+    }
+    private uint _value;
+    [global::ProtoBuf.ProtoMember(4, IsRequired = true, Name=@"value", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint value
+    {
+      get { return _value; }
+      set { _value = value; }
+    }
+    private uint _bitmask;
+    [global::ProtoBuf.ProtoMember(5, IsRequired = true, Name=@"bitmask", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint bitmask
+    {
+      get { return _bitmask; }
+      set { _bitmask = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -231,6 +290,20 @@ namespace Cmd
       get { return _stepall; }
       set { _stepall = value; }
     }
+    private readonly global::System.Collections.Generic.List<Cmd.KeyValue> _kvsyslist = new global::System.Collections.Generic.List<Cmd.KeyValue>();
+    [global::ProtoBuf.ProtoMember(4, Name=@"kvsyslist", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<Cmd.KeyValue> kvsyslist
+    {
+      get { return _kvsyslist; }
+    }
+  
+    private readonly global::System.Collections.Generic.List<Cmd.KeyValue> _kvuserlist = new global::System.Collections.Generic.List<Cmd.KeyValue>();
+    [global::ProtoBuf.ProtoMember(5, Name=@"kvuserlist", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<Cmd.KeyValue> kvuserlist
+    {
+      get { return _kvuserlist; }
+    }
+  
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -274,6 +347,13 @@ namespace Cmd
     public global::System.Collections.Generic.List<Cmd.SaveQuest> questlist
     {
       get { return _questlist; }
+    }
+  
+    private readonly global::System.Collections.Generic.List<Cmd.KeyValue> _kvlist = new global::System.Collections.Generic.List<Cmd.KeyValue>();
+    [global::ProtoBuf.ProtoMember(6, Name=@"kvlist", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<Cmd.KeyValue> kvlist
+    {
+      get { return _kvlist; }
     }
   
     private global::ProtoBuf.IExtension extensionObject;
