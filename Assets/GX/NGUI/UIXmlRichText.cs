@@ -56,7 +56,7 @@ public class UIXmlRichText : UIRichText
 	{
 		try
 		{
-			Add(XDocument.Parse("<root>" + text + "</root>").Root.Nodes(), null, null);
+			AddNodes(XDocument.Parse("<root>" + text + "</root>").Root.Nodes(), null, null);
 		}
 		catch (Exception ex)
 		{
@@ -65,21 +65,21 @@ public class UIXmlRichText : UIRichText
 	}
 	public void AddXml(IEnumerable<XNode> nodes)
 	{
-		Add(nodes, null, null);
+		AddNodes(nodes, null, null);
 	}
 	public void AddXml(XElement e)
 	{
-		Add(e, null, null);
+		AddNode(e, null, null);
 	}
 
-	private void Add(IEnumerable<XNode> nodes, ICollection<UIWidget> paragraph, Color? color)
+	protected void AddNodes(IEnumerable<XNode> nodes, ICollection<UIWidget> paragraph, Color? color)
 	{
 		foreach (var n in nodes)
 		{
 			var e = n as XElement;
 			if (e != null)
 			{
-				Add(e, paragraph, color);
+				AddNode(e, paragraph, color);
 				continue;
 			}
 			var t = n as XText;
@@ -91,7 +91,7 @@ public class UIXmlRichText : UIRichText
 		}
 	}
 
-	private void Add(XElement e, ICollection<UIWidget> paragraph, Color? color)
+	protected virtual bool AddNode(XElement e, ICollection<UIWidget> paragraph, Color? color)
 	{
 		switch (e.Name.ToString())
 		{
@@ -99,7 +99,7 @@ public class UIXmlRichText : UIRichText
 				base.AddNewLine();
 				break;
 			case "n":
-				Add(e.Nodes(), paragraph, color);
+				AddNodes(e.Nodes(), paragraph, color);
 				break;
 			case "a":
 				AddLink(e, paragraph, color);
@@ -125,11 +125,12 @@ public class UIXmlRichText : UIRichText
 				AddImage(e, paragraph, color);
 				break;
 			default:
-				break;
+				return false;
 		}
+		return true;
 	}
 
-	private void AddText(string text, ICollection<UIWidget> paragraph, Color? color)
+	protected void AddText(string text, ICollection<UIWidget> paragraph, Color? color)
 	{
 		if (color.HasValue)
 		{
@@ -148,11 +149,11 @@ public class UIXmlRichText : UIRichText
 		}
 	}
 
-	private void AddLink(XElement e, ICollection<UIWidget> paragraph, Color? color)
+	protected void AddLink(XElement e, ICollection<UIWidget> paragraph, Color? color)
 	{
 		var link = e.AttributeValue("href");
 		var widgets = new List<UIWidget>();
-		Add(e.Nodes(), widgets, color);
+		AddNodes(e.Nodes(), widgets, color);
 		foreach (var w in widgets)
 		{
 			base.AttachLink(w, link);
@@ -161,10 +162,10 @@ public class UIXmlRichText : UIRichText
 		}
 	}
 
-	private void AddDecorateText(XElement e, ICollection<UIWidget> paragraph, Color? color)
+	protected void AddDecorateText(XElement e, ICollection<UIWidget> paragraph, Color? color)
 	{
 		var widgets = new List<UIWidget>();
-		Add(e.Nodes(), widgets, color);
+		AddNodes(e.Nodes(), widgets, color);
 		foreach (var w in widgets)
 		{
 			var label = w as UILabel;
@@ -178,30 +179,30 @@ public class UIXmlRichText : UIRichText
 		}
 	}
 
-	private void AddColor(XElement e, ICollection<UIWidget> paragraph, Color? color)
+	protected void AddColor(XElement e, ICollection<UIWidget> paragraph, Color? color)
 	{
 		var value = e.AttributeValue("value");
 		Color c;
 		if (Extensions.ParseColor(out c, value))
 		{
-			Add(e.Nodes(), paragraph, c);
+			AddNodes(e.Nodes(), paragraph, c);
 		}
 		else
 		{
-			Add(e.Nodes(), paragraph, color);
+			AddNodes(e.Nodes(), paragraph, color);
 		}
 	}
 
-	private void AddParagraph(XElement e, ICollection<UIWidget> paragraph, Color? color)
+	protected void AddParagraph(XElement e, ICollection<UIWidget> paragraph, Color? color)
 	{
 		if (base.IsNewLine() == false)
 			base.AddNewLine();
 		AddText("\t", paragraph, color);
-		Add(e.Nodes(), paragraph, color);
+		AddNodes(e.Nodes(), paragraph, color);
 		base.AddNewLine();
 	}
 
-	private void AddImage(XElement e, ICollection<UIWidget> paragraph, Color? color)
+	protected void AddImage(XElement e, ICollection<UIWidget> paragraph, Color? color)
 	{
 		var atlas = e.AttributeValue("atlas");
 		var sprite = e.AttributeValue("sprite");
@@ -215,7 +216,7 @@ public class UIXmlRichText : UIRichText
 		}
 	}
 
-	private void AddAnimation(XElement e, ICollection<UIWidget> paragraph, Color? color)
+	protected void AddAnimation(XElement e, ICollection<UIWidget> paragraph, Color? color)
 	{
 		var atlas = e.AttributeValue("atlas");
 		if (string.IsNullOrEmpty(atlas))
