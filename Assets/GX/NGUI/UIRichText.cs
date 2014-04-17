@@ -18,6 +18,11 @@ public class UIRichText : MonoBehaviour
 	public GameObject protoLabel;
 
 	/// <summary>
+	/// 超链接采用的BBCode格式修饰
+	/// </summary>
+	public string LinkDecorate = "[u]{0}[/u]";
+
+	/// <summary>
 	/// URL点击事件
 	/// </summary>
 	public event Action<UIWidget, string> UrlClicked;
@@ -193,7 +198,7 @@ public class UIRichText : MonoBehaviour
 		if (label != null)
 		{
 			label.supportEncoding = true;
-			label.text = string.Format("[u]{0}[/u]", label.text);
+			label.text = string.Format(LinkDecorate, label.text);
 		}
 
 		return widget;
