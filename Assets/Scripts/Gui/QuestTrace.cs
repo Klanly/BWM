@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Linq;
+using Cmd;
 
 /// <summary>
 /// 任务追踪界面
@@ -16,6 +17,7 @@ public class QuestTrace : MonoBehaviour
 		yield return new WaitForEndOfFrame();
 		QuestManager.Instance.Changed += OnQuestChanged;
 		OnQuestChanged(QuestManager.Instance);
+		uiXmlRichText.UrlClicked += OnQuestTraceLinkClicked;
 	}
 
 	void OnDestroy()
@@ -29,6 +31,15 @@ public class QuestTrace : MonoBehaviour
 		uiBackground.SetActive(uiXmlRichText.gameObject.activeSelf);
 
 		uiXmlRichText.Clear();
-		uiXmlRichText.AddXml(string.Join("\n", quests.Select(i => i.Content).ToArray()));
+		uiXmlRichText.AddXml(string.Join("\n", quests.Select(i => i.TraceContent).ToArray()));
+	}
+
+	private void OnQuestTraceLinkClicked(UIWidget sender, string href)
+	{
+		Debug.Log(href);
+		Net.Instance.Send(new RequestQuestDetailInfoQuestUserCmd_C()
+		{
+			questid = 1000,
+		});
 	}
 }

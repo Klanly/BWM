@@ -13,12 +13,33 @@ public class QuestDialog : MonoBehaviour
 	public UILabel uiTitle;
 	public UIScrollView uiScrollView;
 	public UIXmlRichText uiXmlRichText;
+	public UIButton uiOKButton;
 
 	public string QuestDetail { get; set; }
 	public uint QuestID { get; set; }
 
-	void Start()
+	IEnumerator Start()
 	{
+		yield return new WaitForEndOfFrame();
+		uiOKButton.GetComponentInChildren<UILabel>().text = QuestManager.Instance[QuestID].squest.Finished ? "完成" : "接受";
+		UIEventListener.Get(uiOKButton.gameObject).onClick = go =>
+		{
+			if (QuestManager.Instance[QuestID].squest.Finished)
+			{
+				Net.Instance.Send(new RequestFinishQuestQuestUserCmd_CS()
+				{
+					questid = QuestID,
+				});
+			}
+			else
+			{
+				Net.Instance.Send(new RequestAcceptQuestQuestUserCmd_CS()
+				{
+					questid = QuestID,
+				});
+			}
+		};
+
 		uiXmlRichText.UrlClicked += OnUrlClicked;
 		SetTitle("任务交接");
 		SetMessage(QuestDetail);
