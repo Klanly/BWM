@@ -213,29 +213,10 @@ namespace Cmd
 	}
 
 	partial class ClientQuest
-	{
-		/// <summary>
-		/// 任务追踪描述信息
-		/// </summary>
-		public string TraceContent
-		{
-			get
-			{
-				try
-				{
-					return string.Format(desc, squest.questid, squest.stepcur, squest.stepall);
-				}
-				catch(System.Exception ex)
-				{
-					Debug.LogError("Quest content format error: " + ex.Message + "\n" + this);
-					return desc;
-				}
-			}
-		}
-		
+	{	
 		public override string ToString()
 		{
-			return squest.ToString() + ": " + desc;
+			return string.Format("{0}, desc={2}", squest, desc);
 		}
 	}
 	#endregion

@@ -54,7 +54,7 @@ public class QuestTrace : MonoBehaviour
 			{
 				var q = _;
 				q.Item1.transform.localPosition = new Vector3(0, -height, 0);
-				q.Item1.GetComponent<UIXmlRichText>().AddXml(q.Item2.TraceContent);
+				q.Item1.GetComponent<UIXmlRichText>().AddXml(q.Item2.desc);
 				height += q.Item1.GetComponent<UIWidget>().height;
 			}
 			uiContent.GetComponent<UIWidget>().height = height;
@@ -63,9 +63,28 @@ public class QuestTrace : MonoBehaviour
 
 	private void OnQuestTraceClicked(ClientQuest quest)
 	{
-		Net.Instance.Send(new RequestQuestDetailInfoQuestUserCmd_C()
-		{
-			questid = 1000,
-		});
+		//if (quest.npcbaseid == 0)
+		//{
+		//	Net.Instance.Send(new RequestQuestDetailInfoQuestUserCmd_C()
+		//	{
+		//		questid = quest.npcbaseid,
+		//	});
+		//}
+		//else
+		//{
+		//	var npc = Npc.All.Values.FirstOrDefault(i => i.TableInfo.id == quest.npcbaseid);
+		//	if (npc == null)
+		//	{
+		//		Debug.Log("任务中无法找到指定的npc: " + quest);
+		//	}
+		//	else
+		//	{
+		//		MainRole.Instance.pathMove.WalkTo(npc.transform.localPosition, () =>
+		//			Net.Instance.Send(new RequestQuestDetailInfoQuestUserCmd_C()
+		//			{
+		//				questid = quest.npcbaseid,
+		//			}));
+		//	}
+		//}
 	}
 }

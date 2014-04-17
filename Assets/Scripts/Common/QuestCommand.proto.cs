@@ -66,8 +66,16 @@ namespace Cmd
       get { return _squest; }
       set { _squest = value; }
     }
+    private string _action = "";
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"action", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string action
+    {
+      get { return _action; }
+      set { _action = value; }
+    }
     private string _desc;
-    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"desc", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"desc", DataFormat = global::ProtoBuf.DataFormat.Default)]
     public string desc
     {
       get { return _desc; }
@@ -247,8 +255,16 @@ namespace Cmd
       get { return _squest; }
       set { _squest = value; }
     }
+    private uint _npcbaseid = default(uint);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"npcbaseid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint npcbaseid
+    {
+      get { return _npcbaseid; }
+      set { _npcbaseid = value; }
+    }
     private string _detail;
-    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"detail", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"detail", DataFormat = global::ProtoBuf.DataFormat.Default)]
     public string detail
     {
       get { return _detail; }

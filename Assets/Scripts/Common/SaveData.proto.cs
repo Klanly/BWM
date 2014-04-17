@@ -143,6 +143,30 @@ namespace Cmd
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"StrKeyValue")]
+  public partial class StrKeyValue : global::ProtoBuf.IExtensible
+  {
+    public StrKeyValue() {}
+    
+    private string _key;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"key", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public string key
+    {
+      get { return _key; }
+      set { _key = value; }
+    }
+    private string _value;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"value", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public string value
+    {
+      get { return _value; }
+      set { _value = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"SaveItem")]
   public partial class SaveItem : global::ProtoBuf.IExtensible
   {
@@ -176,11 +200,11 @@ namespace Cmd
       get { return _loc; }
       set { _loc = value; }
     }
-    private readonly global::System.Collections.Generic.List<Cmd.KeyValue> _kvsyslist = new global::System.Collections.Generic.List<Cmd.KeyValue>();
-    [global::ProtoBuf.ProtoMember(5, Name=@"kvsyslist", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public global::System.Collections.Generic.List<Cmd.KeyValue> kvsyslist
+    private readonly global::System.Collections.Generic.List<Cmd.KeyValue> _kvlist = new global::System.Collections.Generic.List<Cmd.KeyValue>();
+    [global::ProtoBuf.ProtoMember(5, Name=@"kvlist", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<Cmd.KeyValue> kvlist
     {
-      get { return _kvsyslist; }
+      get { return _kvlist; }
     }
   
     private global::ProtoBuf.IExtension extensionObject;
@@ -354,6 +378,13 @@ namespace Cmd
     public global::System.Collections.Generic.List<Cmd.KeyValue> kvlist
     {
       get { return _kvlist; }
+    }
+  
+    private readonly global::System.Collections.Generic.List<Cmd.StrKeyValue> _skvlist = new global::System.Collections.Generic.List<Cmd.StrKeyValue>();
+    [global::ProtoBuf.ProtoMember(7, Name=@"skvlist", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<Cmd.StrKeyValue> skvlist
+    {
+      get { return _skvlist; }
     }
   
     private global::ProtoBuf.IExtension extensionObject;
