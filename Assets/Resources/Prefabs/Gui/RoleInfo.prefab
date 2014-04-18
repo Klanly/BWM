@@ -906,6 +906,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07c32d7d30ffd3748bf3160ff39c426e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  uiSkillInfo: {fileID: 11400188}
 --- !u!114 &11400006
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1021,7 +1022,7 @@ MonoBehaviour:
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 96
+  aspectRatio: 9.05660343
   mAtlas: {fileID: 11400000, guid: 81897fcdc0d7fb04bb512167943f2aab, type: 2}
   mSpriteName: buttonback
   mType: 1
@@ -2684,7 +2685,7 @@ MonoBehaviour:
   autoResizeBoxCollider: 1
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: .0612244904
+  aspectRatio: .979591846
   mAtlas: {fileID: 11400000, guid: 81897fcdc0d7fb04bb512167943f2aab, type: 2}
   mSpriteName: button_guanbi
   mType: 1
