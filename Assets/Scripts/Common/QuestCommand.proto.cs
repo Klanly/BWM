@@ -33,20 +33,23 @@ namespace Cmd
       [global::ProtoBuf.ProtoEnum(Name=@"RemoveQuestQuestUserCmd_CS", Value=4)]
       RemoveQuestQuestUserCmd_CS = 4,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"RequestAcceptQuestQuestUserCmd_CS", Value=5)]
-      RequestAcceptQuestQuestUserCmd_CS = 5,
+      [global::ProtoBuf.ProtoEnum(Name=@"RequestAcceptQuestQuestUserCmd_C", Value=5)]
+      RequestAcceptQuestQuestUserCmd_C = 5,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"RequestFinishQuestQuestUserCmd_CS", Value=6)]
-      RequestFinishQuestQuestUserCmd_CS = 6,
+      [global::ProtoBuf.ProtoEnum(Name=@"RequestFinishQuestQuestUserCmd_C", Value=6)]
+      RequestFinishQuestQuestUserCmd_C = 6,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"RequestQuestDescQuestUserCmd_C", Value=7)]
-      RequestQuestDescQuestUserCmd_C = 7,
+      [global::ProtoBuf.ProtoEnum(Name=@"RequestClickQuestTraceQuestUserCmd_C", Value=7)]
+      RequestClickQuestTraceQuestUserCmd_C = 7,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"RequestQuestDetailInfoQuestUserCmd_C", Value=8)]
-      RequestQuestDetailInfoQuestUserCmd_C = 8,
+      [global::ProtoBuf.ProtoEnum(Name=@"ReturnClickQuestTraceQuestUserCmd_S", Value=8)]
+      ReturnClickQuestTraceQuestUserCmd_S = 8,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"ReturnQuestDetailInfoQuestUserCmd_S", Value=9)]
-      ReturnQuestDetailInfoQuestUserCmd_S = 9
+      [global::ProtoBuf.ProtoEnum(Name=@"RequestQuestDescQuestUserCmd_C", Value=9)]
+      RequestQuestDescQuestUserCmd_C = 9,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"ReturnQuestDetailInfoQuestUserCmd_S", Value=10)]
+      ReturnQuestDetailInfoQuestUserCmd_S = 10
     }
   
     private global::ProtoBuf.IExtension extensionObject;
@@ -154,10 +157,10 @@ namespace Cmd
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"RequestAcceptQuestQuestUserCmd_CS")]
-  public partial class RequestAcceptQuestQuestUserCmd_CS : global::ProtoBuf.IExtensible
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"RequestAcceptQuestQuestUserCmd_C")]
+  public partial class RequestAcceptQuestQuestUserCmd_C : global::ProtoBuf.IExtensible
   {
-    public RequestAcceptQuestQuestUserCmd_CS() {}
+    public RequestAcceptQuestQuestUserCmd_C() {}
     
     private uint _questid;
     [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"questid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
@@ -178,10 +181,10 @@ namespace Cmd
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"RequestFinishQuestQuestUserCmd_CS")]
-  public partial class RequestFinishQuestQuestUserCmd_CS : global::ProtoBuf.IExtensible
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"RequestFinishQuestQuestUserCmd_C")]
+  public partial class RequestFinishQuestQuestUserCmd_C : global::ProtoBuf.IExtensible
   {
-    public RequestFinishQuestQuestUserCmd_CS() {}
+    public RequestFinishQuestQuestUserCmd_C() {}
     
     private uint _questid;
     [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"questid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
@@ -196,6 +199,121 @@ namespace Cmd
     {
       get { return _npctempid; }
       set { _npctempid = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"RequestClickQuestTraceQuestUserCmd_C")]
+  public partial class RequestClickQuestTraceQuestUserCmd_C : global::ProtoBuf.IExtensible
+  {
+    public RequestClickQuestTraceQuestUserCmd_C() {}
+    
+    private uint _questid;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"questid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint questid
+    {
+      get { return _questid; }
+      set { _questid = value; }
+    }
+    private ulong _npctempid = default(ulong);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"npctempid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong npctempid
+    {
+      get { return _npctempid; }
+      set { _npctempid = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"WorldPosition")]
+  public partial class WorldPosition : global::ProtoBuf.IExtensible
+  {
+    public WorldPosition() {}
+    
+    private Cmd.Pos _pos = null;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"pos", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(null)]
+    public Cmd.Pos pos
+    {
+      get { return _pos; }
+      set { _pos = value; }
+    }
+    private uint _mapid = default(uint);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"mapid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint mapid
+    {
+      get { return _mapid; }
+      set { _mapid = value; }
+    }
+    private uint _countryid = default(uint);
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"countryid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint countryid
+    {
+      get { return _countryid; }
+      set { _countryid = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"ReturnClickQuestTraceQuestUserCmd_S")]
+  public partial class ReturnClickQuestTraceQuestUserCmd_S : global::ProtoBuf.IExtensible
+  {
+    public ReturnClickQuestTraceQuestUserCmd_S() {}
+    
+    private uint _questid;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"questid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint questid
+    {
+      get { return _questid; }
+      set { _questid = value; }
+    }
+    private Cmd.ClickQuestTaceEvent _event;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"event", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public Cmd.ClickQuestTaceEvent @event
+    {
+      get { return _event; }
+      set { _event = value; }
+    }
+    private Cmd.WorldPosition _position = null;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"position", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(null)]
+    public Cmd.WorldPosition position
+    {
+      get { return _position; }
+      set { _position = value; }
+    }
+    private uint _npcbaseid = default(uint);
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"npcbaseid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint npcbaseid
+    {
+      get { return _npcbaseid; }
+      set { _npcbaseid = value; }
+    }
+    private string _dialogname = "";
+    [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"dialogname", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string dialogname
+    {
+      get { return _dialogname; }
+      set { _dialogname = value; }
+    }
+    private bool _repeatclick = default(bool);
+    [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"repeatclick", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool repeatclick
+    {
+      get { return _repeatclick; }
+      set { _repeatclick = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -213,30 +331,6 @@ namespace Cmd
     {
       get { return _questid; }
       set { _questid = value; }
-    }
-    private global::ProtoBuf.IExtension extensionObject;
-    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
-  }
-  
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"RequestQuestDetailInfoQuestUserCmd_C")]
-  public partial class RequestQuestDetailInfoQuestUserCmd_C : global::ProtoBuf.IExtensible
-  {
-    public RequestQuestDetailInfoQuestUserCmd_C() {}
-    
-    private uint _questid;
-    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"questid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public uint questid
-    {
-      get { return _questid; }
-      set { _questid = value; }
-    }
-    private ulong _npctempid;
-    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"npctempid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public ulong npctempid
-    {
-      get { return _npctempid; }
-      set { _npctempid = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -274,5 +368,22 @@ namespace Cmd
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
+  
+    [global::ProtoBuf.ProtoContract(Name=@"ClickQuestTaceEvent")]
+    public enum ClickQuestTaceEvent
+    {
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"ClickQuestTaceEvent_None", Value=0)]
+      ClickQuestTaceEvent_None = 0,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"ClickQuestTaceEvent_GoToNpc", Value=1)]
+      ClickQuestTaceEvent_GoToNpc = 1,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"ClickQuestTaceEvent_GoToPositon", Value=2)]
+      ClickQuestTaceEvent_GoToPositon = 2,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"ClickQuestTaceEvent_OpenDialog", Value=3)]
+      ClickQuestTaceEvent_OpenDialog = 3
+    }
   
 }
