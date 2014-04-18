@@ -282,4 +282,24 @@ namespace Cmd
       TileType_Water = 2
     }
   
+    [global::ProtoBuf.ProtoContract(Name=@"QuestProcess")]
+    public enum QuestProcess
+    {
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"QuestProcess_None", Value=0)]
+      QuestProcess_None = 0,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"QuestProcess_Doing", Value=1)]
+      QuestProcess_Doing = 1,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"QuestProcess_CanDone", Value=2)]
+      QuestProcess_CanDone = 2,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"QuestProcess_Done", Value=3)]
+      QuestProcess_Done = 3,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"QuestProcess_Max", Value=4)]
+      QuestProcess_Max = 4
+    }
+  
 }
