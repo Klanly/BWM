@@ -140,6 +140,13 @@ public static partial class Extensions
 		}
 	}
 
+	public static IEnumerable<TSource> Concat<TSource>(this IEnumerable<TSource> first, TSource tail)
+	{
+		foreach (var d in first)
+			yield return d;
+		yield return tail;
+	}
+
 #if UNITY_METRO && !UNITY_EDITOR
 	public static void ForEach<T>(this List<T> list, Action<T> action)
 	{

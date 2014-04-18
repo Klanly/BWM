@@ -25,4 +25,9 @@ public class SkillInfoItem : MonoBehaviour
 		uiName.text = s.name;
 		uiIcon.normalSprite = s.icon;
 	}
+
+	public override string ToString()
+	{
+		return Skill.Value.ToString();
+	}
 }

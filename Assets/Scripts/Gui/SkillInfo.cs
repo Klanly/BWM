@@ -118,6 +118,9 @@ public class SkillInfo : MonoBehaviour
 		selected = view;
 		// 重置施法按钮为默认状态
 		PresentFireThumbs(this.uiSkillFireThumbs);
+		// 基础攻击技能和未学习技能的施法按钮无法配置
+		foreach (var button in this.uiSkillFireThumbs.Concat(uiSkillFireOK))
+			button.gameObject.SetActive(selected.Skill.Value != null && selected.Skill.Value.IsBasic == false);
 
 		// 基本技能信息显示
 		var s = view.Skill.Value ?? table.TableSkill.First(view.Skill.Key);
