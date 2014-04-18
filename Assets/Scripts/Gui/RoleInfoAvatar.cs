@@ -5,6 +5,7 @@ using Cmd;
 public class RoleInfoAvatar : MonoBehaviour
 {
 	private GameObject avatar;
+	public UILabel uiHeadInfo;
 	public ItemGrid[] items;
 
 	void Start()
@@ -47,6 +48,9 @@ public class RoleInfoAvatar : MonoBehaviour
 
 	void Present(ItemManager manager)
 	{
+		uiHeadInfo.text = string.Format("LV{0} {1}\n{2}", 
+			MainRole.ServerInfo.level, MainRole.ServerInfo.userdata.profession.GetName(),
+			MainRole.ServerInfo.userdata.charname);
 		for (var i = 1; i < items.Length; i++)
 			items[i].ServerInfo = null;
 		foreach (var item in manager.Where(ItemLocation.PackageType.Equip))
