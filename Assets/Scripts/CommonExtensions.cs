@@ -216,7 +216,7 @@ namespace Cmd
 	{	
 		public override string ToString()
 		{
-			return string.Format("{0}, desc={2}", squest, desc);
+			return string.Format("{0}, desc={1}", squest, desc);
 		}
 	}
 	#endregion
