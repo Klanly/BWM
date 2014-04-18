@@ -19,6 +19,7 @@ public class QuestTrace : MonoBehaviour
 	IEnumerator Start()
 	{
 		uiItemProto.gameObject.SetActive(false);
+		uiItemProto.protoLabel.GetComponent<UIWidget>().color = "#D3BDA6FF".Parse(Color.white);
 		yield return new WaitForEndOfFrame();
 		QuestManager.Instance.Changed += OnQuestChanged;
 		OnQuestChanged(QuestManager.Instance);
