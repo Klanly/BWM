@@ -208,7 +208,7 @@ namespace Cmd
 
 		public override string ToString()
 		{
-			return string.Format("#{0}, {1}, {2}", questid, stepcur, stepall);
+			return string.Format("#{0}, {1}/{2}", questid, stepcur, stepall);
 		}
 	}
 
