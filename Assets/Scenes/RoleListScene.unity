@@ -131,13 +131,13 @@ MonoBehaviour:
     absolute: 24
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 7
-  mWidth: 1023
+  mWidth: 960
   mHeight: 344
   mDepth: 2
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 2.79069757
+  aspectRatio: 2.97383714
   mRect:
     serializedVersion: 2
     x: 0
@@ -444,13 +444,13 @@ MonoBehaviour:
     absolute: 186
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 7
-  mWidth: 1097
+  mWidth: 1034
   mHeight: 506
   mDepth: 1
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 2.04347825
+  aspectRatio: 2.16798425
   mRect:
     serializedVersion: 2
     x: 0
@@ -518,13 +518,13 @@ MonoBehaviour:
     absolute: 0
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 1694
+  mWidth: 1631
   mHeight: 640
   mDepth: -1
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 2.5484376
+  aspectRatio: 2.6468749
   mRect:
     serializedVersion: 2
     x: 0
@@ -619,8 +619,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 353, y: 87, z: 0}
-  m_Center: {x: 0, y: -43.5, z: 0}
+  m_Size: {x: 330, y: 87, z: 0}
+  m_Center: {x: -60, y: -43.5, z: 0}
 --- !u!114 &884787676
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -677,7 +677,7 @@ MonoBehaviour:
   mWidth: 353
   mHeight: 87
   mDepth: 4
-  autoResizeBoxCollider: 1
+  autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
   aspectRatio: 4.05747128
@@ -791,13 +791,13 @@ MonoBehaviour:
     absolute: 186
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 7
-  mWidth: 1097
+  mWidth: 1034
   mHeight: 506
   mDepth: 1
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 2.04347825
+  aspectRatio: 2.16798425
   mRect:
     serializedVersion: 2
     x: 0
@@ -945,13 +945,13 @@ MonoBehaviour:
     absolute: 0
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 1694
+  mWidth: 1631
   mHeight: 640
   mDepth: -1
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 2.5484376
+  aspectRatio: 2.6468749
   mRect:
     serializedVersion: 2
     x: 0
@@ -1652,7 +1652,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 59, y: 53, z: 0}
+  m_Size: {x: 70, y: 100, z: 0}
   m_Center: {x: 29.5, y: -26.5, z: 0}
 --- !u!114 &1713682105
 MonoBehaviour:
@@ -1710,7 +1710,7 @@ MonoBehaviour:
   mWidth: 59
   mHeight: 53
   mDepth: 6
-  autoResizeBoxCollider: 1
+  autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
   aspectRatio: 1.11320758
@@ -1946,7 +1946,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 6500000, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 2}
       propertyPath: m_Size.x
-      value: 353
+      value: 330
       objectReference: {fileID: 0}
     - target: {fileID: 11400004, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 2}
       propertyPath: mWidth
@@ -2048,6 +2048,14 @@ Prefab:
     - target: {fileID: 11400004, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 2}
       propertyPath: mPivot
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400004, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 2}
+      propertyPath: autoResizeBoxCollider
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6500000, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 2}
+      propertyPath: m_Center.x
+      value: -60
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 2}
