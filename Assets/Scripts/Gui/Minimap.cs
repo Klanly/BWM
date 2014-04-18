@@ -15,6 +15,8 @@ public class Minimap : MonoBehaviour
 
 	public bool Layout { get; set; }
 
+	private Material material;
+
 	public void Setup()
 	{
 		uiMapTexture.mainTexture = BattleScene.Instance.MapNav.transform.parent.GetComponentInChildren<MapTexture>().texture;
@@ -23,6 +25,13 @@ public class Minimap : MonoBehaviour
 		if (MainRole.Instance != null)
 			MainRole.Instance.entity.PositionChanged += OnMainRolePositionChanged;
 		OnMainRolePositionChanged(MainRole.Instance.entity);
+	}
+
+	void Start()
+	{
+		// 对material clone一份，防止运行时的修改影响到源文件
+		material = (Material)GameObject.Instantiate(uiMapTexture.material);
+		uiMapTexture.material = material;
 	}
 
 	void OnDestroy()
@@ -46,7 +55,6 @@ public class Minimap : MonoBehaviour
 
 			var pos = MainRole.Instance.entity.Position;
 
-			var material = uiMapTexture.material;
 			material.SetFloat("_Cutoff", uiMapTexture.mainTexture == null ? 0 : 0.1f);
 			material.mainTextureOffset = new Vector2(
 				Mathf.Clamp((pos.x - Extent / uiMapTexture.mainTexture.width * 0.5f) / size.x, 0, 1 - Extent / uiMapTexture.mainTexture.width),

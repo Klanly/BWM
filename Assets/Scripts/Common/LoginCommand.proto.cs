@@ -441,7 +441,10 @@ namespace Cmd
       Shutdown = 0,
             
       [global::ProtoBuf.ProtoEnum(Name=@"Normal", Value=1)]
-      Normal = 1
+      Normal = 1,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"Fullly", Value=2)]
+      Fullly = 2
     }
   
 }
