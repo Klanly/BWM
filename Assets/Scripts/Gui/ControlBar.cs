@@ -6,6 +6,7 @@ public class ControlBar : MonoBehaviour
 {
 	public UIButton roleInfoButton;
 	public UIButton[] uiSkillFireThumbs;
+	public UIButton uiSkillBasic;
 
 	void Start()
 	{
@@ -17,6 +18,8 @@ public class ControlBar : MonoBehaviour
 		};
 
 		// 技能施法按钮点击
+		UIEventListener.Get(uiSkillBasic.gameObject).onClick = go =>
+			SelectTarget.FireSkill(SkillManager.Instance.BasicSkill);
 		for (var i = 0; i < uiSkillFireThumbs.Length; i++)
 		{
 			var index = i;

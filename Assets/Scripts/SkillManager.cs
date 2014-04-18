@@ -16,6 +16,11 @@ public class SkillManager : IEnumerable<KeyValuePair<uint, table.TableSkill>>
 	static SkillManager() { Instance = new SkillManager(); }
 	private readonly Dictionary<uint, table.TableSkill> skillLevels = new Dictionary<uint, table.TableSkill>();
 
+	public uint BasicSkill
+	{
+		get { return (from s in skillLevels where s.Value.IsBasic select s.Key).FirstOrDefault(); }
+	}
+
 	public event Action<SkillManager> SkillChanged;
 
 	protected void OnSkillChanged()
