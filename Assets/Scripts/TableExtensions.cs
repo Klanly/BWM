@@ -75,6 +75,11 @@ namespace table
 		/// 相同<see cref="id"/>的最高等级
 		/// </summary>
 		public uint MaxLevel { get { return Last(this.id).level; } }
+
+		/// <summary>
+		/// 是否为普通攻击技能
+		/// </summary>
+		public bool IsBasic { get { return id == 1000 || id == 2000 || id == 3000; } }
 		 
 		/// <summary>
 		/// 得到和给定职业相符合的所有技能ID列表

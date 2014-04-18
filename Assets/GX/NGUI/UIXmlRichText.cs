@@ -192,16 +192,8 @@ public class UIXmlRichText : UIRichText
 
 	protected void AddColor(XElement e, ICollection<UIWidget> paragraph, Color? color)
 	{
-		var value = e.AttributeValue("value");
 		Color c;
-		if (Extensions.ParseColor(out c, value))
-		{
-			AddNodes(e.Nodes(), paragraph, c);
-		}
-		else
-		{
-			AddNodes(e.Nodes(), paragraph, color);
-		}
+		AddNodes(e.Nodes(), paragraph, e.AttributeValue("value").TryParse(out c) ? c : color);
 	}
 
 	protected void AddParagraph(XElement e, ICollection<UIWidget> paragraph, Color? color)

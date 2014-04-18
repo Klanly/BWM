@@ -5,8 +5,8 @@ using System.Linq;
 public class ControlBar : MonoBehaviour
 {
 	public UIButton roleInfoButton;
-	public UIButton skillInfoButton;
 	public UIButton[] uiSkillFireThumbs;
+	public UIButton uiSkillBasic;
 
 	void Start()
 	{
@@ -17,14 +17,9 @@ public class ControlBar : MonoBehaviour
 			target.gameObject.SetActive(!target.gameObject.activeSelf);
 		};
 
-		// 切换SkillInfo界面的显隐
-		UIEventListener.Get(skillInfoButton.gameObject).onClick = go =>
-		{
-			var target = BattleScene.Instance.Gui<SkillInfo>();
-			target.gameObject.SetActive(!target.gameObject.activeSelf);
-		};
-
 		// 技能施法按钮点击
+		UIEventListener.Get(uiSkillBasic.gameObject).onClick = go =>
+			SelectTarget.FireSkill(SkillManager.Instance.BasicSkill);
 		for (var i = 0; i < uiSkillFireThumbs.Length; i++)
 		{
 			var index = i;

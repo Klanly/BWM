@@ -166,7 +166,9 @@ public class Role : MonoBehaviour
 			MainRole.ServerInfo.hp = cmd.curhp;
 			return;
 		}
-		if (SelectTarget.Selected.entrytype == SceneEntryType.SceneEntryType_Player && SelectTarget.Selected.entryid == cmd.charid)
+		if (SelectTarget.Selected != null &&
+			SelectTarget.Selected.entrytype == SceneEntryType.SceneEntryType_Player &&
+			SelectTarget.Selected.entryid == cmd.charid)
 		{
 			var view = BattleScene.Instance.Gui<SelectTargetRole>();
 			view.SetHp(cmd.curhp);

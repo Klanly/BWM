@@ -26,14 +26,14 @@ public class QuestDialog : MonoBehaviour
 		{
 			if (QuestManager.Instance[QuestID].squest.Finished)
 			{
-				Net.Instance.Send(new RequestFinishQuestQuestUserCmd_CS()
+				Net.Instance.Send(new RequestFinishQuestQuestUserCmd_C()
 				{
 					questid = QuestID,
 				});
 			}
 			else
 			{
-				Net.Instance.Send(new RequestAcceptQuestQuestUserCmd_CS()
+				Net.Instance.Send(new RequestAcceptQuestQuestUserCmd_C()
 				{
 					questid = QuestID,
 				});

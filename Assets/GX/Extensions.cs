@@ -140,6 +140,13 @@ public static partial class Extensions
 		}
 	}
 
+	public static IEnumerable<TSource> Concat<TSource>(this IEnumerable<TSource> first, TSource tail)
+	{
+		foreach (var d in first)
+			yield return d;
+		yield return tail;
+	}
+
 #if UNITY_METRO && !UNITY_EDITOR
 	public static void ForEach<T>(this List<T> list, Action<T> action)
 	{
@@ -266,30 +273,82 @@ public static partial class Extensions
 	#endregion
 
 	#region String
-	public static bool Parse(this string str, bool defaultValue)
+	public static bool TryParse(this string value, out bool result)
+	{
+		return bool.TryParse(value, out result);
+	}
+	public static bool Parse(this string value, bool defaultValue)
 	{
 		bool ret;
-		return bool.TryParse(str, out ret) ? ret : defaultValue;
+		return bool.TryParse(value, out ret) ? ret : defaultValue;
 	}
-	public static int Parse(this string str, int defaultValue)
+
+	public static bool TryParse(this string value, out int result)
+	{
+		return int.TryParse(value, out result);
+	}
+	public static int Parse(this string value, int defaultValue)
 	{
 		int ret;
-		return int.TryParse(str, out ret) ? ret : defaultValue;
+		return int.TryParse(value, out ret) ? ret : defaultValue;
 	}
-	public static uint Parse(this string str, uint defaultValue)
+
+	public static bool TryParse(this string value, out uint result)
+	{
+		return uint.TryParse(value, out result);
+	}
+	public static uint Parse(this string value, uint defaultValue)
 	{
 		uint ret;
-		return uint.TryParse(str, out ret) ? ret : defaultValue;
+		return uint.TryParse(value, out ret) ? ret : defaultValue;
 	}
-	public static ulong Parse(this string str, ulong defaultValue)
+
+	public static bool TryParse(this string value, out ulong result)
+	{
+		return ulong.TryParse(value, out result);
+	}
+	public static ulong Parse(this string value, ulong defaultValue)
 	{
 		ulong ret;
-		return ulong.TryParse(str, out ret) ? ret : defaultValue;
+		return ulong.TryParse(value, out ret) ? ret : defaultValue;
 	}
-	public static float Parse(this string str, float defaultValue)
+
+	public static bool TryParse(this string value, out float result)
+	{
+		return float.TryParse(value, out result);
+	}
+	public static float Parse(this string value, float defaultValue)
 	{
 		float ret;
-		return float.TryParse(str, out ret) ? ret : defaultValue;
+		return float.TryParse(value, out ret) ? ret : defaultValue;
+	}
+
+	/// <summary>
+	/// 颜色值解析
+	/// </summary>
+	/// <param name="value">支持的格式：#RGB, #RRGGBB, #RRGGBBAA, ColorName</param>
+	/// <param name="result"></param>
+	/// <returns></returns>
+	public static bool TryParse(this string value, out Color result)
+	{
+		if (string.IsNullOrEmpty(value))
+		{
+			result = Color.white;
+			return false;
+		}
+		if (value.StartsWith("#"))
+			return Extensions.TryParseColorFromRGBA(value.Substring(1), out result);
+		else
+			return Extensions.TryParseColorFromName(value, out result);
+	}
+	/// <summary>
+	/// 颜色值解析
+	/// </summary>
+	/// <param name="value">支持的格式：#RGB, #RRGGBB, #RRGGBBAA, ColorName</param>
+	public static Color Parse(this string value, Color defaultValue)
+	{
+		Color ret;
+		return TryParse(value, out ret) ? ret : defaultValue;
 	}
 	#endregion
 
@@ -410,30 +469,15 @@ public static partial class Extensions
 	#endregion
 
 	#region Color
-	/// <summary>
-	/// 颜色值解析
-	/// </summary>
-	/// <param name="color"></param>
-	/// <param name="value">支持的格式：#RGB, #RRGGBB, #RRGGBBAA, ColorName</param>
-	/// <returns></returns>
-	public static bool ParseColor(out Color color, string value)
-	{
-		color = Color.white;
-		if (string.IsNullOrEmpty(value))
-			return false;
-		if (value.StartsWith("#"))
-			return Extensions.ParseColorFromRGBA(out color, value.Substring(1));
-		else
-			return Extensions.ParseColorFromName(out color, value);
-	}
+	
 	/// <summary>
 	/// 颜色值解析
 	/// ref: http://www.dreamdu.com/css/css_colors/
 	/// </summary>
-	/// <param name="color"></param>
 	/// <param name="rgba">支持的格式：RGB, RRGGBB, RRGGBBAA</param>
+	/// <param name="color"></param>
 	/// <returns></returns>
-	public static bool ParseColorFromRGBA(out Color color, string rgba)
+	private static bool TryParseColorFromRGBA(string rgba, out Color color)
 	{
 		color = Color.white;
 		if (string.IsNullOrEmpty(rgba))
@@ -463,10 +507,10 @@ public static partial class Extensions
 	/// <summary>
 	/// 颜色值解析
 	/// </summary>
-	/// <param name="color"></param>
 	/// <param name="colorName">支持的颜色名：black, blue, clear, cyan, gray, green, magenta, red, white, yellow</param>
+	/// <param name="color"></param>
 	/// <returns></returns>
-	public static bool ParseColorFromName(out Color color, string colorName)
+	private static bool TryParseColorFromName(string colorName, out Color color)
 	{
 		switch (colorName)
 		{

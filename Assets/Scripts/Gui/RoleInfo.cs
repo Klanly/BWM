@@ -3,11 +3,15 @@ using System.Collections;
 
 public class RoleInfo : MonoBehaviour
 {
-	public UIButton uiQuest;
+	public UIButton uiSkillInfo;
 
 	void Start()
 	{
-		UIEventListener.Get(uiQuest.gameObject).onClick = go => BattleScene.Instance.Gui<QuestDialog>().gameObject.SetActive(true);
+		UIEventListener.Get(uiSkillInfo.gameObject).onClick = go =>
+		{
+			var target = BattleScene.Instance.Gui<SkillInfo>();
+			target.gameObject.SetActive(!target.gameObject.activeSelf);
+		};
 	}
 	void OnEnable()
 	{
