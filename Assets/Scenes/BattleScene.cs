@@ -3,6 +3,7 @@ using System.Collections;
 using System;
 using System.Linq;
 using System.Collections.Generic;
+using GX;
 
 public class BattleScene : MonoBehaviour
 {
@@ -17,6 +18,20 @@ public class BattleScene : MonoBehaviour
 	public T Gui<T>() where T : MonoBehaviour
 	{
 		return this.GetComponentsDescendant<T>().FirstOrDefault();
+	}
+
+	public MonoBehaviour Gui(string guiTypeName)
+	{
+		try
+		{
+			var type = System.Type.GetType(guiTypeName);
+			var method = typeof(BattleScene).GetRuntimeMethod("Gui").MakeGenericMethod(type);
+			return method.Invoke(BattleScene.Instance, null) as MonoBehaviour;
+		}
+		catch
+		{
+			return null;
+		}
 	}
 	#endregion
 

@@ -4,6 +4,7 @@ using System.Linq;
 using Cmd;
 using System.Xml.Linq;
 using GX.Net;
+using GX;
 
 /// <summary>
 /// 任务追踪界面
@@ -21,7 +22,7 @@ public class QuestTrace : MonoBehaviour
 		yield return new WaitForEndOfFrame();
 		QuestManager.Instance.Changed += OnQuestChanged;
 		OnQuestChanged(QuestManager.Instance);
-		
+
 	}
 
 	void OnDestroy()
@@ -107,7 +108,12 @@ public class QuestTrace : MonoBehaviour
 				break;
 			case ClickQuestTaceEvent.ClickQuestTaceEvent_OpenDialog:
 				{
-					//BattleScene.Instance.Gui<int>().game
+					var gui = BattleScene.Instance.Gui(cmd.dialogname);
+					if (gui == null)
+						break;
+					gui.gameObject.SetActive(true);
+					if (cmd.repeatclick)
+						Net.Instance.Send(new RequestClickQuestTraceQuestUserCmd_C() { questid = cmd.questid });
 				}
 				break;
 			default:
