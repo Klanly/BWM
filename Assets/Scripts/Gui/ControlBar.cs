@@ -7,6 +7,7 @@ public class ControlBar : MonoBehaviour
 	public UIButton roleInfoButton;
 	public UIButton[] uiSkillFireThumbs;
 	public UIButton uiSkillBasic;
+	public GXJoystick joystick;
 
 	void Start()
 	{
@@ -42,5 +43,23 @@ public class ControlBar : MonoBehaviour
 		if (e != null && e.PropertyName != "skillbar")
 			return;
 		SkillInfo.PresentFireThumbs(this.uiSkillFireThumbs);
+	}
+
+	void Update()
+	{
+		if (joystick) 
+		{
+			float horizontal = Input.GetAxis ("Horizontal");
+			float vertical = Input.GetAxis ("Vertical");
+			if (horizontal == 0 && vertical == 0) 
+			{
+				horizontal = joystick.position.x;
+				vertical = joystick.position.y;
+			}
+			if(MainRole.Instance)
+			{
+				MainRole.Instance.controlMove.MoveByJoystick(horizontal, vertical);
+			}
+		}
 	}
 }
