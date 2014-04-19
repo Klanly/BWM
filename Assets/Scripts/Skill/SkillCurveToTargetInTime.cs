@@ -27,18 +27,18 @@ public class SkillCurveToTargetInTime : SendTargetEventBase
 				"from", delay, 
 				"to", 0.0f, 
 				"time", delay, 
-				"onupdate", "onUpdate",
-				"oncomplete", "MoveParticle"));
+				"onupdate", "onUpdate_SkillCurveToTargetInTime",
+				"oncomplete", "MoveParticle_SkillCurveToTargetInTime"));
 		}
 		else
 		{
-			MoveParticle();
+			MoveParticle_SkillCurveToTargetInTime();
 		}
 	}
 
-	void onUpdate(float delay) { }
+	void onUpdate_SkillCurveToTargetInTime(float delay) { }
 
-	void MoveParticle()
+	void MoveParticle_SkillCurveToTargetInTime()
 	{
 		var skill = gameObject.GetComponent<Skill>();
 		if (!skill || !skill.startGo || !skill.targetGo)

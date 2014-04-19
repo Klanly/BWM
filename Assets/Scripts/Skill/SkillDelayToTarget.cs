@@ -16,20 +16,22 @@ public class SkillDelayToTarget : SendTargetEventBase
 				"to", 0.0f, 
 				"time", delay, 
 				"onupdate", "onUpdate", 
-				"oncomplete", "StartTargetEvent"));
+				"oncomplete", "StartTargetEvent_SkillDelayToTarget"));
 		}
 		else
 		{
-			StartTargetEvent();
+			StartTargetEvent_SkillDelayToTarget();
 		}
 	}
 
 	void onUpdate(float delay) { }
 
-	void StartTargetEvent()
+	void StartTargetEvent_SkillDelayToTarget()
 	{
 		if (sendTargetEvent)
+		{
 			gameObject.SendMessage("ApplyTargetEvent");
+		}
 		Destroy(this);
 	}
 }
