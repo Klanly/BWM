@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class TestAvatar : MonoBehaviour {
+public class AvatarView: MonoBehaviour {
 
 	public GameObject prefabSkeleton;
 	public GameObject prefabCoat;
