@@ -362,7 +362,10 @@ namespace Cmd
       ClickQuestTaceEvent_GoToPositon = 2,
             
       [global::ProtoBuf.ProtoEnum(Name=@"ClickQuestTaceEvent_OpenDialog", Value=3)]
-      ClickQuestTaceEvent_OpenDialog = 3
+      ClickQuestTaceEvent_OpenDialog = 3,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"ClickQuestTaceEvent_AttackMonster", Value=4)]
+      ClickQuestTaceEvent_AttackMonster = 4
     }
   
 }

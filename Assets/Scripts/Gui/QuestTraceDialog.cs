@@ -77,6 +77,8 @@ public class QuestTraceDialog : MonoBehaviour
 			return;
 		switch (cmd.@event)
 		{
+			case ClickQuestTaceEvent.ClickQuestTaceEvent_None:
+				break;
 			case ClickQuestTaceEvent.ClickQuestTaceEvent_GoToNpc:
 				{
 					var npc = Npc.All.Values.FirstOrDefault(i => i.TableInfo.id == cmd.npcbaseid);
@@ -118,6 +120,11 @@ public class QuestTraceDialog : MonoBehaviour
 					gui.gameObject.SetActive(true);
 					if (cmd.repeatclick)
 						Net.Instance.Send(new RequestClickQuestTraceQuestUserCmd_C() { questid = cmd.questid });
+				}
+				break;
+			case ClickQuestTaceEvent.ClickQuestTaceEvent_AttackMonster:
+				{
+					// TODO: 按照给定的 cmd.npcbaseid 打怪
 				}
 				break;
 			default:
