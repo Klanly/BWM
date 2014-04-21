@@ -125,6 +125,11 @@ public class QuestTraceDialog : MonoBehaviour
 			case ClickQuestTaceEvent.ClickQuestTaceEvent_AttackMonster:
 				{
 					// TODO: 按照给定的 cmd.npcbaseid 打怪
+					var npc = Npc.All.Values.FirstOrDefault(i => i.TableInfo.id == cmd.npcbaseid);
+					if (npc == null)
+						break;
+					var position = npc.transform.localPosition;
+					MainRole.Instance.pathMove.WalkTo(position);
 				}
 				break;
 			default:
