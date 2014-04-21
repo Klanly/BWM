@@ -15,52 +15,51 @@ public class QuestDialog : MonoBehaviour
 	public UIXmlRichText uiXmlRichText;
 	public UIButton uiOKButton;
 
-	public string QuestDetail { get; set; }
-	public uint QuestID { get; set; }
+	private uint questID;
+	private QuestProcess questState;
 
-	IEnumerator Start()
+	void Start()
 	{
-		yield return new WaitForEndOfFrame();
-		uiOKButton.GetComponentInChildren<UILabel>().text = QuestManager.Instance[QuestID].squest.Finished ? "完成" : "接受";
 		UIEventListener.Get(uiOKButton.gameObject).onClick = go =>
 		{
-			if (QuestManager.Instance[QuestID].squest.Finished)
+			if (questState == QuestProcess.QuestProcess_CanDone)
 			{
 				Net.Instance.Send(new RequestFinishQuestQuestUserCmd_C()
 				{
-					questid = QuestID,
+					questid = questID,
 				});
 			}
 			else
 			{
 				Net.Instance.Send(new RequestAcceptQuestQuestUserCmd_C()
 				{
-					questid = QuestID,
+					questid = questID,
 				});
 			}
 
 			this.GetComponent<Closeable>().Close();
 		};
-
 		uiXmlRichText.UrlClicked += OnUrlClicked;
-		SetTitle("任务交接");
-		SetMessage(QuestDetail);
+	}
+
+	public void Present(uint questID, QuestProcess state, string xml)
+	{
+		if (state != QuestProcess.QuestProcess_CanDone && state != QuestProcess.QuestProcess_None)
+		{
+			Debug.LogError(string.Format("不可接受的任务状态: {0} {1}", questID, state));
+			return;
+		}
+		this.questID = questID;
+		this.questState = state;
+		uiOKButton.GetComponentInChildren<UILabel>().text = this.questState == QuestProcess.QuestProcess_CanDone ? "完成" : "接受";
+		uiTitle.text = "任务交接";
+		uiXmlRichText.Clear();
+		uiXmlRichText.AddXml(xml);
 	}
 
 	void OnEnable()
 	{
 		NGUITools.BringForward(this.gameObject);
-	}
-
-	public void SetTitle(string title)
-	{
-		uiTitle.text = title;
-	}
-
-	public void SetMessage(string xml)
-	{
-		uiXmlRichText.Clear();
-		uiXmlRichText.AddXml(xml);
 	}
 
 	private void OnUrlClicked(UIWidget sender, string url)

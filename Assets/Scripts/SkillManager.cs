@@ -89,6 +89,25 @@ public class SkillManager : IEnumerable<KeyValuePair<uint, table.TableSkill>>
 		}).ToArray());
 	}
 
+	/// <summary>
+	/// 释放给定的技能
+	/// </summary>
+	/// <param name="skillID"></param>
+	/// <returns></returns>
+	public static bool Fire(uint skillID)
+	{
+		var skill = SkillManager.Instance.GetSkill(skillID);
+		if (skill == null)
+			return false;
+		Debug.Log("FireSkill: " + skill);
+		// TODO: 群攻搜索并批量发送攻击请求
+		var cmd = new RequestUseSkillUserCmd_C() { skillid = skill.id };
+		if (SelectTarget.Selected != null && SelectTarget.Selected != null)
+			cmd.hurts.Add(SelectTarget.Selected);
+		Net.Instance.Send(cmd);
+		return false;
+	}
+
 	#region 网络消息处理
 	[Execute]
 	public static void Execute(AddSkillListSkillUserCmd_S cmd)
@@ -109,6 +128,41 @@ public class SkillManager : IEnumerable<KeyValuePair<uint, table.TableSkill>>
 	{
 		SkillManager.Instance.skillLevels.Remove(cmd.skillid);
 		SkillManager.Instance.OnSkillChanged();
+	}
+
+	/// <summary>
+	/// 服务器驱动的技能生效
+	/// </summary>
+	/// <param name="cmd"></param>
+	[Execute]
+	public static void Execute(ReturnUseSkillUserCmd_S cmd)
+	{
+		CastSkill cast = null;
+		switch (cmd.owner.entrytype)
+		{
+			case Cmd.SceneEntryType.SceneEntryType_Npc:
+				{
+					Npc owner;
+					if (Npc.All.TryGetValue(cmd.owner.entryid, out owner))
+						cast = owner.CastSkill;
+				}
+				break;
+			case Cmd.SceneEntryType.SceneEntryType_Player:
+				{
+					Role owner;
+					if (Role.All.TryGetValue(cmd.owner.entryid, out owner))
+						cast = owner.CastSkill;
+				}
+				break;
+			default:
+				break;
+		}
+
+		var skill = table.TableSkill.Where(cmd.skillid, cmd.skilllevel);
+		if (cast == null || skill == null)
+			return;
+		foreach (var target in cmd.hurts)
+			cast.StartSkill(skill, target);
 	}
 	#endregion
 }

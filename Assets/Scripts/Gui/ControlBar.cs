@@ -20,12 +20,12 @@ public class ControlBar : MonoBehaviour
 
 		// 技能施法按钮点击
 		UIEventListener.Get(uiSkillBasic.gameObject).onClick = go =>
-			SelectTarget.FireSkill(SkillManager.Instance.BasicSkill);
+			SkillManager.Fire(SkillManager.Instance.BasicSkill);
 		for (var i = 0; i < uiSkillFireThumbs.Length; i++)
 		{
 			var index = i;
-			UIEventListener.Get(uiSkillFireThumbs[index].gameObject).onClick = go => 
-				SelectTarget.FireSkill(Config.UserData.Instance.skillbar[index]);
+			UIEventListener.Get(uiSkillFireThumbs[index].gameObject).onClick = go =>
+				SkillManager.Fire(Config.UserData.Instance.skillbar[index]);
 		}
 
 		Config.UserData.Instance.PropertyChanged += OnConfigUserDataChanged;

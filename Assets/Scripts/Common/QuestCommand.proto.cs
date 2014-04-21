@@ -321,8 +321,15 @@ namespace Cmd
       get { return _squest; }
       set { _squest = value; }
     }
+    private Cmd.QuestProcess _process;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"process", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public Cmd.QuestProcess process
+    {
+      get { return _process; }
+      set { _process = value; }
+    }
     private uint _npcbaseid = default(uint);
-    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"npcbaseid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"npcbaseid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint npcbaseid
     {
@@ -330,7 +337,7 @@ namespace Cmd
       set { _npcbaseid = value; }
     }
     private string _detail;
-    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"detail", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::ProtoBuf.ProtoMember(4, IsRequired = true, Name=@"detail", DataFormat = global::ProtoBuf.DataFormat.Default)]
     public string detail
     {
       get { return _detail; }
@@ -355,7 +362,10 @@ namespace Cmd
       ClickQuestTaceEvent_GoToPositon = 2,
             
       [global::ProtoBuf.ProtoEnum(Name=@"ClickQuestTaceEvent_OpenDialog", Value=3)]
-      ClickQuestTaceEvent_OpenDialog = 3
+      ClickQuestTaceEvent_OpenDialog = 3,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"ClickQuestTaceEvent_AttackMonster", Value=4)]
+      ClickQuestTaceEvent_AttackMonster = 4
     }
   
 }
