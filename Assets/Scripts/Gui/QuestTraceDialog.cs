@@ -83,6 +83,7 @@ public class QuestTraceDialog : MonoBehaviour
 					if (npc == null)
 						break;
 					var position = npc.transform.localPosition;
+					// TODO: 需要随机到10格范围内，避免寻路重叠
 					if (cmd.repeatclick)
 					{
 						MainRole.Instance.pathMove.WalkTo(position, () =>
