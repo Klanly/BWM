@@ -26,7 +26,47 @@ public class SelectTarget : MonoBehaviour
 		return present;
 	}
 
-	public static SceneEntryUid Selected { get; set; }
+	private static SceneEntryUid s_selected;
+	public static SceneEntryUid Selected 
+	{
+		get { return s_selected; }
+		set
+		{
+			if (s_selected == value)
+				return;
+			s_selected = value;
+			if (value == null)
+			{
+				BattleScene.Instance.Gui<SelectTargetBoss>().gameObject.SetActive(false);
+				BattleScene.Instance.Gui<SelectTargetElite>().gameObject.SetActive(false);
+				BattleScene.Instance.Gui<SelectTargetMonster>().gameObject.SetActive(false);
+				BattleScene.Instance.Gui<SelectTargetNpc>().gameObject.SetActive(false);
+				BattleScene.Instance.Gui<SelectTargetRole>().gameObject.SetActive(false);
+			}
+			else
+			{
+				switch (Selected.entrytype)
+				{
+					case SceneEntryType.SceneEntryType_Npc:
+						{
+							Npc target;
+							if (Npc.All.TryGetValue(Selected.entryid, out target))
+								OnSelect(target);
+						}
+						break;
+					case SceneEntryType.SceneEntryType_Player:
+						{
+							Role target;
+							if (Role.All.TryGetValue(Selected.entryid, out target))
+								BattleScene.Instance.Gui<SelectTarget>().Toggle<SelectTargetRole>().OnSelect(target);
+						}
+						break;
+					default:
+						break;
+				}
+			}
+		}
+	}
 
 	/// <summary>
 	/// 场景点选
@@ -35,29 +75,10 @@ public class SelectTarget : MonoBehaviour
 	[Execute]
 	public static IEnumerator Execute(SelectSceneEntryScriptUserCmd_CS cmd)
 	{
-		Selected = cmd.entry;
 		var my = BattleScene.Instance.Gui<SelectTarget>();
 		my.gameObject.SetActive(true);
 		yield return null;
-		switch (Selected.entrytype)
-		{
-			case SceneEntryType.SceneEntryType_Npc:
-				{
-					Npc target;
-					if (Npc.All.TryGetValue(Selected.entryid, out target))
-						OnSelect(target);
-				}
-				break;
-			case SceneEntryType.SceneEntryType_Player:
-				{
-					Role target;
-					if (Role.All.TryGetValue(Selected.entryid, out target))
-						my.Toggle<SelectTargetRole>().OnSelect(target);
-				}
-				break;
-			default:
-				break;
-		}
+		Selected = cmd.entry;
 	}
 
 	/// <summary>
@@ -109,5 +130,4 @@ public class SelectTarget : MonoBehaviour
 				return false;
 		}
 	}
-
 }
