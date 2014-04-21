@@ -4,31 +4,24 @@ using System.Collections;
 [RequireComponent(typeof(Skill))]
 public class SkillPlayTargetParticle : SkillBase
 {
-
 	public float delay;
 	public GameObject particle;
 	public string mountOfTargetGo;
 
-	void ApplyTargetEvent()
+	IEnumerator ApplyTargetEvent()
 	{
 		if (delay > 0.0f)
 		{
-			iTween.ValueTo(gameObject, iTween.Hash(
-				"from", delay, 
-				"to", 0.0f, 
-				"time", delay, 
-				"onupdate", "onUpdate_SkillPlayTargetParticle",
-				"oncomplete", "PlayParticle_SkillPlayTargetParticle"));
+			yield return new WaitForSeconds (delay);
+			PlayParticle();
 		}
 		else
 		{
-			PlayParticle_SkillPlayTargetParticle();
+			PlayParticle();
 		}
 	}
 
-	void onUpdate_SkillPlayTargetParticle(float delay) { }
-
-	void PlayParticle_SkillPlayTargetParticle()
+	void PlayParticle()
 	{
 		if(particle == null)
 		{

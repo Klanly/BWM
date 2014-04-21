@@ -9,74 +9,84 @@ public class SkillMoveToTargetInTime : SendTargetEventBase
 	public string mountOfTargetGo;
 	public float delay;
 	public float time;
-	public iTween.EaseType easeType = iTween.EaseType.linear;
+	public Easing.EaseType easeType = Easing.EaseType.linear;
 	public bool orientToPath = true;
 
 	private GameObject particleGo;
 	private Transform mountTargetGo;
 	private Vector3[] path;
+	private float curTime;
+
+	/// <summary>
+	/// 运动状态
+	/// </summary>
+	private enum State
+	{
+		delay,
+		start,
+		move,
+	}
+	private State state = State.delay;
 
 	// Use this for initialization
 	override public void StartSkill()
 	{
-		if (delay > 0.0f)
-		{
-			iTween.ValueTo(gameObject, iTween.Hash(
-				"from", delay, 
-				"to", 0.0f, 
-				"time", delay,
-				"onupdate", "onUpdate_SkillMoveToTargetInTime",
-				"oncomplete", "MoveParticle_SkillMoveToTargetInTime"));
-		}
-		else
-		{
-			MoveParticle_SkillMoveToTargetInTime();
-		}
 	}
 
-	void onUpdate_SkillMoveToTargetInTime(float delay) { }
-
-	void MoveParticle_SkillMoveToTargetInTime()
+	void Update()
 	{
-		var skill = gameObject.GetComponent<Skill>();
-		if (!skill || !skill.startGo || !skill.targetGo)
+		if(state == State.delay)
 		{
-			StartTargetEvent();
-			return;
+			delay -= Time.deltaTime;
+			if(delay <= 0.0f)
+				state = State.start;
 		}
 
-		var mountStartGo = SkillBase.Find(skill.startGo.transform, mountOfStartGo);
-		if (!mountStartGo)
-			mountStartGo = skill.startGo.transform;
+		if(state == State.start)
+		{
+			var skill = gameObject.GetComponent<Skill>();
+			if (!skill || !skill.startGo || !skill.targetGo)
+			{
+				StartTargetEvent();
+				return;
+			}
+			
+			var mountStartGo = SkillBase.Find(skill.startGo.transform, mountOfStartGo);
+			if (!mountStartGo)
+				mountStartGo = skill.startGo.transform;
+			
+			mountTargetGo = SkillBase.Find(skill.targetGo.transform, mountOfTargetGo);
+			if (!mountTargetGo)
+				mountTargetGo = skill.targetGo.transform;
+			
+			particleGo = Instantiate(particle) as GameObject;
+			if(particleGo.GetComponent<ParticleParentAutoDestroy>() == null)
+				particleGo.AddComponent<ParticleParentAutoDestroy>();
+			particleGo.transform.localPosition = Vector3.zero;
+			path = new Vector3[2] { mountStartGo.transform.position, mountTargetGo.transform.position };
+			curTime = 0.0f;
 
-		mountTargetGo = SkillBase.Find(skill.targetGo.transform, mountOfTargetGo);
-		if (!mountTargetGo)
-			mountTargetGo = skill.targetGo.transform;
+			state = State.move;
+		}
 
-		particleGo = Instantiate(particle) as GameObject;
-		if(particleGo.GetComponent<ParticleParentAutoDestroy>() == null)
-			particleGo.AddComponent<ParticleParentAutoDestroy>();
-		particleGo.transform.localPosition = Vector3.zero;
-		path = new Vector3[2] { mountStartGo.transform.position, mountTargetGo.transform.position };
-		iTween.ValueTo(gameObject, iTween.Hash(
-			"from", 0.0f, 
-			"to", time, 
-			"time", time, 
-			"easetype", easeType, 
-			"onupdate", "onMoveUpdate",
-			"oncomplete", "StartTargetEvent"));
-	}
+		else if(state == State.move)
+		{
+			curTime += Time.deltaTime;
+			float percentage = curTime / time;
+			if(percentage >= 1.0f)
+			{
+				StartTargetEvent();
+			}
 
-	void onMoveUpdate(float curTime)
-	{
-		if (!particleGo || !mountTargetGo)
-			return;
-
-		path[1] = mountTargetGo.transform.position;
-		float percentage = curTime / time;
-		iTween.PutOnPath(particleGo, path, percentage);
-		if (orientToPath)
-			particleGo.transform.LookAt(iTween.PointOnPath(path, percentage + .05f));
+			if (particleGo && mountTargetGo)
+			{
+				path[1] = mountTargetGo.transform.position;
+				Vector3 curPos = Spline.InterpConstantSpeed(path, percentage, easeType);
+				particleGo.transform.position = curPos;
+				if(orientToPath)
+					particleGo.transform.LookAt(Spline.InterpConstantSpeed(path, percentage + 0.05f, easeType));
+			}
+		}
 	}
 
 	void StartTargetEvent()
