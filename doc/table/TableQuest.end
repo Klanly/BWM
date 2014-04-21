@@ -1,0 +1,4 @@
+﻿
+func (self *TableQuest)AddSubStep(uint32 stepall) {
+    self.SubSteps = append(self.SubSteps,stepall)
+}
