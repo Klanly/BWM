@@ -125,7 +125,7 @@ public class QuestManager : IEnumerable<QuestTrace>
 		var dlg = BattleScene.Instance.Gui<QuestDialog>();
 		dlg.gameObject.SetActive(true);
 		yield return new WaitForEndOfFrame();
-		dlg.Present(cmd.squest.questid, cmd.detail);
+		dlg.Present(cmd.squest.questid, cmd.process, cmd.detail);
 	}
 	#endregion
 }

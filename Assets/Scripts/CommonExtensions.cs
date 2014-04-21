@@ -201,11 +201,6 @@ namespace Cmd
 	#region Quest
 	partial class SaveQuest
 	{
-		/// <summary>
-		/// 任务是否可交
-		/// </summary>
-		public bool Finished { get { return this.stepcur >= this.stepall; } }
-
 		public override string ToString()
 		{
 			return string.Format("#{0}, {1}/{2}", questid, stepcur, stepall);

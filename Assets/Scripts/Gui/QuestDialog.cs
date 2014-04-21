@@ -16,12 +16,13 @@ public class QuestDialog : MonoBehaviour
 	public UIButton uiOKButton;
 
 	private uint questID;
+	private QuestProcess questState;
 
 	void Start()
 	{
 		UIEventListener.Get(uiOKButton.gameObject).onClick = go =>
 		{
-			if (QuestManager.Instance[questID].squest.Finished)
+			if (questState == QuestProcess.QuestProcess_CanDone)
 			{
 				Net.Instance.Send(new RequestFinishQuestQuestUserCmd_C()
 				{
@@ -41,10 +42,16 @@ public class QuestDialog : MonoBehaviour
 		uiXmlRichText.UrlClicked += OnUrlClicked;
 	}
 
-	public void Present(uint questID, string xml)
+	public void Present(uint questID, QuestProcess state, string xml)
 	{
+		if (state != QuestProcess.QuestProcess_CanDone && state != QuestProcess.QuestProcess_None)
+		{
+			Debug.LogError(string.Format("不可接受的任务状态: {0} {1}", questID, state));
+			return;
+		}
 		this.questID = questID;
-		uiOKButton.GetComponentInChildren<UILabel>().text = QuestManager.Instance[questID].squest.Finished ? "完成" : "接受";
+		this.questState = state;
+		uiOKButton.GetComponentInChildren<UILabel>().text = this.questState == QuestProcess.QuestProcess_CanDone ? "完成" : "接受";
 		uiTitle.text = "任务交接";
 		uiXmlRichText.Clear();
 		uiXmlRichText.AddXml(xml);
