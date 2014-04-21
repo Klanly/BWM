@@ -117,15 +117,15 @@ public class QuestManager : IEnumerable<QuestTrace>
 	}
 
 	[Execute]
-	public static void Execute(ReturnQuestDetailInfoQuestUserCmd_S cmd)
+	public static IEnumerator Execute(ReturnQuestDetailInfoQuestUserCmd_S cmd)
 	{
 		QuestManager.Instance.Add(cmd.squest);
 		QuestManager.Instance.OnChanged();
 
 		var dlg = BattleScene.Instance.Gui<QuestDialog>();
 		dlg.gameObject.SetActive(true);
-		dlg.QuestDetail = cmd.detail;
-		dlg.QuestID = cmd.squest.questid;
+		yield return new WaitForEndOfFrame();
+		dlg.Present(cmd.squest.questid, cmd.detail);
 	}
 	#endregion
 }
