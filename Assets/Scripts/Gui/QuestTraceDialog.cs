@@ -9,7 +9,7 @@ using GX;
 /// <summary>
 /// 任务追踪界面
 /// </summary>
-public class QuestTrace : MonoBehaviour
+public class QuestTraceDialog : MonoBehaviour
 {
 	public UIXmlRichText uiItemProto;
 	public GameObject uiContent;
