@@ -9,5 +9,6 @@
 		<key code="level" />
 		<field column="等级" code="level" type="uint32" />
 		<field column="最大血量" code="maxHp" type="int32" />
+		<field column="升级所需经验" code="exp" type="int64" />
 	</output>
 </table>
