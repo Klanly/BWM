@@ -19,5 +19,6 @@
 		<field column="完成描述" code="infoEnd" type="string" />
 		<field column="追踪进行中" code="traceDoing" type="string" />
 		<field column="追踪可完成" code="traceEnd" type="string" />
+		<field column="任务事件" code="events" type="string" />
 	</output>
 </table>
