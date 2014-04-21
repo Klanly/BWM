@@ -75,6 +75,8 @@ public class Role : MonoBehaviour
 	[Execute]
 	public static void Execute(AddMapUserDataAndPosMapUserCmd_S cmd)
 	{
+		if (MainRole.ServerInfo == null)
+			return;
 		Role role;
 		if (Role.All.TryGetValue(cmd.data.charid, out role))
 		{
