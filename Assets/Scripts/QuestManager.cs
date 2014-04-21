@@ -101,7 +101,10 @@ public class QuestManager : IEnumerable<QuestTrace>
 		var quest = QuestManager.Instance[cmd.squest.questid];
 		if (quest != null)
 		{
-			quest.squest = cmd.squest;
+			if (cmd.squest.stepall == 0) // stepall为0表示删除任务
+				QuestManager.Instance.Remove(cmd.squest.questid);
+			else
+				quest.squest = cmd.squest;
 			QuestManager.Instance.OnChanged();
 		}
 	}
