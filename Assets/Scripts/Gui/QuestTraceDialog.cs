@@ -73,6 +73,8 @@ public class QuestTraceDialog : MonoBehaviour
 	[Execute]
 	public static void Execute(ReturnClickQuestTraceQuestUserCmd_S cmd)
 	{
+		if (BattleScene.Instance == null)
+			return;
 		switch (cmd.@event)
 		{
 			case ClickQuestTaceEvent.ClickQuestTaceEvent_GoToNpc:
