@@ -41,6 +41,7 @@ public class SkillPlayStartParticle : SkillBase
 				particleGo.AddComponent<ParticleParentAutoDestroy>();
 			particleGo.transform.parent = mount;
 			particleGo.transform.localPosition = Vector3.zero;
+			particleGo.transform.localRotation = Quaternion.identity;
 		}
 		
 		Destroy(this);
