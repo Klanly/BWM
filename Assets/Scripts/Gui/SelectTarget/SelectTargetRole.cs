@@ -23,7 +23,7 @@ public class SelectTargetRole : MonoBehaviour
 			maxSp = max;
 	}
 
-	internal void Present(Role target)
+	internal void OnSelect(Role target)
 	{
 		uiName.text = target.ServerInfo.charname;
 		uiHead.spriteName = target.ServerInfo.GetRoleHeadSprite();

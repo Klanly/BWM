@@ -45,34 +45,68 @@ public class SelectTarget : MonoBehaviour
 				{
 					Npc target;
 					if (Npc.All.TryGetValue(Selected.entryid, out target))
-					{
-						switch (target.TableInfo.BaseType)
-						{
-							case NpcBaseType.NpcBaseType_Boss:
-								my.Toggle<SelectTargetBoss>().Present(target);
-								break;
-							case NpcBaseType.NpcBaseType_Elite:
-								my.Toggle<SelectTargetElite>().Present(target);
-								break;
-							case NpcBaseType.NpcBaseType_Monster:
-								my.Toggle<SelectTargetMonster>().Present(target);
-								break;
-							default:
-								my.Toggle<SelectTargetNpc>().Present(target);
-								break;
-						}
-					}
+						OnSelect(target);
 				}
 				break;
 			case SceneEntryType.SceneEntryType_Player:
 				{
 					Role target;
 					if (Role.All.TryGetValue(Selected.entryid, out target))
-						my.Toggle<SelectTargetRole>().Present(target);
+						my.Toggle<SelectTargetRole>().OnSelect(target);
 				}
 				break;
 			default:
 				break;
+		}
+	}
+
+	/// <summary>
+	/// 选择指定的NPC头像
+	/// </summary>
+	/// <param name="target"></param>
+	private static void OnSelect(Npc target)
+	{
+		var my = BattleScene.Instance.Gui<SelectTarget>();
+		switch (target.TableInfo.BaseType)
+		{
+			case NpcBaseType.NpcBaseType_Boss:
+				my.Toggle<SelectTargetBoss>().OnSelect(target);
+				break;
+			case NpcBaseType.NpcBaseType_Elite:
+				my.Toggle<SelectTargetElite>().OnSelect(target);
+				break;
+			case NpcBaseType.NpcBaseType_Monster:
+				my.Toggle<SelectTargetMonster>().OnSelect(target);
+				break;
+			default:
+				my.Toggle<SelectTargetNpc>().OnSelect(target);
+				break;
+		}
+		OnUpdate(target);
+	}
+
+	/// <summary>
+	/// 更新指定的NPC头像信息
+	/// </summary>
+	/// <param name="target"></param>
+	/// <returns></returns>
+	public static bool OnUpdate(Npc target)
+	{
+		if (SelectTarget.Selected.entrytype != SceneEntryType.SceneEntryType_Npc || SelectTarget.Selected.entryid != target.ServerInfo.tempid)
+			return false;
+		switch (target.TableInfo.BaseType)
+		{
+			case NpcBaseType.NpcBaseType_Boss:
+				BattleScene.Instance.Gui<SelectTargetBoss>().OnUpdate(target);
+				return true;
+			case NpcBaseType.NpcBaseType_Elite:
+				BattleScene.Instance.Gui<SelectTargetElite>().OnUpdate(target);
+				return true;
+			case NpcBaseType.NpcBaseType_Monster:
+				BattleScene.Instance.Gui<SelectTargetMonster>().OnUpdate(target);
+				return true;
+			default:
+				return false;
 		}
 	}
 
