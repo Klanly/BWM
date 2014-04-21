@@ -65,7 +65,7 @@ public class QuestTraceDialog : MonoBehaviour
 		}
 	}
 
-	private void OnQuestTraceClicked(ClientQuest quest)
+	private void OnQuestTraceClicked(QuestTrace quest)
 	{
 		Net.Instance.Send(new RequestClickQuestTraceQuestUserCmd_C() { questid = quest.squest.questid });
 	}

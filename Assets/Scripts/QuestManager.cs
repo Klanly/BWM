@@ -7,12 +7,12 @@ using GX.Net;
 using System.Collections.Generic;
 
 /// <remarks>客户端不应该对任务项的顺序做任何调整</remarks>
-public class QuestManager : IEnumerable<ClientQuest>
+public class QuestManager : IEnumerable<QuestTrace>
 {
 	public static QuestManager Instance { get; private set; }
 	static QuestManager() { Instance = new QuestManager(); }
 
-	private readonly List<ClientQuest> items = new List<ClientQuest>();
+	private readonly List<QuestTrace> items = new List<QuestTrace>();
 
 	public event Action<QuestManager> Changed;
 	protected void OnChanged()
@@ -22,9 +22,9 @@ public class QuestManager : IEnumerable<ClientQuest>
 		Debug.Log(this.ToString());
 	}
 
-	public ClientQuest this[uint questid] { get { return items.Find(i => i.squest.questid == questid); } }
+	public QuestTrace this[uint questid] { get { return items.Find(i => i.squest.questid == questid); } }
 
-	protected void Add(ClientQuest quest)
+	protected void Add(QuestTrace quest)
 	{
 		var index = items.FindIndex(i => i.squest.questid == quest.squest.questid);
 		if (index >= 0)
@@ -48,7 +48,7 @@ public class QuestManager : IEnumerable<ClientQuest>
 		}
 		else
 		{
-			items.Add(new ClientQuest() { squest = quest, desc = string.Empty });
+			items.Add(new QuestTrace() { squest = quest, desc = string.Empty });
 		}
 	}
 
@@ -69,9 +69,9 @@ public class QuestManager : IEnumerable<ClientQuest>
 	}
 
 
-	#region IEnumerable<ClientQuest> Members
+	#region IEnumerable<QuestTrace> Members
 
-	public IEnumerator<ClientQuest> GetEnumerator()
+	public IEnumerator<QuestTrace> GetEnumerator()
 	{
 		return items.GetEnumerator();
 	}
@@ -89,15 +89,7 @@ public class QuestManager : IEnumerable<ClientQuest>
 
 	#region 网络消息处理
 	[Execute]
-	public static void Execute(AddClientQuestListQuestUserCmd_S cmd)
-	{
-		QuestManager.Instance.items.Clear();
-		QuestManager.Instance.items.AddRange(cmd.questlist);
-		QuestManager.Instance.OnChanged();
-	}
-
-	[Execute]
-	public static void Execute(AddClientQuestQuestUserCmd_S cmd)
+	public static void Execute(AddQuestTraceQuestUserCmd_S cmd)
 	{
 		QuestManager.Instance.Add(cmd.quest);
 		QuestManager.Instance.OnChanged();
