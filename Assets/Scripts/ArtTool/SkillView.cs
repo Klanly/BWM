@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class TestSkill : MonoBehaviour {
+public class SkillView : MonoBehaviour {
 
 	public GameObject startGo;
 	public GameObject targetGo;
@@ -14,7 +14,7 @@ public class TestSkill : MonoBehaviour {
 	}
 
 	[ContextMenu ("start skill")]
-	void startSkill()
+	public void startSkill()
 	{
 		var skill = Object.Instantiate(skillGo) as GameObject;
 		skill.GetComponent<Skill>().startGo = startGo;
@@ -43,7 +43,7 @@ public class TestSkill : MonoBehaviour {
 	}
 
 	[ContextMenu ("start buff")]
-	void startBuff()
+	public void startBuff()
 	{
 		var buff = Object.Instantiate(buffGo) as GameObject;
 		buff.GetComponent<Buff>().StartBuff(startGo);

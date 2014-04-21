@@ -212,7 +212,7 @@ namespace Cmd
 		}
 	}
 
-	partial class ClientQuest
+	partial class QuestTrace
 	{	
 		public override string ToString()
 		{

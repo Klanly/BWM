@@ -20,6 +20,10 @@ public class ControlMove : MonoBehaviour {
 	private bool bRightState = false;
 	#endregion
 
+	#region joystick input
+	private bool bJoystickActive = false;
+	#endregion
+
 	/// <summary>
 	/// 客户端最大步伐
 	/// </summary>
@@ -163,5 +167,33 @@ public class ControlMove : MonoBehaviour {
 		Debug.Log("发送停止移动消息:dst:" + entity.Position + ",dir:" + this.transform.rotation);
 	}
 
+	/// <summary>
+	/// 检测摇杆输入控制移动
+	/// </summary>
+	public void MoveByJoystick(float horizontal, float vertical)
+	{
+		if (horizontal == 0f && vertical == 0f) 
+		{
+			if(bJoystickActive)
+			{
+				bJoystickActive = false;
+				StopControl();
+			}
+			return;
+		}
+
+		bJoystickActive = true;
+		Vector3 rootDirection = MainRole.Instance.transform.forward;
+		Vector3 stickDirection = new Vector3 (horizontal, 0, vertical);
+		
+		// Get camera rotation.    
+		Vector3 CameraDirection = Camera.main.transform.forward;
+		CameraDirection.y = 0.0f; // kill Y
+		Quaternion referentialShift = Quaternion.FromToRotation (Vector3.forward, CameraDirection);
+		
+		// Convert joystick input in Worldspace coordinates
+		Vector3 moveDirection = referentialShift * stickDirection;
+		MoveWithDirection (moveDirection);
+	}
 
 }

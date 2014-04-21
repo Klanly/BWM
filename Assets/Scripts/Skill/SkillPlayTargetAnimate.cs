@@ -16,18 +16,18 @@ public class SkillPlayTargetAnimate : SkillBase
 				"from", delay, 
 				"to", 0.0f, 
 				"time", delay, 
-				"onupdate", "onUpdate",
-				"oncomplete", "PlayAnimate"));
+				"onupdate", "onUpdate_SkillPlayTargetAnimate",
+				"oncomplete", "PlayAnimate_SkillPlayTargetAnimate"));
 		}
 		else
 		{
-			PlayAnimate();
+			PlayAnimate_SkillPlayTargetAnimate();
 		}
 	}
 
-	void onUpdate(float delay) { }
+	void onUpdate_SkillPlayTargetAnimate(float delay) { }
 
-	void PlayAnimate()
+	void PlayAnimate_SkillPlayTargetAnimate()
 	{
 		if (string.IsNullOrEmpty(action))
 		{

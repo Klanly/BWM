@@ -55,7 +55,7 @@ public class Minimap : MonoBehaviour
 
 			var pos = MainRole.Instance.entity.Position;
 
-			material.SetFloat("_Cutoff", uiMapTexture.mainTexture == null ? 0 : 0.1f);
+			// 地图位置更新
 			material.mainTextureOffset = new Vector2(
 				Mathf.Clamp((pos.x - Extent / uiMapTexture.mainTexture.width * 0.5f) / size.x, 0, 1 - Extent / uiMapTexture.mainTexture.width),
 				Mathf.Clamp((pos.y - Extent / uiMapTexture.mainTexture.height * 0.5f) / size.y, 0, 1 - Extent / uiMapTexture.mainTexture.height));
@@ -69,6 +69,15 @@ public class Minimap : MonoBehaviour
 				uiMapTexture.panel.RemoveWidget(uiMapTexture);
 				uiMapTexture.panel = null;
 			}
+
+			// 主角图标位置更新
+			uiFlagMainRole.transform.localPosition = uiMapTexture.transform.localPosition;
 		}
+
+		// 主角图标显隐
+		uiFlagMainRole.SetActive(MainRole.Instance != null);
+		// 主角图标旋转
+		if (MainRole.Instance != null)
+			uiFlagMainRole.transform.localRotation = Quaternion.Euler(0, 180, MainRole.Instance.transform.localRotation.eulerAngles.y);
 	}
 }

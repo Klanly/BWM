@@ -17,18 +17,18 @@ public class SkillPlayTargetParticle : SkillBase
 				"from", delay, 
 				"to", 0.0f, 
 				"time", delay, 
-				"onupdate", "onUpdate",
-				"oncomplete", "PlayParticle"));
+				"onupdate", "onUpdate_SkillPlayTargetParticle",
+				"oncomplete", "PlayParticle_SkillPlayTargetParticle"));
 		}
 		else
 		{
-			PlayParticle();
+			PlayParticle_SkillPlayTargetParticle();
 		}
 	}
 
-	void onUpdate(float delay) { }
+	void onUpdate_SkillPlayTargetParticle(float delay) { }
 
-	void PlayParticle()
+	void PlayParticle_SkillPlayTargetParticle()
 	{
 		if(particle == null)
 		{

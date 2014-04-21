@@ -25,18 +25,18 @@ public class SkillMoveToTargetInTime : SendTargetEventBase
 				"from", delay, 
 				"to", 0.0f, 
 				"time", delay,
-				"onupdate", "onUpdate",
-				"oncomplete", "MoveParticle"));
+				"onupdate", "onUpdate_SkillMoveToTargetInTime",
+				"oncomplete", "MoveParticle_SkillMoveToTargetInTime"));
 		}
 		else
 		{
-			MoveParticle();
+			MoveParticle_SkillMoveToTargetInTime();
 		}
 	}
 
-	void onUpdate(float delay) { }
+	void onUpdate_SkillMoveToTargetInTime(float delay) { }
 
-	void MoveParticle()
+	void MoveParticle_SkillMoveToTargetInTime()
 	{
 		var skill = gameObject.GetComponent<Skill>();
 		if (!skill || !skill.startGo || !skill.targetGo)
