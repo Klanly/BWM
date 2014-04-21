@@ -21,246 +21,89 @@ namespace Cmd
     public enum Param
     {
             
-      [global::ProtoBuf.ProtoEnum(Name=@"AddItemPropertyUserCmd_S", Value=1)]
-      AddItemPropertyUserCmd_S = 1,
+      [global::ProtoBuf.ProtoEnum(Name=@"AddExpPropertyUserCmd_S", Value=1)]
+      AddExpPropertyUserCmd_S = 1,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"AddItemListPropertyUserCmd_S", Value=2)]
-      AddItemListPropertyUserCmd_S = 2,
+      [global::ProtoBuf.ProtoEnum(Name=@"MainUserDataPropertyUserCmd_S", Value=2)]
+      MainUserDataPropertyUserCmd_S = 2
+    }
+  
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"AddExpPropertyUserCmd_S")]
+  public partial class AddExpPropertyUserCmd_S : global::ProtoBuf.IExtensible
+  {
+    public AddExpPropertyUserCmd_S() {}
+    
+    private long _curexp;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"curexp", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public long curexp
+    {
+      get { return _curexp; }
+      set { _curexp = value; }
+    }
+    private Cmd.ExpType _type;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"type", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public Cmd.ExpType type
+    {
+      get { return _type; }
+      set { _type = value; }
+    }
+    private long _addexp;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"addexp", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public long addexp
+    {
+      get { return _addexp; }
+      set { _addexp = value; }
+    }
+    private long _extexp = default(long);
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"extexp", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(long))]
+    public long extexp
+    {
+      get { return _extexp; }
+      set { _extexp = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"MainUserDataPropertyUserCmd_S")]
+  public partial class MainUserDataPropertyUserCmd_S : global::ProtoBuf.IExtensible
+  {
+    public MainUserDataPropertyUserCmd_S() {}
+    
+    private Cmd.MainUserData _data;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"data", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public Cmd.MainUserData data
+    {
+      get { return _data; }
+      set { _data = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+    [global::ProtoBuf.ProtoContract(Name=@"ExpType")]
+    public enum ExpType
+    {
             
-      [global::ProtoBuf.ProtoEnum(Name=@"RemoveItemPropertyUserCmd_CS", Value=3)]
-      RemoveItemPropertyUserCmd_CS = 3,
+      [global::ProtoBuf.ProtoEnum(Name=@"ExpType_None", Value=0)]
+      ExpType_None = 0,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"SwapItemPropertyUserCmd_CS", Value=4)]
-      SwapItemPropertyUserCmd_CS = 4,
+      [global::ProtoBuf.ProtoEnum(Name=@"ExpType_Levelup", Value=1)]
+      ExpType_Levelup = 1,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"SplitItemPropertyUserCmd_CS", Value=5)]
-      SplitItemPropertyUserCmd_CS = 5,
+      [global::ProtoBuf.ProtoEnum(Name=@"ExpType_Quest", Value=2)]
+      ExpType_Quest = 2,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"UnionItemPropertyUserCmd_CS", Value=6)]
-      UnionItemPropertyUserCmd_CS = 6,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"UseItemPropertyUserCmd_CS", Value=7)]
-      UseItemPropertyUserCmd_CS = 7,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"RefreshPosPropertyUserCmd_CS", Value=8)]
-      RefreshPosPropertyUserCmd_CS = 8,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"RefreshCountItemPropertyUserCmd_CS", Value=9)]
-      RefreshCountItemPropertyUserCmd_CS = 9
+      [global::ProtoBuf.ProtoEnum(Name=@"ExpType_Monster", Value=3)]
+      ExpType_Monster = 3
     }
-  
-    private global::ProtoBuf.IExtension extensionObject;
-    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
-  }
-  
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"AddItemPropertyUserCmd_S")]
-  public partial class AddItemPropertyUserCmd_S : global::ProtoBuf.IExtensible
-  {
-    public AddItemPropertyUserCmd_S() {}
-    
-    private Cmd.SaveItem _item;
-    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"item", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public Cmd.SaveItem item
-    {
-      get { return _item; }
-      set { _item = value; }
-    }
-    private global::ProtoBuf.IExtension extensionObject;
-    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
-  }
-  
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"AddItemListPropertyUserCmd_S")]
-  public partial class AddItemListPropertyUserCmd_S : global::ProtoBuf.IExtensible
-  {
-    public AddItemListPropertyUserCmd_S() {}
-    
-    private readonly global::System.Collections.Generic.List<Cmd.SaveItem> _itemlist = new global::System.Collections.Generic.List<Cmd.SaveItem>();
-    [global::ProtoBuf.ProtoMember(1, Name=@"itemlist", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public global::System.Collections.Generic.List<Cmd.SaveItem> itemlist
-    {
-      get { return _itemlist; }
-    }
-  
-    private global::ProtoBuf.IExtension extensionObject;
-    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
-  }
-  
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"RemoveItemPropertyUserCmd_CS")]
-  public partial class RemoveItemPropertyUserCmd_CS : global::ProtoBuf.IExtensible
-  {
-    public RemoveItemPropertyUserCmd_CS() {}
-    
-    private ulong _thisid;
-    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"thisid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public ulong thisid
-    {
-      get { return _thisid; }
-      set { _thisid = value; }
-    }
-    private global::ProtoBuf.IExtension extensionObject;
-    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
-  }
-  
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"SwapItemPropertyUserCmd_CS")]
-  public partial class SwapItemPropertyUserCmd_CS : global::ProtoBuf.IExtensible
-  {
-    public SwapItemPropertyUserCmd_CS() {}
-    
-    private ulong _srcThisid;
-    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"srcThisid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public ulong srcThisid
-    {
-      get { return _srcThisid; }
-      set { _srcThisid = value; }
-    }
-    private ulong _dstThisid;
-    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"dstThisid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public ulong dstThisid
-    {
-      get { return _dstThisid; }
-      set { _dstThisid = value; }
-    }
-    private global::ProtoBuf.IExtension extensionObject;
-    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
-  }
-  
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"SplitItemPropertyUserCmd_CS")]
-  public partial class SplitItemPropertyUserCmd_CS : global::ProtoBuf.IExtensible
-  {
-    public SplitItemPropertyUserCmd_CS() {}
-    
-    private ulong _thisid;
-    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"thisid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public ulong thisid
-    {
-      get { return _thisid; }
-      set { _thisid = value; }
-    }
-    private int _num;
-    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"num", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public int num
-    {
-      get { return _num; }
-      set { _num = value; }
-    }
-    private Cmd.ItemLocation _dst;
-    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"dst", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public Cmd.ItemLocation dst
-    {
-      get { return _dst; }
-      set { _dst = value; }
-    }
-    private global::ProtoBuf.IExtension extensionObject;
-    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
-  }
-  
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"UnionItemPropertyUserCmd_CS")]
-  public partial class UnionItemPropertyUserCmd_CS : global::ProtoBuf.IExtensible
-  {
-    public UnionItemPropertyUserCmd_CS() {}
-    
-    private ulong _srcThisid;
-    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"srcThisid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public ulong srcThisid
-    {
-      get { return _srcThisid; }
-      set { _srcThisid = value; }
-    }
-    private ulong _dstThisid;
-    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"dstThisid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public ulong dstThisid
-    {
-      get { return _dstThisid; }
-      set { _dstThisid = value; }
-    }
-    private int _num;
-    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"num", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public int num
-    {
-      get { return _num; }
-      set { _num = value; }
-    }
-    private global::ProtoBuf.IExtension extensionObject;
-    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
-  }
-  
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"UseItemPropertyUserCmd_CS")]
-  public partial class UseItemPropertyUserCmd_CS : global::ProtoBuf.IExtensible
-  {
-    public UseItemPropertyUserCmd_CS() {}
-    
-    private ulong _thisid;
-    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"thisid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public ulong thisid
-    {
-      get { return _thisid; }
-      set { _thisid = value; }
-    }
-    private ulong _targetid;
-    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"targetid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public ulong targetid
-    {
-      get { return _targetid; }
-      set { _targetid = value; }
-    }
-    private global::ProtoBuf.IExtension extensionObject;
-    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
-  }
-  
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"RefreshPosPropertyUserCmd_CS")]
-  public partial class RefreshPosPropertyUserCmd_CS : global::ProtoBuf.IExtensible
-  {
-    public RefreshPosPropertyUserCmd_CS() {}
-    
-    private ulong _thisid;
-    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"thisid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public ulong thisid
-    {
-      get { return _thisid; }
-      set { _thisid = value; }
-    }
-    private Cmd.ItemLocation _dst;
-    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"dst", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public Cmd.ItemLocation dst
-    {
-      get { return _dst; }
-      set { _dst = value; }
-    }
-    private global::ProtoBuf.IExtension extensionObject;
-    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
-  }
-  
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"RefreshCountItemPropertyUserCmd_CS")]
-  public partial class RefreshCountItemPropertyUserCmd_CS : global::ProtoBuf.IExtensible
-  {
-    public RefreshCountItemPropertyUserCmd_CS() {}
-    
-    private ulong _thisid;
-    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"thisid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public ulong thisid
-    {
-      get { return _thisid; }
-      set { _thisid = value; }
-    }
-    private int _count;
-    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"count", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public int count
-    {
-      get { return _count; }
-      set { _count = value; }
-    }
-    private global::ProtoBuf.IExtension extensionObject;
-    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
-  }
   
 }

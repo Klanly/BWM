@@ -9,7 +9,7 @@ using GX;
 /// <summary>
 /// 任务追踪界面
 /// </summary>
-public class QuestTrace : MonoBehaviour
+public class QuestTraceDialog : MonoBehaviour
 {
 	public UIXmlRichText uiItemProto;
 	public GameObject uiContent;
@@ -65,7 +65,7 @@ public class QuestTrace : MonoBehaviour
 		}
 	}
 
-	private void OnQuestTraceClicked(ClientQuest quest)
+	private void OnQuestTraceClicked(QuestTrace quest)
 	{
 		Net.Instance.Send(new RequestClickQuestTraceQuestUserCmd_C() { questid = quest.squest.questid });
 	}
@@ -73,6 +73,8 @@ public class QuestTrace : MonoBehaviour
 	[Execute]
 	public static void Execute(ReturnClickQuestTraceQuestUserCmd_S cmd)
 	{
+		if (BattleScene.Instance == null)
+			return;
 		switch (cmd.@event)
 		{
 			case ClickQuestTaceEvent.ClickQuestTaceEvent_GoToNpc:
@@ -81,6 +83,7 @@ public class QuestTrace : MonoBehaviour
 					if (npc == null)
 						break;
 					var position = npc.transform.localPosition;
+					// TODO: 需要随机到10格范围内，避免寻路重叠
 					if (cmd.repeatclick)
 					{
 						MainRole.Instance.pathMove.WalkTo(position, () =>
