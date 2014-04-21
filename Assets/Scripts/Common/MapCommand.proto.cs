@@ -36,7 +36,10 @@ namespace Cmd
       RemoveMapNpcMapUserCmd_S = 5,
             
       [global::ProtoBuf.ProtoEnum(Name=@"MainUserIntoSceneMapUserCmd_S", Value=6)]
-      MainUserIntoSceneMapUserCmd_S = 6
+      MainUserIntoSceneMapUserCmd_S = 6,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"UserLevelUpMapUserCmd_S", Value=7)]
+      UserLevelUpMapUserCmd_S = 7
     }
   
     private global::ProtoBuf.IExtension extensionObject;
@@ -220,6 +223,30 @@ namespace Cmd
     {
       get { return _pos; }
       set { _pos = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"UserLevelUpMapUserCmd_S")]
+  public partial class UserLevelUpMapUserCmd_S : global::ProtoBuf.IExtensible
+  {
+    public UserLevelUpMapUserCmd_S() {}
+    
+    private ulong _charid;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"charid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public ulong charid
+    {
+      get { return _charid; }
+      set { _charid = value; }
+    }
+    private uint _level;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"level", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint level
+    {
+      get { return _level; }
+      set { _level = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)

@@ -21,11 +21,8 @@ namespace Cmd
     public enum Param
     {
             
-      [global::ProtoBuf.ProtoEnum(Name=@"AddClientQuestQuestUserCmd_S", Value=1)]
-      AddClientQuestQuestUserCmd_S = 1,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"AddClientQuestListQuestUserCmd_S", Value=2)]
-      AddClientQuestListQuestUserCmd_S = 2,
+      [global::ProtoBuf.ProtoEnum(Name=@"AddQuestTraceQuestUserCmd_S", Value=1)]
+      AddQuestTraceQuestUserCmd_S = 1,
             
       [global::ProtoBuf.ProtoEnum(Name=@"RefreshQeustStateQuestUserCmd_S", Value=3)]
       RefreshQeustStateQuestUserCmd_S = 3,
@@ -57,10 +54,10 @@ namespace Cmd
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"ClientQuest")]
-  public partial class ClientQuest : global::ProtoBuf.IExtensible
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"QuestTrace")]
+  public partial class QuestTrace : global::ProtoBuf.IExtensible
   {
-    public ClientQuest() {}
+    public QuestTrace() {}
     
     private Cmd.SaveQuest _squest;
     [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"squest", DataFormat = global::ProtoBuf.DataFormat.Default)]
@@ -69,16 +66,8 @@ namespace Cmd
       get { return _squest; }
       set { _squest = value; }
     }
-    private string _action = "";
-    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"action", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
-    public string action
-    {
-      get { return _action; }
-      set { _action = value; }
-    }
     private string _desc;
-    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"desc", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"desc", DataFormat = global::ProtoBuf.DataFormat.Default)]
     public string desc
     {
       get { return _desc; }
@@ -89,35 +78,18 @@ namespace Cmd
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"AddClientQuestQuestUserCmd_S")]
-  public partial class AddClientQuestQuestUserCmd_S : global::ProtoBuf.IExtensible
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"AddQuestTraceQuestUserCmd_S")]
+  public partial class AddQuestTraceQuestUserCmd_S : global::ProtoBuf.IExtensible
   {
-    public AddClientQuestQuestUserCmd_S() {}
+    public AddQuestTraceQuestUserCmd_S() {}
     
-    private Cmd.ClientQuest _quest;
+    private Cmd.QuestTrace _quest;
     [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"quest", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public Cmd.ClientQuest quest
+    public Cmd.QuestTrace quest
     {
       get { return _quest; }
       set { _quest = value; }
     }
-    private global::ProtoBuf.IExtension extensionObject;
-    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
-  }
-  
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"AddClientQuestListQuestUserCmd_S")]
-  public partial class AddClientQuestListQuestUserCmd_S : global::ProtoBuf.IExtensible
-  {
-    public AddClientQuestListQuestUserCmd_S() {}
-    
-    private readonly global::System.Collections.Generic.List<Cmd.ClientQuest> _questlist = new global::System.Collections.Generic.List<Cmd.ClientQuest>();
-    [global::ProtoBuf.ProtoMember(1, Name=@"questlist", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public global::System.Collections.Generic.List<Cmd.ClientQuest> questlist
-    {
-      get { return _questlist; }
-    }
-  
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
