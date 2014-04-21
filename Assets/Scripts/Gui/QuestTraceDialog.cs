@@ -58,7 +58,7 @@ public class QuestTraceDialog : MonoBehaviour
 			{
 				var q = _;
 				q.Item1.transform.localPosition = new Vector3(0, -height, 0);
-				q.Item1.GetComponent<UIXmlRichText>().AddXml(q.Item2.desc);
+				q.Item1.GetComponent<UIXmlRichText>().AddXml(q.Item2.TraceContent);
 				height += q.Item1.GetComponent<UIWidget>().height;
 			}
 			uiContent.GetComponent<UIWidget>().height = height;
