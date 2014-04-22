@@ -30,7 +30,10 @@ namespace Cmd
       ReturnNpcDialogScriptUserCmd_S = 3,
             
       [global::ProtoBuf.ProtoEnum(Name=@"SelectNpcDialogScriptUserCmd_C", Value=4)]
-      SelectNpcDialogScriptUserCmd_C = 4
+      SelectNpcDialogScriptUserCmd_C = 4,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"ResetSelectSceneEntryScriptUserCmd_S", Value=5)]
+      ResetSelectSceneEntryScriptUserCmd_S = 5
     }
   
     private global::ProtoBuf.IExtension extensionObject;
@@ -136,6 +139,16 @@ namespace Cmd
       get { return _index; }
       set { _index = value; }
     }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"ResetSelectSceneEntryScriptUserCmd_S")]
+  public partial class ResetSelectSceneEntryScriptUserCmd_S : global::ProtoBuf.IExtensible
+  {
+    public ResetSelectSceneEntryScriptUserCmd_S() {}
+    
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
