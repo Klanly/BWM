@@ -70,7 +70,7 @@ ModelImporter:
     7400000: Ani_Stand
     7400002: Ani_Idle_1
     7400004: 'Ani_Run '
-    7400006: Ani_hurt
+    7400006: Ani_Hurt
     7400008: Ani_Att_1
     7400010: Ani_Ji_1
     7400012: Ani_Ji_2
@@ -390,7 +390,7 @@ ModelImporter:
       maskType: 0
       maskSource: {instanceID: 0}
     - serializedVersion: 16
-      name: Ani_hurt
+      name: Ani_Hurt
       takeName: Take 001
       firstFrame: 505
       lastFrame: 528

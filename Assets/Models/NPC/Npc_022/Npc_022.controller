@@ -137,12 +137,12 @@ State:
   m_IKOnFeet: 0
   m_Mirror: 0
   m_Tag: 
---- !u!1102 &110274695
+--- !u!1102 &110271083
 State:
   m_ObjectHideFlags: 3
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: Ani_hurt
+  m_Name: Ani_Hurt
   m_Speed: 1
   m_CycleOffset: 0
   m_Motions:
@@ -194,22 +194,22 @@ StateMachine:
   - {fileID: 110200000}
   - {fileID: 110277999}
   - {fileID: 110285939}
-  - {fileID: 110274695}
   - {fileID: 110201516}
   - {fileID: 110262328}
   - {fileID: 110240736}
   - {fileID: 110218915}
+  - {fileID: 110271083}
   m_ChildStateMachine: []
   m_ChildStateMachinePosition: []
   m_OrderedTransitions:
     data:
-      first: {fileID: 110277999}
-      second:
-      - {fileID: 110131519}
-    data:
       first: {fileID: 110200000}
       second:
       - {fileID: 110100000}
+    data:
+      first: {fileID: 110277999}
+      second:
+      - {fileID: 110131519}
   m_MotionSetCount: 1
   m_AnyStatePosition: {x: -372, y: -180, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}

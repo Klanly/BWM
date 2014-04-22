@@ -30,7 +30,7 @@ GameObject:
   - 114: {fileID: 11400002}
   - 114: {fileID: 11400004}
   m_Layer: 13
-  m_Name: QusetTrace
+  m_Name: QuestTraceDialog
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -139,6 +139,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   protoLabel: {fileID: 100000, guid: 84307d4497ba458439c4efb2c3a7f91f, type: 2}
+  LinkDecorate: '[u]{0}[/u]'
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
