@@ -30,7 +30,7 @@ public class GmCommand : MonoBehaviour
 			item.GetComponentInChildren<UILabel>().text = info.method;
 			UIEventListener.Get(item.GetComponentInChildren<UIButton>().gameObject).onClick = go =>
 			{
-				Debug.Log(info.ToStringDebug());
+				Debug.Log(info.Dump());
 				BattleScene.Instance.Gui<ChatInputBox>().SetText(string.Format("//{0} {1}", info.method, info.example));
 			};
 		}

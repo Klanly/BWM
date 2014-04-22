@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class GXJoystick : MonoBehaviour {
-
+	
 	public float radius;
 	public Vector3 scale = Vector3.one;
 	private Plane mPlane;
@@ -31,8 +31,15 @@ public class GXJoystick : MonoBehaviour {
 			} 
 			else 
 			{
-				transform.localPosition = center;
 				position = Vector2.zero;
+				if(this.transform.parent)
+				{
+					iTween.MoveTo(this.gameObject,transform.parent.position,1.0f);
+				}
+				else
+				{
+					transform.localPosition = center;
+				}
 			}
 		}
 	}
