@@ -52,16 +52,20 @@ public class Minimap : MonoBehaviour
 			Layout = false;
 			var mapNav = BattleScene.Instance.MapNav;
 			var size = new Vector2(mapNav.gridWidth * mapNav.gridXNum, mapNav.gridHeight * mapNav.gridZNum);
+			Extent = Mathf.Min(Extent, uiMapTexture.mainTexture.width, uiMapTexture.mainTexture.height);
 
 			var pos = MainRole.Instance.entity.Position;
 
+			var ex = Extent / (float)uiMapTexture.mainTexture.width;
+			var ey = Extent / (float)uiMapTexture.mainTexture.height;
+
 			// 地图位置更新
 			material.mainTextureOffset = new Vector2(
-				Mathf.Clamp((pos.x - Extent / uiMapTexture.mainTexture.width * 0.5f) / size.x, 0, 1 - Extent / uiMapTexture.mainTexture.width),
-				Mathf.Clamp((pos.y - Extent / uiMapTexture.mainTexture.height * 0.5f) / size.y, 0, 1 - Extent / uiMapTexture.mainTexture.height));
+				Mathf.Clamp(pos.x / size.x - 0.5f * ex, 0.0f, 1.0f - ex),
+				Mathf.Clamp(pos.z / size.y - 0.5f * ey, 0.0f, 1.0f - ey));
 			material.mainTextureScale = new Vector2(
-				Extent / uiMapTexture.mainTexture.width,
-				Extent / uiMapTexture.mainTexture.height);
+				Extent / (float)uiMapTexture.mainTexture.width,
+				Extent / (float)uiMapTexture.mainTexture.height);
 
 			// force update
 			if (uiMapTexture.panel != null)
@@ -72,6 +76,9 @@ public class Minimap : MonoBehaviour
 
 			// 主角图标位置更新
 			uiFlagMainRole.transform.localPosition = uiMapTexture.transform.localPosition;
+
+			//var p = new Vector2(pos.x / size.x, pos.z / size.y);
+			//Debug.Log(string.Format("{0} - {1} = {2}", p.Dump(), material.mainTextureOffset.Dump(), (p - material.mainTextureOffset).Dump()));
 		}
 
 		// 主角图标显隐
