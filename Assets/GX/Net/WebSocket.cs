@@ -60,7 +60,7 @@ namespace GX.Net
 			if (msg.GetType() != typeof(Cmd.TickRequestNullUserCmd_CS) &&
 				msg.GetType() != typeof(Cmd.TickReturnNullUserCmd_CS) &&
 				msg.GetType() != typeof(Cmd.UserMoveUpMoveUserCmd_C))
-				Debug.Log("<color=green>[SEND]</color>" + msg.ToStringDebug());
+				Debug.Log("<color=green>[SEND]</color>" + msg.Dump());
 
 			var buf = serizlizer.Serialize(msg);
 			Proxy.Send(buf);
@@ -91,7 +91,7 @@ namespace GX.Net
 						msg.GetType() != typeof(Cmd.ChangeUserHpDataUserCmd_S) &&
 						msg.GetType() != typeof(Cmd.AddMapUserDataAndPosMapUserCmd_S) &&
 						msg.GetType() != typeof(Cmd.AddMapNpcDataAndPosMapUserCmd_S))
-						Debug.Log("<color=yellow>[RECV]</color>" + msg.ToStringDebug());
+						Debug.Log("<color=yellow>[RECV]</color>" + msg.Dump());
 					yield return msg;
 				}
 			}

@@ -180,14 +180,14 @@ public static partial class Extensions
 	/// </summary>
 	/// <param name="obj"></param>
 	/// <returns></returns>
-	public static string ToStringDebug(this object obj)
+	public static string Dump(this object obj)
 	{
 		return "{ " + string.Join(", ", (
 			from f in obj.GetType().GetRuntimeFields()
 			select f.Name + "=" + f.GetValue(obj)).ToArray()) + " }";
 	}
 
-	public static string ToStringDebug(this ProtoBuf.IExtensible proto)
+	public static string Dump(this ProtoBuf.IExtensible proto)
 	{
 		var sb = new StringBuilder();
 		using(var writer = new StringWriter(sb))
@@ -252,9 +252,24 @@ public static partial class Extensions
 		writer.Write(prefix); writer.Write("}");
 	}
 
-	public static string ToStringDebug(this Vector3[] data)
+	public static string Dump(this Vector3[] data)
 	{
-		return "{" + string.Join(", ", Array.ConvertAll(data, i => i.ToString())) + "}";
+		return "{" + string.Join(", ", Array.ConvertAll(data, i => i.Dump())) + "}";
+	}
+
+	public static string Dump(this Vector2 data)
+	{
+		return string.Format("({0}, {1})", data.x, data.y);
+	}
+
+	public static string Dump(this Vector3 data)
+	{
+		return string.Format("({0}, {1}, {2})", data.x, data.y, data.z);
+	}
+
+	public static string Dump(this Vector4 data)
+	{
+		return string.Format("({0}, {1}, {2}, {3})", data.x, data.y, data.z, data.w);
 	}
 	#endregion
 
