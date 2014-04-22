@@ -251,6 +251,11 @@ public static partial class Extensions
 		}
 		writer.Write(prefix); writer.Write("}");
 	}
+
+	public static string ToStringDebug(this Vector3[] data)
+	{
+		return "{" + string.Join(", ", Array.ConvertAll(data, i => i.ToString())) + "}";
+	}
 	#endregion
 
 	#region XML
