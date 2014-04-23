@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <table>
-	<output type="json-go" code="TableEquip" file="装备基础表.xlsx" sheet="Sheet1">
+	<output type="json-go" code="TableEquipBase" file="装备基础表.xlsx" sheet="Sheet1">
 		<key code="id" />
 		<field column="id" code="id" type="uint32" />
 
