@@ -57,8 +57,8 @@ public class NpcDialog : MonoBehaviour
 	[Execute]
 	public static IEnumerator Execute(ReturnNpcDialogScriptUserCmd_S cmd)
 	{
-		Npc npc;
-		if (Npc.All.TryGetValue(cmd.tempid, out npc) == false)
+		var npc = Npc.All[cmd.tempid];
+		if (npc == null)
 			yield break;
 		var my = BattleScene.Instance.Gui<NpcDialog>();
 		my.tempid = cmd.tempid;

@@ -49,15 +49,15 @@ public class SelectTarget : MonoBehaviour
 				{
 					case SceneEntryType.SceneEntryType_Npc:
 						{
-							Npc target;
-							if (Npc.All.TryGetValue(Selected.entryid, out target))
+							var target = Npc.All[Selected.entryid];
+							if (target != null)
 								OnSelect(target);
 						}
 						break;
 					case SceneEntryType.SceneEntryType_Player:
 						{
-							Role target;
-							if (Role.All.TryGetValue(Selected.entryid, out target))
+							var target = Role.All[Selected.entryid];
+							if (target != null)
 								BattleScene.Instance.Gui<SelectTarget>().Toggle<SelectTargetRole>().OnSelect(target);
 						}
 						break;

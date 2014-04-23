@@ -261,15 +261,15 @@ static class CommonExtensions
 		{
 			case Cmd.SceneEntryType.SceneEntryType_Npc:
 				{
-					Npc target;
-					if (Npc.All.TryGetValue(entry.entryid, out target))
+					var target = Npc.All[entry.entryid];
+					if (target != null)
 						return target;
 				}
 				break;
 			case Cmd.SceneEntryType.SceneEntryType_Player:
 				{
-					Role target;
-					if (Role.All.TryGetValue(entry.entryid, out target))
+					var target = Role.All[entry.entryid];
+					if (target != null)
 						return target;
 				}
 				break;
