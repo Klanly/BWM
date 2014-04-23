@@ -26,6 +26,6 @@
 		<field column="物免" code="pIggnore" type="uint32" />
 		<field column="魔免" code="mIggnore" type="uint32" />
 		
-		<field column="移动速度" code="o" type="uint32" />
+		<field column="移动速度" code="moveSpeed" type="uint32" />
 	</output>
 </table>
