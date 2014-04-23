@@ -29,7 +29,7 @@
 		<key code="id" />
 		<field column="id" code="id" type="uint32" />
 		<field column="名称" code="name" type="string" />
-		<field column="类型" code="itemType" type="uint8" />
+		<field column="类型" code="itemType" type="uint32" />
 		<field column="最低等级" code="minLevel" type="uint32" />
 		<field column="最高等级" code="maxLevel" type="uint32" />
 		<field column="职业" code="profession" type="uint8" default="0" />
@@ -44,7 +44,7 @@
 	</output>
 	<output type="json-go" code="TableItemType" file="道具表.xlsx" sheet="道具类型">
 		<key code="itemType" />
-		<field column="类型" code="itemType" type="uint8" />
+		<field column="类型" code="itemType" type="uint32" />
 		<field column="装备位置" code="equipPos" type="uint8" />
 	</output>
 </table>
