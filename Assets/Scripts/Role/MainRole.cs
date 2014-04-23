@@ -121,4 +121,20 @@ public class MainRole : MonoBehaviour, INotifyPropertyChanged
 			yield return new WaitForEndOfFrame();
 		BattleScene.Instance.LoadMap(table.TableMap.Where(cmd.mapid).mapfile);
 	}
+
+	/// <summary>
+	/// 主角升级
+	/// </summary>
+	/// <param name="cmd"></param>
+	/// <returns></returns>
+	public static bool Execute(UserLevelUpMapUserCmd_S cmd)
+	{
+		if(cmd.charid == ServerInfo.userdata.charid)
+		{
+			ServerInfo.level = cmd.level;
+			MainRole.Instance.OnPropertyChanged("level");
+			return true;
+		}
+		return false;
+	}
 }
