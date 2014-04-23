@@ -195,5 +195,19 @@ public class Role : MonoBehaviour
 			return;
 		}
 	}
+
+	/// <summary>
+	/// 角色升级
+	/// </summary>
+	/// <param name="cmd"></param>
+	[Execute]
+	public static void Execute(UserLevelUpMapUserCmd_S cmd)
+	{
+		MainRole.Execute(cmd);
+		Role role;
+		if(All.TryGetValue(cmd.charid, out role) == false)
+			return;
+		// TODO: 播放升级特效
+	}
 	#endregion
 }
