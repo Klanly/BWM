@@ -19,11 +19,16 @@ public class RoleInfoAvatar : MonoBehaviour
 		// 更新事件
 		ItemManager.Instance.ItemChanged += Present;
 		Present(ItemManager.Instance);
+
+		MainRole.Instance.PropertyChanged += OnMainRolePropertyChanged;
+		OnMainRolePropertyChanged(this, null);
 	}
 
 	void OnDestroy()
 	{
 		ItemManager.Instance.ItemChanged -= Present;
+		if (MainRole.Instance != null)
+			MainRole.Instance.PropertyChanged -= OnMainRolePropertyChanged;
 	}
 
 	void OnEnable()
@@ -48,13 +53,17 @@ public class RoleInfoAvatar : MonoBehaviour
 
 	void Present(ItemManager manager)
 	{
-		uiHeadInfo.text = string.Format("LV{0} {1}\n{2}", 
-			MainRole.ServerInfo.level, MainRole.ServerInfo.userdata.profession.GetName(),
-			MainRole.ServerInfo.userdata.charname);
 		for (var i = 1; i < items.Length; i++)
 			items[i].ServerInfo = null;
 		foreach (var item in manager.Where(ItemLocation.PackageType.Equip))
 			items[item.TableInfo.Type.equipPos].ServerInfo = item;
+	}
+
+	private void OnMainRolePropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+	{
+		uiHeadInfo.text = string.Format("LV{0} {1}\n{2}",
+			MainRole.ServerInfo.level, MainRole.ServerInfo.userdata.profession.GetName(),
+			MainRole.ServerInfo.userdata.charname);
 	}
 
 	private void OnItemGridClicked(int index)
