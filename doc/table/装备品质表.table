@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <table>
-	<output type="protobuf" code="TableEquip" file="装备品质表.xlsm" sheet="Sheet1">
+	<output type="protobuf" code="TableEquip" file="装备品质表.xlsx" sheet="Sheet1">
 		<key code="id" />
 		<key code="quality" />
 		<field column="装备ID" code="id" type="uint32" />
