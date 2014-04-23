@@ -4,7 +4,7 @@ using System.Collections;
 public class Minimap : MonoBehaviour
 {
 	public UITexture uiMapTexture;
-	public GameObject uiFlagMainRole;
+	public UISprite uiFlagMainRole;
 
 	private float m_extent = 1024;
 	public float Extent
@@ -54,18 +54,14 @@ public class Minimap : MonoBehaviour
 			var size = new Vector2(mapNav.gridWidth * mapNav.gridXNum, mapNav.gridHeight * mapNav.gridZNum);
 			Extent = Mathf.Min(Extent, uiMapTexture.mainTexture.width, uiMapTexture.mainTexture.height);
 
-			var pos = MainRole.Instance.entity.Position;
-
-			var ex = Extent / (float)uiMapTexture.mainTexture.width;
-			var ey = Extent / (float)uiMapTexture.mainTexture.height;
+			var relativePos = new Vector2(MainRole.Instance.entity.Position.x / size.x, MainRole.Instance.entity.Position.z / size.y);
+			var relativeExtent = new Vector2(Extent / (float)uiMapTexture.mainTexture.width, Extent / (float)uiMapTexture.mainTexture.height);
 
 			// 地图位置更新
 			material.mainTextureOffset = new Vector2(
-				Mathf.Clamp(pos.x / size.x - 0.5f * ex, 0.0f, 1.0f - ex),
-				Mathf.Clamp(pos.z / size.y - 0.5f * ey, 0.0f, 1.0f - ey));
-			material.mainTextureScale = new Vector2(
-				Extent / (float)uiMapTexture.mainTexture.width,
-				Extent / (float)uiMapTexture.mainTexture.height);
+				Mathf.Clamp(relativePos.x - 0.5f * relativeExtent.x, 0.0f, 1.0f - relativeExtent.x),
+				Mathf.Clamp(relativePos.y - 0.5f * relativeExtent.y, 0.0f, 1.0f - relativeExtent.y));
+			material.mainTextureScale = relativeExtent;
 
 			// force update
 			if (uiMapTexture.panel != null)
@@ -75,14 +71,18 @@ public class Minimap : MonoBehaviour
 			}
 
 			// 主角图标位置更新
-			uiFlagMainRole.transform.localPosition = uiMapTexture.transform.localPosition;
-
-			//var p = new Vector2(pos.x / size.x, pos.z / size.y);
-			//Debug.Log(string.Format("{0} - {1} = {2}", p.Dump(), material.mainTextureOffset.Dump(), (p - material.mainTextureOffset).Dump()));
+			var p = relativePos - material.mainTextureOffset;
+			p.x /= relativeExtent.x;
+			p.y /= relativeExtent.y;
+			uiFlagMainRole.leftAnchor.Set(p.x, -uiFlagMainRole.width * 0.5f);
+			uiFlagMainRole.rightAnchor.Set(p.x, uiFlagMainRole.width * 0.5f);
+			uiFlagMainRole.topAnchor.Set(p.y, uiFlagMainRole.height * 0.5f);
+			uiFlagMainRole.bottomAnchor.Set(p.y, -uiFlagMainRole.height * 0.5f);
+			uiFlagMainRole.UpdateAnchors();
 		}
 
 		// 主角图标显隐
-		uiFlagMainRole.SetActive(MainRole.Instance != null);
+		uiFlagMainRole.gameObject.SetActive(MainRole.Instance != null);
 		// 主角图标旋转
 		if (MainRole.Instance != null)
 			uiFlagMainRole.transform.localRotation = Quaternion.Euler(0, 180, MainRole.Instance.transform.localRotation.eulerAngles.y);
