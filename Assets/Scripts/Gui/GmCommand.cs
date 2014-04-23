@@ -3,6 +3,7 @@ using System.Collections;
 using GX.Net;
 using Cmd;
 using System.Collections.Generic;
+using System.Linq;
 
 public class GmCommand : MonoBehaviour
 {
@@ -46,6 +47,6 @@ public class GmCommand : MonoBehaviour
 		var my = BattleScene.Instance.Gui<GmCommand>();
 		my.gameObject.SetActive(true);
 		yield return new WaitForEndOfFrame();
-		my.SetValues(cmd.list);
+		my.SetValues(cmd.list.OrderBy(i => i.method));
 	}
 }
