@@ -110,8 +110,6 @@ public class Role : MonoBehaviour
 			Role.All.Remove(cmd.charid);
 			GameObject.Destroy(role.gameObject);
 		}
-		if (SelectTarget.Selected != null && SelectTarget.Selected.entrytype == SceneEntryType.SceneEntryType_Player && SelectTarget.Selected.entryid == cmd.charid)
-			SelectTarget.Selected = null;
 	}
 
 	[Execute]

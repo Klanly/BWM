@@ -108,8 +108,6 @@ public class Npc : MonoBehaviour
 			Npc.All.Remove(cmd.tempid);
 			GameObject.Destroy(npc.gameObject);
 		}
-		if (SelectTarget.Selected != null && SelectTarget.Selected.entrytype == SceneEntryType.SceneEntryType_Npc && SelectTarget.Selected.entryid == cmd.tempid)
-			SelectTarget.Selected = null;
 	}
 	#endregion
 

@@ -6,6 +6,25 @@ using System.Linq;
 
 public class SelectTarget : MonoBehaviour
 {
+	static SelectTarget()
+	{
+		Npc.All.ItemRemove += (_, args) =>
+		{
+			if (SelectTarget.Selected != null && 
+				SelectTarget.Selected.entrytype == SceneEntryType.SceneEntryType_Npc && 
+				SelectTarget.Selected.entryid == args.Data.Key)
+				SelectTarget.Selected = null;
+		};
+
+		Role.All.ItemRemove += (_, args) =>
+		{
+			if (SelectTarget.Selected != null && 
+				SelectTarget.Selected.entrytype == SceneEntryType.SceneEntryType_Player && 
+				SelectTarget.Selected.entryid == args.Data.Key)
+				SelectTarget.Selected = null;
+		};
+	}
+
 	/// <summary>
 	/// 切换给定的SelectTargetX类型展示器可见，并返回其实例
 	/// </summary>
