@@ -19,7 +19,9 @@
 	<output type="protobuf" code="TableItemType" file="道具表.xlsx" sheet="道具类型">
 		<key code="type" />
 		<field column="类型" code="type" type="uint8" />
-		<field column="装备位置" code="equipPos" type="uint8" />
+		<field column="装备位置" code="equipPos" type="uint8">
+			<regex>^[0-7]$</regex>
+		</field>
 		<field column="类型名称" code="name" type="string" />
 		<field column="类型说明" code="desc" type="string" />
 	</output>
@@ -28,5 +30,10 @@
 		<field column="id" code="id" type="uint32" />
 		<field column="名称" code="name" type="string" />
 		<field column="最大叠加数" code="maxNum" type="uint32" default="1" />
+	</output>
+	<output type="json-go" code="TableItemType" file="道具表.xlsx" sheet="道具类型">
+		<key code="type" />
+		<field column="类型" code="type" type="uint8" />
+		<field column="装备位置" code="equipPos" type="uint8" />
 	</output>
 </table>
