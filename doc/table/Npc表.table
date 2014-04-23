@@ -26,9 +26,9 @@
 		<field column="基本类型" code="baseType" type="uint8" />
 		<field column="访问类型" code="clickType" type="uint8" />
 		<field column="最大生命" code="maxHp" type="int32" />
-		<field column="物攻" code="pDam" type="uint32" />
-		<field column="魔攻" code="mDam" type="uint32" />
-		<field column="物防" code="pDef" type="uint32" />
-		<field column="魔防" code="mDef" type="uint32" />
+		<field column="物攻" code="pDam" type="int32" />
+		<field column="魔攻" code="mDam" type="int32" />
+		<field column="物防" code="pDef" type="int32" />
+		<field column="魔防" code="mDef" type="int32" />
 	</output>
 </table>
