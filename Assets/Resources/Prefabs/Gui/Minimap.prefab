@@ -136,7 +136,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 58.0000153, y: 126.5, z: 0}
+  m_LocalPosition: {x: 1026, y: 54.5000153, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400014}
@@ -159,7 +159,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100004}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 14.0000076, y: 124.5, z: 0}
+  m_LocalPosition: {x: 1018, y: 52.5000153, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400014}
@@ -170,7 +170,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100006}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 111.500031, y: 125.5, z: 0}
+  m_LocalPosition: {x: 1007.5, y: 53.5000153, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400014}
@@ -181,7 +181,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100008}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -58.5, y: 131.5, z: 0}
+  m_LocalPosition: {x: 981.5, y: 59.5000153, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400014}
@@ -192,7 +192,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100010}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -121, y: 129, z: 0}
+  m_LocalPosition: {x: 919, y: 57.0000153, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400014}
@@ -203,7 +203,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100012}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 44, y: 0, z: 0}
+  m_LocalPosition: {x: 1012, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400014}
@@ -351,7 +351,7 @@ MonoBehaviour:
     absolute: 64
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 28
+  mWidth: 2
   mHeight: 25
   mDepth: 1
   autoResizeBoxCollider: 0
@@ -547,8 +547,8 @@ MonoBehaviour:
     absolute: -4
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 146
-  mHeight: 146
+  mWidth: 2
+  mHeight: 2
   mDepth: 0
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
@@ -576,6 +576,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   uiMapTexture: {fileID: 11400012}
   uiFlagMainRole: {fileID: 11400010}
+  uiFlagRole: {fileID: 11400000}
+  uiFlagNpc:
+  - {fileID: 0}
+  - {fileID: 11400006}
+  - {fileID: 11400004}
+  - {fileID: 11400008}
 --- !u!114 &11400016
 MonoBehaviour:
   m_ObjectHideFlags: 1
