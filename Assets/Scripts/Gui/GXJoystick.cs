@@ -10,6 +10,8 @@ public class GXJoystick : MonoBehaviour {
 	private Vector3 center;
 	[HideInInspector]
 	public Vector2 position;
+	[HideInInspector]
+	public bool pressed = false;
 
 	private void Start ()
 	{
@@ -41,6 +43,7 @@ public class GXJoystick : MonoBehaviour {
 					transform.localPosition = center;
 				}
 			}
+			this.pressed = pressed;
 		}
 	}
 	
