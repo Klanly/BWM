@@ -11,7 +11,7 @@
 		<field column="职业" code="profession" type="uint8" default="0">
 			<regex>^[0123]$</regex>
 		</field>
-		<field column="需求等级" code="level" type="int32" default="1" />
+		<field column="最低等级" code="level" type="int32" default="1" />
 		<field column="icon" code="icon" type="string">
 			<regex>^[^\\]+$</regex>
 		</field>
@@ -29,11 +29,22 @@
 		<key code="id" />
 		<field column="id" code="id" type="uint32" />
 		<field column="名称" code="name" type="string" />
+		<field column="类型" code="itemType" type="uint8" />
+		<field column="最低等级" code="minLevel" type="uint32" />
+		<field column="最高等级" code="maxLevel" type="uint32" />
+		<field column="职业" code="profession" type="uint8" default="0" />
 		<field column="最大叠加数" code="maxNum" type="uint32" default="1" />
+		<field column="绑定模式" code="bindType" type="uint8" />
+		<field column="耐久度" code="dur" type="int32" />
+		<field column="耐久显示" code="durShow" type="int32" />
+		<field column="冷却类型" code="coldType" type="int32" />
+		<field column="冷却时间" code="coldSecond" type="int32" />
+		<field column="买入价格" code="buyPrice" type="int32" />
+		<field column="卖出价格" code="sellPrice" type="int32" />
 	</output>
 	<output type="json-go" code="TableItemType" file="道具表.xlsx" sheet="道具类型">
-		<key code="type" />
-		<field column="类型" code="type" type="uint8" />
+		<key code="itemType" />
+		<field column="类型" code="itemType" type="uint8" />
 		<field column="装备位置" code="equipPos" type="uint8" />
 	</output>
 </table>
