@@ -18,7 +18,7 @@ public class SkillManager : IEnumerable<KeyValuePair<uint, table.TableSkill>>
 
 	public uint BasicSkill
 	{
-		get { return (from s in skillLevels where s.Value.IsBasic select s.Key).FirstOrDefault(); }
+		get { return (from s in skillLevels where s.Value != null && s.Value.IsBasic select s.Key).FirstOrDefault(); }
 	}
 
 	public event Action<SkillManager> SkillChanged;
