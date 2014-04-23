@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<table>
+	<output type="json-go" code="TableEquip" file="装备基础表.xlsx" sheet="Sheet1">
+		<key code="id" />
+		<field column="id" code="id" type="uint32" />
+
+		<field column="最大生命" code="maxHp" type="uint32" />
+		<field column="物攻增加" code="pDamAdd" type="uint32" />
+		<field column="魔攻增加" code="mDamAdd" type="uint32" />
+		<field column="物防增加" code="pDefAdd" type="uint32" />
+		<field column="魔防增加" code="mDefAdd" type="uint32" />
+
+		<field column="命中" code="hit" type="uint32" />
+		<field column="闪避" code="hide" type="uint32" />
+		<field column="致命" code="lucky" type="uint32" />
+		<field column="暴击" code="force" type="uint32" />
+		<field column="格挡" code="miss" type="uint32" />
+		<field column="物免" code="pIggnore" type="uint32" />
+		<field column="魔免" code="mIggnore" type="uint32" />
+
+		<field column="反伤" code="k" type="uint32" />
+		<field column="攻击速度" code="o" type="uint32" />
+		<field column="移动速度" code="n" type="uint32" />
+	</output>
+</table>
