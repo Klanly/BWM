@@ -110,6 +110,118 @@ namespace Cmd
       get { return _level; }
       set { _level = value; }
     }
+    private int _pDam = default(int);
+    [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"pDam", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(int))]
+    public int pDam
+    {
+      get { return _pDam; }
+      set { _pDam = value; }
+    }
+    private int _mDam = default(int);
+    [global::ProtoBuf.ProtoMember(8, IsRequired = false, Name=@"mDam", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(int))]
+    public int mDam
+    {
+      get { return _mDam; }
+      set { _mDam = value; }
+    }
+    private int _pDef = default(int);
+    [global::ProtoBuf.ProtoMember(9, IsRequired = false, Name=@"pDef", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(int))]
+    public int pDef
+    {
+      get { return _pDef; }
+      set { _pDef = value; }
+    }
+    private int _mDef = default(int);
+    [global::ProtoBuf.ProtoMember(10, IsRequired = false, Name=@"mDef", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(int))]
+    public int mDef
+    {
+      get { return _mDef; }
+      set { _mDef = value; }
+    }
+    private int _pIggnore = default(int);
+    [global::ProtoBuf.ProtoMember(11, IsRequired = false, Name=@"pIggnore", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(int))]
+    public int pIggnore
+    {
+      get { return _pIggnore; }
+      set { _pIggnore = value; }
+    }
+    private int _mIggnore = default(int);
+    [global::ProtoBuf.ProtoMember(12, IsRequired = false, Name=@"mIggnore", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(int))]
+    public int mIggnore
+    {
+      get { return _mIggnore; }
+      set { _mIggnore = value; }
+    }
+    private int _moveSpeed = default(int);
+    [global::ProtoBuf.ProtoMember(13, IsRequired = false, Name=@"moveSpeed", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(int))]
+    public int moveSpeed
+    {
+      get { return _moveSpeed; }
+      set { _moveSpeed = value; }
+    }
+    private int _attackSpeed = default(int);
+    [global::ProtoBuf.ProtoMember(14, IsRequired = false, Name=@"attackSpeed", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(int))]
+    public int attackSpeed
+    {
+      get { return _attackSpeed; }
+      set { _attackSpeed = value; }
+    }
+    private int _hit = default(int);
+    [global::ProtoBuf.ProtoMember(15, IsRequired = false, Name=@"hit", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(int))]
+    public int hit
+    {
+      get { return _hit; }
+      set { _hit = value; }
+    }
+    private int _hide = default(int);
+    [global::ProtoBuf.ProtoMember(16, IsRequired = false, Name=@"hide", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(int))]
+    public int hide
+    {
+      get { return _hide; }
+      set { _hide = value; }
+    }
+    private int _lucky = default(int);
+    [global::ProtoBuf.ProtoMember(17, IsRequired = false, Name=@"lucky", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(int))]
+    public int lucky
+    {
+      get { return _lucky; }
+      set { _lucky = value; }
+    }
+    private int _force = default(int);
+    [global::ProtoBuf.ProtoMember(18, IsRequired = false, Name=@"force", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(int))]
+    public int force
+    {
+      get { return _force; }
+      set { _force = value; }
+    }
+    private int _miss = default(int);
+    [global::ProtoBuf.ProtoMember(19, IsRequired = false, Name=@"miss", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(int))]
+    public int miss
+    {
+      get { return _miss; }
+      set { _miss = value; }
+    }
+    private int _reflect = default(int);
+    [global::ProtoBuf.ProtoMember(20, IsRequired = false, Name=@"reflect", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(int))]
+    public int reflect
+    {
+      get { return _reflect; }
+      set { _reflect = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }

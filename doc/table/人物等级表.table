@@ -1,10 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <table>
-	<output type="protobuf" code="TableRoleLevel" file="人物等级表.xlsx" sheet="Sheet1">
-		<key code="level" />
-		<field column="等级" code="level" type="uint32" />
-		<field column="最大生命" code="maxHp" type="int32" />
-	</output>
 	<output type="json-go" code="TableRoleLevel" file="人物等级表.xlsx" sheet="Sheet1">
 		<key code="level" />
 		<field column="等级" code="level" type="uint32" />
