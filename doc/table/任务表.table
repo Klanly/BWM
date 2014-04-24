@@ -8,12 +8,12 @@
 			<regex>^[0-3]$</regex>
 		</field>
 		<field column="前置任务" code="preQuest" type="uint32" />
-		<field column="最低等级" code="minLevel" type="uint32" />
-		<field column="最高等级" code="maxLevel" type="uint32" />
+		<field column="最低等级" code="minLevel" type="int32" />
+		<field column="最高等级" code="maxLevel" type="int32" />
 		<field column="接npc" code="npcBegin" type="uint32" />
 		<field column="交npc" code="npcEnd" type="uint32" />
-		<field column="任务计数" code="step" type="uint32" />
-		<field column="经验奖励" code="exp" type="uint32" />
+		<field column="任务计数" code="step" type="int32" />
+		<field column="经验奖励" code="exp" type="int32" />
 		<field column="道具奖励" code="items" type="string" />
 		<field column="接取描述" code="infoBegin" type="string" />
 		<field column="完成描述" code="infoEnd" type="string" />

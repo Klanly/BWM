@@ -18,7 +18,7 @@ public class SkillManager : IEnumerable<KeyValuePair<uint, table.TableSkill>>
 
 	public uint BasicSkill
 	{
-		get { return (from s in skillLevels where s.Value.IsBasic select s.Key).FirstOrDefault(); }
+		get { return (from s in skillLevels where s.Value != null && s.Value.IsBasic select s.Key).FirstOrDefault(); }
 	}
 
 	public event Action<SkillManager> SkillChanged;
@@ -142,15 +142,15 @@ public class SkillManager : IEnumerable<KeyValuePair<uint, table.TableSkill>>
 		{
 			case Cmd.SceneEntryType.SceneEntryType_Npc:
 				{
-					Npc owner;
-					if (Npc.All.TryGetValue(cmd.owner.entryid, out owner))
+					var owner = Npc.All[cmd.owner.entryid];
+					if (owner != null)
 						cast = owner.CastSkill;
 				}
 				break;
 			case Cmd.SceneEntryType.SceneEntryType_Player:
 				{
-					Role owner;
-					if (Role.All.TryGetValue(cmd.owner.entryid, out owner))
+					var owner = Role.All[cmd.owner.entryid];
+					if (owner != null)
 						cast = owner.CastSkill;
 				}
 				break;

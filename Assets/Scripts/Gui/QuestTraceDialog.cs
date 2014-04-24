@@ -81,7 +81,7 @@ public class QuestTraceDialog : MonoBehaviour
 				break;
 			case ClickQuestTaceEvent.ClickQuestTaceEvent_GoToNpc:
 				{
-					var npc = Npc.All.Values.FirstOrDefault(i => i.TableInfo.id == cmd.npcbaseid);
+					var npc = (from i in Npc.All where i.Value.TableInfo.id == cmd.npcbaseid select i.Value).FirstOrDefault();
 					if (npc == null)
 						break;
 					var position = npc.transform.localPosition;
@@ -125,7 +125,7 @@ public class QuestTraceDialog : MonoBehaviour
 			case ClickQuestTaceEvent.ClickQuestTaceEvent_AttackMonster:
 				{
 					// TODO: 按照给定的 cmd.npcbaseid 打怪
-					var npc = Npc.All.Values.FirstOrDefault(i => i.TableInfo.id == cmd.npcbaseid);
+					var npc = (from i in Npc.All where i.Value.TableInfo.id == cmd.npcbaseid select i.Value).FirstOrDefault();
 					if (npc == null)
 						break;
 					var position = npc.transform.localPosition;

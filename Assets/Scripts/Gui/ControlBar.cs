@@ -58,7 +58,7 @@ public class ControlBar : MonoBehaviour
 			}
 			if(MainRole.Instance)
 			{
-				MainRole.Instance.controlMove.MoveByJoystick(horizontal, vertical);
+				MainRole.Instance.controlMove.MoveByJoystick(horizontal, vertical, joystick.pressed);
 			}
 		}
 	}

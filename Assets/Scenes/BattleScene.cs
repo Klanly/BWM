@@ -83,7 +83,6 @@ public class BattleScene : MonoBehaviour
 			throw new System.InvalidOperationException();
 		Instance = null;
 		// TODO: use event driven
-		SelectTarget.Selected = null;
 		Role.All.Clear();
 		Npc.All.Clear();
 	}

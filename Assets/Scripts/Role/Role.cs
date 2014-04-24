@@ -4,10 +4,11 @@ using GX.Net;
 using Cmd;
 using System.Collections.Generic;
 using System;
+using GX;
 
 public class Role : MonoBehaviour
 {
-	public static Dictionary<ulong, Role> All { get; private set; }
+	public static ObservableDictionary<ulong, Role> All { get; private set; }
 
 	public MapUserData ServerInfo { get; private set; }
 
@@ -18,7 +19,7 @@ public class Role : MonoBehaviour
 
 	static Role()
 	{
-		All = new Dictionary<ulong, Role>();
+		All = new ObservableDictionary<ulong, Role>();
 	}
 
 	private Role() { }
@@ -77,8 +78,8 @@ public class Role : MonoBehaviour
 	{
 		if (MainRole.ServerInfo == null)
 			return;
-		Role role;
-		if (Role.All.TryGetValue(cmd.data.charid, out role))
+		var role = Role.All[cmd.data.charid];
+		if (role != null)
 		{
 			role.ServerInfo = cmd.data;
 		}
@@ -103,14 +104,12 @@ public class Role : MonoBehaviour
 	[Execute]
 	public static void Execute(RemoveMapUserMapUserCmd_S cmd)
 	{
-		Role role;
-		if (Role.All.TryGetValue(cmd.charid, out role))
+		var role = Role.All[cmd.charid];
+		if (role != null)
 		{
 			Role.All.Remove(cmd.charid);
 			GameObject.Destroy(role.gameObject);
 		}
-		if (SelectTarget.Selected != null && SelectTarget.Selected.entrytype == SceneEntryType.SceneEntryType_Player && SelectTarget.Selected.entryid == cmd.charid)
-			SelectTarget.Selected = null;
 	}
 
 	[Execute]
@@ -119,8 +118,8 @@ public class Role : MonoBehaviour
 		if (MainRole.ServerInfo == null || cmd.charid == MainRole.ServerInfo.userdata.charid)
 			return;
 
-		Role role;
-		if (Role.All.TryGetValue(cmd.charid, out role))
+		var role = Role.All[cmd.charid];
+		if (role != null)
 		{
 			role.move.TargetPosition = BattleScene.Instance.MapNav.GetWorldPosition(cmd.poscm);
 		}
@@ -129,8 +128,8 @@ public class Role : MonoBehaviour
 	[Execute]
 	public static void Execute(UserGotoMoveUserCmd_S cmd)
 	{
-		Role role;
-		if (Role.All.TryGetValue(cmd.charid, out role))
+		var role = Role.All[cmd.charid];
+		if (role != null)
 		{
 			role.entity.Position = BattleScene.Instance.MapNav.GetWorldPosition(cmd.poscm);
 		}
@@ -194,6 +193,20 @@ public class Role : MonoBehaviour
 			view.SetSp(cmd.cursp);
 			return;
 		}
+	}
+
+	/// <summary>
+	/// 角色升级
+	/// </summary>
+	/// <param name="cmd"></param>
+	[Execute]
+	public static void Execute(UserLevelUpMapUserCmd_S cmd)
+	{
+		MainRole.Execute(cmd);
+		var role = All[cmd.charid];
+		if(role == null)
+			return;
+		// TODO: 播放升级特效
 	}
 	#endregion
 }
