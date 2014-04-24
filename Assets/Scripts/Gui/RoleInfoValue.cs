@@ -9,8 +9,10 @@ public class RoleInfoValue : MonoBehaviour
 	public UISlider hp;
 	/// <summary>经验</summary>
 	public UISlider exp;
-	/// <summary>攻击</summary>
-	public UILabel dam;
+	/// <summary>物攻</summary>
+	public UILabel pDam;
+	/// <summary>魔攻</summary>
+	public UILabel mDam;
 	/// <summary>物防</summary>
 	public UILabel pDef;
 	/// <summary>魔防</summary>
