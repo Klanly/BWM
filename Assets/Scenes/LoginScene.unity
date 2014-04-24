@@ -406,15 +406,15 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11400002, guid: 45edf347f9f51214dbfbab27b16fbf01, type: 2}
       propertyPath: bottomAnchor.absolute
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 11400002, guid: 45edf347f9f51214dbfbab27b16fbf01, type: 2}
       propertyPath: topAnchor.absolute
-      value: 3
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: 45edf347f9f51214dbfbab27b16fbf01, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -14
+      value: -12
       objectReference: {fileID: 0}
     - target: {fileID: 11400002, guid: 45edf347f9f51214dbfbab27b16fbf01, type: 2}
       propertyPath: leftAnchor.absolute
@@ -439,7 +439,7 @@ Prefab:
         type: 2}
     - target: {fileID: 11400002, guid: 45edf347f9f51214dbfbab27b16fbf01, type: 2}
       propertyPath: mFontSize
-      value: 22
+      value: 21
       objectReference: {fileID: 0}
     - target: {fileID: 11400002, guid: 45edf347f9f51214dbfbab27b16fbf01, type: 2}
       propertyPath: mText
@@ -623,7 +623,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 628467499}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -222.54364, y: 134.955124, z: 0}
+  m_LocalPosition: {x: -221.869965, y: 134.955124, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 412017433}
@@ -839,7 +839,7 @@ Prefab:
         type: 2}
     - target: {fileID: 11400002, guid: 45edf347f9f51214dbfbab27b16fbf01, type: 2}
       propertyPath: mFontSize
-      value: 22
+      value: 21
       objectReference: {fileID: 0}
     - target: {fileID: 11400002, guid: 45edf347f9f51214dbfbab27b16fbf01, type: 2}
       propertyPath: mText
@@ -939,7 +939,7 @@ MonoBehaviour:
   mTrueTypeFont: {fileID: 0}
   mFont: {fileID: 11400000, guid: 26e29ee85460c3b4bb0bb73bdf6bde41, type: 2}
   mText: 'Press here to type '
-  mFontSize: 22
+  mFontSize: 21
   mFontStyle: 0
   mAlignment: 0
   mEncoding: 1
@@ -1166,7 +1166,7 @@ Transform:
   m_PrefabInternal: {fileID: 560200288}
   m_GameObject: {fileID: 1187737672}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 12, y: -14, z: 0}
+  m_LocalPosition: {x: 12, y: -12, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 566368685}
@@ -1193,11 +1193,11 @@ MonoBehaviour:
   bottomAnchor:
     target: {fileID: 566368685}
     relative: 0
-    absolute: 2
+    absolute: 4
   topAnchor:
     target: {fileID: 566368685}
     relative: 1
-    absolute: 3
+    absolute: 5
   mColor: {r: 1, g: 1, b: 1, a: .403921574}
   mPivot: 3
   mWidth: 219
@@ -1211,7 +1211,7 @@ MonoBehaviour:
   mTrueTypeFont: {fileID: 0}
   mFont: {fileID: 11400000, guid: 26e29ee85460c3b4bb0bb73bdf6bde41, type: 2}
   mText: 'Press here to type '
-  mFontSize: 22
+  mFontSize: 21
   mFontStyle: 0
   mAlignment: 0
   mEncoding: 1
@@ -1255,7 +1255,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1284611458}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -990.543701, y: 454.281433, z: 0}
+  m_LocalPosition: {x: -1032.98572, y: 454.281433, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1909208366}
@@ -1952,7 +1952,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1909208365}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 681.000061, y: -43, z: 0}
+  m_LocalPosition: {x: 723.442139, y: -43, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1284611459}
@@ -2107,7 +2107,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2032827508}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -117, z: 0}
+  m_LocalPosition: {x: 0, y: -116, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 412017433}
@@ -2156,7 +2156,7 @@ MonoBehaviour:
   mPivot: 4
   mWidth: 412
   mHeight: 68
-  mDepth: 2
+  mDepth: 3
   autoResizeBoxCollider: 1
   hideIfOffScreen: 0
   keepAspectRatio: 0
@@ -2267,13 +2267,13 @@ MonoBehaviour:
     absolute: 0
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 1536
+  mWidth: 1621
   mHeight: 640
   mDepth: -1
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 2.234375
+  aspectRatio: 2.5328126
   mRect:
     serializedVersion: 2
     x: 0
