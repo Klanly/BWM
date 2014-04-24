@@ -259,7 +259,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &100100
 GameObject:
   m_ObjectHideFlags: 1
@@ -2151,7 +2151,7 @@ MonoBehaviour:
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 0}
   mFont: {fileID: 11400000, guid: 26e29ee85460c3b4bb0bb73bdf6bde41, type: 2}
-  mText: "\u79F0\u53F7"
+  mText: "\u5C5E\u6027"
   mFontSize: 22
   mFontStyle: 0
   mAlignment: 0
