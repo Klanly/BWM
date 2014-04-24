@@ -20,18 +20,23 @@ public class BattleScene : MonoBehaviour
 		return this.GetComponentsDescendant<T>().FirstOrDefault();
 	}
 
+	public MonoBehaviour Gui(Type guiType)
+	{
+		try
+		{
+			var method = typeof(BattleScene).GetRuntimeMethod("Gui").MakeGenericMethod(guiType);
+			return method.Invoke(BattleScene.Instance, null) as MonoBehaviour;
+		}
+		catch { return null; }
+	}
+
 	public MonoBehaviour Gui(string guiTypeName)
 	{
 		try
 		{
-			var type = System.Type.GetType(guiTypeName);
-			var method = typeof(BattleScene).GetRuntimeMethod("Gui").MakeGenericMethod(type);
-			return method.Invoke(BattleScene.Instance, null) as MonoBehaviour;
+			return Gui(System.Type.GetType(guiTypeName));
 		}
-		catch
-		{
-			return null;
-		}
+		catch { return null; }
 	}
 	#endregion
 

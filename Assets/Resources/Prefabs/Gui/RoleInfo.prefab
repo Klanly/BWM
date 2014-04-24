@@ -907,6 +907,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07c32d7d30ffd3748bf3160ff39c426e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  uiRoleInfoPackage: {fileID: 11400068}
+  uiRoleInfoValue: {fileID: 11400084}
   uiSkillInfo: {fileID: 11400188}
 --- !u!114 &11400006
 MonoBehaviour:
