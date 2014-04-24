@@ -21,6 +21,8 @@ public class RoleInfo : MonoBehaviour
 			var target = BattleScene.Instance.Gui<SkillInfo>();
 			target.gameObject.SetActive(!target.gameObject.activeSelf);
 		};
+
+		ShowRightPanel<RoleInfoPackage>();
 	}
 
 	void OnEnable()
@@ -45,6 +47,8 @@ public class RoleInfo : MonoBehaviour
 				hide.gameObject.SetActive(false);
 			}
 		}
+
+		NGUITools.BringForward(this.GetComponent<Closeable>().closeButton.gameObject);
 		return show;
 	}
 }
