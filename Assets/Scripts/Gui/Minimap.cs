@@ -165,7 +165,11 @@ public class Minimap : MonoBehaviour
 
 	private void OnNpcRemove(object sender, GX.EventArgs<KeyValuePair<ulong, Npc>> args)
 	{
-		RemoveFlag(args.Data.Value.GetComponent<Entity>());
+		try
+		{
+			RemoveFlag(args.Data.Value.GetComponent<Entity>());
+		}
+		catch (MissingReferenceException) { }
 	}
 
 	private void OnRoleAdd(object sender, GX.EventArgs<KeyValuePair<ulong, Role>> args)
@@ -176,6 +180,10 @@ public class Minimap : MonoBehaviour
 
 	private void OnRoleRemove(object sender, GX.EventArgs<KeyValuePair<ulong, Role>> args)
 	{
-		RemoveFlag(args.Data.Value.GetComponent<Entity>());
+		try
+		{
+			RemoveFlag(args.Data.Value.GetComponent<Entity>());
+		}
+		catch (MissingReferenceException) { }
 	}
 }
