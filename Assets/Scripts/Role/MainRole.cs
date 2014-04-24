@@ -18,8 +18,6 @@ public class MainRole : MonoBehaviour, INotifyPropertyChanged
 	public int maxhp { get { return _maxhp; } set { _maxhp = value; OnPropertyChanged("maxhp"); } }
 	private int _maxsp;
 	public int maxsp { get { return _maxsp; } set { _maxsp = value; OnPropertyChanged("maxsp"); } }
-	private int _exp;
-	public int exp { get { return _exp; } set { _exp = value; OnPropertyChanged("exp"); } }
 
 	#endregion
 

@@ -57,6 +57,29 @@ public class RoleInfoValue : MonoBehaviour
 
 	void Update()
 	{
+		var info = MainRole.ServerInfo;
+		if (groupCommon.activeSelf)
+		{
+			//hp
+			//exp
+			pDam.text = info.pDam.ToString();
+			mDam.text = info.mDam.ToString();
+			pDef.text = info.pDef.ToString();
+			mDef.text = info.mDef.ToString();
+			pIggnore.text = info.pIggnore.ToString();
+			mIggnore.text = info.mIggnore.ToString();
+			moveSpeed.text = info.moveSpeed.ToString();
+			attackSpeed.text = info.attackSpeed.ToString();
+			hit.text = info.hit.ToString();
+		}
 
+		if (groupExtend.activeSelf)
+		{
+			hide.text = info.hide.ToString();
+			lucky.text = info.lucky.ToString();
+			force.text = info.force.ToString();
+			miss.text = info.miss.ToString();
+			reflect.text = info.reflect.ToString();
+		}
 	}
 }
