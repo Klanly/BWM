@@ -283,9 +283,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   thumb: {fileID: 0}
-  mBG: {fileID: 0}
+  mBG: {fileID: 1360079701}
   mFG: {fileID: 1703354220}
-  mValue: 1
+  mValue: 0
   mFill: 0
   numberOfSteps: 0
   onChange: []
@@ -417,11 +417,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1476132464}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6a707e44c081bcf4c89026b6f55023d3, type: 3}
+  m_Script: {fileID: 11500000, guid: 6ecdff1404b98754e8a1258c8af8676e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  accountInput: {fileID: 0}
-  playButton: {fileID: 0}
+  slider: {fileID: 1366620057}
+  lable: {fileID: 1697149999}
 --- !u!1 &1697149997
 GameObject:
   m_ObjectHideFlags: 0
@@ -644,13 +644,13 @@ MonoBehaviour:
     absolute: 0
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 1187
+  mWidth: 853
   mHeight: 640
   mDepth: -1
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 1.49843752
+  aspectRatio: 1.33281255
   mRect:
     serializedVersion: 2
     x: 0
