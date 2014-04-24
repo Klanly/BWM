@@ -60,8 +60,8 @@ public class RoleInfoValue : MonoBehaviour
 		var info = MainRole.ServerInfo;
 		if (groupCommon.activeSelf)
 		{
-			//hp
-			//exp
+			hp.value = info.hp / (float)MainRole.Instance.maxhp;
+			//exp.value = info.exp / 
 			pDam.text = info.pDam.ToString();
 			mDam.text = info.mDam.ToString();
 			pDef.text = info.pDef.ToString();
