@@ -3,6 +3,8 @@ using System.Collections;
 
 public class RoleInfoValue : MonoBehaviour
 {
+	public GameObject buttonCommon;
+	public GameObject groupCommon;
 	/// <summary>血量</summary>
 	public UISlider hp;
 	/// <summary>经验</summary>
@@ -24,6 +26,8 @@ public class RoleInfoValue : MonoBehaviour
 	/// <summary>命中</summary>
 	public UILabel hit;
 
+	public GameObject buttonExtend;
+	public GameObject groupExtend;
 	/// <summary>闪避</summary>
 	public UILabel hide;
 	/// <summary>致命</summary>
@@ -35,13 +39,20 @@ public class RoleInfoValue : MonoBehaviour
 	/// <summary>反伤</summary>
 	public UILabel reflect;
 
-	// Use this for initialization
 	void Start()
 	{
-
+		UIEventListener.Get(buttonCommon).onClick = go =>
+		{
+			groupCommon.SetActive(true);
+			groupExtend.SetActive(false);
+		};
+		UIEventListener.Get(buttonExtend).onClick = go =>
+		{
+			groupCommon.SetActive(false);
+			groupExtend.SetActive(true);
+		};
 	}
 
-	// Update is called once per frame
 	void Update()
 	{
 

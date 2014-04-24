@@ -2859,6 +2859,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cacb8e567e0393a4788153b8d1bd5605, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  buttonCommon: {fileID: 100026}
+  groupCommon: {fileID: 100112}
   hp: {fileID: 11400096}
   exp: {fileID: 11400116}
   dam: {fileID: 11400092}
@@ -2869,6 +2871,8 @@ MonoBehaviour:
   moveSpeed: {fileID: 11400068}
   attackSpeed: {fileID: 11400062}
   hit: {fileID: 11400056}
+  buttonExtend: {fileID: 100012}
+  groupExtend: {fileID: 100008}
   hide: {fileID: 11400002}
   lucky: {fileID: 11400028}
   force: {fileID: 11400014}
