@@ -7,18 +7,14 @@ using System.Collections;
 [RequireComponent(typeof(Skill))]
 public class SkillDrawHurt : SkillBase
 {
-
 	public float delay;
 
-	void ApplyTargetEvent()
+	IEnumerator ApplyTargetEvent()
 	{
 		if (delay > 0.0f)
 		{
-			iTween.ValueTo(gameObject, iTween.Hash(
-				"from", delay, 
-				"to", 0.0f, 
-				"time", delay, 
-				"oncomplete", "DrawHurt"));
+			yield return new WaitForSeconds (delay);
+			DrawHurt();
 		}
 		else
 		{

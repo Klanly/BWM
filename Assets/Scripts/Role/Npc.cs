@@ -4,10 +4,11 @@ using Cmd;
 using GX.Net;
 using System.Collections.Generic;
 using System.Linq;
+using GX;
 
 public class Npc : MonoBehaviour
 {
-	public static Dictionary<ulong, Npc> All { get; private set; }
+	public static ObservableDictionary<ulong, Npc> All { get; private set; }
 	public MapNpcData ServerInfo { get; private set; }
 	public table.TableNpc TableInfo { get; private set; }
 
@@ -18,7 +19,7 @@ public class Npc : MonoBehaviour
 
 	static Npc()
 	{
-		All = new Dictionary<ulong, Npc>();
+		All = new ObservableDictionary<ulong, Npc>();
 	}
 
 	private Npc() { }
@@ -84,8 +85,8 @@ public class Npc : MonoBehaviour
 	[Execute]
 	public static void Execute(AddMapNpcDataAndPosMapUserCmd_S cmd)
 	{
-		Npc npc;
-		if (Npc.All.TryGetValue(cmd.data.tempid, out npc))
+		var npc = Npc.All[cmd.data.tempid];
+		if (npc != null)
 		{
 			npc.ServerInfo = cmd.data;
 		}
@@ -101,8 +102,8 @@ public class Npc : MonoBehaviour
 	[Execute]
 	public static void Execute(RemoveMapNpcMapUserCmd_S cmd)
 	{
-		Npc npc;
-		if (Npc.All.TryGetValue(cmd.tempid, out npc))
+		var npc = Npc.All[cmd.tempid];
+		if (npc != null)
 		{
 			Npc.All.Remove(cmd.tempid);
 			GameObject.Destroy(npc.gameObject);
@@ -114,56 +115,22 @@ public class Npc : MonoBehaviour
 	[Execute]
 	public static void Execute(SetNpcHpDataUserCmd_S cmd)
 	{
-		Npc target;
-		if (All.TryGetValue(cmd.tempid, out target) == false)
+		var target = All[cmd.tempid];
+		if (target == null)
 			return;
 		target.ServerInfo.maxhp = cmd.maxhp;
 		target.ServerInfo.hp = cmd.hp;
-
-		if (SelectTarget.Selected.entrytype == SceneEntryType.SceneEntryType_Npc && SelectTarget.Selected.entryid == cmd.tempid)
-		{
-			switch (target.TableInfo.BaseType)
-			{
-				case NpcBaseType.NpcBaseType_Boss:
-					BattleScene.Instance.Gui<SelectTargetBoss>().SetHp(cmd.hp, cmd.maxhp);
-					break;
-				case NpcBaseType.NpcBaseType_Elite:
-					BattleScene.Instance.Gui<SelectTargetElite>().SetHp(cmd.hp, cmd.maxhp);
-					break;
-				case NpcBaseType.NpcBaseType_Monster:
-					BattleScene.Instance.Gui<SelectTargetMonster>().SetHp(cmd.hp, cmd.maxhp);
-					break;
-				default:
-					break;
-			}
-		}
+		SelectTarget.OnUpdate(target);
 	}
 
 	[Execute]
 	public static void Execute(ChangeNpcHpDataUserCmd_S cmd)
 	{
-		Npc target;
-		if(All.TryGetValue(cmd.tempid, out target) == false)
+		var target = All[cmd.tempid];
+		if (target == null)
 			return;
 		target.ServerInfo.hp = cmd.curhp;
-
-		if (SelectTarget.Selected.entrytype == SceneEntryType.SceneEntryType_Npc && SelectTarget.Selected.entryid == cmd.tempid)
-		{
-			switch (target.TableInfo.BaseType)
-			{
-				case NpcBaseType.NpcBaseType_Boss:
-					BattleScene.Instance.Gui<SelectTargetBoss>().SetHp(cmd.curhp);
-					break;
-				case NpcBaseType.NpcBaseType_Elite:
-					BattleScene.Instance.Gui<SelectTargetElite>().SetHp(cmd.curhp);
-					break;
-				case NpcBaseType.NpcBaseType_Monster:
-					BattleScene.Instance.Gui<SelectTargetMonster>().SetHp(cmd.curhp);
-					break;
-				default:
-					break;
-			}
-		}
+		SelectTarget.OnUpdate(target);
 	}
 	#endregion
 }

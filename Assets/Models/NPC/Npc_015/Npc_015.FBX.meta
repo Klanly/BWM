@@ -75,7 +75,7 @@ ModelImporter:
     7400010: 'Ani_Ji_1 '
     7400012: 'Ani_Ji_2 '
     7400014: Ani_Die_1
-    7400016: Ani_hurt
+    7400016: Ani_Hurt
     9500000: //RootNode
     13700000: zhangliao
   materials:
@@ -801,7 +801,7 @@ ModelImporter:
       maskType: 0
       maskSource: {instanceID: 0}
     - serializedVersion: 16
-      name: Ani_hurt
+      name: Ani_Hurt
       takeName: Take 001
       firstFrame: 370
       lastFrame: 395

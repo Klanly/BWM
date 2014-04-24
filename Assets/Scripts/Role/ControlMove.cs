@@ -170,9 +170,9 @@ public class ControlMove : MonoBehaviour {
 	/// <summary>
 	/// 检测摇杆输入控制移动
 	/// </summary>
-	public void MoveByJoystick(float horizontal, float vertical)
+	public void MoveByJoystick(float horizontal, float vertical, bool pressed)
 	{
-		if (horizontal == 0f && vertical == 0f) 
+		if (!pressed) 
 		{
 			if(bJoystickActive)
 			{

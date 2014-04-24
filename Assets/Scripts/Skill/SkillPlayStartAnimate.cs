@@ -21,6 +21,10 @@ public class SkillPlayStartAnimate : SkillBase
 		var skill = gameObject.GetComponent<Skill>();
 		if (skill && skill.startGo)
 		{
+			// 面朝目标者
+			if(skill.targetGo)
+				skill.startGo.transform.LookAt(skill.targetGo.transform.position);
+
 			var animator = skill.startGo.GetComponent<Animator>();
 			if (animator)
 				animator.Play(action);

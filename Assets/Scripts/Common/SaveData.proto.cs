@@ -286,16 +286,16 @@ namespace Cmd
       get { return _questid; }
       set { _questid = value; }
     }
-    private uint _stepcur;
+    private int _stepcur;
     [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"stepcur", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public uint stepcur
+    public int stepcur
     {
       get { return _stepcur; }
       set { _stepcur = value; }
     }
-    private uint _stepall;
+    private int _stepall;
     [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"stepall", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public uint stepall
+    public int stepall
     {
       get { return _stepall; }
       set { _stepall = value; }

@@ -9,24 +9,19 @@ public class SkillDelayToTarget : SendTargetEventBase
 	// Use this for initialization
 	override public void StartSkill()
 	{
-		if (delay > 0.0f)
+	}
+
+	void Update()
+	{
+		delay -= Time.deltaTime;
+		if (delay <= 0.0f)
 		{
-			iTween.ValueTo(gameObject, iTween.Hash(
-				"from", delay, 
-				"to", 0.0f, 
-				"time", delay, 
-				"onupdate", "onUpdate", 
-				"oncomplete", "StartTargetEvent_SkillDelayToTarget"));
-		}
-		else
-		{
-			StartTargetEvent_SkillDelayToTarget();
+			StartTargetEvent();
 		}
 	}
 
-	void onUpdate(float delay) { }
 
-	void StartTargetEvent_SkillDelayToTarget()
+	void StartTargetEvent()
 	{
 		if (sendTargetEvent)
 		{

@@ -11,7 +11,7 @@ public class TableTest : MonoBehaviour
 	{
 		foreach (var item in Table.Query<table.TableName>())
 		{
-			Debug.Log(item.ToStringDebug());
+			Debug.Log(item.Dump());
 		}
 	}
 }

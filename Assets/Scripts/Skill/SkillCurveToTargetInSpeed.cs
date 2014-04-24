@@ -15,66 +15,68 @@ public class SkillCurveToTargetInSpeed : SendTargetEventBase
 	private GameObject particleGo;
 	private Transform mountTargetGo;
 	private Vector3[] path;
-	private bool startMove = false;
 	private float movePosition = 0.0f;
+
+	/// <summary>
+	/// 运动状态
+	/// </summary>
+	private enum State
+	{
+		delay,
+		start,
+		move,
+	}
+	private State state = State.delay;
 
 	// Use this for initialization
 	override public void StartSkill()
 	{
-		if (delay > 0.0f)
-		{
-			iTween.ValueTo(gameObject, iTween.Hash(
-				"from", delay, 
-				"to", 0.0f, 
-				"time", delay, 
-				"onupdate", "onUpdate",
-				"oncomplete", "MoveParticle"));
-		}
-		else
-		{
-			MoveParticle();
-		}
-	}
-
-	void onUpdate(float delay) { }
-
-	void MoveParticle()
-	{
-		var skill = gameObject.GetComponent<Skill>();
-		if (!skill || !skill.startGo || !skill.targetGo)
-		{
-			StartTargetEvent();
-			return;
-		}
-
-		var mountStartGo = SkillBase.Find(skill.startGo.transform, mountOfStartGo);
-		if (!mountStartGo)
-			mountStartGo = skill.startGo.transform;
-
-		mountTargetGo = SkillBase.Find(skill.targetGo.transform, mountOfTargetGo);
-		if (!mountTargetGo)
-			mountTargetGo = skill.targetGo.transform;
-
-		particleGo = Instantiate(particle) as GameObject;
-		if(particleGo.GetComponent<ParticleParentAutoDestroy>() == null)
-			particleGo.AddComponent<ParticleParentAutoDestroy>();
-		particleGo.transform.localPosition = Vector3.zero;
-		particleGo.transform.position = mountStartGo.transform.position;
-		path = new Vector3[3];
-		path[0] = mountStartGo.transform.position;
-		startMove = true;
 	}
 
 	void Update()
 	{
-		if (startMove)
+		if(state == State.delay)
+		{
+			delay -= Time.deltaTime;
+			if(delay <= 0.0f)
+				state = State.start;
+		}
+
+		if(state == State.start)
+		{
+			var skill = gameObject.GetComponent<Skill>();
+			if (!skill || !skill.startGo || !skill.targetGo)
+			{
+				StartTargetEvent();
+				return;
+			}
+			
+			var mountStartGo = SkillBase.Find(skill.startGo.transform, mountOfStartGo);
+			if (!mountStartGo)
+				mountStartGo = skill.startGo.transform;
+			
+			mountTargetGo = SkillBase.Find(skill.targetGo.transform, mountOfTargetGo);
+			if (!mountTargetGo)
+				mountTargetGo = skill.targetGo.transform;
+			
+			particleGo = Instantiate(particle) as GameObject;
+			if(particleGo.GetComponent<ParticleParentAutoDestroy>() == null)
+				particleGo.AddComponent<ParticleParentAutoDestroy>();
+			particleGo.transform.localPosition = Vector3.zero;
+			particleGo.transform.position = mountStartGo.transform.position;
+			path = new Vector3[3];
+			path[0] = mountStartGo.transform.position;
+
+			state = State.move;
+		}
+		else if(state == State.move)
 		{
 			if (!mountTargetGo || !particleGo)
 			{
 				StartTargetEvent();
 				return;
 			}
-
+			
 			var distance = (mountTargetGo.transform.position - particleGo.transform.position).magnitude;
 			if (distance <= 0.01f)
 			{
@@ -86,10 +88,10 @@ public class SkillCurveToTargetInSpeed : SendTargetEventBase
 				var relative = path[2] - path[0];
 				var halfDis = relative.magnitude * 0.5f;
 				path[1] = relative * 0.5f + new Vector3(halfDis * Mathf.Tan(Mathf.Deg2Rad * deviationDegree.x), halfDis * Mathf.Tan(Mathf.Deg2Rad * deviationDegree.y), halfDis * Mathf.Tan(Mathf.Deg2Rad * deviationDegree.z));
-				var pathLength = iTween.PathLength(path);
+				var pathLength = Spline.PathLength(path);
 				if (movePosition > pathLength)
 					movePosition = pathLength;
-				movePosition = iTween.FloatUpdate(movePosition, pathLength, speed);
+				movePosition = Mathf.MoveTowards(movePosition, pathLength, speed * Time.deltaTime);
 				if (movePosition > pathLength)
 					movePosition = pathLength;
 				if (movePosition >= pathLength)
@@ -99,9 +101,10 @@ public class SkillCurveToTargetInSpeed : SendTargetEventBase
 				else
 				{
 					var percentage = movePosition / pathLength;
-					iTween.PutOnPath(particleGo, path, percentage);
-					if (orientToPath)
-						particleGo.transform.LookAt(iTween.PointOnPath(path, percentage + .05f));
+					Vector3 curPos = Spline.InterpConstantSpeed(path, percentage);
+					particleGo.transform.position = curPos;
+					if(orientToPath)
+						particleGo.transform.LookAt(Spline.InterpConstantSpeed(path, percentage + 0.05f));
 				}
 			}
 		}

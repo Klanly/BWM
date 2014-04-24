@@ -10,24 +10,18 @@ public class SkillPlayStartParticle : SkillBase
 
 	override public void StartSkill()
 	{
-		if (delay > 0.0f)
+	}
+
+	void Update()
+	{
+		delay -= Time.deltaTime;
+		if (delay <= 0.0f)
 		{
-			iTween.ValueTo(gameObject, iTween.Hash(
-				"from", delay, 
-				"to", 0.0f, 
-				"time", delay, 
-				"onupdate", "onUpdate_SkillPlayStartParticle",
-				"oncomplete", "PlayParticle_SkillPlayStartParticle"));
-		}
-		else
-		{
-			PlayParticle_SkillPlayStartParticle();
+			PlayParticle();
 		}
 	}
 
-	void onUpdate_SkillPlayStartParticle(float delay) { }
-
-	void PlayParticle_SkillPlayStartParticle()
+	void PlayParticle()
 	{
 		if (particle == null)
 		{
@@ -47,6 +41,7 @@ public class SkillPlayStartParticle : SkillBase
 				particleGo.AddComponent<ParticleParentAutoDestroy>();
 			particleGo.transform.parent = mount;
 			particleGo.transform.localPosition = Vector3.zero;
+			particleGo.transform.localRotation = Quaternion.identity;
 		}
 		
 		Destroy(this);

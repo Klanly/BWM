@@ -4,30 +4,23 @@ using System.Collections;
 [RequireComponent(typeof(Skill))]
 public class SkillPlayTargetAnimate : SkillBase
 {
-
 	public float delay;
 	public string action;
 
-	void ApplyTargetEvent()
+	IEnumerator ApplyTargetEvent()
 	{
 		if (delay > 0.0f)
 		{
-			iTween.ValueTo(gameObject, iTween.Hash(
-				"from", delay, 
-				"to", 0.0f, 
-				"time", delay, 
-				"onupdate", "onUpdate_SkillPlayTargetAnimate",
-				"oncomplete", "PlayAnimate_SkillPlayTargetAnimate"));
+			yield return new WaitForSeconds (delay);
+			PlayAnimate();
 		}
 		else
 		{
-			PlayAnimate_SkillPlayTargetAnimate();
+			PlayAnimate();
 		}
 	}
 
-	void onUpdate_SkillPlayTargetAnimate(float delay) { }
-
-	void PlayAnimate_SkillPlayTargetAnimate()
+	void PlayAnimate()
 	{
 		if (string.IsNullOrEmpty(action))
 		{

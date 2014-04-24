@@ -270,7 +270,23 @@ public static class Spline
 	{
 		return Quaternion.LookRotation(Interp(pts, t2, easeType) - Interp(pts, t1, easeType));
 	}
-	
+
+	public static float PathLength(Path pts)
+	{
+		float pathLength = 0;
+		
+		//Line Draw:
+		Vector3 prevPt = Interp(pts,0);
+		int SmoothAmount = pts.Length*20;
+		for (int i = 1; i <= SmoothAmount; i++) {
+			float pm = (float) i / SmoothAmount;
+			Vector3 currPt = Interp(pts,pm);
+			pathLength += Vector3.Distance(prevPt,currPt);
+			prevPt = currPt;
+		}
+		
+		return pathLength;
+	}
 	
 	public static Vector3 Velocity(Path pts, float t, Easing.EaseType easeType = Easing.EaseType.linear) 
 	{

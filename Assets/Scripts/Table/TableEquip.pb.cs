@@ -22,9 +22,9 @@ namespace table
       get { return _id; }
       set { _id = value; }
     }
-    private uint _quality;
+    private int _quality;
     [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"quality", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public uint quality
+    public int quality
     {
       get { return _quality; }
       set { _quality = value; }

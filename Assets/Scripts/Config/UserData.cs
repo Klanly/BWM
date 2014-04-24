@@ -50,7 +50,7 @@ namespace Config
 				buf = mem.ToArray();
 			}
 			PlayerPrefs.SetString("UserData", Convert.ToBase64String(Crypto.Encode(buf)));
-			Debug.Log("Serialize: " + message.ToStringDebug());
+			Debug.Log("Serialize: " + message.Dump());
 		}
 
 		static UserData Deserialize()

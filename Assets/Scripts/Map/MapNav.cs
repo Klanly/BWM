@@ -90,6 +90,14 @@ public class MapNav : MonoBehaviour
 		transform.localScale = new Vector3(width, height, 1);
 		transform.localEulerAngles = new Vector3(90, 0, 0);
 		transform.position = new Vector3(width * 0.5f, 0, height * 0.5f);
+
+#if false
+		// 禁用所有阻挡
+		if (this.grids == null)
+			Reset();
+		for (var i = 0; i < grids.Length; i++)
+			grids[i] = (TileType)0xFFFF;
+#endif
 	}
 
 	void OnDrawGizmos()

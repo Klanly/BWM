@@ -31,5 +31,7 @@ public class SkillViewEditor : Editor {
 			skillView.startSkill();
 		if(GUILayout.Button("Start Buff"))
 			skillView.startBuff();
+
+		serializedObject.ApplyModifiedProperties();
 	}
 }
