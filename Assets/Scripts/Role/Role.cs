@@ -206,7 +206,12 @@ public class Role : MonoBehaviour
 		var role = All[cmd.charid];
 		if(role == null)
 			return;
-		// TODO: 播放升级特效
+
+		// 角色升级特效
+		var effect = GameObject.Instantiate(Resources.Load("Prefabs/Models/Effect/shengji_sz")) as GameObject;
+		effect.name = role.name;
+		effect.transform.localPosition = role.transform.localPosition;
+		effect.AddComponent<ParticleParentAutoDestroy>();
 	}
 	#endregion
 }
