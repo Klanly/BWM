@@ -909,7 +909,7 @@ MonoBehaviour:
   keepAspectRatio: 0
   aspectRatio: .762931049
   mAtlas: {fileID: 11400000, guid: 81897fcdc0d7fb04bb512167943f2aab, type: 2}
-  mSpriteName: backimage2 (Copy)
+  mSpriteName: backimage2
   mType: 4
   mFillDirection: 4
   mFillAmount: 1
@@ -962,7 +962,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 907952360}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: .67368418, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 459359616}
@@ -992,7 +992,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1017579429}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 191, z: 0}
+  m_LocalPosition: {x: 0, y: 191.673676, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 856078971}
@@ -1263,7 +1263,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1385038168}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -610.420105, y: 320, z: 0}
+  m_LocalPosition: {x: -524.126343, y: 320, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 417452228}
@@ -1469,20 +1469,20 @@ MonoBehaviour:
     absolute: 0
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 1221
+  mWidth: 1048
   mHeight: 640
   mDepth: -1
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 1.90781248
+  aspectRatio: 1.63750005
   mRect:
     serializedVersion: 2
     x: 0
     y: 0
     width: 1
     height: 1
-  mTexture: {fileID: 2800000, guid: 51cdf4e844d521a4c949ebe73137a0cf, type: 3}
+  mTexture: {fileID: 2800000, guid: f8d1f2c4fc4518446bc0695a32e0b39f, type: 3}
   mMat: {fileID: 0}
   mShader: {fileID: 4800000, guid: e75727d9555d9d14ca51d91908c681bc, type: 3}
 --- !u!1 &2046285821
@@ -1541,7 +1541,7 @@ MonoBehaviour:
     absolute: 0
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 1221
+  mWidth: 1048
   mHeight: 640
   mDepth: 0
   autoResizeBoxCollider: 0
