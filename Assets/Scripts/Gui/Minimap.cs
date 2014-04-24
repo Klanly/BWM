@@ -139,11 +139,15 @@ public class Minimap : MonoBehaviour
 		var p = relativePos - material.mainTextureOffset;
 		p.x /= relativeExtent.x;
 		p.y /= relativeExtent.y;
-		flag.leftAnchor.Set(p.x, -flag.width * 0.5f);
-		flag.rightAnchor.Set(p.x, flag.width * 0.5f);
-		flag.topAnchor.Set(p.y, flag.height * 0.5f);
-		flag.bottomAnchor.Set(p.y, -flag.height * 0.5f);
-		flag.UpdateAnchors();
+		flag.gameObject.SetActive((p - new Vector2(0.5f, 0.5f)).magnitude < 0.5f);
+		if (flag.gameObject.activeSelf)
+		{
+			flag.leftAnchor.Set(p.x, -flag.width * 0.5f);
+			flag.rightAnchor.Set(p.x, flag.width * 0.5f);
+			flag.topAnchor.Set(p.y, flag.height * 0.5f);
+			flag.bottomAnchor.Set(p.y, -flag.height * 0.5f);
+			flag.UpdateAnchors();
+		}
 	}
 
 	UISprite GetNpcFlag(Npc npc)
@@ -161,7 +165,11 @@ public class Minimap : MonoBehaviour
 
 	private void OnNpcRemove(object sender, GX.EventArgs<KeyValuePair<ulong, Npc>> args)
 	{
-		RemoveFlag(args.Data.Value.GetComponent<Entity>());
+		try
+		{
+			RemoveFlag(args.Data.Value.GetComponent<Entity>());
+		}
+		catch (MissingReferenceException) { }
 	}
 
 	private void OnRoleAdd(object sender, GX.EventArgs<KeyValuePair<ulong, Role>> args)
@@ -172,6 +180,10 @@ public class Minimap : MonoBehaviour
 
 	private void OnRoleRemove(object sender, GX.EventArgs<KeyValuePair<ulong, Role>> args)
 	{
-		RemoveFlag(args.Data.Value.GetComponent<Entity>());
+		try
+		{
+			RemoveFlag(args.Data.Value.GetComponent<Entity>());
+		}
+		catch (MissingReferenceException) { }
 	}
 }

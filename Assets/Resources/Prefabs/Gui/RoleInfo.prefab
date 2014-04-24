@@ -895,6 +895,7 @@ MonoBehaviour:
   - {fileID: 100022, guid: 681dd6b59c894d34ea66d72465b611bc, type: 2}
   - {fileID: 100016, guid: c074915735529544883aa61352673eee, type: 2}
   - {fileID: 100014, guid: baf7ee1184f58694081a406cf93ff7e3, type: 2}
+  - {fileID: 100000, guid: af4d0d2edd5eb474bb6251c7368f192f, type: 2}
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -906,6 +907,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07c32d7d30ffd3748bf3160ff39c426e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  uiRoleInfoPackage: {fileID: 11400068}
+  uiRoleInfoValue: {fileID: 11400084}
   uiSkillInfo: {fileID: 11400188}
 --- !u!114 &11400006
 MonoBehaviour:
@@ -2151,7 +2154,7 @@ MonoBehaviour:
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 0}
   mFont: {fileID: 11400000, guid: 26e29ee85460c3b4bb0bb73bdf6bde41, type: 2}
-  mText: "\u79F0\u53F7"
+  mText: "\u5C5E\u6027"
   mFontSize: 22
   mFontStyle: 0
   mAlignment: 0
