@@ -139,11 +139,15 @@ public class Minimap : MonoBehaviour
 		var p = relativePos - material.mainTextureOffset;
 		p.x /= relativeExtent.x;
 		p.y /= relativeExtent.y;
-		flag.leftAnchor.Set(p.x, -flag.width * 0.5f);
-		flag.rightAnchor.Set(p.x, flag.width * 0.5f);
-		flag.topAnchor.Set(p.y, flag.height * 0.5f);
-		flag.bottomAnchor.Set(p.y, -flag.height * 0.5f);
-		flag.UpdateAnchors();
+		flag.gameObject.SetActive((p - new Vector2(0.5f, 0.5f)).magnitude < 0.5f);
+		if (flag.gameObject.activeSelf)
+		{
+			flag.leftAnchor.Set(p.x, -flag.width * 0.5f);
+			flag.rightAnchor.Set(p.x, flag.width * 0.5f);
+			flag.topAnchor.Set(p.y, flag.height * 0.5f);
+			flag.bottomAnchor.Set(p.y, -flag.height * 0.5f);
+			flag.UpdateAnchors();
+		}
 	}
 
 	UISprite GetNpcFlag(Npc npc)
