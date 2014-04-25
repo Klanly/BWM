@@ -35,7 +35,7 @@ public class PathMove : MonoBehaviour {
 
 		// 如果起始点是阻挡，检测方向是否为走出阻挡的方向
 		MapGrid gridRealSrc = gridOriginSrc;
-		if((MapNav[gridRealSrc.x, gridRealSrc.y] & entity.TileType) == 0)
+		if((MapNav[gridRealSrc.x, gridRealSrc.z] & entity.TileType) == 0)
 		{
 			gridRealSrc = MapNav.GetNearestValidGrid(gridOriginDst, gridOriginSrc, entity.TileType, 1);
 			if(gridRealSrc == null)

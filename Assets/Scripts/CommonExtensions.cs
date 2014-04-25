@@ -53,7 +53,7 @@ namespace Cmd
 
 		public static implicit operator MapGrid(Pos poscm)
 		{
-			return new MapGrid() { x = poscm.x, y = poscm.y };
+			return new MapGrid() { x = poscm.x, z = poscm.y };
 		}
 	}
 	#endregion

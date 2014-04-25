@@ -65,12 +65,12 @@ public class MapNav : MonoBehaviour
 
 	public MapGrid GetGrid(Vector3 worldPosition)
 	{
-		return new MapGrid(){x = GetGridX(worldPosition), y = GetGridZ(worldPosition)};
+		return new MapGrid(){x = GetGridX(worldPosition), z = GetGridZ(worldPosition)};
 	}
 
 	public Vector3 GetWorldPosition(MapGrid pos)
 	{
-		return GetWorldPosition(pos.x, pos.y);
+		return GetWorldPosition(pos.x, pos.z);
 	}
 
 	public Vector3 GetWorldPosition(int gridX, int gridZ)
@@ -176,7 +176,7 @@ public class MapNav : MonoBehaviour
 			h = _h;
 			f = g + h;
 
-			grid = new MapGrid(){x = index % mapNav.gridXNum, y = index / mapNav.gridXNum};
+			grid = new MapGrid(){x = index % mapNav.gridXNum, z = index / mapNav.gridXNum};
 			position = mapNav.GetWorldPosition(grid);
 		}
 
@@ -188,7 +188,7 @@ public class MapNav : MonoBehaviour
 
 		public override string ToString()
 		{
-			return string.Format("PathNode:" + index + ",(" + grid.x + "," + grid.y + "),(" + g + "," + h + "," + f + "),(" + position.x + "," + position.y + "," + position.z + ")");
+			return string.Format("PathNode:" + index + ",(" + grid.x + "," + grid.z + "),(" + g + "," + h + "," + f + "),(" + position.x + "," + position.y + "," + position.z + ")");
 		}
 	}
 
@@ -216,7 +216,7 @@ public class MapNav : MonoBehaviour
 	
 	public List<MapGrid> GetPath(MapGrid fromPos, MapGrid toPos, TileType validType)
 	{
-		return GetPath(fromPos.x, fromPos.y, toPos.x, toPos.y, validType);
+		return GetPath(fromPos.x, fromPos.z, toPos.x, toPos.z, validType);
 	}
 		
 	public List<MapGrid> GetPath(int fromGridX, int fromGridZ, int toGridX, int toGridZ, TileType validType)
@@ -231,8 +231,8 @@ public class MapNav : MonoBehaviour
 		// 同一个点也导出路径
 		if(fromGridX == toGridX && fromGridZ == toGridZ)
 		{
-			path.Add(new MapGrid(){x = fromGridX, y = fromGridZ});
-			path.Add(new MapGrid(){x = toGridX, y = toGridZ});
+			path.Add(new MapGrid(){x = fromGridX, z = fromGridZ});
+			path.Add(new MapGrid(){x = toGridX, z = toGridZ});
 			return path;
 		}
 
@@ -342,7 +342,7 @@ public class MapNav : MonoBehaviour
 	public MapGrid GetNearestValidGrid(MapGrid src, MapGrid dst, TileType validType, int gridRadius=-1)
 	{
 		MapGrid ptOut = dst;
-		while((this[ptOut.x, ptOut.y] & validType) == 0)
+		while((this[ptOut.x, ptOut.z] & validType) == 0)
 		{
 			ptOut = GetNearestGrid(src, ptOut);
 			if(ptOut == src) break;
@@ -354,7 +354,7 @@ public class MapNav : MonoBehaviour
 			}
 		}
 
-		if((this[ptOut.x, ptOut.y] & validType) != 0)
+		if((this[ptOut.x, ptOut.z] & validType) != 0)
 			return ptOut;
 		else
 			return null;
@@ -431,7 +431,7 @@ public class MapNav : MonoBehaviour
 		dir *= ShortestMoveDst;
 
 		Vector3 curPos = vecSrc;
-		MapGrid curPt = new MapGrid(){x=0, y=0};
+		MapGrid curPt = new MapGrid(){x=0, z=0};
 
 		for(; (vecDst - curPos).magnitude > ShortestMoveDst; curPos += dir)
 		{
@@ -444,7 +444,7 @@ public class MapNav : MonoBehaviour
 				continue;
 			}
 
-			if((this[curPt.x, curPt.y] & validType) == 0)
+			if((this[curPt.x, curPt.z] & validType) == 0)
 			{
 				return false;
 			}
@@ -470,7 +470,7 @@ public class MapNav : MonoBehaviour
 	private void SplitBlockLineEx(MapGrid grid1, MapGrid grid2, out List<MapGrid> path)
 	{
 		path = new List<MapGrid>();
-		if(grid1.x == grid2.x && grid1.y == grid2.y)
+		if(grid1.x == grid2.x && grid1.z == grid2.z)
 			return;
 
 		path = new List<MapGrid>();
@@ -536,15 +536,15 @@ public class MapNav : MonoBehaviour
 		dir *= ShortestMoveDst;
 
 		Vector3 vecCur = vecSrc;
-		MapGrid ptCur = new MapGrid(){x=0, y=0};
+		MapGrid ptCur = new MapGrid(){x=0, z=0};
 		vecDst = vecCur;
 
 		// 如果起始点是阻挡，检测方向是否为走出阻挡的方向
-		if((this[ptSrc.x, ptSrc.y] & validType) == 0)
+		if((this[ptSrc.x, ptSrc.z] & validType) == 0)
 		{
 			Vector3 vecForward = vecSrc + dir * MapGrid.Width;
 			MapGrid ptForward = GetGrid(vecSrc + dir * MapGrid.Width);
-			if(ptForward == ptSrc || (this[ptForward.x, ptForward.y] & validType) == 0)
+			if(ptForward == ptSrc || (this[ptForward.x, ptForward.z] & validType) == 0)
 				return false;
 		}
 
@@ -556,7 +556,7 @@ public class MapNav : MonoBehaviour
 				ptCur = GetGrid(vecCur);
 
 				// 遇到阻挡，不考虑起始点的阻挡，有可能会走进去
-				if((ptCur != ptSrc) && (this[ptCur.x, ptCur.y] & validType) == 0)
+				if((ptCur != ptSrc) && (this[ptCur.x, ptCur.z] & validType) == 0)
 				{
 					// 回退一小格，免得和阻挡格子太接近
 					if(i <= 1) 
