@@ -6,8 +6,7 @@ namespace Cmd
 {
 	#region Pos
 	/// <summary>
-	/// 游戏地图上的逻辑格子位置
-	/// 原点在屏幕左下角
+	/// 游戏地图上的位置，单位为cm，原点在左下角
 	/// </summary>
 	partial class Pos : System.IEquatable<Pos>
 	{
@@ -49,11 +48,6 @@ namespace Cmd
 		public override string ToString()
 		{
 			return string.Format("Pos({0}, {1})/cm", x, y);
-		}
-
-		public static implicit operator MapGrid(Pos poscm)
-		{
-			return new MapGrid() { x = poscm.x, z = poscm.y };
 		}
 	}
 	#endregion

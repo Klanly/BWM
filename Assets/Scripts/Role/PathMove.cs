@@ -31,7 +31,7 @@ public class PathMove : MonoBehaviour {
 	public void WalkTo(Vector3 _dst, PathFinished _delegate = null)
 	{
 		MapGrid gridOriginSrc = entity.Grid;
-		MapGrid gridOriginDst = MapNav.GetGrid(_dst);
+		MapGrid gridOriginDst = new MapGrid(_dst);
 
 		// 如果起始点是阻挡，检测方向是否为走出阻挡的方向
 		MapGrid gridRealSrc = gridOriginSrc;

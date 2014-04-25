@@ -100,7 +100,7 @@ public class QuestTraceDialog : MonoBehaviour
 			case ClickQuestTaceEvent.ClickQuestTaceEvent_GoToPositon:
 				{
 					// TODO: process for cmd.position.countryid and cmd.position.mapid
-					var position = BattleScene.Instance.MapNav.GetWorldPosition(cmd.position.pos);
+					var position = BattleScene.Instance.MapNav.GetWorldPosition(new MapGrid(cmd.position.pos));
 					if (cmd.repeatclick)
 					{
 						MainRole.Instance.pathMove.WalkTo(position, () =>

@@ -20,6 +20,22 @@ public class MapGrid : System.IEquatable<MapGrid>
 	public int x;
 	public int z;
 
+	public MapGrid()
+	{
+	}
+
+	public MapGrid(Vector3 worldPosition)
+	{
+		this.x = (int)(worldPosition.x / MapGrid.Width);
+		this.z = (int)(worldPosition.z / MapGrid.Height);
+	}
+
+	public MapGrid(Cmd.Pos poscm)
+	{
+		this.x = poscm.x;
+		this.z = poscm.y;
+	}
+
 	#region Equatable
 	public static bool operator ==(MapGrid a, MapGrid b)
 	{

@@ -98,7 +98,7 @@ public class Role : MonoBehaviour
 			Role.All[cmd.data.charid] = role;
 		}
 
-		role.entity.Grid = cmd.pos;
+		role.entity.Grid = new MapGrid(cmd.pos);
 	}
 
 	[Execute]
@@ -121,7 +121,7 @@ public class Role : MonoBehaviour
 		var role = Role.All[cmd.charid];
 		if (role != null)
 		{
-			role.move.TargetPosition = BattleScene.Instance.MapNav.GetWorldPosition(cmd.poscm);
+			role.move.TargetPosition = BattleScene.Instance.MapNav.GetWorldPosition(new MapGrid(cmd.poscm));
 		}
 	}
 
@@ -131,7 +131,7 @@ public class Role : MonoBehaviour
 		var role = Role.All[cmd.charid];
 		if (role != null)
 		{
-			role.entity.Position = BattleScene.Instance.MapNav.GetWorldPosition(cmd.poscm);
+			role.entity.Position = BattleScene.Instance.MapNav.GetWorldPosition(new MapGrid(cmd.poscm));
 		}
 	}
 	#endregion

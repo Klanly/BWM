@@ -96,7 +96,7 @@ public class Npc : MonoBehaviour
 			Npc.All[cmd.data.tempid] = npc;
 		}
 
-		npc.entity.Grid = cmd.pos;
+		npc.entity.Grid = new MapGrid(cmd.pos);
 	}
 
 	[Execute]

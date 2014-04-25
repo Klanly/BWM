@@ -200,7 +200,7 @@ public class MapNavEditor : Editor
 
 					if (Event.current.type == EventType.MouseDown || Event.current.type == EventType.MouseDrag)
 					{
-						var grid = mapNav.GetGrid(hitPoint);
+						var grid = new MapGrid(hitPoint);
 						for (int _z = grid.z - Mathf.RoundToInt(_radius); _z <= grid.z + Mathf.RoundToInt(_radius); ++_z)
 						{
 							if (_z < 0) continue;
@@ -210,7 +210,7 @@ public class MapNavEditor : Editor
 								if (_x < 0) continue;
 								if (_x > mapNav.gridXNum - 1) continue;
 
-								Vector3 position = mapNav.GetWorldPosition(_x, _z);
+								Vector3 position = mapNav.GetWorldPosition(new MapGrid() {x = _x, z = _z });
 								if (Mathf.Abs(position.x - hitPoint.x) <= _radius * MapGrid.Width
 								   && Mathf.Abs(position.z - hitPoint.z) <= _radius * MapGrid.Height)
 								{
@@ -251,9 +251,9 @@ public class MapNavEditor : Editor
 							vecEnd = hitPoint;
 						bSampleStart = !bSampleStart;
 
-						MapGrid gridEnd = mapNav.GetNearestValidGrid(mapNav.GetGrid(vecStart), mapNav.GetGrid(vecEnd), TileType.TileType_Walk);
+						MapGrid gridEnd = mapNav.GetNearestValidGrid(new MapGrid(vecStart), new MapGrid(vecEnd), TileType.TileType_Walk);
 						if(gridEnd != null)
-							path = mapNav.GetPath(mapNav.GetGrid(vecStart), gridEnd, TileType.TileType_Walk);
+							path = mapNav.GetPath(new MapGrid(vecStart), gridEnd, TileType.TileType_Walk);
 						else
 							path.Clear();
 					}
@@ -347,15 +347,19 @@ public class MapNavEditor : Editor
 
 		var json = NGUIJson.jsonEncode(new Hashtable()
 		{
-			{"npcs", System.Array.ConvertAll(npc, i => new Hashtable()
+			{"npcs", System.Array.ConvertAll(npc, i => 
 				{
-					{"id", i.baseId},
-					{"name", string.IsNullOrEmpty(i.alias) ? db[(uint)i.baseId].name : i.alias},
-					{"x", Target.GetGrid(i.transform.localPosition).x},
-					{"y", Target.GetGrid(i.transform.localPosition).z},
-					{"angle", (int)i.transform.localRotation.eulerAngles.y},
-					{"relivetime", i.relivetime},
-					{"rate", Mathf.Clamp(i.rate, 0, 100)},
+					var grid = new MapGrid(i.transform.localPosition);
+					return new Hashtable()
+					{
+						{"id", i.baseId},
+						{"name", string.IsNullOrEmpty(i.alias) ? db[(uint)i.baseId].name : i.alias},
+						{"x", grid.x},
+						{"y", grid.z},
+						{"angle", (int)i.transform.localRotation.eulerAngles.y},
+						{"relivetime", i.relivetime},
+						{"rate", Mathf.Clamp(i.rate, 0, 100)},
+					};
 				})
 			},
 		});

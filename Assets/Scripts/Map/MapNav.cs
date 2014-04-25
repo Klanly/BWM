@@ -53,22 +53,13 @@ public class MapNav : MonoBehaviour
 		grids = new TileType[gridZNum * gridXNum];
 	}
 
-	public MapGrid GetGrid(Vector3 worldPosition)
-	{
-		return new MapGrid() { x = (int)(worldPosition.x / MapGrid.Width), z = (int)(worldPosition.z / MapGrid.Height) };
-	}
-
+	// TODO: move to MapGrid.cs implementation.
 	public Vector3 GetWorldPosition(MapGrid pos)
 	{
-		return GetWorldPosition(pos.x, pos.z);
-	}
-
-	public Vector3 GetWorldPosition(int gridX, int gridZ)
-	{
 		return new Vector3(
-			(Mathf.Clamp(gridX, 0, gridXNum - 1) + 0.5f) * MapGrid.Width,
+			(Mathf.Clamp(pos.x, 0, gridXNum - 1) + 0.5f) * MapGrid.Width,
 			0.0f,
-			(Mathf.Clamp(gridZ, 0, gridZNum - 1) + 0.5f) * MapGrid.Height);
+			(Mathf.Clamp(pos.z, 0, gridZNum - 1) + 0.5f) * MapGrid.Height);
 	}
 
 	void Start()
@@ -201,8 +192,8 @@ public class MapNav : MonoBehaviour
 
 	public List<MapGrid> GetPath(Vector3 fromPosition, Vector3 toPosition, TileType validType)
 	{
-		var from = GetGrid(fromPosition);
-		var to = GetGrid(toPosition);
+		var from = new MapGrid(fromPosition);
+		var to = new MapGrid(toPosition);
 		return GetPath(from.x, from.z, to.x, to.z, validType);
 	}
 	
@@ -319,7 +310,7 @@ public class MapNav : MonoBehaviour
 		Vector3 vecDir = this.GetWorldPosition(src) - this.GetWorldPosition(dst);
 		vecDir.Normalize();
 		Vector3 vecOut = this.GetWorldPosition(dst) + gridnum * MapGrid.Width * vecDir;
-		ptOut = this.GetGrid(vecOut);
+		ptOut = new MapGrid(vecOut);
 		return ptOut;
 	}
 
@@ -416,7 +407,7 @@ public class MapNav : MonoBehaviour
 	/// <param name="vecDst">Vec dst.</param>
 	public bool LinePathClear(Vector3 vecSrc, Vector3 vecDst, TileType validType = TileType.TileType_Walk)
 	{
-		MapGrid dstPt = GetGrid(vecDst);
+		MapGrid dstPt = new MapGrid(vecDst);
 
 		Vector3 dir = vecDst - vecSrc;
 		dir.Normalize();
@@ -427,9 +418,9 @@ public class MapNav : MonoBehaviour
 
 		for(; (vecDst - curPos).magnitude > ShortestMoveDst; curPos += dir)
 		{
-			if(curPt != GetGrid(curPos))
+			if(curPt != new MapGrid(curPos))
 			{
-				curPt = GetGrid(curPos);
+				curPt = new MapGrid(curPos);
 			}
 			else
 			{
@@ -484,10 +475,10 @@ public class MapNav : MonoBehaviour
 		for(;;)
 		{
 			curPos += dir;
-			if(GetGrid(curPos) == curPt)
+			if (new MapGrid(curPos) == curPt)
 				continue;
 
-			curPt = GetGrid(curPos);
+			curPt = new MapGrid(curPos);
 
 			// 已经是最后一个节点，退出
 			if(curPt == grid2)
@@ -519,8 +510,8 @@ public class MapNav : MonoBehaviour
 	/// <param name="validType">Valid type.</param>
 	public bool IsPathReached(Vector3 vecSrc, Vector3 vecOriginDst ,out Vector3 vecDst, TileType validType = TileType.TileType_Walk)
 	{
-		MapGrid ptSrc = GetGrid(vecSrc);
-		MapGrid ptDst = GetGrid(vecOriginDst);
+		MapGrid ptSrc = new MapGrid(vecSrc);
+		MapGrid ptDst = new MapGrid(vecOriginDst);
 
 		Vector3 dir = vecOriginDst - vecSrc;
 		float length = dir.magnitude;
@@ -535,7 +526,7 @@ public class MapNav : MonoBehaviour
 		if((this[ptSrc.x, ptSrc.z] & validType) == 0)
 		{
 			Vector3 vecForward = vecSrc + dir * MapGrid.Width;
-			MapGrid ptForward = GetGrid(vecSrc + dir * MapGrid.Width);
+			MapGrid ptForward = new MapGrid(vecSrc + dir * MapGrid.Width);
 			if(ptForward == ptSrc || (this[ptForward.x, ptForward.z] & validType) == 0)
 				return false;
 		}
@@ -543,9 +534,9 @@ public class MapNav : MonoBehaviour
 		int i = 0;
 		for(; (vecOriginDst - vecCur).magnitude > ShortestMoveDst; vecCur += dir)
 		{
-			if(ptCur != GetGrid(vecCur))
+			if (ptCur != new MapGrid(vecCur))
 			{
-				ptCur = GetGrid(vecCur);
+				ptCur = new MapGrid(vecCur);
 
 				// 遇到阻挡，不考虑起始点的阻挡，有可能会走进去
 				if((ptCur != ptSrc) && (this[ptCur.x, ptCur.z] & validType) == 0)
