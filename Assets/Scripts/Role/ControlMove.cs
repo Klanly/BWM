@@ -119,7 +119,11 @@ public class ControlMove : MonoBehaviour {
 		if(MapNav.IsPathReached(entity.Position, vecNewPosition, out vecRealPosition, entity.TileType))
 		{
 			move.TargetPosition = vecRealPosition;
-			Debug.Log("发送移动消息:dst:" + move.TargetPosition + ",dir:" + this.transform.rotation);
+			Net.Instance.Send(new Cmd.UserMoveUpMoveUserCmd_C()
+			{
+				poscm = new MapGrid(move.TargetPosition), 
+				angle = (uint)this.transform.localRotation.eulerAngles.y
+			});
 			return;
 		}
 		else
@@ -139,7 +143,11 @@ public class ControlMove : MonoBehaviour {
 				if(MapNav.IsPathReached(entity.Position, vecNewPosition2, out vecRealPosition2, entity.TileType))
 				{
 					move.TargetPosition = vecRealPosition2;
-					Debug.Log("发送移动消息:dst:" + move.TargetPosition + ",dir:" + this.transform.rotation);
+					Net.Instance.Send(new Cmd.UserMoveUpMoveUserCmd_C()
+					{
+						poscm = new MapGrid(move.TargetPosition),
+						angle = (uint)this.transform.localRotation.eulerAngles.y
+					});
 					return;
 				}
 
@@ -150,7 +158,11 @@ public class ControlMove : MonoBehaviour {
 				if(MapNav.IsPathReached(entity.Position, vecNewPosition2, out vecRealPosition2, entity.TileType))
 				{
 					move.TargetPosition = vecRealPosition2;
-					Debug.Log("发送移动消息:dst:" + move.TargetPosition + ",dir:" + this.transform.rotation);
+					Net.Instance.Send(new Cmd.UserMoveUpMoveUserCmd_C()
+					{
+						poscm = new MapGrid(move.TargetPosition),
+						angle = (uint)this.transform.localRotation.eulerAngles.y
+					});
 					return;
 				}
 			}

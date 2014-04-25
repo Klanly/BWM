@@ -98,14 +98,22 @@ public class PathMove : MonoBehaviour {
 		{
 			move.TargetPosition = dst;
 			path.RemoveAt(0);
-			//Debug.Log("发送移动消息:dst:" + move.TargetPosition + ",dir:" + this.transform.rotation);
+			Net.Instance.Send(new Cmd.UserMoveUpMoveUserCmd_C()
+			{
+				poscm = new MapGrid(move.TargetPosition),
+				angle = (uint)this.transform.localRotation.eulerAngles.y
+			});
 		}
 		// 中间节点
 		else
 		{
 			move.TargetPosition = MapNav.GetWorldPosition(path[0]);
 			path.RemoveAt(0);
-			//Debug.Log("发送移动消息:dst:" + move.TargetPosition + ",dir:" + this.transform.rotation);
+			Net.Instance.Send(new Cmd.UserMoveUpMoveUserCmd_C()
+			{
+				poscm = new MapGrid(move.TargetPosition),
+				angle = (uint)this.transform.localRotation.eulerAngles.y
+			});
 		}
 	}
 

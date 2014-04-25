@@ -58,8 +58,7 @@ namespace GX.Net
 		public static void Send(ProtoBuf.IExtensible msg)
 		{
 			if (msg.GetType() != typeof(Cmd.TickRequestNullUserCmd_CS) &&
-				msg.GetType() != typeof(Cmd.TickReturnNullUserCmd_CS) &&
-				msg.GetType() != typeof(Cmd.UserMoveUpMoveUserCmd_C))
+				msg.GetType() != typeof(Cmd.TickReturnNullUserCmd_CS))
 				Debug.Log("<color=green>[SEND]</color>" + msg.Dump());
 
 			var buf = serizlizer.Serialize(msg);
@@ -86,7 +85,6 @@ namespace GX.Net
 						continue;
 					if (msg.GetType() != typeof(Cmd.TickRequestNullUserCmd_CS) &&
 						msg.GetType() != typeof(Cmd.TickReturnNullUserCmd_CS) &&
-						msg.GetType() != typeof(Cmd.UserMoveDownMoveUserCmd_S) &&
 						msg.GetType() != typeof(Cmd.SetUserHpSpDataUserCmd_S) &&
 						msg.GetType() != typeof(Cmd.ChangeUserHpDataUserCmd_S) &&
 						msg.GetType() != typeof(Cmd.AddMapUserDataAndPosMapUserCmd_S) &&

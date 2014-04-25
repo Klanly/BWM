@@ -31,8 +31,6 @@ public class MainRole : MonoBehaviour, INotifyPropertyChanged
 	public PathMove pathMove;
 	public ControlMove controlMove;
 
-	private MapGrid lastGird = new MapGrid();
-
 	private MainRole() { }
 
 	public static MainRole Create()
@@ -71,13 +69,6 @@ public class MainRole : MonoBehaviour, INotifyPropertyChanged
 	void OnPositionChanged(Entity sender)
 	{
 		cameraFollow.UpdateCamera();
-
-		var cur = entity.Grid;
-		if (cur != lastGird)
-		{
-			Net.Instance.Send(new UserMoveUpMoveUserCmd_C() { poscm = cur });
-			lastGird = cur;
-		}
 	}
 
 	#region INotifyPropertyChanged Members

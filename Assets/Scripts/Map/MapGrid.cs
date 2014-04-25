@@ -36,6 +36,15 @@ public class MapGrid : System.IEquatable<MapGrid>
 		this.z = (int)(poscm.y / (100 * Height));
 	}
 
+	public static implicit operator Cmd.Pos(MapGrid grid)
+	{
+		return new Cmd.Pos()
+		{
+			x = (int)((grid.x + 0.5f) * (100 * Width)),
+			y = (int)((grid.x + 0.5f) * (100 * Height))
+		};
+	}
+
 	#region Equatable
 	public static bool operator ==(MapGrid a, MapGrid b)
 	{
@@ -74,14 +83,5 @@ public class MapGrid : System.IEquatable<MapGrid>
 	public override string ToString()
 	{
 		return string.Format("Grid({0}, {1})", x, z);
-	}
-
-	public static implicit operator Cmd.Pos(MapGrid grid)
-	{
-		return new Cmd.Pos()
-		{
-			x = (int)((grid.x + 0.5f) * (100 * Width)),
-			y = (int)((grid.x + 0.5f) * (100 * Height))
-		};
 	}
 }
