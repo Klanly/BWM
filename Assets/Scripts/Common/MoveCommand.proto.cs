@@ -27,7 +27,10 @@ namespace Cmd
       UserMoveDownMoveUserCmd_S = 2,
             
       [global::ProtoBuf.ProtoEnum(Name=@"UserGotoMoveUserCmd_S", Value=3)]
-      UserGotoMoveUserCmd_S = 3
+      UserGotoMoveUserCmd_S = 3,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"NpcMoveDownMoveUserCmd_S", Value=4)]
+      NpcMoveDownMoveUserCmd_S = 4
     }
   
     private global::ProtoBuf.IExtension extensionObject;
@@ -122,6 +125,37 @@ namespace Cmd
     {
       get { return _mapid; }
       set { _mapid = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"NpcMoveDownMoveUserCmd_S")]
+  public partial class NpcMoveDownMoveUserCmd_S : global::ProtoBuf.IExtensible
+  {
+    public NpcMoveDownMoveUserCmd_S() {}
+    
+    private ulong _tempid;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"tempid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public ulong tempid
+    {
+      get { return _tempid; }
+      set { _tempid = value; }
+    }
+    private Cmd.Pos _poscm;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"poscm", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public Cmd.Pos poscm
+    {
+      get { return _poscm; }
+      set { _poscm = value; }
+    }
+    private uint _angle;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"angle", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint angle
+    {
+      get { return _angle; }
+      set { _angle = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
