@@ -30,11 +30,11 @@ namespace Cmd
       [global::ProtoBuf.ProtoEnum(Name=@"RemoveQuestQuestUserCmd_CS", Value=4)]
       RemoveQuestQuestUserCmd_CS = 4,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"RequestAcceptQuestQuestUserCmd_C", Value=5)]
-      RequestAcceptQuestQuestUserCmd_C = 5,
+      [global::ProtoBuf.ProtoEnum(Name=@"RequestAcceptQuestQuestUserCmd_CS", Value=5)]
+      RequestAcceptQuestQuestUserCmd_CS = 5,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"RequestFinishQuestQuestUserCmd_C", Value=6)]
-      RequestFinishQuestQuestUserCmd_C = 6,
+      [global::ProtoBuf.ProtoEnum(Name=@"RequestFinishQuestQuestUserCmd_CS", Value=6)]
+      RequestFinishQuestQuestUserCmd_CS = 6,
             
       [global::ProtoBuf.ProtoEnum(Name=@"RequestClickQuestTraceQuestUserCmd_C", Value=7)]
       RequestClickQuestTraceQuestUserCmd_C = 7,
@@ -129,10 +129,10 @@ namespace Cmd
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"RequestAcceptQuestQuestUserCmd_C")]
-  public partial class RequestAcceptQuestQuestUserCmd_C : global::ProtoBuf.IExtensible
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"RequestAcceptQuestQuestUserCmd_CS")]
+  public partial class RequestAcceptQuestQuestUserCmd_CS : global::ProtoBuf.IExtensible
   {
-    public RequestAcceptQuestQuestUserCmd_C() {}
+    public RequestAcceptQuestQuestUserCmd_CS() {}
     
     private uint _questid;
     [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"questid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
@@ -147,16 +147,24 @@ namespace Cmd
     {
       get { return _npctempid; }
       set { _npctempid = value; }
+    }
+    private ulong _charid = default(ulong);
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"charid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong charid
+    {
+      get { return _charid; }
+      set { _charid = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"RequestFinishQuestQuestUserCmd_C")]
-  public partial class RequestFinishQuestQuestUserCmd_C : global::ProtoBuf.IExtensible
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"RequestFinishQuestQuestUserCmd_CS")]
+  public partial class RequestFinishQuestQuestUserCmd_CS : global::ProtoBuf.IExtensible
   {
-    public RequestFinishQuestQuestUserCmd_C() {}
+    public RequestFinishQuestQuestUserCmd_CS() {}
     
     private uint _questid;
     [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"questid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
@@ -171,6 +179,14 @@ namespace Cmd
     {
       get { return _npctempid; }
       set { _npctempid = value; }
+    }
+    private ulong _charid = default(ulong);
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"charid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong charid
+    {
+      get { return _charid; }
+      set { _charid = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
