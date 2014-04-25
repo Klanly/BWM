@@ -47,12 +47,12 @@ namespace Cmd
       get { return _poscm; }
       set { _poscm = value; }
     }
-    private uint _dir;
-    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"dir", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public uint dir
+    private uint _angle;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"angle", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint angle
     {
-      get { return _dir; }
-      set { _dir = value; }
+      get { return _angle; }
+      set { _angle = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -78,12 +78,12 @@ namespace Cmd
       get { return _poscm; }
       set { _poscm = value; }
     }
-    private uint _dir;
-    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"dir", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public uint dir
+    private uint _angle;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"angle", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint angle
     {
-      get { return _dir; }
-      set { _dir = value; }
+      get { return _angle; }
+      set { _angle = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -109,12 +109,12 @@ namespace Cmd
       get { return _poscm; }
       set { _poscm = value; }
     }
-    private uint _dir;
-    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"dir", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public uint dir
+    private uint _angle;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"angle", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint angle
     {
-      get { return _dir; }
-      set { _dir = value; }
+      get { return _angle; }
+      set { _angle = value; }
     }
     private uint _mapid;
     [global::ProtoBuf.ProtoMember(4, IsRequired = true, Name=@"mapid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]

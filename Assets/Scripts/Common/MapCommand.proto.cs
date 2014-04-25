@@ -90,12 +90,19 @@ namespace Cmd
       get { return _homeland; }
       set { _homeland = value; }
     }
-    private Cmd.Pos _pos;
-    [global::ProtoBuf.ProtoMember(4, IsRequired = true, Name=@"pos", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public Cmd.Pos pos
+    private Cmd.Pos _poscm;
+    [global::ProtoBuf.ProtoMember(4, IsRequired = true, Name=@"poscm", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public Cmd.Pos poscm
     {
-      get { return _pos; }
-      set { _pos = value; }
+      get { return _poscm; }
+      set { _poscm = value; }
+    }
+    private uint _angle;
+    [global::ProtoBuf.ProtoMember(5, IsRequired = true, Name=@"angle", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint angle
+    {
+      get { return _angle; }
+      set { _angle = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -169,12 +176,19 @@ namespace Cmd
       get { return _data; }
       set { _data = value; }
     }
-    private Cmd.Pos _pos;
-    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"pos", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public Cmd.Pos pos
+    private Cmd.Pos _poscm;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"poscm", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public Cmd.Pos poscm
     {
-      get { return _pos; }
-      set { _pos = value; }
+      get { return _poscm; }
+      set { _poscm = value; }
+    }
+    private uint _angle;
+    [global::ProtoBuf.ProtoMember(4, IsRequired = true, Name=@"angle", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint angle
+    {
+      get { return _angle; }
+      set { _angle = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -217,12 +231,19 @@ namespace Cmd
       get { return _mapid; }
       set { _mapid = value; }
     }
-    private Cmd.Pos _pos;
-    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"pos", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public Cmd.Pos pos
+    private Cmd.Pos _poscm;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"poscm", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public Cmd.Pos poscm
     {
-      get { return _pos; }
-      set { _pos = value; }
+      get { return _poscm; }
+      set { _poscm = value; }
+    }
+    private uint _angle;
+    [global::ProtoBuf.ProtoMember(4, IsRequired = true, Name=@"angle", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint angle
+    {
+      get { return _angle; }
+      set { _angle = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)

@@ -51,50 +51,57 @@ namespace Cmd
       get { return _profession; }
       set { _profession = value; }
     }
-    private Cmd.Pos _pos;
-    [global::ProtoBuf.ProtoMember(9, IsRequired = true, Name=@"pos", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public Cmd.Pos pos
+    private Cmd.Pos _poscm;
+    [global::ProtoBuf.ProtoMember(6, IsRequired = true, Name=@"poscm", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public Cmd.Pos poscm
     {
-      get { return _pos; }
-      set { _pos = value; }
+      get { return _poscm; }
+      set { _poscm = value; }
+    }
+    private uint _angle;
+    [global::ProtoBuf.ProtoMember(7, IsRequired = true, Name=@"angle", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint angle
+    {
+      get { return _angle; }
+      set { _angle = value; }
     }
     private uint _homeland;
-    [global::ProtoBuf.ProtoMember(10, IsRequired = true, Name=@"homeland", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoMember(8, IsRequired = true, Name=@"homeland", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     public uint homeland
     {
       get { return _homeland; }
       set { _homeland = value; }
     }
     private uint _countryid;
-    [global::ProtoBuf.ProtoMember(11, IsRequired = true, Name=@"countryid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoMember(9, IsRequired = true, Name=@"countryid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     public uint countryid
     {
       get { return _countryid; }
       set { _countryid = value; }
     }
     private uint _mapid;
-    [global::ProtoBuf.ProtoMember(12, IsRequired = true, Name=@"mapid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoMember(10, IsRequired = true, Name=@"mapid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     public uint mapid
     {
       get { return _mapid; }
       set { _mapid = value; }
     }
     private int _hp;
-    [global::ProtoBuf.ProtoMember(13, IsRequired = true, Name=@"hp", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoMember(11, IsRequired = true, Name=@"hp", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     public int hp
     {
       get { return _hp; }
       set { _hp = value; }
     }
     private int _sp;
-    [global::ProtoBuf.ProtoMember(15, IsRequired = true, Name=@"sp", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoMember(12, IsRequired = true, Name=@"sp", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     public int sp
     {
       get { return _sp; }
       set { _sp = value; }
     }
     private long _exp;
-    [global::ProtoBuf.ProtoMember(17, IsRequired = true, Name=@"exp", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoMember(13, IsRequired = true, Name=@"exp", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     public long exp
     {
       get { return _exp; }

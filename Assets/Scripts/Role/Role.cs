@@ -98,7 +98,7 @@ public class Role : MonoBehaviour
 			Role.All[cmd.data.charid] = role;
 		}
 
-		role.entity.Grid = new MapGrid(cmd.pos);
+		role.entity.Grid = new MapGrid(cmd.poscm);
 	}
 
 	[Execute]
