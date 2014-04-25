@@ -50,7 +50,7 @@ public class Entity : MonoBehaviour
 	/// </summary>
 	public MapGrid Grid
 	{
-		get { return new MapGrid() { x = MapNav.GetGridX(Position), z = MapNav.GetGridZ(Position) }; }
+		get { return MapNav.GetGrid(Position); }
 		set { Position = MapNav.GetWorldPosition(value); }
 	}
 

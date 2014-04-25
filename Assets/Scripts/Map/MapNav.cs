@@ -53,19 +53,9 @@ public class MapNav : MonoBehaviour
 		grids = new TileType[gridZNum * gridXNum];
 	}
 
-	public int GetGridX(Vector3 worldPosition)
-	{
-		return (int)(worldPosition.x / MapGrid.Width);
-	}
-
-	public int GetGridZ(Vector3 worldPosition)
-	{
-		return (int)(worldPosition.z / MapGrid.Height);
-	}
-
 	public MapGrid GetGrid(Vector3 worldPosition)
 	{
-		return new MapGrid(){x = GetGridX(worldPosition), z = GetGridZ(worldPosition)};
+		return new MapGrid() { x = (int)(worldPosition.x / MapGrid.Width), z = (int)(worldPosition.z / MapGrid.Height) };
 	}
 
 	public Vector3 GetWorldPosition(MapGrid pos)
@@ -211,7 +201,9 @@ public class MapNav : MonoBehaviour
 
 	public List<MapGrid> GetPath(Vector3 fromPosition, Vector3 toPosition, TileType validType)
 	{
-		return GetPath(GetGridX(fromPosition), GetGridZ(fromPosition), GetGridX(toPosition), GetGridZ(toPosition), validType);
+		var from = GetGrid(fromPosition);
+		var to = GetGrid(toPosition);
+		return GetPath(from.x, from.z, to.x, to.z, validType);
 	}
 	
 	public List<MapGrid> GetPath(MapGrid fromPos, MapGrid toPos, TileType validType)

@@ -200,13 +200,12 @@ public class MapNavEditor : Editor
 
 					if (Event.current.type == EventType.MouseDown || Event.current.type == EventType.MouseDrag)
 					{
-						int x = mapNav.GetGridX(hitPoint);
-						int z = mapNav.GetGridZ(hitPoint);
-						for (int _z = z - Mathf.RoundToInt(_radius); _z <= z + Mathf.RoundToInt(_radius); ++_z)
+						var grid = mapNav.GetGrid(hitPoint);
+						for (int _z = grid.z - Mathf.RoundToInt(_radius); _z <= grid.z + Mathf.RoundToInt(_radius); ++_z)
 						{
 							if (_z < 0) continue;
 							if (_z > mapNav.gridZNum - 1) continue;
-							for (int _x = x - Mathf.RoundToInt(_radius); _x <= x + Mathf.RoundToInt(_radius); ++_x)
+							for (int _x = grid.x - Mathf.RoundToInt(_radius); _x <= grid.x + Mathf.RoundToInt(_radius); ++_x)
 							{
 								if (_x < 0) continue;
 								if (_x > mapNav.gridXNum - 1) continue;
@@ -352,8 +351,8 @@ public class MapNavEditor : Editor
 				{
 					{"id", i.baseId},
 					{"name", string.IsNullOrEmpty(i.alias) ? db[(uint)i.baseId].name : i.alias},
-					{"x", Target.GetGridX(i.transform.localPosition)},
-					{"y", Target.GetGridZ(i.transform.localPosition)},
+					{"x", Target.GetGrid(i.transform.localPosition).x},
+					{"y", Target.GetGrid(i.transform.localPosition).z},
 					{"angle", (int)i.transform.localRotation.eulerAngles.y},
 					{"relivetime", i.relivetime},
 					{"rate", Mathf.Clamp(i.rate, 0, 100)},
