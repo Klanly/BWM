@@ -111,10 +111,9 @@ public class MainRole : MonoBehaviour, INotifyPropertyChanged
 	[Execute]
 	public static IEnumerator Execute(MainUserIntoSceneMapUserCmd_S cmd)
 	{
-		if (Application.loadedLevelName != "LoadingScene")
+		if (Application.loadedLevelName != "BattleScene")
 		{
-			LoadingScene.loadedLevelName = "BattleScene";
-			yield return Application.LoadLevelAsync("LoadingScene");
+			yield return Application.LoadLevelAsync("BattleScene");
 		}
 		while (BattleScene.Instance == null)
 			yield return new WaitForEndOfFrame();
