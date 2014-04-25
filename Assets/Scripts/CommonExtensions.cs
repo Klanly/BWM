@@ -6,48 +6,13 @@ namespace Cmd
 {
 	#region Pos
 	/// <summary>
-	/// 游戏地图上的位置，单位为cm，原点在左下角
+	/// 游戏地图上的位置，单位为cm，原点在左下角。仅用于和服务器通信
 	/// </summary>
-	partial class Pos : System.IEquatable<Pos>
+	partial class Pos
 	{
-		#region Equatable
-		public static bool operator ==(Pos a, Pos b)
-		{
-			if (System.Object.ReferenceEquals(a, b))
-				return true;
-			if (((object)a == null) || ((object)b == null))
-				return false;
-			return a.x == b.x && a.y == b.y;
-		}
-		public static bool operator !=(Pos a, Pos b)
-		{
-			return !(a == b);
-		}
-
-		public override bool Equals(object obj)
-		{
-			return this == obj as Pos;
-		}
-
-		public override int GetHashCode()
-		{
-			return (int)(this.x ^ this.y);
-		}
-
-		#region IEquatable<Pos> Members
-
-		public bool Equals(Pos other)
-		{
-			return this == other;
-		}
-
-		#endregion
-
-		#endregion
-
 		public override string ToString()
 		{
-			return string.Format("Pos({0}, {1})/cm", x, y);
+			return string.Format("Pos({0}cm, {1}cm)", x, y);
 		}
 	}
 	#endregion
