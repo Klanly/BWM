@@ -24,14 +24,14 @@ public class QuestDialog : MonoBehaviour
 		{
 			if (questState == QuestProcess.QuestProcess_CanDone)
 			{
-				Net.Instance.Send(new RequestFinishQuestQuestUserCmd_C()
+				Net.Instance.Send(new RequestFinishQuestQuestUserCmd_CS()
 				{
 					questid = questID,
 				});
 			}
 			else
 			{
-				Net.Instance.Send(new RequestAcceptQuestQuestUserCmd_C()
+				Net.Instance.Send(new RequestAcceptQuestQuestUserCmd_CS()
 				{
 					questid = questID,
 				});
@@ -65,5 +65,29 @@ public class QuestDialog : MonoBehaviour
 	private void OnUrlClicked(UIWidget sender, string url)
 	{
 		Debug.Log(string.Format("OnUrlClicked: {0}, {1}", sender.name, url));
+	}
+
+	[Execute]
+	public static void Execute(RequestAcceptQuestQuestUserCmd_CS cmd)
+	{
+		var role = Role.All[cmd.charid];
+		if (role == null)
+			return;
+		var effect = GameObject.Instantiate(Resources.Load("Prefabs/Models/Effect/xinderenwu")) as GameObject;
+		effect.name = role.name;
+		effect.transform.localPosition = role.transform.localPosition;
+		effect.AddComponent<ParticleParentAutoDestroy>();
+	}
+
+	[Execute]
+	public static void Execute(RequestFinishQuestQuestUserCmd_CS cmd)
+	{
+		var role = Role.All[cmd.charid];
+		if (role == null)
+			return;
+		var effect = GameObject.Instantiate(Resources.Load("Prefabs/Models/Effect/wanchengrenwu")) as GameObject;
+		effect.name = role.name;
+		effect.transform.localPosition = role.transform.localPosition;
+		effect.AddComponent<ParticleParentAutoDestroy>();
 	}
 }
