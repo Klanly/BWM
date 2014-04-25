@@ -143,7 +143,7 @@ public class ControlMove : MonoBehaviour {
 					return;
 				}
 
-				// 在尝试右边
+				// 再尝试右边
 				mat.SetTRS(Vector3.zero, Quaternion.Euler(new Vector3(0, fRadian, 0)), Vector3.one);
 				vecNewDirection2 = mat.MultiplyVector(vecDir);
 				vecNewPosition2 = entity.Position + vecNewDirection2 * MaxClientMoveStep;
@@ -164,7 +164,7 @@ public class ControlMove : MonoBehaviour {
 	void StopControl()
 	{
 		move.Stop();
-		Debug.Log("发送停止移动消息:dst:" + entity.Position + ",dir:" + this.transform.rotation);
+		move.Sync(entity.Position, this.transform.localRotation);
 	}
 
 	/// <summary>

@@ -112,10 +112,14 @@ public class Move : MonoBehaviour
 	/// <returns></returns>
 	public bool Sync()
 	{
+		return Sync(this.TargetPosition, this.transform.localRotation);
+	}
+	public bool Sync(Vector3 position, Quaternion rotation)
+	{
 		Net.Instance.Send(new Cmd.UserMoveUpMoveUserCmd_C()
 		{
-			poscm = new MapGrid(this.TargetPosition),
-			angle = (uint)this.transform.localRotation.eulerAngles.y
+			poscm = new MapGrid(position),
+			angle = (uint)rotation.eulerAngles.y
 		});
 		return true;
 	}
