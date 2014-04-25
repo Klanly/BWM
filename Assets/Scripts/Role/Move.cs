@@ -105,4 +105,18 @@ public class Move : MonoBehaviour
 			}
 		}
 	}
+
+	/// <summary>
+	/// 行走同步，发送行走请求消息到服务器
+	/// </summary>
+	/// <returns></returns>
+	public bool Sync()
+	{
+		Net.Instance.Send(new Cmd.UserMoveUpMoveUserCmd_C()
+		{
+			poscm = new MapGrid(this.TargetPosition),
+			angle = (uint)this.transform.localRotation.eulerAngles.y
+		});
+		return true;
+	}
 }

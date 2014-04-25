@@ -119,11 +119,7 @@ public class ControlMove : MonoBehaviour {
 		if(MapNav.IsPathReached(entity.Position, vecNewPosition, out vecRealPosition, entity.TileType))
 		{
 			move.TargetPosition = vecRealPosition;
-			Net.Instance.Send(new Cmd.UserMoveUpMoveUserCmd_C()
-			{
-				poscm = new MapGrid(move.TargetPosition), 
-				angle = (uint)this.transform.localRotation.eulerAngles.y
-			});
+			move.Sync();
 			return;
 		}
 		else
@@ -143,11 +139,7 @@ public class ControlMove : MonoBehaviour {
 				if(MapNav.IsPathReached(entity.Position, vecNewPosition2, out vecRealPosition2, entity.TileType))
 				{
 					move.TargetPosition = vecRealPosition2;
-					Net.Instance.Send(new Cmd.UserMoveUpMoveUserCmd_C()
-					{
-						poscm = new MapGrid(move.TargetPosition),
-						angle = (uint)this.transform.localRotation.eulerAngles.y
-					});
+					move.Sync();
 					return;
 				}
 
@@ -158,11 +150,7 @@ public class ControlMove : MonoBehaviour {
 				if(MapNav.IsPathReached(entity.Position, vecNewPosition2, out vecRealPosition2, entity.TileType))
 				{
 					move.TargetPosition = vecRealPosition2;
-					Net.Instance.Send(new Cmd.UserMoveUpMoveUserCmd_C()
-					{
-						poscm = new MapGrid(move.TargetPosition),
-						angle = (uint)this.transform.localRotation.eulerAngles.y
-					});
+					move.Sync();
 					return;
 				}
 			}
