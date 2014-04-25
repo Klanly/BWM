@@ -74,7 +74,7 @@ public class Minimap : MonoBehaviour
 		{
 			Layout = false;
 			var mapNav = BattleScene.Instance.MapNav;
-			var size = new Vector2(mapNav.gridWidth * mapNav.gridXNum, mapNav.gridHeight * mapNav.gridZNum);
+			var size = new Vector2(MapGrid.Width * mapNav.gridXNum, MapGrid.Height * mapNav.gridZNum);
 			Extent = Mathf.Min(Extent, uiMapTexture.mainTexture.width, uiMapTexture.mainTexture.height);
 			var relativeExtent = new Vector2(Extent / (float)uiMapTexture.mainTexture.width, Extent / (float)uiMapTexture.mainTexture.height);
 
@@ -132,7 +132,7 @@ public class Minimap : MonoBehaviour
 	private void LayoutFlag(Entity entity, UISprite flag)
 	{
 		var mapNav = BattleScene.Instance.MapNav;
-		var size = new Vector2(mapNav.gridWidth * mapNav.gridXNum, mapNav.gridHeight * mapNav.gridZNum);
+		var size = new Vector2(MapGrid.Width * mapNav.gridXNum, MapGrid.Height * mapNav.gridZNum);
 		var relativeExtent = new Vector2(Extent / (float)uiMapTexture.mainTexture.width, Extent / (float)uiMapTexture.mainTexture.height);
 
 		var relativePos = new Vector2(entity.Position.x / size.x, entity.Position.z / size.y);

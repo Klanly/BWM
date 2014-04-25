@@ -73,7 +73,7 @@ public class MapNavEditor : Editor
 	/// <summary>
 	/// 自动寻路路径
 	/// </summary>
-	private List<Pos> path = new List<Pos>();
+	private List<MapGrid> path = new List<MapGrid>();
 	/// <summary>
 	/// 是否采样寻路的起始点
 	/// </summary>
@@ -184,18 +184,18 @@ public class MapNavEditor : Editor
 			if (groundPlane.Raycast(ray, out rayDistance))
 			{
 				Vector3 hitPoint = ray.GetPoint(rayDistance);
-				if (hitPoint.x >= 0.0f && hitPoint.x <= mapNav.gridXNum * mapNav.gridWidth
-				   && hitPoint.z >= 0.0f && hitPoint.z <= mapNav.gridZNum * mapNav.gridHeight)
+				if (hitPoint.x >= 0.0f && hitPoint.x <= mapNav.gridXNum * MapGrid.Width
+				   && hitPoint.z >= 0.0f && hitPoint.z <= mapNav.gridZNum * MapGrid.Height)
 				{
 					Handles.color = Color.black;
 					float _radius = radius * 0.5f;
 					Handles.DrawPolyLine(new Vector3[]
 					{
-						new Vector3(hitPoint.x - _radius * mapNav.gridWidth, y, hitPoint.z - _radius * mapNav.gridHeight),
-						new Vector3(hitPoint.x - _radius * mapNav.gridWidth, y, hitPoint.z + _radius * mapNav.gridHeight),
-						new Vector3(hitPoint.x + _radius * mapNav.gridWidth, y, hitPoint.z + _radius * mapNav.gridHeight),
-						new Vector3(hitPoint.x + _radius * mapNav.gridWidth, y, hitPoint.z - _radius * mapNav.gridHeight),
-						new Vector3(hitPoint.x - _radius * mapNav.gridWidth, y, hitPoint.z - _radius * mapNav.gridHeight)
+						new Vector3(hitPoint.x - _radius * MapGrid.Width, y, hitPoint.z - _radius * MapGrid.Height),
+						new Vector3(hitPoint.x - _radius * MapGrid.Width, y, hitPoint.z + _radius * MapGrid.Height),
+						new Vector3(hitPoint.x + _radius * MapGrid.Width, y, hitPoint.z + _radius * MapGrid.Height),
+						new Vector3(hitPoint.x + _radius * MapGrid.Width, y, hitPoint.z - _radius * MapGrid.Height),
+						new Vector3(hitPoint.x - _radius * MapGrid.Width, y, hitPoint.z - _radius * MapGrid.Height)
 					});
 
 					if (Event.current.type == EventType.MouseDown || Event.current.type == EventType.MouseDrag)
@@ -212,8 +212,8 @@ public class MapNavEditor : Editor
 								if (_x > mapNav.gridXNum - 1) continue;
 
 								Vector3 position = mapNav.GetWorldPosition(_x, _z);
-								if (Mathf.Abs(position.x - hitPoint.x) <= _radius * mapNav.gridWidth
-								   && Mathf.Abs(position.z - hitPoint.z) <= _radius * mapNav.gridHeight)
+								if (Mathf.Abs(position.x - hitPoint.x) <= _radius * MapGrid.Width
+								   && Mathf.Abs(position.z - hitPoint.z) <= _radius * MapGrid.Height)
 								{
 									switch (curProcessType)
 									{
@@ -243,8 +243,8 @@ public class MapNavEditor : Editor
 				if (groundPlane.Raycast(ray, out rayDistance))
 				{
 					Vector3 hitPoint = ray.GetPoint(rayDistance);
-					if (hitPoint.x >= 0.0f && hitPoint.x <= mapNav.gridXNum * mapNav.gridWidth
-						&& hitPoint.z >= 0.0f && hitPoint.z <= mapNav.gridZNum * mapNav.gridHeight)
+					if (hitPoint.x >= 0.0f && hitPoint.x <= mapNav.gridXNum * MapGrid.Width
+						&& hitPoint.z >= 0.0f && hitPoint.z <= mapNav.gridZNum * MapGrid.Height)
 					{
 						if (bSampleStart)
 							vecStart = hitPoint;
@@ -252,7 +252,7 @@ public class MapNavEditor : Editor
 							vecEnd = hitPoint;
 						bSampleStart = !bSampleStart;
 
-						Pos gridEnd = mapNav.GetNearestValidGrid(mapNav.GetGrid(vecStart), mapNav.GetGrid(vecEnd), TileType.TileType_Walk);
+						MapGrid gridEnd = mapNav.GetNearestValidGrid(mapNav.GetGrid(vecStart), mapNav.GetGrid(vecEnd), TileType.TileType_Walk);
 						if(gridEnd != null)
 							path = mapNav.GetPath(mapNav.GetGrid(vecStart), gridEnd, TileType.TileType_Walk);
 						else
@@ -272,7 +272,7 @@ public class MapNavEditor : Editor
 				Handles.color = Color.black;
 				Vector3 lastPoint = vecStart;
 				lastPoint.y = y;
-				foreach (Pos grid in path)
+				foreach (MapGrid grid in path)
 				{
 					Vector3 curPoint = mapNav.GetWorldPosition(grid);
 					curPoint.y = y;
@@ -319,8 +319,6 @@ public class MapNavEditor : Editor
 	{
 		var json = NGUIJson.jsonEncode(new Hashtable()
 		{
-			//{"tilewidth", Target.gridWidth},
-			//{"tileheight", Target.gridHeight},
 			{"tilexnum", Target.gridXNum},
 			{"tileynum", Target.gridZNum},
 			{"tiles", System.Array.ConvertAll(Target.grids, g => (uint)g)},

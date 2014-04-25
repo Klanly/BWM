@@ -31,7 +31,7 @@ public class MainRole : MonoBehaviour, INotifyPropertyChanged
 	public PathMove pathMove;
 	public ControlMove controlMove;
 
-	private Pos lastGird = new Pos();
+	private MapGrid lastGird = new MapGrid();
 
 	private MainRole() { }
 

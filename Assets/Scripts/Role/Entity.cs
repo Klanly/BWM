@@ -35,8 +35,8 @@ public class Entity : MonoBehaviour
 			{
 				// 确保角色对象在场景地图的可视范围内
 				// TODO: 移至角色相关的部分
-				value.x = Mathf.Clamp(value.x, 0.5f, MapNav.gridWidth * MapNav.gridXNum - 0.5f);
-				value.z = Mathf.Clamp(value.z, 1.0f, MapNav.gridHeight * MapNav.gridZNum - 4.0f);
+				value.x = Mathf.Clamp(value.x, 0.5f, MapGrid.Width * MapNav.gridXNum - 0.5f);
+				value.z = Mathf.Clamp(value.z, 1.0f, MapGrid.Height * MapNav.gridZNum - 4.0f);
 			}
 			this.transform.position = value;
 
@@ -48,9 +48,9 @@ public class Entity : MonoBehaviour
 	/// <summary>
 	/// 逻辑格子位置
 	/// </summary>
-	public Pos Grid
+	public MapGrid Grid
 	{
-		get { return new Pos() { x = MapNav.GetGridX(Position), y = MapNav.GetGridZ(Position) }; }
+		get { return new MapGrid() { x = MapNav.GetGridX(Position), y = MapNav.GetGridZ(Position) }; }
 		set { Position = MapNav.GetWorldPosition(value); }
 	}
 

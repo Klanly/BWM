@@ -31,8 +31,8 @@ public class Move : MonoBehaviour
 		{
 			if (MapNav != null)
 			{
-				value.x = Mathf.Clamp(value.x, 0, MapNav.gridWidth * MapNav.gridXNum);
-				value.z = Mathf.Clamp(value.z, 0, MapNav.gridHeight * MapNav.gridZNum);
+				value.x = Mathf.Clamp(value.x, 0, MapGrid.Width * MapNav.gridXNum);
+				value.z = Mathf.Clamp(value.z, 0, MapGrid.Height * MapNav.gridZNum);
 			}
 			targetPosition = value;
 			if (value != Vector3.zero)

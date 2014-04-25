@@ -14,7 +14,7 @@ public class PathMove : MonoBehaviour {
 	public delegate void PathFinished();
 	public PathFinished pathFinished;
 
-	private List<Pos> path = new List<Pos>();
+	private List<MapGrid> path = new List<MapGrid>();
 	//private Vector3 src;
 	private Vector3 dst;
 
@@ -30,11 +30,11 @@ public class PathMove : MonoBehaviour {
 
 	public void WalkTo(Vector3 _dst, PathFinished _delegate = null)
 	{
-		Pos gridOriginSrc = entity.Grid;
-		Pos gridOriginDst = MapNav.GetGrid(_dst);
+		MapGrid gridOriginSrc = entity.Grid;
+		MapGrid gridOriginDst = MapNav.GetGrid(_dst);
 
 		// 如果起始点是阻挡，检测方向是否为走出阻挡的方向
-		Pos gridRealSrc = gridOriginSrc;
+		MapGrid gridRealSrc = gridOriginSrc;
 		if((MapNav[gridRealSrc.x, gridRealSrc.y] & entity.TileType) == 0)
 		{
 			gridRealSrc = MapNav.GetNearestValidGrid(gridOriginDst, gridOriginSrc, entity.TileType, 1);
@@ -45,7 +45,7 @@ public class PathMove : MonoBehaviour {
 			}
 		}
 
-		Pos gridRealDst = MapNav.GetNearestValidGrid(gridRealSrc, gridOriginDst, entity.TileType);
+		MapGrid gridRealDst = MapNav.GetNearestValidGrid(gridRealSrc, gridOriginDst, entity.TileType);
 		if (gridRealDst == null)
 		{
 			StopPath();

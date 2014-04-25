@@ -48,9 +48,13 @@ namespace Cmd
 
 		public override string ToString()
 		{
-			return string.Format("{{{0},{1}}}", x, y);
+			return string.Format("Pos({0}, {1})/cm", x, y);
 		}
 
+		public static implicit operator MapGrid(Pos poscm)
+		{
+			return new MapGrid() { x = poscm.x, y = poscm.y };
+		}
 	}
 	#endregion
 
