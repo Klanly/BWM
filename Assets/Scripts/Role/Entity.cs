@@ -13,7 +13,7 @@ public class Entity : MonoBehaviour
 	private MapNav MapNav { get { return BattleScene.Instance.MapNav; } }
 
 	/// <summary>
-	/// 移动速度
+	/// 移动速度 m/s
 	/// </summary>
 	public float Speed = 5.0f;
 
