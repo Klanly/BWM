@@ -32,8 +32,8 @@ public class MapGrid : System.IEquatable<MapGrid>
 
 	public MapGrid(Cmd.Pos poscm)
 	{
-		this.x = poscm.x;
-		this.z = poscm.y;
+		this.x = (int)(poscm.x / (100 * Width));
+		this.z = (int)(poscm.y / (100 * Height));
 	}
 
 	#region Equatable
@@ -78,6 +78,10 @@ public class MapGrid : System.IEquatable<MapGrid>
 
 	public static implicit operator Cmd.Pos(MapGrid grid)
 	{
-		return new Cmd.Pos() { x = grid.x, y = grid.z };
+		return new Cmd.Pos()
+		{
+			x = (int)((grid.x + 0.5f) * (100 * Width)),
+			y = (int)((grid.x + 0.5f) * (100 * Height))
+		};
 	}
 }
