@@ -65,12 +65,12 @@ public class MapNav : MonoBehaviour
 		return (int)(worldPosition.z / gridHeight);
 	}
 
-	public Cmd.Pos GetGrid(Vector3 worldPosition)
+	public Pos GetGrid(Vector3 worldPosition)
 	{
-		return new Cmd.Pos(){x = GetGridX(worldPosition), y = GetGridZ(worldPosition)};
+		return new Pos(){x = GetGridX(worldPosition), y = GetGridZ(worldPosition)};
 	}
 
-	public Vector3 GetWorldPosition(Cmd.Pos pos)
+	public Vector3 GetWorldPosition(Pos pos)
 	{
 		return GetWorldPosition(pos.x, pos.y);
 	}
@@ -167,7 +167,7 @@ public class MapNav : MonoBehaviour
 		public float h;
 		public float f;
 
-		public Cmd.Pos grid;
+		public Pos grid;
 		public Vector3 position;
 
 		public PathNode(int _index, int _parentIndex, float _g, float _h, MapNav mapNav)
@@ -178,7 +178,7 @@ public class MapNav : MonoBehaviour
 			h = _h;
 			f = g + h;
 
-			grid = new Cmd.Pos(){x = index % mapNav.gridXNum, y = index / mapNav.gridXNum};
+			grid = new Pos(){x = index % mapNav.gridXNum, y = index / mapNav.gridXNum};
 			position = mapNav.GetWorldPosition(grid);
 		}
 
@@ -211,19 +211,19 @@ public class MapNav : MonoBehaviour
 		}
 	}
 
-	public List<Cmd.Pos> GetPath(Vector3 fromPosition, Vector3 toPosition, TileType validType)
+	public List<Pos> GetPath(Vector3 fromPosition, Vector3 toPosition, TileType validType)
 	{
 		return GetPath(GetGridX(fromPosition), GetGridZ(fromPosition), GetGridX(toPosition), GetGridZ(toPosition), validType);
 	}
 	
-	public List<Cmd.Pos> GetPath(Cmd.Pos fromPos, Cmd.Pos toPos, TileType validType)
+	public List<Pos> GetPath(Pos fromPos, Pos toPos, TileType validType)
 	{
 		return GetPath(fromPos.x, fromPos.y, toPos.x, toPos.y, validType);
 	}
 		
-	public List<Cmd.Pos> GetPath(int fromGridX, int fromGridZ, int toGridX, int toGridZ, TileType validType)
+	public List<Pos> GetPath(int fromGridX, int fromGridZ, int toGridX, int toGridZ, TileType validType)
 	{
-		List<Cmd.Pos> path = new List<Cmd.Pos>();
+		List<Pos> path = new List<Pos>();
 		if ((this[fromGridX, fromGridZ] & validType) == 0)
 			return path;
 		
@@ -233,8 +233,8 @@ public class MapNav : MonoBehaviour
 		// 同一个点也导出路径
 		if(fromGridX == toGridX && fromGridZ == toGridZ)
 		{
-			path.Add(new Cmd.Pos(){x = fromGridX, y = fromGridZ});
-			path.Add(new Cmd.Pos(){x = toGridX, y = toGridZ});
+			path.Add(new Pos(){x = fromGridX, y = fromGridZ});
+			path.Add(new Pos(){x = toGridX, y = toGridZ});
 			return path;
 		}
 
@@ -298,7 +298,7 @@ public class MapNav : MonoBehaviour
 		if(!closeDic.ContainsKey(pnTo.index))
 			return path;
 
-		List<Cmd.Pos> tmpPath = new List<Cmd.Pos>();
+		List<Pos> tmpPath = new List<Pos>();
 		PathNode node = closeDic[pnTo.index];
 		while(node != null)
 		{
@@ -320,9 +320,9 @@ public class MapNav : MonoBehaviour
 	/// <param name="src">Source.</param>
 	/// <param name="dst">Dst.</param>
 	/// <param name="mindis">gridnum.</param>
-	public Cmd.Pos GetNearestGrid(Cmd.Pos src, Cmd.Pos dst, int gridnum=1)
+	public Pos GetNearestGrid(Pos src, Pos dst, int gridnum=1)
 	{
-		Cmd.Pos ptOut = src;
+		Pos ptOut = src;
 		if(src == dst)
 			return ptOut;
 
@@ -341,9 +341,9 @@ public class MapNav : MonoBehaviour
 	/// <param name="dst">Dst.</param>
 	/// <param name="validType">Valid type.</param>
 	/// <param name="radius">Grid Radius.</param>
-	public Cmd.Pos GetNearestValidGrid(Cmd.Pos src, Cmd.Pos dst, TileType validType, int gridRadius=-1)
+	public Pos GetNearestValidGrid(Pos src, Pos dst, TileType validType, int gridRadius=-1)
 	{
-		Cmd.Pos ptOut = dst;
+		Pos ptOut = dst;
 		while((this[ptOut.x, ptOut.y] & validType) == 0)
 		{
 			ptOut = GetNearestGrid(src, ptOut);
@@ -367,9 +367,9 @@ public class MapNav : MonoBehaviour
 	/// </summary>
 	/// <returns>The path ex.</returns>
 	/// <param name="srcPath">Source path.</param>
-	private List<Cmd.Pos> LinePathEx(List<Cmd.Pos> srcPath, TileType validType = TileType.TileType_Walk)
+	private List<Pos> LinePathEx(List<Pos> srcPath, TileType validType = TileType.TileType_Walk)
 	{
-		List<Cmd.Pos> dstPath = srcPath;
+		List<Pos> dstPath = srcPath;
 		dstPath.Reverse();
 
 		int nStartIndex = 0;
@@ -400,7 +400,7 @@ public class MapNav : MonoBehaviour
 		{
 			nDelta = 0;
 
-			List<Cmd.Pos> path;
+			List<Pos> path;
 			SplitBlockLineEx(dstPath[nStartIndex], dstPath[nEndIndex], out path);
 			if(path.Count >= 3)
 			{
@@ -426,14 +426,14 @@ public class MapNav : MonoBehaviour
 	/// <param name="vecDst">Vec dst.</param>
 	public bool LinePathClear(Vector3 vecSrc, Vector3 vecDst, TileType validType = TileType.TileType_Walk)
 	{
-		Cmd.Pos dstPt = GetGrid(vecDst);
+		Pos dstPt = GetGrid(vecDst);
 
 		Vector3 dir = vecDst - vecSrc;
 		dir.Normalize();
 		dir *= ShortestMoveDst;
 
 		Vector3 curPos = vecSrc;
-		Cmd.Pos curPt = new Cmd.Pos(){x=0, y=0};
+		Pos curPt = new Pos(){x=0, y=0};
 
 		for(; (vecDst - curPos).magnitude > ShortestMoveDst; curPos += dir)
 		{
@@ -458,7 +458,7 @@ public class MapNav : MonoBehaviour
 		return true;
 	}
 
-	public bool LinePathClear(Cmd.Pos gridSrc, Cmd.Pos gridDst, TileType validType = TileType.TileType_Walk)
+	public bool LinePathClear(Pos gridSrc, Pos gridDst, TileType validType = TileType.TileType_Walk)
 	{
 		return LinePathClear(GetWorldPosition(gridSrc), GetWorldPosition(gridDst), validType);
 	}
@@ -469,13 +469,13 @@ public class MapNav : MonoBehaviour
 	/// <param name="grid1">Grid1.</param>
 	/// <param name="grid2">Grid2.</param>
 	/// <param name="path">Path.</param>
-	private void SplitBlockLineEx(Cmd.Pos grid1, Cmd.Pos grid2, out List<Cmd.Pos> path)
+	private void SplitBlockLineEx(Pos grid1, Pos grid2, out List<Pos> path)
 	{
-		path = new List<Cmd.Pos>();
+		path = new List<Pos>();
 		if(grid1.x == grid2.x && grid1.y == grid2.y)
 			return;
 
-		path = new List<Cmd.Pos>();
+		path = new List<Pos>();
 		path.Clear();
 
 		Vector3 vecSrc = GetWorldPosition(grid1);
@@ -488,7 +488,7 @@ public class MapNav : MonoBehaviour
 		dir *= ShortestMoveDst;
 
 		Vector3 curPos = vecSrc;
-		Cmd.Pos curPt = grid1;
+		Pos curPt = grid1;
 
 		path.Add(grid1);
 		for(;;)
@@ -529,8 +529,8 @@ public class MapNav : MonoBehaviour
 	/// <param name="validType">Valid type.</param>
 	public bool IsPathReached(Vector3 vecSrc, Vector3 vecOriginDst ,out Vector3 vecDst, TileType validType = TileType.TileType_Walk)
 	{
-		Cmd.Pos ptSrc = GetGrid(vecSrc);
-		Cmd.Pos ptDst = GetGrid(vecOriginDst);
+		Pos ptSrc = GetGrid(vecSrc);
+		Pos ptDst = GetGrid(vecOriginDst);
 
 		Vector3 dir = vecOriginDst - vecSrc;
 		float length = dir.magnitude;
@@ -538,14 +538,14 @@ public class MapNav : MonoBehaviour
 		dir *= ShortestMoveDst;
 
 		Vector3 vecCur = vecSrc;
-		Cmd.Pos ptCur = new Cmd.Pos(){x=0, y=0};
+		Pos ptCur = new Pos(){x=0, y=0};
 		vecDst = vecCur;
 
 		// 如果起始点是阻挡，检测方向是否为走出阻挡的方向
 		if((this[ptSrc.x, ptSrc.y] & validType) == 0)
 		{
 			Vector3 vecForward = vecSrc + dir * gridWidth;
-			Cmd.Pos ptForward = GetGrid(vecSrc + dir * gridWidth);
+			Pos ptForward = GetGrid(vecSrc + dir * gridWidth);
 			if(ptForward == ptSrc || (this[ptForward.x, ptForward.y] & validType) == 0)
 				return false;
 		}

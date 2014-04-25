@@ -73,7 +73,7 @@ public class MapNavEditor : Editor
 	/// <summary>
 	/// 自动寻路路径
 	/// </summary>
-	private List<Cmd.Pos> path = new List<Cmd.Pos>();
+	private List<Pos> path = new List<Pos>();
 	/// <summary>
 	/// 是否采样寻路的起始点
 	/// </summary>
@@ -252,7 +252,7 @@ public class MapNavEditor : Editor
 							vecEnd = hitPoint;
 						bSampleStart = !bSampleStart;
 
-						Cmd.Pos gridEnd = mapNav.GetNearestValidGrid(mapNav.GetGrid(vecStart), mapNav.GetGrid(vecEnd), TileType.TileType_Walk);
+						Pos gridEnd = mapNav.GetNearestValidGrid(mapNav.GetGrid(vecStart), mapNav.GetGrid(vecEnd), TileType.TileType_Walk);
 						if(gridEnd != null)
 							path = mapNav.GetPath(mapNav.GetGrid(vecStart), gridEnd, TileType.TileType_Walk);
 						else
@@ -272,7 +272,7 @@ public class MapNavEditor : Editor
 				Handles.color = Color.black;
 				Vector3 lastPoint = vecStart;
 				lastPoint.y = y;
-				foreach (Cmd.Pos grid in path)
+				foreach (Pos grid in path)
 				{
 					Vector3 curPoint = mapNav.GetWorldPosition(grid);
 					curPoint.y = y;
