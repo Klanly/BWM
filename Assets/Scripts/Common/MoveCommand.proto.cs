@@ -29,8 +29,11 @@ namespace Cmd
       [global::ProtoBuf.ProtoEnum(Name=@"UserGotoMoveUserCmd_S", Value=3)]
       UserGotoMoveUserCmd_S = 3,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"NpcMoveDownMoveUserCmd_S", Value=4)]
-      NpcMoveDownMoveUserCmd_S = 4
+      [global::ProtoBuf.ProtoEnum(Name=@"ReturnUserMoveFailMoveUserCmd_S", Value=4)]
+      ReturnUserMoveFailMoveUserCmd_S = 4,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"NpcMoveDownMoveUserCmd_S", Value=5)]
+      NpcMoveDownMoveUserCmd_S = 5
     }
   
     private global::ProtoBuf.IExtension extensionObject;
@@ -131,6 +134,37 @@ namespace Cmd
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"ReturnUserMoveFailMoveUserCmd_S")]
+  public partial class ReturnUserMoveFailMoveUserCmd_S : global::ProtoBuf.IExtensible
+  {
+    public ReturnUserMoveFailMoveUserCmd_S() {}
+    
+    private Cmd.Pos _poscm;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"poscm", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public Cmd.Pos poscm
+    {
+      get { return _poscm; }
+      set { _poscm = value; }
+    }
+    private uint _angle;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"angle", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint angle
+    {
+      get { return _angle; }
+      set { _angle = value; }
+    }
+    private Cmd.MoveFailType _reason;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"reason", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public Cmd.MoveFailType reason
+    {
+      get { return _reason; }
+      set { _reason = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"NpcMoveDownMoveUserCmd_S")]
   public partial class NpcMoveDownMoveUserCmd_S : global::ProtoBuf.IExtensible
   {
@@ -161,5 +195,13 @@ namespace Cmd
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
+  
+    [global::ProtoBuf.ProtoContract(Name=@"MoveFailType")]
+    public enum MoveFailType
+    {
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"MoveFailType_Goto", Value=1)]
+      MoveFailType_Goto = 1
+    }
   
 }
