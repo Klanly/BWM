@@ -19,11 +19,11 @@ namespace Pmd
     public enum Version
     {
             
-      [global::ProtoBuf.ProtoEnum(Name=@"Version_Login", Value=2015)]
-      Version_Login = 2015,
+      [global::ProtoBuf.ProtoEnum(Name=@"Version_Login", Value=20140427)]
+      Version_Login = 20140427,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"Version_Game", Value=2014)]
-      Version_Game = 2014
+      [global::ProtoBuf.ProtoEnum(Name=@"Version_Game", Value=20140427)]
+      Version_Game = 20140427
     }
   
     [global::ProtoBuf.ProtoContract(Name=@"Debug")]
