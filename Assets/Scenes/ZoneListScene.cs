@@ -3,13 +3,14 @@ using System.Collections;
 using GX.Net;
 using Cmd;
 using System.Linq;
+using Pmd;
 
 /// <summary>
 /// 区列表，由LoginServer下发
 /// </summary>
 public class ZoneListScene : MonoBehaviour
 {
-	public static ZoneInfoListLoginUserCmd_S ZoneList { get; private set; }
+	public static ZoneInfoListLoginUserPmd_S ZoneList { get; private set; }
 
 	public UIGrid zoneList;
 	public GameObject zoneButton;
@@ -26,14 +27,14 @@ public class ZoneListScene : MonoBehaviour
 			DestroyObject(t.gameObject);
 		zoneList.transform.DetachChildren();
 
-		var height = zoneList.cellHeight * ZoneList.server.Count - (zoneList.cellHeight - zoneButton.GetComponent<UISprite>().height);
+		var height = zoneList.cellHeight * ZoneList.zonelist.Count - (zoneList.cellHeight - zoneButton.GetComponent<UISprite>().height);
 		var oldPosition = zoneList.transform.localPosition;
 		oldPosition.y = height / 2.0f;
 		zoneList.transform.localPosition = oldPosition;
 		GameObject.Find("BG_List").GetComponent<UISprite>().height = (int)height + 70;
 		zoneList.Reposition();
 
-		foreach (var zone in ZoneList.server)
+		foreach (var zone in ZoneList.zonelist)
 		{
 			var item = Instantiate(zoneButton) as GameObject;
 			item.transform.parent = zoneList.transform;
@@ -41,11 +42,11 @@ public class ZoneListScene : MonoBehaviour
 			item.GetComponentInChildren<UILabel>().text = zone.zonename;
 			switch (zone.state)
 			{
-				case ServerState.Normal:
+				case ZoneState.Normal:
 					var zoneid = zone.zoneid;
 					UIEventListener.Get(item).onClick = go => ZoneSelect(zoneid);
 					break;
-				case ServerState.Shutdown:
+				case ZoneState.Shutdown:
 					var button = item.GetComponentInChildren<UIButton>();
 					button.isEnabled = false;
 					break;
@@ -60,9 +61,9 @@ public class ZoneListScene : MonoBehaviour
 	{
 		if (zoneid == 0)
 			return;
-		Net.Instance.Send(new UserLoginRequestLoginUserCmd_C()
+		Net.Instance.Send(new UserLoginRequestLoginUserPmd_C()
 		{
-			gameversion = (uint)Cmd.Config.Version.Version_Game,
+			gameversion = (uint)Pmd.Config.Version.Version_Game,
 			gameid = ZoneList.gameid,
 			zoneid = zoneid,
 			mid = SystemInfo.deviceUniqueIdentifier,
@@ -73,11 +74,11 @@ public class ZoneListScene : MonoBehaviour
 	{
 		// 默认选择第一个可用的区
 		if (Input.GetKeyDown(KeyCode.Return))
-			ZoneSelect((from z in ZoneList.server where z.state == ServerState.Normal select z.zoneid).FirstOrDefault());
+			ZoneSelect((from z in ZoneList.zonelist where z.state == ZoneState.Normal select z.zoneid).FirstOrDefault());
 	}
 
 	[Execute]
-	public static IEnumerator Execute(ZoneInfoListLoginUserCmd_S cmd)
+	public static IEnumerator Execute(ZoneInfoListLoginUserPmd_S cmd)
 	{
 		ZoneList = cmd;
 		yield return Application.LoadLevelAsync("ZoneListScene");

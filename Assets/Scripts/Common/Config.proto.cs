@@ -8,7 +8,7 @@
 //------------------------------------------------------------------------------
 
 // Generated from: Config.proto
-namespace Cmd
+namespace Pmd
 {
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"Config")]
   public partial class Config : global::ProtoBuf.IExtensible
@@ -19,8 +19,8 @@ namespace Cmd
     public enum Version
     {
             
-      [global::ProtoBuf.ProtoEnum(Name=@"Version_Login", Value=2014)]
-      Version_Login = 2014,
+      [global::ProtoBuf.ProtoEnum(Name=@"Version_Login", Value=2015)]
+      Version_Login = 2015,
             
       [global::ProtoBuf.ProtoEnum(Name=@"Version_Game", Value=2014)]
       Version_Game = 2014

@@ -7,6 +7,7 @@ using System;
 using System.IO;
 using System.Collections;
 using System.Collections.Generic;
+using Pmd;
 
 static class ServerLog
 {
@@ -20,7 +21,7 @@ static class ServerLog
 	}
 
 	[Execute]
-	public static void Execute(ClientLogUrlLoginUserCmd_S cmd)
+	public static void Execute(ClientLogUrlLoginUserPmd_S cmd)
 	{
 		distinct = cmd.distinct ? new HashSet<int>() : null;
 		URL = cmd.logurl;

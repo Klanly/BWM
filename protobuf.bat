@@ -1,17 +1,25 @@
 @echo off
 set protogen=%~dp0\3Party\protobuf-net r668\ProtoGen\protogen.exe
-set dest=%~dp0\Assets\Scripts\Common
 
+rem ShenCommon生成
+del /Q /S "%~dp0\Assets\Scripts\Common\*.cs"
 pushd "%~dp0\Common"
-echo ===================================================================
+
 del /Q /S *.cs
-del /Q /S "%dest%\*.cs"
-call:buildDir "%~dp0\Common" "%dest%"
+
+call:buildDir "%~dp0\Common" "%~dp0\Assets\Scripts\Common"
 del /Q /S *.cs
-echo ===================================================================
-call:clearMeta "%dest%"
 popd
 
+rem PlatCommon生成
+pushd "%~dp0\PlatCommon"
+del /Q /S *.cs
+call:buildDir "%~dp0\PlatCommon" "%~dp0\Assets\Scripts\Common"
+del /Q /S *.cs
+call:clearMeta "%~dp0\Assets\Scripts\Common"
+popd
+
+rem 客户端生成
 "%protogen%" -i:"Assets\Scripts\Config\UserData.proto" -o:"Assets\Scripts\Config\UserData.proto.cs" -p:observable -q
 
 pause

@@ -3,6 +3,7 @@ using System.Collections;
 using GX.Net;
 using Cmd;
 using System;
+using Pmd;
 
 public class LoginScene : MonoBehaviour
 {
@@ -22,9 +23,9 @@ public class LoginScene : MonoBehaviour
 			if (string.IsNullOrEmpty(accountInput.value))
 				return;
 			StopCoroutine("ConnectLoginServer");
-			StartCoroutine("ConnectLoginServer", new AccountTokenVerifyLoginUserCmd_CS()
+			StartCoroutine("ConnectLoginServer", new AccountTokenVerifyLoginUserPmd_CS()
 			{
-				version = (uint)Cmd.Config.Version.Version_Login,
+				version = (uint)Pmd.Config.Version.Version_Login,
 				gameid = GameID,
 				account = accountInput.value,
 				token = "dev",
@@ -80,7 +81,7 @@ public class LoginScene : MonoBehaviour
 	/// LoginServer下发的用于网关登陆验证的令牌
 	/// TODO: 加密保存或持久化
 	/// </summary>
-	private static UserLoginReturnOkLoginUserCmd_S gamewayToken;
+	private static UserLoginReturnOkLoginUserPmd_S gamewayToken;
 
 	public static IEnumerator ConnectGatewayServer()
 	{
@@ -90,7 +91,7 @@ public class LoginScene : MonoBehaviour
 		if (Net.Instance.State == WebSocket.State.Open)
 		{
 			var stamp = DateTime.Now.ToUnixTime();
-			Net.Instance.Send(new UserLoginTokenLoginUserCmd_C()
+			Net.Instance.Send(new UserLoginTokenLoginUserPmd_C()
 			{
 				gameid = token.gameid,
 				zoneid = token.zoneid,
@@ -115,7 +116,7 @@ public class LoginScene : MonoBehaviour
 	/// </summary>
 	/// <param name="cmd"></param>
 	[Execute]
-	public static IEnumerator Execute(UserLoginReturnOkLoginUserCmd_S cmd)
+	public static IEnumerator Execute(UserLoginReturnOkLoginUserPmd_S cmd)
 	{
 		Net.Instance.Close(); // 和LoginServer断开连接
 
@@ -125,7 +126,7 @@ public class LoginScene : MonoBehaviour
 	}
 
 	[Execute]
-	public static void Execute(UserLoginReturnFailLoginUserCmd_S cmd)
+	public static void Execute(UserLoginReturnFailLoginUserPmd_S cmd)
 	{
 		MessageBox.Show(cmd.retcode.ToString(), cmd.desc);
 	}
