@@ -135,9 +135,8 @@ namespace GX.Net
 		/// 解析消息号和消息类型对应表
 		/// </summary>
 		/// <returns></returns>
-		private IEnumerable<KeyValuePair<MessageType, Type>> Parse()
+		private static IEnumerable<KeyValuePair<MessageType, Type>> Parse(Type categoryIdType)
 		{
-			var categoryIdType = typeof(Cmd.Command);
 #if UNITY_METRO && !UNITY_EDITOR
 			var assembly = this.GetType().GetTypeInfo().Assembly;
 #else
@@ -147,15 +146,21 @@ namespace GX.Net
 			foreach (var cName in Enum.GetNames(categoryIdType))
 			{
 				var cValue = Convert.ToByte(Enum.Parse(categoryIdType, cName));
-				var typeIdType = assembly.GetType(categoryIdType.Namespace + "." + cName + "+Param");
+				var name1 = categoryIdType.Namespace + "." + cName + "+Param";
+				var typeIdType = assembly.GetType(name1);
+				if (typeIdType == null)
+				{
+					UnityEngine.Debug.LogWarning("Can't find type by name: " + name1);
+					continue;
+				}
 				foreach (var tName in Enum.GetNames(typeIdType))
 				{
 					var tValue = Convert.ToByte(Enum.Parse(typeIdType, tName));
-					var name = categoryIdType.Namespace + "." + tName;
-					var messageType = assembly.GetType(name);
+					var name2 = categoryIdType.Namespace + "." + tName;
+					var messageType = assembly.GetType(name2);
 					if (messageType == null)
 					{
-						UnityEngine.Debug.LogWarning("Can't find type by name: " + name);
+						UnityEngine.Debug.LogWarning("Can't find type by name: " + name2);
 						continue;
 					}
 					ret.Add(new MessageType() { Cmd = cValue, Param = tValue }, messageType);
@@ -167,7 +172,7 @@ namespace GX.Net
 
 		public MessageSerializer()
 		{
-			foreach (var msg in Parse())
+			foreach (var msg in Parse(typeof(Cmd.Command)).Concat(Parse(typeof(Pmd.PlatCommand))))
 				Register(msg.Key, msg.Value);
 		}
 
