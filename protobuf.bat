@@ -37,8 +37,8 @@ rem ²ÎÊý: Â·¾¶
 echo clear meta: %~1
 for /f "tokens=* delims=" %%i in ('dir /b /s "%~1\*.meta"') do (
 	if not exist "%%~dpni" (
-		echo "%~1\%%i"
-		del /Q "%~1\%%i"
+		echo %%i
+		del /Q "%%i"
 	)
 )
 GOTO:EOF
