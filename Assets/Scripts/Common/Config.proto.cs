@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-// Generated from: Config.proto
+// Generated from: config.proto
 namespace Pmd
 {
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"Config")]

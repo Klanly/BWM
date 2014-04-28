@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-// Generated from: Pmd.proto
+// Generated from: pmd.proto
 namespace Pmd
 {
     [global::ProtoBuf.ProtoContract(Name=@"PlatCommand")]

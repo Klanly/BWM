@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-// Generated from: LoginCommand.proto
+// Generated from: login_command.proto
 namespace Pmd
 {
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"Login")]
