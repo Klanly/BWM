@@ -7,3 +7,7 @@
 [submodule "PlatCommon"]
 	path = PlatCommon
 	url = git@git.code4.in:mobilegameserver/platcommon.git
+[submodule "Assets/NLuaUnity3D"]
+	path = Assets/NLuaUnity3D
+	url = https://github.com/miaodadao/NLuaUnity3D.git
+	branch = unity3d
