@@ -7,8 +7,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-// Generated from: ScriptCommand.proto
-// Note: requires additional types generated from: Common.proto
+// Generated from: scriptcommand.proto
+// Note: requires additional types generated from: common.proto
 namespace Cmd
 {
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"Script")]

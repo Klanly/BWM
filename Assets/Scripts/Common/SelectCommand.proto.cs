@@ -7,8 +7,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-// Generated from: SelectCommand.proto
-// Note: requires additional types generated from: Common.proto
+// Generated from: selectcommand.proto
+// Note: requires additional types generated from: common.proto
 namespace Cmd
 {
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"Select")]

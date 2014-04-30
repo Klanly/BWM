@@ -7,9 +7,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-// Generated from: SkillCommand.proto
-// Note: requires additional types generated from: Common.proto
-// Note: requires additional types generated from: SaveData.proto
+// Generated from: skillcommand.proto
+// Note: requires additional types generated from: common.proto
+// Note: requires additional types generated from: savedata.proto
 namespace Cmd
 {
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"Skill")]

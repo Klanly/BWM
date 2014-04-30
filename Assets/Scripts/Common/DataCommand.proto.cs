@@ -7,8 +7,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-// Generated from: DataCommand.proto
-// Note: requires additional types generated from: Common.proto
+// Generated from: datacommand.proto
+// Note: requires additional types generated from: common.proto
 namespace Cmd
 {
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"Data")]
