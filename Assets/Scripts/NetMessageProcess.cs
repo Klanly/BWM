@@ -3,6 +3,7 @@ using System.Collections;
 using GX.Net;
 using Cmd;
 using System;
+using Pmd;
 
 /// <summary>
 /// 全局网络消息处理
@@ -15,7 +16,7 @@ public static class NetMessageProcess
 	/// </summary>
 	/// <param name="cmd"></param>
 	[Execute]
-	public static void Execute(MessageBoxChatUserCmd_S cmd)
+	public static void Execute(MessageBoxLoginUserPmd_S cmd)
 	{
 		MessageBox.Show(cmd.info);
 	}
@@ -25,8 +26,8 @@ public static class NetMessageProcess
 	/// </summary>
 	/// <param name="cmd"></param>
 	[Execute]
-	public static void Execute(TickRequestNullUserCmd_CS cmd)
+	public static void Execute(TickRequestNullUserPmd_CS cmd)
 	{
-		Net.Instance.Send(new TickReturnNullUserCmd_CS() { requesttime = cmd.requesttime, mytime = DateTime.Now.ToUnixTime() });
+		Net.Instance.Send(new TickReturnNullUserPmd_CS() { requesttime = cmd.requesttime, mytime = DateTime.Now.ToUnixTime() });
 	}
 }

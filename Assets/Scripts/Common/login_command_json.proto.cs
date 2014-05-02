@@ -7,44 +7,42 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-// Generated from: login_command.proto
+// Generated from: login_command_json.proto
+// Note: requires additional types generated from: login_command.proto
 namespace Pmd
 {
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"Login")]
-  public partial class Login : global::ProtoBuf.IExtensible
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"LoginJson")]
+  public partial class LoginJson : global::ProtoBuf.IExtensible
   {
-    public Login() {}
+    public LoginJson() {}
     
     [global::ProtoBuf.ProtoContract(Name=@"Param")]
     public enum Param
     {
             
-      [global::ProtoBuf.ProtoEnum(Name=@"AccountTokenVerifyLoginUserPmd_CS", Value=1)]
-      AccountTokenVerifyLoginUserPmd_CS = 1,
+      [global::ProtoBuf.ProtoEnum(Name=@"AccountTokenVerifyLoginJsonPmd_CS", Value=1)]
+      AccountTokenVerifyLoginJsonPmd_CS = 1,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"AccountTokenVerifyReturnLoginUserPmd_S", Value=2)]
-      AccountTokenVerifyReturnLoginUserPmd_S = 2,
+      [global::ProtoBuf.ProtoEnum(Name=@"AccountTokenVerifyReturnLoginJsonPmd_S", Value=2)]
+      AccountTokenVerifyReturnLoginJsonPmd_S = 2,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"ZoneInfoListLoginUserPmd_S", Value=3)]
-      ZoneInfoListLoginUserPmd_S = 3,
+      [global::ProtoBuf.ProtoEnum(Name=@"ZoneInfoListLoginJsonPmd_S", Value=3)]
+      ZoneInfoListLoginJsonPmd_S = 3,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"UserLoginRequestLoginUserPmd_C", Value=4)]
-      UserLoginRequestLoginUserPmd_C = 4,
+      [global::ProtoBuf.ProtoEnum(Name=@"UserLoginRequestLoginJsonPmd_C", Value=4)]
+      UserLoginRequestLoginJsonPmd_C = 4,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"UserLoginReturnFailLoginUserPmd_S", Value=5)]
-      UserLoginReturnFailLoginUserPmd_S = 5,
+      [global::ProtoBuf.ProtoEnum(Name=@"UserLoginReturnFailLoginJsonPmd_S", Value=5)]
+      UserLoginReturnFailLoginJsonPmd_S = 5,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"UserLoginReturnOkLoginUserPmd_S", Value=6)]
-      UserLoginReturnOkLoginUserPmd_S = 6,
+      [global::ProtoBuf.ProtoEnum(Name=@"UserLoginReturnOkLoginJsonPmd_S", Value=6)]
+      UserLoginReturnOkLoginJsonPmd_S = 6,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"UserLoginTokenLoginUserPmd_C", Value=7)]
-      UserLoginTokenLoginUserPmd_C = 7,
+      [global::ProtoBuf.ProtoEnum(Name=@"UserLoginTokenLoginJsonPmd_C", Value=7)]
+      UserLoginTokenLoginJsonPmd_C = 7,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"ClientLogUrlLoginUserPmd_S", Value=8)]
-      ClientLogUrlLoginUserPmd_S = 8,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"MessageBoxLoginUserCmd_S", Value=9)]
-      MessageBoxLoginUserCmd_S = 9
+      [global::ProtoBuf.ProtoEnum(Name=@"ClientLogUrlLoginJsonPmd_S", Value=8)]
+      ClientLogUrlLoginJsonPmd_S = 8
     }
   
     private global::ProtoBuf.IExtension extensionObject;
@@ -52,10 +50,10 @@ namespace Pmd
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"AccountTokenVerifyLoginUserPmd_CS")]
-  public partial class AccountTokenVerifyLoginUserPmd_CS : global::ProtoBuf.IExtensible
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"AccountTokenVerifyLoginJsonPmd_CS")]
+  public partial class AccountTokenVerifyLoginJsonPmd_CS : global::ProtoBuf.IExtensible
   {
-    public AccountTokenVerifyLoginUserPmd_CS() {}
+    public AccountTokenVerifyLoginJsonPmd_CS() {}
     
     private string _account;
     [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"account", DataFormat = global::ProtoBuf.DataFormat.Default)]
@@ -99,10 +97,10 @@ namespace Pmd
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"AccountTokenVerifyReturnLoginUserPmd_S")]
-  public partial class AccountTokenVerifyReturnLoginUserPmd_S : global::ProtoBuf.IExtensible
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"AccountTokenVerifyReturnLoginJsonPmd_S")]
+  public partial class AccountTokenVerifyReturnLoginJsonPmd_S : global::ProtoBuf.IExtensible
   {
-    public AccountTokenVerifyReturnLoginUserPmd_S() {}
+    public AccountTokenVerifyReturnLoginJsonPmd_S() {}
     
     private Pmd.VerifyReturnReason _retcode;
     [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"retcode", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
@@ -124,42 +122,10 @@ namespace Pmd
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"ZoneInfo")]
-  public partial class ZoneInfo : global::ProtoBuf.IExtensible
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"ZoneInfoListLoginJsonPmd_S")]
+  public partial class ZoneInfoListLoginJsonPmd_S : global::ProtoBuf.IExtensible
   {
-    public ZoneInfo() {}
-    
-    private uint _zoneid;
-    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"zoneid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public uint zoneid
-    {
-      get { return _zoneid; }
-      set { _zoneid = value; }
-    }
-    private string _zonename;
-    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"zonename", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public string zonename
-    {
-      get { return _zonename; }
-      set { _zonename = value; }
-    }
-    private Pmd.ZoneState _state = Pmd.ZoneState.Shutdown;
-    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"state", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(Pmd.ZoneState.Shutdown)]
-    public Pmd.ZoneState state
-    {
-      get { return _state; }
-      set { _state = value; }
-    }
-    private global::ProtoBuf.IExtension extensionObject;
-    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
-  }
-  
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"ZoneInfoListLoginUserPmd_S")]
-  public partial class ZoneInfoListLoginUserPmd_S : global::ProtoBuf.IExtensible
-  {
-    public ZoneInfoListLoginUserPmd_S() {}
+    public ZoneInfoListLoginJsonPmd_S() {}
     
     private string _gamename;
     [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"gamename", DataFormat = global::ProtoBuf.DataFormat.Default)]
@@ -187,10 +153,10 @@ namespace Pmd
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"UserLoginRequestLoginUserPmd_C")]
-  public partial class UserLoginRequestLoginUserPmd_C : global::ProtoBuf.IExtensible
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"UserLoginRequestLoginJsonPmd_C")]
+  public partial class UserLoginRequestLoginJsonPmd_C : global::ProtoBuf.IExtensible
   {
-    public UserLoginRequestLoginUserPmd_C() {}
+    public UserLoginRequestLoginJsonPmd_C() {}
     
     private uint _gameid;
     [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"gameid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
@@ -226,10 +192,10 @@ namespace Pmd
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"UserLoginReturnFailLoginUserPmd_S")]
-  public partial class UserLoginReturnFailLoginUserPmd_S : global::ProtoBuf.IExtensible
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"UserLoginReturnFailLoginJsonPmd_S")]
+  public partial class UserLoginReturnFailLoginJsonPmd_S : global::ProtoBuf.IExtensible
   {
-    public UserLoginReturnFailLoginUserPmd_S() {}
+    public UserLoginReturnFailLoginJsonPmd_S() {}
     
     private Pmd.LoginReturnFailReason _retcode;
     [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"retcode", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
@@ -250,10 +216,10 @@ namespace Pmd
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"UserLoginReturnOkLoginUserPmd_S")]
-  public partial class UserLoginReturnOkLoginUserPmd_S : global::ProtoBuf.IExtensible
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"UserLoginReturnOkLoginJsonPmd_S")]
+  public partial class UserLoginReturnOkLoginJsonPmd_S : global::ProtoBuf.IExtensible
   {
-    public UserLoginReturnOkLoginUserPmd_S() {}
+    public UserLoginReturnOkLoginJsonPmd_S() {}
     
     private ulong _accountid;
     [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"accountid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
@@ -302,10 +268,10 @@ namespace Pmd
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"UserLoginTokenLoginUserPmd_C")]
-  public partial class UserLoginTokenLoginUserPmd_C : global::ProtoBuf.IExtensible
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"UserLoginTokenLoginJsonPmd_C")]
+  public partial class UserLoginTokenLoginJsonPmd_C : global::ProtoBuf.IExtensible
   {
-    public UserLoginTokenLoginUserPmd_C() {}
+    public UserLoginTokenLoginJsonPmd_C() {}
     
     private uint _gameid;
     [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"gameid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
@@ -362,10 +328,10 @@ namespace Pmd
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"ClientLogUrlLoginUserPmd_S")]
-  public partial class ClientLogUrlLoginUserPmd_S : global::ProtoBuf.IExtensible
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"ClientLogUrlLoginJsonPmd_S")]
+  public partial class ClientLogUrlLoginJsonPmd_S : global::ProtoBuf.IExtensible
   {
-    public ClientLogUrlLoginUserPmd_S() {}
+    public ClientLogUrlLoginJsonPmd_S() {}
     
     private string _loglevel;
     [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"loglevel", DataFormat = global::ProtoBuf.DataFormat.Default)]
@@ -392,104 +358,5 @@ namespace Pmd
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
-  
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"MessageBoxLoginUserPmd_S")]
-  public partial class MessageBoxLoginUserPmd_S : global::ProtoBuf.IExtensible
-  {
-    public MessageBoxLoginUserPmd_S() {}
-    
-    private string _btnleft = "";
-    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"btnleft", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
-    public string btnleft
-    {
-      get { return _btnleft; }
-      set { _btnleft = value; }
-    }
-    private string _btnmiddle = "";
-    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"btnmiddle", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
-    public string btnmiddle
-    {
-      get { return _btnmiddle; }
-      set { _btnmiddle = value; }
-    }
-    private string _btnright = "";
-    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"btnright", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
-    public string btnright
-    {
-      get { return _btnright; }
-      set { _btnright = value; }
-    }
-    private string _info = "";
-    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"info", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
-    public string info
-    {
-      get { return _info; }
-      set { _info = value; }
-    }
-    private global::ProtoBuf.IExtension extensionObject;
-    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
-  }
-  
-    [global::ProtoBuf.ProtoContract(Name=@"VerifyReturnReason")]
-    public enum VerifyReturnReason
-    {
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"LoginOk", Value=0)]
-      LoginOk = 0,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"TokenFindError", Value=1)]
-      TokenFindError = 1,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"TokenDiffError", Value=2)]
-      TokenDiffError = 2,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"VersionError", Value=3)]
-      VersionError = 3
-    }
-  
-    [global::ProtoBuf.ProtoContract(Name=@"ZoneState")]
-    public enum ZoneState
-    {
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"Shutdown", Value=0)]
-      Shutdown = 0,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"Normal", Value=1)]
-      Normal = 1,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"Fullly", Value=2)]
-      Fullly = 2
-    }
-  
-    [global::ProtoBuf.ProtoContract(Name=@"LoginReturnFailReason")]
-    public enum LoginReturnFailReason
-    {
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"Password", Value=1)]
-      Password = 1,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"ServerShutdown", Value=2)]
-      ServerShutdown = 2,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"VersionTooLow", Value=3)]
-      VersionTooLow = 3,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"UserTokenFind", Value=4)]
-      UserTokenFind = 4,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"UserTokenTempId", Value=5)]
-      UserTokenTempId = 5,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"UserTokenTimeOut", Value=6)]
-      UserTokenTimeOut = 6,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"LoginDulicate", Value=7)]
-      LoginDulicate = 7
-    }
   
 }

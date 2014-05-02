@@ -51,7 +51,7 @@ namespace GX.Net
 			Debug.Assert(ProtoBuf.Serializer.NonGeneric.CanSerialize(message.GetType()));
 
 			var messageType = messageTypeTable[message.GetType()];
-			var package = new Cmd.ForwardNullUserCmd_CS()
+			var package = new Pmd.ForwardNullUserPmd_CS()
 			{
 				byCmd = messageType.Cmd,
 				byParam = messageType.Param,
@@ -83,7 +83,7 @@ namespace GX.Net
 
 		public ProtoBuf.IExtensible Deserialize(Stream stream)
 		{
-			var package = ProtoBuf.Serializer.DeserializeWithLengthPrefix<Cmd.ForwardNullUserCmd_CS>(stream, ProtoBuf.PrefixStyle.Base128);
+			var package = ProtoBuf.Serializer.DeserializeWithLengthPrefix<Pmd.ForwardNullUserPmd_CS>(stream, ProtoBuf.PrefixStyle.Base128);
 			var messageType = new MessageType() { Cmd = package.byCmd, Param = package.byParam };
 			using (var buf = new MemoryStream(package.data))
 			{

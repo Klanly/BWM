@@ -25,9 +25,6 @@ namespace Cmd
       [global::ProtoBuf.ProtoEnum(Name=@"GMCommandChatUserCmd_C", Value=2)]
       GMCommandChatUserCmd_C = 2,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"MessageBoxChatUserCmd_S", Value=3)]
-      MessageBoxChatUserCmd_S = 3,
-            
       [global::ProtoBuf.ProtoEnum(Name=@"GMCommandListChatUserCmd_S", Value=4)]
       GMCommandListChatUserCmd_S = 4
     }
@@ -149,48 +146,6 @@ namespace Cmd
     {
       get { return _params; }
       set { _params = value; }
-    }
-    private global::ProtoBuf.IExtension extensionObject;
-    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
-  }
-  
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"MessageBoxChatUserCmd_S")]
-  public partial class MessageBoxChatUserCmd_S : global::ProtoBuf.IExtensible
-  {
-    public MessageBoxChatUserCmd_S() {}
-    
-    private string _btnleft = "";
-    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"btnleft", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
-    public string btnleft
-    {
-      get { return _btnleft; }
-      set { _btnleft = value; }
-    }
-    private string _btnmiddle = "";
-    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"btnmiddle", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
-    public string btnmiddle
-    {
-      get { return _btnmiddle; }
-      set { _btnmiddle = value; }
-    }
-    private string _btnright = "";
-    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"btnright", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
-    public string btnright
-    {
-      get { return _btnright; }
-      set { _btnright = value; }
-    }
-    private string _info = "";
-    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"info", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
-    public string info
-    {
-      get { return _info; }
-      set { _info = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)

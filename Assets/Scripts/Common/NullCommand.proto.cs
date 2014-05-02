@@ -8,7 +8,7 @@
 //------------------------------------------------------------------------------
 
 // Generated from: nullcommand.proto
-namespace Cmd
+namespace Pmd
 {
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"Null")]
   public partial class Null : global::ProtoBuf.IExtensible
@@ -19,17 +19,17 @@ namespace Cmd
     public enum Param
     {
             
-      [global::ProtoBuf.ProtoEnum(Name=@"ForwardNullUserCmd_CS", Value=0)]
-      ForwardNullUserCmd_CS = 0,
+      [global::ProtoBuf.ProtoEnum(Name=@"ForwardNullUserPmd_CS", Value=0)]
+      ForwardNullUserPmd_CS = 0,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"TickRequestNullUserCmd_CS", Value=1)]
-      TickRequestNullUserCmd_CS = 1,
+      [global::ProtoBuf.ProtoEnum(Name=@"TickRequestNullUserPmd_CS", Value=1)]
+      TickRequestNullUserPmd_CS = 1,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"TickReturnNullUserCmd_CS", Value=2)]
-      TickReturnNullUserCmd_CS = 2,
+      [global::ProtoBuf.ProtoEnum(Name=@"TickReturnNullUserPmd_CS", Value=2)]
+      TickReturnNullUserPmd_CS = 2,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"RequestCloseNullUserCmd_CS", Value=3)]
-      RequestCloseNullUserCmd_CS = 3
+      [global::ProtoBuf.ProtoEnum(Name=@"RequestCloseNullUserPmd_CS", Value=3)]
+      RequestCloseNullUserPmd_CS = 3
     }
   
     private global::ProtoBuf.IExtension extensionObject;
@@ -37,10 +37,10 @@ namespace Cmd
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"ForwardNullUserCmd_CS")]
-  public partial class ForwardNullUserCmd_CS : global::ProtoBuf.IExtensible
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"ForwardNullUserPmd_CS")]
+  public partial class ForwardNullUserPmd_CS : global::ProtoBuf.IExtensible
   {
-    public ForwardNullUserCmd_CS() {}
+    public ForwardNullUserPmd_CS() {}
     
     private uint _byCmd;
     [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"byCmd", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
@@ -80,15 +80,23 @@ namespace Cmd
       get { return _data; }
       set { _data = value; }
     }
+    private ulong _prototype = default(ulong);
+    [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"prototype", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong prototype
+    {
+      get { return _prototype; }
+      set { _prototype = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"TickRequestNullUserCmd_CS")]
-  public partial class TickRequestNullUserCmd_CS : global::ProtoBuf.IExtensible
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"TickRequestNullUserPmd_CS")]
+  public partial class TickRequestNullUserPmd_CS : global::ProtoBuf.IExtensible
   {
-    public TickRequestNullUserCmd_CS() {}
+    public TickRequestNullUserPmd_CS() {}
     
     private uint _requesttime;
     [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"requesttime", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
@@ -102,10 +110,10 @@ namespace Cmd
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"TickReturnNullUserCmd_CS")]
-  public partial class TickReturnNullUserCmd_CS : global::ProtoBuf.IExtensible
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"TickReturnNullUserPmd_CS")]
+  public partial class TickReturnNullUserPmd_CS : global::ProtoBuf.IExtensible
   {
-    public TickReturnNullUserCmd_CS() {}
+    public TickReturnNullUserPmd_CS() {}
     
     private uint _requesttime;
     [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"requesttime", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
@@ -126,10 +134,10 @@ namespace Cmd
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"RequestCloseNullUserCmd_CS")]
-  public partial class RequestCloseNullUserCmd_CS : global::ProtoBuf.IExtensible
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"RequestCloseNullUserPmd_CS")]
+  public partial class RequestCloseNullUserPmd_CS : global::ProtoBuf.IExtensible
   {
-    public RequestCloseNullUserCmd_CS() {}
+    public RequestCloseNullUserPmd_CS() {}
     
     private string _reason;
     [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"reason", DataFormat = global::ProtoBuf.DataFormat.Default)]

@@ -14,8 +14,14 @@ namespace Pmd
     public enum PlatCommand
     {
             
+      [global::ProtoBuf.ProtoEnum(Name=@"Null", Value=0)]
+      Null = 0,
+            
       [global::ProtoBuf.ProtoEnum(Name=@"Login", Value=250)]
-      Login = 250
+      Login = 250,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"LoginJson", Value=251)]
+      LoginJson = 251
     }
   
 }
