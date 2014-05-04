@@ -43,8 +43,8 @@ namespace Pmd
       [global::ProtoBuf.ProtoEnum(Name=@"ClientLogUrlLoginUserPmd_S", Value=8)]
       ClientLogUrlLoginUserPmd_S = 8,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"MessageBoxLoginUserCmd_S", Value=9)]
-      MessageBoxLoginUserCmd_S = 9
+      [global::ProtoBuf.ProtoEnum(Name=@"MessageBoxLoginUserPmd_S", Value=9)]
+      MessageBoxLoginUserPmd_S = 9
     }
   
     private global::ProtoBuf.IExtension extensionObject;
