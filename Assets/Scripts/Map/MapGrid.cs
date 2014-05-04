@@ -41,7 +41,7 @@ public class MapGrid : System.IEquatable<MapGrid>
 		return new Cmd.Pos()
 		{
 			x = (int)((grid.x + 0.5f) * (100 * Width)),
-			y = (int)((grid.x + 0.5f) * (100 * Height))
+			y = (int)((grid.z + 0.5f) * (100 * Height))
 		};
 	}
 
