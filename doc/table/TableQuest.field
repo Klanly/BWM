@@ -1,6 +1,2 @@
 ﻿	SubSteps []int32 // 子步骤
-	Items []struct{
-		Id uint32
-		Num uint32
-		Str string
-	}	// 子步骤
+	Items []QuestItems	// 道具奖励
