@@ -14,7 +14,7 @@
 		<field column="交npc" code="npcEnd" type="uint32" />
 		<field column="任务计数" code="step" type="int32" />
 		<field column="经验奖励" code="exp" type="int32" />
-		<field column="道具奖励" code="items" type="string" />
+		<field column="道具奖励" code="itemsstr" type="string" />
 		<field column="接取描述" code="infoBegin" type="string" />
 		<field column="完成描述" code="infoEnd" type="string" />
 		<field column="追踪进行中" code="traceDoing" type="string" />
