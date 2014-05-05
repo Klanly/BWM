@@ -17,10 +17,10 @@ GameObject:
   - 114: {fileID: 11400012}
   - 114: {fileID: 11400014}
   - 114: {fileID: 11400016}
-  - 114: {fileID: 11400020}
   - 114: {fileID: 11400018}
+  - 114: {fileID: 11400020}
   m_Layer: 0
-  m_Name: Skill2
+  m_Name: Skill22
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -48,7 +48,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73047d75db44660419b04e0b13095820, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  delay: 0
+  delay: .100000001
   action: Ani_Hurt
 --- !u!114 &11400002
 MonoBehaviour:
@@ -62,7 +62,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   delay: .100000001
-  particle: {fileID: 100004, guid: 3e3db44fc9dffdb46a4e32246334565f, type: 2}
+  particle: {fileID: 100002, guid: 667a6f0f20a454f47a33e75fe466790c, type: 2}
   mountOfTargetGo: Bip01 Spine1
 --- !u!114 &11400004
 MonoBehaviour:
@@ -89,7 +89,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96a25147f951c994587297a84c546e3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  action: Ani_Cq_Att_02
+  action: Ani_Sz_Att_02
 --- !u!114 &11400008
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -102,7 +102,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   delay: 0
-  particle: {fileID: 100016, guid: e767398fb2cb6624aa8b1636c4b89110, type: 2}
+  particle: {fileID: 100022, guid: df87658e362193a48baa117bb7e3077f, type: 2}
   mountOfStartGo: 
 --- !u!114 &11400010
 MonoBehaviour:
@@ -137,12 +137,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 937ba7e07775be344a96ed7b6166177c, type: 3}
+  m_Script: {fileID: 11500000, guid: 73047d75db44660419b04e0b13095820, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  delay: 1.20000005
-  particle: {fileID: 100004, guid: 3e3db44fc9dffdb46a4e32246334565f, type: 2}
-  mountOfTargetGo: Bip01 Spine1
+  delay: 1
+  action: Ani_Hurt
 --- !u!114 &11400016
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -154,7 +153,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73047d75db44660419b04e0b13095820, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  delay: 1.20000005
+  delay: 2.5
   action: Ani_Hurt
 --- !u!114 &11400018
 MonoBehaviour:
@@ -164,11 +163,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 73047d75db44660419b04e0b13095820, type: 3}
+  m_Script: {fileID: 11500000, guid: 937ba7e07775be344a96ed7b6166177c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  delay: 2.20000005
-  action: Ani_Hurt
+  delay: 1
+  particle: {fileID: 100002, guid: 667a6f0f20a454f47a33e75fe466790c, type: 2}
+  mountOfTargetGo: Bip01 Spine1
 --- !u!114 &11400020
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -180,8 +180,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 937ba7e07775be344a96ed7b6166177c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  delay: 2.20000005
-  particle: {fileID: 100004, guid: bba7dba436f38d84cae744fe62ad3199, type: 2}
+  delay: 2.5
+  particle: {fileID: 100002, guid: 667a6f0f20a454f47a33e75fe466790c, type: 2}
   mountOfTargetGo: Bip01 Spine1
 --- !u!1001 &100100000
 Prefab:
