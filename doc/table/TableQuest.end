@@ -2,3 +2,8 @@
 func (self *TableQuest)AddSubStep(stepall int32) {
     self.SubSteps = append(self.SubSteps,stepall)
 }
+type QuestItems struct{
+	Id uint32
+	Num uint32
+	Str string
+}	// 子步骤
