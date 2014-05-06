@@ -6501,7 +6501,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100010}
   m_LocalRotation: {x: .707106829, y: 0, z: 0, w: .707106829}
-  m_LocalPosition: {x: 16, y: 0, z: 32}
+  m_LocalPosition: {x: 16, y: -1, z: 42}
   m_LocalScale: {x: 32, y: 64, z: 1}
   m_Children: []
   m_Father: {fileID: 400008}
@@ -6512,7 +6512,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100012}
   m_LocalRotation: {x: .707106829, y: 0, z: 0, w: .707106829}
-  m_LocalPosition: {x: 16, y: 0, z: 32}
+  m_LocalPosition: {x: 16, y: -1, z: 42}
   m_LocalScale: {x: 32, y: 64, z: 1}
   m_Children: []
   m_Father: {fileID: 400008}
@@ -12105,7 +12105,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   baseId: 10000
   alias: 
-  relivetime: 0
+  relivetime: 1
   rate: 100
 --- !u!114 &11400008
 MonoBehaviour:
@@ -12132,7 +12132,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   baseId: 10000
   alias: 
-  relivetime: 0
+  relivetime: 1
   rate: 100
 --- !u!114 &11400012
 MonoBehaviour:
@@ -12186,7 +12186,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   baseId: 10000
   alias: 
-  relivetime: 0
+  relivetime: 1
   rate: 100
 --- !u!114 &11400020
 MonoBehaviour:
@@ -12213,7 +12213,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   baseId: 10000
   alias: 
-  relivetime: 0
+  relivetime: 1
   rate: 100
 --- !u!114 &11400024
 MonoBehaviour:
@@ -12240,7 +12240,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   baseId: 40000
   alias: 
-  relivetime: 0
+  relivetime: 1
   rate: 100
 --- !u!114 &11400028
 MonoBehaviour:
