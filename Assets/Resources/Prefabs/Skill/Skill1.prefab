@@ -15,6 +15,7 @@ GameObject:
   - 114: {fileID: 11400002}
   - 114: {fileID: 11400000}
   - 114: {fileID: 11400012}
+  - 114: {fileID: 11400014}
   m_Layer: 0
   m_Name: Skill1
   m_TagString: Untagged
@@ -98,7 +99,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   delay: 0
-  particle: {fileID: 100004, guid: fc170d1bc885e414dbc3ee327c932fcf, type: 2}
+  particle: {fileID: 100006, guid: fc170d1bc885e414dbc3ee327c932fcf, type: 2}
   mountOfStartGo: 
 --- !u!114 &11400010
 MonoBehaviour:
@@ -125,6 +126,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   delay: 0
+--- !u!114 &11400014
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20a1277eeeb4295428bdf9a68af90eb5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  delay: .5
+  shakeAmount: {x: .100000001, y: .100000001, z: .100000001}
+  time: .150000006
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

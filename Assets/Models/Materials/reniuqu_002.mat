@@ -6,7 +6,7 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: reniuqu_001
+  m_Name: reniuqu_002
   m_Shader: {fileID: 4800000, guid: cf4fd22e824ffb34f867244c779b7ab0, type: 3}
   m_ShaderKeywords: []
   m_CustomRenderQueue: -1
@@ -24,18 +24,18 @@ Material:
         first:
           name: _NoiseTex
         second:
-          m_Texture: {fileID: 2800000, guid: d86e4f3d974fc384ea90fdab69083fa7, type: 3}
+          m_Texture: {fileID: 2800000, guid: 1d47cad901817774da12e6ff86eca382, type: 3}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
     m_Floats:
       data:
         first:
           name: _HeatTime
-        second: 1.5
+        second: .616071403
       data:
         first:
           name: _HeatForce
-        second: .100000001
+        second: .0410714298
     m_Colors:
       data:
         first:

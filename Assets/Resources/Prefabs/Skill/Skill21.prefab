@@ -15,6 +15,7 @@ GameObject:
   - 114: {fileID: 11400002}
   - 114: {fileID: 11400000}
   - 114: {fileID: 11400012}
+  - 114: {fileID: 11400014}
   m_Layer: 0
   m_Name: Skill21
   m_TagString: Untagged
@@ -125,6 +126,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   delay: 0
+--- !u!114 &11400014
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20a1277eeeb4295428bdf9a68af90eb5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  delay: .5
+  shakeAmount: {x: .200000003, y: .200000003, z: .200000003}
+  time: .25
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

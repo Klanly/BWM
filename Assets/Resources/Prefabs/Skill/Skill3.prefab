@@ -15,14 +15,12 @@ GameObject:
   - 114: {fileID: 11400002}
   - 114: {fileID: 11400000}
   - 114: {fileID: 11400012}
-  - 114: {fileID: 11400014}
   - 114: {fileID: 11400016}
-  - 114: {fileID: 11400020}
+  - 114: {fileID: 11400014}
   - 114: {fileID: 11400018}
-  - 114: {fileID: 11400022}
-  - 114: {fileID: 11400024}
+  - 114: {fileID: 11400020}
   m_Layer: 0
-  m_Name: Skill2
+  m_Name: Skill3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -63,8 +61,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 937ba7e07775be344a96ed7b6166177c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  delay: .119999997
-  particle: {fileID: 100004, guid: 3e3db44fc9dffdb46a4e32246334565f, type: 2}
+  delay: 0
+  particle: {fileID: 100006, guid: ceaa9a49f1a99524bba7ba35c5290414, type: 2}
   mountOfTargetGo: Bip01 Spine1
 --- !u!114 &11400004
 MonoBehaviour:
@@ -79,7 +77,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sendTargetEvent: 1
   immediateDeleteParticle: 0
-  delay: .100000001
+  delay: .349999994
 --- !u!114 &11400006
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -91,7 +89,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96a25147f951c994587297a84c546e3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  action: Ani_Cq_Att_02
+  action: Ani_Cq_Att_03
 --- !u!114 &11400008
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -104,7 +102,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   delay: 0
-  particle: {fileID: 100022, guid: e767398fb2cb6624aa8b1636c4b89110, type: 2}
+  particle: {fileID: 0}
   mountOfStartGo: 
 --- !u!114 &11400010
 MonoBehaviour:
@@ -139,12 +137,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 937ba7e07775be344a96ed7b6166177c, type: 3}
+  m_Script: {fileID: 11500000, guid: a44936ff6955efb459a6fd63d04edada, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  delay: 1.20000005
-  particle: {fileID: 100004, guid: 3e3db44fc9dffdb46a4e32246334565f, type: 2}
-  mountOfTargetGo: Bip01 Spine1
+  sendTargetEvent: 0
+  immediateDeleteParticle: 0
+  particle: {fileID: 100002, guid: 0fa9ce3a74848c54c995596d6416436e, type: 2}
+  mountOfStartGo: 
+  mountOfTargetGo: 
+  delay: .100000001
+  time: .699999988
+  easeType: 3
+  orientToPath: 0
 --- !u!114 &11400016
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -153,11 +157,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 73047d75db44660419b04e0b13095820, type: 3}
+  m_Script: {fileID: 11500000, guid: a44936ff6955efb459a6fd63d04edada, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  delay: 1.20000005
-  action: Ani_Hurt
+  sendTargetEvent: 0
+  immediateDeleteParticle: 0
+  particle: {fileID: 100000, guid: 8a925b6665ea45c4088d2989922a8217, type: 2}
+  mountOfStartGo: 
+  mountOfTargetGo: 
+  delay: 0
+  time: .349999994
+  easeType: 3
+  orientToPath: 0
 --- !u!114 &11400018
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -166,11 +177,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 73047d75db44660419b04e0b13095820, type: 3}
+  m_Script: {fileID: 11500000, guid: 695f57052481b2943b8bb5068c39a64c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  delay: 2.20000005
-  action: Ani_Hurt
+  delay: 0
+  shakeAmount: {x: .25, y: .200000003, z: .25}
+  time: .150000006
 --- !u!114 &11400020
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -179,40 +191,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 937ba7e07775be344a96ed7b6166177c, type: 3}
+  m_Script: {fileID: 11500000, guid: a44936ff6955efb459a6fd63d04edada, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  delay: 2.20000005
-  particle: {fileID: 100004, guid: bba7dba436f38d84cae744fe62ad3199, type: 2}
-  mountOfTargetGo: Bip01 Spine1
---- !u!114 &11400022
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100000}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 20a1277eeeb4295428bdf9a68af90eb5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  delay: 1.20000005
-  shakeAmount: {x: .200000003, y: .5, z: .200000003}
-  time: .200000003
---- !u!114 &11400024
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100000}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 20a1277eeeb4295428bdf9a68af90eb5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  delay: 2.20000005
-  shakeAmount: {x: .200000003, y: .400000006, z: .200000003}
-  time: .25
+  sendTargetEvent: 0
+  immediateDeleteParticle: 0
+  particle: {fileID: 100000, guid: 2f0c375027e6e2041a860dfcf754b427, type: 2}
+  mountOfStartGo: 
+  mountOfTargetGo: 
+  delay: 0
+  time: .600000024
+  easeType: 21
+  orientToPath: 1
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
