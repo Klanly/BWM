@@ -668,7 +668,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startGo: {fileID: 1641303619}
   targetGo: {fileID: 1614362384}
-  skillGo: {fileID: 100000, guid: 34214072e3aded342b168e98e2efa161, type: 2}
+  skillGo: {fileID: 100000, guid: 39a43989f0cc8fc409caeab031220eff, type: 2}
   buffGo: {fileID: 0}
 --- !u!4 &707289545
 Transform:
@@ -1407,7 +1407,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: 5263f8d2fc9f7e1419af1ea0842fcb3e, type: 2}
+  - {fileID: 2100000, guid: 99cb1391ef0922e4ea28d9d2ae61da34, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -2062,6 +2062,7 @@ GameObject:
   - 92: {fileID: 1860885276}
   - 124: {fileID: 1860885275}
   - 81: {fileID: 1860885274}
+  - 114: {fileID: 1860885279}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -2130,6 +2131,27 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
+--- !u!114 &1860885279
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1860885273}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 085d9842593af44d8a507541ce47bc6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: 
+  type: 
+  method: 
+  easeType: 0
+  time: 0
+  delay: 0
+  loopType: 0
+  isRunning: 0
+  isPaused: 0
+  _name: 
 --- !u!1 &1883551914
 GameObject:
   m_ObjectHideFlags: 0

@@ -6,7 +6,7 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: kuosan_013
+  m_Name: kuosan_015
   m_Shader: {fileID: 203, guid: 0000000000000000f000000000000000, type: 0}
   m_ShaderKeywords: []
   m_CustomRenderQueue: -1
@@ -17,14 +17,7 @@ Material:
         first:
           name: _MainTex
         second:
-          m_Texture: {fileID: 2800000, guid: 95b78acc5cc388e4ea43acbde8244e5a, type: 3}
-          m_Scale: {x: 1, y: 1}
-          m_Offset: {x: 0, y: 0}
-      data:
-        first:
-          name: _NoiseTex
-        second:
-          m_Texture: {fileID: 2800000, guid: 816e65a24cff33d4ba3dd1202c5307a4, type: 3}
+          m_Texture: {fileID: 2800000, guid: f68453233499220439abcbc5bd58151d, type: 3}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
     m_Floats:
@@ -32,14 +25,6 @@ Material:
         first:
           name: _InvFade
         second: 1
-      data:
-        first:
-          name: _HeatTime
-        second: 1
-      data:
-        first:
-          name: _HeatForce
-        second: .100000001
     m_Colors:
       data:
         first:

@@ -17,12 +17,8 @@ GameObject:
   - 114: {fileID: 11400012}
   - 114: {fileID: 11400014}
   - 114: {fileID: 11400016}
-  - 114: {fileID: 11400018}
-  - 114: {fileID: 11400020}
-  - 114: {fileID: 11400022}
-  - 114: {fileID: 11400024}
   m_Layer: 0
-  m_Name: Skill12
+  m_Name: Skill5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -50,7 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73047d75db44660419b04e0b13095820, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  delay: .100000001
+  delay: 0
   action: Ani_Hurt
 --- !u!114 &11400002
 MonoBehaviour:
@@ -63,8 +59,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 937ba7e07775be344a96ed7b6166177c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  delay: .100000001
-  particle: {fileID: 100010, guid: 4f7d8556b29cb75438a0a8fc9904c1cc, type: 2}
+  delay: 0
+  particle: {fileID: 100010, guid: 40fe623ef1cdb494a965b98bba132434, type: 2}
   mountOfTargetGo: Bip01 Spine1
 --- !u!114 &11400004
 MonoBehaviour:
@@ -79,7 +75,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sendTargetEvent: 1
   immediateDeleteParticle: 0
-  delay: .100000001
+  delay: .200000003
 --- !u!114 &11400006
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -91,7 +87,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96a25147f951c994587297a84c546e3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  action: Ani_Dd_Att_02
+  action: Ani_Cq_Att_05
 --- !u!114 &11400008
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -104,7 +100,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   delay: 0
-  particle: {fileID: 100022, guid: 39f1adb7a2367114182f49bc0c92daba, type: 2}
+  particle: {fileID: 100010, guid: 0da002d95ed857643854a2f77aee25f1, type: 2}
   mountOfStartGo: 
 --- !u!114 &11400010
 MonoBehaviour:
@@ -139,11 +135,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 73047d75db44660419b04e0b13095820, type: 3}
+  m_Script: {fileID: 11500000, guid: 20a1277eeeb4295428bdf9a68af90eb5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  delay: 1
-  action: Ani_Hurt
+  delay: .300000012
+  shakeAmount: {x: .100000001, y: .100000001, z: .100000001}
+  time: .699999988
 --- !u!114 &11400016
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -152,67 +149,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 73047d75db44660419b04e0b13095820, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  delay: 2
-  action: Ani_Hurt
---- !u!114 &11400018
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100000}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 937ba7e07775be344a96ed7b6166177c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  delay: 1
-  particle: {fileID: 100010, guid: 4f7d8556b29cb75438a0a8fc9904c1cc, type: 2}
+  delay: .400000006
+  particle: {fileID: 100010, guid: 40fe623ef1cdb494a965b98bba132434, type: 2}
   mountOfTargetGo: Bip01 Spine1
---- !u!114 &11400020
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100000}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 937ba7e07775be344a96ed7b6166177c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  delay: 2
-  particle: {fileID: 100010, guid: 4f7d8556b29cb75438a0a8fc9904c1cc, type: 2}
-  mountOfTargetGo: Bip01 Spine1
---- !u!114 &11400022
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100000}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 20a1277eeeb4295428bdf9a68af90eb5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  delay: 2
-  shakeAmount: {x: .200000003, y: .300000012, z: .200000003}
-  time: .200000003
---- !u!114 &11400024
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100000}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 20a1277eeeb4295428bdf9a68af90eb5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  delay: 1
-  shakeAmount: {x: .200000003, y: .200000003, z: .200000003}
-  time: .25
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
