@@ -40,6 +40,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: 3b2f8ce1cb689a747afe048605b43b1f, type: 2}
   mSprites:
+  - name: 2000
+    x: 162
+    y: 7
+    width: 48
+    height: 20
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
   - name: back 12
     x: 443
     y: 1770
@@ -132,7 +145,7 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: backimage1
-    x: 1866
+    x: 1929
     y: 1411
     width: 62
     height: 62
@@ -262,8 +275,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: BarBlue
-    x: 1005
-    y: 1450
+    x: 1446
+    y: 1640
     width: 325
     height: 14
     borderLeft: 0
@@ -275,8 +288,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: BarGreen
-    x: 443
-    y: 1637
+    x: 1005
+    y: 1435
     width: 325
     height: 14
     borderLeft: 0
@@ -301,19 +314,6 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: BarOrange
-    x: 1446
-    y: 1640
-    width: 325
-    height: 14
-    borderLeft: 0
-    borderRight: 0
-    borderTop: 0
-    borderBottom: 0
-    paddingLeft: 0
-    paddingRight: 0
-    paddingTop: 0
-    paddingBottom: 0
-  - name: BarPurple
     x: 1197
     y: 1544
     width: 325
@@ -326,9 +326,22 @@ MonoBehaviour:
     paddingRight: 0
     paddingTop: 0
     paddingBottom: 0
-  - name: BarRed
+  - name: BarPurple
     x: 1005
-    y: 1435
+    y: 1450
+    width: 325
+    height: 14
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: BarRed
+    x: 443
+    y: 1637
     width: 325
     height: 14
     borderLeft: 0
@@ -575,7 +588,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: button_max
     x: 457
-    y: 721
+    y: 816
     width: 94
     height: 94
     borderLeft: 0
@@ -587,8 +600,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: button_minimap
-    x: 1177
-    y: 1638
+    x: 527
+    y: 591
     width: 42
     height: 43
     borderLeft: 0
@@ -652,7 +665,7 @@ MonoBehaviour:
     paddingTop: 4
     paddingBottom: 0
   - name: button_qie
-    x: 1929
+    x: 1866
     y: 1411
     width: 62
     height: 62
@@ -821,8 +834,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: ButtonMiniMapShrink
-    x: 527
-    y: 591
+    x: 1177
+    y: 1638
     width: 42
     height: 43
     borderLeft: 0
@@ -965,7 +978,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: country_2
     x: 570
-    y: 291
+    y: 351
     width: 56
     height: 59
     borderLeft: 0
@@ -978,7 +991,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: country_3
     x: 570
-    y: 351
+    y: 291
     width: 56
     height: 59
     borderLeft: 0
@@ -1120,8 +1133,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: HeadTipShu
-    x: 523
-    y: 83
+    x: 521
+    y: 299
     width: 39
     height: 41
     borderLeft: 0
@@ -1146,8 +1159,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: HeadTipsWu
-    x: 521
-    y: 299
+    x: 523
+    y: 83
     width: 39
     height: 41
     borderLeft: 0
@@ -1342,7 +1355,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: item_huwan
     x: 570
-    y: 1079
+    y: 1145
     width: 65
     height: 65
     borderLeft: 0
@@ -1355,7 +1368,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: item_jiezhi
     x: 570
-    y: 1145
+    y: 1013
     width: 65
     height: 65
     borderLeft: 0
@@ -1368,7 +1381,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: item_kuzi
     x: 570
-    y: 1013
+    y: 1079
     width: 65
     height: 65
     borderLeft: 0
@@ -1380,8 +1393,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: item_shangyi
-    x: 457
-    y: 59
+    x: 570
+    y: 1211
     width: 65
     height: 65
     borderLeft: 0
@@ -1406,8 +1419,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: item_xianglian
-    x: 570
-    y: 1343
+    x: 457
+    y: 59
     width: 65
     height: 65
     borderLeft: 0
@@ -1420,7 +1433,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: item_xiezi
     x: 570
-    y: 1211
+    y: 1343
     width: 65
     height: 65
     borderLeft: 0
@@ -1433,7 +1446,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: levelback
     x: 330
-    y: 186
+    y: 148
     width: 37
     height: 37
     borderLeft: 0
@@ -1588,19 +1601,6 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: MiniMapMonster
-    x: 867
-    y: 1638
-    width: 13
-    height: 13
-    borderLeft: 0
-    borderRight: 0
-    borderTop: 0
-    borderBottom: 0
-    paddingLeft: 0
-    paddingRight: 0
-    paddingTop: 0
-    paddingBottom: 0
-  - name: MiniMapPlayer
     x: 917
     y: 1662
     width: 13
@@ -1613,9 +1613,22 @@ MonoBehaviour:
     paddingRight: 0
     paddingTop: 0
     paddingBottom: 0
+  - name: MiniMapPlayer
+    x: 917
+    y: 1648
+    width: 13
+    height: 13
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
   - name: MiniMapRole
     x: 347
-    y: 1004
+    y: 979
     width: 20
     height: 24
     borderLeft: 0
@@ -1640,8 +1653,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: Monster
-    x: 917
-    y: 1648
+    x: 867
+    y: 1638
     width: 13
     height: 13
     borderLeft: 0
@@ -1732,7 +1745,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: Player
     x: 347
-    y: 979
+    y: 1004
     width: 20
     height: 24
     borderLeft: 0
@@ -1978,7 +1991,7 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: skill2
-    x: 1738
+    x: 1802
     y: 1410
     width: 63
     height: 63
@@ -1991,7 +2004,7 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: skill3
-    x: 1802
+    x: 1738
     y: 1410
     width: 63
     height: 63
@@ -2018,7 +2031,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: SkillButtonOK
     x: 457
-    y: 816
+    y: 721
     width: 94
     height: 94
     borderLeft: 0
@@ -2043,8 +2056,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: SkillIcon2
-    x: 457
-    y: 563
+    x: 368
+    y: 63
     width: 69
     height: 71
     borderLeft: 0
@@ -2057,7 +2070,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: SkillIcon3
     x: 457
-    y: 491
+    y: 563
     width: 69
     height: 71
     borderLeft: 0
@@ -2069,8 +2082,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: SkillIcon4
-    x: 368
-    y: 63
+    x: 457
+    y: 491
     width: 69
     height: 71
     borderLeft: 0
@@ -2225,7 +2238,7 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: tabbutton1
-    x: 1056
+    x: 935
     y: 1637
     width: 120
     height: 44
@@ -2238,7 +2251,7 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: tabbutton2
-    x: 935
+    x: 1056
     y: 1637
     width: 120
     height: 44
@@ -2252,7 +2265,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: taozhuang1
     x: 330
-    y: 148
+    y: 186
     width: 37
     height: 37
     borderLeft: 0
@@ -2290,8 +2303,8 @@ MonoBehaviour:
     paddingTop: 4
     paddingBottom: 2
   - name: taozhuang4
-    x: 335
-    y: 318
+    x: 570
+    y: 2
     width: 32
     height: 32
     borderLeft: 0
@@ -2368,8 +2381,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: white
-    x: 570
-    y: 2
+    x: 335
+    y: 318
     width: 32
     height: 32
     borderLeft: 0
