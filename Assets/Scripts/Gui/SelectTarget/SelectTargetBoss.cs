@@ -38,8 +38,8 @@ public class SelectTargetBoss : MonoBehaviour
 		var index = Mathf.FloorToInt(percent * count);
 		var remainder = percent - index / count;
 
-		uiHpBack.spriteName = bars[index];
-		uiHp.spriteName = bars[index + 1];
+		uiHpBack.spriteName = bars[Mathf.Max(0, index - 1)];
+		uiHp.spriteName = bars[index];
 		uiHp.fillAmount = remainder;
 	}
 }
