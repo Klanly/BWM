@@ -79,6 +79,9 @@ public class Npc : MonoBehaviour
 		headTip.SetAnchor(npc.gameObject);
 		headTip.bottomAnchor.absolute = 120;
 		headTip.topAnchor.absolute = headTip.bottomAnchor.absolute + 30;
+
+		var recycle = npc.gameObject.AddComponent<OnDestroyAction>();
+		recycle.Action = () => NGUITools.Destroy(headTip.gameObject);
 	}
 
 	#region 网络消息 NPC移动
