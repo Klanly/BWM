@@ -94,6 +94,19 @@ public class MainRole : MonoBehaviour, INotifyPropertyChanged
 		MainRole.ServerInfo = cmd.data;
 	}
 
+	[Execute]
+	public static void Execute(MainUserDataPropertyUserCmd_S cmd)
+	{
+		MainRole.ServerInfo = cmd.data;
+	}
+
+	[Execute]
+	public static void Execute(AddExpPropertyUserCmd_S cmd)
+	{
+		MainRole.ServerInfo.exp = cmd.curexp;
+		// TODO: 用 cmd.type; cmd.addexp; cmd.extexp; 实现经验值增长动画
+	}
+
 	/// <summary>
 	/// 进入场景
 	/// </summary>
