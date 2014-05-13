@@ -668,8 +668,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startGo: {fileID: 1641303619}
   targetGo: {fileID: 1614362384}
-  skillGo: {fileID: 100000, guid: 991a984ffc54ad345a3b91384b5b7c3a, type: 2}
-  buffGo: {fileID: 100000, guid: 991a984ffc54ad345a3b91384b5b7c3a, type: 2}
+  skillGo: {fileID: 100000, guid: 50d0cd7f5dc3a2247add3dfa4b349106, type: 2}
+  buffGo: {fileID: 0}
 --- !u!4 &707289545
 Transform:
   m_ObjectHideFlags: 0

@@ -51,7 +51,7 @@ public class SelectTarget : MonoBehaviour
 		get { return s_selected; }
 		set
 		{
-			if (s_selected == value)
+			if (s_selected == value || BattleScene.Instance == null)
 				return;
 			s_selected = value;
 			if (value == null)
