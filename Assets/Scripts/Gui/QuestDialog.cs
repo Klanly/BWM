@@ -73,10 +73,7 @@ public class QuestDialog : MonoBehaviour
 		var role = Role.All[cmd.charid];
 		if (role == null)
 			return;
-		var effect = GameObject.Instantiate(Resources.Load("Prefabs/Models/Effect/xinderenwu")) as GameObject;
-		effect.name = role.name;
-		effect.transform.localPosition = role.transform.localPosition;
-		effect.AddComponent<ParticleParentAutoDestroy>();
+		GameApplication.PlayEffect("Prefabs/Models/Effect/xinderenwu", role.transform);
 	}
 
 	[Execute]
@@ -85,9 +82,6 @@ public class QuestDialog : MonoBehaviour
 		var role = Role.All[cmd.charid];
 		if (role == null)
 			return;
-		var effect = GameObject.Instantiate(Resources.Load("Prefabs/Models/Effect/wanchengrenwu")) as GameObject;
-		effect.name = role.name;
-		effect.transform.localPosition = role.transform.localPosition;
-		effect.AddComponent<ParticleParentAutoDestroy>();
+		GameApplication.PlayEffect("Prefabs/Models/Effect/wanchengrenwu", role.transform);
 	}
 }

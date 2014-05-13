@@ -26,4 +26,18 @@ public static class GameApplication
 		}
 	}
 	public static event ValueChanged<GameState> GameStateChanged;
+
+	public static GameObject PlayEffect(string path, Transform transform)
+	{
+		var prefab = Resources.Load(path);
+		if (prefab == null)
+			return null;
+		var effect = GameObject.Instantiate(prefab) as GameObject;
+		if (effect == null)
+			return null;
+		effect.name = "Effect." + transform.name;
+		effect.transform.localPosition = transform.localPosition;
+		effect.AddComponent<ParticleParentAutoDestroy>();
+		return effect;
+	}
 }
