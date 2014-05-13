@@ -41,7 +41,22 @@ public class BattleScene : MonoBehaviour
 	#endregion
 
 	#region Map
-	public MapNav MapNav { get; private set; }
+	private MapNav m_mapNav;
+	public MapNav MapNav 
+	{
+		get { return m_mapNav; }
+		private set
+		{
+			m_mapNav = value;
+			if (MapLoaded != null)
+				MapLoaded(m_mapNav);
+		}
+	}
+
+	/// <summary>
+	/// 地图文件加载完毕的事件
+	/// </summary>
+	public event Action<MapNav> MapLoaded;
 
 	/// <summary>
 	/// 地表的唯一实例，用于避免重复加载
@@ -66,11 +81,12 @@ public class BattleScene : MonoBehaviour
 			GameObject.Destroy(terrain);
 		terrain = GameObject.Instantiate(map) as GameObject;
 		terrain.name = path.Replace('/', '.');
-		MapNav = UnityEngine.Object.FindObjectOfType<MapNav>();
 
 		// 删除地图中在编辑器中预制的Npc
 		foreach(var npc in terrain.GetComponentsInChildren<NpcEditor>())
 			GameObject.Destroy(npc.gameObject);
+
+		MapNav = terrain.GetComponentInChildren<MapNav>();
 		return true;
 	}
 	#endregion
