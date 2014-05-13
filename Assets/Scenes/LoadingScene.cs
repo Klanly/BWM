@@ -1,38 +1,29 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class LoadingScene : MonoBehaviour {
-	
+public class LoadingScene : MonoBehaviour
+{
 	public UISlider slider;
-	public static string loadedLevelName= "";
-	//异步对象   
+	public static string loadedLevelName = "";
 	private AsyncOperation async;
-	
-	// Use this for initialization
-	void Start () 
+
+	void Start()
 	{
-		//在这里开启一个异步任务，   
-		//进入loadScene方法。
 		slider.value = 0.0f;
-		StartCoroutine(loadScene());
+		StartCoroutine(LoadLevel());
 	}
-	
-	//注意这里返回值一定是 IEnumerator   
-	IEnumerator loadScene()   
-	{   
-		if (Application.loadedLevelName != loadedLevelName) 
+
+	IEnumerator LoadLevel()
+	{
+		if (Application.loadedLevelName != loadedLevelName)
 		{
-			async = Application.LoadLevelAsync (loadedLevelName);
+			async = Application.LoadLevelAsync(loadedLevelName);
 			yield return async;
 		}
-	}  
-	
-	// Update is called once per frame
-	void Update () 
+	}
+
+	void Update()
 	{
-		if (slider) 
-		{
-			slider.sliderValue = async.progress;
-		}
+		slider.value = async.progress;
 	}
 }
