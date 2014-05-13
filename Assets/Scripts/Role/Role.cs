@@ -61,7 +61,7 @@ public class Role : MonoBehaviour
 		headTip.topAnchor.absolute = headTip.bottomAnchor.absolute + 30;
 
 		var recycle = role.gameObject.AddComponent<OnDestroyAction>();
-		recycle.Action = () => NGUITools.Destroy(headTip.gameObject);
+		recycle.Action = () => { try { NGUITools.Destroy(headTip.gameObject); } catch { } };
 	}
 
 	private CastSkill m_caseSkillCache;
