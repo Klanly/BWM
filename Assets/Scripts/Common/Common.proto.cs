@@ -350,6 +350,20 @@ namespace Cmd
       SceneEntryType_Item = 2
     }
   
+    [global::ProtoBuf.ProtoContract(Name=@"SceneEntryState")]
+    public enum SceneEntryState
+    {
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"SceneEntryState_Normal", Value=0)]
+      SceneEntryState_Normal = 0,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"SceneEntryState_Dead", Value=1)]
+      SceneEntryState_Dead = 1,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"SceneEntryState_Hide", Value=2)]
+      SceneEntryState_Hide = 2
+    }
+  
     [global::ProtoBuf.ProtoContract(Name=@"NpcBaseType")]
     public enum NpcBaseType
     {
@@ -419,6 +433,17 @@ namespace Cmd
             
       [global::ProtoBuf.ProtoEnum(Name=@"QuestProcess_Max", Value=4)]
       QuestProcess_Max = 4
+    }
+  
+    [global::ProtoBuf.ProtoContract(Name=@"CopySceneType")]
+    public enum CopySceneType
+    {
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"CopySceneType_None", Value=0)]
+      CopySceneType_None = 0,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"CopySceneType_Normal", Value=1)]
+      CopySceneType_Normal = 1
     }
   
 }
