@@ -143,15 +143,8 @@ public class Role : MonoBehaviour
 	[Execute]
 	public static void Execute(SetUserHpSpDataUserCmd_S cmd)
 	{
-		var my = MainRole.Instance;
-		if (my != null && cmd.charid == my.Role.ServerInfo.charid)
-		{
-			my.maxhp = cmd.maxhp;
-			MainRole.ServerInfo.hp = cmd.hp;
-			my.maxsp = cmd.maxsp;
-			MainRole.ServerInfo.sp = cmd.sp;
+		if (MainRole.Execute(cmd))
 			return;
-		}
 
 		if (SelectTarget.Selected != null && 
 			SelectTarget.Selected.entrytype == SceneEntryType.SceneEntryType_Player && 
@@ -167,11 +160,8 @@ public class Role : MonoBehaviour
 	[Execute]
 	public static void Execute(ChangeUserHpDataUserCmd_S cmd)
 	{
-		if (MainRole.ServerInfo != null && cmd.charid == MainRole.ServerInfo.userdata.charid)
-		{
-			MainRole.ServerInfo.hp = cmd.curhp;
+		if (MainRole.Execute(cmd))
 			return;
-		}
 		if (SelectTarget.Selected != null &&
 			SelectTarget.Selected.entrytype == SceneEntryType.SceneEntryType_Player &&
 			SelectTarget.Selected.entryid == cmd.charid)
@@ -185,11 +175,8 @@ public class Role : MonoBehaviour
 	[Execute]
 	public static void Execute(ChangeUserSpDataUserCmd_S cmd)
 	{
-		if (MainRole.ServerInfo != null && cmd.charid == MainRole.ServerInfo.userdata.charid)
-		{
-			MainRole.ServerInfo.sp = cmd.cursp;
+		if (MainRole.Execute(cmd))
 			return;
-		}
 		if (SelectTarget.Selected.entrytype == SceneEntryType.SceneEntryType_Player && SelectTarget.Selected.entryid == cmd.charid)
 		{
 			var view = BattleScene.Instance.Gui<SelectTargetRole>();

@@ -4,13 +4,26 @@ using Cmd;
 using GX;
 using GX.Net;
 using System.ComponentModel;
+using System.Linq;
 
 public class MainRole : MonoBehaviour, INotifyPropertyChanged
 {
+	private static MainUserData _serverInfo;
 	/// <summary>
 	/// 主角基本信息
 	/// </summary>
-	public static MainUserData ServerInfo { get; private set; }
+	public static MainUserData ServerInfo
+	{
+		get { return _serverInfo; }
+		private set
+		{
+			if (_serverInfo == value)
+				return;
+			_serverInfo = value;
+			if (MainRole.Instance != null)
+				MainRole.Instance.OnPropertyChanged(null);
+		}
+	}
 
 	#region 主角特有信息
 	public uint mapid { get; set; }
@@ -74,10 +87,25 @@ public class MainRole : MonoBehaviour, INotifyPropertyChanged
 	#region INotifyPropertyChanged Members
 
 	public event global::System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+
+	/// <summary>
+	/// <see cref="MainUserData"/>所有字段名的缓存
+	/// </summary>
+	private static string[] MainUserDataMemberNames;
 	protected virtual void OnPropertyChanged(string propertyName)
 	{
-		if (PropertyChanged != null)
+		if (PropertyChanged == null)
+			return;
+		if(propertyName != null)
+		{
 			PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			return;
+		}
+
+		if (MainUserDataMemberNames == null)
+			MainUserDataMemberNames = (from p in Extensions.GetProtoMemberNames(typeof(MainUserData)) select p.Name).ToArray();
+		foreach(var p in MainUserDataMemberNames)
+			PropertyChanged(this, new PropertyChangedEventArgs(p));
 	}
 
 	#endregion
@@ -104,6 +132,7 @@ public class MainRole : MonoBehaviour, INotifyPropertyChanged
 	public static void Execute(AddExpPropertyUserCmd_S cmd)
 	{
 		MainRole.ServerInfo.exp = cmd.curexp;
+		MainRole.Instance.OnPropertyChanged("exp");
 		// TODO: 用 cmd.type; cmd.addexp; cmd.extexp; 实现经验值增长动画
 	}
 
@@ -136,6 +165,44 @@ public class MainRole : MonoBehaviour, INotifyPropertyChanged
 		{
 			ServerInfo.level = cmd.level;
 			MainRole.Instance.OnPropertyChanged("level");
+			return true;
+		}
+		return false;
+	}
+
+	public static bool Execute(ChangeUserHpDataUserCmd_S cmd)
+	{
+		if (MainRole.ServerInfo != null && cmd.charid == MainRole.ServerInfo.userdata.charid)
+		{
+			MainRole.ServerInfo.hp = cmd.curhp;
+			MainRole.Instance.OnPropertyChanged("hp");
+			return true;
+		}
+		return false;
+	}
+
+	public static bool Execute(SetUserHpSpDataUserCmd_S cmd)
+	{
+		var my = MainRole.Instance;
+		if (my != null && cmd.charid == my.Role.ServerInfo.charid)
+		{
+			my.maxhp = cmd.maxhp;
+			MainRole.ServerInfo.hp = cmd.hp;
+			MainRole.Instance.OnPropertyChanged("hp");
+			my.maxsp = cmd.maxsp;
+			MainRole.ServerInfo.sp = cmd.sp;
+			MainRole.Instance.OnPropertyChanged("sp");
+			return true;
+		}
+		return false;
+	}
+
+	public static bool Execute(ChangeUserSpDataUserCmd_S cmd)
+	{
+		if (MainRole.ServerInfo != null && cmd.charid == MainRole.ServerInfo.userdata.charid)
+		{
+			MainRole.ServerInfo.sp = cmd.cursp;
+			MainRole.Instance.OnPropertyChanged("sp");
 			return true;
 		}
 		return false;

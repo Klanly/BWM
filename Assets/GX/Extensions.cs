@@ -651,6 +651,20 @@ public static partial class Extensions
 			return default(T);
 		return ProtoBuf.Serializer.DeepClone<T>(pb);
 	}
+
+	/// <summary>
+	/// 得到给定类型中，所有具有ProtoMemberAttribute特性的属性
+	/// </summary>
+	/// <param name="protobuf"></param>
+	/// <returns></returns>
+	public static IEnumerable<System.Reflection.PropertyInfo> GetProtoMemberNames(System.Type protobuf)
+	{
+		return
+			from p in GX.Reflection.GetRuntimeProperties(protobuf)
+			let m = p.GetCustomAttributes(typeof(ProtoBuf.ProtoMemberAttribute), true) as ProtoBuf.ProtoMemberAttribute[]
+			where m != null && m.Any()
+			select p;
+	}
 	#endregion
 
 	#region Convert DateTime & Unix GMT +8
