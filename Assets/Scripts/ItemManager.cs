@@ -91,7 +91,8 @@ public class ItemManager : IEnumerable<SaveItem>
 
 	public override string ToString()
 	{
-		return string.Join("\n", this.OrderBy(i => i.loc.type).ThenBy(i => i.loc.index).Select(i => i.ToString()).ToArray());
+		return string.Format("ItemManager: {0}\n", this.items.Count) + 
+			string.Join("\n", this.OrderBy(i => i.loc.type).ThenBy(i => i.loc.index).Select(i => i.ToString()).ToArray());
 	}
 
 	#region IEnumerable<SaveItem> 成员

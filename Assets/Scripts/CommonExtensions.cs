@@ -161,6 +161,17 @@ namespace Cmd
 	}
 	#endregion
 
+	#region SaveBuff
+	partial class SaveBuff
+	{
+		public override string ToString()
+		{
+			this.bitmask.ToString();
+			return string.Format("#{0} level:{1} time:{2} value:{3} bitmask:{4}", this.buffid, this.level, this.time, this.value, this.bitmask.ToBitString());
+		}
+	}
+	#endregion
+
 	#region Quest
 	partial class SaveQuest
 	{

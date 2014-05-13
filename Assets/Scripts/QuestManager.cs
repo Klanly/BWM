@@ -65,7 +65,8 @@ public class QuestManager : IEnumerable<QuestTrace>
 
 	public override string ToString()
 	{
-		return string.Join("\n", items.Select(i => i.ToString()).ToArray());
+		return string.Format("QuestManager: {0}\n", this.items.Count) + 
+			string.Join("\n", items.Select(i => i.ToString()).ToArray());
 	}
 
 

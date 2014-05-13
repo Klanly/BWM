@@ -80,13 +80,14 @@ public class SkillManager : IEnumerable<KeyValuePair<uint, table.TableSkill>>
 
 	public override string ToString()
 	{
-		return string.Join("\n", this.skillLevels.Select(i =>
-		{
-			var s = i.Value ?? table.TableSkill.First(i.Key);
-			return string.Format("<color={0}>{1}:{2} {3}</color>",
-				i.Value != null ? "green" : "orange",
-				s.id, s.level, s.name);
-		}).ToArray());
+		return string.Format("SkillManager: {0}\n", this.skillLevels.Count) +
+			string.Join("\n", this.skillLevels.Select(i =>
+			{
+				var s = i.Value ?? table.TableSkill.First(i.Key);
+				return string.Format("<color={0}>{1}:{2} {3}</color>",
+					i.Value != null ? "green" : "orange",
+					s.id, s.level, s.name);
+			}).ToArray());
 	}
 
 	/// <summary>

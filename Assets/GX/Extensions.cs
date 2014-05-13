@@ -292,7 +292,7 @@ public static partial class Extensions
 	}
 	#endregion
 
-	#region String
+	#region TryParse & Parse
 	public static bool TryParse(this string value, out bool result)
 	{
 		return bool.TryParse(value, out result);
@@ -369,6 +369,45 @@ public static partial class Extensions
 	{
 		Color ret;
 		return TryParse(value, out ret) ? ret : defaultValue;
+	}
+	#endregion
+
+	#region ToBitString
+	/// <summary>
+	/// ref: http://stackoverflow.com/questions/5377566/get-raw-pixel-value-in-bitmap-image
+	/// </summary>
+	/// <param name="value"></param>
+	/// <returns></returns>
+	public static string ToBitString(this byte value)
+	{
+		var sb = new StringBuilder(8);
+		for (var i = 7; i >= 0; i--)
+			sb.Append((value & (1 << i)) > 0 ? '1' : '0');
+		return sb.ToString();
+	}
+	public static string ToBitString(this short value)
+	{
+		return string.Join(" ", Array.ConvertAll(BitConverter.GetBytes(value), b => b.ToBitString()));
+	}
+	public static string ToBitString(this ushort value)
+	{
+		return string.Join(" ", Array.ConvertAll(BitConverter.GetBytes(value), b => b.ToBitString()));
+	}
+	public static string ToBitString(this int value)
+	{
+		return string.Join(" ", Array.ConvertAll(BitConverter.GetBytes(value), b => b.ToBitString()));
+	}
+	public static string ToBitString(this uint value)
+	{
+		return string.Join(" ", Array.ConvertAll(BitConverter.GetBytes(value), b => b.ToBitString()));
+	}
+	public static string ToBitString(this long value)
+	{
+		return string.Join(" ", Array.ConvertAll(BitConverter.GetBytes(value), b => b.ToBitString()));
+	}
+	public static string ToBitString(this ulong value)
+	{
+		return string.Join(" ", Array.ConvertAll(BitConverter.GetBytes(value), b => b.ToBitString()));
 	}
 	#endregion
 
