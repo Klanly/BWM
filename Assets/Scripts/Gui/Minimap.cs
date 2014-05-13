@@ -12,25 +12,30 @@ public class Minimap : MonoBehaviour
 	private readonly Dictionary<Entity, UISprite> flags = new Dictionary<Entity, UISprite>();
 
 	private float m_extent = 1024;
+	/// <summary>
+	/// 地图可显示部分的宽度
+	/// </summary>
 	public float Extent
 	{
 		get { return m_extent; }
 		set { m_extent = value; Layout = true; }
 	}
 
+	/// <summary>
+	/// 地图在3D空间中的大小
+	/// </summary>
+	private Vector2 mapSize;
+	/// <summary>
+	/// 小地图可显示部分所占总地图大小的比例
+	/// </summary>
+	private Vector2 relativeExtent;
+
+	/// <summary>
+	/// 重新布局的脏标记
+	/// </summary>
 	public bool Layout { get; set; }
 
 	private Material material;
-
-	public void Setup()
-	{
-		uiMapTexture.mainTexture = BattleScene.Instance.MapNav.transform.parent.GetComponentInChildren<MapTexture>().texture;
-		uiMapTexture.gameObject.SetActive(uiMapTexture.mainTexture != null);
-
-		if (MainRole.Instance != null)
-			MainRole.Instance.entity.PositionChanged += OnMainRolePositionChanged;
-		OnMainRolePositionChanged(MainRole.Instance.entity);
-	}
 
 	void Start()
 	{
@@ -50,11 +55,21 @@ public class Minimap : MonoBehaviour
 				AddFlag(i.Value.GetComponent<Entity>(), uiFlagRole);
 		}
 	}
+	public void Setup()
+	{
+		BattleScene.Instance.MapLoaded += OnMapChanged;
+		OnMapChanged(BattleScene.Instance.MapNav);
+		if (MainRole.Instance != null)
+			MainRole.Instance.entity.PositionChanged += OnMainRolePositionChanged;
+		OnMainRolePositionChanged(MainRole.Instance.entity);
+	}
 
 	void OnDestroy()
 	{
 		if (MainRole.Instance != null)
 			MainRole.Instance.entity.PositionChanged -= OnMainRolePositionChanged;
+		if (BattleScene.Instance != null)
+			BattleScene.Instance.MapLoaded -= OnMapChanged;
 
 		Npc.All.ItemAdd -= OnNpcAdd;
 		Npc.All.ItemRemove -= OnNpcRemove;
@@ -63,22 +78,13 @@ public class Minimap : MonoBehaviour
 		flags.Clear();
 	}
 
-	void OnMainRolePositionChanged(Entity sender)
-	{
-		Layout = true;
-	}
-
 	void Update()
 	{
 		if (Layout && uiMapTexture.gameObject.activeSelf)
 		{
 			Layout = false;
-			var mapNav = BattleScene.Instance.MapNav;
-			var size = new Vector2(MapGrid.Width * mapNav.gridXNum, MapGrid.Height * mapNav.gridZNum);
-			Extent = Mathf.Min(Extent, uiMapTexture.mainTexture.width, uiMapTexture.mainTexture.height);
-			var relativeExtent = new Vector2(Extent / (float)uiMapTexture.mainTexture.width, Extent / (float)uiMapTexture.mainTexture.height);
-
-			var relativePos = new Vector2(MainRole.Instance.entity.Position.x / size.x, MainRole.Instance.entity.Position.z / size.y);
+			
+			var relativePos = new Vector2(MainRole.Instance.entity.Position.x / mapSize.x, MainRole.Instance.entity.Position.z / mapSize.y);
 
 			// 地图位置更新
 			material.mainTextureOffset = new Vector2(
@@ -131,11 +137,7 @@ public class Minimap : MonoBehaviour
 
 	private void LayoutFlag(Entity entity, UISprite flag)
 	{
-		var mapNav = BattleScene.Instance.MapNav;
-		var size = new Vector2(MapGrid.Width * mapNav.gridXNum, MapGrid.Height * mapNav.gridZNum);
-		var relativeExtent = new Vector2(Extent / (float)uiMapTexture.mainTexture.width, Extent / (float)uiMapTexture.mainTexture.height);
-
-		var relativePos = new Vector2(entity.Position.x / size.x, entity.Position.z / size.y);
+		var relativePos = new Vector2(entity.Position.x / mapSize.x, entity.Position.z / mapSize.y);
 		var p = relativePos - material.mainTextureOffset;
 		p.x /= relativeExtent.x;
 		p.y /= relativeExtent.y;
@@ -185,5 +187,21 @@ public class Minimap : MonoBehaviour
 			RemoveFlag(args.Data.Value.GetComponent<Entity>());
 		}
 		catch (MissingReferenceException) { }
+	}
+	void OnMainRolePositionChanged(Entity sender)
+	{
+		Layout = true;
+	}
+
+	void OnMapChanged(MapNav map)
+	{
+		uiMapTexture.mainTexture = map.transform.parent.GetComponentInChildren<MapTexture>().texture;
+		uiMapTexture.gameObject.SetActive(uiMapTexture.mainTexture != null);
+
+		mapSize = new Vector2(MapGrid.Width * map.gridXNum, MapGrid.Height * map.gridZNum);
+		Extent = Mathf.Min(Extent, uiMapTexture.mainTexture.width, uiMapTexture.mainTexture.height);
+		relativeExtent = new Vector2(Extent / (float)uiMapTexture.mainTexture.width, Extent / (float)uiMapTexture.mainTexture.height);
+
+		Layout = true;
 	}
 }
