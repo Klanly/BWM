@@ -44,6 +44,7 @@ public class ChatInputBox : MonoBehaviour
 	{
 		SendChat(chatInput.value.Trim());
 		chatInput.value = string.Empty;
+		chatInput.isSelected = true;
 	}
 
 	public static void SendChat(string message)
