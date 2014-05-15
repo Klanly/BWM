@@ -6,7 +6,9 @@ public class ControlBar : MonoBehaviour
 {
 	public UIButton roleInfoButton;
 	public UIButton[] uiSkillFireThumbs;
+	public UILabel[] uiSkillCD;
 	public UIButton uiSkillBasic;
+	public UILabel uiSkillBasicCD;
 	public GXJoystick joystick;
 
 	void Start()
@@ -60,6 +62,27 @@ public class ControlBar : MonoBehaviour
 			{
 				MainRole.Instance.controlMove.MoveByJoystick(horizontal, vertical, joystick.pressed);
 			}
+		}
+
+		// 更新CD
+		UpdateCD(SkillManager.Instance.BasicSkill, this.uiSkillBasicCD, this.uiSkillBasic);
+		for (var i = 0; i < uiSkillFireThumbs.Length; i++)
+			UpdateCD(Config.UserData.Instance.skillbar[i], uiSkillCD[i], uiSkillFireThumbs[i]);
+	}
+
+	void UpdateCD(uint skill, UILabel label, UIButton button)
+	{
+		var cd = SkillManager.Instance.CoolDown(skill);
+		if (cd < 0)
+		{
+			label.gameObject.SetActive(false);
+			button.isEnabled = true;
+		}
+		else
+		{
+			label.gameObject.SetActive(true);
+			label.text = cd.ToString("F1") + "s";
+			button.isEnabled = false;
 		}
 	}
 }
