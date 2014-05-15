@@ -37,16 +37,15 @@ public class PathMove : MonoBehaviour {
 		MapGrid gridRealSrc = gridOriginSrc;
 		if((MapNav[gridRealSrc.x, gridRealSrc.z] & entity.TileType) == 0)
 		{
-			gridRealSrc = MapNav.GetNearestValidGrid(gridOriginDst, gridOriginSrc, entity.TileType, 1);
-			if(gridRealSrc == null)
+			if (MapNav.GetNearestValidGrid(gridOriginDst, gridOriginSrc, out gridRealSrc, entity.TileType, 1) == false)
 			{
 				StopPath();
 				return;
 			}
 		}
 
-		MapGrid gridRealDst = MapNav.GetNearestValidGrid(gridRealSrc, gridOriginDst, entity.TileType);
-		if (gridRealDst == null)
+		MapGrid gridRealDst;
+		if(MapNav.GetNearestValidGrid(gridRealSrc, gridOriginDst, out gridRealDst, entity.TileType) == false)
 		{
 			StopPath();
 			return;

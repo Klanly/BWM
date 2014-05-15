@@ -251,8 +251,8 @@ public class MapNavEditor : Editor
 							vecEnd = hitPoint;
 						bSampleStart = !bSampleStart;
 
-						MapGrid gridEnd = mapNav.GetNearestValidGrid(new MapGrid(vecStart), new MapGrid(vecEnd), TileType.TileType_Walk);
-						if(gridEnd != null)
+						MapGrid gridEnd;
+						if (mapNav.GetNearestValidGrid(new MapGrid(vecStart), new MapGrid(vecEnd), out gridEnd, TileType.TileType_Walk))
 							path = mapNav.GetPath(new MapGrid(vecStart), gridEnd, TileType.TileType_Walk);
 						else
 							path.Clear();
