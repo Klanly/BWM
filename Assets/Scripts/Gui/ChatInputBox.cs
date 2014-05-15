@@ -3,6 +3,7 @@ using System.Collections;
 using Cmd;
 using GX.Net;
 using System.Text.RegularExpressions;
+using System.Collections.Generic;
 
 /// <summary>
 /// </summary>
@@ -11,6 +12,9 @@ public class ChatInputBox : MonoBehaviour
 {
 	public UIButton sendButton;
 	public UIInput chatInput;
+
+	private const int HistorySize = 5;
+	private static readonly List<string> history = new List<string>();
 
 	// Use this for initialization
 	void Start()
@@ -42,9 +46,16 @@ public class ChatInputBox : MonoBehaviour
 
 	private void SendChat()
 	{
-		SendChat(chatInput.value.Trim());
+		var str = chatInput.value.Trim(); 
+		SendChat(str);
 		chatInput.value = string.Empty;
 		chatInput.isSelected = true;
+
+		// 更新发送历史
+		history.Remove(str);
+		history.Add(str);
+		if (history.Count > HistorySize)
+			history.RemoveRange(0, history.Count - HistorySize);
 	}
 
 	public static void SendChat(string message)
