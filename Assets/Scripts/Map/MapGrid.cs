@@ -4,9 +4,8 @@ using System.Collections;
 /// <summary>
 /// 地图格子，主要用来做阻挡判断和寻路。
 /// 和服务器之间的位置通信用<see cref="Cmd.Pos"/>
-/// TODO: change MapGrid from class to struct
 /// </summary>
-public class MapGrid : System.IEquatable<MapGrid>
+public struct MapGrid : System.IEquatable<MapGrid>
 {
 	/// <summary>
 	/// 每个格子<see cref="MapGrid"/>宽度
@@ -19,10 +18,6 @@ public class MapGrid : System.IEquatable<MapGrid>
 
 	public int x;
 	public int z;
-
-	public MapGrid()
-	{
-	}
 
 	public MapGrid(Vector3 worldPosition)
 	{

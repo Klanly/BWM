@@ -322,9 +322,9 @@ public class MapNav : MonoBehaviour
 	/// <param name="dst">Dst.</param>
 	/// <param name="validType">Valid type.</param>
 	/// <param name="radius">Grid Radius.</param>
-	public MapGrid GetNearestValidGrid(MapGrid src, MapGrid dst, TileType validType, int gridRadius=-1)
+	public bool GetNearestValidGrid(MapGrid src, MapGrid dst, out MapGrid ptOut, TileType validType, int gridRadius = -1)
 	{
-		MapGrid ptOut = dst;
+		ptOut = dst;
 		while((this[ptOut.x, ptOut.z] & validType) == 0)
 		{
 			ptOut = GetNearestGrid(src, ptOut);
@@ -337,10 +337,7 @@ public class MapNav : MonoBehaviour
 			}
 		}
 
-		if((this[ptOut.x, ptOut.z] & validType) != 0)
-			return ptOut;
-		else
-			return null;
+		return (this[ptOut.x, ptOut.z] & validType) != 0;
 	}
 
 	/// <summary>

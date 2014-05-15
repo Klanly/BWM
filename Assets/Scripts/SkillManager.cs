@@ -15,6 +15,7 @@ public class SkillManager : IEnumerable<KeyValuePair<uint, table.TableSkill>>
 	public static SkillManager Instance { get; private set; }
 	static SkillManager() { Instance = new SkillManager(); }
 	private readonly Dictionary<uint, table.TableSkill> skillLevels = new Dictionary<uint, table.TableSkill>();
+	private readonly Dictionary<uint, float> lastFireTime = new Dictionary<uint, float>();
 
 	public uint BasicSkill
 	{
@@ -33,6 +34,7 @@ public class SkillManager : IEnumerable<KeyValuePair<uint, table.TableSkill>>
 	void Clear()
 	{
 		this.skillLevels.Clear();
+		this.lastFireTime.Clear();
 		// 对所有可能有的技能占位，方便访问
 		foreach (var id in table.TableSkill.Where(MainRole.ServerInfo.userdata.profession))
 			this.skillLevels[id] = null;
@@ -58,6 +60,24 @@ public class SkillManager : IEnumerable<KeyValuePair<uint, table.TableSkill>>
 	{
 		var s = GetSkill(skillID);
 		return s != null ? s.level : 0;
+	}
+
+	/// <summary>
+	/// 得到指定技能的剩余的冷却时间
+	/// </summary>
+	/// <param name="skillID"></param>
+	/// <returns>剩余的冷却时间(秒)，&lt;=0 表示已经冷却OK</returns>
+	/// <remarks>const</remarks>
+	public float CoolDown(uint skillID)
+	{
+		float last;
+		if (lastFireTime.TryGetValue(skillID, out last) == false)
+			return -1;
+		var skill = skillLevels[skillID];
+		var now = Time.realtimeSinceStartup;
+		if(now < last)
+			return 0;
+		return skill.cd * 0.001f - now + last;// (skill.cd / 1000) - (now - last);
 	}
 
 	#region IEnumerable<KeyValuePair<uint,TableSkill>> Members
@@ -94,19 +114,23 @@ public class SkillManager : IEnumerable<KeyValuePair<uint, table.TableSkill>>
 	/// 释放给定的技能
 	/// </summary>
 	/// <param name="skillID"></param>
-	/// <returns></returns>
+	/// <returns>是否成功释放技能</returns>
 	public static bool Fire(uint skillID)
 	{
 		var skill = SkillManager.Instance.GetSkill(skillID);
 		if (skill == null)
+			return false;
+		// CD检测
+		if (SkillManager.Instance.CoolDown(skillID) > 0)
 			return false;
 		Debug.Log("FireSkill: " + skill);
 		// TODO: 群攻搜索并批量发送攻击请求
 		var cmd = new RequestUseSkillUserCmd_C() { skillid = skill.id };
 		if (SelectTarget.Selected != null && SelectTarget.Selected != null)
 			cmd.hurts.Add(SelectTarget.Selected);
+		SkillManager.Instance.lastFireTime[skillID] = Time.realtimeSinceStartup; // 记录施法时戳
 		Net.Instance.Send(cmd);
-		return false;
+		return true;
 	}
 
 	#region 网络消息处理

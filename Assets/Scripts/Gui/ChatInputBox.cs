@@ -3,6 +3,8 @@ using System.Collections;
 using Cmd;
 using GX.Net;
 using System.Text.RegularExpressions;
+using System.Collections.Generic;
+using System.Linq;
 
 /// <summary>
 /// </summary>
@@ -12,10 +14,17 @@ public class ChatInputBox : MonoBehaviour
 	public UIButton sendButton;
 	public UIInput chatInput;
 
+	private const int HistorySize = 5;
+	/// <summary>
+	/// 聊天发送历史，越后面的表示越近期发送过的
+	/// </summary>
+	private static readonly List<string> history = new List<string>();
+
 	// Use this for initialization
 	void Start()
 	{
 		UIEventListener.Get(sendButton.gameObject).onClick = go => SendChat();
+		UIEventListener.Get(chatInput.gameObject).onKey = ApplyHistory;
 	}
 
 	void Update()
@@ -40,10 +49,56 @@ public class ChatInputBox : MonoBehaviour
 		BattleScene.Instance.Gui<ChatDialog>().gameObject.SetActive(true);
 	}
 
+	private void ApplyHistory(GameObject go, KeyCode key)
+	{
+		bool upFlag;
+		switch(key)
+		{
+			case KeyCode.UpArrow:
+				upFlag = true;
+				break;
+			case KeyCode.DownArrow:
+				upFlag = false;
+				break;
+			default:
+				return;
+		}
+
+		if (history.Count != 0)
+		{
+			var index = history.IndexOf(chatInput.value);
+			if (index < 0)
+			{
+				chatInput.value = history.Last();
+				return;
+			}
+			if (upFlag)
+				index--;
+			else
+				index++;
+			while (index < 0)
+				index += history.Count;
+			while (index >= history.Count)
+				index -= history.Count;
+
+			chatInput.value = history[index];
+		}
+	}
+
 	private void SendChat()
 	{
-		SendChat(chatInput.value.Trim());
+		var str = chatInput.value.Trim();
+		if (string.IsNullOrEmpty(str))
+			return;
+		SendChat(str);
 		chatInput.value = string.Empty;
+		chatInput.isSelected = true;
+
+		// 更新发送历史
+		history.Remove(str);
+		history.Add(str);
+		if (history.Count > HistorySize)
+			history.RemoveRange(0, history.Count - HistorySize);
 	}
 
 	public static void SendChat(string message)
