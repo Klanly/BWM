@@ -4,8 +4,11 @@
 		<key code="id" />
 		<field column="编号" code="id" type="uint32" />
 		<field column="名称" code="name" type="string" />
-		<field column="类型" code="type" type="uint32">
-			<regex>^[12]$</regex>
+		<field column="国家类型" code="type" type="uint32">
+			<replace from="国家" to="1" />
+			<replace from="中立区" to="2" />
+			<replace from="副本" to="3" />
+			<regex>^[123]$</regex>
 		</field>
 	</output>
 </table>

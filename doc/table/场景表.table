@@ -15,7 +15,7 @@
 		<key code="id" />
 		<field column="编号" code="id" type="uint32" />
 		<field column="名称" code="name" type="string" />
-		<field column="地图类型" code="type" type="int32">
+		<field column="国家类型" code="countryType" type="uint32">
 			<replace from="国家" to="1" />
 			<replace from="中立区" to="2" />
 			<replace from="副本" to="3" />
