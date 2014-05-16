@@ -267,6 +267,13 @@ namespace Cmd
       get { return _profession; }
       set { _profession = value; }
     }
+    private int _movespeed;
+    [global::ProtoBuf.ProtoMember(5, IsRequired = true, Name=@"movespeed", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int movespeed
+    {
+      get { return _movespeed; }
+      set { _movespeed = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
