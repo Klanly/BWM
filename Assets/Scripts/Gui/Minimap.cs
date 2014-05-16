@@ -8,6 +8,7 @@ public class Minimap : MonoBehaviour
 	public UISprite uiFlagMainRole;
 	public UISprite uiFlagRole;
 	public UISprite[] uiFlagNpc;
+	public UILabel uiMapGrid;
 
 	private readonly Dictionary<Entity, UISprite> flags = new Dictionary<Entity, UISprite>();
 
@@ -101,6 +102,9 @@ public class Minimap : MonoBehaviour
 
 			// 主角图标位置更新
 			LayoutFlag(MainRole.Instance.entity, uiFlagMainRole);
+
+			var pos = new MapGrid(MainRole.Instance.transform.position);
+			uiMapGrid.text = string.Format("{0},{1}", pos.x, pos.z);
 		}
 
 		// 主角图标显隐
