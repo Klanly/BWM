@@ -15,7 +15,7 @@ public class Npc : MonoBehaviour
 	private MapNav MapNav { get { return BattleScene.Instance.MapNav; } }
 	private Entity entity;
 	//private Animator animator;
-	//private Move move;
+	private Move move;
 
 	static Npc()
 	{
@@ -54,7 +54,7 @@ public class Npc : MonoBehaviour
 
 		var npc = avatar.AddComponent<Npc>();
 		npc.entity = avatar.AddComponent<Entity>();
-		//npc.move = avatar.AddComponent<Move>();
+		npc.move = avatar.AddComponent<Move>();
 		//npc.animator = avatar.GetComponent<Animator>();
 		npc.ServerInfo = info;
 		npc.TableInfo = tbl;
@@ -110,6 +110,16 @@ public class Npc : MonoBehaviour
 		{
 			Npc.All.Remove(cmd.tempid);
 			GameObject.Destroy(npc.gameObject);
+		}
+	}
+
+	[Execute]
+	public static void Execute(NpcMoveDownMoveUserCmd_S cmd)
+	{
+		var target = Npc.All[cmd.tempid];
+		if (target != null)
+		{
+			target.move.TargetPosition = BattleScene.Instance.MapNav.GetWorldPosition(new MapGrid(cmd.poscm));
 		}
 	}
 	#endregion
