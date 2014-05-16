@@ -13,6 +13,11 @@ public class Move : MonoBehaviour
 	public delegate void TargetArrived();
 	public TargetArrived targetArrived;
 
+	/// <summary>
+	/// 移动速度 m/s
+	/// </summary>
+	public Func<Move, float> speed;
+
 	private MapNav MapNav { get { return BattleScene.Instance.MapNav; } }
 	private Entity entity;
 	private Animator animator;
@@ -38,7 +43,7 @@ public class Move : MonoBehaviour
 			if (value != Vector3.zero)
 			{
 				if (animator && animator.GetFloat("speed") == 0.0f)
-					animator.SetFloat("speed", entity.Speed);
+					animator.SetFloat("speed", speed(this));
 
 				var relativePos = TargetPosition - entity.Position;
 				this.transform.rotation = Quaternion.LookRotation(relativePos);
@@ -68,6 +73,11 @@ public class Move : MonoBehaviour
 		TargetPosition = Vector3.zero;
 	}
 
+	public Move()
+	{
+		speed = sender => 5.0f;
+	}
+
 	// Use this for initialization
 	void Start()
 	{
@@ -85,7 +95,7 @@ public class Move : MonoBehaviour
 			vDelta.Normalize();
 
 			Vector3 vOldPosition = entity.Position;
-			float fMoveLen = entity.Speed * Time.deltaTime;
+			float fMoveLen = speed(this) * Time.deltaTime;
 			bool bFinish = false;
 			if (fMoveLen >= fDeltaLen)
 			{

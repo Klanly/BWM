@@ -55,6 +55,7 @@ public class Npc : MonoBehaviour
 		var npc = avatar.AddComponent<Npc>();
 		npc.entity = avatar.AddComponent<Entity>();
 		npc.move = avatar.AddComponent<Move>();
+		npc.move.speed = sender => npc.ServerInfo.movespeed * 0.01f;
 		//npc.animator = avatar.GetComponent<Animator>();
 		npc.ServerInfo = info;
 		npc.TableInfo = tbl;

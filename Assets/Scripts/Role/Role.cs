@@ -36,6 +36,7 @@ public class Role : MonoBehaviour
 		var role = avatar.AddComponent<Role>();
 		role.entity = avatar.AddComponent<Entity>();
 		role.move = avatar.AddComponent<Move>();
+		role.move.speed = sender => role.ServerInfo.movespeed * 0.01f;
 		//role.animator = avatar.GetComponent<Animator>();
 		role.ServerInfo = info;
 

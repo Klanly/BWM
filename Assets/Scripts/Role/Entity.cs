@@ -13,11 +13,6 @@ public class Entity : MonoBehaviour
 	private MapNav MapNav { get { return BattleScene.Instance.MapNav; } }
 
 	/// <summary>
-	/// 移动速度 m/s
-	/// </summary>
-	public float Speed = 5.0f;
-
-	/// <summary>
 	/// 世界坐标<see cref="Position"/>改变事件
 	/// </summary>
 	public event Action<Entity> PositionChanged;
