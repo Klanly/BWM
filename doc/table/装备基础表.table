@@ -20,6 +20,6 @@
 
 		<field column="反伤" code="reflect" type="int32" />
 		<field column="攻击速度" code="attackSpeed" type="int32" />
-		<field column="移动速度" code="moveSpeed" type="int32" />
+		<field column="速度" code="moveSpeed" type="int32" />
 	</output>
 </table>
