@@ -68,6 +68,24 @@ Transition:
   m_Atomic: 1
   m_Solo: 0
   m_Mute: 0
+--- !u!1101 &110103751
+Transition:
+  m_ObjectHideFlags: 3
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: 
+  m_SrcState: {fileID: 110241115}
+  m_DstState: {fileID: 110241963}
+  m_TransitionDuration: .25
+  m_TransitionOffset: 0
+  m_Conditions:
+  - m_ConditionMode: 5
+    m_ConditionEvent: 
+    m_EventTreshold: 0
+    m_ExitTime: .75
+  m_Atomic: 1
+  m_Solo: 0
+  m_Mute: 0
 --- !u!1101 &110109217
 Transition:
   m_ObjectHideFlags: 3
@@ -614,6 +632,21 @@ State:
   m_IKOnFeet: 0
   m_Mirror: 0
   m_Tag: 
+--- !u!1102 &110241115
+State:
+  m_ObjectHideFlags: 3
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: Ani_Dd_Att_06
+  m_Speed: 1
+  m_CycleOffset: 0
+  m_Motions:
+  - {fileID: 7400000, guid: ce9453a197a8a454b987d22b681b0973, type: 3}
+  m_ParentStateMachine: {fileID: 110700000}
+  m_Position: {x: 180, y: 888, z: 0}
+  m_IKOnFeet: 0
+  m_Mirror: 0
+  m_Tag: 
 --- !u!1102 &110241963
 State:
   m_ObjectHideFlags: 3
@@ -873,15 +906,16 @@ StateMachine:
   - {fileID: 110222632}
   - {fileID: 110274834}
   - {fileID: 110251375}
+  - {fileID: 110241115}
   m_ChildStateMachine:
   - {fileID: 110710087}
   m_ChildStateMachinePosition:
   - {x: 600, y: 264, z: 0}
   m_OrderedTransitions:
     data:
-      first: {fileID: 110251375}
+      first: {fileID: 110241115}
       second:
-      - {fileID: 110124925}
+      - {fileID: 110103751}
     data:
       first: {fileID: 0}
       second: []
@@ -980,6 +1014,10 @@ StateMachine:
       first: {fileID: 110274834}
       second:
       - {fileID: 110111836}
+    data:
+      first: {fileID: 110251375}
+      second:
+      - {fileID: 110124925}
   m_MotionSetCount: 1
   m_AnyStatePosition: {x: 50, y: 20, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
