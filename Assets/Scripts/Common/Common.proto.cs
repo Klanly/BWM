@@ -453,4 +453,12 @@ namespace Cmd
       CopySceneType_Normal = 1
     }
   
+    [global::ProtoBuf.ProtoContract(Name=@"CountryId")]
+    public enum CountryId
+    {
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"CountryId_Middle", Value=100)]
+      CountryId_Middle = 100
+    }
+  
 }
