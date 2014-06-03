@@ -3,13 +3,13 @@
 	<output type="json-go" code="TableEquipBase" file="装备基础表.xlsx" sheet="Sheet1">
 		<key code="id" />
 		<key code="quality" />
-		<field column="id" code="id" type="uint32" />
+		<field column="id" code="id" type="uint16" />
 
 		<field column="最大生命" code="maxHp" type="int32" />
-		<field column="物攻增加" code="pDamAdd" type="int32" />
-		<field column="魔攻增加" code="mDamAdd" type="int32" />
-		<field column="物防增加" code="pDefAdd" type="int32" />
-		<field column="魔防增加" code="mDefAdd" type="int32" />
+		<field column="物攻" code="pDam" type="int32" />
+		<field column="魔攻" code="mDam" type="int32" />
+		<field column="物防" code="pDef" type="int32" />
+		<field column="魔防" code="mDef" type="int32" />
 
 		<field column="命中" code="hit" type="int32" />
 		<field column="闪避" code="hide" type="int32" />
@@ -24,6 +24,6 @@
 		<field column="移动速度" code="moveSpeed" type="int32" />
 
 		<field column="需求等级" code="needLevel" type="int32" />
-		<field column="品质系数" code="quality" type="int32" />
+		<field column="品质系数" code="quality" type="uint16" />
 		</output>
 </table>
