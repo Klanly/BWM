@@ -8,6 +8,10 @@
 		
 		<field column="名称" code="name" type="string" />
 		<field column="描述" code="desc" type="string" />
+		<field column="是否显示" code="needShow" type="uint16" />
+		<field column="BUFF时间" code="time" type="int32" />
+		<field column="BUFF类型" code="type" type="uint16" />
+		<field column="是否计算战斗力" code="needPower" type="uint16" />
 	</output>
 	<output type="json-go" code="TableBuff" file="Buff表.xlsx" sheet="Sheet1">
 		<key code="id" />

@@ -31,5 +31,6 @@
 		<field column="魔攻" code="mDam" type="int32" />
 		<field column="物防" code="pDef" type="int32" />
 		<field column="魔防" code="mDef" type="int32" />
+		<field column="怪物伤害" code="monsterDam" type="int32" />
 	</output>
 </table>

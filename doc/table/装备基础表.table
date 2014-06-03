@@ -2,6 +2,7 @@
 <table>
 	<output type="json-go" code="TableEquipBase" file="装备基础表.xlsx" sheet="Sheet1">
 		<key code="id" />
+		<key code="quality" />
 		<field column="id" code="id" type="uint32" />
 
 		<field column="最大生命" code="maxHp" type="int32" />
@@ -20,6 +21,9 @@
 
 		<field column="反伤" code="reflect" type="int32" />
 		<field column="攻击速度" code="attackSpeed" type="int32" />
-		<field column="速度" code="moveSpeed" type="int32" />
-	</output>
+		<field column="移动速度" code="moveSpeed" type="int32" />
+
+		<field column="需求等级" code="needLevel" type="int32" />
+		<field column="品质系数" code="quality" type="int32" />
+		</output>
 </table>
