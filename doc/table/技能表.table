@@ -41,5 +41,28 @@
 		<field column="等级" code="level" type="uint16" />
 		
 		<field column="名称" code="name" type="string" />
+		<field column="距离" code="radius" type="int32" />
+		<field column="职业类型" code="profession" type="uint8">
+			<regex>^[123]$</regex>
+		</field>
+		<field column="技能类型" code="type" type="uint8">
+			<regex>^[123]$</regex>
+		</field>
+		<field column="学习消耗" code="requirePoint" type="uint32" />
+		<field column="消耗类型" code="requireType" type="uint8">
+			<regex>^[012]$</regex>
+		</field>
+		<field column="人物等级需求" code="requireLevel" type="uint32" />
+		<field column="前提技能" code="requireSkill" type="uint16" />
+		<field column="前提技能等级" code="requireSkillLevel" type="uint16" />
+		<field column="冷却时间" code="cd" type="uint32" />
+		<field column="准备时间" code="prepareTime" type="uint32" />
+		<field column="可否打断" code="interruptable" type="bool" />
+		<field column="技能路径" code="path" type="string" />
+
+		<field column="物理伤害" code="pDam" type="int32" />
+		<field column="魔法伤害" code="mDam" type="int32" />
+		<field column="技能伤害" code="skillDam" type="int32" />
+		<field column="目标数量" code="maxTarget" type="int32" />
 	</output>
 </table>
