@@ -1,6 +1,5 @@
 ﻿
 type NpcSkill struct{
-	Id uint16
-	Level uint16
+	Skill *TableSkill
 	Rate int32
 }	// npc技能
