@@ -32,5 +32,6 @@
 		<field column="物防" code="pDef" type="int32" />
 		<field column="魔防" code="mDef" type="int32" />
 		<field column="附加伤害" code="ExtDam" type="int32" />
+		<field column="技能" code="skills" type="string" />
 	</output>
 </table>
