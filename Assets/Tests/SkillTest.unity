@@ -668,7 +668,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startGo: {fileID: 1641303619}
   targetGo: {fileID: 1614362384}
-  skillGo: {fileID: 100000, guid: 8f1cfcb4d75139445a535ac92b391bff, type: 2}
+  skillGo: {fileID: 100000, guid: 91fe7fa681fbdb74898fdf87e6ddbc22, type: 2}
   buffGo: {fileID: 0}
 --- !u!4 &707289545
 Transform:
@@ -2064,6 +2064,7 @@ GameObject:
   - 81: {fileID: 1860885274}
   - 114: {fileID: 1860885279}
   - 114: {fileID: 1860885280}
+  - 114: {fileID: 1860885281}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -2154,6 +2155,27 @@ MonoBehaviour:
   isPaused: 0
   _name: 
 --- !u!114 &1860885280
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1860885273}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 085d9842593af44d8a507541ce47bc6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: 
+  type: 
+  method: 
+  easeType: 0
+  time: 0
+  delay: 0
+  loopType: 0
+  isRunning: 0
+  isPaused: 0
+  _name: 
+--- !u!114 &1860885281
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
