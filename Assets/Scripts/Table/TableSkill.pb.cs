@@ -134,6 +134,34 @@ namespace table
       get { return _path; }
       set { _path = value; }
     }
+    private int _pDam;
+    [global::ProtoBuf.ProtoMember(18, IsRequired = true, Name=@"pDam", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int pDam
+    {
+      get { return _pDam; }
+      set { _pDam = value; }
+    }
+    private int _mDam;
+    [global::ProtoBuf.ProtoMember(19, IsRequired = true, Name=@"mDam", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int mDam
+    {
+      get { return _mDam; }
+      set { _mDam = value; }
+    }
+    private int _skillDam;
+    [global::ProtoBuf.ProtoMember(20, IsRequired = true, Name=@"skillDam", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int skillDam
+    {
+      get { return _skillDam; }
+      set { _skillDam = value; }
+    }
+    private int _maxTarget;
+    [global::ProtoBuf.ProtoMember(21, IsRequired = true, Name=@"maxTarget", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int maxTarget
+    {
+      get { return _maxTarget; }
+      set { _maxTarget = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }

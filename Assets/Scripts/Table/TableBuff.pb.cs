@@ -43,6 +43,34 @@ namespace table
       get { return _desc; }
       set { _desc = value; }
     }
+    private uint _needShow;
+    [global::ProtoBuf.ProtoMember(5, IsRequired = true, Name=@"needShow", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint needShow
+    {
+      get { return _needShow; }
+      set { _needShow = value; }
+    }
+    private int _time;
+    [global::ProtoBuf.ProtoMember(6, IsRequired = true, Name=@"time", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int time
+    {
+      get { return _time; }
+      set { _time = value; }
+    }
+    private uint _type;
+    [global::ProtoBuf.ProtoMember(7, IsRequired = true, Name=@"type", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint type
+    {
+      get { return _type; }
+      set { _type = value; }
+    }
+    private uint _needPower;
+    [global::ProtoBuf.ProtoMember(8, IsRequired = true, Name=@"needPower", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint needPower
+    {
+      get { return _needPower; }
+      set { _needPower = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
