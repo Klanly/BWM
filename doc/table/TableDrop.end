@@ -1,0 +1,7 @@
+﻿
+type DropItem struct{
+	Id	 int32
+	Rate int32
+	Num  int32
+	Iv 	 string
+}	// npc技能

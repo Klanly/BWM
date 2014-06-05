@@ -3,3 +3,7 @@ type NpcSkill struct{
 	Skill *TableSkill
 	Rate int32
 }	// npc技能
+type NpcDrop struct{
+	Id	 int32
+	Rate int32
+}	// npc技能

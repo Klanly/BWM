@@ -33,5 +33,6 @@
 		<field column="魔防" code="mDef" type="int32" />
 		<field column="附加伤害" code="ExtDam" type="int32" />
 		<field column="技能" code="skills" type="string" />
+		<field column="掉落池" code="drops" type="string" />
 	</output>
 </table>
