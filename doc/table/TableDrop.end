@@ -1,6 +1,6 @@
 ﻿
 type DropItem struct{
-	Id	 int32
+	Id	 uint32
 	Rate int32
 	Num  int32
 	Iv 	 string
