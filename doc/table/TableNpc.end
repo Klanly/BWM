@@ -4,6 +4,6 @@ type NpcSkill struct{
 	Rate int32
 }	// npc技能
 type NpcDrop struct{
-	Id	 int32
-	Rate int32
+	Drop	*TableDrop
+	Rate 	int32
 }	// npc技能
