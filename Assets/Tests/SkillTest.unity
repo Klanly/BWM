@@ -668,7 +668,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startGo: {fileID: 1641303619}
   targetGo: {fileID: 1614362384}
-  skillGo: {fileID: 100000, guid: 91fe7fa681fbdb74898fdf87e6ddbc22, type: 2}
+  skillGo: {fileID: 100000, guid: 638c4648fc136f0468f845c70220bf74, type: 2}
   buffGo: {fileID: 0}
 --- !u!4 &707289545
 Transform:
@@ -1394,7 +1394,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!23 &1257312135
 Renderer:
   m_ObjectHideFlags: 0
