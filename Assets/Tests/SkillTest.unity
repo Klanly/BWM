@@ -668,7 +668,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startGo: {fileID: 1641303619}
   targetGo: {fileID: 1614362384}
-  skillGo: {fileID: 100000, guid: 638c4648fc136f0468f845c70220bf74, type: 2}
+  skillGo: {fileID: 100000, guid: 1760a74cebbbb314a955c4f5c1b6dc6e, type: 2}
   buffGo: {fileID: 0}
 --- !u!4 &707289545
 Transform:
@@ -912,6 +912,10 @@ Prefab:
     - target: {fileID: 400066, guid: d5409ef154fa4564783d2cc1147d4a27, type: 2}
       propertyPath: m_LocalScale.z
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 100066, guid: d5409ef154fa4564783d2cc1147d4a27, type: 2}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d5409ef154fa4564783d2cc1147d4a27, type: 2}
