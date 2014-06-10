@@ -668,7 +668,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startGo: {fileID: 1641303619}
   targetGo: {fileID: 1614362384}
-  skillGo: {fileID: 100000, guid: 1760a74cebbbb314a955c4f5c1b6dc6e, type: 2}
+  skillGo: {fileID: 100000, guid: 8f5938b8c9476f748b3774259e4dbebc, type: 2}
   buffGo: {fileID: 0}
 --- !u!4 &707289545
 Transform:
@@ -2115,7 +2115,7 @@ Camera:
     height: 1
   near clip plane: .300000012
   far clip plane: 1000
-  field of view: 36.5999985
+  field of view: 71
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
