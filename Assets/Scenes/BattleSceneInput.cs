@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using Cmd;
+using GX.Net;
 
 /// <summary>
 /// 战斗场景输入处理
@@ -79,11 +80,15 @@ public class BattleSceneInput : MonoBehaviour
 			}
 			else
 			{
-				Application.LoadLevel("RoleListScene");
+				Net.Instance.Send(new CharactorUnregSelectUserCmd_CS() { });
 			}
 		}
 	}
-
+	[Execute]
+	public static void Execute(CharactorUnregSelectUserCmd_CS cmd)
+	{
+		Application.LoadLevel("RoleListScene");
+	}
 	/// <summary>
 	/// is sent when keyboard or controller input is used.
 	/// </summary>

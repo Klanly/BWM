@@ -149,10 +149,10 @@ namespace Cmd
       get { return _hurtid; }
       set { _hurtid = value; }
     }
-    private uint _hp = default(uint);
+    private int _hp = default(int);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"hp", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
-    public uint hp
+    [global::System.ComponentModel.DefaultValue(default(int))]
+    public int hp
     {
       get { return _hp; }
       set { _hp = value; }
