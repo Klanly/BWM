@@ -14,7 +14,7 @@ public class Npc : MonoBehaviour
 
 	private MapNav MapNav { get { return BattleScene.Instance.MapNav; } }
 	private Entity entity;
-	//private Animator animator;
+	private Animator animator;
 	private Move move;
 
 	static Npc()
@@ -56,7 +56,7 @@ public class Npc : MonoBehaviour
 		npc.entity = avatar.AddComponent<Entity>();
 		npc.move = avatar.AddComponent<Move>();
 		npc.move.speed = sender => npc.ServerInfo.movespeed * 0.01f;
-		//npc.animator = avatar.GetComponent<Animator>();
+		npc.animator = avatar.GetComponent<Animator>();
 		npc.ServerInfo = info;
 		npc.TableInfo = tbl;
 
@@ -135,6 +135,8 @@ public class Npc : MonoBehaviour
 		target.ServerInfo.maxhp = cmd.maxhp;
 		target.ServerInfo.hp = cmd.hp;
 		SelectTarget.OnUpdate(target);
+		//如果死亡,死亡动画
+		target.animator.SetInteger("hp", target.ServerInfo.hp); ;
 	}
 
 	[Execute]
@@ -145,6 +147,8 @@ public class Npc : MonoBehaviour
 			return;
 		target.ServerInfo.hp = cmd.curhp;
 		SelectTarget.OnUpdate(target);
+		//如果死亡,死亡动画
+		target.animator.SetInteger("hp", target.ServerInfo.hp); ;
 	}
 	#endregion
 }

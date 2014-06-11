@@ -28,7 +28,7 @@ public class SkillPlayStartAnimate : SkillBase
 			var animator = skill.startGo.GetComponent<Animator>();
 			if (animator)
 			{
-				Debug.Log(action);
+				//Debug.Log(action);
 				animator.Play(action);
 			}
 		}
