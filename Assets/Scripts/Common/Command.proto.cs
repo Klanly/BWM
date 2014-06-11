@@ -45,7 +45,10 @@ namespace Cmd
       Item = 11,
             
       [global::ProtoBuf.ProtoEnum(Name=@"Script", Value=12)]
-      Script = 12
+      Script = 12,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"Relive", Value=13)]
+      Relive = 13
     }
   
 }

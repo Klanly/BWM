@@ -25,7 +25,10 @@ namespace Cmd
       AddExpPropertyUserCmd_S = 1,
             
       [global::ProtoBuf.ProtoEnum(Name=@"MainUserDataPropertyUserCmd_S", Value=2)]
-      MainUserDataPropertyUserCmd_S = 2
+      MainUserDataPropertyUserCmd_S = 2,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"PickUpItemPropertyUserCmd_C", Value=3)]
+      PickUpItemPropertyUserCmd_C = 3
     }
   
     private global::ProtoBuf.IExtension extensionObject;
@@ -83,6 +86,23 @@ namespace Cmd
     {
       get { return _data; }
       set { _data = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"PickUpItemPropertyUserCmd_C")]
+  public partial class PickUpItemPropertyUserCmd_C : global::ProtoBuf.IExtensible
+  {
+    public PickUpItemPropertyUserCmd_C() {}
+    
+    private uint _thisid;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"thisid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint thisid
+    {
+      get { return _thisid; }
+      set { _thisid = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
