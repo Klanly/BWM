@@ -54,6 +54,14 @@ namespace Cmd
       get { return _type; }
       set { _type = value; }
     }
+    private Cmd.Pos _pos = null;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"pos", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(null)]
+    public Cmd.Pos pos
+    {
+      get { return _pos; }
+      set { _pos = value; }
+    }
     [global::ProtoBuf.ProtoContract(Name=@"PackageType")]
     public enum PackageType
     {
@@ -62,7 +70,10 @@ namespace Cmd
       Main = 0,
             
       [global::ProtoBuf.ProtoEnum(Name=@"Equip", Value=1)]
-      Equip = 1
+      Equip = 1,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"Scene", Value=2)]
+      Scene = 2
     }
   
     private global::ProtoBuf.IExtension extensionObject;

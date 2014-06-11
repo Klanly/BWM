@@ -179,22 +179,29 @@ namespace Cmd
       get { return _baseid; }
       set { _baseid = value; }
     }
+    private uint _createtime;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"createtime", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint createtime
+    {
+      get { return _createtime; }
+      set { _createtime = value; }
+    }
     private int _num;
-    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"num", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoMember(4, IsRequired = true, Name=@"num", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     public int num
     {
       get { return _num; }
       set { _num = value; }
     }
     private Cmd.ItemLocation _loc;
-    [global::ProtoBuf.ProtoMember(4, IsRequired = true, Name=@"loc", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::ProtoBuf.ProtoMember(5, IsRequired = true, Name=@"loc", DataFormat = global::ProtoBuf.DataFormat.Default)]
     public Cmd.ItemLocation loc
     {
       get { return _loc; }
       set { _loc = value; }
     }
     private readonly global::System.Collections.Generic.List<Cmd.KeyValue> _kvlist = new global::System.Collections.Generic.List<Cmd.KeyValue>();
-    [global::ProtoBuf.ProtoMember(5, Name=@"kvlist", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::ProtoBuf.ProtoMember(6, Name=@"kvlist", DataFormat = global::ProtoBuf.DataFormat.Default)]
     public global::System.Collections.Generic.List<Cmd.KeyValue> kvlist
     {
       get { return _kvlist; }
