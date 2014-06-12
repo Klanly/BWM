@@ -34,5 +34,7 @@
 		<field column="附加伤害" code="ExtDam" type="int32" />
 		<field column="技能" code="skills" type="string" />
 		<field column="掉落池" code="drops" type="string" />
+		<field column="尸体消失技能" code="BoneSkill" type="uint32" />
+		<field column="尸体停留时间" code="BoneTime" type="uint32" />
 	</output>
 </table>
