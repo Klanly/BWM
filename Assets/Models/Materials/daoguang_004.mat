@@ -6,8 +6,8 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: Ani_Dd_Att_01_06
-  m_Shader: {fileID: 200, guid: 0000000000000000f000000000000000, type: 0}
+  m_Name: daoguang_004
+  m_Shader: {fileID: 203, guid: 0000000000000000f000000000000000, type: 0}
   m_ShaderKeywords: []
   m_CustomRenderQueue: -1
   m_SavedProperties:
@@ -24,13 +24,9 @@ Material:
       data:
         first:
           name: _InvFade
-        second: .893214285
+        second: 1
     m_Colors:
       data:
         first:
-          name: _Color
-        second: {r: .588, g: .588, b: .588, a: 1}
-      data:
-        first:
           name: _TintColor
-        second: {r: .501960814, g: .501960814, b: .501960814, a: .250980407}
+        second: {r: .5, g: .5, b: .5, a: .250980407}
