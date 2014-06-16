@@ -12,8 +12,6 @@ public class SceneItem : MonoBehaviour
 
 	public SaveItem ServerInfo { get; private set; }
 
-
-	private MapNav MapNav { get { return BattleScene.Instance.MapNav; } }
 	private Entity entity;
 	private Animator animator;
 
@@ -44,7 +42,7 @@ public class SceneItem : MonoBehaviour
 
 		var item = avatar.AddComponent<SceneItem>();
 		item.entity = avatar.AddComponent<Entity>();
-		item.animator = avatar.GetComponent<Animator>();
+		//item.animator = avatar.GetComponent<Animator>();
 		item.ServerInfo = info;
 
 		return item;
@@ -67,8 +65,8 @@ public class SceneItem : MonoBehaviour
 			SceneItem.All[cmd.item.thisid] = item;
 		}
 		var pos = cmd.item.loc.pos;
-		pos.x = pos.x * 25;
-		pos.y = pos.y * 25;
+		//pos.x = pos.x * 25;
+		//pos.y = pos.y * 25;
 		item.entity.Grid = new MapGrid(cmd.item.loc.pos);
 	}
 

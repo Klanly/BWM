@@ -5,6 +5,7 @@ using System.Collections.Generic;
 
 public class SelectTargetBoss : MonoBehaviour
 {
+	public UILabel uiLevel;
 	public UILabel nameLabel;
 	public UISprite uiHp;
 	public UISprite uiHpBack;
@@ -13,6 +14,7 @@ public class SelectTargetBoss : MonoBehaviour
 	internal void OnSelect(Npc target)
 	{
 		nameLabel.text = target.TableInfo.name;
+		uiLevel.text = target.TableInfo.level.ToString();
 		SetupBars(target.TableInfo.hpBar);
 	}
 	internal void OnUpdate(Npc target)

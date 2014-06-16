@@ -106,5 +106,6 @@ public class BattleScene : MonoBehaviour
 		// TODO: use event driven
 		Role.All.Clear();
 		Npc.All.Clear();
+		SceneItem.All.Clear();
 	}
 }

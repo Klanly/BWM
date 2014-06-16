@@ -4,6 +4,7 @@ using System.Collections;
 public class SelectTargetRole : MonoBehaviour
 {
 	public UILabel uiName;
+	public UILabel uiLevel;
 	public UISprite uiHead;
 	public UISlider uiHp;
 
@@ -27,5 +28,6 @@ public class SelectTargetRole : MonoBehaviour
 	{
 		uiName.text = target.ServerInfo.charname;
 		uiHead.spriteName = target.ServerInfo.GetRoleHeadSprite();
+		uiLevel.text = target.ServerInfo.level.ToString();
 	}
 }
