@@ -66,7 +66,9 @@ public class SceneItem : MonoBehaviour
 			item = SceneItem.Create(cmd.item);
 			SceneItem.All[cmd.item.thisid] = item;
 		}
-
+		var pos = cmd.item.loc.pos;
+		pos.x = pos.x * 25;
+		pos.y = pos.y * 25;
 		item.entity.Grid = new MapGrid(cmd.item.loc.pos);
 	}
 

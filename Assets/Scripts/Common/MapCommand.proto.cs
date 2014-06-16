@@ -9,6 +9,7 @@
 
 // Generated from: mapcommand.proto
 // Note: requires additional types generated from: common.proto
+// Note: requires additional types generated from: savedata.proto
 namespace Cmd
 {
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"Map")]
@@ -39,7 +40,16 @@ namespace Cmd
       MainUserIntoSceneMapUserCmd_S = 6,
             
       [global::ProtoBuf.ProtoEnum(Name=@"UserLevelUpMapUserCmd_S", Value=7)]
-      UserLevelUpMapUserCmd_S = 7
+      UserLevelUpMapUserCmd_S = 7,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"AddMapItemMapUserCmd_S", Value=8)]
+      AddMapItemMapUserCmd_S = 8,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"ReplaceItemListMapUserCmd_S", Value=9)]
+      ReplaceItemListMapUserCmd_S = 9,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"RemoveMapItemMapUserCmd_S", Value=10)]
+      RemoveMapItemMapUserCmd_S = 10
     }
   
     private global::ProtoBuf.IExtension extensionObject;
@@ -275,6 +285,57 @@ namespace Cmd
     {
       get { return _level; }
       set { _level = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"AddMapItemMapUserCmd_S")]
+  public partial class AddMapItemMapUserCmd_S : global::ProtoBuf.IExtensible
+  {
+    public AddMapItemMapUserCmd_S() {}
+    
+    private Cmd.SaveItem _item;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"item", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public Cmd.SaveItem item
+    {
+      get { return _item; }
+      set { _item = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"ReplaceItemListMapUserCmd_S")]
+  public partial class ReplaceItemListMapUserCmd_S : global::ProtoBuf.IExtensible
+  {
+    public ReplaceItemListMapUserCmd_S() {}
+    
+    private readonly global::System.Collections.Generic.List<Cmd.SaveItem> _itemlist = new global::System.Collections.Generic.List<Cmd.SaveItem>();
+    [global::ProtoBuf.ProtoMember(1, Name=@"itemlist", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<Cmd.SaveItem> itemlist
+    {
+      get { return _itemlist; }
+    }
+  
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"RemoveMapItemMapUserCmd_S")]
+  public partial class RemoveMapItemMapUserCmd_S : global::ProtoBuf.IExtensible
+  {
+    public RemoveMapItemMapUserCmd_S() {}
+    
+    private ulong _thisid;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"thisid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public ulong thisid
+    {
+      get { return _thisid; }
+      set { _thisid = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
