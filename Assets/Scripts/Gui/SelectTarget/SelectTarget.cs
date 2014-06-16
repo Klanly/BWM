@@ -56,11 +56,22 @@ public class SelectTarget : MonoBehaviour
 			s_selected = value;
 			if (value == null)
 			{
-				BattleScene.Instance.Gui<SelectTargetBoss>().gameObject.SetActive(false);
-				BattleScene.Instance.Gui<SelectTargetElite>().gameObject.SetActive(false);
-				BattleScene.Instance.Gui<SelectTargetMonster>().gameObject.SetActive(false);
-				BattleScene.Instance.Gui<SelectTargetNpc>().gameObject.SetActive(false);
-				BattleScene.Instance.Gui<SelectTargetRole>().gameObject.SetActive(false);
+				MonoBehaviour gui = null;
+				gui = BattleScene.Instance.Gui<SelectTargetBoss>();
+				if(gui != null)
+					gui.gameObject.SetActive(false);
+				gui = BattleScene.Instance.Gui<SelectTargetElite>();
+				if (gui != null)
+					gui.gameObject.SetActive(false);
+				gui = BattleScene.Instance.Gui<SelectTargetMonster>();
+				if (gui != null)
+					gui.gameObject.SetActive(false);
+				gui = BattleScene.Instance.Gui<SelectTargetNpc>();
+				if (gui != null)
+					gui.gameObject.SetActive(false);
+				gui = BattleScene.Instance.Gui<SelectTargetRole>();
+				if (gui != null)
+					gui.gameObject.SetActive(false);
 			}
 			else
 			{

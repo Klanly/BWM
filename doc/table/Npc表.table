@@ -4,6 +4,7 @@
 		<key code="id" />
 		<field column="id" code="id" type="uint32" />
 		<field column="名称" code="name" type="string" />
+		<field column="等级" code="level" type="uint32" />
 		<field column="标签" code="label" type="string" />
 		<field column="模型" code="model" type="string">
 			<regex>^[^\\]+$</regex>
@@ -22,6 +23,7 @@
 	<output type="json-go" code="TableNpc" file="Npc表.xlsx" sheet="Sheet1">
 		<key code="id" />
 		<field column="id" code="id" type="uint32" />
+		<field column="等级" code="level" type="uint32" />
 		<field column="名称" code="name" type="string" />
 		<field column="基本类型" code="baseType" type="uint8" />
 		<field column="访问类型" code="clickType" type="uint8" />
