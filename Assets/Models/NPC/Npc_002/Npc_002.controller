@@ -100,7 +100,7 @@ Transition:
   - m_ConditionMode: 5
     m_ConditionEvent: hp
     m_EventTreshold: 0
-    m_ExitTime: .642857552
+    m_ExitTime: 1
   - m_ConditionMode: 6
     m_ConditionEvent: hp
     m_EventTreshold: 0
@@ -212,7 +212,7 @@ State:
   m_Motions:
   - {fileID: 7400010, guid: 5c840018bbb7e3a46a2f6c807161fc7b, type: 3}
   m_ParentStateMachine: {fileID: 110700000}
-  m_Position: {x: -432, y: 252, z: 0}
+  m_Position: {x: -432, y: 300, z: 0}
   m_IKOnFeet: 0
   m_Mirror: 0
   m_Tag: 
