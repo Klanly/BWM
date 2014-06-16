@@ -5,6 +5,9 @@
 		<field column="id" code="id" type="uint32" />
 		<field column="名称" code="name" type="string" />
 		<field column="说明" code="desc" type="string" />
+		<field column="掉落模型" code="model" type="string">
+			<regex>^[^\\]+$</regex>
+		</field>
 		<field column="类型" code="type" type="uint8">
 			<regex>^[^0]\d*$</regex>
 		</field>
