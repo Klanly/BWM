@@ -217,7 +217,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 400054, guid: 6b1c4c84c7d82be4884f72126ff6fb3e, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -5.44129372
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400054, guid: 6b1c4c84c7d82be4884f72126ff6fb3e, type: 2}
       propertyPath: m_LocalPosition.y
@@ -225,7 +225,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400054, guid: 6b1c4c84c7d82be4884f72126ff6fb3e, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 3.26105332
       objectReference: {fileID: 0}
     - target: {fileID: 400054, guid: 6b1c4c84c7d82be4884f72126ff6fb3e, type: 2}
       propertyPath: m_LocalRotation.x
@@ -1515,7 +1515,7 @@ Transform:
   m_PrefabInternal: {fileID: 65102232}
   m_GameObject: {fileID: 695258566}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.44129372, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 3.26105332}
   m_LocalScale: {x: 5, y: 5, z: 5}
   m_Children:
   - {fileID: 1547045498}
@@ -1630,9 +1630,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: edeb1b68d8072e94184e072105840666, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startGo: {fileID: 1641303619}
+  startGo: {fileID: 2073228169}
   targetGo: {fileID: 1614362384}
-  skillGo: {fileID: 100000, guid: 9b173701ed7fed240bd41f58477d2765, type: 2}
+  skillGo: {fileID: 100000, guid: 6823d9eb5248ac746b1630eeceab575a, type: 2}
   buffGo: {fileID: 0}
 --- !u!4 &707289545
 Transform:

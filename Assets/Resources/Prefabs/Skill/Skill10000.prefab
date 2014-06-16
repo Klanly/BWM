@@ -59,7 +59,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   delay: 0
-  particle: {fileID: 100010, guid: 40fe623ef1cdb494a965b98bba132434, type: 2}
+  particle: {fileID: 100008, guid: 20357da7c79f3874099a4c1e7916a5d1, type: 2}
   mountOfTargetGo: Bip01 Spine1
 --- !u!114 &11400004
 MonoBehaviour:
@@ -99,7 +99,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   delay: 0
-  particle: {fileID: 100004, guid: ea6adddf08d3b404fb79c8d45c14f150, type: 2}
+  particle: {fileID: 0}
   mountOfStartGo: 
 --- !u!114 &11400010
 MonoBehaviour:
