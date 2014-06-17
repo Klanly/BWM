@@ -64,7 +64,7 @@ Transition:
   - m_ConditionMode: 5
     m_ConditionEvent: hp
     m_EventTreshold: 0
-    m_ExitTime: .5
+    m_ExitTime: 1
   - m_ConditionMode: 6
     m_ConditionEvent: hp
     m_EventTreshold: 0
