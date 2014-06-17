@@ -17,7 +17,7 @@ GameObject:
   - 114: {fileID: 11400012}
   - 114: {fileID: 11400018}
   m_Layer: 0
-  m_Name: Skill10001
+  m_Name: Skill10002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -59,7 +59,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   delay: 0
-  particle: {fileID: 100006, guid: 7c6ec44d1ef46634f985c4121e9561de, type: 2}
+  particle: {fileID: 100006, guid: 8005ead84fbb66d4585761747db740e6, type: 2}
   mountOfTargetGo: 
 --- !u!114 &11400004
 MonoBehaviour:
@@ -74,7 +74,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sendTargetEvent: 1
   immediateDeleteParticle: 0
-  delay: .800000012
+  delay: .5
 --- !u!114 &11400006
 MonoBehaviour:
   m_ObjectHideFlags: 1
