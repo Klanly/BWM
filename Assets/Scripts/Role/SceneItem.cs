@@ -11,6 +11,7 @@ public class SceneItem : MonoBehaviour
 	public static ObservableDictionary<ulong, SceneItem> All { get; private set; }
 
 	public SaveItem ServerInfo { get; private set; }
+	public table.TableItem TableInfo { get; private set; }
 
 	private Entity entity;
 	private Animator animator;
@@ -44,11 +45,39 @@ public class SceneItem : MonoBehaviour
 		item.entity = avatar.AddComponent<Entity>();
 		//item.animator = avatar.GetComponent<Animator>();
 		item.ServerInfo = info;
-
+		item.TableInfo = tbl;
+		CreateHeadTip(item);
 		return item;
 	}
 
 
+	/// <summary>
+	/// 道具头顶文字
+	/// </summary>
+	/// <param name="npc"></param>
+	private static void CreateHeadTip(SceneItem item)
+	{
+		var headTip = (GameObject.Instantiate(Resources.Load("Prefabs/Gui/HeadTip")) as GameObject).GetComponent<UILabel>();
+#if UNITY_EDITOR
+		headTip.name = item.name;
+#endif
+		headTip.text = item.TableInfo.name;
+		headTip.hideIfOffScreen = true;
+		headTip.SetAnchor(item.gameObject);
+		headTip.bottomAnchor.absolute = 120;
+		headTip.topAnchor.absolute = headTip.bottomAnchor.absolute + 30;
+
+		var recycle = item.gameObject.AddComponent<OnDestroyAction>();
+		recycle.Action = () => { try { NGUITools.Destroy(headTip.gameObject); } catch { } };
+	}
+	public bool PickUp()
+	{
+		Net.Instance.Send(new Cmd.PickUpItemPropertyUserCmd_C()
+		{
+			thisid = this.ServerInfo.thisid
+		});
+		return true;
+	}
 
 	#region 网络消息 添加场景道具
 	[Execute]
@@ -65,9 +94,26 @@ public class SceneItem : MonoBehaviour
 			SceneItem.All[cmd.item.thisid] = item;
 		}
 		var pos = cmd.item.loc.pos;
-		//pos.x = pos.x * 25;
-		//pos.y = pos.y * 25;
+		pos.x = pos.x * 25;
+		pos.y = pos.y * 25;
 		item.entity.Grid = new MapGrid(cmd.item.loc.pos);
+	}
+
+	[Execute]
+	public static void Execute(ReplaceItemListMapUserCmd_S cmd)
+	{
+		SceneItem.All.Clear();
+		foreach(var v in cmd.itemlist)
+		{
+			var item = SceneItem.Create(v);
+			SceneItem.All[v.thisid] = item;
+			var pos = v.loc.pos;
+			pos.x = pos.x * 25;
+			pos.y = pos.y * 25;
+			item.entity.Grid = new MapGrid(v.loc.pos);
+		}
+
+		
 	}
 
 	[Execute]
