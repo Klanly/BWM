@@ -3195,10 +3195,10 @@ ParticleSystem:
           rgba: 16777215
         key1:
           serializedVersion: 2
-          rgba: 4278255432
+          rgba: 4281460991
         key2:
           serializedVersion: 2
-          rgba: 2555756
+          rgba: 28159
         key3:
           serializedVersion: 2
           rgba: 0
@@ -3216,7 +3216,7 @@ ParticleSystem:
           rgba: 0
         ctime0: 0
         ctime1: 32768
-        ctime2: 64571
+        ctime2: 65535
         ctime3: 0
         ctime4: 0
         ctime5: 0
@@ -6570,15 +6570,15 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 19800002, guid: 20357da7c79f3874099a4c1e7916a5d1, type: 2}
       propertyPath: ColorModule.gradient.maxGradient.key1.rgba
-      value: 4278255432
+      value: 4281460991
       objectReference: {fileID: 0}
     - target: {fileID: 19800002, guid: 20357da7c79f3874099a4c1e7916a5d1, type: 2}
       propertyPath: ColorModule.gradient.maxGradient.ctime2
-      value: 64571
+      value: 65535
       objectReference: {fileID: 0}
     - target: {fileID: 19800002, guid: 20357da7c79f3874099a4c1e7916a5d1, type: 2}
       propertyPath: ColorModule.gradient.maxGradient.key2.rgba
-      value: 2555756
+      value: 28159
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 20357da7c79f3874099a4c1e7916a5d1, type: 2}
