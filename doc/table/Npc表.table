@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <table>
-	<output type="lua-module" code="TableNpc" file="Npc表.xlsx" sheet="Sheet1">
+	<output type="protobuf" code="TableNpc" file="Npc表.xlsx" sheet="Sheet1">
 		<key code="id" />
 		<field column="id" code="id" type="uint32" />
 		<field column="名称" code="name" type="string" />
@@ -18,13 +18,7 @@
 		<field column="血条贴图" code="hpBar" type="array" default="[&quot;BarRed&quot;]">
 			<field type="string" />
 		</field>
-		<field column="技能" code="skills" type="array">
-			<field type="object">
-				<field code="skillid" type="uint16" />
-				<field code="skilllevel" type="uint16" />
-				<field code="rate" type="int32" />
-			</field>
-		</field>
+		
 	</output>
 	<output type="json-go" code="TableNpc" file="Npc表.xlsx" sheet="Sheet1">
 		<key code="id" />
@@ -40,7 +34,13 @@
 		<field column="物防" code="pDef" type="int32" />
 		<field column="魔防" code="mDef" type="int32" />
 		<field column="附加伤害" code="ExtDam" type="int32" />
-		<field column="技能" code="skills" type="string" />
+		<field column="技能" code="skills" type="array">
+			<field type="object">
+				<field code="skillid" type="uint16" />
+				<field code="skilllevel" type="uint16" />
+				<field code="rate" type="int32" />
+			</field>
+		</field>
 		<field column="掉落池" code="drops" type="string" />
 		<field column="尸体消失技能" code="BoneSkill" type="uint32" />
 		<field column="尸体停留时间" code="BoneTime" type="uint32" />
