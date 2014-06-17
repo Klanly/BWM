@@ -64,7 +64,7 @@ Transition:
   - m_ConditionMode: 5
     m_ConditionEvent: hp
     m_EventTreshold: 0
-    m_ExitTime: 1
+    m_ExitTime: .758064568
   m_Atomic: 1
   m_Solo: 0
   m_Mute: 0
@@ -100,7 +100,7 @@ Transition:
   - m_ConditionMode: 5
     m_ConditionEvent: hp
     m_EventTreshold: 0
-    m_ExitTime: .5
+    m_ExitTime: .758064568
   - m_ConditionMode: 6
     m_ConditionEvent: hp
     m_EventTreshold: 0
@@ -186,7 +186,7 @@ State:
   m_Speed: 1
   m_CycleOffset: 0
   m_Motions:
-  - {fileID: 7400008, guid: 23f945269ede9c448a8416d1296dc457, type: 3}
+  - {fileID: 7400016, guid: 23f945269ede9c448a8416d1296dc457, type: 3}
   m_ParentStateMachine: {fileID: 110700000}
   m_Position: {x: -576, y: -144, z: 0}
   m_IKOnFeet: 0

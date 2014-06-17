@@ -59,8 +59,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   delay: 0
-  particle: {fileID: 100010, guid: 40fe623ef1cdb494a965b98bba132434, type: 2}
-  mountOfTargetGo: Bip01 Spine1
+  particle: {fileID: 100006, guid: 7c6ec44d1ef46634f985c4121e9561de, type: 2}
+  mountOfTargetGo: 
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -74,7 +74,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sendTargetEvent: 1
   immediateDeleteParticle: 0
-  delay: .5
+  delay: .800000012
 --- !u!114 &11400006
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -99,7 +99,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   delay: 0
-  particle: {fileID: 100010, guid: 0da002d95ed857643854a2f77aee25f1, type: 2}
+  particle: {fileID: 0}
   mountOfStartGo: 
 --- !u!114 &11400010
 MonoBehaviour:

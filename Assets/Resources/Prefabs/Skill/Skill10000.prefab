@@ -59,7 +59,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   delay: 0
-  particle: {fileID: 100002, guid: 20357da7c79f3874099a4c1e7916a5d1, type: 2}
+  particle: {fileID: 100004, guid: 20357da7c79f3874099a4c1e7916a5d1, type: 2}
   mountOfTargetGo: 
 --- !u!114 &11400004
 MonoBehaviour:
@@ -74,7 +74,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sendTargetEvent: 1
   immediateDeleteParticle: 0
-  delay: .600000024
+  delay: .5
 --- !u!114 &11400006
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -137,7 +137,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20a1277eeeb4295428bdf9a68af90eb5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  delay: .600000024
+  delay: .5
   shakeAmount: {x: .100000001, y: .100000001, z: .100000001}
   time: .150000006
 --- !u!1001 &100100000
