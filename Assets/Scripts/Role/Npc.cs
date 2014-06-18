@@ -69,7 +69,7 @@ public class Npc : MonoBehaviour
 	/// NPC头顶文字
 	/// </summary>
 	/// <param name="npc"></param>
-	private static void CreateHeadTip(Npc npc)
+	private static void CreateHeadTip1(Npc npc)
 	{
 		var headTip = (GameObject.Instantiate(Resources.Load("Prefabs/Gui/HeadTip")) as GameObject).GetComponent<UILabel>();
 #if UNITY_EDITOR
@@ -80,6 +80,26 @@ public class Npc : MonoBehaviour
 		headTip.SetAnchor(npc.gameObject);
 		headTip.bottomAnchor.absolute = 120;
 		headTip.topAnchor.absolute = headTip.bottomAnchor.absolute + 30;
+
+		var recycle = npc.gameObject.AddComponent<OnDestroyAction>();
+		recycle.Action = () => { try { NGUITools.Destroy(headTip.gameObject); } catch { } };
+	}
+	private static void CreateHeadTip(Npc npc)
+	{
+		var go = GameObject.Instantiate(Resources.Load("Prefabs/Gui/HeadTipNpc")) as GameObject;
+#if UNITY_EDITOR
+		go.name = npc.name;
+#endif
+		var headTip = go.GetComponent<HeadTip>();
+		headTip.text.text = npc.TableInfo.name;
+		headTip.hpText.text = "100/100";
+		headTip.hpProgress.value = 0.8f;
+
+		var widget = go.GetComponent<UIWidget>();
+		widget.hideIfOffScreen = true;
+		widget.SetAnchor(npc.gameObject);
+		widget.bottomAnchor.absolute = 120;
+		widget.topAnchor.absolute = widget.bottomAnchor.absolute + 30;
 
 		var recycle = npc.gameObject.AddComponent<OnDestroyAction>();
 		recycle.Action = () => { try { NGUITools.Destroy(headTip.gameObject); } catch { } };
