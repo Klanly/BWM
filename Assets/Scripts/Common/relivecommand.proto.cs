@@ -21,11 +21,69 @@ namespace Cmd
     public enum Param
     {
             
-      [global::ProtoBuf.ProtoEnum(Name=@"RequestReliveUserCmd_C", Value=1)]
-      RequestReliveUserCmd_C = 1,
+      [global::ProtoBuf.ProtoEnum(Name=@"ReliveMethodsReliveUserCmd_S", Value=1)]
+      ReliveMethodsReliveUserCmd_S = 1,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"ReturnReliveUserCmd_S", Value=2)]
-      ReturnReliveUserCmd_S = 2
+      [global::ProtoBuf.ProtoEnum(Name=@"RequestReliveUserCmd_C", Value=2)]
+      RequestReliveUserCmd_C = 2,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"ReturnReliveUserCmd_S", Value=3)]
+      ReturnReliveUserCmd_S = 3
+    }
+  
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"ReliveType")]
+  public partial class ReliveType : global::ProtoBuf.IExtensible
+  {
+    public ReliveType() {}
+    
+    private int _type;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"type", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int type
+    {
+      get { return _type; }
+      set { _type = value; }
+    }
+    private string _desc;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"desc", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public string desc
+    {
+      get { return _desc; }
+      set { _desc = value; }
+    }
+    private int _cold;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"cold", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int cold
+    {
+      get { return _cold; }
+      set { _cold = value; }
+    }
+    private int _money;
+    [global::ProtoBuf.ProtoMember(4, IsRequired = true, Name=@"money", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int money
+    {
+      get { return _money; }
+      set { _money = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"ReliveMethodsReliveUserCmd_S")]
+  public partial class ReliveMethodsReliveUserCmd_S : global::ProtoBuf.IExtensible
+  {
+    public ReliveMethodsReliveUserCmd_S() {}
+    
+    private readonly global::System.Collections.Generic.List<Cmd.ReliveType> _relive = new global::System.Collections.Generic.List<Cmd.ReliveType>();
+    [global::ProtoBuf.ProtoMember(1, Name=@"relive", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<Cmd.ReliveType> relive
+    {
+      get { return _relive; }
     }
   
     private global::ProtoBuf.IExtension extensionObject;
@@ -38,9 +96,9 @@ namespace Cmd
   {
     public RequestReliveUserCmd_C() {}
     
-    private long _type;
+    private int _type;
     [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"type", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public long type
+    public int type
     {
       get { return _type; }
       set { _type = value; }
