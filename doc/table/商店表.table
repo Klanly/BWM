@@ -1,13 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <table>
-	<output type="json-go" code="TableDrop" file="掉落池.xlsx" sheet="Sheet1">
+	<output type="json-go" code="TableShop" file="商店表.xlsx" sheet="Sheet1">
 		<key code="id" />
 		<field column="id" code="id" type="uint32" />
-		<field column="掉落道具" code="items" type="array">
+		<field column="出售道具" code="items" type="array">
 			<field type="object">
 				<field code="itemid" type="uint32" />
-				<field code="rate" type="int32" />
 				<field code="num" type="int32" />
+				<field code="moneytype" type="uint16" />
+				<field code="money" type="int32" />
 				<field code="iv" type="string" />
 			</field>
 		</field>

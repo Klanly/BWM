@@ -41,7 +41,12 @@
 				<field code="rate" type="int32" />
 			</field>
 		</field>
-		<field column="掉落池" code="drops" type="string" />
+		<field column="掉落池" code="drops" type="array">
+			<field type="object">
+				<field code="dropid" type="uint32" />
+				<field code="rate" type="int32" />
+			</field>
+		</field>
 		<field column="尸体消失技能" code="BoneSkill" type="uint32" />
 		<field column="尸体停留时间" code="BoneTime" type="uint32" />
 	</output>

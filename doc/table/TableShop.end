@@ -1,0 +1,8 @@
+﻿
+type ShopItem struct{
+	Id	 uint32
+	Num  int32
+	MoneyType uint16
+	Money	 int32
+	Iv 	 string
+}	// npc技能
