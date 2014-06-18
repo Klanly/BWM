@@ -8,7 +8,8 @@
 				<field code="itemid" type="uint32" />
 				<field code="num" type="int32" />
 				<field code="moneytype" type="uint16" />
-				<field code="money" type="int32" />
+				<field code="moneyshow" type="int32" />
+				<field code="moneyreal" type="int32" />
 				<field code="iv" type="string" />
 			</field>
 		</field>
