@@ -14,6 +14,8 @@ public class Revive : MonoBehaviour
 
 	void Start()
 	{
+		var root = GameObject.Find("UI Root");
+		GetComponent<UIWidget>().SetAnchor(root, 0, 0, 0, 0);
 		NGUITools.BringForward(gameObject);
 		UIEventListener.Get(OK).onClick = go =>
 		{
