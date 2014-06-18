@@ -98,6 +98,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
+  - {fileID: 2100000, guid: d140c5a78d20dbc4fae18d703186d3c0, type: 2}
   - {fileID: 2100000, guid: c645c9975c82cfa498895557614c6e5f, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
@@ -190,7 +191,7 @@ ParticleSystem:
         m_PostInfinity: 2
       minMaxState: 0
     startSpeed:
-      scalar: 1
+      scalar: .5
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -317,7 +318,7 @@ ParticleSystem:
         rgba: 4294967295
       minMaxState: 0
     startSize:
-      scalar: .0500000007
+      scalar: .0299999993
       maxCurve:
         serializedVersion: 2
         m_Curve:
