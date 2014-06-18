@@ -16,6 +16,15 @@ public class SceneItem : MonoBehaviour
 	private Entity entity;
 	private Animator animator;
 
+	/// <summary>
+	/// 上次检测拾取的时间，免得多次发送消息
+	/// </summary>
+	private float lastPickUpTime = 0;
+	/// <summary>
+	/// 检测拾取的冷却
+	/// </summary>
+	private float deltaPickUpTime = 1.0f;
+
 	static SceneItem()
 	{
 		All = new ObservableDictionary<ulong, SceneItem>();
@@ -47,9 +56,20 @@ public class SceneItem : MonoBehaviour
 		item.ServerInfo = info;
 		item.TableInfo = tbl;
 		CreateHeadTip(item);
+
+		item.lastPickUpTime = Time.time;
+		if (MainRole.Instance != null)
+			MainRole.Instance.entity.PositionChanged += item.OnMainRolePositionChanged;
+		item.StartCoroutine("WaitAndPickUp", item.deltaPickUpTime);
 		return item;
 	}
 
+	void OnDestroy()
+	{
+		StopCoroutine("WaitAndPickUp");
+		if (MainRole.Instance != null)
+			MainRole.Instance.entity.PositionChanged -= OnMainRolePositionChanged;
+	}
 
 	/// <summary>
 	/// 道具头顶文字
@@ -70,13 +90,39 @@ public class SceneItem : MonoBehaviour
 		var recycle = item.gameObject.AddComponent<OnDestroyAction>();
 		recycle.Action = () => { try { NGUITools.Destroy(headTip.gameObject); } catch { } };
 	}
+
+	/// <summary>
+	/// 主角位置改变时，检查是否可拾取
+	/// </summary>
+	/// <param name="sender">Sender.</param>
+	void OnMainRolePositionChanged(Entity sender)
+	{
+		PickUp();
+	}
+
+	IEnumerator WaitAndPickUp(float waitTime) {
+		yield return new WaitForSeconds(waitTime);
+		PickUp();
+	}
+
 	public bool PickUp()
 	{
-		Net.Instance.Send(new Cmd.PickUpItemPropertyUserCmd_C()
+		if ((Time.time - lastPickUpTime) > deltaPickUpTime)
 		{
-			thisid = this.ServerInfo.thisid
-		});
-		return true;
+			if (MainRole.Instance != null && gameObject.GetComponent<Entity>() != null)
+			{
+				if(Vector3.Distance(MainRole.Instance.entity.Position,entity.Position) < 1.5f)
+				{
+					lastPickUpTime = Time.time;
+					Net.Instance.Send(new Cmd.PickUpItemPropertyUserCmd_C()
+					{
+						thisid = this.ServerInfo.thisid
+					});
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 
 	#region 网络消息 添加场景道具
