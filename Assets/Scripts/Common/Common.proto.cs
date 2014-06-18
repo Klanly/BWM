@@ -94,11 +94,18 @@ namespace Cmd
       set { _userdata = value; }
     }
     private int _hp;
-    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"hp", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"hp", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     public int hp
     {
       get { return _hp; }
       set { _hp = value; }
+    }
+    private int _maxhp;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"maxhp", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int maxhp
+    {
+      get { return _maxhp; }
+      set { _maxhp = value; }
     }
     private int _sp;
     [global::ProtoBuf.ProtoMember(4, IsRequired = true, Name=@"sp", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
@@ -107,29 +114,36 @@ namespace Cmd
       get { return _sp; }
       set { _sp = value; }
     }
+    private int _maxsp;
+    [global::ProtoBuf.ProtoMember(5, IsRequired = true, Name=@"maxsp", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int maxsp
+    {
+      get { return _maxsp; }
+      set { _maxsp = value; }
+    }
     private long _exp;
-    [global::ProtoBuf.ProtoMember(5, IsRequired = true, Name=@"exp", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoMember(6, IsRequired = true, Name=@"exp", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     public long exp
     {
       get { return _exp; }
       set { _exp = value; }
     }
     private long _nextexp;
-    [global::ProtoBuf.ProtoMember(6, IsRequired = true, Name=@"nextexp", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoMember(7, IsRequired = true, Name=@"nextexp", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     public long nextexp
     {
       get { return _nextexp; }
       set { _nextexp = value; }
     }
     private uint _level;
-    [global::ProtoBuf.ProtoMember(7, IsRequired = true, Name=@"level", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoMember(8, IsRequired = true, Name=@"level", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     public uint level
     {
       get { return _level; }
       set { _level = value; }
     }
     private int _pDam = default(int);
-    [global::ProtoBuf.ProtoMember(8, IsRequired = false, Name=@"pDam", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoMember(9, IsRequired = false, Name=@"pDam", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     [global::System.ComponentModel.DefaultValue(default(int))]
     public int pDam
     {
@@ -137,7 +151,7 @@ namespace Cmd
       set { _pDam = value; }
     }
     private int _mDam = default(int);
-    [global::ProtoBuf.ProtoMember(9, IsRequired = false, Name=@"mDam", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoMember(10, IsRequired = false, Name=@"mDam", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     [global::System.ComponentModel.DefaultValue(default(int))]
     public int mDam
     {
@@ -145,7 +159,7 @@ namespace Cmd
       set { _mDam = value; }
     }
     private int _pDef = default(int);
-    [global::ProtoBuf.ProtoMember(10, IsRequired = false, Name=@"pDef", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoMember(11, IsRequired = false, Name=@"pDef", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     [global::System.ComponentModel.DefaultValue(default(int))]
     public int pDef
     {
@@ -153,7 +167,7 @@ namespace Cmd
       set { _pDef = value; }
     }
     private int _mDef = default(int);
-    [global::ProtoBuf.ProtoMember(11, IsRequired = false, Name=@"mDef", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoMember(12, IsRequired = false, Name=@"mDef", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     [global::System.ComponentModel.DefaultValue(default(int))]
     public int mDef
     {
@@ -161,7 +175,7 @@ namespace Cmd
       set { _mDef = value; }
     }
     private int _pIggnore = default(int);
-    [global::ProtoBuf.ProtoMember(12, IsRequired = false, Name=@"pIggnore", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoMember(13, IsRequired = false, Name=@"pIggnore", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     [global::System.ComponentModel.DefaultValue(default(int))]
     public int pIggnore
     {
@@ -169,7 +183,7 @@ namespace Cmd
       set { _pIggnore = value; }
     }
     private int _mIggnore = default(int);
-    [global::ProtoBuf.ProtoMember(13, IsRequired = false, Name=@"mIggnore", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoMember(14, IsRequired = false, Name=@"mIggnore", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     [global::System.ComponentModel.DefaultValue(default(int))]
     public int mIggnore
     {
@@ -177,7 +191,7 @@ namespace Cmd
       set { _mIggnore = value; }
     }
     private int _moveSpeed = default(int);
-    [global::ProtoBuf.ProtoMember(14, IsRequired = false, Name=@"moveSpeed", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoMember(15, IsRequired = false, Name=@"moveSpeed", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     [global::System.ComponentModel.DefaultValue(default(int))]
     public int moveSpeed
     {
@@ -185,7 +199,7 @@ namespace Cmd
       set { _moveSpeed = value; }
     }
     private int _attackSpeed = default(int);
-    [global::ProtoBuf.ProtoMember(15, IsRequired = false, Name=@"attackSpeed", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoMember(16, IsRequired = false, Name=@"attackSpeed", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     [global::System.ComponentModel.DefaultValue(default(int))]
     public int attackSpeed
     {
@@ -193,7 +207,7 @@ namespace Cmd
       set { _attackSpeed = value; }
     }
     private int _hit = default(int);
-    [global::ProtoBuf.ProtoMember(16, IsRequired = false, Name=@"hit", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoMember(17, IsRequired = false, Name=@"hit", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     [global::System.ComponentModel.DefaultValue(default(int))]
     public int hit
     {
@@ -201,7 +215,7 @@ namespace Cmd
       set { _hit = value; }
     }
     private int _hide = default(int);
-    [global::ProtoBuf.ProtoMember(17, IsRequired = false, Name=@"hide", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoMember(18, IsRequired = false, Name=@"hide", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     [global::System.ComponentModel.DefaultValue(default(int))]
     public int hide
     {
@@ -209,7 +223,7 @@ namespace Cmd
       set { _hide = value; }
     }
     private int _lucky = default(int);
-    [global::ProtoBuf.ProtoMember(18, IsRequired = false, Name=@"lucky", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoMember(19, IsRequired = false, Name=@"lucky", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     [global::System.ComponentModel.DefaultValue(default(int))]
     public int lucky
     {
@@ -217,7 +231,7 @@ namespace Cmd
       set { _lucky = value; }
     }
     private int _force = default(int);
-    [global::ProtoBuf.ProtoMember(19, IsRequired = false, Name=@"force", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoMember(20, IsRequired = false, Name=@"force", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     [global::System.ComponentModel.DefaultValue(default(int))]
     public int force
     {
@@ -225,7 +239,7 @@ namespace Cmd
       set { _force = value; }
     }
     private int _miss = default(int);
-    [global::ProtoBuf.ProtoMember(20, IsRequired = false, Name=@"miss", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoMember(21, IsRequired = false, Name=@"miss", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     [global::System.ComponentModel.DefaultValue(default(int))]
     public int miss
     {
@@ -233,7 +247,7 @@ namespace Cmd
       set { _miss = value; }
     }
     private int _reflect = default(int);
-    [global::ProtoBuf.ProtoMember(21, IsRequired = false, Name=@"reflect", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoMember(22, IsRequired = false, Name=@"reflect", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     [global::System.ComponentModel.DefaultValue(default(int))]
     public int reflect
     {

@@ -186,10 +186,10 @@ public class MainRole : MonoBehaviour, INotifyPropertyChanged
 		var my = MainRole.Instance;
 		if (my != null && cmd.charid == my.Role.ServerInfo.charid)
 		{
-			my.maxhp = cmd.maxhp;
+			MainRole.ServerInfo.maxhp = cmd.maxhp;
 			MainRole.ServerInfo.hp = cmd.hp;
 			MainRole.Instance.OnPropertyChanged("hp");
-			my.maxsp = cmd.maxsp;
+			MainRole.ServerInfo.maxsp = cmd.maxsp;
 			MainRole.ServerInfo.sp = cmd.sp;
 			MainRole.Instance.OnPropertyChanged("sp");
 			return true;

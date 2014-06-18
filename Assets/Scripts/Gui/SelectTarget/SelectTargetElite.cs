@@ -6,6 +6,7 @@ public class SelectTargetElite : MonoBehaviour
 	public UILabel uiLevel;
 	public UILabel nameLabel;
 	public UISlider uiHp;
+	public UILabel uiHpText;
 
 	internal void OnSelect(Npc target)
 	{
@@ -16,5 +17,6 @@ public class SelectTargetElite : MonoBehaviour
 	internal void OnUpdate(Npc target)
 	{
 		uiHp.value = target.ServerInfo.hp / (float)target.ServerInfo.maxhp;
+		uiHpText.text = target.ServerInfo.hp + "/" + target.ServerInfo.maxhp;
 	}
 }
