@@ -38,6 +38,21 @@ public class BattleScene : MonoBehaviour
 		}
 		catch { return null; }
 	}
+
+	/// <summary>
+	/// 界面加到Panel下，并排在最前面
+	/// </summary>
+	/// <param name="go">Go.</param>
+	public static void AddToPanel(GameObject go)
+	{
+		var rootpanel = GameObject.Find("UI Root/Panel");
+		go.transform.parent = rootpanel.transform;
+		go.transform.localScale = Vector3.one;
+		go.transform.position = Vector3.zero;
+		go.GetComponent<UIWidget>().SetAnchor(rootpanel, 0, 0, 0, 0);
+		NGUITools.BringForward(go);
+	}
+
 	#endregion
 
 	#region Map

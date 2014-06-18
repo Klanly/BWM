@@ -14,16 +14,14 @@ public class Revive : MonoBehaviour
 
 	void Start()
 	{
-		var root = GameObject.Find("UI Root");
-		GetComponent<UIWidget>().SetAnchor(root, 0, 0, 0, 0);
-		NGUITools.BringForward(gameObject);
+		BattleScene.AddToPanel(gameObject);
 		UIEventListener.Get(OK).onClick = go =>
 		{
 			Net.Instance.Send(new RequestReliveUserCmd_C()
 			{
 				type = 1,
 			});
-		};;
+		};
 	}
 
 	/// <summary>

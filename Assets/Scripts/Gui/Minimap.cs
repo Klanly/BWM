@@ -9,6 +9,8 @@ public class Minimap : MonoBehaviour
 	public UISprite uiFlagRole;
 	public UISprite[] uiFlagNpc;
 	public UILabel uiMapGrid;
+	public GameObject uiCopy;
+	public GameObject uiStore;
 
 	private readonly Dictionary<Entity, UISprite> flags = new Dictionary<Entity, UISprite>();
 
@@ -55,6 +57,8 @@ public class Minimap : MonoBehaviour
 			if(i.Value.ServerInfo.charid != MainRole.ServerInfo.userdata.charid)
 				AddFlag(i.Value.GetComponent<Entity>(), uiFlagRole);
 		}
+
+		UIEventListener.Get(uiCopy).onClick = go =>	Instantiate(Resources.Load("Prefabs/Gui/CopyEnter"));
 	}
 	public void Setup()
 	{
