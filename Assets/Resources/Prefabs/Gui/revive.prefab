@@ -89,9 +89,9 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 400010}
-  - 114: {fileID: 11400014}
   - 65: {fileID: 6500002}
   - 114: {fileID: 11400000}
+  - 114: {fileID: 11400014}
   m_Layer: 13
   m_Name: revive
   m_TagString: Untagged
@@ -162,7 +162,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100004}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: .163696289, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400010}
@@ -220,7 +220,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100014}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: .163696289, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400006}
@@ -610,13 +610,13 @@ MonoBehaviour:
     absolute: 0
   mColor: {r: .188235298, g: .188235298, b: .188235298, a: .611764729}
   mPivot: 4
-  mWidth: 1067
+  mWidth: 960
   mHeight: 640
   mDepth: 104
   autoResizeBoxCollider: 1
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 1.66718745
+  aspectRatio: 1.5
   mAtlas: {fileID: 11400000, guid: 81897fcdc0d7fb04bb512167943f2aab, type: 2}
   mSpriteName: white
   mType: 0
@@ -638,13 +638,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 100010}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d9e98d14f52a7a74b91f72f295cae258, type: 3}
+  m_Script: {fileID: 11500000, guid: 67f4b5538f2f8dd4e8143b041c47c254, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  messageBoxTitle: {fileID: 11400004}
-  messageBoxText: {fileID: 11400010}
-  messageBoxOK: {fileID: 100012}
-  messageBoxCancel: {fileID: 100006}
+  title: {fileID: 11400004}
+  text: {fileID: 11400010}
+  OK: {fileID: 100012}
 --- !u!114 &11400016
 MonoBehaviour:
   m_ObjectHideFlags: 1
