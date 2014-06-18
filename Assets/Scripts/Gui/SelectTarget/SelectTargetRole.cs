@@ -17,7 +17,7 @@ public class SelectTargetRole : MonoBehaviour
 		if (max != 0)
 			maxHp = max;
 		uiHp.value = cur / (float)maxHp;
-		uiHpText.text = cur + "/" + max;
+		uiHpText.text = cur + "/" + maxHp;
 	}
 
 	public void SetSp(int cur, int max = 0)
