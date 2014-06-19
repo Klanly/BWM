@@ -77,7 +77,7 @@ public class SceneItem : MonoBehaviour
 	/// <param name="npc"></param>
 	private static void CreateHeadTip(SceneItem item)
 	{
-		var headTip = (GameObject.Instantiate(Resources.Load("Prefabs/Gui/HeadTip")) as GameObject).GetComponent<UILabel>();
+		var headTip = (GameObject.Instantiate(Resources.Load("Prefabs/Gui/HeadTipItem")) as GameObject).GetComponent<UILabel>();
 #if UNITY_EDITOR
 		headTip.name = item.name;
 #endif

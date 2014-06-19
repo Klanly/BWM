@@ -8,6 +8,7 @@ public class RoleHead : MonoBehaviour
 	public UILabel myName;
 	public UILabel myLevel;
 	public UISlider myHp;
+	public UILabel	myHpText;
 	public UISprite myHead;
 
 	IEnumerator Start()
@@ -31,6 +32,7 @@ public class RoleHead : MonoBehaviour
 		myName.text = MainRole.ServerInfo.userdata.charname;
 		myLevel.text = MainRole.ServerInfo.level.ToString();
 		myHead.spriteName = MainRole.ServerInfo.userdata.GetRoleHeadSprite();
-		myHp.value = MainRole.ServerInfo.hp / (float)MainRole.Instance.maxhp;
+		myHp.value = MainRole.ServerInfo.hp / (float)MainRole.ServerInfo.maxhp;
+		myHpText.text = MainRole.ServerInfo.hp + "/" + MainRole.ServerInfo.maxhp;
 	}
 }

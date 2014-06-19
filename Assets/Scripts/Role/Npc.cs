@@ -69,7 +69,7 @@ public class Npc : MonoBehaviour
 	/// NPC头顶文字
 	/// </summary>
 	/// <param name="npc"></param>
-	private static void CreateHeadTip1(Npc npc)
+	private static void CreateHeadTip(Npc npc)
 	{
 		var headTip = (GameObject.Instantiate(Resources.Load("Prefabs/Gui/HeadTip")) as GameObject).GetComponent<UILabel>();
 #if UNITY_EDITOR
@@ -84,7 +84,7 @@ public class Npc : MonoBehaviour
 		var recycle = npc.gameObject.AddComponent<OnDestroyAction>();
 		recycle.Action = () => { try { NGUITools.Destroy(headTip.gameObject); } catch { } };
 	}
-	private static void CreateHeadTip(Npc npc)
+	private static void CreateHeadTip1(Npc npc)
 	{
 		var go = GameObject.Instantiate(Resources.Load("Prefabs/Gui/HeadTipNpc")) as GameObject;
 #if UNITY_EDITOR

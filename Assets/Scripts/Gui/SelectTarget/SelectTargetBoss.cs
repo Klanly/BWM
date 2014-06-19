@@ -8,6 +8,7 @@ public class SelectTargetBoss : MonoBehaviour
 	public UILabel uiLevel;
 	public UILabel nameLabel;
 	public UISprite uiHp;
+	public UILabel uiHpText;
 	public UISprite uiHpBack;
 	private List<string> bars = new List<string>();
 
@@ -20,6 +21,7 @@ public class SelectTargetBoss : MonoBehaviour
 	internal void OnUpdate(Npc target)
 	{
 		OnHpUpdate(target.ServerInfo.hp / (float)target.ServerInfo.maxhp);
+		uiHpText.text = target.ServerInfo.hp + "/" + target.ServerInfo.maxhp;
 	}
 
 	/// <summary>

@@ -7,6 +7,7 @@ public class SelectTargetRole : MonoBehaviour
 	public UILabel uiLevel;
 	public UISprite uiHead;
 	public UISlider uiHp;
+	public UILabel uiHpText;
 
 	private int maxHp;
 	private int maxSp;
@@ -16,6 +17,7 @@ public class SelectTargetRole : MonoBehaviour
 		if (max != 0)
 			maxHp = max;
 		uiHp.value = cur / (float)maxHp;
+		uiHpText.text = cur + "/" + maxHp;
 	}
 
 	public void SetSp(int cur, int max = 0)

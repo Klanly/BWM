@@ -7,8 +7,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-// Generated from: loginjsoncommand.proto
-// Note: requires additional types generated from: logincommand.proto
+// Generated from: login_command_json.proto
+// Note: requires additional types generated from: login_command.proto
 namespace Pmd
 {
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"LoginJson")]
