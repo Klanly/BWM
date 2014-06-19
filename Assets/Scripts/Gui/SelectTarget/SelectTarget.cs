@@ -105,10 +105,17 @@ public class SelectTarget : MonoBehaviour
 	[Execute]
 	public static IEnumerator Execute(SelectSceneEntryScriptUserCmd_CS cmd)
 	{
-		var my = BattleScene.Instance.Gui<SelectTarget>();
-		my.gameObject.SetActive(true);
-		yield return null;
-		Selected = cmd.entry;
+		if (cmd.entry.entryid == 0)
+		{
+			Selected = null;
+		}
+		else
+		{
+			var my = BattleScene.Instance.Gui<SelectTarget>();
+			my.gameObject.SetActive(true);
+			yield return null;
+			Selected = cmd.entry;
+		}
 	}
 
 	/// <summary>

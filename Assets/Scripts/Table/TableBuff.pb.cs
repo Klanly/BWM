@@ -29,43 +29,50 @@ namespace table
       get { return _level; }
       set { _level = value; }
     }
+    private string _icon;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"icon", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public string icon
+    {
+      get { return _icon; }
+      set { _icon = value; }
+    }
     private string _name;
-    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"name", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::ProtoBuf.ProtoMember(4, IsRequired = true, Name=@"name", DataFormat = global::ProtoBuf.DataFormat.Default)]
     public string name
     {
       get { return _name; }
       set { _name = value; }
     }
     private string _desc;
-    [global::ProtoBuf.ProtoMember(4, IsRequired = true, Name=@"desc", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::ProtoBuf.ProtoMember(5, IsRequired = true, Name=@"desc", DataFormat = global::ProtoBuf.DataFormat.Default)]
     public string desc
     {
       get { return _desc; }
       set { _desc = value; }
     }
     private uint _needShow;
-    [global::ProtoBuf.ProtoMember(5, IsRequired = true, Name=@"needShow", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoMember(6, IsRequired = true, Name=@"needShow", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     public uint needShow
     {
       get { return _needShow; }
       set { _needShow = value; }
     }
     private int _time;
-    [global::ProtoBuf.ProtoMember(6, IsRequired = true, Name=@"time", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoMember(7, IsRequired = true, Name=@"time", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     public int time
     {
       get { return _time; }
       set { _time = value; }
     }
     private uint _type;
-    [global::ProtoBuf.ProtoMember(7, IsRequired = true, Name=@"type", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoMember(8, IsRequired = true, Name=@"type", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     public uint type
     {
       get { return _type; }
       set { _type = value; }
     }
     private uint _needPower;
-    [global::ProtoBuf.ProtoMember(8, IsRequired = true, Name=@"needPower", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoMember(9, IsRequired = true, Name=@"needPower", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     public uint needPower
     {
       get { return _needPower; }

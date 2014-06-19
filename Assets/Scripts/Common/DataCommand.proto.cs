@@ -87,6 +87,22 @@ namespace Cmd
       get { return _prehp; }
       set { _prehp = value; }
     }
+    private Cmd.ChangeHpType _changetype = Cmd.ChangeHpType.ChangeHpType_None;
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"changetype", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(Cmd.ChangeHpType.ChangeHpType_None)]
+    public Cmd.ChangeHpType changetype
+    {
+      get { return _changetype; }
+      set { _changetype = value; }
+    }
+    private uint _changeid = default(uint);
+    [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"changeid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint changeid
+    {
+      get { return _changeid; }
+      set { _changeid = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -194,6 +210,22 @@ namespace Cmd
       get { return _prehp; }
       set { _prehp = value; }
     }
+    private Cmd.ChangeHpType _changetype = Cmd.ChangeHpType.ChangeHpType_None;
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"changetype", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(Cmd.ChangeHpType.ChangeHpType_None)]
+    public Cmd.ChangeHpType changetype
+    {
+      get { return _changetype; }
+      set { _changetype = value; }
+    }
+    private uint _changeid = default(uint);
+    [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"changeid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint changeid
+    {
+      get { return _changeid; }
+      set { _changeid = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -229,5 +261,19 @@ namespace Cmd
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
+  
+    [global::ProtoBuf.ProtoContract(Name=@"ChangeHpType")]
+    public enum ChangeHpType
+    {
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"ChangeHpType_None", Value=0)]
+      ChangeHpType_None = 0,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"ChangeHpType_Skill", Value=1)]
+      ChangeHpType_Skill = 1,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"ChangeHpType_Buf", Value=2)]
+      ChangeHpType_Buf = 2
+    }
   
 }
