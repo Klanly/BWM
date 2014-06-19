@@ -93,20 +93,6 @@ namespace Cmd
       get { return _userdata; }
       set { _userdata = value; }
     }
-    private int _hp;
-    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"hp", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public int hp
-    {
-      get { return _hp; }
-      set { _hp = value; }
-    }
-    private int _maxhp;
-    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"maxhp", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public int maxhp
-    {
-      get { return _maxhp; }
-      set { _maxhp = value; }
-    }
     private int _sp;
     [global::ProtoBuf.ProtoMember(4, IsRequired = true, Name=@"sp", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     public int sp
@@ -305,6 +291,20 @@ namespace Cmd
     {
       get { return _level; }
       set { _level = value; }
+    }
+    private int _hp;
+    [global::ProtoBuf.ProtoMember(7, IsRequired = true, Name=@"hp", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int hp
+    {
+      get { return _hp; }
+      set { _hp = value; }
+    }
+    private int _maxhp;
+    [global::ProtoBuf.ProtoMember(8, IsRequired = true, Name=@"maxhp", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int maxhp
+    {
+      get { return _maxhp; }
+      set { _maxhp = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
