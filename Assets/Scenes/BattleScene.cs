@@ -40,17 +40,52 @@ public class BattleScene : MonoBehaviour
 	}
 
 	/// <summary>
-	/// 界面加到Panel下，并排在最前面
+	/// 界面加到最上层
 	/// </summary>
-	/// <param name="go">Go.</param>
-	public static void AddToPanel(GameObject go)
+	/// <returns>为界面新创建的父Panel，界面销毁时需要顺带销毁这个父panel</returns>
+	/// <param name="gogui">界面</param>
+	/// <param name="bModal">If set to <c>true</c> b modal.</param>
+	public static GameObject AddGuiToTop(GameObject gogui, bool bModal = true)
 	{
-		var rootpanel = GameObject.Find("UI Root/Panel");
-		go.transform.parent = rootpanel.transform;
-		go.transform.localScale = Vector3.one;
-		go.transform.position = Vector3.zero;
-		go.GetComponent<UIWidget>().SetAnchor(rootpanel, 0, 0, 0, 0);
-		NGUITools.BringForward(go);
+		var root = GameObject.Find("UI Root");
+
+		// 创建一个depth最大的panel
+		var panels = root.GetComponentsInChildren<UIPanel>();
+		var maxdepth = 0;
+		foreach(var t in panels)
+		{
+			if(t.depth > maxdepth)
+				maxdepth = t.depth;
+		}
+		maxdepth += 1;
+		var gopanel = new GameObject("Panel" + maxdepth);
+		var panel = gopanel.AddComponent<UIPanel>();
+		panel.depth = maxdepth;
+		gopanel.layer = root.layer;
+		gopanel.transform.parent = root.transform;
+		gopanel.transform.localScale = Vector3.one;
+		gopanel.transform.position = Vector3.zero;
+
+		// 为当前界面创建一个接收所有输入的UISprite，模拟模态窗口
+		if (bModal == true)
+		{
+			var gosprite = new GameObject("SpriteLayer");
+			var sprite = gosprite.AddComponent<UISprite>();
+			sprite.SetDimensions(0,0);
+			sprite.GetComponent<UIWidget>().depth = -1000;
+			var col = gosprite.AddComponent<BoxCollider>();
+			col.size = new Vector3(panel.width, panel.height, 0);
+			gosprite.transform.parent = gogui.transform;
+			gosprite.transform.position = Vector3.zero;
+		}
+
+		// 界面加入之前创建的panel
+		gogui.transform.parent = gopanel.transform;
+		gogui.transform.localScale = Vector3.one;
+		gogui.transform.position = Vector3.zero;
+		gogui.GetComponent<UIWidget>().SetAnchor(gopanel, 0, 0, 0, 0);
+		NGUITools.BringForward(gogui);
+		return gopanel;
 	}
 
 	#endregion
