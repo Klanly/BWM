@@ -42,7 +42,7 @@ public class BattleScene : MonoBehaviour
 	/// <summary>
 	/// 界面加到最上层
 	/// </summary>
-	/// <returns>为界面新创建的父Panel，界面销毁时需要顺带销毁这个父panel</returns>
+	/// <returns>为界面新创建的父Panel，界面销毁时需要销毁这个父panel</returns>
 	/// <param name="gogui">界面</param>
 	/// <param name="bModal">If set to <c>true</c> b modal.</param>
 	public static GameObject AddGuiToTop(GameObject gogui, bool bModal = true)

@@ -11,10 +11,10 @@ public class CopyEnter : MonoBehaviour {
 	// Use this for initialization
 	void Start () 
 	{
-		var parent = BattleScene.AddGuiToTop(gameObject);
+		BattleScene.AddGuiToTop(gameObject);
 
 		// 关闭按钮
-		UIEventListener.Get(uiClose).onClick = go => Destroy(parent);
+		UIEventListener.Get(uiClose).onClick = go => Destroy(transform.parent.gameObject);
 
 		// 每个副本按钮点击事件
 		for (int i = 0; i < uiCopys.Length; ++i)
@@ -34,7 +34,7 @@ public class CopyEnter : MonoBehaviour {
 		UIEventListener.Get(uiEnter).onClick = go => 
 		{
 			Debug.Log("select copy:" + selected);
-			Destroy(gameObject);
+			Destroy(transform.parent.gameObject);
 
 			// 打开copystart界面
 			Instantiate(Resources.Load("Prefabs/Gui/CopyStart"));

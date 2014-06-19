@@ -8,9 +8,9 @@ public class CopyEnd : MonoBehaviour {
 	// Use this for initialization
 	void Start () 
 	{
-		var parent = BattleScene.AddGuiToTop(gameObject);
+		BattleScene.AddGuiToTop(gameObject);
 
 		// 关闭按钮
-		UIEventListener.Get(uiClose).onClick = go => Destroy(parent);
+		UIEventListener.Get(uiClose).onClick = go => Destroy(transform.parent.gameObject);
 	}
 }
