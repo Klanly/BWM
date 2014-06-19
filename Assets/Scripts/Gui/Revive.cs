@@ -14,7 +14,7 @@ public class Revive : MonoBehaviour
 
 	void Start()
 	{
-		BattleScene.AddToPanel(gameObject);
+		BattleScene.AddGuiToTop(gameObject);
 		UIEventListener.Get(OK).onClick = go =>
 		{
 			Net.Instance.Send(new RequestReliveUserCmd_C()
@@ -47,6 +47,6 @@ public class Revive : MonoBehaviour
 	[Execute]
 	public static void Execute(ReturnReliveUserCmd_S cmd)
 	{
-		NGUITools.Destroy(FindObjectOfType<Revive>().gameObject);
+		NGUITools.Destroy(FindObjectOfType<Revive>().transform.parent.gameObject);
 	}
 }

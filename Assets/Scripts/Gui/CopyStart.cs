@@ -8,14 +8,14 @@ public class CopyStart : MonoBehaviour {
 	// Use this for initialization
 	void Start () 
 	{
-		BattleScene.AddToPanel(gameObject);
+		BattleScene.AddGuiToTop(gameObject, false);
 
 		uiBack.GetComponent<TweenHeight>().AddOnFinished(onFinish);
 	}
 
 	void onFinish()
 	{
-		Destroy(gameObject);
+		Destroy(transform.parent.gameObject);
 
 		// 打开CopyEnd界面
 		Instantiate(Resources.Load("Prefabs/Gui/CopyEnd"));
