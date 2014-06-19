@@ -186,8 +186,7 @@ public class SkillManager : IEnumerable<KeyValuePair<uint, table.TableSkill>>
 		var skill = table.TableSkill.Where(cmd.skillid, cmd.skilllevel);
 		if (cast == null || skill == null)
 			return;
-		foreach (var target in cmd.hurts)
-			cast.StartSkill(skill, target);
+		cast.StartSkill(skill, cmd.hurts);
 	}
 	#endregion
 }

@@ -146,29 +146,39 @@ public class Npc : MonoBehaviour
 	#endregion
 
 	#region 网络消息 NPC血量变化
+	public void SetHp(int hp, int maxhp = -1)
+	{
+		if (maxhp >= 0)
+			ServerInfo.maxhp = maxhp;
+		ServerInfo.hp = hp;
+		SelectTarget.OnUpdate(this);
+
+		if (hp <= 0)
+		{
+			animator.Play("Ani_Die_1");
+		}
+	}
+
 	[Execute]
 	public static void Execute(SetNpcHpDataUserCmd_S cmd)
 	{
 		var target = All[cmd.tempid];
 		if (target == null)
 			return;
-		target.ServerInfo.maxhp = cmd.maxhp;
-		target.ServerInfo.hp = cmd.hp;
-		SelectTarget.OnUpdate(target);
-		//如果死亡,死亡动画
-		target.animator.SetInteger("hp", target.ServerInfo.hp); ;
+		target.SetHp(cmd.hp, cmd.maxhp);
 	}
 
 	[Execute]
 	public static void Execute(ChangeNpcHpDataUserCmd_S cmd)
 	{
+		// 技能和buff影响的血量由技能系统修改
+		if (cmd.changetype > 0)
+			return;
+
 		var target = All[cmd.tempid];
 		if (target == null)
 			return;
-		target.ServerInfo.hp = cmd.curhp;
-		SelectTarget.OnUpdate(target);
-		//如果死亡,死亡动画
-		target.animator.SetInteger("hp", target.ServerInfo.hp); ;
+		target.SetHp(cmd.curhp);
 	}
 	#endregion
 }

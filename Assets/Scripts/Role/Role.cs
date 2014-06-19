@@ -141,36 +141,61 @@ public class Role : MonoBehaviour
 	#endregion
 
 	#region 网络消息 角色血量变化
+	public void SetHp(int hp, int maxhp = -1)
+	{
+		if (maxhp >= 0)
+			ServerInfo.maxhp = maxhp;
+		ServerInfo.hp = hp;
+
+		if (SelectTarget.Selected != null && 
+		    SelectTarget.Selected.entrytype == SceneEntryType.SceneEntryType_Player && 
+		    SelectTarget.Selected.entryid == ServerInfo.charid)
+		{
+			var view = BattleScene.Instance.Gui<SelectTargetRole>();
+			view.SetHp(hp, maxhp >= 0 ? maxhp : 0 );
+		}
+	}
+
+	public void SetSp(int sp, int maxsp = -1)
+	{
+		if (SelectTarget.Selected != null && 
+		    SelectTarget.Selected.entrytype == SceneEntryType.SceneEntryType_Player && 
+		    SelectTarget.Selected.entryid == ServerInfo.charid)
+		{
+			var view = BattleScene.Instance.Gui<SelectTargetRole>();
+			view.SetSp(sp, maxsp >= 0 ? maxsp : 0);
+		}
+	}
+
 	[Execute]
 	public static void Execute(SetUserHpSpDataUserCmd_S cmd)
 	{
 		if (MainRole.Execute(cmd))
 			return;
 
-		if (SelectTarget.Selected != null && 
-			SelectTarget.Selected.entrytype == SceneEntryType.SceneEntryType_Player && 
-			SelectTarget.Selected.entryid == cmd.charid)
-		{
-			var view = BattleScene.Instance.Gui<SelectTargetRole>();
-			view.SetHp(cmd.hp, cmd.maxhp);
-			view.SetSp(cmd.sp, cmd.maxsp);
+		var target = All[cmd.charid];
+		if (target == null) 
 			return;
-		}
+
+		target.SetHp(cmd.hp, cmd.maxhp);
+		target.SetSp(cmd.sp, cmd.maxsp);
 	}
 
 	[Execute]
 	public static void Execute(ChangeUserHpDataUserCmd_S cmd)
 	{
+		// 技能和buff影响的血量由技能系统修改
+		if (cmd.changetype > 0)
+			return;
+
 		if (MainRole.Execute(cmd))
 			return;
-		if (SelectTarget.Selected != null &&
-			SelectTarget.Selected.entrytype == SceneEntryType.SceneEntryType_Player &&
-			SelectTarget.Selected.entryid == cmd.charid)
-		{
-			var view = BattleScene.Instance.Gui<SelectTargetRole>();
-			view.SetHp(cmd.curhp);
+
+		var target = All[cmd.charid];
+		if (target == null) 
 			return;
-		}
+		
+		target.SetHp(cmd.curhp);
 	}
 
 	[Execute]
@@ -178,12 +203,12 @@ public class Role : MonoBehaviour
 	{
 		if (MainRole.Execute(cmd))
 			return;
-		if (SelectTarget.Selected.entrytype == SceneEntryType.SceneEntryType_Player && SelectTarget.Selected.entryid == cmd.charid)
-		{
-			var view = BattleScene.Instance.Gui<SelectTargetRole>();
-			view.SetSp(cmd.cursp);
+
+		var target = All[cmd.charid];
+		if (target == null) 
 			return;
-		}
+		
+		target.SetSp(cmd.cursp);
 	}
 
 	/// <summary>

@@ -1,12 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 /// <summary>
 /// 技能发射器，可指定目标释放技能
 /// </summary>
 public class CastSkill : MonoBehaviour
 {
-	public bool StartSkill(table.TableSkill skillTableInfo, Cmd.SkillHurtData hurt)
+	public bool StartSkill(table.TableSkill skillTableInfo, List<Cmd.SkillHurtData> hurts)
 	{
 		var path = "Prefabs/Skill/" + skillTableInfo.path;
 		var res = Resources.Load(path);
@@ -19,10 +20,16 @@ public class CastSkill : MonoBehaviour
 		var skill = Object.Instantiate(res) as GameObject;
 		var s = skill.GetComponent<Skill>();
 		s.startGo = gameObject;
-		var tg = hurt.hurtid.GetGameObject();
-		s.targetGo = tg != null ? tg.gameObject : null;
 		s.TableInfo = skillTableInfo;
-		s.Hurt = hurt;
+		s.hurts = hurts;
+		if (hurts.Count > 0)
+		{
+			var tg = hurts[0].hurtid.GetGameObject();
+			if (tg != null)
+			{
+				s.targetGo = tg.gameObject;
+			}
+		}
 
 		// 检查技能的有效性
 		int count = 0;

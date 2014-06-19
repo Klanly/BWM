@@ -29,12 +29,22 @@ public class SkillPlayTargetAnimate : SkillBase
 		}
 
 		var skill = gameObject.GetComponent<Skill>();
-		if (skill && skill.targetGo)
+		if (skill)
 		{
-			var animator = skill.targetGo.GetComponent<Animator>();
-			if (animator)
-				animator.Play(action);
+			foreach(var t in skill.hurts)
+			{
+				var tg = t.hurtid.GetGameObject();
+				if (tg)
+				{
+					var targetGo = tg.gameObject;
+					var animator = targetGo.GetComponent<Animator>();
+					if (animator)
+						animator.Play(action);
+				}
+			}
+
 		}
+
 		Destroy(this);
 	}
 }

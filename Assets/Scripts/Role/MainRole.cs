@@ -170,12 +170,27 @@ public class MainRole : MonoBehaviour, INotifyPropertyChanged
 		return false;
 	}
 
+	public void SetHp(int hp, int maxhp = -1)
+	{
+		if (maxhp >= 0)
+			Role.ServerInfo.maxhp = maxhp;
+		Role.ServerInfo.hp = hp;
+		OnPropertyChanged("hp");
+	}
+
+	public void SetSp(int sp, int maxsp = -1)
+	{
+		if (maxsp >= 0)
+			ServerInfo.maxsp = maxsp;
+		ServerInfo.sp = sp;
+		OnPropertyChanged("sp");
+	}
+
 	public static bool Execute(ChangeUserHpDataUserCmd_S cmd)
 	{
 		if (MainRole.ServerInfo != null && cmd.charid == MainRole.ServerInfo.userdata.charid)
 		{
-			MainRole.ServerInfo.hp = cmd.curhp;
-			MainRole.Instance.OnPropertyChanged("hp");
+			MainRole.Instance.SetHp(cmd.curhp);
 			return true;
 		}
 		return false;
@@ -186,12 +201,8 @@ public class MainRole : MonoBehaviour, INotifyPropertyChanged
 		var my = MainRole.Instance;
 		if (my != null && cmd.charid == my.Role.ServerInfo.charid)
 		{
-			MainRole.ServerInfo.maxhp = cmd.maxhp;
-			MainRole.ServerInfo.hp = cmd.hp;
-			MainRole.Instance.OnPropertyChanged("hp");
-			MainRole.ServerInfo.maxsp = cmd.maxsp;
-			MainRole.ServerInfo.sp = cmd.sp;
-			MainRole.Instance.OnPropertyChanged("sp");
+			MainRole.Instance.SetHp(cmd.hp, cmd.maxhp);
+			MainRole.Instance.SetSp(cmd.sp, cmd.maxsp);
 			return true;
 		}
 		return false;
@@ -201,8 +212,7 @@ public class MainRole : MonoBehaviour, INotifyPropertyChanged
 	{
 		if (MainRole.ServerInfo != null && cmd.charid == MainRole.ServerInfo.userdata.charid)
 		{
-			MainRole.ServerInfo.sp = cmd.cursp;
-			MainRole.Instance.OnPropertyChanged("sp");
+			MainRole.Instance.SetSp(cmd.cursp);
 			return true;
 		}
 		return false;

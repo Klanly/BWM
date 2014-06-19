@@ -30,18 +30,26 @@ public class SkillPlayTargetParticle : SkillBase
 		}
 
 		var skill = gameObject.GetComponent<Skill>();
-		if (skill && skill.targetGo)
+		if (skill)
 		{
-			var mount = SkillBase.Find(skill.targetGo.transform, mountOfTargetGo);
-			if (!mount)
-				mount = skill.targetGo.transform;
-
-			var particleGo = Instantiate(particle) as GameObject;
-			if(particleGo.GetComponent<ParticleParentAutoDestroy>() == null)
-				particleGo.AddComponent<ParticleParentAutoDestroy>();
-			particleGo.transform.parent = mount;
-			particleGo.transform.localPosition = Vector3.zero;
-			particleGo.transform.localRotation = Quaternion.identity;
+			foreach(var t in skill.hurts)
+			{
+				var tg = t.hurtid.GetGameObject();
+				if (tg)
+				{
+					var targetGo = tg.gameObject;
+					var mount = SkillBase.Find(targetGo.transform, mountOfTargetGo);
+					if (!mount)
+						mount = targetGo.transform;
+					
+					var particleGo = Instantiate(particle) as GameObject;
+					if(particleGo.GetComponent<ParticleParentAutoDestroy>() == null)
+						particleGo.AddComponent<ParticleParentAutoDestroy>();
+					particleGo.transform.parent = mount;
+					particleGo.transform.localPosition = Vector3.zero;
+					particleGo.transform.localRotation = Quaternion.identity;
+				}
+			}
 		}
 
 		Destroy(this);

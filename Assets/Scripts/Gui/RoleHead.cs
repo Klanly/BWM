@@ -32,7 +32,7 @@ public class RoleHead : MonoBehaviour
 		myName.text = MainRole.ServerInfo.userdata.charname;
 		myLevel.text = MainRole.ServerInfo.level.ToString();
 		myHead.spriteName = MainRole.ServerInfo.userdata.GetRoleHeadSprite();
-		myHp.value = MainRole.ServerInfo.hp / (float)MainRole.ServerInfo.maxhp;
-		myHpText.text = MainRole.ServerInfo.hp + "/" + MainRole.ServerInfo.maxhp;
+		myHp.value = MainRole.Instance.Role.ServerInfo.hp / (float)MainRole.Instance.Role.ServerInfo.maxhp;
+		myHpText.text = MainRole.Instance.Role.ServerInfo.hp + "/" + MainRole.Instance.Role.ServerInfo.maxhp;
 	}
 }

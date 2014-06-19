@@ -27,7 +27,48 @@ public class SkillDrawHurt : SkillBase
 	/// </summary>
 	void DrawHurt()
 	{
-		Debug.Log("hp:" + 10);
+		var skill = gameObject.GetComponent<Skill>();
+		if(skill)
+		{
+			foreach(var t in skill.hurts)
+			{
+				GameObject targetGo = null;
+				switch (t.hurtid.entrytype)
+				{
+				case Cmd.SceneEntryType.SceneEntryType_Npc:
+				{
+					var target = Npc.All[t.hurtid.entryid];
+					if (target != null)
+					{
+						target.SetHp(target.ServerInfo.hp + t.hp);
+						targetGo = target.gameObject;
+					}
+				}
+					break;
+				case Cmd.SceneEntryType.SceneEntryType_Player:
+				{
+					if (t.hurtid.entryid == MainRole.Instance.Role.ServerInfo.charid)
+					{
+						MainRole.Instance.SetHp(MainRole.Instance.Role.ServerInfo.hp + t.hp);
+						targetGo = MainRole.Instance.gameObject;
+					}
+					else
+					{
+						var target = Role.All[t.hurtid.entryid];
+						target.SetHp(target.ServerInfo.hp + t.hp);
+						targetGo = target.gameObject;
+					}
+				}
+					break;
+				}
+				
+				if (targetGo != null)
+				{
+					Debug.Log(skill.TableInfo.name + ":(" + skill.TableInfo.path + "):" + targetGo.name + ":hp:" + t.hp);
+				}
+			}
+		}
+
 		Destroy(this);
 	}
 }
