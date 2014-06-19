@@ -6,6 +6,9 @@
 		<field column="id" code="id" type="uint16" />
 		<field column="等级" code="level" type="uint16" />
 		
+		<field column="icon" code="icon" type="string">
+			<regex>^[^\\]+$</regex>
+		</field>
 		<field column="名称" code="name" type="string" />
 		<field column="描述" code="desc" type="string" />
 		<field column="是否显示" code="needShow" type="uint16" />
@@ -20,5 +23,8 @@
 		<field column="等级" code="level" type="uint16" />
 		
 		<field column="名称" code="name" type="string" />
+		<field column="BUFF时间" code="time" type="int32" />
+		<field column="BUFF类型" code="type" type="uint16" />
+		<field column="是否计算战斗力" code="needPower" type="uint16" />
 	</output>
 </table>
