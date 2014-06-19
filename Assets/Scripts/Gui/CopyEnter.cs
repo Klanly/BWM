@@ -35,6 +35,9 @@ public class CopyEnter : MonoBehaviour {
 		{
 			Debug.Log("select copy:" + selected);
 			Destroy(gameObject);
+
+			// 打开copystart界面
+			Instantiate(Resources.Load("Prefabs/Gui/CopyStart"));
 		};
 	}
 }
