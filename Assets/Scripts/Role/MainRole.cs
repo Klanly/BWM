@@ -172,6 +172,8 @@ public class MainRole : MonoBehaviour, INotifyPropertyChanged
 
 	public void SetHp(int hp, int maxhp = -1)
 	{
+		if (hp < 0)
+			hp = 0;
 		if (maxhp >= 0)
 			Role.ServerInfo.maxhp = maxhp;
 		Role.ServerInfo.hp = hp;
@@ -180,6 +182,8 @@ public class MainRole : MonoBehaviour, INotifyPropertyChanged
 
 	public void SetSp(int sp, int maxsp = -1)
 	{
+		if (sp < 0)
+			sp = 0;
 		if (maxsp >= 0)
 			ServerInfo.maxsp = maxsp;
 		ServerInfo.sp = sp;

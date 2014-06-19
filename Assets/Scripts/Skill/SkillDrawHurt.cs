@@ -40,7 +40,7 @@ public class SkillDrawHurt : SkillBase
 					var target = Npc.All[t.hurtid.entryid];
 					if (target != null)
 					{
-						target.SetHp(target.ServerInfo.hp + t.hp);
+						target.SetHp(target.ServerInfo.hp - t.hp);
 						targetGo = target.gameObject;
 					}
 				}
@@ -49,13 +49,13 @@ public class SkillDrawHurt : SkillBase
 				{
 					if (t.hurtid.entryid == MainRole.Instance.Role.ServerInfo.charid)
 					{
-						MainRole.Instance.SetHp(MainRole.Instance.Role.ServerInfo.hp + t.hp);
+						MainRole.Instance.SetHp(MainRole.Instance.Role.ServerInfo.hp - t.hp);
 						targetGo = MainRole.Instance.gameObject;
 					}
 					else
 					{
 						var target = Role.All[t.hurtid.entryid];
-						target.SetHp(target.ServerInfo.hp + t.hp);
+						target.SetHp(target.ServerInfo.hp - t.hp);
 						targetGo = target.gameObject;
 					}
 				}

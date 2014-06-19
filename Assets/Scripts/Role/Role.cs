@@ -143,6 +143,8 @@ public class Role : MonoBehaviour
 	#region 网络消息 角色血量变化
 	public void SetHp(int hp, int maxhp = -1)
 	{
+		if (hp < 0)
+			hp = 0;
 		if (maxhp >= 0)
 			ServerInfo.maxhp = maxhp;
 		ServerInfo.hp = hp;
