@@ -14,7 +14,7 @@ public class Role : MonoBehaviour
 
 	private MapNav MapNav { get { return BattleScene.Instance.MapNav; } }
 	private Entity entity;
-	//private Animator animator;
+	private Animator animator;
 	private Move move;
 
 	static Role()
@@ -37,7 +37,7 @@ public class Role : MonoBehaviour
 		role.entity = avatar.AddComponent<Entity>();
 		role.move = avatar.AddComponent<Move>();
 		role.move.speed = sender => role.ServerInfo.movespeed * 0.01f;
-		//role.animator = avatar.GetComponent<Animator>();
+		role.animator = avatar.GetComponent<Animator>();
 		role.ServerInfo = info;
 
 		CreateHeadTip(role);
@@ -155,6 +155,11 @@ public class Role : MonoBehaviour
 		{
 			var view = BattleScene.Instance.Gui<SelectTargetRole>();
 			view.SetHp(hp, maxhp >= 0 ? maxhp : 0 );
+		}
+
+		if (hp <= 0)
+		{
+			animator.Play("Ani_Die_1");
 		}
 	}
 

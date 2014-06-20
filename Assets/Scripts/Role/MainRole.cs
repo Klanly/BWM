@@ -178,6 +178,11 @@ public class MainRole : MonoBehaviour, INotifyPropertyChanged
 			Role.ServerInfo.maxhp = maxhp;
 		Role.ServerInfo.hp = hp;
 		OnPropertyChanged("hp");
+
+		if (hp <= 0)
+		{
+			animator.Play("Ani_Die_1");
+		}
 	}
 
 	public void SetSp(int sp, int maxsp = -1)

@@ -40,7 +40,8 @@ public class SkillDrawHurt : SkillBase
 					var target = Npc.All[t.hurtid.entryid];
 					if (target != null)
 					{
-						target.SetHp(target.ServerInfo.hp - t.hp);
+						if(target.ServerInfo.hp == t.prehp)
+							target.SetHp(target.ServerInfo.hp - t.subhp);
 						targetGo = target.gameObject;
 					}
 				}
@@ -49,13 +50,17 @@ public class SkillDrawHurt : SkillBase
 				{
 					if (t.hurtid.entryid == MainRole.Instance.Role.ServerInfo.charid)
 					{
-						MainRole.Instance.SetHp(MainRole.Instance.Role.ServerInfo.hp - t.hp);
+						if (MainRole.Instance.Role.ServerInfo.hp == t.prehp)
+						{
+							MainRole.Instance.SetHp(MainRole.Instance.Role.ServerInfo.hp - t.subhp);
+						}
 						targetGo = MainRole.Instance.gameObject;
 					}
 					else
 					{
 						var target = Role.All[t.hurtid.entryid];
-						target.SetHp(target.ServerInfo.hp - t.hp);
+						if (target.ServerInfo.hp == t.prehp)
+							target.SetHp(target.ServerInfo.hp - t.subhp);
 						targetGo = target.gameObject;
 					}
 				}
@@ -64,11 +69,14 @@ public class SkillDrawHurt : SkillBase
 				
 				if (targetGo != null)
 				{
-					Debug.Log(skill.TableInfo.name + ":(" + skill.TableInfo.path + "):" + targetGo.name + ":hp:" + t.hp);
+					Debug.Log(skill.TableInfo.name + ":(" + skill.TableInfo.path + "):" + targetGo.name + ":hp:" + t.subhp);
 
 					var gohp = Instantiate(Resources.Load("Prefabs/Gui/HurtTipHp")) as GameObject;
 					var labelhp = gohp.GetComponentInChildren<UILabel>();
-					labelhp.text = t.hp.ToString();
+					if (t.subhp > 0)
+						labelhp.text = "-" + t.subhp.ToString();
+					else if (t.subhp < 0)
+						labelhp.text = "+" + (-1 * t.subhp).ToString();
 					gohp.GetComponent<UIWidget>().SetAnchor(targetGo);
 				}
 			}
