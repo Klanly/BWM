@@ -65,6 +65,11 @@ public class SkillDrawHurt : SkillBase
 				if (targetGo != null)
 				{
 					Debug.Log(skill.TableInfo.name + ":(" + skill.TableInfo.path + "):" + targetGo.name + ":hp:" + t.hp);
+
+					var gohp = Instantiate(Resources.Load("Prefabs/Gui/HurtTipHp")) as GameObject;
+					var labelhp = gohp.GetComponentInChildren<UILabel>();
+					labelhp.text = t.hp.ToString();
+					gohp.GetComponent<UIWidget>().SetAnchor(targetGo);
 				}
 			}
 		}
