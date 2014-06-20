@@ -10,8 +10,6 @@ GameObject:
   - 4: {fileID: 400000}
   - 114: {fileID: 11400010}
   - 114: {fileID: 11400008}
-  - 114: {fileID: 11400004}
-  - 114: {fileID: 11400000}
   m_Layer: 0
   m_Name: Skill20000
   m_TagString: Untagged
@@ -30,32 +28,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
---- !u!114 &11400000
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100000}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 96a25147f951c994587297a84c546e3d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  action: 
---- !u!114 &11400004
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100000}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e4751e697cf60f04dbfdd97bff881fcb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sendTargetEvent: 1
-  immediateDeleteParticle: 0
-  delay: 1
 --- !u!114 &11400008
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -83,6 +55,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startGo: {fileID: 0}
   targetGo: {fileID: 0}
+  hurts: []
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
