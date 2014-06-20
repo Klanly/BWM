@@ -31,6 +31,13 @@ public class SkillPlayStartAnimate : SkillBase
 				//Debug.Log(action);
 				animator.Play(action);
 			}
+
+			// 若在移动，则停止
+			var move = skill.startGo.GetComponent<Move>();
+			if (move != null && move.InMoving())
+			{
+				move.Stop();
+			}
 		}
 
 		Destroy(this);
