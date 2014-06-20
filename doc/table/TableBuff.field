@@ -1,4 +1,4 @@
-﻿	ScriptAdd  uint32
-	ScriptTime uint32
-	ScriptDel  uint32
+﻿	ScriptTimer uint32
+	ScriptAdd  string
+	ScriptDel  string
 	Bvs *BattleValues
