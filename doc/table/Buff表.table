@@ -27,6 +27,8 @@
 		<field column="BUFF类型" code="type" type="uint16" />
 		<field column="是否计算战斗力" code="needPower" type="uint16" />
 		
+		<field column="叠加类型" code="addType" type="int32" />
+		<field column="叠加ID" code="addId" type="int32" />
 		
 		<field column="最大生命" code="maxHp" type="int32" />
 		<field column="物攻" code="pDam" type="int32" />
