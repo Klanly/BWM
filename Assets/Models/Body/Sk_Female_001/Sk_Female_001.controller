@@ -245,6 +245,14 @@ Transition:
     m_ConditionEvent: 
     m_EventTreshold: 0
     m_ExitTime: .700000048
+  - m_ConditionMode: 4
+    m_ConditionEvent: speed
+    m_EventTreshold: .00999999978
+    m_ExitTime: .700000048
+  - m_ConditionMode: 6
+    m_ConditionEvent: profession
+    m_EventTreshold: 1
+    m_ExitTime: .700000048
   m_Atomic: 1
   m_Solo: 0
   m_Mute: 0
@@ -266,6 +274,28 @@ Transition:
   m_Atomic: 1
   m_Solo: 0
   m_Mute: 0
+--- !u!1101 &110139514
+Transition:
+  m_ObjectHideFlags: 3
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: 
+  m_SrcState: {fileID: 110201449}
+  m_DstState: {fileID: 110290269}
+  m_TransitionDuration: .299999982
+  m_TransitionOffset: 0
+  m_Conditions:
+  - m_ConditionMode: 5
+    m_ConditionEvent: 
+    m_EventTreshold: 0
+    m_ExitTime: .700000048
+  - m_ConditionMode: 3
+    m_ConditionEvent: speed
+    m_EventTreshold: .00999999978
+    m_ExitTime: .700000048
+  m_Atomic: 1
+  m_Solo: 0
+  m_Mute: 0
 --- !u!1101 &110147788
 Transition:
   m_ObjectHideFlags: 3
@@ -280,6 +310,14 @@ Transition:
   - m_ConditionMode: 5
     m_ConditionEvent: 
     m_EventTreshold: 0
+    m_ExitTime: .700000048
+  - m_ConditionMode: 4
+    m_ConditionEvent: speed
+    m_EventTreshold: .00999999978
+    m_ExitTime: .700000048
+  - m_ConditionMode: 6
+    m_ConditionEvent: profession
+    m_EventTreshold: 2
     m_ExitTime: .700000048
   m_Atomic: 1
   m_Solo: 0
@@ -316,6 +354,14 @@ Transition:
   - m_ConditionMode: 5
     m_ConditionEvent: speed
     m_EventTreshold: 0
+    m_ExitTime: .700000048
+  - m_ConditionMode: 4
+    m_ConditionEvent: speed
+    m_EventTreshold: .00999999978
+    m_ExitTime: .700000048
+  - m_ConditionMode: 6
+    m_ConditionEvent: profession
+    m_EventTreshold: 3
     m_ExitTime: .700000048
   m_Atomic: 1
   m_Solo: 0
@@ -992,6 +1038,7 @@ StateMachine:
       - {fileID: 110155462}
       - {fileID: 110128321}
       - {fileID: 110147788}
+      - {fileID: 110139514}
     data:
       first: {fileID: 110228244}
       second:

@@ -61,6 +61,7 @@ public class Role : MonoBehaviour
 		role.move = avatar.AddComponent<Move>();
 		role.move.speed = sender => role.ServerInfo.movespeed * 0.01f;
 		role.animator = avatar.GetComponent<Animator>();
+		role.animator.SetInteger("profession", (int)info.profession);
 		role.ServerInfo = info;
 
 		CreateHeadTip(role);
