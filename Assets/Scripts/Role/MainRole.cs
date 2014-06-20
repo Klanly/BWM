@@ -104,7 +104,7 @@ public class MainRole : MonoBehaviour, INotifyPropertyChanged
 			{
 				if (MapUserDataMemberNames == null)
 					MapUserDataMemberNames = (from p in Extensions.GetProtoMemberNames(typeof(MapUserData)) select p.Name).ToArray();
-				Debug.Log(string.Join("\n", MapUserDataMemberNames));
+				//Debug.Log(string.Join("\n", MapUserDataMemberNames));
 				foreach (var p in MapUserDataMemberNames)
 					PropertyChanged(this, new PropertyChangedEventArgs(p));
 			}
@@ -113,7 +113,7 @@ public class MainRole : MonoBehaviour, INotifyPropertyChanged
 		{
 			if (MainUserDataMemberNames == null)
 				MainUserDataMemberNames = (from p in Extensions.GetProtoMemberNames(typeof(MainUserData)) select p.Name).ToArray();
-			Debug.Log(string.Join("\n", MainUserDataMemberNames));
+			//Debug.Log(string.Join("\n", MainUserDataMemberNames));
 			foreach (var p in MainUserDataMemberNames)
 				PropertyChanged(this, new PropertyChangedEventArgs(p));
 		}

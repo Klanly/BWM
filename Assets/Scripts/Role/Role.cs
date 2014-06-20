@@ -15,7 +15,7 @@ public class Role : MonoBehaviour
 	{
 		get 
 		{
-			if (this.ServerInfo != null && MainRole.ServerInfo != null && this.ServerInfo.charid == MainRole.ServerInfo.userdata.charid)
+			if (this.m_serverInfo != null && MainRole.ServerInfo != null && this.m_serverInfo.charid == MainRole.ServerInfo.userdata.charid)
 				return MainRole.ServerInfo.userdata;
 			return m_serverInfo; 
 		}
@@ -25,11 +25,12 @@ public class Role : MonoBehaviour
 				return;
 			m_serverInfo = value;
 
-			if (this.ServerInfo != null && MainRole.ServerInfo != null && this.ServerInfo.charid == MainRole.ServerInfo.userdata.charid)
+			if (this.m_serverInfo != null && MainRole.ServerInfo != null && this.m_serverInfo.charid == MainRole.ServerInfo.userdata.charid)
 			{
 				//Assert(this == MainRole.Role);
-				MainRole.ServerInfo.userdata = this.ServerInfo;
-				MainRole.Instance.OnPropertyChanged("userdata");
+				MainRole.ServerInfo.userdata = this.m_serverInfo;
+				if (MainRole.Instance != null)
+					MainRole.Instance.OnPropertyChanged("userdata");
 			}
 		}
 	}
