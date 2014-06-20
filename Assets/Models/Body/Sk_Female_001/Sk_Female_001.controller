@@ -505,7 +505,7 @@ State:
   m_ObjectHideFlags: 3
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: Ani_stand
+  m_Name: Ani_Stand
   m_Speed: 1
   m_CycleOffset: 0
   m_Motions:
@@ -947,10 +947,6 @@ StateMachine:
   - {x: 600, y: 264, z: 0}
   m_OrderedTransitions:
     data:
-      first: {fileID: 110264679}
-      second:
-      - {fileID: 110182793}
-    data:
       first: {fileID: 0}
       second: []
     data:
@@ -1056,6 +1052,10 @@ StateMachine:
       first: {fileID: 110241115}
       second:
       - {fileID: 110103751}
+    data:
+      first: {fileID: 110264679}
+      second:
+      - {fileID: 110182793}
   m_MotionSetCount: 1
   m_AnyStatePosition: {x: 50, y: 20, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}

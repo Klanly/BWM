@@ -48,5 +48,7 @@ public class Revive : MonoBehaviour
 	public static void Execute(ReturnReliveUserCmd_S cmd)
 	{
 		NGUITools.Destroy(FindObjectOfType<Revive>().transform.parent.gameObject);
+		if (MainRole.Instance)
+			MainRole.Instance.animator.Play("Ani_Stand");
 	}
 }
