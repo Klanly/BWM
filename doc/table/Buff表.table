@@ -26,5 +26,24 @@
 		<field column="BUFF时间" code="time" type="int32" />
 		<field column="BUFF类型" code="type" type="uint16" />
 		<field column="是否计算战斗力" code="needPower" type="uint16" />
+		
+		
+		<field column="最大生命" code="maxHp" type="int32" />
+		<field column="物攻" code="pDam" type="int32" />
+		<field column="魔攻" code="mDam" type="int32" />
+		<field column="物防" code="pDef" type="int32" />
+		<field column="魔防" code="mDef" type="int32" />
+
+		<field column="命中" code="hit" type="int32" />
+		<field column="闪避" code="hide" type="int32" />
+		<field column="致命" code="lucky" type="int32" />
+		<field column="暴击" code="force" type="int32" />
+		<field column="格挡" code="miss" type="int32" />
+		<field column="物免" code="pIggnore" type="int32" />
+		<field column="魔免" code="mIggnore" type="int32" />
+
+		<field column="反伤" code="reflect" type="int32" />
+		<field column="攻击速度" code="attackSpeed" type="int32" />
+		<field column="移动速度" code="moveSpeed" type="int32" />
 	</output>
 </table>

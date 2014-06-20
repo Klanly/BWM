@@ -458,6 +458,24 @@ Transition:
   m_Atomic: 1
   m_Solo: 0
   m_Mute: 0
+--- !u!1101 &110199276
+Transition:
+  m_ObjectHideFlags: 3
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: 
+  m_SrcState: {fileID: 110232095}
+  m_DstState: {fileID: 110244626}
+  m_TransitionDuration: .25
+  m_TransitionOffset: 0
+  m_Conditions:
+  - m_ConditionMode: 5
+    m_ConditionEvent: 
+    m_EventTreshold: 0
+    m_ExitTime: .75
+  m_Atomic: 1
+  m_Solo: 0
+  m_Mute: 0
 --- !u!1101 &110199419
 Transition:
   m_ObjectHideFlags: 3
@@ -578,6 +596,21 @@ State:
   - {fileID: 7400000, guid: ed058e987a800184798be14a59d18bec, type: 3}
   m_ParentStateMachine: {fileID: 110700000}
   m_Position: {x: -192, y: 336, z: 0}
+  m_IKOnFeet: 0
+  m_Mirror: 0
+  m_Tag: 
+--- !u!1102 &110232095
+State:
+  m_ObjectHideFlags: 3
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: Ani_Sz_Att_04
+  m_Speed: 1
+  m_CycleOffset: 0
+  m_Motions:
+  - {fileID: 7400000, guid: 7462e7ecb8832444caea6daa60d54986, type: 3}
+  m_ParentStateMachine: {fileID: 110700000}
+  m_Position: {x: 84, y: 672, z: 0}
   m_IKOnFeet: 0
   m_Mirror: 0
   m_Tag: 
@@ -901,9 +934,14 @@ StateMachine:
   - {fileID: 110206586}
   - {fileID: 110244473}
   - {fileID: 110251347}
+  - {fileID: 110232095}
   m_ChildStateMachine: []
   m_ChildStateMachinePosition: []
   m_OrderedTransitions:
+    data:
+      first: {fileID: 110232095}
+      second:
+      - {fileID: 110199276}
     data:
       first: {fileID: 110203407}
       second:
