@@ -92,20 +92,31 @@ public class MainRole : MonoBehaviour, INotifyPropertyChanged
 	/// <see cref="MainUserData"/>所有字段名的缓存
 	/// </summary>
 	private static string[] MainUserDataMemberNames;
-	protected virtual void OnPropertyChanged(string propertyName)
+	private static string[] MapUserDataMemberNames;
+	public virtual void OnPropertyChanged(string propertyName)
 	{
 		if (PropertyChanged == null)
 			return;
-		if(propertyName != null)
+		if (propertyName != null)
 		{
 			PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			return;
+			if (propertyName == "userdata")
+			{
+				if (MapUserDataMemberNames == null)
+					MapUserDataMemberNames = (from p in Extensions.GetProtoMemberNames(typeof(MapUserData)) select p.Name).ToArray();
+				Debug.Log(string.Join("\n", MapUserDataMemberNames));
+				foreach (var p in MapUserDataMemberNames)
+					PropertyChanged(this, new PropertyChangedEventArgs(p));
+			}
 		}
-
-		if (MainUserDataMemberNames == null)
-			MainUserDataMemberNames = (from p in Extensions.GetProtoMemberNames(typeof(MainUserData)) select p.Name).ToArray();
-		foreach(var p in MainUserDataMemberNames)
-			PropertyChanged(this, new PropertyChangedEventArgs(p));
+		else
+		{
+			if (MainUserDataMemberNames == null)
+				MainUserDataMemberNames = (from p in Extensions.GetProtoMemberNames(typeof(MainUserData)) select p.Name).ToArray();
+			Debug.Log(string.Join("\n", MainUserDataMemberNames));
+			foreach (var p in MainUserDataMemberNames)
+				PropertyChanged(this, new PropertyChangedEventArgs(p));
+		}
 	}
 
 	#endregion

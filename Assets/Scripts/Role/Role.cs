@@ -10,7 +10,29 @@ public class Role : MonoBehaviour
 {
 	public static ObservableDictionary<ulong, Role> All { get; private set; }
 
-	public MapUserData ServerInfo { get; private set; }
+	private MapUserData m_serverInfo;
+	public MapUserData ServerInfo 
+	{
+		get 
+		{
+			if (this.ServerInfo != null && MainRole.ServerInfo != null && this.ServerInfo.charid == MainRole.ServerInfo.userdata.charid)
+				return MainRole.ServerInfo.userdata;
+			return m_serverInfo; 
+		}
+		private set
+		{
+			if (value == m_serverInfo)
+				return;
+			m_serverInfo = value;
+
+			if (this.ServerInfo != null && MainRole.ServerInfo != null && this.ServerInfo.charid == MainRole.ServerInfo.userdata.charid)
+			{
+				//Assert(this == MainRole.Role);
+				MainRole.ServerInfo.userdata = this.ServerInfo;
+				MainRole.Instance.OnPropertyChanged("userdata");
+			}
+		}
+	}
 
 	private MapNav MapNav { get { return BattleScene.Instance.MapNav; } }
 	private Entity entity;
