@@ -75,11 +75,13 @@ public class BattleScene : MonoBehaviour
 			sprite.GetComponent<UIWidget>().depth = -1000;
 			var col = gosprite.AddComponent<BoxCollider>();
 			col.size = new Vector3(panel.width, panel.height, 0);
+			gosprite.layer = gogui.layer;
 			gosprite.transform.parent = gogui.transform;
 			gosprite.transform.position = Vector3.zero;
 		}
 
 		// 界面加入之前创建的panel
+		gogui.layer = gopanel.layer;
 		gogui.transform.parent = gopanel.transform;
 		gogui.transform.localScale = Vector3.one;
 		gogui.transform.position = Vector3.zero;
