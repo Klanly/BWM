@@ -32,12 +32,10 @@ public class SkillPlayTargetParticle : SkillBase
 		var skill = gameObject.GetComponent<Skill>();
 		if (skill)
 		{
-			foreach(var t in skill.hurts)
+			foreach(var targetGo in skill.targetGos)
 			{
-				var tg = t.hurtid.GetGameObject();
-				if (tg)
+				if (targetGo != null)
 				{
-					var targetGo = tg.gameObject;
 					var mount = SkillBase.Find(targetGo.transform, mountOfTargetGo);
 					if (!mount)
 						mount = targetGo.transform;

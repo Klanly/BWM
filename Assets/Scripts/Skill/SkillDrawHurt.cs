@@ -30,9 +30,10 @@ public class SkillDrawHurt : SkillBase
 		var skill = gameObject.GetComponent<Skill>();
 		if(skill)
 		{
-			foreach(var t in skill.hurts)
+			for (int i = 0; i < skill.hurts.Count; ++i)
 			{
-				GameObject targetGo = null;
+				var t = skill.hurts[i];
+				var targetGo = skill.targetGos[i];
 				switch (t.hurtid.entrytype)
 				{
 				case Cmd.SceneEntryType.SceneEntryType_Npc:
@@ -42,7 +43,6 @@ public class SkillDrawHurt : SkillBase
 					{
 						if(target.ServerInfo.hp == t.prehp)
 							target.SetHp(target.ServerInfo.hp - t.subhp);
-						targetGo = target.gameObject;
 					}
 				}
 					break;
@@ -54,14 +54,12 @@ public class SkillDrawHurt : SkillBase
 						{
 							MainRole.Instance.SetHp(MainRole.Instance.Role.ServerInfo.hp - t.subhp);
 						}
-						targetGo = MainRole.Instance.gameObject;
 					}
 					else
 					{
 						var target = Role.All[t.hurtid.entryid];
 						if (target.ServerInfo.hp == t.prehp)
 							target.SetHp(target.ServerInfo.hp - t.subhp);
-						targetGo = target.gameObject;
 					}
 				}
 					break;

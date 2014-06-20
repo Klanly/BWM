@@ -21,6 +21,7 @@ public class Skill : SkillBase
 	/// 所有被击者，包括第一被击者
 	/// </summary>
 	public List<Cmd.SkillHurtData> hurts = new List<Cmd.SkillHurtData>();
+	public List<GameObject> targetGos = new List<GameObject>();
 
 	/// <summary>
 	/// 技能信息

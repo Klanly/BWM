@@ -30,6 +30,14 @@ public class CastSkill : MonoBehaviour
 				s.targetGo = tg.gameObject;
 			}
 		}
+		foreach(var t in hurts)
+		{
+			var tg = t.hurtid.GetGameObject();
+			GameObject gotg = null;
+			if (tg != null)
+				gotg = tg.gameObject;
+			s.targetGos.Add(gotg);
+		}
 
 		// 检查技能的有效性
 		int count = 0;
