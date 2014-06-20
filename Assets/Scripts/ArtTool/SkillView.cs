@@ -19,6 +19,10 @@ public class SkillView : MonoBehaviour {
 		var skill = Object.Instantiate(skillGo) as GameObject;
 		skill.GetComponent<Skill>().startGo = startGo;
 		skill.GetComponent<Skill>().targetGo = targetGo;
+		skill.GetComponent<Skill>().targetGos.Add(targetGo);
+		Cmd.SkillHurtData hurt = new Cmd.SkillHurtData();
+		hurt.subhp = 100;
+		skill.GetComponent<Skill>().hurts.Add(hurt);
 
 		// 检查技能的有效性
 		int count = 0;

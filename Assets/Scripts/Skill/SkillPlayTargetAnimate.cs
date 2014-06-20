@@ -31,12 +31,10 @@ public class SkillPlayTargetAnimate : SkillBase
 		var skill = gameObject.GetComponent<Skill>();
 		if (skill)
 		{
-			foreach(var t in skill.hurts)
+			foreach(var targetGo in skill.targetGos)
 			{
-				var tg = t.hurtid.GetGameObject();
-				if (tg)
+				if (targetGo != null)
 				{
-					var targetGo = tg.gameObject;
 					var animator = targetGo.GetComponent<Animator>();
 					if (animator)
 						animator.Play(action);
