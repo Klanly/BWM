@@ -149,13 +149,21 @@ namespace Cmd
       get { return _hurtid; }
       set { _hurtid = value; }
     }
-    private int _hp = default(int);
-    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"hp", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    private int _subhp = default(int);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"subhp", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     [global::System.ComponentModel.DefaultValue(default(int))]
-    public int hp
+    public int subhp
     {
-      get { return _hp; }
-      set { _hp = value; }
+      get { return _subhp; }
+      set { _subhp = value; }
+    }
+    private int _prehp = default(int);
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"prehp", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(int))]
+    public int prehp
+    {
+      get { return _prehp; }
+      set { _prehp = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
