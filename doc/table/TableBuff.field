@@ -7,7 +7,6 @@
 	ScriptSec15 *string
 	ScriptSec30 *string
 	ScriptSec60 *string
-	ScriptSec4 *string
 	ScriptAdd  *string
 	ScriptDel  *string
 	Bvs *BattleValues
