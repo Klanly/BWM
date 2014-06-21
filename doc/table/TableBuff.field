@@ -1,12 +1,5 @@
-﻿	ScriptSec1 *string
-	ScriptSec2 *string
-	ScriptSec3 *string
-	ScriptSec4 *string
-	ScriptSec5 *string
-	ScriptSec10 *string
-	ScriptSec15 *string
-	ScriptSec30 *string
-	ScriptSec60 *string
-	ScriptAdd  *string
-	ScriptDel  *string
+﻿	ScriptMsec int46
+	ScriptLoop string
+	ScriptAdd  string
+	ScriptDel  string
 	Bvs *BattleValues
