@@ -87,4 +87,21 @@ namespace Cmd
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+    [global::ProtoBuf.ProtoContract(Name=@"BuffAddType")]
+    public enum BuffAddType
+    {
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"BuffAddType_None", Value=0)]
+      BuffAddType_None = 0,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"BuffAddType_Replace", Value=1)]
+      BuffAddType_Replace = 1,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"BuffAddType_Time", Value=2)]
+      BuffAddType_Time = 2,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"BuffAddType_All", Value=3)]
+      BuffAddType_All = 3
+    }
+  
 }

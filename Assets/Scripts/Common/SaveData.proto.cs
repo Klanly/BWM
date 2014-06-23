@@ -269,15 +269,17 @@ namespace Cmd
       get { return _time; }
       set { _time = value; }
     }
-    private uint _value;
-    [global::ProtoBuf.ProtoMember(4, IsRequired = true, Name=@"value", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    private uint _value = default(uint);
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"value", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint value
     {
       get { return _value; }
       set { _value = value; }
     }
-    private uint _bitmask;
-    [global::ProtoBuf.ProtoMember(5, IsRequired = true, Name=@"bitmask", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    private uint _bitmask = default(uint);
+    [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"bitmask", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint bitmask
     {
       get { return _bitmask; }
