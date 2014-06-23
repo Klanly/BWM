@@ -173,18 +173,25 @@ public class SkillManager : IEnumerable<KeyValuePair<uint, table.TableSkill>>
 		}
 		else
 		{
-			listRotate.Sort( delegate(GameObject go1, GameObject go2) {
-				var delta1 = Math.Abs(go1.transform.rotation.eulerAngles.y - MainRole.Instance.transform.rotation.eulerAngles.y);
-				var delta2 = Math.Abs(go2.transform.rotation.eulerAngles.y - MainRole.Instance.transform.rotation.eulerAngles.y);
-				if (delta1 < delta2)
-					return -1;
-				else if (delta1 < delta2)
-					return 1;
-				return 0;
-			});
+            listTarget.AddRange(listLast.GetRange(0, listLast.Count));
+            if (listRotate.Count > 0)
+            {
+                listRotate.Sort(delegate(GameObject go1, GameObject go2)
+                {
+                    var delta1 = Math.Abs(go1.transform.rotation.eulerAngles.y - MainRole.Instance.transform.rotation.eulerAngles.y);
+                    var delta2 = Math.Abs(go2.transform.rotation.eulerAngles.y - MainRole.Instance.transform.rotation.eulerAngles.y);
+                    if (delta1 < delta2)
+                        return -1;
+                    else if (delta1 < delta2)
+                        return 1;
+                    return 0;
+                });
 
-			listTarget.AddRange(listLast.GetRange(0, listLast.Count));
-			listTarget.AddRange(listRotate.GetRange(0, maxnum - listLast.Count));
+                if (listRotate.Count >= maxnum - listLast.Count)
+                    listTarget.AddRange(listRotate.GetRange(0, maxnum - listLast.Count));
+                else
+                    listTarget.AddRange(listRotate.GetRange(0, listRotate.Count));
+            }
 		}
 
 		lastSelects = listTarget;
