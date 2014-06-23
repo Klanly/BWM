@@ -1,5 +1,5 @@
 ﻿	ScriptMsec int64
-	ScriptLoop string
-	ScriptAdd  string
-	ScriptDel  string
+	ScriptLoop string//循环脚本
+	ScriptAdd  string//添加脚本
+	ScriptDel  string//删除脚本
 	Bvs *BattleValues

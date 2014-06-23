@@ -1,2 +1,5 @@
+	ScriptUse  string//使用脚本
+	ScriptDel  string//添加脚本
+	ScriptAdd  string//删除脚本
 	TypeBase *TableItemType // 道具类型
 	EquipBase *TableEquipBase // 装备基础表
