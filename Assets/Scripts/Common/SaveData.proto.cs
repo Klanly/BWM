@@ -248,36 +248,45 @@ namespace Cmd
   {
     public SaveBuff() {}
     
+    private uint _thisid;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"thisid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint thisid
+    {
+      get { return _thisid; }
+      set { _thisid = value; }
+    }
     private uint _buffid;
-    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"buffid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"buffid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     public uint buffid
     {
       get { return _buffid; }
       set { _buffid = value; }
     }
     private uint _level;
-    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"level", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"level", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     public uint level
     {
       get { return _level; }
       set { _level = value; }
     }
     private uint _time;
-    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"time", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoMember(4, IsRequired = true, Name=@"time", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     public uint time
     {
       get { return _time; }
       set { _time = value; }
     }
-    private uint _value;
-    [global::ProtoBuf.ProtoMember(4, IsRequired = true, Name=@"value", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    private uint _value = default(uint);
+    [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"value", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint value
     {
       get { return _value; }
       set { _value = value; }
     }
-    private uint _bitmask;
-    [global::ProtoBuf.ProtoMember(5, IsRequired = true, Name=@"bitmask", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    private uint _bitmask = default(uint);
+    [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"bitmask", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint bitmask
     {
       get { return _bitmask; }
