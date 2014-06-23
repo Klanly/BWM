@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
-using Cmd;
 using System.Collections.Generic;
+using Cmd;
 using GX.Net;
 using System.Linq;
 using System;
@@ -111,6 +111,87 @@ public class SkillManager : IEnumerable<KeyValuePair<uint, table.TableSkill>>
 	}
 
 	/// <summary>
+	/// 上次的选择
+	/// </summary>
+	private static List<GameObject> lastSelects = new List<GameObject>();
+	/// <summary>
+	/// 根据选中目标，选中攻击的目标
+	/// </summary>
+	/// <returns>The selects.</returns>
+	/// <param name="skill">Skill.</param>
+	/// <param name="select">Select.</param>
+	public static List<GameObject> GetSelects(float radius, int maxnum, GameObject select)
+	{
+		if (MainRole.Instance == null)
+			return new List<GameObject>();
+
+		List<GameObject> listTarget = new List<GameObject>();
+		if (select != null)
+		{
+			listTarget.Add(select);
+			maxnum = maxnum - 1;
+		}
+
+		if (maxnum == 0)
+			return listTarget;
+
+		// 收集距离满足条件的
+		List<GameObject> listRaius = new List<GameObject>();
+		foreach(var npc in Npc.All)
+		{
+			if(npc.Value.GetComponent<HpProtocol>().hp > 0 && npc.Value.gameObject != select && Vector3.Distance(npc.Value.entity.Position, MainRole.Instance.entity.Position) <= radius)
+			{
+				listRaius.Add(npc.Value.gameObject);
+			}
+		}
+		
+		foreach(var role in Role.All)
+		{
+            if (role.Value.GetComponent<HpProtocol>().hp > 0 && role.Value != MainRole.Instance.Role && role.Value.gameObject != select && Vector3.Distance(role.Value.entity.Position, MainRole.Instance.entity.Position) <= radius)
+			{
+				listRaius.Add(role.Value.gameObject);
+			}
+		}
+
+		if (listRaius.Count == 0)
+			return listTarget;
+
+		// 若是上次的选中目标，则继续选择, 剩余的按照朝向选择
+		List<GameObject> listLast = new List<GameObject>();
+		List<GameObject> listRotate = new List<GameObject>();
+		foreach(var go in listRaius)
+		{
+			if (lastSelects.Contains(go))
+				listLast.Add(go);
+			else
+				listRotate.Add(go);
+		}
+
+		if (listLast.Count >= maxnum)
+		{
+			listTarget.AddRange(listLast.GetRange(0, maxnum));
+		}
+		else
+		{
+			listRotate.Sort( delegate(GameObject go1, GameObject go2) {
+				var delta1 = Math.Abs(go1.transform.rotation.eulerAngles.y - MainRole.Instance.transform.rotation.eulerAngles.y);
+				var delta2 = Math.Abs(go2.transform.rotation.eulerAngles.y - MainRole.Instance.transform.rotation.eulerAngles.y);
+				if (delta1 < delta2)
+					return -1;
+				else if (delta1 < delta2)
+					return 1;
+				return 0;
+			});
+
+			listTarget.AddRange(listLast.GetRange(0, listLast.Count));
+			listTarget.AddRange(listRotate.GetRange(0, maxnum - listLast.Count));
+		}
+
+		lastSelects = listTarget;
+		return listTarget;
+	}
+
+	/// <summary>
 	/// 释放给定的技能
 	/// </summary>
 	/// <param name="skillID"></param>
@@ -123,15 +204,55 @@ public class SkillManager : IEnumerable<KeyValuePair<uint, table.TableSkill>>
 		// CD检测
 		if (SkillManager.Instance.CoolDown(skillID) > 0)
 			return false;
+		//主角检查
+		if (MainRole.Instance == null)
+			return false;
+
+		// 如果有选择目标，则检查目标距离，超出范围就跑向目标后再攻击
+		GameObject goSelect = null;
+		if (SelectTarget.Selected != null)
+		{
+			var tmp = SelectTarget.Selected.GetGameObject();
+			if (tmp != null && tmp.gameObject.GetComponent<HpProtocol>().hp > 0)
+			{
+				goSelect = tmp.gameObject;
+				if (Vector3.Distance(goSelect.transform.position, MainRole.Instance.transform.position) > skill.radius)
+				{
+					MainRole.Instance.runToTarget.Target(goSelect, skill.radius, () =>
+					{
+						SkillManager.Fire(skillID);
+					});
+					return false;
+				}
+			}
+		}
+
+		// 收集目标
+		List<GameObject> listSelect = new List<GameObject>();
+		listSelect = SkillManager.GetSelects(skill.radius, skill.maxTarget, goSelect);
+		if (listSelect.Count == 0) 
+		{
+			Debug.Log("没有攻击目标!");
+			return false;
+		}
+
+		// 如果第一个目标不是当前目标，则发送选择目标消息
+		if (goSelect == null)
+		{
+			SelectTarget.Select(listSelect[0]);
+		}
+
 		Debug.Log("FireSkill: " + skill);
-		// TODO: 群攻搜索并批量发送攻击请求
+
+		// 发送攻击请求
 		var cmd = new RequestUseSkillUserCmd_C() { skillid = skill.id };
-		if (SelectTarget.Selected != null && SelectTarget.Selected != null)
-			cmd.hurts.Add(SelectTarget.Selected);
+		foreach(var go in listSelect)
+			cmd.hurts.Add(go.GetComponent<Entry>().uid);
 		SkillManager.Instance.lastFireTime[skillID] = Time.realtimeSinceStartup; // 记录施法时戳
 		Net.Instance.Send(cmd);
 		return true;
 	}
+
 
 	#region 网络消息处理
 	[Execute]

@@ -34,36 +34,9 @@ public class SkillDrawHurt : SkillBase
 			{
 				var t = skill.hurts[i];
 				var targetGo = skill.targetGos[i];
-				switch (t.hurtid.entrytype)
-				{
-				case Cmd.SceneEntryType.SceneEntryType_Npc:
-				{
-					var target = Npc.All[t.hurtid.entryid];
-					if (target != null)
-					{
-						if(target.ServerInfo.hp == t.prehp)
-							target.SetHp(target.ServerInfo.hp - t.subhp);
-					}
-				}
-					break;
-				case Cmd.SceneEntryType.SceneEntryType_Player:
-				{
-					if (t.hurtid.entryid == MainRole.Instance.Role.ServerInfo.charid)
-					{
-						if (MainRole.Instance.Role.ServerInfo.hp == t.prehp)
-						{
-							MainRole.Instance.SetHp(MainRole.Instance.Role.ServerInfo.hp - t.subhp);
-						}
-					}
-					else
-					{
-						var target = Role.All[t.hurtid.entryid];
-						if (target.ServerInfo.hp == t.prehp)
-							target.SetHp(target.ServerInfo.hp - t.subhp);
-					}
-				}
-					break;
-				}
+                var hpproto = targetGo.GetComponent<HpProtocol>();
+                if (hpproto.hp == t.prehp)
+                    hpproto.hp = hpproto.hp - t.subhp;
 				
 				if (targetGo != null)
 				{
