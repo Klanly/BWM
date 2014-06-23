@@ -162,9 +162,58 @@ namespace Cmd
 	#endregion
 
 	#region SaveBuff
-	partial class SaveBuff
-	{
-		public override string ToString()
+    partial class SaveBuff : System.IEquatable<SaveBuff>
+    {
+        #region Equatable
+        public static bool operator ==(SaveBuff a, SaveBuff b)
+        {
+            if (System.Object.ReferenceEquals(a, b))
+                return true;
+            if (((object)a == null) || ((object)b == null))
+                return false;
+            return a.buffid == b.buffid && a.level == b.level;
+        }
+        public static bool operator !=(SaveBuff a, SaveBuff b)
+        {
+            return !(a == b);
+        }
+
+        public override bool Equals(object obj)
+        {
+            return this == obj as SaveBuff;
+        }
+
+        public override int GetHashCode()
+        {
+            return (int)(this.buffid << 16) | (int)this.level;
+        }
+
+        #region IEquatable<SaveBuff> Members
+
+        public bool Equals(SaveBuff other)
+        {
+            return this == other;
+        }
+
+        #endregion
+
+        #endregion
+
+        #region Table cache
+        private table.TableBuff tableInfoCache;
+        public table.TableBuff TableInfo
+        {
+            get
+            {
+                if (tableInfoCache != null && tableInfoCache.id == this.buffid)
+                    return tableInfoCache;
+                tableInfoCache = Table.Query<table.TableBuff>().First(i => i.id == this.buffid && i.level == this.level);
+                return tableInfoCache;
+            }
+        }
+        #endregion
+        
+        public override string ToString()
 		{
 			this.bitmask.ToString();
 			return string.Format("#{0} level:{1} time:{2} value:{3} bitmask:{4}", this.buffid, this.level, this.time, this.value, this.bitmask.ToBitString());

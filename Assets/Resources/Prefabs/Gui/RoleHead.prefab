@@ -794,6 +794,9 @@ MonoBehaviour:
   myHp: {fileID: 11400030}
   myHpText: {fileID: 11400010}
   myHead: {fileID: 11400004}
+  myBuff: {fileID: 11400044}
+  myBuffRight: {fileID: 11400038}
+  myBuffDown: {fileID: 11400006}
 --- !u!114 &11400010
 MonoBehaviour:
   m_ObjectHideFlags: 1

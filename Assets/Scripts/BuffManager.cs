@@ -2,6 +2,7 @@
 using System.Collections;
 using GX.Net;
 using Cmd;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -10,36 +11,52 @@ public class BuffManager
 	public static BuffManager Instance { get; private set; }
 	static BuffManager() { Instance = new BuffManager(); }
 
-	private readonly Dictionary<uint, SaveBuff> buffers = new Dictionary<uint, SaveBuff>();
+	public readonly List<SaveBuff> buffers = new List<SaveBuff>();
 
-	protected void OnBuffChanged()
+    public event Action<BuffManager> Changed;
+    protected void OnBuffChanged()
 	{
-		Debug.Log(this.ToString());
+        if (Changed != null)
+            Changed(this);
+        Debug.Log(this.ToString());
 	}
 
 	public override string ToString()
 	{
 		return string.Format("BuffManager: {0}\n", this.buffers.Count) + 
-			string.Join("\n", (from b in buffers.Values select b.ToString()).ToArray());
+            string.Join("\n", buffers.Select(i => i.ToString()).ToArray());
 	}
 
 	[Execute]
 	public static void Execute(AddBuffBuffUserCmd_S cmd)
 	{
-		Instance.buffers.Add(cmd.buff.buffid, cmd.buff);
+        var index = Instance.buffers.FindIndex(i => i.thisid == cmd.buff.thisid);
+        if (index >= 0)
+        {
+            Instance.buffers[index] = cmd.buff;
+        }
+        else 
+        {
+            Instance.buffers.Add(cmd.buff);
+        }
 		Instance.OnBuffChanged();
 	}
 	[Execute]
 	public static void Execute(AddBuffListBuffUserCmd_S cmd)
 	{
 		Instance.buffers.Clear();
-		Instance.buffers.AddRange(from i in cmd.bufflist select new KeyValuePair<uint, SaveBuff>(i.buffid, i));
+        foreach (var t in cmd.bufflist)
+            Instance.buffers.Add(t);
 		Instance.OnBuffChanged();
 	}
 	[Execute]
 	public static void Execute(RemoveBuffBuffUserCmd_CS cmd)
 	{
-		if(Instance.buffers.Remove(cmd.buffid))
-			Instance.OnBuffChanged();
+        var index = Instance.buffers.FindIndex(i => i.thisid == cmd.thisid);
+        if (index >= 0)
+        { 
+            Instance.buffers.RemoveAt(index);
+            Instance.OnBuffChanged();
+        }
 	}
 }
