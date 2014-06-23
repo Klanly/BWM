@@ -114,6 +114,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startGo: {fileID: 0}
   targetGo: {fileID: 0}
+  hurts: []
 --- !u!114 &11400012
 MonoBehaviour:
   m_ObjectHideFlags: 1

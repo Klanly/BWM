@@ -5797,7 +5797,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: 8a5715394c3e2af4792ce08ceae0baf4, type: 2}
+  - {fileID: 2100000, guid: 99cb1391ef0922e4ea28d9d2ae61da34, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -6991,8 +6991,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1102253769}
-  - {fileID: 1001943888}
-  - {fileID: 1701914499}
   m_Father: {fileID: 0}
 --- !u!114 &312588732
 MonoBehaviour:
@@ -14078,7 +14076,7 @@ Transform:
   m_Children:
   - {fileID: 465461153}
   - {fileID: 605219395}
-  m_Father: {fileID: 312588731}
+  m_Father: {fileID: 0}
 --- !u!111 &1001943889
 Animation:
   m_ObjectHideFlags: 0
@@ -14100,7 +14098,7 @@ Prefab:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 312588731}
+    m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 400002, guid: 667a6f0f20a454f47a33e75fe466790c, type: 2}
       propertyPath: m_LocalPosition.x
@@ -17937,7 +17935,7 @@ Transform:
   - {fileID: 552333366}
   - {fileID: 407983874}
   - {fileID: 589533654}
-  m_Father: {fileID: 312588731}
+  m_Father: {fileID: 0}
 --- !u!114 &1701914500
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20165,7 +20163,7 @@ Prefab:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 312588731}
+    m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 400000, guid: a7f9834f1f3c9a14c9204c338e2a99cc, type: 3}
       propertyPath: m_LocalPosition.x
