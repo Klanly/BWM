@@ -36,8 +36,8 @@ public class Role : MonoBehaviour
 	}
 
 	private MapNav MapNav { get { return BattleScene.Instance.MapNav; } }
-	private Entity entity;
-	private Animator animator;
+	public Entity entity;
+	public Animator animator;
 	private Move move;
 
 	static Role()
@@ -59,10 +59,12 @@ public class Role : MonoBehaviour
 		var role = avatar.AddComponent<Role>();
 		role.entity = avatar.AddComponent<Entity>();
 		role.move = avatar.AddComponent<Move>();
+        avatar.AddComponent<HpRole>();
 		role.move.speed = sender => role.ServerInfo.movespeed * 0.01f;
 		role.animator = avatar.GetComponent<Animator>();
 		role.animator.SetInteger("profession", (int)info.profession);
 		role.ServerInfo = info;
+        avatar.AddComponent<Entry>();
 
 		CreateHeadTip(role);
 		
@@ -165,39 +167,6 @@ public class Role : MonoBehaviour
 	#endregion
 
 	#region 网络消息 角色血量变化
-	public void SetHp(int hp, int maxhp = -1)
-	{
-		if (hp < 0)
-			hp = 0;
-		if (maxhp >= 0)
-			ServerInfo.maxhp = maxhp;
-		ServerInfo.hp = hp;
-
-		if (SelectTarget.Selected != null && 
-		    SelectTarget.Selected.entrytype == SceneEntryType.SceneEntryType_Player && 
-		    SelectTarget.Selected.entryid == ServerInfo.charid)
-		{
-			var view = BattleScene.Instance.Gui<SelectTargetRole>();
-			view.SetHp(hp, maxhp >= 0 ? maxhp : 0 );
-		}
-
-		if (hp <= 0)
-		{
-			animator.Play("Ani_Die_1");
-		}
-	}
-
-	public void SetSp(int sp, int maxsp = -1)
-	{
-		if (SelectTarget.Selected != null && 
-		    SelectTarget.Selected.entrytype == SceneEntryType.SceneEntryType_Player && 
-		    SelectTarget.Selected.entryid == ServerInfo.charid)
-		{
-			var view = BattleScene.Instance.Gui<SelectTargetRole>();
-			view.SetSp(sp, maxsp >= 0 ? maxsp : 0);
-		}
-	}
-
 	[Execute]
 	public static void Execute(SetUserHpSpDataUserCmd_S cmd)
 	{
@@ -208,8 +177,9 @@ public class Role : MonoBehaviour
 		if (target == null) 
 			return;
 
-		target.SetHp(cmd.hp, cmd.maxhp);
-		target.SetSp(cmd.sp, cmd.maxsp);
+		target.gameObject.GetComponent<HpProtocol>().hp = cmd.hp;
+        target.gameObject.GetComponent<HpProtocol>().maxhp = cmd.maxhp;
+		//target.SetSp(cmd.sp, cmd.maxsp);
 	}
 
 	[Execute]
@@ -219,14 +189,11 @@ public class Role : MonoBehaviour
 		if (cmd.changetype > 0)
 			return;
 
-		if (MainRole.Execute(cmd))
-			return;
-
 		var target = All[cmd.charid];
 		if (target == null) 
 			return;
-		
-		target.SetHp(cmd.curhp);
+
+        target.gameObject.GetComponent<HpProtocol>().hp = cmd.curhp;
 	}
 
 	[Execute]
@@ -239,7 +206,7 @@ public class Role : MonoBehaviour
 		if (target == null) 
 			return;
 		
-		target.SetSp(cmd.cursp);
+		//target.SetSp(cmd.cursp);
 	}
 
 	/// <summary>

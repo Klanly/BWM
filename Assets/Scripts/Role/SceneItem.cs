@@ -55,6 +55,7 @@ public class SceneItem : MonoBehaviour
 		//item.animator = avatar.GetComponent<Animator>();
 		item.ServerInfo = info;
 		item.TableInfo = tbl;
+        avatar.AddComponent<Entry>();
 		CreateHeadTip(item);
 
 		item.lastPickUpTime = Time.time;

@@ -13,8 +13,8 @@ public class Npc : MonoBehaviour
 	public table.TableNpc TableInfo { get; private set; }
 
 	private MapNav MapNav { get { return BattleScene.Instance.MapNav; } }
-	private Entity entity;
-	private Animator animator;
+	public Entity entity;
+	public Animator animator;
 	private Move move;
 
 	static Npc()
@@ -55,10 +55,12 @@ public class Npc : MonoBehaviour
 		var npc = avatar.AddComponent<Npc>();
 		npc.entity = avatar.AddComponent<Entity>();
 		npc.move = avatar.AddComponent<Move>();
+        avatar.AddComponent<HpNpc>();
 		npc.move.speed = sender => npc.ServerInfo.movespeed * 0.01f;
 		npc.animator = avatar.GetComponent<Animator>();
 		npc.ServerInfo = info;
 		npc.TableInfo = tbl;
+        avatar.AddComponent<Entry>();
 
 		CreateHeadTip(npc);
 
@@ -146,28 +148,14 @@ public class Npc : MonoBehaviour
 	#endregion
 
 	#region 网络消息 NPC血量变化
-	public void SetHp(int hp, int maxhp = -1)
-	{
-		if (hp < 0)
-			hp = 0;
-		if (maxhp >= 0)
-			ServerInfo.maxhp = maxhp;
-		ServerInfo.hp = hp;
-		SelectTarget.OnUpdate(this);
-
-		if (hp <= 0)
-		{
-			animator.Play("Ani_Die_1");
-		}
-	}
-
 	[Execute]
 	public static void Execute(SetNpcHpDataUserCmd_S cmd)
 	{
 		var target = All[cmd.tempid];
 		if (target == null)
 			return;
-		target.SetHp(cmd.hp, cmd.maxhp);
+		target.gameObject.GetComponent<HpProtocol>().hp = cmd.hp;
+        target.gameObject.GetComponent<HpProtocol>().maxhp = cmd.maxhp;
 	}
 
 	[Execute]
@@ -180,7 +168,8 @@ public class Npc : MonoBehaviour
 		var target = All[cmd.tempid];
 		if (target == null)
 			return;
-		target.SetHp(cmd.curhp);
+
+        target.gameObject.GetComponent<HpProtocol>().hp = cmd.curhp;
 	}
 	#endregion
 }

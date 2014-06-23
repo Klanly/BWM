@@ -39,16 +39,13 @@ public class BattleSceneInput : MonoBehaviour
 			RaycastHit hit;
 			if (Physics.Raycast(ray, out hit))
 			{
-				var npc = hit.collider.gameObject.GetComponent<Npc>();
-				if (npc != null)
+				if (SelectTarget.Select(hit.collider.gameObject) == false)
 				{
-					Net.Instance.Send(new SelectSceneEntryScriptUserCmd_CS() { entry = new SceneEntryUid() { entrytype = SceneEntryType.SceneEntryType_Npc, entryid = npc.ServerInfo.tempid } });
-				}
-
-				var role = hit.collider.gameObject.GetComponent<Role>();
-				if (role != null && role.ServerInfo.charid != MainRole.ServerInfo.userdata.charid)
-				{
-					Net.Instance.Send(new SelectSceneEntryScriptUserCmd_CS() { entry = new SceneEntryUid() { entrytype = SceneEntryType.SceneEntryType_Player, entryid = role.ServerInfo.charid } });
+					// 没有选中目标，就移动
+					if (hit.collider.gameObject.GetComponent<MapNav>())
+					{
+						mainRole.pathMove.WalkTo(hit.point);
+					}
 				}
 			}
 		}
@@ -58,18 +55,6 @@ public class BattleSceneInput : MonoBehaviour
 
 	void Update()
 	{
-		// 点击场景控制角色移动
-		if (pressing)
-		{
-			var ray = Camera.main.ScreenPointToRay(new Vector3(UICamera.lastTouchPosition.x, UICamera.lastTouchPosition.y));
-			Collider terrain = MapNav.gameObject.collider;
-			RaycastHit hit;
-			if (terrain.Raycast(ray, out hit, 1000))
-			{
-				mainRole.pathMove.WalkTo(hit.point);
-			}
-		}
-
 		// Esc关闭界面或退出场景
 		if (Input.GetKeyDown(KeyCode.Escape))
 		{

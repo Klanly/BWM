@@ -227,7 +227,7 @@ static class CommonExtensions
 		}
 	}
 
-	public static MonoBehaviour GetGameObject(this Cmd.SceneEntryUid entry)
+	public static GameObject GetGameObject(this Cmd.SceneEntryUid entry)
 	{
 		if (entry == null)
 			return null;
@@ -237,14 +237,14 @@ static class CommonExtensions
 				{
 					var target = Npc.All[entry.entryid];
 					if (target != null)
-						return target;
+						return target.gameObject;
 				}
 				break;
 			case Cmd.SceneEntryType.SceneEntryType_Player:
 				{
 					var target = Role.All[entry.entryid];
 					if (target != null)
-						return target;
+						return target.gameObject;
 				}
 				break;
 			default:

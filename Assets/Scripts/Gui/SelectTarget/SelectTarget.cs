@@ -98,6 +98,20 @@ public class SelectTarget : MonoBehaviour
 		}
 	}
 
+	public static bool Select(GameObject go)
+	{
+        var entry = go.GetComponent<Entry>();
+        if (entry == null)
+            return false;
+
+        if (entry.IsMainRole())
+            return false;
+
+        Net.Instance.Send(new SelectSceneEntryScriptUserCmd_CS() { entry = entry.uid});
+        return true;
+	}
+
+
 	/// <summary>
 	/// 场景点选
 	/// </summary>

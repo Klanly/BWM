@@ -43,6 +43,7 @@ public class MainRole : MonoBehaviour, INotifyPropertyChanged
 	public CameraFollow cameraFollow;
 	public PathMove pathMove;
 	public ControlMove controlMove;
+	public RunToTarget runToTarget;
 
 	private MainRole() { }
 
@@ -61,6 +62,7 @@ public class MainRole : MonoBehaviour, INotifyPropertyChanged
 		mainRole.cameraFollow = role.gameObject.AddComponent<CameraFollow>();
 		mainRole.pathMove = role.gameObject.AddComponent<PathMove>();
 		mainRole.controlMove = role.gameObject.AddComponent<ControlMove>();
+		mainRole.runToTarget = role.gameObject.AddComponent<RunToTarget>();
 
 		mainRole.entity.PositionChanged += mainRole.OnPositionChanged;
 		return mainRole;
@@ -181,21 +183,6 @@ public class MainRole : MonoBehaviour, INotifyPropertyChanged
 		return false;
 	}
 
-	public void SetHp(int hp, int maxhp = -1)
-	{
-		if (hp < 0)
-			hp = 0;
-		if (maxhp >= 0)
-			Role.ServerInfo.maxhp = maxhp;
-		Role.ServerInfo.hp = hp;
-		OnPropertyChanged("hp");
-
-		if (hp <= 0)
-		{
-			animator.Play("Ani_Die_1");
-		}
-	}
-
 	public void SetSp(int sp, int maxsp = -1)
 	{
 		if (sp < 0)
@@ -206,22 +193,13 @@ public class MainRole : MonoBehaviour, INotifyPropertyChanged
 		OnPropertyChanged("sp");
 	}
 
-	public static bool Execute(ChangeUserHpDataUserCmd_S cmd)
-	{
-		if (MainRole.ServerInfo != null && cmd.charid == MainRole.ServerInfo.userdata.charid)
-		{
-			MainRole.Instance.SetHp(cmd.curhp);
-			return true;
-		}
-		return false;
-	}
-
 	public static bool Execute(SetUserHpSpDataUserCmd_S cmd)
 	{
 		var my = MainRole.Instance;
 		if (my != null && cmd.charid == my.Role.ServerInfo.charid)
 		{
-			MainRole.Instance.SetHp(cmd.hp, cmd.maxhp);
+			MainRole.Instance.gameObject.GetComponent<HpProtocol>().hp = cmd.hp;
+            MainRole.Instance.gameObject.GetComponent<HpProtocol>().maxhp = cmd.maxhp;
 			MainRole.Instance.SetSp(cmd.sp, cmd.maxsp);
 			return true;
 		}
