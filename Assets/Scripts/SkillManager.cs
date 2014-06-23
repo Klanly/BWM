@@ -114,13 +114,14 @@ public class SkillManager : IEnumerable<KeyValuePair<uint, table.TableSkill>>
 	/// 上次的选择
 	/// </summary>
 	private static List<GameObject> lastSelects = new List<GameObject>();
-	/// <summary>
-	/// 根据选中目标，选中攻击的目标
-	/// </summary>
-	/// <returns>The selects.</returns>
-	/// <param name="skill">Skill.</param>
-	/// <param name="select">Select.</param>
-	public static List<GameObject> GetSelects(float radius, int maxnum, GameObject select)
+    /// <summary>
+    /// 根据选中目标，选中攻击的目标
+    /// </summary>
+    /// <param name="radius"></param>
+    /// <param name="maxnum"></param>
+    /// <param name="select"></param>
+    /// <returns></returns>
+	public static List<GameObject> GetMultiTargets(float radius, int maxnum, GameObject select)
 	{
 		if (MainRole.Instance == null)
 			return new List<GameObject>();
@@ -306,7 +307,7 @@ public class SkillManager : IEnumerable<KeyValuePair<uint, table.TableSkill>>
 
 		// 收集目标
 		List<GameObject> listSelect = new List<GameObject>();
-		listSelect = SkillManager.GetSelects(skill.radius, skill.maxTarget, goSelect);
+		listSelect = SkillManager.GetMultiTargets(skill.radius, skill.maxTarget, goSelect);
 		if (listSelect.Count == 0) 
 		{
             // 找到屏幕内最近的目标，自动跑过去
