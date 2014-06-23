@@ -191,6 +191,76 @@ public class SkillManager : IEnumerable<KeyValuePair<uint, table.TableSkill>>
 		return listTarget;
 	}
 
+    /// <summary>
+    /// 屏幕范围内找到最近可攻击的目标
+    /// </summary>
+    /// <returns></returns>
+    public static GameObject GetNearestTarget()
+    {
+        if (MainRole.Instance == null)
+            return null;
+
+        float nearest = 50.0f;
+        GameObject target = null;
+
+        // 收集距离满足条件的
+        foreach (var npc in Npc.All)
+        {
+            if (npc.Value.GetComponent<HpProtocol>().hp > 0)
+            {
+                float dist = Vector3.Distance(npc.Value.entity.Position, MainRole.Instance.entity.Position);
+                if (dist < nearest)
+                {
+                    var renderers = npc.Value.gameObject.GetComponentsInChildren<Renderer>();
+                    bool visible = false;
+                    foreach (var t in renderers)
+                    {
+                        if (t.isVisible)
+                        {
+                            visible = true;
+                            break;
+                        }
+                    }
+
+                    if (visible)
+                    {
+                        nearest = dist;
+                        target = npc.Value.gameObject;
+                    }
+                }
+            }
+        }
+
+        foreach (var role in Role.All)
+        {
+            if (role.Value.GetComponent<HpProtocol>().hp > 0 && role.Value != MainRole.Instance.Role && role.Value.renderer != null /*&& role.Value.renderer.isVisible*/)
+            {
+                float dist = Vector3.Distance(role.Value.entity.Position, MainRole.Instance.entity.Position);
+                if (dist < nearest)
+                {
+                    var renderers = role.Value.gameObject.GetComponentsInChildren<Renderer>();
+                    bool visible = false;
+                    foreach (var t in renderers)
+                    {
+                        if (t.isVisible)
+                        {
+                            visible = true;
+                            break;
+                        }
+                    }
+
+                    if (visible)
+                    {
+                        nearest = dist;
+                        target = role.Value.gameObject;
+                    }
+                }
+            }
+        }
+
+        return target;
+    }
+
 	/// <summary>
 	/// 释放给定的技能
 	/// </summary>
@@ -212,10 +282,10 @@ public class SkillManager : IEnumerable<KeyValuePair<uint, table.TableSkill>>
 		GameObject goSelect = null;
 		if (SelectTarget.Selected != null)
 		{
-			var tmp = SelectTarget.Selected.GetGameObject();
-			if (tmp != null && tmp.gameObject.GetComponent<HpProtocol>().hp > 0)
+			var go = SelectTarget.Selected.GetGameObject();
+			if (go != null && go.GetComponent<HpProtocol>().hp > 0)
 			{
-				goSelect = tmp.gameObject;
+				goSelect = go;
 				if (Vector3.Distance(goSelect.transform.position, MainRole.Instance.transform.position) > skill.radius)
 				{
 					MainRole.Instance.runToTarget.Target(goSelect, skill.radius, () =>
@@ -232,7 +302,21 @@ public class SkillManager : IEnumerable<KeyValuePair<uint, table.TableSkill>>
 		listSelect = SkillManager.GetSelects(skill.radius, skill.maxTarget, goSelect);
 		if (listSelect.Count == 0) 
 		{
-			Debug.Log("没有攻击目标!");
+            // 找到屏幕内最近的目标，自动跑过去
+            GameObject goNearest = SkillManager.GetNearestTarget();
+            if (goNearest != null)
+            {
+                MainRole.Instance.runToTarget.Target(goNearest, skill.radius, () =>
+                {
+                    SkillManager.Fire(skillID);
+                });
+                return false;
+            }
+            else 
+            {
+                Debug.Log("没有攻击目标!");
+            }
+
 			return false;
 		}
 
