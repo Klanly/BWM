@@ -75,12 +75,12 @@ namespace Cmd
   {
     public RemoveBuffBuffUserCmd_CS() {}
     
-    private uint _buffid;
-    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"buffid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public uint buffid
+    private uint _thisid;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"thisid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint thisid
     {
-      get { return _buffid; }
-      set { _buffid = value; }
+      get { return _thisid; }
+      set { _thisid = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
