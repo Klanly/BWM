@@ -292,6 +292,14 @@ namespace Cmd
       get { return _bitmask; }
       set { _bitmask = value; }
     }
+    private int _lefttime = default(int);
+    [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"lefttime", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(int))]
+    public int lefttime
+    {
+      get { return _lefttime; }
+      set { _lefttime = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
