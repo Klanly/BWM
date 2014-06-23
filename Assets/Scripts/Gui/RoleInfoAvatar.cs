@@ -38,7 +38,7 @@ public class RoleInfoAvatar : MonoBehaviour
 		avatar = Avatar.Create(table.TableAvatar.Where(MainRole.ServerInfo.userdata.profession, MainRole.ServerInfo.userdata.sexman));
 		avatar.name = "RoleInfoAvatar.avatar";
 		avatar.transform.position = new Vector3(-10, 0, 0);
-		avatar.transform.Rotate(0, 180, 0);
+		avatar.transform.Rotate(0, 0, 0);
 		avatar.transform.localScale = new Vector3(5, 5, 5);
 	}
 
