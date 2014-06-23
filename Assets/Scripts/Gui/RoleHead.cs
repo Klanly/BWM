@@ -75,7 +75,11 @@ public class RoleHead : MonoBehaviour
                 btn.hoverSprite =
                 btn.pressedSprite =
                 btn.normalSprite =
-                btn != null ? "buff024"/*tblbuff.icon*/ : string.Empty;
+                btn != null ? tblbuff.icon : string.Empty;
+            if (t.time == 0)
+                btn.GetComponentInChildren<UILabel>().text = "";
+            else
+                btn.GetComponentInChildren<UILabel>().text = t.lefttime.ToString();
             listBtnBuff.Add(btn);
 
             x++;
