@@ -41,6 +41,7 @@
 				<field code="rate" type="int32" />
 			</field>
 		</field>
+		<field column="经验值" code="Exp" type="int64" />
 		<field column="掉落池" code="drops" type="array">
 			<field type="object">
 				<field code="dropid" type="uint32" />
