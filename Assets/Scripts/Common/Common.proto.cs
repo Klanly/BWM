@@ -361,6 +361,53 @@ namespace Cmd
       Shoes = 7
     }
   
+    [global::ProtoBuf.ProtoContract(Name=@"ItemType")]
+    public enum ItemType
+    {
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"ItemType_Weapon_ZhanShi", Value=1)]
+      ItemType_Weapon_ZhanShi = 1,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"ItemType_Weapon_DaoShi", Value=2)]
+      ItemType_Weapon_DaoShi = 2,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"ItemType_Weapon_FaShi", Value=3)]
+      ItemType_Weapon_FaShi = 3,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"ItemType_Bracer", Value=11)]
+      ItemType_Bracer = 11,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"ItemType_Clothe", Value=12)]
+      ItemType_Clothe = 12,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"ItemType_Pants", Value=13)]
+      ItemType_Pants = 13,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"ItemType_Necklace", Value=14)]
+      ItemType_Necklace = 14,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"ItemType_Ring", Value=15)]
+      ItemType_Ring = 15,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"ItemType_Shoes", Value=16)]
+      ItemType_Shoes = 16,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"ItemType_Medicine", Value=20)]
+      ItemType_Medicine = 20,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"ItemType_Scroll", Value=21)]
+      ItemType_Scroll = 21,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"ItemType_Stone", Value=22)]
+      ItemType_Stone = 22,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"ItemType_Quest", Value=23)]
+      ItemType_Quest = 23,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"ItemType_Present", Value=24)]
+      ItemType_Present = 24
+    }
+  
     [global::ProtoBuf.ProtoContract(Name=@"Profession")]
     public enum Profession
     {
