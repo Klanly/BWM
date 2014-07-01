@@ -78,7 +78,7 @@ public class RoleInfoPackage : MonoBehaviour
 			{
 				var compare = BattleScene.Instance.Gui<ItemTooltipEquiped>();
 				compare.gameObject.SetActive(true);
-				compare.ServerInfo = item;
+				compare.ServerInfo = equiped;
 			}
 		}
 		else

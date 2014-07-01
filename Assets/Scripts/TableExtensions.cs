@@ -52,6 +52,8 @@ namespace table
 	#region TableItemType
 	partial class TableItemType
 	{
+		public bool CanUse { get { return this.type == (uint)(Cmd.ItemType.ItemType_Medicine) ||  this.type == (uint)(Cmd.ItemType.ItemType_Present); } }
+
 		public bool IsEquip { get { return this.equipPos != 0; } }
 
 		public EquipPos EquipPos { get { return (EquipPos)this.equipPos; } }

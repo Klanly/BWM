@@ -6,6 +6,7 @@ using System.Text;
 public class ItemTooltipItem : MonoBehaviour
 {
 	public UILabel uiName;
+	public UIButton uiUse;
 	public UIButton uiDelete;
 
 	public UILabel uiProperty;
@@ -19,6 +20,7 @@ public class ItemTooltipItem : MonoBehaviour
 		{
 			serverInfo = value;
 			Present();
+			uiUse.gameObject.SetActive(serverInfo.TableInfo.Type.CanUse);
 		}
 	}
 	void Start()
@@ -28,6 +30,7 @@ public class ItemTooltipItem : MonoBehaviour
 			Net.Instance.Send(new RemoveItemItemUserCmd_CS() { thisid = ServerInfo.thisid });
 			BattleScene.Instance.Gui<RoleInfoPackage>().CloseAllTooltips();
 		};
+		UIEventListener.Get(uiUse.gameObject).onClick = OnUse;
 	}
 
 	void OnEnable()
@@ -45,5 +48,16 @@ public class ItemTooltipItem : MonoBehaviour
 		uiName.text = item.name;
 		uiProperty.text = string.Format("种类: {0}", item.type);
 		uiMessage.text = item.desc;
+	}
+
+	public virtual void OnUse(GameObject sender = null)
+	{
+		Net.Instance.Send(new UseItemItemUserCmd_CS()
+		{
+			thisid = ServerInfo.thisid,
+			targetid = 0,
+		});
+
+		BattleScene.Instance.Gui<RoleInfoPackage>().CloseAllTooltips();
 	}
 }
