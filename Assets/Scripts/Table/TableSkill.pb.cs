@@ -127,13 +127,13 @@ namespace table
       get { return _interruptable; }
       set { _interruptable = value; }
     }
-    private string _path;
-    [global::ProtoBuf.ProtoMember(17, IsRequired = true, Name=@"path", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public string path
+    private readonly global::System.Collections.Generic.List<string> _path = new global::System.Collections.Generic.List<string>();
+    [global::ProtoBuf.ProtoMember(17, Name=@"path", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<string> path
     {
       get { return _path; }
-      set { _path = value; }
     }
+  
     private int _pDam;
     [global::ProtoBuf.ProtoMember(18, IsRequired = true, Name=@"pDam", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     public int pDam

@@ -9,7 +9,9 @@ public class CastSkill : MonoBehaviour
 {
 	public bool StartSkill(table.TableSkill skillTableInfo, List<Cmd.SkillHurtData> hurts)
 	{
-		var path = "Prefabs/Skill/" + skillTableInfo.path;
+		if (skillTableInfo.path.Count == 0)
+			return false;
+		var path = "Prefabs/Skill/" + skillTableInfo.path[0]; // TODO: 多个技能动作按照一定规则播放
 		var res = Resources.Load(path);
 		if (res == null)
 		{

@@ -40,7 +40,7 @@ public class SkillDrawHurt : SkillBase
 				
 				if (targetGo != null)
 				{
-					Debug.Log(skill.TableInfo.name + ":(" + skill.TableInfo.path + "):" + targetGo.name + ":hp:" + t.subhp);
+					Debug.Log(skill.TableInfo.name + ":(" + string.Join(", ", skill.TableInfo.path.ToArray()) + "):" + targetGo.name + ":hp:" + t.subhp);
 
 					var gohp = Instantiate(Resources.Load("Prefabs/Gui/HurtTipHp")) as GameObject;
 					var labelhp = gohp.GetComponentInChildren<UILabel>();
