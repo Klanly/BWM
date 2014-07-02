@@ -1,18 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <table>
-	<output type="protobuf" code="TableStep" file="关卡表.xlsx" sheet="Sheet1">
+	<output type="protobuf" code="TableStage" file="关卡表.xlsx" sheet="Sheet1">
 		<key code="id" />
-		<field column="id" code="id" type="uint32" />
-		<field column="关卡名称" code="name" type="string" />
-		<field column="关卡描述" code="desc" type="string" />
-		<field column="奖励描述" code="presentDesc" type="string" />
+		<key code="level" />
+		<field column="id" code="id" type="uint16" />
+		<field column="等级" code="level" type="uint16" />
 		<field column="普通副本" code="mapIdNormal" type="uint32" />
 		<field column="精英副本" code="mapIdSenior" type="uint32" />
 	</output>
-	<output type="json-go" code="TableStep" file="关卡表.xlsx" sheet="Sheet1">
+	<output type="json-go" code="TableStage" file="关卡表.xlsx" sheet="Sheet1">
 		<key code="id" />
-		<field column="id" code="id" type="uint32" />
-		<field column="关卡名称" code="name" type="string" />
+		<key code="level" />
+		<field column="id" code="id" type="uint16" />
+		<field column="等级" code="level" type="uint16" />
 		<field column="普通副本" code="mapIdNormal" type="uint32" />
 		<field column="精英副本" code="mapIdSenior" type="uint32" />
 	</output>

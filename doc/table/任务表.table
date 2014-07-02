@@ -4,9 +4,9 @@
 		<key code="id" />
 		<field column="id" code="id" type="uint32" />
 		<field column="名称" code="name" type="string" />
-		<field column="任务类型" code="type" type="uint8">
-			<regex>^[0-3]$</regex>
-		</field>
+		<field column="任务类型" code="type" type="uint8"/>
+		<field column="关卡id" code="stageId" type="uint16" />
+		<field column="关卡等级" code="stageLevel" type="uint16" />
 		<field column="前置任务" code="preQuest" type="uint32" />
 		<field column="最低等级" code="minLevel" type="int32" />
 		<field column="最高等级" code="maxLevel" type="int32" />

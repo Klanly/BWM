@@ -80,8 +80,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: BackBOSS2
-    x: 243
-    y: 276
+    x: 674
+    y: 1367
     width: 363
     height: 64
     borderLeft: 0
@@ -93,8 +93,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: BackBossLevel
-    x: 2003
-    y: 1275
+    x: 1973
+    y: 1126
     width: 38
     height: 39
     borderLeft: 0
@@ -107,7 +107,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: BackElite
     x: 0
-    y: 535
+    y: 422
     width: 412
     height: 93
     borderLeft: 0
@@ -119,8 +119,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: backgrond_chat
-    x: 243
-    y: 6
+    x: 1467
+    y: 1153
     width: 148
     height: 78
     borderLeft: 10
@@ -132,8 +132,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: backimage1
-    x: 842
-    y: 513
+    x: 1584
+    y: 889
     width: 62
     height: 62
     borderLeft: 20
@@ -145,8 +145,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: backimage2
-    x: 405
-    y: 79
+    x: 842
+    y: 1120
     width: 120
     height: 127
     borderLeft: 30
@@ -158,8 +158,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: backimage3
-    x: 928
-    y: 691
+    x: 1152
+    y: 583
     width: 56
     height: 53
     borderLeft: 15
@@ -197,8 +197,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: BackMonster
-    x: 1590
-    y: 922
+    x: 1329
+    y: 1380
     width: 276
     height: 19
     borderLeft: 0
@@ -210,8 +210,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: BackMonsterLevel
-    x: 928
-    y: 108
+    x: 1041
+    y: 440
     width: 34
     height: 34
     borderLeft: 0
@@ -223,7 +223,7 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: BackNPC
-    x: 842
+    x: 1038
     y: 1372
     width: 290
     height: 59
@@ -236,8 +236,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: BackOtherRole
-    x: 215
-    y: 726
+    x: 0
+    y: 516
     width: 352
     height: 112
     borderLeft: 0
@@ -249,8 +249,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: bar_exp
-    x: 1901
-    y: 962
+    x: 1279
+    y: 898
     width: 113
     height: 53
     borderLeft: 0
@@ -275,58 +275,6 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: BarGreen
-    x: 1112
-    y: 858
-    width: 325
-    height: 14
-    borderLeft: 0
-    borderRight: 0
-    borderTop: 0
-    borderBottom: 0
-    paddingLeft: 0
-    paddingRight: 0
-    paddingTop: 0
-    paddingBottom: 0
-  - name: BarMonsterHp
-    x: 1590
-    y: 911
-    width: 268
-    height: 10
-    borderLeft: 0
-    borderRight: 0
-    borderTop: 0
-    borderBottom: 0
-    paddingLeft: 0
-    paddingRight: 0
-    paddingTop: 0
-    paddingBottom: 0
-  - name: BarOrange
-    x: 1438
-    y: 873
-    width: 325
-    height: 14
-    borderLeft: 0
-    borderRight: 0
-    borderTop: 0
-    borderBottom: 0
-    paddingLeft: 0
-    paddingRight: 0
-    paddingTop: 0
-    paddingBottom: 0
-  - name: BarPurple
-    x: 1112
-    y: 873
-    width: 325
-    height: 14
-    borderLeft: 0
-    borderRight: 0
-    borderTop: 0
-    borderBottom: 0
-    paddingLeft: 0
-    paddingRight: 0
-    paddingTop: 0
-    paddingBottom: 0
-  - name: BarRed
     x: 1610
     y: 1507
     width: 325
@@ -339,9 +287,61 @@ MonoBehaviour:
     paddingRight: 0
     paddingTop: 0
     paddingBottom: 0
+  - name: BarMonsterHp
+    x: 1329
+    y: 1369
+    width: 268
+    height: 10
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: BarOrange
+    x: 1402
+    y: 1253
+    width: 325
+    height: 14
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: BarPurple
+    x: 1402
+    y: 1268
+    width: 325
+    height: 14
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: BarRed
+    x: 1402
+    y: 1283
+    width: 325
+    height: 14
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
   - name: blueimage
-    x: 1673
-    y: 1382
+    x: 842
+    y: 1248
     width: 315
     height: 49
     borderLeft: 0
@@ -353,8 +353,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: butt
-    x: 1236
-    y: 964
+    x: 1201
+    y: 953
     width: 136
     height: 51
     borderLeft: 12
@@ -366,8 +366,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: button_big
-    x: 1467
-    y: 894
+    x: 1539
+    y: 1299
     width: 122
     height: 47
     borderLeft: 18
@@ -379,8 +379,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: button_chat
-    x: 928
-    y: 636
+    x: 1041
+    y: 602
     width: 54
     height: 54
     borderLeft: 0
@@ -392,8 +392,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: button_close
-    x: 928
-    y: 970
+    x: 1152
+    y: 757
     width: 56
     height: 60
     borderLeft: 0
@@ -405,8 +405,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: button_creat
-    x: 0
-    y: 200
+    x: 485
+    y: 658
     width: 182
     height: 180
     borderLeft: 0
@@ -418,8 +418,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: button_daoshi
-    x: 842
-    y: 1158
+    x: 434
+    y: 4
     width: 112
     height: 116
     borderLeft: 0
@@ -431,8 +431,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 1
   - name: button_emotion
-    x: 928
-    y: 454
+    x: 1783
+    y: 1302
     width: 49
     height: 44
     borderLeft: 0
@@ -444,8 +444,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: button_fashi
-    x: 955
-    y: 1159
+    x: 547
+    y: 5
     width: 112
     height: 115
     borderLeft: 0
@@ -457,8 +457,8 @@ MonoBehaviour:
     paddingTop: 2
     paddingBottom: 0
   - name: button_female
-    x: 597
-    y: 538
+    x: 674
+    y: 435
     width: 66
     height: 90
     borderLeft: 0
@@ -470,8 +470,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: button_guanbi
-    x: 928
-    y: 499
+    x: 1784
+    y: 1120
     width: 48
     height: 49
     borderLeft: 0
@@ -483,8 +483,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: button_haoyou
-    x: 183
-    y: 234
+    x: 931
+    y: 70
     width: 59
     height: 71
     borderLeft: 0
@@ -496,8 +496,8 @@ MonoBehaviour:
     paddingTop: 4
     paddingBottom: 0
   - name: button_hecheng
-    x: 842
-    y: 134
+    x: 991
+    y: 71
     width: 49
     height: 70
     borderLeft: 0
@@ -509,8 +509,8 @@ MonoBehaviour:
     paddingTop: 5
     paddingBottom: 0
   - name: button_jiazu
-    x: 842
-    y: 576
+    x: 1041
+    y: 728
     width: 53
     height: 73
     borderLeft: 0
@@ -522,8 +522,8 @@ MonoBehaviour:
     paddingTop: 2
     paddingBottom: 0
   - name: button_jineng
-    x: 842
-    y: 379
+    x: 1041
+    y: 657
     width: 54
     height: 70
     borderLeft: 0
@@ -535,8 +535,8 @@ MonoBehaviour:
     paddingTop: 5
     paddingBottom: 0
   - name: button_juese
-    x: 183
-    y: 306
+    x: 184
+    y: 29
     width: 58
     height: 74
     borderLeft: 0
@@ -549,7 +549,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: button_jump
     x: 757
-    y: 665
+    y: 85
     width: 63
     height: 77
     borderLeft: 0
@@ -561,8 +561,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: button_male
-    x: 498
-    y: 633
+    x: 674
+    y: 683
     width: 67
     height: 92
     borderLeft: 0
@@ -574,8 +574,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: button_max
-    x: 576
-    y: 1082
+    x: 1347
+    y: 1025
     width: 94
     height: 94
     borderLeft: 0
@@ -639,8 +639,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: button_qianghua
-    x: 842
-    y: 650
+    x: 1096
+    y: 806
     width: 55
     height: 71
     borderLeft: 0
@@ -652,8 +652,8 @@ MonoBehaviour:
     paddingTop: 4
     paddingBottom: 0
   - name: button_qie
-    x: 842
-    y: 450
+    x: 1521
+    y: 889
     width: 62
     height: 62
     borderLeft: 0
@@ -666,7 +666,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: button_quest
     x: 674
-    y: 492
+    y: 128
     width: 75
     height: 75
     borderLeft: 0
@@ -678,8 +678,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: button_red
-    x: 1643
-    y: 964
+    x: 1608
+    y: 953
     width: 134
     height: 51
     borderLeft: 66
@@ -704,8 +704,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: button_tab1
-    x: 1778
-    y: 965
+    x: 1743
+    y: 954
     width: 122
     height: 50
     borderLeft: 42
@@ -717,8 +717,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: button_tab2
-    x: 1226
-    y: 892
+    x: 1158
+    y: 1248
     width: 122
     height: 49
     borderLeft: 42
@@ -730,8 +730,8 @@ MonoBehaviour:
     paddingTop: 1
     paddingBottom: 0
   - name: button_touzi
-    x: 757
-    y: 524
+    x: 1973
+    y: 1166
     width: 71
     height: 65
     borderLeft: 0
@@ -743,8 +743,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: button_yuyi
-    x: 842
-    y: 850
+    x: 1041
+    y: 802
     width: 54
     height: 75
     borderLeft: 0
@@ -756,8 +756,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: button_zhanshi
-    x: 1068
-    y: 1160
+    x: 931
+    y: 1005
     width: 112
     height: 114
     borderLeft: 0
@@ -770,7 +770,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: button_zuoqi
     x: 757
-    y: 590
+    y: 10
     width: 63
     height: 74
     borderLeft: 0
@@ -782,8 +782,8 @@ MonoBehaviour:
     paddingTop: 1
     paddingBottom: 0
   - name: button1
-    x: 1010
-    y: 1291
+    x: 1084
+    y: 1167
     width: 195
     height: 64
     borderLeft: 95
@@ -808,8 +808,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: ButtonCS
-    x: 1982
-    y: 1206
+    x: 931
+    y: 142
     width: 62
     height: 68
     borderLeft: 0
@@ -821,8 +821,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: buttongua
-    x: 164
-    y: 3
+    x: 674
+    y: 603
     width: 77
     height: 79
     borderLeft: 0
@@ -847,8 +847,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: ButtonMail
-    x: 968
-    y: 257
+    x: 1768
+    y: 1010
     width: 40
     height: 37
     borderLeft: 0
@@ -873,8 +873,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: check
-    x: 183
-    y: 203
+    x: 377
+    y: 3
     width: 36
     height: 30
     borderLeft: 0
@@ -886,8 +886,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: checkbox
-    x: 2003
-    y: 1315
+    x: 630
+    y: 431
     width: 41
     height: 40
     borderLeft: 0
@@ -899,8 +899,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: checkbox1
-    x: 928
-    y: 217
+    x: 997
+    y: 307
     width: 41
     height: 35
     borderLeft: 0
@@ -912,8 +912,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: checkbox2
-    x: 966
-    y: 180
+    x: 1984
+    y: 968
     width: 36
     height: 36
     borderLeft: 0
@@ -925,8 +925,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: checkbox4
-    x: 928
-    y: 337
+    x: 2006
+    y: 1257
     width: 40
     height: 40
     borderLeft: 0
@@ -938,8 +938,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: checkbox5
-    x: 970
-    y: 217
+    x: 1809
+    y: 1012
     width: 41
     height: 35
     borderLeft: 0
@@ -951,8 +951,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: closebutton
-    x: 928
-    y: 745
+    x: 1210
+    y: 824
     width: 59
     height: 53
     borderLeft: 0
@@ -964,8 +964,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: control
-    x: 1989
-    y: 1373
+    x: 1900
+    y: 893
     width: 58
     height: 58
     borderLeft: 0
@@ -978,7 +978,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: controlback
     x: 0
-    y: 36
+    y: 104
     width: 163
     height: 163
     borderLeft: 0
@@ -990,8 +990,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: CopyAward
-    x: 928
-    y: 404
+    x: 1546
+    y: 1127
     width: 68
     height: 25
     borderLeft: 0
@@ -1016,8 +1016,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: CopyBossLock
-    x: 1291
-    y: 1159
+    x: 931
+    y: 889
     width: 109
     height: 115
     borderLeft: 0
@@ -1029,8 +1029,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: CopyBossUnlock
-    x: 1181
-    y: 1159
+    x: 931
+    y: 773
     width: 109
     height: 115
     borderLeft: 0
@@ -1043,7 +1043,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: CopyButton
     x: 842
-    y: 926
+    y: 348
     width: 85
     height: 88
     borderLeft: 0
@@ -1055,8 +1055,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: CopyElitelock
-    x: 1633
-    y: 1017
+    x: 931
+    y: 679
     width: 90
     height: 93
     borderLeft: 0
@@ -1068,8 +1068,8 @@ MonoBehaviour:
     paddingTop: 8
     paddingBottom: 14
   - name: CopyEliteSelect
-    x: 1301
-    y: 1057
+    x: 1852
+    y: 1012
     width: 165
     height: 53
     borderLeft: 0
@@ -1081,8 +1081,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: CopyEliteUnlock
-    x: 1724
-    y: 1017
+    x: 931
+    y: 585
     width: 90
     height: 93
     borderLeft: 0
@@ -1094,8 +1094,8 @@ MonoBehaviour:
     paddingTop: 8
     paddingBottom: 14
   - name: CopyEliteUnSelect
-    x: 1222
-    y: 1113
+    x: 1207
+    y: 1302
     width: 165
     height: 44
     borderLeft: 0
@@ -1108,7 +1108,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: CopyEnterBack
     x: 243
-    y: 341
+    y: 228
     width: 190
     height: 124
     borderLeft: 0
@@ -1120,8 +1120,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: CopyEnterButton
-    x: 1016
-    y: 840
+    x: 931
+    y: 409
     width: 89
     height: 89
     borderLeft: 0
@@ -1133,8 +1133,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: CopyFire
-    x: 1646
-    y: 1286
+    x: 1616
+    y: 1162
     width: 167
     height: 69
     borderLeft: 0
@@ -1146,8 +1146,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: CopyGrade
-    x: 928
-    y: 378
+    x: 1616
+    y: 1136
     width: 68
     height: 25
     borderLeft: 0
@@ -1159,8 +1159,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: CopyLine1
-    x: 1133
-    y: 1380
+    x: 353
+    y: 520
     width: 278
     height: 19
     borderLeft: 0
@@ -1172,7 +1172,7 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: CopyLine2
-    x: 1133
+    x: 1329
     y: 1400
     width: 539
     height: 31
@@ -1237,8 +1237,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: CopyMission CompleteWord2
-    x: 1514
-    y: 1216
+    x: 1862
+    y: 1308
     width: 182
     height: 58
     borderLeft: 0
@@ -1263,8 +1263,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: CopyMissionFailedWord
-    x: 1814
-    y: 1294
+    x: 1784
+    y: 1170
     width: 188
     height: 61
     borderLeft: 0
@@ -1289,8 +1289,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: CopyMissionStartWord
-    x: 1459
-    y: 1292
+    x: 1280
+    y: 1168
     width: 186
     height: 63
     borderLeft: 0
@@ -1302,8 +1302,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: CopyName
-    x: 243
-    y: 207
+    x: 674
+    y: 1298
     width: 326
     height: 68
     borderLeft: 0
@@ -1316,7 +1316,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: CopyNormalLock
     x: 674
-    y: 644
+    y: 280
     width: 77
     height: 76
     borderLeft: 0
@@ -1328,8 +1328,8 @@ MonoBehaviour:
     paddingTop: 18
     paddingBottom: 21
   - name: CopyNormalSelect
-    x: 1467
-    y: 1057
+    x: 1852
+    y: 1066
     width: 165
     height: 53
     borderLeft: 0
@@ -1342,7 +1342,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: CopyNormalUnlock
     x: 674
-    y: 721
+    y: 357
     width: 76
     height: 77
     borderLeft: 0
@@ -1354,8 +1354,8 @@ MonoBehaviour:
     paddingTop: 17
     paddingBottom: 21
   - name: CopyNormalUnSelect
-    x: 1388
-    y: 1113
+    x: 1373
+    y: 1302
     width: 165
     height: 44
     borderLeft: 0
@@ -1367,8 +1367,8 @@ MonoBehaviour:
     paddingTop: 9
     paddingBottom: 0
   - name: CopyPannel
-    x: 1206
-    y: 1308
+    x: 215
+    y: 641
     width: 252
     height: 47
     borderLeft: 0
@@ -1380,8 +1380,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: CopyPower
-    x: 526
-    y: 14
+    x: 1727
+    y: 1048
     width: 124
     height: 71
     borderLeft: 0
@@ -1393,8 +1393,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: CopyreCommend
-    x: 485
-    y: 35
+    x: 630
+    y: 472
     width: 39
     height: 43
     borderLeft: 0
@@ -1406,8 +1406,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: country_1
-    x: 842
-    y: 14
+    x: 1959
+    y: 892
     width: 57
     height: 59
     borderLeft: 0
@@ -1419,8 +1419,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: country_2
-    x: 928
-    y: 910
+    x: 1152
+    y: 637
     width: 56
     height: 59
     borderLeft: 0
@@ -1432,8 +1432,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: country_3
-    x: 928
-    y: 850
+    x: 1152
+    y: 697
     width: 56
     height: 59
     borderLeft: 0
@@ -1444,9 +1444,152 @@ MonoBehaviour:
     paddingRight: 0
     paddingTop: 0
     paddingBottom: 0
+  - name: CP_BlackBack
+    x: 215
+    y: 689
+    width: 269
+    height: 149
+    borderLeft: 10
+    borderRight: 10
+    borderTop: 10
+    borderBottom: 10
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: CP_ButtonEnter
+    x: 842
+    y: 523
+    width: 88
+    height: 89
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: CP_ButtonEnter2
+    x: 842
+    y: 613
+    width: 88
+    height: 89
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: CP_ButtonSelect
+    x: 931
+    y: 343
+    width: 97
+    height: 65
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: CP_EnterButton
+    x: 243
+    y: 115
+    width: 190
+    height: 112
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 2
+    paddingBottom: 0
+  - name: CP_Line
+    x: 1001
+    y: 1347
+    width: 860
+    height: 19
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: CP_Star
+    x: 2012
+    y: 1130
+    width: 34
+    height: 35
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: CP_Word_1
+    x: 1907
+    y: 1270
+    width: 98
+    height: 27
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: CP_Word_2
+    x: 1084
+    y: 1139
+    width: 98
+    height: 27
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: CP_Word_3
+    x: 1280
+    y: 1140
+    width: 98
+    height: 27
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: CP_WordBack
+    x: 413
+    y: 437
+    width: 216
+    height: 78
+    borderLeft: 10
+    borderRight: 10
+    borderTop: 10
+    borderBottom: 10
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
   - name: ditubian
-    x: 674
-    y: 37
+    x: 757
+    y: 589
     width: 72
     height: 72
     borderLeft: 0
@@ -1484,8 +1627,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: exp
-    x: 1112
-    y: 888
+    x: 1165
+    y: 898
     width: 113
     height: 53
     borderLeft: 0
@@ -1497,8 +1640,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: female
-    x: 674
-    y: 799
+    x: 596
+    y: 132
     width: 76
     height: 110
     borderLeft: 0
@@ -1510,8 +1653,8 @@ MonoBehaviour:
     paddingTop: 11
     paddingBottom: 0
   - name: fire
-    x: 842
-    y: 1275
+    x: 243
+    y: 34
     width: 167
     height: 80
     borderLeft: 0
@@ -1523,8 +1666,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: 'greenarrow '
-    x: 978
-    y: 558
+    x: 1873
+    y: 1124
     width: 33
     height: 45
     borderLeft: 0
@@ -1575,8 +1718,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: HeadTipShu
-    x: 928
-    y: 253
+    x: 1725
+    y: 1120
     width: 39
     height: 41
     borderLeft: 0
@@ -1601,8 +1744,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: HeadTipsWu
-    x: 968
-    y: 295
+    x: 1833
+    y: 1128
     width: 39
     height: 41
     borderLeft: 0
@@ -1614,8 +1757,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: HeadTipWei
-    x: 928
-    y: 295
+    x: 1685
+    y: 1120
     width: 39
     height: 41
     borderLeft: 0
@@ -1640,19 +1783,6 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: HPTeammate
-    x: 1376
-    y: 1637
-    width: 166
-    height: 8
-    borderLeft: 0
-    borderRight: 0
-    borderTop: 0
-    borderBottom: 0
-    paddingLeft: 0
-    paddingRight: 0
-    paddingTop: 0
-    paddingBottom: 0
-  - name: HPTeammateBack
     x: 1111
     y: 1508
     width: 166
@@ -1665,9 +1795,22 @@ MonoBehaviour:
     paddingRight: 0
     paddingTop: 0
     paddingBottom: 0
+  - name: HPTeammateBack
+    x: 1376
+    y: 1637
+    width: 166
+    height: 8
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
   - name: huabian
-    x: 1584
-    y: 1372
+    x: 1379
+    y: 1140
     width: 68
     height: 27
     borderLeft: 0
@@ -1679,8 +1822,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: HY_ButtonRed2
-    x: 1508
-    y: 964
+    x: 1473
+    y: 953
     width: 134
     height: 51
     borderLeft: 0
@@ -1692,8 +1835,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: HY_ButtonYellow2
-    x: 1373
-    y: 964
+    x: 1338
+    y: 953
     width: 134
     height: 51
     borderLeft: 0
@@ -1718,8 +1861,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: HY_InfoBack
-    x: 978
-    y: 461
+    x: 997
+    y: 239
     width: 37
     height: 37
     borderLeft: 0
@@ -1731,8 +1874,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: HY_ListBack
-    x: 413
-    y: 554
+    x: 0
+    y: 29
     width: 183
     height: 74
     borderLeft: 0
@@ -1796,8 +1939,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: image_input
-    x: 1112
-    y: 951
+    x: 1041
+    y: 887
     width: 123
     height: 64
     borderLeft: 15
@@ -1823,7 +1966,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: image_moji2
     x: 434
-    y: 356
+    y: 243
     width: 216
     height: 109
     borderLeft: 0
@@ -1862,7 +2005,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: image_skill
     x: 674
-    y: 417
+    y: 53
     width: 75
     height: 74
     borderLeft: 0
@@ -1874,8 +2017,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: input
-    x: 570
-    y: 210
+    x: 757
+    y: 523
     width: 78
     height: 65
     borderLeft: 14
@@ -1901,7 +2044,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: item
     x: 674
-    y: 568
+    y: 204
     width: 76
     height: 75
     borderLeft: 0
@@ -1913,8 +2056,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: item_daoju
-    x: 757
-    y: 260
+    x: 842
+    y: 150
     width: 65
     height: 65
     borderLeft: 0
@@ -1926,8 +2069,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: item_huwan
-    x: 757
-    y: 128
+    x: 931
+    y: 211
     width: 65
     height: 65
     borderLeft: 0
@@ -1939,8 +2082,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: item_jiezhi
-    x: 757
-    y: 62
+    x: 842
+    y: 18
     width: 65
     height: 65
     borderLeft: 0
@@ -1952,8 +2095,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: item_kuzi
-    x: 757
-    y: 326
+    x: 931
+    y: 277
     width: 65
     height: 65
     borderLeft: 0
@@ -1965,8 +2108,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: item_shangyi
-    x: 757
-    y: 458
+    x: 842
+    y: 84
     width: 65
     height: 65
     borderLeft: 0
@@ -1978,8 +2121,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: item_wuqi
-    x: 1016
-    y: 754
+    x: 842
+    y: 437
     width: 88
     height: 85
     borderLeft: 0
@@ -1991,8 +2134,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: item_xianglian
-    x: 757
-    y: 392
+    x: 842
+    y: 216
     width: 65
     height: 65
     borderLeft: 0
@@ -2004,8 +2147,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: item_xiezi
-    x: 757
-    y: 194
+    x: 842
+    y: 282
     width: 65
     height: 65
     borderLeft: 0
@@ -2017,8 +2160,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: levelback
-    x: 928
-    y: 179
+    x: 994
+    y: 173
     width: 37
     height: 37
     borderLeft: 0
@@ -2030,8 +2173,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: libao
-    x: 405
-    y: 2
+    x: 674
+    y: 526
     width: 79
     height: 76
     borderLeft: 0
@@ -2043,8 +2186,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: line
-    x: 1673
-    y: 1378
+    x: 1038
+    y: 1368
     width: 289
     height: 3
     borderLeft: 0
@@ -2056,8 +2199,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: loadingback
-    x: 842
-    y: 1356
+    x: 1084
+    y: 1232
     width: 945
     height: 15
     borderLeft: 0
@@ -2069,8 +2212,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: loadingbar
-    x: 1112
-    y: 942
+    x: 1041
+    y: 878
     width: 895
     height: 8
     borderLeft: 0
@@ -2082,8 +2225,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: loginbutton
-    x: 215
-    y: 637
+    x: 353
+    y: 540
     width: 282
     height: 88
     borderLeft: 0
@@ -2096,7 +2239,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: male
     x: 164
-    y: 83
+    y: 151
     width: 77
     height: 116
     borderLeft: 0
@@ -2108,8 +2251,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 5
   - name: mima_word
-    x: 928
-    y: 604
+    x: 1820
+    y: 1266
     width: 86
     height: 31
     borderLeft: 0
@@ -2122,7 +2265,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: MiniMapBack
     x: 0
-    y: 381
+    y: 268
     width: 242
     height: 153
     borderLeft: 0
@@ -2134,8 +2277,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: MiniMapBoss
-    x: 961
-    y: 52
+    x: 997
+    y: 277
     width: 33
     height: 29
     borderLeft: 0
@@ -2147,8 +2290,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: MiniMapElite
-    x: 1428
-    y: 1282
+    x: 1833
+    y: 1321
     width: 28
     height: 25
     borderLeft: 0
@@ -2160,8 +2303,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: MiniMapGoTo
-    x: 961
-    y: 25
+    x: 994
+    y: 146
     width: 34
     height: 26
     borderLeft: 0
@@ -2173,8 +2316,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: MiniMapMail
-    x: 969
-    y: 340
+    x: 1727
+    y: 1010
     width: 40
     height: 37
     borderLeft: 0
@@ -2187,7 +2330,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: MiniMapMonster
     x: 2034
-    y: 2035
+    y: 2021
     width: 13
     height: 13
     borderLeft: 0
@@ -2199,8 +2342,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: MiniMapPlayer
-    x: 2034
-    y: 2021
+    x: 867
+    y: 1638
     width: 13
     height: 13
     borderLeft: 0
@@ -2225,8 +2368,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: moneybind
-    x: 928
-    y: 82
+    x: 122
+    y: 3
     width: 40
     height: 25
     borderLeft: 0
@@ -2238,8 +2381,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: MoneyGold
-    x: 892
-    y: 136
+    x: 1183
+    y: 1120
     width: 33
     height: 22
     borderLeft: 0
@@ -2251,8 +2394,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: MoneySilver
-    x: 896
-    y: 627
+    x: 1217
+    y: 1120
     width: 31
     height: 22
     borderLeft: 0
@@ -2264,8 +2407,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: Monster
-    x: 867
-    y: 1638
+    x: 2034
+    y: 2035
     width: 13
     height: 13
     borderLeft: 0
@@ -2290,8 +2433,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: MonsterHp
-    x: 1590
-    y: 900
+    x: 1270
+    y: 867
     width: 262
     height: 10
     borderLeft: 0
@@ -2303,8 +2446,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: mp
-    x: 434
-    y: 342
+    x: 413
+    y: 423
     width: 204
     height: 13
     borderLeft: 0
@@ -2316,8 +2459,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: panel1
-    x: 928
-    y: 799
+    x: 674
+    y: 2
     width: 66
     height: 50
     borderLeft: 0
@@ -2342,8 +2485,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: panel3
-    x: 674
-    y: 110
+    x: 757
+    y: 662
     width: 65
     height: 81
     borderLeft: 8
@@ -2368,8 +2511,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: qianghua_cailiao
-    x: 969
-    y: 84
+    x: 997
+    y: 215
     width: 41
     height: 23
     borderLeft: 0
@@ -2381,8 +2524,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: qianghua_feng
-    x: 674
-    y: 266
+    x: 757
+    y: 818
     width: 74
     height: 73
     borderLeft: 0
@@ -2394,8 +2537,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: qianghua_fengexian
-    x: 1438
-    y: 869
+    x: 1533
+    y: 874
     width: 368
     height: 3
     borderLeft: 0
@@ -2407,8 +2550,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: qianghua_jiantou
-    x: 842
-    y: 205
+    x: 1833
+    y: 899
     width: 66
     height: 52
     borderLeft: 0
@@ -2446,8 +2589,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: qianghua_xing
-    x: 1514
-    y: 1158
+    x: 1869
+    y: 1374
     width: 158
     height: 57
     borderLeft: 0
@@ -2460,7 +2603,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: qianghua_xuanzhong
     x: 757
-    y: 1103
+    y: 969
     width: 84
     height: 83
     borderLeft: 0
@@ -2485,8 +2628,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: qianghua_yulan
-    x: 928
-    y: 430
+    x: 1467
+    y: 1129
     width: 78
     height: 23
     borderLeft: 0
@@ -2498,8 +2641,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: qianghua_zhuangbei
-    x: 674
-    y: 192
+    x: 757
+    y: 744
     width: 74
     height: 73
     borderLeft: 0
@@ -2511,8 +2654,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: Qipao
-    x: 757
-    y: 6
+    x: 1647
+    y: 896
     width: 64
     height: 55
     borderLeft: 0
@@ -2524,8 +2667,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: Qipao Copy
-    x: 842
-    y: 258
+    x: 1768
+    y: 896
     width: 64
     height: 55
     borderLeft: 0
@@ -2537,8 +2680,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: QipaoBack
-    x: 1016
-    y: 1016
+    x: 1537
+    y: 1025
     width: 94
     height: 94
     borderLeft: 0
@@ -2550,8 +2693,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: QipaoButton
-    x: 1111
-    y: 1016
+    x: 1632
+    y: 1025
     width: 94
     height: 94
     borderLeft: 0
@@ -2563,8 +2706,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: questnum
-    x: 134
-    y: 6
+    x: 1941
+    y: 1140
     width: 29
     height: 29
     borderLeft: 0
@@ -2576,8 +2719,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: 'redarrow '
-    x: 892
-    y: 159
+    x: 1907
+    y: 1124
     width: 33
     height: 45
     borderLeft: 0
@@ -2589,8 +2732,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: renwu_jiangli
-    x: 647
-    y: 109
+    x: 636
+    y: 531
     width: 25
     height: 97
     borderLeft: 8
@@ -2615,8 +2758,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: renwu_weijie
-    x: 1791
-    y: 1174
+    x: 1251
+    y: 1019
     width: 95
     height: 100
     borderLeft: 0
@@ -2641,8 +2784,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: renwu_yijie
-    x: 1697
-    y: 1169
+    x: 1157
+    y: 1014
     width: 93
     height: 105
     borderLeft: 0
@@ -2654,8 +2797,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: renwu_yixuan
-    x: 1401
-    y: 1177
+    x: 1044
+    y: 1022
     width: 112
     height: 97
     borderLeft: 0
@@ -2680,8 +2823,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: renwu_zidongzi
-    x: 1349
-    y: 891
+    x: 1866
+    y: 954
     width: 117
     height: 50
     borderLeft: 0
@@ -2758,8 +2901,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: select
-    x: 1887
-    y: 1180
+    x: 1442
+    y: 1025
     width: 94
     height: 94
     borderLeft: 0
@@ -2772,7 +2915,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: sentence_daoshi
     x: 674
-    y: 1163
+    y: 1029
     width: 82
     height: 268
     borderLeft: 0
@@ -2785,7 +2928,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: sentence_fashi
     x: 757
-    y: 1187
+    y: 1053
     width: 84
     height: 244
     borderLeft: 0
@@ -2798,7 +2941,7 @@ MonoBehaviour:
     paddingBottom: 24
   - name: sentence_zhanshi
     x: 674
-    y: 910
+    y: 776
     width: 79
     height: 252
     borderLeft: 0
@@ -2810,8 +2953,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 16
   - name: skill1
-    x: 607
-    y: 276
+    x: 931
+    y: 5
     width: 64
     height: 64
     borderLeft: 0
@@ -2823,8 +2966,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: skill2
-    x: 842
-    y: 722
+    x: 1393
+    y: 888
     width: 63
     height: 63
     borderLeft: 0
@@ -2836,8 +2979,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: skill3
-    x: 842
-    y: 786
+    x: 1457
+    y: 888
     width: 63
     height: 63
     borderLeft: 0
@@ -2849,8 +2992,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: SkillBack
-    x: 1016
-    y: 1111
+    x: 1001
+    y: 1300
     width: 205
     height: 46
     borderLeft: 0
@@ -2862,8 +3005,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: SkillButtonOK
-    x: 1206
-    y: 1016
+    x: 576
+    y: 1082
     width: 94
     height: 94
     borderLeft: 0
@@ -2876,7 +3019,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: SkillIcon1
     x: 757
-    y: 1031
+    y: 379
     width: 69
     height: 71
     borderLeft: 0
@@ -2889,7 +3032,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: SkillIcon2
     x: 757
-    y: 959
+    y: 451
     width: 69
     height: 71
     borderLeft: 0
@@ -2902,7 +3045,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: SkillIcon3
     x: 757
-    y: 887
+    y: 307
     width: 69
     height: 71
     borderLeft: 0
@@ -2915,7 +3058,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: SkillIcon4
     x: 757
-    y: 815
+    y: 163
     width: 69
     height: 71
     borderLeft: 0
@@ -2928,7 +3071,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: SkillIcon5
     x: 757
-    y: 743
+    y: 235
     width: 69
     height: 71
     borderLeft: 0
@@ -2940,8 +3083,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: SkillInfo
-    x: 243
-    y: 85
+    x: 434
+    y: 121
     width: 161
     height: 121
     borderLeft: 0
@@ -2953,8 +3096,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: SkillSelect
-    x: 526
-    y: 86
+    x: 963
+    y: 1127
     width: 120
     height: 120
     borderLeft: 0
@@ -2966,8 +3109,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: SkillUp
-    x: 842
-    y: 74
+    x: 1152
+    y: 818
     width: 57
     height: 59
     borderLeft: 0
@@ -2979,8 +3122,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: SkillWord1
-    x: 1206
-    y: 1276
+    x: 243
+    y: 2
     width: 133
     height: 31
     borderLeft: 0
@@ -2992,8 +3135,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: SkillWord2
-    x: 0
-    y: 4
+    x: 1606
+    y: 1368
     width: 133
     height: 31
     borderLeft: 0
@@ -3005,8 +3148,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: SkillWord3
-    x: 1910
-    y: 1437
+    x: 0
+    y: 3
     width: 121
     height: 25
     borderLeft: 0
@@ -3045,7 +3188,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: startbutton
     x: 243
-    y: 466
+    y: 353
     width: 413
     height: 68
     borderLeft: 0
@@ -3070,8 +3213,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: StoreButton
-    x: 674
-    y: 340
+    x: 757
+    y: 892
     width: 72
     height: 76
     borderLeft: 0
@@ -3083,8 +3226,8 @@ MonoBehaviour:
     paddingTop: 4
     paddingBottom: 8
   - name: StoreDecrease
-    x: 928
-    y: 143
+    x: 1041
+    y: 511
     width: 34
     height: 35
     borderLeft: 0
@@ -3096,8 +3239,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: StoreIncrease
-    x: 963
-    y: 143
+    x: 1041
+    y: 475
     width: 34
     height: 35
     borderLeft: 0
@@ -3109,8 +3252,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: StoreMoneyBack
-    x: 1412
-    y: 1372
+    x: 485
+    y: 630
     width: 171
     height: 27
     borderLeft: 0
@@ -3135,8 +3278,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: StoreNum
-    x: 568
-    y: 648
+    x: 1937
+    y: 1463
     width: 95
     height: 43
     borderLeft: 10
@@ -3161,8 +3304,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: tabbutton1
-    x: 1554
-    y: 1113
+    x: 1281
+    y: 1253
     width: 120
     height: 44
     borderLeft: 0
@@ -3174,8 +3317,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: tabbutton2
-    x: 1675
-    y: 1113
+    x: 1662
+    y: 1302
     width: 120
     height: 44
     borderLeft: 0
@@ -3187,8 +3330,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: taozhuang1
-    x: 977
-    y: 511
+    x: 996
+    y: 32
     width: 37
     height: 37
     borderLeft: 0
@@ -3213,8 +3356,8 @@ MonoBehaviour:
     paddingTop: 4
     paddingBottom: 3
   - name: taozhuang3
-    x: 928
-    y: 50
+    x: 1041
+    y: 342
     width: 32
     height: 31
     borderLeft: 0
@@ -3226,8 +3369,8 @@ MonoBehaviour:
     paddingTop: 4
     paddingBottom: 2
   - name: taozhuang4
-    x: 485
-    y: 2
+    x: 1041
+    y: 374
     width: 32
     height: 32
     borderLeft: 0
@@ -3239,8 +3382,8 @@ MonoBehaviour:
     paddingTop: 4
     paddingBottom: 1
   - name: taozhuang5
-    x: 983
-    y: 658
+    x: 1041
+    y: 407
     width: 32
     height: 32
     borderLeft: 0
@@ -3265,8 +3408,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: tipsback
-    x: 1016
-    y: 930
+    x: 931
+    y: 499
     width: 95
     height: 85
     borderLeft: 10
@@ -3278,8 +3421,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: TitleBarTalk
-    x: 1937
-    y: 1463
+    x: 1728
+    y: 1254
     width: 91
     height: 43
     borderLeft: 40
@@ -3304,8 +3447,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: VIP
-    x: 928
-    y: 549
+    x: 1041
+    y: 547
     width: 49
     height: 54
     borderLeft: 0
@@ -3317,8 +3460,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: white
-    x: 963
-    y: 110
+    x: 1828
+    y: 1367
     width: 32
     height: 32
     borderLeft: 0
@@ -3331,7 +3474,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: word_daoshi
     x: 842
-    y: 1015
+    y: 830
     width: 85
     height: 142
     borderLeft: 0
@@ -3343,8 +3486,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 8
   - name: word_exp
-    x: 1887
-    y: 1159
+    x: 184
+    y: 8
     width: 48
     height: 20
     borderLeft: 0
@@ -3356,8 +3499,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: word_fashi
-    x: 568
-    y: 692
+    x: 842
+    y: 973
     width: 88
     height: 146
     borderLeft: 0
@@ -3369,8 +3512,8 @@ MonoBehaviour:
     paddingTop: 4
     paddingBottom: 0
   - name: word_zhanshi
-    x: 928
-    y: 1031
+    x: 842
+    y: 703
     width: 87
     height: 126
     borderLeft: 0
@@ -3382,8 +3525,8 @@ MonoBehaviour:
     paddingTop: 6
     paddingBottom: 18
   - name: xiulian
-    x: 842
-    y: 314
+    x: 1712
+    y: 887
     width: 55
     height: 64
     borderLeft: 0
@@ -3395,8 +3538,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: xuanzhong
-    x: 1796
-    y: 1134
+    x: 1910
+    y: 1439
     width: 128
     height: 23
     borderLeft: 0
@@ -3408,8 +3551,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: xuanzhong2
-    x: 1982
-    y: 1159
+    x: 164
+    y: 104
     width: 57
     height: 46
     borderLeft: 0
@@ -3421,8 +3564,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: Xunlu
-    x: 1815
-    y: 1058
+    x: 1041
+    y: 952
     width: 159
     height: 52
     borderLeft: 0
@@ -3434,8 +3577,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: yibangding
-    x: 674
-    y: 13
+    x: 1183
+    y: 1143
     width: 81
     height: 23
     borderLeft: 0
@@ -3460,8 +3603,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: zhanghao_word
-    x: 1340
-    y: 1275
+    x: 1740
+    y: 1367
     width: 87
     height: 32
     borderLeft: 0

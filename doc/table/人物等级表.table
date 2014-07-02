@@ -4,7 +4,7 @@
 		<key code="level" />
 		<field column="等级" code="level" type="uint32" />
 		<field column="升级所需经验" code="exp" type="int64" />
-		<field column="体力上限" code="maxActivePoint" type="int32" />
+		<field column="体力上限" code="maxSp" type="int32" />
 		<field column="真气增加" code="skillPointAdd" type="int32" />
 		
 		<field column="最大生命" code="maxHp" type="int32" />
