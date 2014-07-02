@@ -206,8 +206,9 @@ namespace Cmd
       get { return _thisid; }
       set { _thisid = value; }
     }
-    private ulong _targetid;
-    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"targetid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    private ulong _targetid = default(ulong);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"targetid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong targetid
     {
       get { return _targetid; }
