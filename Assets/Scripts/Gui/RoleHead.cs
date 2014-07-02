@@ -30,9 +30,9 @@ public class RoleHead : MonoBehaviour
 	void OnDestroy()
 	{
 		if (MainRole.Instance != null)
-		{
 			MainRole.Instance.PropertyChanged -= OnMainRolePropertyChanged;
-		}
+		if (BuffManager.Instance != null)
+			BuffManager.Instance.Changed -= OnBuffChanged;
 	}
 
 	void OnMainRolePropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
