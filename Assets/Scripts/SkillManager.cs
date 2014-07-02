@@ -183,7 +183,7 @@ public class SkillManager : IEnumerable<KeyValuePair<uint, table.TableSkill>>
                     var delta2 = Math.Abs(go2.transform.rotation.eulerAngles.y - MainRole.Instance.transform.rotation.eulerAngles.y);
                     if (delta1 < delta2)
                         return -1;
-                    else if (delta1 < delta2)
+                    else if (delta1 > delta2)
                         return 1;
                     return 0;
                 });
