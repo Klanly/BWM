@@ -6,6 +6,10 @@ using GX.Net;
 using System.Linq;
 using System;
 
+/// <summary>
+/// 技能管理器[技能ID, 该技能对应等级的<see cref="table.TableSkill"/>]。
+/// 包括所有适合该职业的技能，未学习的为<c>null</c>
+/// </summary>
 public class SkillManager : IEnumerable<KeyValuePair<uint, table.TableSkill>>
 {
 	/// <summary>
@@ -75,7 +79,7 @@ public class SkillManager : IEnumerable<KeyValuePair<uint, table.TableSkill>>
 			return -1;
 		var skill = skillLevels[skillID];
 		var now = Time.realtimeSinceStartup;
-		if(now < last)
+		if (now < last)
 			return 0;
 		return skill.cd * 0.001f - now + last;// (skill.cd / 1000) - (now - last);
 	}
@@ -114,13 +118,14 @@ public class SkillManager : IEnumerable<KeyValuePair<uint, table.TableSkill>>
 	/// 上次的选择
 	/// </summary>
 	private static List<GameObject> lastSelects = new List<GameObject>();
-    /// <summary>
-    /// 根据选中目标，选中攻击的目标
-    /// </summary>
-    /// <param name="radius"></param>
-    /// <param name="maxnum"></param>
-    /// <param name="select"></param>
-    /// <returns></returns>
+
+	/// <summary>
+	/// 根据选中目标，选中攻击的目标
+	/// </summary>
+	/// <param name="radius"></param>
+	/// <param name="maxnum"></param>
+	/// <param name="select"></param>
+	/// <returns></returns>
 	public static List<GameObject> GetMultiTargets(float radius, int maxnum, GameObject select)
 	{
 		if (MainRole.Instance == null)
@@ -138,17 +143,22 @@ public class SkillManager : IEnumerable<KeyValuePair<uint, table.TableSkill>>
 
 		// 收集距离满足条件的
 		List<GameObject> listRaius = new List<GameObject>();
-		foreach(var npc in Npc.All)
+		foreach (var npc in Npc.All)
 		{
-			if(npc.Value.GetComponent<HpProtocol>().hp > 0 && npc.Value.gameObject != select && Vector3.Distance(npc.Value.entity.Position, MainRole.Instance.entity.Position) <= radius)
+			if (npc.Value.GetComponent<HpProtocol>().hp > 0
+				&& npc.Value.gameObject != select
+				&& Vector3.Distance(npc.Value.entity.Position, MainRole.Instance.entity.Position) <= radius)
 			{
 				listRaius.Add(npc.Value.gameObject);
 			}
 		}
-		
-		foreach(var role in Role.All)
+
+		foreach (var role in Role.All)
 		{
-            if (role.Value.GetComponent<HpProtocol>().hp > 0 && role.Value != MainRole.Instance.Role && role.Value.gameObject != select && Vector3.Distance(role.Value.entity.Position, MainRole.Instance.entity.Position) <= radius)
+			if (role.Value.GetComponent<HpProtocol>().hp > 0
+				&& role.Value != MainRole.Instance.Role
+				&& role.Value.gameObject != select
+				&& Vector3.Distance(role.Value.entity.Position, MainRole.Instance.entity.Position) <= radius)
 			{
 				listRaius.Add(role.Value.gameObject);
 			}
@@ -160,7 +170,7 @@ public class SkillManager : IEnumerable<KeyValuePair<uint, table.TableSkill>>
 		// 若是上次的选中目标，则继续选择, 剩余的按照朝向选择
 		List<GameObject> listLast = new List<GameObject>();
 		List<GameObject> listRotate = new List<GameObject>();
-		foreach(var go in listRaius)
+		foreach (var go in listRaius)
 		{
 			if (lastSelects.Contains(go))
 				listLast.Add(go);
@@ -174,100 +184,96 @@ public class SkillManager : IEnumerable<KeyValuePair<uint, table.TableSkill>>
 		}
 		else
 		{
-            listTarget.AddRange(listLast.GetRange(0, listLast.Count));
-            if (listRotate.Count > 0)
-            {
-                listRotate.Sort(delegate(GameObject go1, GameObject go2)
-                {
-                    var delta1 = Math.Abs(go1.transform.rotation.eulerAngles.y - MainRole.Instance.transform.rotation.eulerAngles.y);
-                    var delta2 = Math.Abs(go2.transform.rotation.eulerAngles.y - MainRole.Instance.transform.rotation.eulerAngles.y);
-                    if (delta1 < delta2)
-                        return -1;
-                    else if (delta1 > delta2)
-                        return 1;
-                    return 0;
-                });
+			listTarget.AddRange(listLast.GetRange(0, listLast.Count));
+			if (listRotate.Count > 0)
+			{
+				listRotate.Sort((go1, go2) =>
+				{
+					var delta1 = Math.Abs(go1.transform.rotation.eulerAngles.y - MainRole.Instance.transform.rotation.eulerAngles.y);
+					var delta2 = Math.Abs(go2.transform.rotation.eulerAngles.y - MainRole.Instance.transform.rotation.eulerAngles.y);
+					if (delta1 < delta2)
+						return -1;
+					else if (delta1 > delta2)
+						return 1;
+					return 0;
+				});
 
-                if (listRotate.Count >= maxnum - listLast.Count)
-                    listTarget.AddRange(listRotate.GetRange(0, maxnum - listLast.Count));
-                else
-                    listTarget.AddRange(listRotate.GetRange(0, listRotate.Count));
-            }
+				if (listRotate.Count >= maxnum - listLast.Count)
+					listTarget.AddRange(listRotate.GetRange(0, maxnum - listLast.Count));
+				else
+					listTarget.AddRange(listRotate.GetRange(0, listRotate.Count));
+			}
 		}
 
 		lastSelects = listTarget;
 		return listTarget;
 	}
 
-    /// <summary>
-    /// 屏幕范围内找到最近可攻击的目标
-    /// </summary>
-    /// <returns></returns>
-    public static GameObject GetNearestTarget()
-    {
-        if (MainRole.Instance == null)
-            return null;
+	/// <summary>
+	/// 屏幕范围内找到最近可攻击的目标
+	/// </summary>
+	/// <returns></returns>
+	public static GameObject GetNearestTarget()
+	{
+		if (MainRole.Instance == null)
+			return null;
 
-        float nearest = 50.0f;
-        GameObject target = null;
+		float nearest = 50.0f;
+		GameObject target = null;
 
-        // 收集距离满足条件的
-        foreach (var npc in Npc.All)
-        {
-            if (npc.Value.GetComponent<HpProtocol>().hp > 0)
-            {
-                float dist = Vector3.Distance(npc.Value.entity.Position, MainRole.Instance.entity.Position);
-                if (dist < nearest)
-                {
-                    var renderers = npc.Value.gameObject.GetComponentsInChildren<Renderer>();
-                    bool visible = false;
-                    foreach (var t in renderers)
-                    {
-                        if (t.isVisible)
-                        {
-                            visible = true;
-                            break;
-                        }
-                    }
+		// 收集距离满足条件的
+		foreach (var npc in Npc.All)
+		{
+			if (npc.Value.GetComponent<HpProtocol>().hp <= 0)
+				continue;
+			float dist = Vector3.Distance(npc.Value.entity.Position, MainRole.Instance.entity.Position);
+			if (dist >= nearest)
+				continue;
+			var renderers = npc.Value.gameObject.GetComponentsInChildren<Renderer>();
+			bool visible = false;
+			foreach (var t in renderers)
+			{
+				if (t.isVisible)
+				{
+					visible = true;
+					break;
+				}
+			}
 
-                    if (visible)
-                    {
-                        nearest = dist;
-                        target = npc.Value.gameObject;
-                    }
-                }
-            }
-        }
+			if (visible)
+			{
+				nearest = dist;
+				target = npc.Value.gameObject;
+			}
+		}
 
-        foreach (var role in Role.All)
-        {
-            if (role.Value.GetComponent<HpProtocol>().hp > 0 && role.Value != MainRole.Instance.Role && role.Value.renderer != null /*&& role.Value.renderer.isVisible*/)
-            {
-                float dist = Vector3.Distance(role.Value.entity.Position, MainRole.Instance.entity.Position);
-                if (dist < nearest)
-                {
-                    var renderers = role.Value.gameObject.GetComponentsInChildren<Renderer>();
-                    bool visible = false;
-                    foreach (var t in renderers)
-                    {
-                        if (t.isVisible)
-                        {
-                            visible = true;
-                            break;
-                        }
-                    }
+		foreach (var role in Role.All)
+		{
+			if (role.Value.GetComponent<HpProtocol>().hp <= 0 || role.Value == MainRole.Instance.Role || role.Value.renderer == null /*|| role.Value.renderer.isVisible == false*/)
+				continue;
+			float dist = Vector3.Distance(role.Value.entity.Position, MainRole.Instance.entity.Position);
+			if (dist >= nearest)
+				continue;
+			var renderers = role.Value.gameObject.GetComponentsInChildren<Renderer>();
+			bool visible = false;
+			foreach (var t in renderers)
+			{
+				if (t.isVisible)
+				{
+					visible = true;
+					break;
+				}
+			}
 
-                    if (visible)
-                    {
-                        nearest = dist;
-                        target = role.Value.gameObject;
-                    }
-                }
-            }
-        }
+			if (visible)
+			{
+				nearest = dist;
+				target = role.Value.gameObject;
+			}
+		}
 
-        return target;
-    }
+		return target;
+	}
 
 	/// <summary>
 	/// 释放给定的技能
@@ -308,22 +314,22 @@ public class SkillManager : IEnumerable<KeyValuePair<uint, table.TableSkill>>
 		// 收集目标
 		List<GameObject> listSelect = new List<GameObject>();
 		listSelect = SkillManager.GetMultiTargets(skill.radius, skill.maxTarget, goSelect);
-		if (listSelect.Count == 0) 
+		if (listSelect.Count == 0)
 		{
-            // 找到屏幕内最近的目标，自动跑过去
-            GameObject goNearest = SkillManager.GetNearestTarget();
-            if (goNearest != null)
-            {
-                MainRole.Instance.runToTarget.Target(goNearest, skill.radius, () =>
-                {
-                    SkillManager.Fire(skillID);
-                });
-                return false;
-            }
-            else 
-            {
-                Debug.Log("没有攻击目标!");
-            }
+			// 找到屏幕内最近的目标，自动跑过去
+			GameObject goNearest = SkillManager.GetNearestTarget();
+			if (goNearest != null)
+			{
+				MainRole.Instance.runToTarget.Target(goNearest, skill.radius, () =>
+				{
+					SkillManager.Fire(skillID);
+				});
+				return false;
+			}
+			else
+			{
+				Debug.Log("没有攻击目标!");
+			}
 
 			return false;
 		}
@@ -338,7 +344,7 @@ public class SkillManager : IEnumerable<KeyValuePair<uint, table.TableSkill>>
 
 		// 发送攻击请求
 		var cmd = new RequestUseSkillUserCmd_C() { skillid = skill.id };
-		foreach(var go in listSelect)
+		foreach (var go in listSelect)
 			cmd.hurts.Add(go.GetComponent<Entry>().uid);
 		SkillManager.Instance.lastFireTime[skillID] = Time.realtimeSinceStartup; // 记录施法时戳
 		Net.Instance.Send(cmd);
