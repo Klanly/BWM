@@ -10,8 +10,9 @@
 	</output>
 	<output type="json-go" code="TableStage" file="关卡表.xlsx" sheet="Sheet1">
 		<key code="id" />
-		<field column="id" code="id" type="uint32" />
-		<field column="关卡名称" code="name" type="string" />
+		<key code="level" />
+		<field column="id" code="id" type="uint16" />
+		<field column="等级" code="level" type="uint16" />
 		<field column="普通副本" code="mapIdNormal" type="uint32" />
 		<field column="精英副本" code="mapIdSenior" type="uint32" />
 	</output>
