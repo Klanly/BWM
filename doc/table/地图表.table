@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <table>
-	<output type="protobuf" code="TableMap" file="场景表.xlsx" sheet="Sheet1">
+	<output type="protobuf" code="TableMap" file="地图表.xlsx" sheet="Sheet1">
 		<key code="id" />
 		<field column="编号" code="id" type="uint32" />
 		<field column="名称" code="name" type="string" />
@@ -11,7 +11,7 @@
 			<regex>^[^\\/]*$</regex>
 		</field>
 	</output>
-	<output type="json-go" code="TableMap" file="场景表.xlsx" sheet="Sheet1">
+	<output type="json-go" code="TableMap" file="地图表.xlsx" sheet="Sheet1">
 		<key code="id" />
 		<field column="编号" code="id" type="uint32" />
 		<field column="名称" code="name" type="string" />

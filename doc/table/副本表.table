@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<table>
+	<output type="json-go" code="TableCopy" file="副本表.xlsx" sheet="Sheet1">
+		<key code="id" />
+		<field column="id" code="id" type="uint32" />
+		<field column="地图" code="mapId" type="uint32" />
+		<field column="次数上限" code="maxTimes" type="int32" />
+		<field column="体力需求" code="needSp" type="int32" />
+		<field column="复活上限" code="maxReliveTimes" type="int32" />
+	</output>
+</table>
