@@ -508,6 +508,20 @@ namespace Cmd
       TileType_Water = 2
     }
   
+    [global::ProtoBuf.ProtoContract(Name=@"QuestType")]
+    public enum QuestType
+    {
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"QuestType_None", Value=0)]
+      QuestType_None = 0,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"QuestType_Main", Value=1)]
+      QuestType_Main = 1,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"QuestType_Stage", Value=99)]
+      QuestType_Stage = 99
+    }
+  
     [global::ProtoBuf.ProtoContract(Name=@"QuestProcess")]
     public enum QuestProcess
     {
