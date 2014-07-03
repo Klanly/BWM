@@ -1,15 +1,15 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class HpProtocol : MonoBehaviour
+public abstract class HpProtocol : MonoBehaviour
 {
-    public virtual int hp { get; set; }
-    public virtual int maxhp { get; set; }
+    public abstract int hp { get; set; }
+	public abstract int maxhp { get; set; }
 }
 
 public class HpNpc : HpProtocol
 {
-    public Npc npc;
+    private Npc npc;
     void Start()
     {
         npc = GetComponent<Npc>();
@@ -46,7 +46,7 @@ public class HpNpc : HpProtocol
 
 public class HpRole : HpProtocol
 {
-    public Role role;
+    private Role role;
     void Start()
     {
         role = GetComponent<Role>();
