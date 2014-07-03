@@ -85,7 +85,7 @@ public class SkillInfo : MonoBehaviour
 		if (this.gameObject.activeSelf == false || items == null)
 			return;
 		// 为每个按钮关联对应的技能
-		foreach (var i in items.Zip(manager.OrderBy(i => i.Key)))
+		foreach (var i in items.Zip(from s in manager where s.Value == null || s.Value.IsBasic == false orderby s.Key select s))
 			i.Item1.Skill = i.Item2;
 
 		// 默认选中第一个学会的技能
