@@ -94,11 +94,18 @@ namespace Cmd
       set { _userdata = value; }
     }
     private int _sp;
-    [global::ProtoBuf.ProtoMember(4, IsRequired = true, Name=@"sp", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"sp", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     public int sp
     {
       get { return _sp; }
       set { _sp = value; }
+    }
+    private int _ep;
+    [global::ProtoBuf.ProtoMember(4, IsRequired = true, Name=@"ep", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int ep
+    {
+      get { return _ep; }
+      set { _ep = value; }
     }
     private int _maxsp;
     [global::ProtoBuf.ProtoMember(5, IsRequired = true, Name=@"maxsp", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]

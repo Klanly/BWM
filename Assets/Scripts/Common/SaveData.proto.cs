@@ -107,6 +107,13 @@ namespace Cmd
       get { return _exp; }
       set { _exp = value; }
     }
+    private int _ep;
+    [global::ProtoBuf.ProtoMember(14, IsRequired = true, Name=@"ep", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int ep
+    {
+      get { return _ep; }
+      set { _ep = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
