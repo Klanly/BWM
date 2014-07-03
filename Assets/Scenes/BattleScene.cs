@@ -159,5 +159,6 @@ public class BattleScene : MonoBehaviour
 		Role.All.Clear();
 		Npc.All.Clear();
 		SceneItem.All.Clear();
+		QuestManager.Instance.Clear();
 	}
 }

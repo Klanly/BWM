@@ -63,6 +63,12 @@ public class QuestManager : IEnumerable<QuestTrace>
 		return false;
 	}
 
+	public void Clear()
+	{
+		items.Clear();
+		//OnChanged();
+	}
+
 	public override string ToString()
 	{
 		return string.Format("QuestManager: {0}\n", this.items.Count) + 
