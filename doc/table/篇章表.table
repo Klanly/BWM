@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<table>
+	<output type="protobuf" code="TableSection" file="篇章表.xlsx" sheet="Sheet1">
+		<key code="id" />
+		<key code="level" />
+		<field column="id" code="id" type="uint16" />
+		<field column="等级" code="level" type="uint16" />
+		<field column="普通关卡" code="stageIdNormal" type="uint32" />
+		<field column="精英关卡" code="stageIdSenior" type="uint32" />
+	</output>
+	<output type="json-go" code="TableSection" file="篇章表.xlsx" sheet="Sheet1">
+		<key code="id" />
+		<key code="level" />
+		<field column="id" code="id" type="uint16" />
+		<field column="等级" code="level" type="uint16" />
+		<field column="普通关卡" code="stageIdNormal" type="uint32" />
+		<field column="精英关卡" code="stageIdSenior" type="uint32" />
+	</output>
+</table>

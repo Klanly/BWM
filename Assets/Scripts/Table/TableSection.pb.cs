@@ -7,13 +7,13 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-// Generated from: TableStage.proto
+// Generated from: TableSection.proto
 namespace table
 {
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"TableStage")]
-  public partial class TableStage : global::ProtoBuf.IExtensible
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"TableSection")]
+  public partial class TableSection : global::ProtoBuf.IExtensible
   {
-    public TableStage() {}
+    public TableSection() {}
     
     private uint _id;
     [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
@@ -29,19 +29,19 @@ namespace table
       get { return _level; }
       set { _level = value; }
     }
-    private uint _mapIdNormal;
-    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"mapIdNormal", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public uint mapIdNormal
+    private uint _stageIdNormal;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"stageIdNormal", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint stageIdNormal
     {
-      get { return _mapIdNormal; }
-      set { _mapIdNormal = value; }
+      get { return _stageIdNormal; }
+      set { _stageIdNormal = value; }
     }
-    private uint _mapIdSenior;
-    [global::ProtoBuf.ProtoMember(4, IsRequired = true, Name=@"mapIdSenior", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public uint mapIdSenior
+    private uint _stageIdSenior;
+    [global::ProtoBuf.ProtoMember(4, IsRequired = true, Name=@"stageIdSenior", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint stageIdSenior
     {
-      get { return _mapIdSenior; }
-      set { _mapIdSenior = value; }
+      get { return _stageIdSenior; }
+      set { _stageIdSenior = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)

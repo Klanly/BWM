@@ -1,2 +1,3 @@
 ﻿	SubSteps []int32 // 子步骤
 	Items []*QuestItems	// 道具奖励
+	Stage *TableStage	// 关卡
