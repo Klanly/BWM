@@ -149,13 +149,13 @@ public class QuestManager : IEnumerable<QuestTrace>
 		//NGUITools.Destroy(FindObjectOfType<CopyEnter>().transform.parent.gameObject);
 		//NGUITools.Destroy(FindObjectOfType<CopyEnter2>().transform.parent.gameObject);
 		// 打开copystart界面
-		Instantiate(Resources.Load("Prefabs/Gui/CopyStart"));
+		UnityEngine.Object.Instantiate(Resources.Load("Prefabs/Gui/CopyStart"));
 	}
 	[Execute]
 	public static void Execute(FinishStageQuestUserCmd_S cmd)
 	{
 		// 打开CopyEnd界面
-		Instantiate(Resources.Load("Prefabs/Gui/CopyEnd"));
+		UnityEngine.Object.Instantiate(Resources.Load("Prefabs/Gui/CopyEnd"));
 	}
 	#endregion
 }
