@@ -1766,13 +1766,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 100002}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e3e573e8f441c184690ba0416640a49b, type: 3}
+  m_Script: {fileID: 11500000, guid: de98b7a57303f264593d8c33c8fdb14c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   uiClose: {fileID: 100000}
-  uiCopys:
-  - {fileID: 0}
-  - {fileID: 0}
+  uiCopys: []
   uiEnter: {fileID: 100014}
 --- !u!114 &11400028
 MonoBehaviour:
