@@ -46,7 +46,19 @@ namespace Cmd
       RequestQuestDescQuestUserCmd_C = 9,
             
       [global::ProtoBuf.ProtoEnum(Name=@"ReturnQuestDetailInfoQuestUserCmd_S", Value=10)]
-      ReturnQuestDetailInfoQuestUserCmd_S = 10
+      ReturnQuestDetailInfoQuestUserCmd_S = 10,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"OpenStageDialogQuestUserCmd_S", Value=11)]
+      OpenStageDialogQuestUserCmd_S = 11,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"RequestOpenStageQuestUserCmd_C", Value=12)]
+      RequestOpenStageQuestUserCmd_C = 12,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"ReturnOpenStageQuestUserCmd_S", Value=13)]
+      ReturnOpenStageQuestUserCmd_S = 13,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"FinishStageQuestUserCmd_S", Value=14)]
+      FinishStageQuestUserCmd_S = 14
     }
   
     private global::ProtoBuf.IExtension extensionObject;
@@ -358,6 +370,88 @@ namespace Cmd
     {
       get { return _detail; }
       set { _detail = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"OpenStageDialogQuestUserCmd_S")]
+  public partial class OpenStageDialogQuestUserCmd_S : global::ProtoBuf.IExtensible
+  {
+    public OpenStageDialogQuestUserCmd_S() {}
+    
+    private uint _sectionid;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"sectionid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint sectionid
+    {
+      get { return _sectionid; }
+      set { _sectionid = value; }
+    }
+    private uint _stageid;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"stageid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint stageid
+    {
+      get { return _stageid; }
+      set { _stageid = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"RequestOpenStageQuestUserCmd_C")]
+  public partial class RequestOpenStageQuestUserCmd_C : global::ProtoBuf.IExtensible
+  {
+    public RequestOpenStageQuestUserCmd_C() {}
+    
+    private uint _stageid;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"stageid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint stageid
+    {
+      get { return _stageid; }
+      set { _stageid = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"ReturnOpenStageQuestUserCmd_S")]
+  public partial class ReturnOpenStageQuestUserCmd_S : global::ProtoBuf.IExtensible
+  {
+    public ReturnOpenStageQuestUserCmd_S() {}
+    
+    private uint _stageid;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"stageid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint stageid
+    {
+      get { return _stageid; }
+      set { _stageid = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"FinishStageQuestUserCmd_S")]
+  public partial class FinishStageQuestUserCmd_S : global::ProtoBuf.IExtensible
+  {
+    public FinishStageQuestUserCmd_S() {}
+    
+    private uint _stageid;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"stageid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint stageid
+    {
+      get { return _stageid; }
+      set { _stageid = value; }
+    }
+    private bool _result;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"result", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public bool result
+    {
+      get { return _result; }
+      set { _result = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)

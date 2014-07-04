@@ -134,5 +134,14 @@ public class QuestManager : IEnumerable<QuestTrace>
 		yield return new WaitForEndOfFrame();
 		dlg.Present(cmd.squest.questid, cmd.process, cmd.detail);
 	}
+
+	[Execute]
+	public static void Execute(OpenStageDialogQuestUserCmd_S cmd)
+	{
+		GameObject.Instantiate(Resources.Load("Prefabs/Gui/CopyEnter"));
+		var gui = GameObject.Instantiate(Resources.Load("Prefabs/Gui/CopyEnter2")) as GameObject;
+		var copy2 = gui.GetComponent<CopyEnter2>();
+		copy2.SetDefaultSelect(cmd.stageid);
+	}
 	#endregion
 }

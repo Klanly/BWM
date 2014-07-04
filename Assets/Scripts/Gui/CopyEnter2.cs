@@ -1,7 +1,9 @@
-﻿using UnityEngine;
+﻿using Cmd;
+using GX.Net;
+using UnityEngine;
 using System.Collections;
 
-public class CopyEnter : MonoBehaviour {
+public class CopyEnter2 : MonoBehaviour {
 
 	public GameObject uiClose;
 	public GameObject[] uiCopys;
@@ -33,7 +35,27 @@ public class CopyEnter : MonoBehaviour {
 		// 进入按钮
 		UIEventListener.Get(uiEnter).onClick = go => 
 		{
-			GameObject.Instantiate(Resources.Load("Prefabs/Gui/CopyEnter2"));
+			Debug.Log("select copy:" + selected);
+			Net.Instance.Send(new RequestOpenStageQuestUserCmd_C() { stageid = (uint)selected });
+
+
 		};
 	}
+
+	public void SetDefaultSelect(uint stageid)
+	{
+		selected = (int)stageid;
+	}
+
+	#region 网络消息处理
+	[Execute]
+	public static void Execute(ReturnOpenStageQuestUserCmd_S cmd)
+	{
+		NGUITools.Destroy(FindObjectOfType<CopyEnter>().transform.parent.gameObject);
+		NGUITools.Destroy(FindObjectOfType<CopyEnter2>().transform.parent.gameObject);
+		// 打开copystart界面
+		Instantiate(Resources.Load("Prefabs/Gui/CopyStart"));
+	}
+	#endregion
+
 }
