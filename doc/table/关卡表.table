@@ -4,6 +4,10 @@
 		<key code="id" />
 		<field column="id" code="id" type="uint32" />
 		<field column="地图" code="mapId" type="uint32" />
+		<field column="出生坐标X" code="posx" type="int32" />
+		<field column="出生坐标Y" code="posy" type="int32" />
+		<field column="超时时间" code="timeout" type="int32" />
+		<field column="预备时间" code="pretime" type="int32" />
 		<field column="次数上限" code="maxTimes" type="int32" />
 		<field column="体力需求" code="needSp" type="int32" />
 		<field column="复活上限" code="maxReliveTimes" type="int32" />
