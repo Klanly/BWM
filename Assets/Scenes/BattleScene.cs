@@ -148,6 +148,7 @@ public class BattleScene : MonoBehaviour
 		if (Instance != null)
 			throw new System.InvalidOperationException();
 		Instance = this;
+		Debug.Log("<color=olive>战斗场景 进入！</color>");
 	}
 
 	void OnDestroy()
@@ -155,6 +156,7 @@ public class BattleScene : MonoBehaviour
 		if (Instance == null)
 			throw new System.InvalidOperationException();
 		Instance = null;
+		Debug.Log("<color=olive>战斗场景 退出！</color>");
 		// TODO: use event driven
 		Role.All.Clear();
 		Npc.All.Clear();

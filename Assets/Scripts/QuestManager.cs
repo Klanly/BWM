@@ -143,5 +143,19 @@ public class QuestManager : IEnumerable<QuestTrace>
 		var copy2 = gui.GetComponent<CopyEnter2>();
 		copy2.SetDefaultSelect(cmd.stageid);
 	}
+	[Execute]
+	public static void Execute(ReturnOpenStageQuestUserCmd_S cmd)
+	{
+		//NGUITools.Destroy(FindObjectOfType<CopyEnter>().transform.parent.gameObject);
+		//NGUITools.Destroy(FindObjectOfType<CopyEnter2>().transform.parent.gameObject);
+		// 打开copystart界面
+		Instantiate(Resources.Load("Prefabs/Gui/CopyStart"));
+	}
+	[Execute]
+	public static void Execute(FinishStageQuestUserCmd_S cmd)
+	{
+		// 打开CopyEnd界面
+		Instantiate(Resources.Load("Prefabs/Gui/CopyEnd"));
+	}
 	#endregion
 }

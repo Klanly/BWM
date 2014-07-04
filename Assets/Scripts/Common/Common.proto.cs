@@ -549,8 +549,8 @@ namespace Cmd
       [global::ProtoBuf.ProtoEnum(Name=@"CopySceneType_None", Value=0)]
       CopySceneType_None = 0,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"CopySceneType_Normal", Value=1)]
-      CopySceneType_Normal = 1
+      [global::ProtoBuf.ProtoEnum(Name=@"CopySceneType_Stage", Value=1)]
+      CopySceneType_Stage = 1
     }
   
     [global::ProtoBuf.ProtoContract(Name=@"CountryId")]

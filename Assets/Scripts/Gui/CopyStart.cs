@@ -17,7 +17,5 @@ public class CopyStart : MonoBehaviour {
 	{
 		Destroy(transform.parent.gameObject);
 
-		// 打开CopyEnd界面
-		Instantiate(Resources.Load("Prefabs/Gui/CopyEnd"));
 	}
 }
