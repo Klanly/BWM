@@ -51,8 +51,8 @@ public class CopyEnter2 : MonoBehaviour {
 	[Execute]
 	public static void Execute(ReturnOpenStageQuestUserCmd_S cmd)
 	{
-		NGUITools.Destroy(FindObjectOfType<CopyEnter>().transform.parent.gameObject);
-		NGUITools.Destroy(FindObjectOfType<CopyEnter2>().transform.parent.gameObject);
+		//NGUITools.Destroy(FindObjectOfType<CopyEnter>().transform.parent.gameObject);
+		//NGUITools.Destroy(FindObjectOfType<CopyEnter2>().transform.parent.gameObject);
 		// 打开copystart界面
 		Instantiate(Resources.Load("Prefabs/Gui/CopyStart"));
 	}
