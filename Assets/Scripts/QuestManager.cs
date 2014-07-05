@@ -152,10 +152,11 @@ public class QuestManager : IEnumerable<QuestTrace>
 		UnityEngine.Object.Instantiate(Resources.Load("Prefabs/Gui/CopyStart"));
 	}
 	[Execute]
-	public static void Execute(FinishStageQuestUserCmd_S cmd)
+	public static void Execute(PrepairFinishStageQuestUserCmd_S cmd)
 	{
-		// 打开CopyEnd界面
-		UnityEngine.Object.Instantiate(Resources.Load("Prefabs/Gui/CopyEnd"));
+		var gui = GameObject.Instantiate(Resources.Load("Prefabs/Gui/CopyEnd")) as GameObject;
+		var copy2 = gui.GetComponent<CopyEnd>();
+		copy2.SetStage(cmd);
 	}
 	#endregion
 }

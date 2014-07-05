@@ -57,8 +57,11 @@ namespace Cmd
       [global::ProtoBuf.ProtoEnum(Name=@"ReturnOpenStageQuestUserCmd_S", Value=13)]
       ReturnOpenStageQuestUserCmd_S = 13,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"FinishStageQuestUserCmd_S", Value=14)]
-      FinishStageQuestUserCmd_S = 14
+      [global::ProtoBuf.ProtoEnum(Name=@"PrepairFinishStageQuestUserCmd_S", Value=14)]
+      PrepairFinishStageQuestUserCmd_S = 14,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"RequestFinishStageQuestUserCmd_C", Value=15)]
+      RequestFinishStageQuestUserCmd_C = 15
     }
   
     private global::ProtoBuf.IExtension extensionObject;
@@ -434,10 +437,10 @@ namespace Cmd
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"FinishStageQuestUserCmd_S")]
-  public partial class FinishStageQuestUserCmd_S : global::ProtoBuf.IExtensible
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"PrepairFinishStageQuestUserCmd_S")]
+  public partial class PrepairFinishStageQuestUserCmd_S : global::ProtoBuf.IExtensible
   {
-    public FinishStageQuestUserCmd_S() {}
+    public PrepairFinishStageQuestUserCmd_S() {}
     
     private uint _stageid;
     [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"stageid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
@@ -452,6 +455,31 @@ namespace Cmd
     {
       get { return _result; }
       set { _result = value; }
+    }
+    private string _desc = "";
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"desc", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string desc
+    {
+      get { return _desc; }
+      set { _desc = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"RequestFinishStageQuestUserCmd_C")]
+  public partial class RequestFinishStageQuestUserCmd_C : global::ProtoBuf.IExtensible
+  {
+    public RequestFinishStageQuestUserCmd_C() {}
+    
+    private uint _stageid;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"stageid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint stageid
+    {
+      get { return _stageid; }
+      set { _stageid = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
