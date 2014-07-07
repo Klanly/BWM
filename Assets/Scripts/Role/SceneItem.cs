@@ -55,7 +55,7 @@ public class SceneItem : MonoBehaviour
 		//item.animator = avatar.GetComponent<Animator>();
 		item.ServerInfo = info;
 		item.TableInfo = tbl;
-        avatar.AddComponent<Entry>();
+		avatar.AddComponent<Entry>();
 		CreateHeadTip(item);
 
 		item.lastPickUpTime = Time.time;
@@ -101,7 +101,8 @@ public class SceneItem : MonoBehaviour
 		PickUp();
 	}
 
-	IEnumerator WaitAndPickUp(float waitTime) {
+	IEnumerator WaitAndPickUp(float waitTime)
+	{
 		yield return new WaitForSeconds(waitTime);
 		PickUp();
 	}
@@ -112,7 +113,7 @@ public class SceneItem : MonoBehaviour
 		{
 			if (MainRole.Instance != null && gameObject.GetComponent<Entity>() != null)
 			{
-				if(Vector3.Distance(MainRole.Instance.entity.Position,entity.Position) < 1.5f)
+				if (Vector3.Distance(MainRole.Instance.entity.Position, entity.Position) < 1.5f)
 				{
 					lastPickUpTime = Time.time;
 					Net.Instance.Send(new Cmd.PickUpItemPropertyUserCmd_C()
@@ -150,7 +151,7 @@ public class SceneItem : MonoBehaviour
 	public static void Execute(ReplaceItemListMapUserCmd_S cmd)
 	{
 		SceneItem.All.Clear();
-		foreach(var v in cmd.itemlist)
+		foreach (var v in cmd.itemlist)
 		{
 			var item = SceneItem.Create(v);
 			SceneItem.All[v.thisid] = item;
@@ -160,7 +161,7 @@ public class SceneItem : MonoBehaviour
 			item.entity.Grid = new MapGrid(v.loc.pos);
 		}
 
-		
+
 	}
 
 	[Execute]
