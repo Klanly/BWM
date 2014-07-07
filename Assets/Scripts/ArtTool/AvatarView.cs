@@ -2,7 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class AvatarView: MonoBehaviour {
+public class AvatarView : MonoBehaviour
+{
 
 	public GameObject prefabSkeleton;
 	public GameObject prefabCoat;
@@ -99,14 +100,14 @@ public class AvatarView: MonoBehaviour {
 	void Start()
 	{
 		role = Instantiate(prefabSkeleton) as GameObject;
-		role.transform.position = new Vector3(10,0,10);
-		role.transform.localScale = new Vector3(5,5,5);
-		role.transform.rotation = Quaternion.Euler(new Vector3(0,180,0));
+		role.transform.position = new Vector3(10, 0, 10);
+		role.transform.localScale = new Vector3(5, 5, 5);
+		role.transform.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
 
 		role1 = Avatar.Create(strSkeleton, strCoat, strHead, strWeapon);
-		role1.transform.position = new Vector3(15,0,10);
-		role1.transform.localScale = new Vector3(5,5,5);
-		role1.transform.rotation = Quaternion.Euler(new Vector3(0,180,0));
+		role1.transform.position = new Vector3(15, 0, 10);
+		role1.transform.localScale = new Vector3(5, 5, 5);
+		role1.transform.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
 		role1.name = "role1";
 
 
@@ -120,16 +121,17 @@ public class AvatarView: MonoBehaviour {
 			result = System.IO.File.ReadAllText(filePath);
 		*/
 	}
-	
+
 	// Update is called once per frame
 	private bool bTouched = false;
-	void Update () {
+	void Update()
+	{
 
-		if(Input.GetKeyDown("space") || (!bTouched && Input.touchCount > 0) || (!bTouched && Input.GetMouseButton(0)))
+		if (Input.GetKeyDown("space") || (!bTouched && Input.touchCount > 0) || (!bTouched && Input.GetMouseButton(0)))
 		{
 			bTouched = true;
 
-			var coat  = Instantiate(prefabCoat) as GameObject;
+			var coat = Instantiate(prefabCoat) as GameObject;
 			var head = Instantiate(prefabHead) as GameObject;
 			var weapon = Instantiate(prefabWeapon) as GameObject;
 
@@ -163,11 +165,11 @@ public class AvatarView: MonoBehaviour {
 			var headma = head.transform.Find("m_a");
 			var invert1 = Matrix4x4.TRS(headma.localPosition, headma.localRotation, headma.localScale).inverse;
 			var v41 = invert1.GetColumn(3);
-			headroot.localPosition = new Vector3(v41.x,v41.y,v41.z);
+			headroot.localPosition = new Vector3(v41.x, v41.y, v41.z);
 			headroot.localScale = headma.localScale;
 			var rotate1 = headma.localRotation.eulerAngles;
 			headroot.localRotation = Quaternion.Inverse(Quaternion.Euler(rotate1));
-			
+
 
 			/* 以scene_root和k_armright对齐
 			var karmright = role.transform.Find("Bip01").Find("Bip01 Pelvis").Find("Bip01 Spine").Find("Bip01 Spine1").Find("Bip01 Spine2").Find("Bip01 Neck").Find("Bip01 R Clavicle").Find("Bip01 R UpperArm").Find("Bip01 R Forearm").Find("Bip01 R Hand").Find("k_armright");
@@ -185,7 +187,7 @@ public class AvatarView: MonoBehaviour {
 			var weaponma = weapon.transform.Find("m_a");
 			var invert = Matrix4x4.TRS(weaponma.localPosition, weaponma.localRotation, weaponma.localScale).inverse;
 			var v4 = invert.GetColumn(3);
-			weaponroot.localPosition = new Vector3(v4.x,v4.y,v4.z);
+			weaponroot.localPosition = new Vector3(v4.x, v4.y, v4.z);
 			weaponroot.localScale = weaponma.localScale;
 			var rotate = weaponma.localRotation.eulerAngles;
 			weaponroot.localRotation = Quaternion.Inverse(Quaternion.Euler(rotate));

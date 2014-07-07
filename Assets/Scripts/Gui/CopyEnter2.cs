@@ -3,7 +3,8 @@ using GX.Net;
 using UnityEngine;
 using System.Collections;
 
-public class CopyEnter2 : MonoBehaviour {
+public class CopyEnter2 : MonoBehaviour
+{
 
 	public GameObject uiClose;
 	public GameObject[] uiCopys;
@@ -11,7 +12,7 @@ public class CopyEnter2 : MonoBehaviour {
 	private int selected = 0;
 
 	// Use this for initialization
-	void Start () 
+	void Start()
 	{
 		BattleScene.AddGuiToTop(gameObject);
 
@@ -25,7 +26,7 @@ public class CopyEnter2 : MonoBehaviour {
 			UIEventListener.Get(uiCopys[i]).onClick = go =>
 			{
 				Debug.Log("copy" + index);
-				foreach(var t in uiCopys)
+				foreach (var t in uiCopys)
 					t.GetComponent<UIButton>().enabled = true;
 				uiCopys[index].GetComponent<UIButton>().enabled = false;
 				selected = index;
@@ -33,7 +34,7 @@ public class CopyEnter2 : MonoBehaviour {
 		}
 
 		// 进入按钮
-		UIEventListener.Get(uiEnter).onClick = go => 
+		UIEventListener.Get(uiEnter).onClick = go =>
 		{
 			Debug.Log("select copy:" + selected);
 			Net.Instance.Send(new RequestOpenStageQuestUserCmd_C() { stageid = (uint)selected });

@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class SkillView : MonoBehaviour {
+public class SkillView : MonoBehaviour
+{
 
 	public GameObject startGo;
 	public GameObject targetGo;
@@ -13,7 +14,7 @@ public class SkillView : MonoBehaviour {
 		//startSkill();
 	}
 
-	[ContextMenu ("start skill")]
+	[ContextMenu("start skill")]
 	public void startSkill()
 	{
 		var skill = Object.Instantiate(skillGo) as GameObject;
@@ -26,19 +27,19 @@ public class SkillView : MonoBehaviour {
 
 		// 检查技能的有效性
 		int count = 0;
-		foreach(SendTargetEventBase t in skill.GetComponents<SendTargetEventBase>())
+		foreach (SendTargetEventBase t in skill.GetComponents<SendTargetEventBase>())
 		{
 			if (t.sendTargetEvent == true)
-				count ++;
+				count++;
 
-			if(count >= 2)
+			if (count >= 2)
 			{
 				Debug.LogError("技能有多个发送到达目标的组件");
 				return;
 			}
 		}
 
-		foreach(SkillBase t in skill.GetComponents<SkillBase>())
+		foreach (SkillBase t in skill.GetComponents<SkillBase>())
 		{
 			t.StartSkill();
 		}
@@ -46,7 +47,7 @@ public class SkillView : MonoBehaviour {
 		skill.transform.localPosition = Vector3.zero;
 	}
 
-	[ContextMenu ("start buff")]
+	[ContextMenu("start buff")]
 	public void startBuff()
 	{
 		var buff = Object.Instantiate(buffGo) as GameObject;

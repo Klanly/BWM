@@ -9,7 +9,8 @@ using System;
 /// </summary>
 [RequireComponent(typeof(Entity))]
 [RequireComponent(typeof(Move))]
-public class PathMove : MonoBehaviour {
+public class PathMove : MonoBehaviour
+{
 
 	public delegate void PathFinished();
 	public PathFinished pathFinished;
@@ -23,7 +24,8 @@ public class PathMove : MonoBehaviour {
 	private MapNav MapNav { get { return BattleScene.Instance.MapNav; } }
 
 	// Use this for initialization
-	void Start () {
+	void Start()
+	{
 		entity = this.gameObject.GetComponent<Entity>();
 		move = this.gameObject.GetComponent<Move>();
 	}
@@ -35,7 +37,7 @@ public class PathMove : MonoBehaviour {
 
 		// 如果起始点是阻挡，检测方向是否为走出阻挡的方向
 		MapGrid gridRealSrc = gridOriginSrc;
-		if((MapNav[gridRealSrc.x, gridRealSrc.z] & entity.TileType) == 0)
+		if ((MapNav[gridRealSrc.x, gridRealSrc.z] & entity.TileType) == 0)
 		{
 			if (MapNav.GetNearestValidGrid(gridOriginDst, gridOriginSrc, out gridRealSrc, entity.TileType, 1) == false)
 			{
@@ -45,14 +47,14 @@ public class PathMove : MonoBehaviour {
 		}
 
 		MapGrid gridRealDst;
-		if(MapNav.GetNearestValidGrid(gridRealSrc, gridOriginDst, out gridRealDst, entity.TileType) == false)
+		if (MapNav.GetNearestValidGrid(gridRealSrc, gridOriginDst, out gridRealDst, entity.TileType) == false)
 		{
 			StopPath();
 			return;
 		}
 
 		// 正在走着
-		if (path.Count > 0 && path[path.Count-1] == gridRealDst)
+		if (path.Count > 0 && path[path.Count - 1] == gridRealDst)
 		{
 			pathFinished = null;
 			pathFinished += _delegate;
@@ -60,7 +62,7 @@ public class PathMove : MonoBehaviour {
 		}
 
 		path = MapNav.GetPath(gridRealSrc, gridRealDst, entity.TileType);
-		if(path.Count == 0)
+		if (path.Count == 0)
 		{
 			StopPath();
 			return;
@@ -89,7 +91,7 @@ public class PathMove : MonoBehaviour {
 			PathFinished tmpDelegate = pathFinished;
 			StopPath();
 
-			if(tmpDelegate != null)
+			if (tmpDelegate != null)
 				tmpDelegate();
 		}
 		// 最后一个节点
@@ -110,7 +112,7 @@ public class PathMove : MonoBehaviour {
 
 	public void StopPath()
 	{
-		if(path.Count > 0)
+		if (path.Count > 0)
 		{
 			path.Clear();
 			move.targetArrived -= this.onTargetArrived;

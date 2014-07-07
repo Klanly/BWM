@@ -3,13 +3,14 @@ using System.Collections;
 using Cmd;
 using GX.Net;
 
-public class CopyEnd : MonoBehaviour {
+public class CopyEnd : MonoBehaviour
+{
 
 	public GameObject uiClose;
 	private PrepairFinishStageQuestUserCmd_S serverInfo;
 
 	// Use this for initialization
-	void Start () 
+	void Start()
 	{
 		BattleScene.AddGuiToTop(gameObject);
 

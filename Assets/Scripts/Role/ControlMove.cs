@@ -6,7 +6,8 @@ using System.Collections;
 /// </summary>
 [RequireComponent(typeof(Entity))]
 [RequireComponent(typeof(Move))]
-public class ControlMove : MonoBehaviour {
+public class ControlMove : MonoBehaviour
+{
 
 	private Entity entity;
 	private Move move;
@@ -30,7 +31,8 @@ public class ControlMove : MonoBehaviour {
 	public const float MaxClientMoveStep = 8.0f;
 
 	// Use this for initialization
-	void Start () {
+	void Start()
+	{
 		entity = this.gameObject.GetComponent<Entity>();
 		move = this.gameObject.GetComponent<Move>();
 	}
@@ -45,9 +47,9 @@ public class ControlMove : MonoBehaviour {
 		bLeftState = Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow);
 		bRightState = Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow);
 
-		if(!bUpState && !bDownState && !bLeftState && !bRightState)
+		if (!bUpState && !bDownState && !bLeftState && !bRightState)
 		{
-			if(bKeyboardActive)
+			if (bKeyboardActive)
 			{
 				bKeyboardActive = false;
 				StopControl();
@@ -63,25 +65,25 @@ public class ControlMove : MonoBehaviour {
 		float fAngle = 0.0f;
 		if (bUpState)
 		{
-			if(bLeftState)
+			if (bLeftState)
 				fAngle = -180 / 4.0f;
-			else if(bRightState)
+			else if (bRightState)
 				fAngle = 180 / 4.0f;
 		}
-		else if(bDownState)
+		else if (bDownState)
 		{
-			if(bLeftState)
+			if (bLeftState)
 				fAngle = -180 * 3.0f / 4.0f;
-			else if(bRightState)
+			else if (bRightState)
 				fAngle = 180 * 3.0f / 4.0f;
 			else
 				fAngle = 180;
 		}
 		else
 		{
-			if(bLeftState)
+			if (bLeftState)
 				fAngle = -180 / 2.0f;
-			else if(bRightState)
+			else if (bRightState)
 				fAngle = 180 / 2.0f;
 		}
 
@@ -95,19 +97,19 @@ public class ControlMove : MonoBehaviour {
 	/// <param name="vecDir">look rotation(= target - position)</param>
 	void MoveWithDirection(Vector3 vecDir)
 	{
-		if(vecDir == Vector3.zero)
+		if (vecDir == Vector3.zero)
 			return;
 
 		vecDir.Normalize();
 
 		// 如果当前方向和新方向一致，而且当前目标点还有一定距离达到，则继续原来的移动
-		if(move.InMoving())
+		if (move.InMoving())
 		{
 			Vector3 vecCurDir = move.TargetPosition - entity.Position;
 			vecCurDir.y = 0.0f;
 			float fLength = vecCurDir.magnitude;
 			vecCurDir.Normalize();
-			if(Vector3.Dot(vecCurDir, vecDir) > 0.99985f && fLength > 0.5f )
+			if (Vector3.Dot(vecCurDir, vecDir) > 0.99985f && fLength > 0.5f)
 			{
 				return;
 			}
@@ -116,7 +118,7 @@ public class ControlMove : MonoBehaviour {
 		// 寻找新目标点
 		Vector3 vecNewPosition = entity.Position + vecDir * MaxClientMoveStep;
 		Vector3 vecRealPosition;
-		if(MapNav.IsPathReached(entity.Position, vecNewPosition, out vecRealPosition, entity.TileType))
+		if (MapNav.IsPathReached(entity.Position, vecNewPosition, out vecRealPosition, entity.TileType))
 		{
 			move.TargetPosition = vecRealPosition;
 			move.Sync();
@@ -128,7 +130,7 @@ public class ControlMove : MonoBehaviour {
 			int nNum = 10;
 			float fDeltaRadian = 180 / 2.0f / nNum;
 			float fRadian;
-			for(int i = 1; i <= nNum; ++i)
+			for (int i = 1; i <= nNum; ++i)
 			{
 				// 先尝试左边
 				fRadian = i * fDeltaRadian;
@@ -136,7 +138,7 @@ public class ControlMove : MonoBehaviour {
 				Vector3 vecNewDirection2 = mat.MultiplyVector(vecDir);
 				Vector3 vecNewPosition2 = entity.Position + vecNewDirection2 * MaxClientMoveStep;
 				Vector3 vecRealPosition2;
-				if(MapNav.IsPathReached(entity.Position, vecNewPosition2, out vecRealPosition2, entity.TileType))
+				if (MapNav.IsPathReached(entity.Position, vecNewPosition2, out vecRealPosition2, entity.TileType))
 				{
 					move.TargetPosition = vecRealPosition2;
 					move.Sync();
@@ -147,7 +149,7 @@ public class ControlMove : MonoBehaviour {
 				mat.SetTRS(Vector3.zero, Quaternion.Euler(new Vector3(0, fRadian, 0)), Vector3.one);
 				vecNewDirection2 = mat.MultiplyVector(vecDir);
 				vecNewPosition2 = entity.Position + vecNewDirection2 * MaxClientMoveStep;
-				if(MapNav.IsPathReached(entity.Position, vecNewPosition2, out vecRealPosition2, entity.TileType))
+				if (MapNav.IsPathReached(entity.Position, vecNewPosition2, out vecRealPosition2, entity.TileType))
 				{
 					move.TargetPosition = vecRealPosition2;
 					move.Sync();
@@ -172,9 +174,9 @@ public class ControlMove : MonoBehaviour {
 	/// </summary>
 	public void MoveByJoystick(float horizontal, float vertical, bool pressed)
 	{
-		if (!pressed) 
+		if (!pressed)
 		{
-			if(bJoystickActive)
+			if (bJoystickActive)
 			{
 				bJoystickActive = false;
 				StopControl();
@@ -184,16 +186,16 @@ public class ControlMove : MonoBehaviour {
 
 		bJoystickActive = true;
 		Vector3 rootDirection = MainRole.Instance.transform.forward;
-		Vector3 stickDirection = new Vector3 (horizontal, 0, vertical);
-		
+		Vector3 stickDirection = new Vector3(horizontal, 0, vertical);
+
 		// Get camera rotation.    
 		Vector3 CameraDirection = Camera.main.transform.forward;
 		CameraDirection.y = 0.0f; // kill Y
-		Quaternion referentialShift = Quaternion.FromToRotation (Vector3.forward, CameraDirection);
-		
+		Quaternion referentialShift = Quaternion.FromToRotation(Vector3.forward, CameraDirection);
+
 		// Convert joystick input in Worldspace coordinates
 		Vector3 moveDirection = referentialShift * stickDirection;
-		MoveWithDirection (moveDirection);
+		MoveWithDirection(moveDirection);
 	}
 
 }

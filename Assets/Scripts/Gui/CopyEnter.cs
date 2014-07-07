@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class CopyEnter : MonoBehaviour {
+public class CopyEnter : MonoBehaviour
+{
 
 	public GameObject uiClose;
 	public GameObject[] uiCopys;
@@ -9,7 +10,7 @@ public class CopyEnter : MonoBehaviour {
 	private int selected = 0;
 
 	// Use this for initialization
-	void Start () 
+	void Start()
 	{
 		BattleScene.AddGuiToTop(gameObject);
 
@@ -23,7 +24,7 @@ public class CopyEnter : MonoBehaviour {
 			UIEventListener.Get(uiCopys[i]).onClick = go =>
 			{
 				Debug.Log("copy" + index);
-				foreach(var t in uiCopys)
+				foreach (var t in uiCopys)
 					t.GetComponent<UIButton>().enabled = true;
 				uiCopys[index].GetComponent<UIButton>().enabled = false;
 				selected = index;
@@ -31,7 +32,7 @@ public class CopyEnter : MonoBehaviour {
 		}
 
 		// 进入按钮
-		UIEventListener.Get(uiEnter).onClick = go => 
+		UIEventListener.Get(uiEnter).onClick = go =>
 		{
 			GameObject.Instantiate(Resources.Load("Prefabs/Gui/CopyEnter2"));
 		};

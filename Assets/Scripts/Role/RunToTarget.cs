@@ -4,7 +4,8 @@ using System.Collections;
 /// <summary>
 /// Run to target.
 /// </summary>
-public class RunToTarget : MonoBehaviour {
+public class RunToTarget : MonoBehaviour
+{
 
 	public enum TargetType
 	{
@@ -36,7 +37,7 @@ public class RunToTarget : MonoBehaviour {
 	public void Target(GameObject _go, float _radius = 0.0f, TargetArrived _delegate = null)
 	{
 		clear();
-		if(_go == null)
+		if (_go == null)
 			return;
 
 		targetType = TargetType.Type_GameObject;
@@ -60,42 +61,42 @@ public class RunToTarget : MonoBehaviour {
 			return;
 
 		bool bArrived = false;
-		switch(targetType)
+		switch (targetType)
 		{
-		case TargetType.Type_Null:
-			return;
-		case TargetType.Type_GameObject:
-		{
-			if (goTarget == null)
-			{
-				MainRole.Instance.pathMove.StopPath();
-				clear();
-			}
-			else
-			{
-				if (Vector3.Distance(goTarget.transform.position, MainRole.Instance.transform.position) <= radius)
+			case TargetType.Type_Null:
+				return;
+			case TargetType.Type_GameObject:
 				{
-					bArrived = true;
+					if (goTarget == null)
+					{
+						MainRole.Instance.pathMove.StopPath();
+						clear();
+					}
+					else
+					{
+						if (Vector3.Distance(goTarget.transform.position, MainRole.Instance.transform.position) <= radius)
+						{
+							bArrived = true;
+						}
+						else
+						{
+							MainRole.Instance.pathMove.WalkTo(goTarget.transform.position);
+						}
+					}
 				}
-				else
+				break;
+			case TargetType.Type_Position:
 				{
-					MainRole.Instance.pathMove.WalkTo(goTarget.transform.position);
+					if (Vector3.Distance(posTarget, MainRole.Instance.transform.position) <= radius)
+					{
+						bArrived = true;
+					}
+					else
+					{
+						MainRole.Instance.pathMove.WalkTo(posTarget);
+					}
 				}
-			}
-		}
-			break;
-		case TargetType.Type_Position:
-		{
-			if (Vector3.Distance(posTarget, MainRole.Instance.transform.position) <= radius)
-			{
-				bArrived = true;
-			}
-			else
-			{
-				MainRole.Instance.pathMove.WalkTo(posTarget);
-			}
-		}
-			break;
+				break;
 		}
 
 		if (bArrived)

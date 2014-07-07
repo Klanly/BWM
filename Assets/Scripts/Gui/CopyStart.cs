@@ -1,12 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class CopyStart : MonoBehaviour {
+public class CopyStart : MonoBehaviour
+{
 
 	public GameObject uiBack;
 
 	// Use this for initialization
-	void Start () 
+	void Start()
 	{
 		BattleScene.AddGuiToTop(gameObject, false);
 
