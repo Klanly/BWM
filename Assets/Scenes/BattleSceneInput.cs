@@ -59,10 +59,15 @@ public class BattleSceneInput : MonoBehaviour
 		// Esc关闭界面或退出场景
 		if (Input.GetKeyDown(KeyCode.Escape))
 		{
+
 			var topmost = Closeable.TopMost();
 			if (topmost != null)
 			{
 				topmost.gameObject.SetActive(false);
+			}
+			else if (SelectTarget.Selected != null)
+			{
+				SelectTarget.Selected = null;
 			}
 			else
 			{

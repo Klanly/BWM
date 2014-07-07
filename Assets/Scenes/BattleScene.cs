@@ -124,8 +124,14 @@ public class BattleScene : MonoBehaviour
 	public bool LoadMap(string mapname)
 	{
 		foreach (var i in Role.All)
-			GameObject.Destroy(i.Value.gameObject);
-		Role.All.Clear();
+		{
+			if (MainRole.Instance.Role.ServerInfo.charid != i.Value.ServerInfo.charid)
+			{
+				Role.All.Remove(i.Value.ServerInfo.charid);
+				GameObject.Destroy(i.Value.gameObject);
+			}
+		}
+		//Role.All.Clear();
 
 		foreach (var i in Npc.All)
 			GameObject.Destroy(i.Value.gameObject);
