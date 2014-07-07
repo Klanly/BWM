@@ -521,7 +521,6 @@ GameObject:
   - 114: {fileID: 2009933830}
   - 54: {fileID: 2009933829}
   - 114: {fileID: 2009933831}
-  - 114: {fileID: 2009933832}
   m_Layer: 13
   m_Name: Panel
   m_TagString: Untagged
@@ -626,15 +625,3 @@ MonoBehaviour:
   - {fileID: 100010, guid: 2d827f810e13cb647a1134f7809171b7, type: 2}
   - {fileID: 100002, guid: ef6c31a5c98c3a7409ad20466da86c65, type: 2}
   - {fileID: 100002, guid: 8b93feb72ef409745be62cd442af80d8, type: 2}
---- !u!114 &2009933832
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2009933827}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0542fb0a01391ca4d9b368f5ff44ee9b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  uiBack: {fileID: 0}
