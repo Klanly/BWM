@@ -123,9 +123,18 @@ public class BattleScene : MonoBehaviour
 	/// <returns>加载是否成功</returns>
 	public bool LoadMap(string mapname)
 	{
+		foreach (var i in Role.All)
+			GameObject.Destroy(i.Value.gameObject);
 		Role.All.Clear();
+
+		foreach (var i in Npc.All)
+			GameObject.Destroy(i.Value.gameObject);
 		Npc.All.Clear();
+
+		foreach (var i in SceneItem.All)
+			GameObject.Destroy(i.Value.gameObject);
 		SceneItem.All.Clear();
+
 		//跨地图关闭窗口
 		BattleScene.Instance.Gui<NpcDialog>().gameObject.SetActive(false);
 		BattleScene.Instance.Gui<CopyEnter>().gameObject.SetActive(false);
