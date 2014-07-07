@@ -121,6 +121,11 @@ public class BattleScene : MonoBehaviour
 	/// <returns>加载是否成功</returns>
 	public bool LoadMap(string mapname)
 	{
+		//跨地图关闭窗口
+		BattleScene.Instance.Gui<NpcDialog>().gameObject.SetActive(false);
+		BattleScene.Instance.Gui<CopyEnter>().gameObject.SetActive(false);
+		BattleScene.Instance.Gui<CopyEnter2>().gameObject.SetActive(false);
+
 		var path = "Map/" + mapname;
 		var map = Resources.Load(path);
 		if (map == null)

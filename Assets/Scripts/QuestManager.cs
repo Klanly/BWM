@@ -135,21 +135,5 @@ public class QuestManager : IEnumerable<QuestTrace>
 		dlg.Present(cmd.squest.questid, cmd.process, cmd.detail);
 	}
 
-	[Execute]
-	public static void Execute(OpenStageDialogQuestUserCmd_S cmd)
-	{
-		GameObject.Instantiate(Resources.Load("Prefabs/Gui/CopyEnter"));
-		var gui = GameObject.Instantiate(Resources.Load("Prefabs/Gui/CopyEnter2")) as GameObject;
-		var copy2 = gui.GetComponent<CopyEnter2>();
-		copy2.SetDefaultSelect(cmd.stageid);
-	}
-	[Execute]
-	public static void Execute(ReturnOpenStageQuestUserCmd_S cmd)
-	{
-		//NGUITools.Destroy(FindObjectOfType<CopyEnter>().transform.parent.gameObject);
-		//NGUITools.Destroy(FindObjectOfType<CopyEnter2>().transform.parent.gameObject);
-		// 打开copystart界面
-		UnityEngine.Object.Instantiate(Resources.Load("Prefabs/Gui/CopyStart"));
-	}
 	#endregion
 }

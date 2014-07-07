@@ -27,13 +27,15 @@ public class CopyEnd : MonoBehaviour
 		{
 			stageid = serverInfo.stageid,
 		});
-		Destroy(transform.parent.gameObject);
+		//this.transform.parent.gameObject.SetActive(false);
+		this.gameObject.SetActive(false);
 	}
 	#region 网络消息处理
 	[Execute]
 	public static void Execute(PrepairFinishStageQuestUserCmd_S cmd)
 	{
 		var my = BattleScene.Instance.Gui<CopyEnd>();
+		my.gameObject.SetActive(true);
 		my.SetStage(cmd);
 	}
 	#endregion

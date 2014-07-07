@@ -4,7 +4,6 @@ using System.Collections;
 public class CopyEnter : MonoBehaviour
 {
 
-	public GameObject uiClose;
 	public GameObject[] uiCopys;
 	public GameObject uiEnter;
 	private int selected = 0;
@@ -13,9 +12,6 @@ public class CopyEnter : MonoBehaviour
 	void Start()
 	{
 		BattleScene.AddGuiToTop(gameObject);
-
-		// 关闭按钮
-		UIEventListener.Get(uiClose).onClick = go => Destroy(transform.parent.gameObject);
 
 		// 每个副本按钮点击事件
 		for (int i = 0; i < uiCopys.Length; ++i)
@@ -34,7 +30,8 @@ public class CopyEnter : MonoBehaviour
 		// 进入按钮
 		UIEventListener.Get(uiEnter).onClick = go =>
 		{
-			GameObject.Instantiate(Resources.Load("Prefabs/Gui/CopyEnter2"));
+			var my = BattleScene.Instance.Gui<CopyEnter2>();
+			my.gameObject.SetActive(true);
 		};
 	}
 }

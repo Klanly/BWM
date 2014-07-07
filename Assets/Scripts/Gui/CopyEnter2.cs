@@ -6,7 +6,6 @@ using System.Collections;
 public class CopyEnter2 : MonoBehaviour
 {
 
-	public GameObject uiClose;
 	public GameObject[] uiCopys;
 	public GameObject uiEnter;
 	private int selected = 0;
@@ -15,9 +14,6 @@ public class CopyEnter2 : MonoBehaviour
 	void Start()
 	{
 		BattleScene.AddGuiToTop(gameObject);
-
-		// 关闭按钮
-		UIEventListener.Get(uiClose).onClick = go => Destroy(transform.parent.gameObject);
 
 		// 每个副本按钮点击事件
 		for (int i = 0; i < uiCopys.Length; ++i)
@@ -49,6 +45,15 @@ public class CopyEnter2 : MonoBehaviour
 	}
 
 	#region 网络消息处理
+	[Execute]
+	public static void Execute(OpenStageDialogQuestUserCmd_S cmd)
+	{
+		var gui = BattleScene.Instance.Gui<CopyEnter>();
+		gui.gameObject.SetActive(true);
+		var my = BattleScene.Instance.Gui<CopyEnter2>();
+		my.gameObject.SetActive(true);
+		my.SetDefaultSelect(cmd.stageid);
+	}
 	#endregion
 
 }

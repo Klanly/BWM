@@ -28,13 +28,14 @@ GameObject:
   - 4: {fileID: 400002}
   - 114: {fileID: 11400004}
   - 114: {fileID: 11400026}
+  - 114: {fileID: 11400072}
   m_Layer: 13
   m_Name: CopyEnter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &100004
 GameObject:
   m_ObjectHideFlags: 1
@@ -1352,7 +1353,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3e573e8f441c184690ba0416640a49b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  uiClose: {fileID: 100000}
   uiCopys:
   - {fileID: 100034}
   - {fileID: 100010}
@@ -2195,6 +2195,18 @@ MonoBehaviour:
   rightType: 1
   bottomType: 1
   topType: 1
+--- !u!114 &11400072
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa7fa03aa64ee7d4fb73148d370f293f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  closeButton: {fileID: 11400000}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
