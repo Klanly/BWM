@@ -29,4 +29,12 @@ public class CopyEnd : MonoBehaviour
 		});
 		Destroy(transform.parent.gameObject);
 	}
+	#region 网络消息处理
+	[Execute]
+	public static void Execute(PrepairFinishStageQuestUserCmd_S cmd)
+	{
+		var my = BattleScene.Instance.Gui<CopyEnd>();
+		my.SetStage(cmd);
+	}
+	#endregion
 }
