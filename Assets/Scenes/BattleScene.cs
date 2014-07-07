@@ -85,7 +85,9 @@ public class BattleScene : MonoBehaviour
 		gogui.transform.parent = gopanel.transform;
 		gogui.transform.localScale = Vector3.one;
 		gogui.transform.position = Vector3.zero;
-		gogui.GetComponent<UIWidget>().SetAnchor(gopanel, 0, 0, 0, 0);
+		var widget = gogui.GetComponent<UIWidget>();
+		if(widget != null)
+			widget.SetAnchor(gopanel, 0, 0, 0, 0);
 		NGUITools.BringForward(gogui);
 		return gopanel;
 	}
