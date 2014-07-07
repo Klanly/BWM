@@ -44,7 +44,8 @@ public class BattleSceneInput : MonoBehaviour
 					// 没有选中目标，就移动
 					if (hit.collider.gameObject.GetComponent<MapNav>())
 					{
-						mainRole.pathMove.WalkTo(hit.point);
+						if (mainRole != null)
+							mainRole.pathMove.WalkTo(hit.point);
 					}
 				}
 			}

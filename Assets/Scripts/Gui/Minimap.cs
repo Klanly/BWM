@@ -85,7 +85,7 @@ public class Minimap : MonoBehaviour
 
 	void Update()
 	{
-		if (Layout && uiMapTexture.gameObject.activeSelf)
+		if (Layout && uiMapTexture.gameObject.activeSelf && MainRole.Instance != null)
 		{
 			Layout = false;
 			
