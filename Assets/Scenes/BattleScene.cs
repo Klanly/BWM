@@ -125,7 +125,7 @@ public class BattleScene : MonoBehaviour
 	{
 		foreach (var i in Role.All)
 		{
-			if (MainRole.Instance.Role.ServerInfo.charid != i.Value.ServerInfo.charid)
+			if (MainRole.Instance && MainRole.Instance.Role.ServerInfo.charid != i.Value.ServerInfo.charid)
 			{
 				Role.All.Remove(i.Value.ServerInfo.charid);
 				GameObject.Destroy(i.Value.gameObject);

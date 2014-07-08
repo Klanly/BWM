@@ -34,9 +34,9 @@ public class Net : Singleton<Net>
 		WebSocket.Proxy.Close();
 	}
 
-	public void Send(ProtoBuf.IExtensible message)
+	public bool Send(ProtoBuf.IExtensible message)
 	{
-		WebSocket.Send(message);
+		return WebSocket.Send(message);
 	}
 
 	public void Send(params ProtoBuf.IExtensible[] message)
