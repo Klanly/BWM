@@ -70,9 +70,12 @@ namespace GX.Net
 			}
 		}
 
-		public void Send(byte[] data)
+		public bool Send(byte[] data)
 		{
+			if (socket == null)
+				return false;
 			socket.Send(data, 0, data.Length);
+			return true;
 		}
 
 		public byte[] Receive()

@@ -34,7 +34,8 @@ namespace GX.Net
 			GX.Net.WebSocket.State State { get; }
 			void Open(string url);
 			void Close();
-			void Send(byte[] data);
+			// TODO: 应该采用统一的异常模型来做网络异常处理，此处返回bool为临时方案
+			bool Send(byte[] data);
 			byte[] Receive();
 		}
 		public static IProxy Proxy { get; set; }
@@ -55,20 +56,20 @@ namespace GX.Net
 			Proxy.Open(url);
 		}
 
-		public static void Send(ProtoBuf.IExtensible msg)
+		public static bool Send(ProtoBuf.IExtensible msg)
 		{
 			if (msg.GetType() != typeof(Pmd.TickRequestNullUserPmd_CS) &&
 				msg.GetType() != typeof(Pmd.TickReturnNullUserPmd_CS))
 				Debug.Log("<color=green>[SEND]</color>" + msg.Dump());
 
 			var buf = serizlizer.Serialize(msg);
-			Proxy.Send(buf);
+			return Proxy.Send(buf);
 		}
 
-		public static void Send(params ProtoBuf.IExtensible[] message)
+		public static bool Send(params ProtoBuf.IExtensible[] message)
 		{
 			var buf = serizlizer.Serialize(message);
-			Proxy.Send(buf);
+			return Proxy.Send(buf);
 		}
 
 		public static IEnumerable<ProtoBuf.IExtensible> Receive()
