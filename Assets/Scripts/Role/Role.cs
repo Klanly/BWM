@@ -137,6 +137,11 @@ public class Role : MonoBehaviour
 		var role = Role.All[cmd.charid];
 		if (role != null)
 		{
+			if (MainRole.Instance != null && cmd.charid == MainRole.Instance.Role.ServerInfo.charid)
+			{
+				Debug.Log("忽略主角删除消息");
+				return;
+			}
 			Role.All.Remove(cmd.charid);
 			GameObject.Destroy(role.gameObject);
 		}

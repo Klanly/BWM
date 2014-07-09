@@ -69,6 +69,11 @@ public class MainRole : MonoBehaviour, INotifyPropertyChanged
 	}
 
 	public static MainRole Instance { get; private set; }
+
+	void Awake()
+	{
+		DontDestroyOnLoad(gameObject);
+	}
 	// Use this for initialization
 	void Start()
 	{

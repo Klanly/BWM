@@ -123,9 +123,13 @@ public class BattleScene : MonoBehaviour
 	/// <returns>加载是否成功</returns>
 	public bool LoadMap(string mapname)
 	{
-		foreach (var i in Role.All)
+		foreach (var i in Role.All.ToList())
 		{
-			if (MainRole.Instance && MainRole.Instance.Role.ServerInfo.charid != i.Value.ServerInfo.charid)
+			if (MainRole.Instance != null && MainRole.Instance.Role.ServerInfo.charid == i.Value.ServerInfo.charid)
+			{
+				continue;
+			}
+			else
 			{
 				Role.All.Remove(i.Value.ServerInfo.charid);
 				GameObject.Destroy(i.Value.gameObject);
@@ -183,6 +187,8 @@ public class BattleScene : MonoBehaviour
 		Instance = null;
 		Debug.Log("<color=olive>战斗场景 退出！</color>");
 		// TODO: use event driven
+		if(MainRole.Instance != null)
+			GameObject.Destroy(MainRole.Instance.gameObject);
 		Role.All.Clear();
 		Npc.All.Clear();
 		SceneItem.All.Clear();
