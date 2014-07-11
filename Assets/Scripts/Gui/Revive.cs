@@ -33,7 +33,7 @@ public class Revive : MonoBehaviour
 	public static void Execute(ReliveMethodsReliveUserCmd_S cmd)
 	{
 		// 加载复活界面
-		var gui = Instantiate(Resources.Load("Prefabs/Gui/revive")) as GameObject;
+		var gui = Instantiate(Resources.Load("Prefabs/Gui/Revive")) as GameObject;
 		var revive = gui.GetComponent<Revive>();
 		revive.title.text = "复活";
 		revive.text.text = "立即复活";
