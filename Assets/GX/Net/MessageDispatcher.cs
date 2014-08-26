@@ -114,6 +114,10 @@ namespace GX.Net
 			foreach(var method in ExecuteAttribute.GetStaticExecuteMethod(Assembly.GetExecutingAssembly()))
 			{
 				var invoker = MessageInvoker.Create(method, null);
+#if UNITY_EDITOR
+				if (items.ContainsKey(invoker.MessageType))
+					UnityEngine.Debug.LogError(string.Format("消息类型重复: {0}", invoker.MessageType));
+#endif
 				items.Add(invoker.MessageType, invoker);
 			}
 		}

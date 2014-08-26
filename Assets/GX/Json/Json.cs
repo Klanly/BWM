@@ -17,7 +17,7 @@ namespace GX
 
 		static Json()
 		{
-#if !UNITY_WP8 || UNITY_EDITOR
+#if (!UNITY_WP8 && !UNITY_WINRT) || UNITY_EDITOR
 			Proxy = new JsonJsonFx();
 #endif
 		}

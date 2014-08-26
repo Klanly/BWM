@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 
-#if !UNITY_WP8 || UNITY_EDITOR
+#if (!UNITY_WP8 && !UNITY_WINRT) || UNITY_EDITOR
 namespace JsonFx.Json.Converter
 {
 	public class BoundsConverter : JsonConverter
