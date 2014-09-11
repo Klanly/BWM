@@ -109,6 +109,7 @@ Transform:
   - {fileID: 1668176885}
   - {fileID: 2009933828}
   m_Father: {fileID: 0}
+  m_RootOrder: 2
 --- !u!54 &256516998
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -292,6 +293,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
+  m_RootOrder: 1
 --- !u!1001 &765573277
 Prefab:
   m_ObjectHideFlags: 0
@@ -403,8 +405,11 @@ Camera:
     m_Bits: 4294967295
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
+  m_TargetDisplay: 0
   m_HDR: 0
   m_OcclusionCulling: 1
+  m_StereoConvergence: 10
+  m_StereoSeparation: .0219999999
 --- !u!4 &874818342
 Transform:
   m_ObjectHideFlags: 0
@@ -416,6 +421,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
+  m_RootOrder: 0
 --- !u!1 &1668176884
 GameObject:
   m_ObjectHideFlags: 0
@@ -444,6 +450,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 256516997}
+  m_RootOrder: 0
 --- !u!114 &1668176886
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -508,8 +515,11 @@ Camera:
     m_Bits: 8192
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
+  m_TargetDisplay: 0
   m_HDR: 0
   m_OcclusionCulling: 1
+  m_StereoConvergence: 10
+  m_StereoSeparation: .0219999999
 --- !u!1 &2009933827
 GameObject:
   m_ObjectHideFlags: 0
@@ -539,6 +549,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 256516997}
+  m_RootOrder: 1
 --- !u!54 &2009933829
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -611,10 +622,10 @@ MonoBehaviour:
   - {fileID: 100004, guid: e88436e25da17ac40b1e15f339f71e71, type: 2}
   - {fileID: 100022, guid: 9e6aa9ab33e252c4ba5f757d9e47ca8b, type: 2}
   - {fileID: 100004, guid: 3b3854ee850edec4aa90cd3129a500ea, type: 2}
-  - {fileID: 100008, guid: f98eb6ece3fc7184c96020237935aa0c, type: 2}
+  - {fileID: 0}
   - {fileID: 100098, guid: df82b101cbf4a7545a9711ed03d1695e, type: 2}
   - {fileID: 100004, guid: eadaef650297f3744b6d7216be9dec87, type: 2}
-  - {fileID: 100012, guid: d3ed8e83d93454045bddfb5af715f7cd, type: 2}
+  - {fileID: 0}
   - {fileID: 100066, guid: 7fdc63cdd1f34754db63475d2d4e39ee, type: 2}
   - {fileID: 100104, guid: de94b8c9842bf6f4f9df711899d5b98c, type: 2}
   - {fileID: 100002, guid: 74534ca74f53c404483f2d7b8df93968, type: 2}
