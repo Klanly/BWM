@@ -14,7 +14,7 @@ static class GXMenu
 #if UNITY_WP8
 	[MenuItem("GX/Export WP8", false)]
 #elif UNITY_WINRT
-	[MenuItem("GX/Export Metro", false)]
+	[MenuItem("GX/Export WinRT", false)]
 #endif
 	public static void Help()
 	{
@@ -39,7 +39,7 @@ static class GXMenu
 #if UNITY_WP8
 				BuildPipeline.BuildPlayer(levels, "WP8", BuildTarget.WP8Player, BuildOptions.None);
 #elif UNITY_WINRT
-				BuildPipeline.BuildPlayer(levels, "Metro", BuildTarget.MetroPlayer, BuildOptions.None);
+				BuildPipeline.BuildPlayer(levels, "WinRT", BuildTarget.MetroPlayer, BuildOptions.None);
 #endif
 			}
 
