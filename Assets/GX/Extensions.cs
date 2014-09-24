@@ -254,7 +254,7 @@ public static partial class Extensions
 
 	public static string Dump(this Vector3[] data)
 	{
-		return "{" + string.Join(", ", Array.ConvertAll(data, i => i.Dump())) + "}";
+		return "{" + string.Join(", ", data.Select(i => i.Dump()).ToArray()) + "}";
 	}
 
 	public static string Dump(this Vector2 data)
@@ -270,6 +270,19 @@ public static partial class Extensions
 	public static string Dump(this Vector4 data)
 	{
 		return string.Format("({0}, {1}, {2}, {3})", data.x, data.y, data.z, data.w);
+	}
+
+	public static string Dump(this Resolution data)
+	{
+		return string.Format("{0} x {1}, {2}fps", data.width, data.height, data.refreshRate);
+	}
+
+	public static string Dump(this Rect data)
+	{
+		return string.Format("x:[{0}, {1}], y:[{2}, {3}], width:{4}, height:{5}", 
+			data.xMin, data.xMax,
+			data.yMin, data.yMax,
+			data.width, data.height);
 	}
 	#endregion
 
@@ -387,27 +400,27 @@ public static partial class Extensions
 	}
 	public static string ToBitString(this short value)
 	{
-		return string.Join(" ", Array.ConvertAll(BitConverter.GetBytes(value), b => b.ToBitString()));
+		return string.Join(" ", BitConverter.GetBytes(value).Select(b => b.ToBitString()).ToArray());
 	}
 	public static string ToBitString(this ushort value)
 	{
-		return string.Join(" ", Array.ConvertAll(BitConverter.GetBytes(value), b => b.ToBitString()));
+		return string.Join(" ", BitConverter.GetBytes(value).Select(b => b.ToBitString()).ToArray());
 	}
 	public static string ToBitString(this int value)
 	{
-		return string.Join(" ", Array.ConvertAll(BitConverter.GetBytes(value), b => b.ToBitString()));
+		return string.Join(" ", BitConverter.GetBytes(value).Select(b => b.ToBitString()).ToArray());
 	}
 	public static string ToBitString(this uint value)
 	{
-		return string.Join(" ", Array.ConvertAll(BitConverter.GetBytes(value), b => b.ToBitString()));
+		return string.Join(" ", BitConverter.GetBytes(value).Select(b => b.ToBitString()).ToArray());
 	}
 	public static string ToBitString(this long value)
 	{
-		return string.Join(" ", Array.ConvertAll(BitConverter.GetBytes(value), b => b.ToBitString()));
+		return string.Join(" ", BitConverter.GetBytes(value).Select(b => b.ToBitString()).ToArray());
 	}
 	public static string ToBitString(this ulong value)
 	{
-		return string.Join(" ", Array.ConvertAll(BitConverter.GetBytes(value), b => b.ToBitString()));
+		return string.Join(" ", BitConverter.GetBytes(value).Select(b => b.ToBitString()).ToArray());
 	}
 	#endregion
 

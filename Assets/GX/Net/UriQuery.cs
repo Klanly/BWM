@@ -34,7 +34,7 @@ namespace GX.Net
 
 		public override string ToString()
 		{
-			return string.Join("&", data.ConvertAll(i => WWW.EscapeURL(i.Key) + "=" + WWW.EscapeURL(i.Value)).ToArray());
+			return string.Join("&", data.Select(i => WWW.EscapeURL(i.Key) + "=" + WWW.EscapeURL(i.Value)).ToArray());
 		}
 
 		#region IEnumerable<KeyValuePair<string,string>> 成员
