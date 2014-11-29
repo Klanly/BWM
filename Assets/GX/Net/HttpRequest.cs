@@ -19,7 +19,13 @@ public class HttpRequest
 	{
 		get
 		{
-			return Data != null ? Data[key] : null;
+			if (Data != null)
+			{
+				object value;
+				if (Data.TryGetValue(key, out value))
+					return value;
+			}
+			return null;
 		}
 		set
 		{

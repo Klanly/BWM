@@ -11,10 +11,28 @@ namespace GX
 		public bool IsError { get { return !string.IsNullOrEmpty(ErrorMessage); } }
 		public string ErrorMessage { get; private set; }
 
-		public object this[string key] { get { return this.response != null ? this.response[key] : null; } }
+		public object this[string key]
+		{
+			get
+			{
+				if(this.response != null)
+				{
+					object value;
+					if(this.response.TryGetValue(key, out value))
+						return value;
+				}
+				return null;
+			} 
+		}
 		public object Data(string key)
 		{
-			return this.data != null ? this.data[key] : null;
+			if (this.data != null)
+			{
+				object value;
+				if (this.data.TryGetValue(key, out value))
+					return value;
+			}
+			return null;
 		}
 		public T Data<T>(string key)
 		{
@@ -56,21 +74,18 @@ namespace GX
 				this.response = GX.Json.Deserialize<Dictionary<string, object>>(this.json);
 				if (this.response != null)
 				{
-					var errno = this.response["errno"];
+					var errno = this["errno"];
 					if (errno != null && errno.ToString() != "0")
 					{
 						this.ErrorMessage = errno.ToString();
 						return;
 					}
-					this.data = this.response["data"] as Dictionary<string, object>;
-					if (this.data != null)
+					this.data = this["data"] as Dictionary<string, object>;
+					errno = this.Data("errno");
+					if (errno != null && errno.ToString() != "0")
 					{
-						errno = this.data["errno"];
-						if (errno != null && errno.ToString() != "0")
-						{
-							this.ErrorMessage = errno.ToString();
-							return;
-						}
+						this.ErrorMessage = errno.ToString();
+						return;
 					}
 				}
 				this.ErrorMessage = string.Empty;

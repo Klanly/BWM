@@ -47,7 +47,8 @@ namespace GX
 				*/
 				var www = Send(LoginUrl, "register-newaccount", new Dictionary<string, object> { { "mid", SystemInfo.deviceUniqueIdentifier } });
 				yield return www;
-				if (www.IsError())
+				var response = new HttpResponse(www);
+				if (response.IsError)
 				{
 					Debug.LogError(string.Format("[WWW] ERROR {0} {1}\n{2}", LoginUrl, www.error, www.text));
 					yield break;
@@ -56,17 +57,13 @@ namespace GX
 				/*
 				{"data":{"mid":"839faa337c04fcf11ae77180bd33f1536f6e39ed","sid":"9dfbae7eb7472f71134ec21bc65efe3d","uid":"114701"},"do":"register-newaccount","gameid":304,"zoneid":301}
 				*/
-				//Debug.Log(www.text);
-				var response = GX.Json.Deserialize<Dictionary<string, object>>(www.text);
 				int number = 0;
-				if (int.TryParse(response["gameid"] as string, out number))
+				if (int.TryParse(response["gameid"].ToString(), out number))
 					this.GameID = number;
-				if (int.TryParse(response["zoneid"] as string, out number))
+				if (int.TryParse(response["zoneid"].ToString(), out number))
 					this.ZoneID = number;
-				var data = response["data"] as Dictionary<string, object>;
-				this.UID = data["uid"] as string;
-				this.SID = data["sid"] as string;
-				//Debug.Log(string.Format("[WWW] register-newaccount: uid={0}, sid={1}", this.UID, this.SID));
+				this.UID = response.Data<string>("uid");
+				this.SID = response.Data<string>("sid");
 			}
 			#endregion
 
@@ -79,7 +76,8 @@ namespace GX
 				*/
 				var www = Send(LoginUrl, "get-zone-gatewayurl", new Dictionary<string, object> { { "gameid", this.GameID }, { "zoneid", this.ZoneID } });
 				yield return www;
-				if (www.IsError())
+				var response = new HttpResponse(www);
+				if (response.IsError)
 				{
 					Debug.LogError(string.Format("[WWW] ERROR {0} {1}\n{2}", LoginUrl, www.error, www.text));
 					yield break;
@@ -88,28 +86,23 @@ namespace GX
 				/*
 				{"data":{"gameid":304,"gatewayurl":"http://14.17.104.56:7001/shen/user/http","zoneid":301},"do":"get-zone-gatewayurl","errno":"0","gameid":304,"st":1416965726,"uid":"114699","zoneid":301}
 				*/
-				//Debug.Log(www.text);
-				var response = GX.Json.Deserialize<Dictionary<string, object>>(www.text);
-				var data = response["data"] as Dictionary<string, object>;
 				int number = 0;
-				if (int.TryParse(data["gameid"] as string, out number))
+				if (int.TryParse(response.Data("gameid").ToString(), out number))
 					this.GameID = number;
-				if (int.TryParse(data["zoneid"] as string, out number))
+				if (int.TryParse(response.Data("zoneid").ToString(), out number))
 					this.ZoneID = number;
-				this.GatewayUrl = data["gatewayurl"] as string;
-
+				this.GatewayUrl = response.Data<string>("gatewayurl");
 			}
 			#endregion
 
 			{
 				var www = Send(GatewayUrl, action, message);
 				yield return www;
-				if (www.IsError())
+				if (!string.IsNullOrEmpty(www.error))
 				{
 					Debug.LogError(string.Format("[WWW] ERROR {0} {1}\n{2}", GatewayUrl, www.error, www.text));
 					yield break;
 				}
-				//Debug.Log(www.text);
 				if (callback != null)
 					callback(www);
 			}
