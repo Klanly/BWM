@@ -13,6 +13,8 @@ namespace GX
 		private static System.Security.Cryptography.MD5 md5 = System.Security.Cryptography.MD5.Create();
 #endif
 		public static string ComputeHashString(byte[] data) { return ToString(ComputeHash(data)); }
+		public static string ComputeHashString(string data) { return ToString(ComputeHash(GX.Encoding.GetBytes(data))); }
+
 		public static byte[] ComputeHash(byte[] data)
 		{
 #if UNITY_WINRT && !UNITY_EDITOR
@@ -24,8 +26,8 @@ namespace GX
 #endif
 		}
 
-		public static string ComputeHashString(string filename) { return ToString(ComputeHash(filename)); }
-		public static byte[] ComputeHash(string filename)
+		public static string ComputeHashStringFromFile(string filename) { return ToString(ComputeHashFromFile(filename)); }
+		public static byte[] ComputeHashFromFile(string filename)
 		{
 #if UNITY_WP8 && !UNITY_EDITOR
 			byte[] buf;

@@ -7,7 +7,9 @@ using System.Text;
 using UnityEngine;
 using GX;
 using System.Xml.Linq;
+using System.Text.RegularExpressions;
 
+/// <remarks> ref: http://miaodadao.lofter.com/post/7a31e_f7032c </remarks>
 public static partial class Extensions
 {
 	#region Random
@@ -36,6 +38,34 @@ public static partial class Extensions
 			return default(T);
 		return list[random.Next(list.Count)];
 	}
+	/// <summary>
+	/// Rearranges the elements in <paramref name="source"/> randomly.
+	/// </summary>
+	/// <param name="source"></param>
+	/// <typeparam name="T"></typeparam>
+	/// <returns></returns>
+	/// <remarks>
+	/// ref:
+	/// http://stackoverflow.com/questions/1287567/is-using-random-and-orderby-a-good-shuffle-algorithm
+	/// http://stackoverflow.com/questions/48087/select-a-random-n-elements-from-listt-in-c-sharp
+	/// http://www.cplusplus.com/reference/algorithm/random_shuffle/
+	/// http://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle
+	/// </remarks>
+	public static IEnumerable<T> RandomShuffle<T>(this IEnumerable<T> source)
+	{
+		if (source == null)
+			yield break;
+		var list = source.ToList(); // 必须创建一个拷贝，以避免原序列被意外修改
+		for (int i = list.Count - 1; i >= 0; i--)
+		{
+			// Swap element "i" with a random earlier element it (or itself)
+			// ... except we don't really need to swap it fully, as we can
+			// return it immediately, and afterwards it's irrelevant.
+			int swapIndex = random.Next(i + 1);
+			yield return list[swapIndex];
+			list[swapIndex] = list[i];
+		}
+	}
 	#endregion
 
 	#region Enumerable
@@ -59,6 +89,62 @@ public static partial class Extensions
 	{
 		foreach (var d in collection)
 			dic.Add(d.Key, d.Value);
+	}
+
+	/// <summary>
+	/// 对二维数组进行“平面化”的一维迭代访问
+	/// </summary>
+	/// <typeparam name="T"></typeparam>
+	/// <param name="data"></param>
+	/// <returns></returns>
+	public static IEnumerable<IEnumerable<T>> AsEnumerable<T>(this T[,] data)
+	{
+		if (data == null)
+			yield break;
+		for (var i0 = data.GetLowerBound(0); i0 <= data.GetUpperBound(0); i0++)
+		{
+			yield return AsEnumerable(data, i0);
+		}
+	}
+
+	private static IEnumerable<T> AsEnumerable<T>(this T[,] data, int i0)
+	{
+		for (var i1 = data.GetLowerBound(1); i1 <= data.GetUpperBound(1); i1++)
+		{
+			yield return data[i0, i1];
+		}
+	}
+
+	public class LambdaEqualityComparer<T> : EqualityComparer<T>
+	{
+		private Func<T, T, bool> equals;
+		private Func<T, int> getHashCode;
+
+		public LambdaEqualityComparer(Func<T, T, bool> equals, Func<T, int> getHashCode = null)
+		{
+			this.equals = equals;
+			this.getHashCode = getHashCode;
+		}
+		public override bool Equals(T x, T y) { return this.equals(x, y); }
+		public override int GetHashCode(T obj) { return getHashCode == null ? obj.GetHashCode() : getHashCode(obj); }
+	}
+
+	public static bool AreEqual<T>(this IEnumerable<T> a, IEnumerable<T> b)
+	{
+		return Enumerable.SequenceEqual(a, b);
+	}
+
+	public static bool AreEqual<T>(this IEnumerable<IEnumerable<T>> a, IEnumerable<IEnumerable<T>> b)
+	{
+		return Enumerable.SequenceEqual(a, b,
+		new LambdaEqualityComparer<IEnumerable<T>>(AreEqual));
+	}
+
+	public static bool AreEqual(this IEnumerable<KeyValuePair<string, IEnumerable<IEnumerable<string>>>> a, IEnumerable<KeyValuePair<string, IEnumerable<IEnumerable<string>>>> b)
+	{
+		return Enumerable.SequenceEqual(a, b,
+		new LambdaEqualityComparer<KeyValuePair<string, IEnumerable<IEnumerable<string>>>>(
+			(sa, sb) => sa.Key == sb.Key && AreEqual(sa.Value, sb.Value)));
 	}
 
 	/// <summary>
@@ -171,6 +257,33 @@ public static partial class Extensions
 			count -= n;
 		}
 		return buffer;
+	}
+
+	public static IEnumerable<string> ReadAllLines(this TextReader reader)
+	{
+		while (true)
+		{
+			var line = reader.ReadLine();
+			if (line == null)
+				yield break;
+			yield return line;
+		}
+	}
+
+	public static IEnumerable<string> ReadAllLines(this string str, bool containsTerminating = false)
+	{
+		if (str == null)
+			yield break;
+		using (var reader = new StringReader(str))
+		{
+			foreach (var lien in ReadAllLines(reader))
+				yield return lien;
+		}
+		if (containsTerminating)
+		{
+			if (str.Length == 0 || str.EndsWith("\n"))
+				yield return "";
+		}
 	}
 	#endregion
 
@@ -385,7 +498,7 @@ public static partial class Extensions
 	}
 	#endregion
 
-	#region ToBitString
+	#region Text & String
 	/// <summary>
 	/// ref: http://stackoverflow.com/questions/5377566/get-raw-pixel-value-in-bitmap-image
 	/// </summary>
@@ -421,6 +534,29 @@ public static partial class Extensions
 	public static string ToBitString(this ulong value)
 	{
 		return string.Join(" ", BitConverter.GetBytes(value).Select(b => b.ToBitString()).ToArray());
+	}
+
+	/// <summary>
+	/// 将字符串由正则表达式分割成片段，并标注每段是否匹配
+	/// </summary>
+	/// <param name="regex"></param>
+	/// <param name="input"></param>
+	/// <returns></returns>
+	public static IEnumerable<Tuple<bool, string>> Fragment(this Regex regex, string input)
+	{
+		if (input == null)
+			yield break;
+
+		int i = 0;
+		for (var m = regex.Match(input); m.Success; i = m.Index + m.Length, m = m.NextMatch())
+		{
+			int len = m.Index - i;
+			if (len > 0)
+				yield return Tuple.Create(false, input.Substring(i, len));
+			yield return Tuple.Create(true, m.Value);
+		}
+		if (i < input.Length)
+			yield return Tuple.Create(false, input.Substring(i));
 	}
 	#endregion
 
