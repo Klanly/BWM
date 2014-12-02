@@ -1,4 +1,4 @@
-﻿#if WINDOWS_PHONE
+﻿#if USE_JSONNET
 using UnityEngine;
 using System.Collections;
 

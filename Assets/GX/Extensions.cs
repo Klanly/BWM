@@ -32,9 +32,12 @@ public static partial class Extensions
 	/// <typeparam name="T"></typeparam>
 	/// <param name="list"></param>
 	/// <returns>失败返回<c>default(T)</c></returns>
-	public static T Random<T>(this IList<T> list)
+	public static T Random<T>(this IEnumerable<T> source)
 	{
-		if (list == null || list.Count == 0)
+		if(source == null)
+			return default(T);
+		var list = (source as IList<T>) ?? source.ToList();
+		if (list.Count == 0)
 			return default(T);
 		return list[random.Next(list.Count)];
 	}
