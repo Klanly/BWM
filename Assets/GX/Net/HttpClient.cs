@@ -16,6 +16,11 @@ namespace GX
 		public string LoginUrl { get; set; }
 		public string GatewayUrl { get; private set; }
 
+		public bool HasSession()
+		{
+			return !string.IsNullOrEmpty(this.UID) && !string.IsNullOrEmpty(this.SID);
+		}
+
 		private WWW Send(string url, string action, Dictionary<string, object> message)
 		{
 			var cmd = new Dictionary<string, object>();
@@ -39,11 +44,11 @@ namespace GX
 		public IEnumerator Send(string action, Dictionary<string, object> message, Action<WWW> callback = null)
 		{
 			#region register-newaccount
-			if (string.IsNullOrEmpty(UID) || string.IsNullOrEmpty(SID))
+			if (!HasSession() && !Deserialize())
 			{
 				/*
 				http://14.17.104.56:7000/httplogin
-				{"do":"register-newaccount","data":{"mid":"839faa337c04fcf11ae77180bd33f1536f6e39ed"},"gameid":304,"zoneid":301}
+				{"do":"register-newaccount","data":{"mid":"839faa337c04fcf11ae77180bd33f1536f6e39ed"},"gameid":306,"zoneid":301}
 				*/
 				var www = Send(LoginUrl, "register-newaccount", new Dictionary<string, object> { { "mid", SystemInfo.deviceUniqueIdentifier } });
 				yield return www;
@@ -55,7 +60,7 @@ namespace GX
 				}
 
 				/*
-				{"data":{"mid":"839faa337c04fcf11ae77180bd33f1536f6e39ed","sid":"9dfbae7eb7472f71134ec21bc65efe3d","uid":"114701"},"do":"register-newaccount","gameid":304,"zoneid":301}
+				{"data":{"mid":"839faa337c04fcf11ae77180bd33f1536f6e39ed","sid":"9dfbae7eb7472f71134ec21bc65efe3d","uid":"114701"},"do":"register-newaccount","gameid":306,"zoneid":301}
 				*/
 				int number = 0;
 				if (int.TryParse(response["gameid"].ToString(), out number))
@@ -64,6 +69,8 @@ namespace GX
 					this.ZoneID = number;
 				this.UID = response.Data<string>("uid");
 				this.SID = response.Data<string>("sid");
+
+				this.Serialize();
 			}
 			#endregion
 
@@ -72,7 +79,7 @@ namespace GX
 			{
 				/*
 				http://14.17.104.56:7000/httplogin?smd=md5&sign=1837f72e72032f7ba2ef4a7f0a6ca8f9
-				{"do":"get-zone-gatewayurl","data":{"gameid":304,"zoneid":301},"uid":"114701","gameid":304,"zoneid":301}
+				{"do":"get-zone-gatewayurl","data":{"gameid":306,"zoneid":301},"uid":"114701","gameid":306,"zoneid":301}
 				*/
 				var www = Send(LoginUrl, "get-zone-gatewayurl", new Dictionary<string, object> { { "gameid", this.GameID }, { "zoneid", this.ZoneID } });
 				yield return www;
@@ -84,7 +91,7 @@ namespace GX
 				}
 
 				/*
-				{"data":{"gameid":304,"gatewayurl":"http://14.17.104.56:7001/shen/user/http","zoneid":301},"do":"get-zone-gatewayurl","errno":"0","gameid":304,"st":1416965726,"uid":"114699","zoneid":301}
+				{"data":{"gameid":306,"gatewayurl":"http://14.17.104.56:7001/shen/user/http","zoneid":301},"do":"get-zone-gatewayurl","errno":"0","gameid":306,"st":1416965726,"uid":"114699","zoneid":301}
 				*/
 				int number = 0;
 				if (int.TryParse(response.Data("gameid").ToString(), out number))
@@ -115,5 +122,27 @@ namespace GX
 			else
 				return Send(request.Action, request.Data, www => callback(new GX.HttpResponse(www)));
 		}
+
+		#region Serialize
+		private bool Serialize()
+		{
+			if (!HasSession())
+				return false;
+			PlayerPrefs.SetString("HTTP.UID", this.UID);
+			PlayerPrefs.SetString("HTTP.SID", this.SID);
+			return true;
+		}
+
+		private bool Deserialize()
+		{
+			var uid = PlayerPrefs.GetString("HTTP.UID");
+			var sid = PlayerPrefs.GetString("HTTP.SID");
+			if (string.IsNullOrEmpty(uid) || string.IsNullOrEmpty(sid))
+				return false;
+			this.UID = uid;
+			this.SID = sid;
+			return true;
+		} 
+		#endregion
 	}
 }
