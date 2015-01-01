@@ -11,7 +11,7 @@ namespace GX.Net
 	/// <summary>
 	/// 消息注册分发器
 	/// </summary>
-	public class MessageDispatcher
+	public class MessageDispatcher : IEnumerable<Type>
 	{
 		#region class MessageInvoker
 		private abstract class MessageInvoker
@@ -154,5 +154,24 @@ namespace GX.Net
 				sb.AppendLine(invoker.ToString());
 			return sb.ToString();
 		}
+
+		#region IEnumerable<Type> 成员
+
+		public IEnumerator<Type> GetEnumerator()
+		{
+			foreach (var t in this.items.Keys)
+				yield return t;
+		}
+
+		#endregion
+
+		#region IEnumerable 成员
+
+		IEnumerator IEnumerable.GetEnumerator()
+		{
+			return this.GetEnumerator();
+		}
+
+		#endregion
 	}
 }

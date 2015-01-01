@@ -12,7 +12,7 @@ namespace GX.Net
 	/// <see cref="ProtoBuf.IExtensible"/>对象和字节流间的编码器
 	/// </summary>
 	/// <remarks>性能分析参见：http://www.servicestack.net/benchmarks/NorthwindDatabaseRowsSerialization.100000-times.2010-08-17.html </remarks>
-	public class MessageSerializer
+	public class MessageSerializer : IEnumerable<KeyValuePair<Type, MessageType>>
 	{
 		private readonly Dictionary<MessageType, Func<Stream, ProtoBuf.IExtensible>> deserializeTable = new Dictionary<MessageType, Func<Stream, ProtoBuf.IExtensible>>();
 		private readonly Dictionary<Type, MessageType> messageTypeTable = new Dictionary<Type, MessageType>();
@@ -185,5 +185,23 @@ namespace GX.Net
 			}
 			return sb.ToString();
 		}
+
+		#region IEnumerable<KeyValuePair<Type,MessageType>> 成员
+
+		public IEnumerator<KeyValuePair<Type, MessageType>> GetEnumerator()
+		{
+			return messageTypeTable.GetEnumerator();
+		}
+
+		#endregion
+
+		#region IEnumerable 成员
+
+		System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
+		{
+			return this.GetEnumerator();
+		}
+
+		#endregion
 	}
 }
