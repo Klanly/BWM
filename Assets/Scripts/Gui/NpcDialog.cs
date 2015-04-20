@@ -43,7 +43,7 @@ public class NpcDialog : MonoBehaviour
 			ulong index;
 			if (ulong.TryParse(url.Substring(UriSchemeIndex.Length), out index))
 			{
-				Net.Instance.Send(new SelectNpcDialogScriptUserCmd_C()
+				WebSocketClient.Instance.Send(new SelectNpcDialogScriptUserCmd_C()
 				{
 					tempid = this.tempid,
 					token = this.token,

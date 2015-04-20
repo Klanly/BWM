@@ -347,7 +347,7 @@ public class SkillManager : IEnumerable<KeyValuePair<uint, table.TableSkill>>
 		foreach (var go in listSelect)
 			cmd.hurts.Add(go.GetComponent<Entry>().uid);
 		SkillManager.Instance.lastFireTime[skillID] = Time.realtimeSinceStartup; // 记录施法时戳
-		Net.Instance.Send(cmd);
+		WebSocketClient.Instance.Send(cmd);
 		return true;
 	}
 

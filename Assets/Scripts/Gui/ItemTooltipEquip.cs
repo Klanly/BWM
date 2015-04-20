@@ -27,7 +27,7 @@ public class ItemTooltipEquip : MonoBehaviour
 	{
 		UIEventListener.Get(uiDelete.gameObject).onClick = go =>
 		{
-			Net.Instance.Send(new RemoveItemItemUserCmd_CS() { thisid = ServerInfo.thisid });
+			WebSocketClient.Instance.Send(new RemoveItemItemUserCmd_CS() { thisid = ServerInfo.thisid });
 			BattleScene.Instance.Gui<RoleInfoPackage>().CloseAllTooltips();
 		};
 		UIEventListener.Get(uiUse.gameObject).onClick = OnUse;
@@ -56,7 +56,7 @@ public class ItemTooltipEquip : MonoBehaviour
 
 	public virtual void OnUse(GameObject sender = null)
 	{
-		Net.Instance.Send(new RefreshPosItemUserCmd_CS()
+		WebSocketClient.Instance.Send(new RefreshPosItemUserCmd_CS()
 		{
 			thisid = ServerInfo.thisid,
 			dst = new ItemLocation() { type = ItemLocation.PackageType.Equip },

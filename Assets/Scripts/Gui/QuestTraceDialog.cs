@@ -67,7 +67,7 @@ public class QuestTraceDialog : MonoBehaviour
 
 	private void OnQuestTraceClicked(QuestTrace quest)
 	{
-		Net.Instance.Send(new RequestClickQuestTraceQuestUserCmd_C() { questid = quest.squest.questid });
+		WebSocketClient.Instance.Send(new RequestClickQuestTraceQuestUserCmd_C() { questid = quest.squest.questid });
 	}
 
 	[Execute]
@@ -89,7 +89,7 @@ public class QuestTraceDialog : MonoBehaviour
 					if (cmd.repeatclick)
 					{
 						MainRole.Instance.pathMove.WalkTo(position, () =>
-							Net.Instance.Send(new RequestClickQuestTraceQuestUserCmd_C() { questid = cmd.questid }));
+							WebSocketClient.Instance.Send(new RequestClickQuestTraceQuestUserCmd_C() { questid = cmd.questid }));
 					}
 					else
 					{
@@ -104,7 +104,7 @@ public class QuestTraceDialog : MonoBehaviour
 					if (cmd.repeatclick)
 					{
 						MainRole.Instance.pathMove.WalkTo(position, () =>
-							Net.Instance.Send(new RequestClickQuestTraceQuestUserCmd_C() { questid = cmd.questid }));
+							WebSocketClient.Instance.Send(new RequestClickQuestTraceQuestUserCmd_C() { questid = cmd.questid }));
 					}
 					else
 					{
@@ -119,7 +119,7 @@ public class QuestTraceDialog : MonoBehaviour
 						break;
 					gui.gameObject.SetActive(true);
 					if (cmd.repeatclick)
-						Net.Instance.Send(new RequestClickQuestTraceQuestUserCmd_C() { questid = cmd.questid });
+						WebSocketClient.Instance.Send(new RequestClickQuestTraceQuestUserCmd_C() { questid = cmd.questid });
 				}
 				break;
 			case ClickQuestTaceEvent.ClickQuestTaceEvent_AttackMonster:

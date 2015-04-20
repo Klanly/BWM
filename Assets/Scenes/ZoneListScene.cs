@@ -61,7 +61,7 @@ public class ZoneListScene : MonoBehaviour
 	{
 		if (zoneid == 0)
 			return;
-		Net.Instance.Send(new UserLoginRequestLoginUserPmd_C()
+		WebSocketClient.Instance.Send(new UserLoginRequestLoginUserPmd_C()
 		{
 			gameversion = (uint)Pmd.Config.Version.Version_Game,
 			gameid = ZoneList.gameid,

@@ -28,6 +28,6 @@ public static class NetMessageProcess
 	[Execute]
 	public static void Execute(TickRequestNullUserPmd_CS cmd)
 	{
-		Net.Instance.Send(new TickReturnNullUserPmd_CS() { requesttime = cmd.requesttime, mytime = DateTime.Now.ToUnixTime() });
+		WebSocketClient.Instance.Send(new TickReturnNullUserPmd_CS() { requesttime = cmd.requesttime, mytime = DateTime.Now.ToUnixTime() });
 	}
 }

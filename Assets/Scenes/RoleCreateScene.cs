@@ -83,7 +83,7 @@ public class RoleCreateScene : MonoBehaviour
 	{
 		if (profession == default(Profession) || string.IsNullOrEmpty(roleNameInput.value))
 			return;
-		Net.Instance.Send(new CheckCharNameSelectUserCmd_CS()
+		WebSocketClient.Instance.Send(new CheckCharNameSelectUserCmd_CS()
 		{
 			charname = roleNameInput.value,
 		});
@@ -143,7 +143,7 @@ public class RoleCreateScene : MonoBehaviour
 		}
 		else
 		{
-			Net.Instance.Send(new CharactorCreateSelectUserCmd_C()
+			WebSocketClient.Instance.Send(new CharactorCreateSelectUserCmd_C()
 			{
 				charname = cmd.charname,
 				sexman = my.sexman,

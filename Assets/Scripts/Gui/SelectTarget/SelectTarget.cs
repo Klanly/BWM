@@ -107,7 +107,7 @@ public class SelectTarget : MonoBehaviour
         if (entry.IsMainRole())
             return false;
 
-        Net.Instance.Send(new SelectSceneEntryScriptUserCmd_CS() { entry = entry.uid});
+        WebSocketClient.Instance.Send(new SelectSceneEntryScriptUserCmd_CS() { entry = entry.uid});
         return true;
 	}
 

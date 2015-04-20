@@ -87,7 +87,7 @@ static class ServerLog
 	{
 		log["mid"] = SystemInfo.deviceUniqueIdentifier;
 		var json = GX.Json.Serialize(log);
-		Net.Instance.StartCoroutine(Send(json));
+		WebSocketClient.Instance.StartCoroutine(Send(json));
 	}
 
 	static IEnumerator Send(string log)

@@ -160,6 +160,6 @@ public class SkillInfo : MonoBehaviour
 	private void OnSkillUpgrade(GameObject go)
 	{
 		// 学习和升级是同一个消息
-		Net.Instance.Send(new LearnSkillSkillUserCmd_C() { skillid = selected.Skill.Key });
+		WebSocketClient.Instance.Send(new LearnSkillSkillUserCmd_C() { skillid = selected.Skill.Key });
 	}
 }

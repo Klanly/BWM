@@ -23,7 +23,7 @@ public class CopyEnd : MonoBehaviour
 	}
 	public void OnGetPresent(GameObject sender = null)
 	{
-		Net.Instance.Send(new RequestFinishStageQuestUserCmd_C()
+		WebSocketClient.Instance.Send(new RequestFinishStageQuestUserCmd_C()
 		{
 			stageid = serverInfo.stageid,
 		});

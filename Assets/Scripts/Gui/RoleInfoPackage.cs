@@ -12,7 +12,7 @@ public class RoleInfoPackage : MonoBehaviour
 	{
 		// 包裹整理
 		UIEventListener.Get(tidyButton.gameObject).onClick = go =>
-			Net.Instance.Send(new TidyItemItemUserCmd_C());
+			WebSocketClient.Instance.Send(new TidyItemItemUserCmd_C());
 
 		// 道具格子表初始化
 		var grid = this.transform.FindChild("Grid");

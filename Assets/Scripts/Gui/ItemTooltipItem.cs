@@ -27,7 +27,7 @@ public class ItemTooltipItem : MonoBehaviour
 	{
 		UIEventListener.Get(uiDelete.gameObject).onClick = go =>
 		{
-			Net.Instance.Send(new RemoveItemItemUserCmd_CS() { thisid = ServerInfo.thisid });
+			WebSocketClient.Instance.Send(new RemoveItemItemUserCmd_CS() { thisid = ServerInfo.thisid });
 			BattleScene.Instance.Gui<RoleInfoPackage>().CloseAllTooltips();
 		};
 		UIEventListener.Get(uiUse.gameObject).onClick = OnUse;
@@ -52,7 +52,7 @@ public class ItemTooltipItem : MonoBehaviour
 
 	public virtual void OnUse(GameObject sender = null)
 	{
-		Net.Instance.Send(new UseItemItemUserCmd_CS()
+		WebSocketClient.Instance.Send(new UseItemItemUserCmd_CS()
 		{
 			thisid = ServerInfo.thisid,
 			targetid = 0,

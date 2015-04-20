@@ -71,7 +71,7 @@ public class BattleSceneInput : MonoBehaviour
 			}
 			else
 			{
-				if (Net.Instance.Send(new CharactorUnregSelectUserCmd_CS() { }) == false)
+				if (WebSocketClient.Instance.Send(new CharactorUnregSelectUserCmd_CS() { }) == false)
 				{
 					Application.LoadLevel("RoleListScene");
 				}

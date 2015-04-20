@@ -17,7 +17,7 @@ public class Revive : MonoBehaviour
 		BattleScene.AddGuiToTop(gameObject);
 		UIEventListener.Get(OK).onClick = go =>
 		{
-			Net.Instance.Send(new RequestReliveUserCmd_C()
+			WebSocketClient.Instance.Send(new RequestReliveUserCmd_C()
 			{
 				type = 1,
 			});

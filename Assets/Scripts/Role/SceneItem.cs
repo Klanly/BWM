@@ -116,7 +116,7 @@ public class SceneItem : MonoBehaviour
 				if (Vector3.Distance(MainRole.Instance.entity.Position, entity.Position) < 1.5f)
 				{
 					lastPickUpTime = Time.time;
-					Net.Instance.Send(new Cmd.PickUpItemPropertyUserCmd_C()
+					WebSocketClient.Instance.Send(new Cmd.PickUpItemPropertyUserCmd_C()
 					{
 						thisid = this.ServerInfo.thisid
 					});

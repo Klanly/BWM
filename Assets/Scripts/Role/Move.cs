@@ -126,7 +126,7 @@ public class Move : MonoBehaviour
 	}
 	public bool Sync(Vector3 position, Quaternion rotation)
 	{
-		Net.Instance.Send(new Cmd.UserMoveUpMoveUserCmd_C()
+		WebSocketClient.Instance.Send(new Cmd.UserMoveUpMoveUserCmd_C()
 		{
 			poscm = new MapGrid(position),
 			angle = (uint)rotation.eulerAngles.y

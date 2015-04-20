@@ -24,14 +24,14 @@ public class QuestDialog : MonoBehaviour
 		{
 			if (questState == QuestProcess.QuestProcess_CanDone)
 			{
-				Net.Instance.Send(new RequestFinishQuestQuestUserCmd_CS()
+				WebSocketClient.Instance.Send(new RequestFinishQuestQuestUserCmd_CS()
 				{
 					questid = questID,
 				});
 			}
 			else
 			{
-				Net.Instance.Send(new RequestAcceptQuestQuestUserCmd_CS()
+				WebSocketClient.Instance.Send(new RequestAcceptQuestQuestUserCmd_CS()
 				{
 					questid = questID,
 				});

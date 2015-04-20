@@ -33,7 +33,7 @@ public class CopyEnter2 : MonoBehaviour
 		UIEventListener.Get(uiEnter).onClick = go =>
 		{
 			Debug.Log("select copy:" + selected);
-			Net.Instance.Send(new RequestOpenStageQuestUserCmd_C() { stageid = (uint)selected });
+			WebSocketClient.Instance.Send(new RequestOpenStageQuestUserCmd_C() { stageid = (uint)selected });
 
 
 		};

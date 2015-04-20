@@ -59,7 +59,7 @@ public class RoleListScene : MonoBehaviour
 			item.transform.Find("spriteProfession").GetComponent<UISprite>().spriteName = spriteNameProfession[(int)(info.profession) - 1];
 			UIEventListener.Get(item.gameObject).onClick = go => SelectRole(info.charid);
 			UIEventListener.Get(item.transform.Find("btnDelete").gameObject).onClick = go =>
-				Net.Instance.Send(new CharactorDeleteSelectUserCmd_C() { charid = info.charid, });
+				WebSocketClient.Instance.Send(new CharactorDeleteSelectUserCmd_C() { charid = info.charid, });
 		}
 
 		if (RoleList.Count < MaxRoleNum)
@@ -79,7 +79,7 @@ public class RoleListScene : MonoBehaviour
 
 	private static void SelectRole(ulong charid)
 	{
-		Net.Instance.Send(new CharactorSelectSelectUserCmd_C() { charid = charid, });
+		WebSocketClient.Instance.Send(new CharactorSelectSelectUserCmd_C() { charid = charid, });
 	}
 
 	void Update()

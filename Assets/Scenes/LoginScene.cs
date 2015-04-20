@@ -54,11 +54,11 @@ public class LoginScene : MonoBehaviour
 
 		foreach (var url in remotes)
 		{
-			foreach (var c in Net.Instance.Open(url).AsEnumerable())
+			foreach (var c in WebSocketClient.Instance.Open(url).AsEnumerable())
 				yield return c;
-			if (Net.Instance.State == WebSocket.State.Open)
+			if (WebSocketClient.Instance.State == WebSocket.State.Open)
 			{
-				Net.Instance.Send(cmd);
+				WebSocketClient.Instance.Send(cmd);
 				yield break;
 			}
 			Debug.LogWarning("登陆服务器连接错误: " + url);
@@ -86,12 +86,12 @@ public class LoginScene : MonoBehaviour
 	public static IEnumerator ConnectGatewayServer()
 	{
 		var token = gamewayToken;
-		foreach (var c in Net.Instance.Open(token.gatewayurl).AsEnumerable())
+		foreach (var c in WebSocketClient.Instance.Open(token.gatewayurl).AsEnumerable())
 			yield return c;
-		if (Net.Instance.State == WebSocket.State.Open)
+		if (WebSocketClient.Instance.State == WebSocket.State.Open)
 		{
 			var stamp = DateTime.Now.ToUnixTime();
-			Net.Instance.Send(new UserLoginTokenLoginUserPmd_C()
+			WebSocketClient.Instance.Send(new UserLoginTokenLoginUserPmd_C()
 			{
 				gameid = token.gameid,
 				zoneid = token.zoneid,
@@ -118,7 +118,7 @@ public class LoginScene : MonoBehaviour
 	[Execute]
 	public static IEnumerator Execute(UserLoginReturnOkLoginUserPmd_S cmd)
 	{
-		Net.Instance.Close(); // 和LoginServer断开连接
+		WebSocketClient.Instance.Close(); // 和LoginServer断开连接
 
 		gamewayToken = cmd;
 		foreach (var c in ConnectGatewayServer().AsEnumerable())

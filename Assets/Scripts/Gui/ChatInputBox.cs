@@ -108,7 +108,7 @@ public class ChatInputBox : MonoBehaviour
 			cmd = CreateGmCommand(message);
 		if (cmd == null)
 			cmd = CreateCommonChat(message);
-		Net.Instance.Send(cmd);
+		WebSocketClient.Instance.Send(cmd);
 	}
 
 	private static Regex gmcommandRegex = new Regex(@"^\s*//\s*(?<method>\w+)(\s+(?<params>.*?)\s*)?$");
