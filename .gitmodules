@@ -7,3 +7,7 @@
 [submodule "Assets/GX"]
 	path = Assets/GX
 	url = git@git.code4.in:unity/GX.git
+[submodule "Common"]
+	path = Common
+	url = git@git.code4.in:mobilegameserver/bwmcommon.git
+	branch = master
