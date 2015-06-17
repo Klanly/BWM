@@ -14,7 +14,7 @@ static class GXMenu
 #if UNITY_WP8
 	[MenuItem("GX/Export WP8", false)]
 #elif UNITY_WINRT
-	[MenuItem("GX/Export WinRT", false)]
+	[MenuItem("GX/Export Universal App", false)]
 #endif
 	public static void Help()
 	{
@@ -35,11 +35,48 @@ static class GXMenu
 
 			// 进行WP8项目生成
 			{
-				AssetDatabase.Refresh();
 #if UNITY_WP8
+				AssetDatabase.Refresh();
 				BuildPipeline.BuildPlayer(levels, "WP8", BuildTarget.WP8Player, BuildOptions.None);
 #elif UNITY_WINRT
-				BuildPipeline.BuildPlayer(levels, "WinRT", BuildTarget.MetroPlayer, BuildOptions.None);
+				/*
+				var metroSDK = UnityEditor.EditorUserBuildSettings.metroSDK;
+				try
+				{
+					{
+						PlayerSettings.productName = "BWGame-8.0";
+						UnityEditor.EditorUserBuildSettings.metroSDK = MetroSDK.SDK80;
+						AssetDatabase.Refresh();
+						BuildPipeline.BuildPlayer(levels, "WinRT", BuildTarget.MetroPlayer, BuildOptions.None);
+					}
+
+					{
+						PlayerSettings.productName = "BWGame-8.1";
+						UnityEditor.EditorUserBuildSettings.metroSDK = MetroSDK.SDK81;
+						AssetDatabase.Refresh();
+						BuildPipeline.BuildPlayer(levels, "WinRT", BuildTarget.MetroPlayer, BuildOptions.None);
+					}
+				}
+				finally
+				{
+					PlayerSettings.productName = "BWGame";
+					UnityEditor.EditorUserBuildSettings.metroSDK = metroSDK;
+				}
+				*/
+				{
+					PlayerSettings.productName = "BWGame";
+					UnityEditor.EditorUserBuildSettings.metroSDK = MetroSDK.UniversalSDK81;
+
+					// 避免 UNITY_EDITOR* 在导出时没有被取消定义
+					PlayerSettings.SetScriptingDefineSymbolsForGroup(BuildTargetGroup.Metro, string.Join(";",
+						UnityEditor.EditorUserBuildSettings.activeScriptCompilationDefines
+						.Where(i => i.StartsWith("UNITY_EDITOR") == false)
+						.ToArray()));
+					Debug.Log("DefineSymbols: " + PlayerSettings.GetScriptingDefineSymbolsForGroup(BuildTargetGroup.Metro));
+
+					AssetDatabase.Refresh();
+					BuildPipeline.BuildPlayer(levels, "WS", BuildTarget.MetroPlayer, BuildOptions.None);
+				}
 #endif
 			}
 
