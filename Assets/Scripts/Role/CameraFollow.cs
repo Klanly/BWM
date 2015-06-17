@@ -23,7 +23,7 @@ public class CameraFollow : MonoBehaviour
 	public void UpdateCamera()
 	{
 		if (cameraMain == null)
-			cameraMain = GameObject.Find("CameraMain").GetComponent<Camera>();
+			cameraMain = Camera.main;
 
 		var targetCenter = this.transform.position;
 		targetCenter.z += heightCameraLookAt;
