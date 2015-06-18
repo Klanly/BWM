@@ -4,6 +4,7 @@ using System.Collections;
 public class Demo : MonoBehaviour
 {
 	public GXJoystick joystick;
+	public CameraFollow cameraFollow;
 
 	// Use this for initialization
 	void Start()
@@ -56,7 +57,8 @@ public class Demo : MonoBehaviour
 			return;
 		vecDir.Normalize();
 
-		var r = Quaternion.Euler(0, -Mathf.Atan2(vecDir.z, vecDir.x) * Mathf.Rad2Deg + 90, 0);
-		this.transform.rotation = r;
+		this.transform.localRotation = Quaternion.Euler(0, -Mathf.Atan2(vecDir.z, vecDir.x) * Mathf.Rad2Deg + 90, 0);
+		this.transform.localPosition += vecDir * Time.deltaTime * 3.0f;
+		cameraFollow.UpdateCamera();
 	}
 }
