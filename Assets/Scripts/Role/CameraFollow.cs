@@ -1,8 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[ExecuteInEditMode]
 public class CameraFollow : MonoBehaviour
 {
+	public Vector3 distance = new Vector3(0, 2, -2);
 	// Use this for initialization
 	void Start()
 	{
@@ -14,9 +16,6 @@ public class CameraFollow : MonoBehaviour
 	/// </summary>
 	public void UpdateCamera()
 	{
-		var pos = this.transform.position;
-		pos.y += 2.1f;
-		pos.z += -2.1f;
-		Camera.main.transform.position = pos;
+		Camera.main.transform.position = this.transform.position + distance;
 	}
 }
