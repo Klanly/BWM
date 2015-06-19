@@ -28807,7 +28807,6 @@ GameObject:
   - 111: {fileID: 638757361}
   - 143: {fileID: 638757360}
   - 114: {fileID: 638757362}
-  - 114: {fileID: 638757359}
   m_Layer: 0
   m_Name: Male
   m_TagString: Player
@@ -28845,19 +28844,6 @@ Animator:
   m_ApplyRootMotion: 1
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &638757359
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 638757356}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5b782b903c1d59044ba3a1ca333b2883, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  distance: {x: 0, y: 5, z: -3}
-  rotation: {x: 45, y: 0, z: 0}
 --- !u!143 &638757360
 CharacterController:
   m_ObjectHideFlags: 0
@@ -28898,7 +28884,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   joystick: {fileID: 821125094}
-  cameraFollow: {fileID: 638757359}
+  cameraFollow: {fileID: 1343741180}
 --- !u!1 &638767105
 GameObject:
   m_ObjectHideFlags: 0
@@ -56593,6 +56579,8 @@ GameObject:
   - 92: {fileID: 1343741176}
   - 124: {fileID: 1343741175}
   - 81: {fileID: 1343741174}
+  - 114: {fileID: 1343741179}
+  - 114: {fileID: 1343741180}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -56665,6 +56653,34 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!114 &1343741179
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1343741173}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8445bd851f11c6e4cb5b6ec7cbc4fa71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cameraFollow: {fileID: 0}
+--- !u!114 &1343741180
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1343741173}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b782b903c1d59044ba3a1ca333b2883, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainRole: {fileID: 638757356}
+  distance: {x: 0, y: 5, z: -3}
+  rotation: {x: 45, y: 0, z: 0}
+  sensitivityX: 8
+  sensitivityY: 8
 --- !u!1001 &1345285632
 Prefab:
   m_ObjectHideFlags: 0
