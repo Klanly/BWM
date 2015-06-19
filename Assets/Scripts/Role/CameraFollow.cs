@@ -4,7 +4,8 @@ using System.Collections;
 [ExecuteInEditMode]
 public class CameraFollow : MonoBehaviour
 {
-	public Vector3 distance = new Vector3(0, 2, -2);
+	public Vector3 distance = new Vector3(0, 5, -3);
+	public Vector3 rotation = new Vector3(45, 0, 0);
 	// Use this for initialization
 	void Start()
 	{
@@ -17,5 +18,6 @@ public class CameraFollow : MonoBehaviour
 	public void UpdateCamera()
 	{
 		Camera.main.transform.position = this.transform.position + distance;
+		Camera.main.transform.rotation = Quaternion.Euler(rotation);
 	}
 }

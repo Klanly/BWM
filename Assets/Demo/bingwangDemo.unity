@@ -28857,6 +28857,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distance: {x: 0, y: 5, z: -3}
+  rotation: {x: 45, y: 0, z: 0}
 --- !u!143 &638757360
 CharacterController:
   m_ObjectHideFlags: 0
@@ -56659,7 +56660,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1343741173}
   m_LocalRotation: {x: .382683486, y: 0, z: 0, w: .923879564}
-  m_LocalPosition: {x: 45.3100014, y: 13.25, z: 36.4000015}
+  m_LocalPosition: {x: 45.3100014, y: 10.25, z: 36.4000015}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
