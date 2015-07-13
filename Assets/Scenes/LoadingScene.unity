@@ -102,6 +102,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1476132468}
+  m_RootOrder: 1
 --- !u!114 &1352938012
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -164,8 +165,11 @@ Camera:
     m_Bits: 8192
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
+  m_TargetDisplay: 0
   m_HDR: 0
   m_OcclusionCulling: 1
+  m_StereoConvergence: 10
+  m_StereoSeparation: .0219999999
 --- !u!1 &1360079699
 GameObject:
   m_ObjectHideFlags: 0
@@ -193,6 +197,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1366620056}
+  m_RootOrder: 0
 --- !u!114 &1360079701
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -271,6 +276,7 @@ Transform:
   - {fileID: 1360079700}
   - {fileID: 1703354219}
   m_Father: {fileID: 2071682155}
+  m_RootOrder: 1
 --- !u!114 &1366620057
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -397,6 +403,7 @@ Transform:
   - {fileID: 2071682155}
   - {fileID: 1352938011}
   m_Father: {fileID: 0}
+  m_RootOrder: 0
 --- !u!114 &1476132469
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -408,7 +415,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea5b03183f4ddda49abb1772ad9fd055, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lastSceneName: 
+  lastSceneName: RoleCreateScene
 --- !u!114 &1476132470
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -448,6 +455,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2071682155}
+  m_RootOrder: 0
 --- !u!114 &1697149999
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -536,6 +544,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1366620056}
+  m_RootOrder: 1
 --- !u!114 &1703354220
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -614,6 +623,7 @@ Transform:
   - {fileID: 1697149998}
   - {fileID: 1366620056}
   m_Father: {fileID: 1476132468}
+  m_RootOrder: 0
 --- !u!114 &2071682156
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -643,13 +653,13 @@ MonoBehaviour:
     absolute: 0
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 853
+  mWidth: 1855
   mHeight: 640
   mDepth: -1
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 1.33281255
+  aspectRatio: 2.8984375
   mRect:
     serializedVersion: 2
     x: 0

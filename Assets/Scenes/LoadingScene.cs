@@ -24,6 +24,6 @@ public class LoadingScene : MonoBehaviour
 
 	void Update()
 	{
-		slider.value = async.progress;
+        slider.value = async.progress;
 	}
 }
